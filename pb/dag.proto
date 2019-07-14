@@ -1,0 +1,122 @@
+syntax = "proto3";
+package pb;
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// provides protocol buffer definitions for interactin with IPLD objects
+
+service DagAPI {
+    // DagPut is used to store arbitrary bytes as a custom IPLD object
+    rpc DagPut(DagPutRequest) returns (DagPutResponse) { };
+    // DagGet is used to request the raw ipld node data for an IPLD object
+    rpc DagGet(DagGetRequest) returns (DagGetResponse) { };
+    // NewIPLDNode is used to create a new IPFS MerkleDAG node.
+    // This is the same type as in github.com/ipfs/go-ipld-format.Node
+    rpc NewIPLDNode(NewIPLDNodeRequest) returns (DagPutResponse) { };
+    // AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
+    rpc AddLinksToNode(AddLinksRequest) returns (DagPutResponse) { };
+    // GetLinks is used to request all the links for a given object
+    rpc GetLinks(GetLinksRequest) returns (GetLinksResponse) { };
+}
+
+// DagPutResponse contains the hashes of ipld nodes generated
+// by the dag put request
+message DagPutResponse {
+    // an array of hashes (cids) of the root ipld nod
+    repeated string hashes = 1;
+}
+// DagPut allows us to store arbitrary bytes as a custom IPLD object
+message DagPutRequest {
+    // data that we will be storing
+    bytes data = 1;
+    // the object encoding type (raw, cbor, protobuf, etc...)
+    string objectEncoding = 2;
+    // the serialization format (raw, cbor, protobuf, etc...)
+    string serializationFormat = 3;
+    // the hash function to to use (sha2-256, sha3-512, etc...)
+    string hashFunc = 4;
+    // the cid version to use (0, 1)
+    int64 cidVersion = 5;
+}
+
+// DagGetRequest is used to retrieve the raw data
+// of an ipld dag node for the specified hash. This can
+// then be used by libraries like go-ipld-format to
+// decoded into a dag object on the client side using 
+// merkledag.DecodeProtobuf and passing in the returned bytes
+message DagGetRequest {
+    // the hash of the ipld node to get
+    string hash = 1;
+}
+
+// DagGetResponse is a response to DagGetRequest
+// that returns the raw data of the matching ipld node
+message DagGetResponse {
+    // the raw data of the ipld node
+    bytes rawData = 1;
+}
+
+// NewIPLDNodeRequest is used to create a new ipld node
+message NewIPLDNodeRequest {
+    // links are optional hashes to include as links of the node
+    // the name is used as the key, while the value of the key is used as the hash
+    map<string, string> links = 1;
+    // data to store as part of the data field
+    bytes data = 2;
+    // the hash function to to use (sha2-256, sha3-512, etc...)
+    string hashFunc = 3;
+}
+
+// AddLinksRequest is used to add links to an existing ipld node
+message AddLinksRequest {
+    // links are optional hashes to include as links of the node
+    // the name is used as the key, while the value of the key is used as the hash
+    map<string, string> links = 1;
+    // the hash of the node we want to add lin skto
+    string hash = 2;
+    // the hash function to to use (sha2-256, sha3-512, etc...)
+    string hashFunc = 3;
+}
+
+// GetLinksRequest is used to return all the links associated with a particular hash
+message GetLinksRequest {
+    // the hash to request links for
+    string hash = 1;
+}
+
+// GetLinksResponse returns all the links for the 
+// associated hash that was requested
+message GetLinksResponse {
+    // each of the links referenced by the requested hash
+    repeated IPLDLink links = 1;
+}
+
+// An IPFS MerkleDAG Link
+message IPLDLink {
+    // multihash of the target object
+    bytes hash = 1;
+    // utf string name. should be unique per object
+    string name = 2;
+    // cumulative size of target object
+    uint64 size = 3;
+}
+  
+// An IPFS MerkleDAG Node
+message IPLDNode {
+    // refs to other objects
+    repeated IPLDLink links = 2;
+    // opaque user data
+    bytes data = 1;
+  }
+  

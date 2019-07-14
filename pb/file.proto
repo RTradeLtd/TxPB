@@ -1,0 +1,69 @@
+syntax = "proto3";
+package pb;
+import "util.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// provides protocol buffer definitions for uploading files and creating UnixFS types
+
+service FileAPI {
+    // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
+    rpc UploadFile(stream UploadRequest) returns  (PutResponse) { };
+    // DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)
+    rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) { };
+}
+
+
+// UploadRequest is used to upload data as a UnixFS object
+message UploadRequest {
+    // blob is a single chunk of data
+    Blob blob = 1;
+    // options allows setting the optoins for this upload
+    UploadOptions options = 2;
+}
+
+// UploadOptions allows controlling the parameters of a file upload
+message UploadOptions {
+    // specifes the multihash function to use
+    string multiHash = 1;
+    // specifies the dag layout (balanced, tricklet)
+    string layout = 2;
+    // specifies the chunker type (rabin, default, etc...)
+    string chunker = 3;
+}
+
+// DownloadRequest is used to download a UnixFS object
+// although it can in theory be used with other type of objects
+// there may be some undefined behavior
+message DownloadRequest {
+    // hash is the ipfs hash/cid (content identifier) of the data to download
+    string hash = 1;
+    // chunkSize specifies the size of chunks to be sent to the client
+    // it allows us to efficiently control incoming data amounts which
+    // is useful on machines with low-memory
+    int32 chunkSize = 2;
+}
+
+// DownloadResponse contains the response to a download request
+// which allows the gRPC server to stream blobs to the client
+message DownloadResponse {
+    // blob is a single chunk of data
+    Blob blob = 1;
+}
+
+// Blob is a chunk of binary data
+message Blob {
+    // content is the actual binary data contained in this message
+    bytes content = 1;
+}
