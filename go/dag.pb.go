@@ -7,14 +7,15 @@ import (
 	bytes "bytes"
 	context "context"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	grpc "google.golang.org/grpc"
 	io "io"
 	math "math"
 	reflect "reflect"
 	strings "strings"
+
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	grpc "google.golang.org/grpc"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1453,7 +1454,7 @@ func (this *NewIPLDNodeRequest) GoString() string {
 	s := make([]string, 0, 7)
 	s = append(s, "&pb.NewIPLDNodeRequest{")
 	keysForLinks := make([]string, 0, len(this.Links))
-	for k, _ := range this.Links {
+	for k := range this.Links {
 		keysForLinks = append(keysForLinks, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForLinks)
@@ -1480,7 +1481,7 @@ func (this *AddLinksRequest) GoString() string {
 	s := make([]string, 0, 7)
 	s = append(s, "&pb.AddLinksRequest{")
 	keysForLinks := make([]string, 0, len(this.Links))
-	for k, _ := range this.Links {
+	for k := range this.Links {
 		keysForLinks = append(keysForLinks, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForLinks)
@@ -1940,7 +1941,7 @@ func (m *NewIPLDNodeRequest) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.Links) > 0 {
-		for k, _ := range m.Links {
+		for k := range m.Links {
 			dAtA[i] = 0xa
 			i++
 			v := m.Links[k]
@@ -1990,7 +1991,7 @@ func (m *AddLinksRequest) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.Links) > 0 {
-		for k, _ := range m.Links {
+		for k := range m.Links {
 			dAtA[i] = 0xa
 			i++
 			v := m.Links[k]
@@ -2676,7 +2677,7 @@ func (this *NewIPLDNodeRequest) String() string {
 		return "nil"
 	}
 	keysForLinks := make([]string, 0, len(this.Links))
-	for k, _ := range this.Links {
+	for k := range this.Links {
 		keysForLinks = append(keysForLinks, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForLinks)
@@ -2699,7 +2700,7 @@ func (this *AddLinksRequest) String() string {
 		return "nil"
 	}
 	keysForLinks := make([]string, 0, len(this.Links))
-	for k, _ := range this.Links {
+	for k := range this.Links {
 		keysForLinks = append(keysForLinks, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForLinks)

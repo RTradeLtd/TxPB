@@ -16,6 +16,9 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ * FileAPI provides a gRPC api to upload/download files as UnixFS objects
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.19.0)",
@@ -115,6 +118,9 @@ public final class FileAPIGrpc {
   }
 
   /**
+   * <pre>
+   * FileAPI provides a gRPC api to upload/download files as UnixFS objects
+   * </pre>
    */
   public static abstract class FileAPIImplBase implements io.grpc.BindableService {
 
@@ -159,6 +165,9 @@ public final class FileAPIGrpc {
   }
 
   /**
+   * <pre>
+   * FileAPI provides a gRPC api to upload/download files as UnixFS objects
+   * </pre>
    */
   public static final class FileAPIStub extends io.grpc.stub.AbstractStub<FileAPIStub> {
     private FileAPIStub(io.grpc.Channel channel) {
@@ -200,6 +209,9 @@ public final class FileAPIGrpc {
   }
 
   /**
+   * <pre>
+   * FileAPI provides a gRPC api to upload/download files as UnixFS objects
+   * </pre>
    */
   public static final class FileAPIBlockingStub extends io.grpc.stub.AbstractStub<FileAPIBlockingStub> {
     private FileAPIBlockingStub(io.grpc.Channel channel) {
@@ -230,6 +242,9 @@ public final class FileAPIGrpc {
   }
 
   /**
+   * <pre>
+   * FileAPI provides a gRPC api to upload/download files as UnixFS objects
+   * </pre>
    */
   public static final class FileAPIFutureStub extends io.grpc.stub.AbstractStub<FileAPIFutureStub> {
     private FileAPIFutureStub(io.grpc.Channel channel) {

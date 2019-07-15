@@ -16,6 +16,9 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ * DagAPI provides a gRPC API for manipulating IPLD objects
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.19.0)",
@@ -211,6 +214,9 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides a gRPC API for manipulating IPLD objects
+   * </pre>
    */
   public static abstract class DagAPIImplBase implements io.grpc.BindableService {
 
@@ -307,6 +313,9 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides a gRPC API for manipulating IPLD objects
+   * </pre>
    */
   public static final class DagAPIStub extends io.grpc.stub.AbstractStub<DagAPIStub> {
     private DagAPIStub(io.grpc.Channel channel) {
@@ -382,6 +391,9 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides a gRPC API for manipulating IPLD objects
+   * </pre>
    */
   public static final class DagAPIBlockingStub extends io.grpc.stub.AbstractStub<DagAPIBlockingStub> {
     private DagAPIBlockingStub(io.grpc.Channel channel) {
@@ -452,6 +464,9 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides a gRPC API for manipulating IPLD objects
+   * </pre>
    */
   public static final class DagAPIFutureStub extends io.grpc.stub.AbstractStub<DagAPIFutureStub> {
     private DagAPIFutureStub(io.grpc.Channel channel) {

@@ -8,6 +8,7 @@ import util_pb2 as util__pb2
 class FileAPIStub(object):
   """provides protocol buffer definitions for uploading files and creating UnixFS types
 
+  FileAPI provides a gRPC api to upload/download files as UnixFS objects
   """
 
   def __init__(self, channel):
@@ -31,6 +32,7 @@ class FileAPIStub(object):
 class FileAPIServicer(object):
   """provides protocol buffer definitions for uploading files and creating UnixFS types
 
+  FileAPI provides a gRPC api to upload/download files as UnixFS objects
   """
 
   def UploadFile(self, request_iterator, context):

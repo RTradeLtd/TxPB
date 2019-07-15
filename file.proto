@@ -17,6 +17,8 @@ option (gogoproto.unmarshaler_all) = true;
 
 // provides protocol buffer definitions for uploading files and creating UnixFS types
 
+
+// FileAPI provides a gRPC api to upload/download files as UnixFS objects
 service FileAPI {
     // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
     rpc UploadFile(stream UploadRequest) returns  (PutResponse) { };
