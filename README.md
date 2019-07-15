@@ -4,10 +4,10 @@
 
 It has gRPC bindings for the following languages:
 
-* golang
-* javascript (grpc-web)
-* java
-* python
+* [golang](./go)
+* [javascript (grpc-web)](./js)
+* [java](./java/pb)
+* [python](./py)
 
 If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
 
