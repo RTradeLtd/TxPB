@@ -16,6 +16,8 @@ option (gogoproto.unmarshaler_all) = true;
 
 // provides protocol buffer definitions for interactin with IPLD objects
 
+
+// DagAPI provides a gRPC API for manipulating IPLD objects
 service DagAPI {
     // DagPut is used to store arbitrary bytes as a custom IPLD object
     rpc DagPut(DagPutRequest) returns (DagPutResponse) { };
