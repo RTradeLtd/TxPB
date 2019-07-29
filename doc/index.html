@@ -273,6 +273,33 @@
         
           
           <li>
+            <a href="#node.proto">node.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.ConnectRequest"><span class="badge">M</span>ConnectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.GetPeersResponse"><span class="badge">M</span>GetPeersResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#pb.NodeAPI"><span class="badge">S</span>NodeAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#util.proto">util.proto</a>
             <ul>
               
@@ -917,6 +944,101 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.DownloadRequest">DownloadRequest</a></td>
                 <td><a href="#pb.DownloadResponse">DownloadResponse</a> stream</td>
                 <td><p>DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="node.proto">node.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.ConnectRequest">ConnectRequest</h3>
+        <p>ConnectRequest is used to connect to libp2p peers</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>multiAddrs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of all multiaddrs we want to connect to </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.Empty">Empty</h3>
+        <p>Empty is an empty message</p>
+
+        
+
+        
+      
+        <h3 id="pb.GetPeersResponse">GetPeersResponse</h3>
+        <p>GetPeersResponse is a response to GetPeers containing a slice of peer IDs</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of peer IDs </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="pb.NodeAPI">NodeAPI</h3>
+        <p>NodeAPI provide an API to control the underlying custom ipfs node</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetPeers</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><a href="#pb.GetPeersResponse">GetPeersResponse</a></td>
+                <td><p>GetPeers returns a message containing a slice of current peers in our peerstore</p></td>
+              </tr>
+            
+              <tr>
+                <td>Connect</td>
+                <td><a href="#pb.ConnectRequest">ConnectRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>Connect is used to connect to remote libp2p peers</p></td>
               </tr>
             
           </tbody>
