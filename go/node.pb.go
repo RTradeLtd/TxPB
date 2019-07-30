@@ -14,6 +14,7 @@ import (
 
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
 )
 
@@ -163,32 +164,138 @@ func (m *ConnectRequest) GetMultiAddrs() []string {
 	return nil
 }
 
+// IsConnectedRequest is used check whether or not we are currently peered with these peers
+type IsConnectedRequest struct {
+	// a slice of the peer IDs to examine
+	PeerIDs              []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *IsConnectedRequest) Reset()      { *m = IsConnectedRequest{} }
+func (*IsConnectedRequest) ProtoMessage() {}
+func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{3}
+}
+func (m *IsConnectedRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *IsConnectedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_IsConnectedRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *IsConnectedRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IsConnectedRequest.Merge(m, src)
+}
+func (m *IsConnectedRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *IsConnectedRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_IsConnectedRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IsConnectedRequest proto.InternalMessageInfo
+
+func (m *IsConnectedRequest) GetPeerIDs() []string {
+	if m != nil {
+		return m.PeerIDs
+	}
+	return nil
+}
+
+// IsConnectedResponse is a response to an IsConnectedRequest request
+type IsConnectedResponse struct {
+	// a map of the peer ID and a boolean indicating if we are connected with them
+	Connected            map[string]bool `protobuf:"bytes,1,rep,name=connected,proto3" json:"connected,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *IsConnectedResponse) Reset()      { *m = IsConnectedResponse{} }
+func (*IsConnectedResponse) ProtoMessage() {}
+func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{4}
+}
+func (m *IsConnectedResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *IsConnectedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_IsConnectedResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *IsConnectedResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IsConnectedResponse.Merge(m, src)
+}
+func (m *IsConnectedResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *IsConnectedResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_IsConnectedResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IsConnectedResponse proto.InternalMessageInfo
+
+func (m *IsConnectedResponse) GetConnected() map[string]bool {
+	if m != nil {
+		return m.Connected
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Empty)(nil), "pb.Empty")
 	proto.RegisterType((*GetPeersResponse)(nil), "pb.GetPeersResponse")
 	proto.RegisterType((*ConnectRequest)(nil), "pb.ConnectRequest")
+	proto.RegisterType((*IsConnectedRequest)(nil), "pb.IsConnectedRequest")
+	proto.RegisterType((*IsConnectedResponse)(nil), "pb.IsConnectedResponse")
+	proto.RegisterMapType((map[string]bool)(nil), "pb.IsConnectedResponse.ConnectedEntry")
 }
 
 func init() { proto.RegisterFile("node.proto", fileDescriptor_0c843d59d2d938e7) }
 
 var fileDescriptor_0c843d59d2d938e7 = []byte{
-	// 255 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xca, 0xcb, 0x4f, 0x49,
-	0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x92, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9,
-	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0x4b, 0x25, 0x95,
-	0xa6, 0x81, 0x79, 0x60, 0x0e, 0x98, 0x05, 0xd1, 0xa2, 0xc4, 0xce, 0xc5, 0xea, 0x9a, 0x5b, 0x50,
-	0x52, 0xa9, 0xa4, 0xc3, 0x25, 0xe0, 0x9e, 0x5a, 0x12, 0x90, 0x9a, 0x5a, 0x54, 0x1c, 0x94, 0x5a,
-	0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x2a, 0x24, 0xc1, 0xc5, 0x5e, 0x90, 0x9a, 0x5a, 0xe4, 0xe9, 0x52,
-	0x2c, 0xc1, 0xa8, 0xc0, 0xac, 0xc1, 0x19, 0x04, 0xe3, 0x2a, 0x19, 0x70, 0xf1, 0x39, 0xe7, 0xe7,
-	0xe5, 0xa5, 0x26, 0x97, 0x04, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x08, 0xc9, 0x71, 0x71, 0xe5,
-	0x96, 0xe6, 0x94, 0x64, 0x3a, 0xa6, 0xa4, 0x14, 0xc1, 0x94, 0x23, 0x89, 0x18, 0xa5, 0x70, 0xb1,
-	0xfb, 0xe5, 0xa7, 0xa4, 0x3a, 0x06, 0x78, 0x0a, 0xe9, 0x72, 0x71, 0xc0, 0xac, 0x12, 0xe2, 0xd4,
-	0x2b, 0x48, 0xd2, 0x03, 0xbb, 0x40, 0x4a, 0x04, 0xc4, 0x44, 0x77, 0x83, 0x12, 0x83, 0x90, 0x16,
-	0x17, 0x3b, 0xd4, 0x2e, 0x21, 0x21, 0x90, 0x12, 0x54, 0x8b, 0xa5, 0x10, 0x26, 0x28, 0x31, 0x38,
-	0x69, 0xdc, 0x78, 0x28, 0xc7, 0xf0, 0xe0, 0xa1, 0x1c, 0xe3, 0x87, 0x87, 0x72, 0x8c, 0x3f, 0x1e,
-	0xca, 0x31, 0x36, 0x3c, 0x92, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0x71, 0xc7, 0x23, 0x39, 0xc6, 0x13,
-	0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x31, 0x89, 0x0d, 0xec, 0x7f,
-	0x63, 0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa8, 0x5f, 0x12, 0xbf, 0x40, 0x01, 0x00, 0x00,
+	// 362 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0xcf, 0x4e, 0xc2, 0x40,
+	0x10, 0xc6, 0x3b, 0x10, 0x2c, 0x1d, 0x12, 0x43, 0x56, 0xa2, 0x4d, 0x0f, 0x1b, 0xd2, 0x83, 0x69,
+	0x8c, 0x14, 0x83, 0x17, 0x63, 0x3c, 0x88, 0x42, 0x0c, 0x17, 0x43, 0xfa, 0x06, 0x96, 0xae, 0x48,
+	0x84, 0x6e, 0x6d, 0xb7, 0x26, 0xdc, 0x7c, 0x0d, 0x5f, 0xc0, 0xf8, 0x08, 0x3e, 0x82, 0x47, 0x8f,
+	0x1e, 0x69, 0x9f, 0xc0, 0xa3, 0x47, 0xd3, 0xd2, 0xf2, 0x47, 0xe5, 0x36, 0xdf, 0xcc, 0xfc, 0x76,
+	0x66, 0xbe, 0x2c, 0xa2, 0xcb, 0x1d, 0x66, 0x7a, 0x3e, 0x17, 0x9c, 0x14, 0x3c, 0x5b, 0x6b, 0x0c,
+	0x47, 0xe2, 0x2e, 0xb4, 0xcd, 0x01, 0x9f, 0x34, 0x87, 0x7c, 0xc8, 0x9b, 0x69, 0xc9, 0x0e, 0x6f,
+	0x53, 0x95, 0x8a, 0x34, 0x9a, 0x23, 0xba, 0x8c, 0xa5, 0xee, 0xc4, 0x13, 0x53, 0xfd, 0x10, 0xab,
+	0x57, 0x4c, 0xf4, 0x19, 0xf3, 0x03, 0x8b, 0x05, 0x1e, 0x77, 0x03, 0x46, 0x54, 0x94, 0x3d, 0xc6,
+	0xfc, 0x5e, 0x27, 0x50, 0xa1, 0x5e, 0x34, 0x14, 0x2b, 0x97, 0xfa, 0x11, 0x6e, 0x5f, 0x72, 0xd7,
+	0x65, 0x03, 0x61, 0xb1, 0x87, 0x90, 0x05, 0x82, 0x50, 0xc4, 0x49, 0x38, 0x16, 0xa3, 0xb6, 0xe3,
+	0xf8, 0x79, 0xfb, 0x4a, 0x46, 0x37, 0x91, 0xf4, 0x82, 0x8c, 0x61, 0x4e, 0x4e, 0x6d, 0x9e, 0xf0,
+	0x0c, 0xb8, 0xb3, 0x06, 0x64, 0x3b, 0x75, 0x50, 0x19, 0xe4, 0xc9, 0x94, 0xa9, 0xb4, 0xf6, 0x4d,
+	0xcf, 0x36, 0xff, 0xe9, 0x35, 0x17, 0x99, 0xae, 0x2b, 0xfc, 0xa9, 0xb5, 0x04, 0xb5, 0xb3, 0xc5,
+	0xfe, 0x59, 0x91, 0x54, 0xb1, 0x78, 0xcf, 0xa6, 0x2a, 0xd4, 0xc1, 0x50, 0xac, 0x24, 0x24, 0x35,
+	0x2c, 0x3d, 0xde, 0x8c, 0x43, 0xa6, 0x16, 0xea, 0x60, 0x94, 0xad, 0xb9, 0x38, 0x2d, 0x9c, 0x40,
+	0xeb, 0x05, 0x50, 0xbe, 0xe6, 0x0e, 0x6b, 0xf7, 0x7b, 0xa4, 0x81, 0xe5, 0xdc, 0x37, 0xa2, 0x24,
+	0x8b, 0xa4, 0x76, 0x6a, 0xb5, 0x24, 0xfc, 0x6d, 0xa8, 0x2e, 0x91, 0x03, 0x94, 0xb3, 0xc1, 0x84,
+	0x24, 0x2d, 0xeb, 0x2e, 0x6a, 0xcb, 0x17, 0x74, 0x89, 0x9c, 0x63, 0x65, 0xe5, 0x2a, 0xb2, 0xfb,
+	0xe7, 0xcc, 0x39, 0xb3, 0xb7, 0xe1, 0x7c, 0x5d, 0xba, 0x30, 0x3e, 0x23, 0x2a, 0xcd, 0x22, 0x0a,
+	0x5f, 0x11, 0x85, 0xef, 0x88, 0xc2, 0x53, 0x4c, 0xe1, 0x35, 0xa6, 0xf0, 0x16, 0x53, 0x78, 0x8f,
+	0x29, 0x7c, 0xc4, 0x14, 0x66, 0x31, 0x05, 0x7b, 0x2b, 0xfd, 0x0e, 0xc7, 0x3f, 0x01, 0x00, 0x00,
+	0xff, 0xff, 0xb0, 0xfe, 0x25, 0x9a, 0x4f, 0x02, 0x00, 0x00,
 }
 
 func (this *Empty) VerboseEqual(that interface{}) error {
@@ -385,6 +492,146 @@ func (this *ConnectRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *IsConnectedRequest) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*IsConnectedRequest)
+	if !ok {
+		that2, ok := that.(IsConnectedRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *IsConnectedRequest")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *IsConnectedRequest but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *IsConnectedRequest but is not nil && this == nil")
+	}
+	if len(this.PeerIDs) != len(that1.PeerIDs) {
+		return fmt.Errorf("PeerIDs this(%v) Not Equal that(%v)", len(this.PeerIDs), len(that1.PeerIDs))
+	}
+	for i := range this.PeerIDs {
+		if this.PeerIDs[i] != that1.PeerIDs[i] {
+			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *IsConnectedRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*IsConnectedRequest)
+	if !ok {
+		that2, ok := that.(IsConnectedRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.PeerIDs) != len(that1.PeerIDs) {
+		return false
+	}
+	for i := range this.PeerIDs {
+		if this.PeerIDs[i] != that1.PeerIDs[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
+func (this *IsConnectedResponse) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*IsConnectedResponse)
+	if !ok {
+		that2, ok := that.(IsConnectedResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *IsConnectedResponse")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *IsConnectedResponse but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *IsConnectedResponse but is not nil && this == nil")
+	}
+	if len(this.Connected) != len(that1.Connected) {
+		return fmt.Errorf("Connected this(%v) Not Equal that(%v)", len(this.Connected), len(that1.Connected))
+	}
+	for i := range this.Connected {
+		if this.Connected[i] != that1.Connected[i] {
+			return fmt.Errorf("Connected this[%v](%v) Not Equal that[%v](%v)", i, this.Connected[i], i, that1.Connected[i])
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *IsConnectedResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*IsConnectedResponse)
+	if !ok {
+		that2, ok := that.(IsConnectedResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.Connected) != len(that1.Connected) {
+		return false
+	}
+	for i := range this.Connected {
+		if this.Connected[i] != that1.Connected[i] {
+			return false
+		}
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func (this *Empty) GoString() string {
 	if this == nil {
 		return "nil"
@@ -423,6 +670,44 @@ func (this *ConnectRequest) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *IsConnectedRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.IsConnectedRequest{")
+	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *IsConnectedResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.IsConnectedResponse{")
+	keysForConnected := make([]string, 0, len(this.Connected))
+	for k := range this.Connected {
+		keysForConnected = append(keysForConnected, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForConnected)
+	mapStringForConnected := "map[string]bool{"
+	for _, k := range keysForConnected {
+		mapStringForConnected += fmt.Sprintf("%#v: %#v,", k, this.Connected[k])
+	}
+	mapStringForConnected += "}"
+	if this.Connected != nil {
+		s = append(s, "Connected: "+mapStringForConnected+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func valueToGoStringNode(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -448,6 +733,8 @@ type NodeAPIClient interface {
 	GetPeers(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*GetPeersResponse, error)
 	// Connect is used to connect to remote libp2p peers
 	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*Empty, error)
+	// IsConnected is used to check if we are connected with a given peer
+	IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error)
 }
 
 type nodeAPIClient struct {
@@ -476,12 +763,23 @@ func (c *nodeAPIClient) Connect(ctx context.Context, in *ConnectRequest, opts ..
 	return out, nil
 }
 
+func (c *nodeAPIClient) IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error) {
+	out := new(IsConnectedResponse)
+	err := c.cc.Invoke(ctx, "/pb.NodeAPI/IsConnected", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodeAPIServer is the server API for NodeAPI service.
 type NodeAPIServer interface {
 	// GetPeers returns a message containing a slice of current peers in our peerstore
 	GetPeers(context.Context, *Empty) (*GetPeersResponse, error)
 	// Connect is used to connect to remote libp2p peers
 	Connect(context.Context, *ConnectRequest) (*Empty, error)
+	// IsConnected is used to check if we are connected with a given peer
+	IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error)
 }
 
 func RegisterNodeAPIServer(s *grpc.Server, srv NodeAPIServer) {
@@ -524,6 +822,24 @@ func _NodeAPI_Connect_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NodeAPI_IsConnected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsConnectedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeAPIServer).IsConnected(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.NodeAPI/IsConnected",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeAPIServer).IsConnected(ctx, req.(*IsConnectedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.NodeAPI",
 	HandlerType: (*NodeAPIServer)(nil),
@@ -535,6 +851,10 @@ var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Connect",
 			Handler:    _NodeAPI_Connect_Handler,
+		},
+		{
+			MethodName: "IsConnected",
+			Handler:    _NodeAPI_IsConnected_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -634,6 +954,84 @@ func (m *ConnectRequest) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+func (m *IsConnectedRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *IsConnectedRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.PeerIDs) > 0 {
+		for _, s := range m.PeerIDs {
+			dAtA[i] = 0xa
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *IsConnectedResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *IsConnectedResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Connected) > 0 {
+		for k := range m.Connected {
+			dAtA[i] = 0xa
+			i++
+			v := m.Connected[k]
+			mapSize := 1 + len(k) + sovNode(uint64(len(k))) + 1 + 1
+			i = encodeVarintNode(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintNode(dAtA, i, uint64(len(k)))
+			i += copy(dAtA[i:], k)
+			dAtA[i] = 0x10
+			i++
+			if v {
+				dAtA[i] = 1
+			} else {
+				dAtA[i] = 0
+			}
+			i++
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
 func encodeVarintNode(dAtA []byte, offset int, v uint64) int {
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
@@ -677,6 +1075,35 @@ func NewPopulatedConnectRequest(r randyNode, easy bool) *ConnectRequest {
 	return this
 }
 
+func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest {
+	this := &IsConnectedRequest{}
+	v3 := r.Intn(10)
+	this.PeerIDs = make([]string, v3)
+	for i := 0; i < v3; i++ {
+		this.PeerIDs[i] = string(randStringNode(r))
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
+	}
+	return this
+}
+
+func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedResponse {
+	this := &IsConnectedResponse{}
+	if r.Intn(10) != 0 {
+		v4 := r.Intn(10)
+		this.Connected = make(map[string]bool)
+		for i := 0; i < v4; i++ {
+			v5 := randStringNode(r)
+			this.Connected[v5] = bool(bool(r.Intn(2) == 0))
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
+	}
+	return this
+}
+
 type randyNode interface {
 	Float32() float32
 	Float64() float64
@@ -696,9 +1123,9 @@ func randUTF8RuneNode(r randyNode) rune {
 	return rune(ru + 61)
 }
 func randStringNode(r randyNode) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	v6 := r.Intn(100)
+	tmps := make([]rune, v6)
+	for i := 0; i < v6; i++ {
 		tmps[i] = randUTF8RuneNode(r)
 	}
 	return string(tmps)
@@ -720,11 +1147,11 @@ func randFieldNode(dAtA []byte, r randyNode, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		v4 := r.Int63()
+		v7 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			v7 *= -1
 		}
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateNode(dAtA, uint64(v7))
 	case 1:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -797,6 +1224,44 @@ func (m *ConnectRequest) Size() (n int) {
 	return n
 }
 
+func (m *IsConnectedRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.PeerIDs) > 0 {
+		for _, s := range m.PeerIDs {
+			l = len(s)
+			n += 1 + l + sovNode(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *IsConnectedResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Connected) > 0 {
+		for k, v := range m.Connected {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovNode(uint64(len(k))) + 1 + 1
+			n += mapEntrySize + 1 + sovNode(uint64(mapEntrySize))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
 func sovNode(x uint64) (n int) {
 	for {
 		n++
@@ -837,6 +1302,38 @@ func (this *ConnectRequest) String() string {
 	}
 	s := strings.Join([]string{`&ConnectRequest{`,
 		`MultiAddrs:` + fmt.Sprintf("%v", this.MultiAddrs) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *IsConnectedRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&IsConnectedRequest{`,
+		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *IsConnectedResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	keysForConnected := make([]string, 0, len(this.Connected))
+	for k := range this.Connected {
+		keysForConnected = append(keysForConnected, k)
+	}
+	github_com_gogo_protobuf_sortkeys.Strings(keysForConnected)
+	mapStringForConnected := "map[string]bool{"
+	for _, k := range keysForConnected {
+		mapStringForConnected += fmt.Sprintf("%v: %v,", k, this.Connected[k])
+	}
+	mapStringForConnected += "}"
+	s := strings.Join([]string{`&IsConnectedResponse{`,
+		`Connected:` + mapStringForConnected + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -1050,6 +1547,261 @@ func (m *ConnectRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.MultiAddrs = append(m.MultiAddrs, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *IsConnectedRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: IsConnectedRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: IsConnectedRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PeerIDs", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PeerIDs = append(m.PeerIDs, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *IsConnectedResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: IsConnectedResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: IsConnectedResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Connected", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Connected == nil {
+				m.Connected = make(map[string]bool)
+			}
+			var mapkey string
+			var mapvalue bool
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowNode
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowNode
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthNode
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthNode
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var mapvaluetemp int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowNode
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapvaluetemp |= int(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					mapvalue = bool(mapvaluetemp != 0)
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipNode(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthNode
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Connected[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

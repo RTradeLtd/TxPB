@@ -21,6 +21,8 @@ service NodeAPI {
     rpc GetPeers(Empty) returns (GetPeersResponse) { };
     // Connect is used to connect to remote libp2p peers
     rpc Connect(ConnectRequest) returns (Empty) { };
+    // IsConnected is used to check if we are connected with a given peer
+    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { }
 }
 
 // Empty is an empty message
@@ -36,4 +38,16 @@ message GetPeersResponse {
 message ConnectRequest {
     // a slice of all multiaddrs we want to connect to
     repeated string multiAddrs = 1;
+}
+
+// IsConnectedRequest is used check whether or not we are currently peered with these peers
+message IsConnectedRequest {
+    // a slice of the peer IDs to examine
+    repeated string peerIDs = 1;
+}
+
+// IsConnectedResponse is a response to an IsConnectedRequest request
+message IsConnectedResponse {
+    // a map of the peer ID and a boolean indicating if we are connected with them
+    map<string, bool> connected = 1;
 }

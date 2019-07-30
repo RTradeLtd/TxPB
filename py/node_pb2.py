@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x07\n\x05\x45mpty\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t2d\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x07\n\x05\x45mpty\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x32\xa6\x01\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -113,9 +113,112 @@ _CONNECTREQUEST = _descriptor.Descriptor(
   serialized_end=147,
 )
 
+
+_ISCONNECTEDREQUEST = _descriptor.Descriptor(
+  name='IsConnectedRequest',
+  full_name='pb.IsConnectedRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerIDs', full_name='pb.IsConnectedRequest.peerIDs', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=149,
+  serialized_end=186,
+)
+
+
+_ISCONNECTEDRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
+  name='ConnectedEntry',
+  full_name='pb.IsConnectedResponse.ConnectedEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.IsConnectedResponse.ConnectedEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.IsConnectedResponse.ConnectedEntry.value', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=271,
+  serialized_end=319,
+)
+
+_ISCONNECTEDRESPONSE = _descriptor.Descriptor(
+  name='IsConnectedResponse',
+  full_name='pb.IsConnectedResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='connected', full_name='pb.IsConnectedResponse.connected', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_ISCONNECTEDRESPONSE_CONNECTEDENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=189,
+  serialized_end=319,
+)
+
+_ISCONNECTEDRESPONSE_CONNECTEDENTRY.containing_type = _ISCONNECTEDRESPONSE
+_ISCONNECTEDRESPONSE.fields_by_name['connected'].message_type = _ISCONNECTEDRESPONSE_CONNECTEDENTRY
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['GetPeersResponse'] = _GETPEERSRESPONSE
 DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
+DESCRIPTOR.message_types_by_name['IsConnectedRequest'] = _ISCONNECTEDREQUEST
+DESCRIPTOR.message_types_by_name['IsConnectedResponse'] = _ISCONNECTEDRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
@@ -139,8 +242,31 @@ ConnectRequest = _reflection.GeneratedProtocolMessageType('ConnectRequest', (_me
   })
 _sym_db.RegisterMessage(ConnectRequest)
 
+IsConnectedRequest = _reflection.GeneratedProtocolMessageType('IsConnectedRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ISCONNECTEDREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.IsConnectedRequest)
+  })
+_sym_db.RegisterMessage(IsConnectedRequest)
+
+IsConnectedResponse = _reflection.GeneratedProtocolMessageType('IsConnectedResponse', (_message.Message,), {
+
+  'ConnectedEntry' : _reflection.GeneratedProtocolMessageType('ConnectedEntry', (_message.Message,), {
+    'DESCRIPTOR' : _ISCONNECTEDRESPONSE_CONNECTEDENTRY,
+    '__module__' : 'node_pb2'
+    # @@protoc_insertion_point(class_scope:pb.IsConnectedResponse.ConnectedEntry)
+    })
+  ,
+  'DESCRIPTOR' : _ISCONNECTEDRESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.IsConnectedResponse)
+  })
+_sym_db.RegisterMessage(IsConnectedResponse)
+_sym_db.RegisterMessage(IsConnectedResponse.ConnectedEntry)
+
 
 DESCRIPTOR._options = None
+_ISCONNECTEDRESPONSE_CONNECTEDENTRY._options = None
 
 _NODEAPI = _descriptor.ServiceDescriptor(
   name='NodeAPI',
@@ -148,8 +274,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=149,
-  serialized_end=249,
+  serialized_start=322,
+  serialized_end=488,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPeers',
@@ -167,6 +293,15 @@ _NODEAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CONNECTREQUEST,
     output_type=_EMPTY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='IsConnected',
+    full_name='pb.NodeAPI.IsConnected',
+    index=2,
+    containing_service=None,
+    input_type=_ISCONNECTEDREQUEST,
+    output_type=_ISCONNECTEDRESPONSE,
     serialized_options=None,
   ),
 ])

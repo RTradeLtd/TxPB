@@ -288,6 +288,18 @@
                   <a href="#pb.GetPeersResponse"><span class="badge">M</span>GetPeersResponse</a>
                 </li>
               
+                <li>
+                  <a href="#pb.IsConnectedRequest"><span class="badge">M</span>IsConnectedRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.IsConnectedResponse"><span class="badge">M</span>IsConnectedResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.IsConnectedResponse.ConnectedEntry"><span class="badge">M</span>IsConnectedResponse.ConnectedEntry</a>
+                </li>
+              
               
               
               
@@ -1013,6 +1025,85 @@ is useful on machines with low-memory </p></td>
 
         
       
+        <h3 id="pb.IsConnectedRequest">IsConnectedRequest</h3>
+        <p>IsConnectedRequest is used check whether or not we are currently peered with these peers</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of the peer IDs to examine </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.IsConnectedResponse">IsConnectedResponse</h3>
+        <p>IsConnectedResponse is a response to an IsConnectedRequest request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>connected</td>
+                  <td><a href="#pb.IsConnectedResponse.ConnectedEntry">IsConnectedResponse.ConnectedEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>a map of the peer ID and a boolean indicating if we are connected with them </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.IsConnectedResponse.ConnectedEntry">IsConnectedResponse.ConnectedEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -1039,6 +1130,13 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.ConnectRequest">ConnectRequest</a></td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>Connect is used to connect to remote libp2p peers</p></td>
+              </tr>
+            
+              <tr>
+                <td>IsConnected</td>
+                <td><a href="#pb.IsConnectedRequest">IsConnectedRequest</a></td>
+                <td><a href="#pb.IsConnectedResponse">IsConnectedResponse</a></td>
+                <td><p>IsConnected is used to check if we are connected with a given peer</p></td>
               </tr>
             
           </tbody>

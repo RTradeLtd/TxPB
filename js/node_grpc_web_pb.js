@@ -198,5 +198,60 @@ proto.pb.NodeAPIPromiseClient.prototype.connect =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.IsConnectedRequest,
+ *   !proto.pb.IsConnectedResponse>}
+ */
+const methodInfo_NodeAPI_IsConnected = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.IsConnectedResponse,
+  /** @param {!proto.pb.IsConnectedRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.pb.IsConnectedResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.IsConnectedRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.IsConnectedResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.IsConnectedResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.NodeAPIClient.prototype.isConnected =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.NodeAPI/IsConnected',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_IsConnected,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.IsConnectedRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.IsConnectedResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.NodeAPIPromiseClient.prototype.isConnected =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.NodeAPI/IsConnected',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_IsConnected);
+};
+
+
 module.exports = proto.pb;
 

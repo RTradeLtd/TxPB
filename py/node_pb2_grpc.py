@@ -24,6 +24,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.ConnectRequest.SerializeToString,
         response_deserializer=node__pb2.Empty.FromString,
         )
+    self.IsConnected = channel.unary_unary(
+        '/pb.NodeAPI/IsConnected',
+        request_serializer=node__pb2.IsConnectedRequest.SerializeToString,
+        response_deserializer=node__pb2.IsConnectedResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -44,6 +49,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def IsConnected(self, request, context):
+    """IsConnected is used to check if we are connected with a given peer
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -56,6 +68,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.Connect,
           request_deserializer=node__pb2.ConnectRequest.FromString,
           response_serializer=node__pb2.Empty.SerializeToString,
+      ),
+      'IsConnected': grpc.unary_unary_rpc_method_handler(
+          servicer.IsConnected,
+          request_deserializer=node__pb2.IsConnectedRequest.FromString,
+          response_serializer=node__pb2.IsConnectedResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
