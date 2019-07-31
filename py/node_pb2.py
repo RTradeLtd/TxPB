@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x07\n\x05\x45mpty\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x32\xa6\x01\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x07\n\x05\x45mpty\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t2\xe5\x01\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -212,13 +212,155 @@ _ISCONNECTEDRESPONSE = _descriptor.Descriptor(
   serialized_end=319,
 )
 
+
+_DISCONNECTREQUEST = _descriptor.Descriptor(
+  name='DisconnectRequest',
+  full_name='pb.DisconnectRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerIDs', full_name='pb.DisconnectRequest.peerIDs', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=321,
+  serialized_end=357,
+)
+
+
+_DISCONNECTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
+  name='StatusEntry',
+  full_name='pb.DisconnectResponse.StatusEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.DisconnectResponse.StatusEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.DisconnectResponse.StatusEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=434,
+  serialized_end=517,
+)
+
+_DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
+  name='StatusMessage',
+  full_name='pb.DisconnectResponse.StatusMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='disconnected', full_name='pb.DisconnectResponse.StatusMessage.disconnected', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reason', full_name='pb.DisconnectResponse.StatusMessage.reason', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=519,
+  serialized_end=572,
+)
+
+_DISCONNECTRESPONSE = _descriptor.Descriptor(
+  name='DisconnectResponse',
+  full_name='pb.DisconnectResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='pb.DisconnectResponse.status', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_DISCONNECTRESPONSE_STATUSENTRY, _DISCONNECTRESPONSE_STATUSMESSAGE, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=360,
+  serialized_end=572,
+)
+
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY.containing_type = _ISCONNECTEDRESPONSE
 _ISCONNECTEDRESPONSE.fields_by_name['connected'].message_type = _ISCONNECTEDRESPONSE_CONNECTEDENTRY
+_DISCONNECTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _DISCONNECTRESPONSE_STATUSMESSAGE
+_DISCONNECTRESPONSE_STATUSENTRY.containing_type = _DISCONNECTRESPONSE
+_DISCONNECTRESPONSE_STATUSMESSAGE.containing_type = _DISCONNECTRESPONSE
+_DISCONNECTRESPONSE.fields_by_name['status'].message_type = _DISCONNECTRESPONSE_STATUSENTRY
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['GetPeersResponse'] = _GETPEERSRESPONSE
 DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
 DESCRIPTOR.message_types_by_name['IsConnectedRequest'] = _ISCONNECTEDREQUEST
 DESCRIPTOR.message_types_by_name['IsConnectedResponse'] = _ISCONNECTEDRESPONSE
+DESCRIPTOR.message_types_by_name['DisconnectRequest'] = _DISCONNECTREQUEST
+DESCRIPTOR.message_types_by_name['DisconnectResponse'] = _DISCONNECTRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
@@ -264,9 +406,40 @@ IsConnectedResponse = _reflection.GeneratedProtocolMessageType('IsConnectedRespo
 _sym_db.RegisterMessage(IsConnectedResponse)
 _sym_db.RegisterMessage(IsConnectedResponse.ConnectedEntry)
 
+DisconnectRequest = _reflection.GeneratedProtocolMessageType('DisconnectRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DISCONNECTREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.DisconnectRequest)
+  })
+_sym_db.RegisterMessage(DisconnectRequest)
+
+DisconnectResponse = _reflection.GeneratedProtocolMessageType('DisconnectResponse', (_message.Message,), {
+
+  'StatusEntry' : _reflection.GeneratedProtocolMessageType('StatusEntry', (_message.Message,), {
+    'DESCRIPTOR' : _DISCONNECTRESPONSE_STATUSENTRY,
+    '__module__' : 'node_pb2'
+    # @@protoc_insertion_point(class_scope:pb.DisconnectResponse.StatusEntry)
+    })
+  ,
+
+  'StatusMessage' : _reflection.GeneratedProtocolMessageType('StatusMessage', (_message.Message,), {
+    'DESCRIPTOR' : _DISCONNECTRESPONSE_STATUSMESSAGE,
+    '__module__' : 'node_pb2'
+    # @@protoc_insertion_point(class_scope:pb.DisconnectResponse.StatusMessage)
+    })
+  ,
+  'DESCRIPTOR' : _DISCONNECTRESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.DisconnectResponse)
+  })
+_sym_db.RegisterMessage(DisconnectResponse)
+_sym_db.RegisterMessage(DisconnectResponse.StatusEntry)
+_sym_db.RegisterMessage(DisconnectResponse.StatusMessage)
+
 
 DESCRIPTOR._options = None
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY._options = None
+_DISCONNECTRESPONSE_STATUSENTRY._options = None
 
 _NODEAPI = _descriptor.ServiceDescriptor(
   name='NodeAPI',
@@ -274,8 +447,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=322,
-  serialized_end=488,
+  serialized_start=575,
+  serialized_end=804,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPeers',
@@ -296,9 +469,18 @@ _NODEAPI = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='Disconnect',
+    full_name='pb.NodeAPI.Disconnect',
+    index=2,
+    containing_service=None,
+    input_type=_DISCONNECTREQUEST,
+    output_type=_DISCONNECTRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='IsConnected',
     full_name='pb.NodeAPI.IsConnected',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_ISCONNECTEDREQUEST,
     output_type=_ISCONNECTEDRESPONSE,

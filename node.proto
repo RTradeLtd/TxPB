@@ -21,6 +21,8 @@ service NodeAPI {
     rpc GetPeers(Empty) returns (GetPeersResponse) { };
     // Connect is used to connect to remote libp2p peers
     rpc Connect(ConnectRequest) returns (Empty) { };
+    // Disconnect is used to disconnect remote libp2p peer connections
+    rpc Disconnect(DisconnectRequest) returns (DisconnectResponse) { };
     // IsConnected is used to check if we are connected with a given peer
     rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { }
 }
@@ -50,4 +52,23 @@ message IsConnectedRequest {
 message IsConnectedResponse {
     // a map of the peer ID and a boolean indicating if we are connected with them
     map<string, bool> connected = 1;
+}
+
+// DisconnectRequest is used to disconnect a connection to a libp2p peer
+message DisconnectRequest {
+    // a slice of the peer IDs to disconnect from
+    repeated string peerIDs = 1;
+}
+
+// DisconnectResponse is a response to a disconnect request
+message DisconnectResponse {
+    // a map of the peer id, and a custom message indicating success, or why there was a failure
+    map<string, StatusMessage> status = 1;
+    // StatusMessage is used to contain the status information about a particular disconnection attempt
+    message StatusMessage {
+        // indicate whether or not we actually disconnected
+        bool disconnected = 1;
+        // if disconnected is false, the reason why it is false
+        string reason = 2;
+    }
 }

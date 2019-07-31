@@ -281,6 +281,22 @@
                 </li>
               
                 <li>
+                  <a href="#pb.DisconnectRequest"><span class="badge">M</span>DisconnectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse"><span class="badge">M</span>DisconnectResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse.StatusEntry"><span class="badge">M</span>DisconnectResponse.StatusEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse.StatusMessage"><span class="badge">M</span>DisconnectResponse.StatusMessage</a>
+                </li>
+              
+                <li>
                   <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
                 </li>
               
@@ -994,6 +1010,116 @@ is useful on machines with low-memory </p></td>
 
         
       
+        <h3 id="pb.DisconnectRequest">DisconnectRequest</h3>
+        <p>DisconnectRequest is used to disconnect a connection to a libp2p peer</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of the peer IDs to disconnect from </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse">DisconnectResponse</h3>
+        <p>DisconnectResponse is a response to a disconnect request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#pb.DisconnectResponse.StatusEntry">DisconnectResponse.StatusEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>a map of the peer id, and a custom message indicating success, or why there was a failure </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse.StatusEntry">DisconnectResponse.StatusEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#pb.DisconnectResponse.StatusMessage">DisconnectResponse.StatusMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse.StatusMessage">DisconnectResponse.StatusMessage</h3>
+        <p>StatusMessage is used to contain the status information about a particular disconnection attempt</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>disconnected</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>indicate whether or not we actually disconnected </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>if disconnected is false, the reason why it is false </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="pb.Empty">Empty</h3>
         <p>Empty is an empty message</p>
 
@@ -1130,6 +1256,13 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.ConnectRequest">ConnectRequest</a></td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>Connect is used to connect to remote libp2p peers</p></td>
+              </tr>
+            
+              <tr>
+                <td>Disconnect</td>
+                <td><a href="#pb.DisconnectRequest">DisconnectRequest</a></td>
+                <td><a href="#pb.DisconnectResponse">DisconnectResponse</a></td>
+                <td><p>Disconnect is used to disconnect remote libp2p peer connections</p></td>
               </tr>
             
               <tr>

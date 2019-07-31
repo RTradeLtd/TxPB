@@ -94,6 +94,38 @@ public final class NodeAPIGrpc {
      return getConnectMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.DisconnectRequest,
+      pb.Node.DisconnectResponse> getDisconnectMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Disconnect",
+      requestType = pb.Node.DisconnectRequest.class,
+      responseType = pb.Node.DisconnectResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.DisconnectRequest,
+      pb.Node.DisconnectResponse> getDisconnectMethod() {
+    io.grpc.MethodDescriptor<pb.Node.DisconnectRequest, pb.Node.DisconnectResponse> getDisconnectMethod;
+    if ((getDisconnectMethod = NodeAPIGrpc.getDisconnectMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getDisconnectMethod = NodeAPIGrpc.getDisconnectMethod) == null) {
+          NodeAPIGrpc.getDisconnectMethod = getDisconnectMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.DisconnectRequest, pb.Node.DisconnectResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Disconnect"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DisconnectRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DisconnectResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Disconnect"))
+                  .build();
+          }
+        }
+     }
+     return getDisconnectMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<pb.Node.IsConnectedRequest,
       pb.Node.IsConnectedResponse> getIsConnectedMethod;
 
@@ -178,6 +210,16 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
+     * Disconnect is used to disconnect remote libp2p peer connections
+     * </pre>
+     */
+    public void disconnect(pb.Node.DisconnectRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getDisconnectMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * IsConnected is used to check if we are connected with a given peer
      * </pre>
      */
@@ -202,6 +244,13 @@ public final class NodeAPIGrpc {
                 pb.Node.ConnectRequest,
                 pb.Node.Empty>(
                   this, METHODID_CONNECT)))
+          .addMethod(
+            getDisconnectMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.DisconnectRequest,
+                pb.Node.DisconnectResponse>(
+                  this, METHODID_DISCONNECT)))
           .addMethod(
             getIsConnectedMethod(),
             asyncUnaryCall(
@@ -258,6 +307,17 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
+     * Disconnect is used to disconnect remote libp2p peer connections
+     * </pre>
+     */
+    public void disconnect(pb.Node.DisconnectRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDisconnectMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * IsConnected is used to check if we are connected with a given peer
      * </pre>
      */
@@ -307,6 +367,16 @@ public final class NodeAPIGrpc {
     public pb.Node.Empty connect(pb.Node.ConnectRequest request) {
       return blockingUnaryCall(
           getChannel(), getConnectMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Disconnect is used to disconnect remote libp2p peer connections
+     * </pre>
+     */
+    public pb.Node.DisconnectResponse disconnect(pb.Node.DisconnectRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDisconnectMethod(), getCallOptions(), request);
     }
 
     /**
@@ -365,6 +435,17 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
+     * Disconnect is used to disconnect remote libp2p peer connections
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.DisconnectResponse> disconnect(
+        pb.Node.DisconnectRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDisconnectMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * IsConnected is used to check if we are connected with a given peer
      * </pre>
      */
@@ -377,7 +458,8 @@ public final class NodeAPIGrpc {
 
   private static final int METHODID_GET_PEERS = 0;
   private static final int METHODID_CONNECT = 1;
-  private static final int METHODID_IS_CONNECTED = 2;
+  private static final int METHODID_DISCONNECT = 2;
+  private static final int METHODID_IS_CONNECTED = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -403,6 +485,10 @@ public final class NodeAPIGrpc {
         case METHODID_CONNECT:
           serviceImpl.connect((pb.Node.ConnectRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.Empty>) responseObserver);
+          break;
+        case METHODID_DISCONNECT:
+          serviceImpl.disconnect((pb.Node.DisconnectRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse>) responseObserver);
           break;
         case METHODID_IS_CONNECTED:
           serviceImpl.isConnected((pb.Node.IsConnectedRequest) request,
@@ -471,6 +557,7 @@ public final class NodeAPIGrpc {
               .setSchemaDescriptor(new NodeAPIFileDescriptorSupplier())
               .addMethod(getGetPeersMethod())
               .addMethod(getConnectMethod())
+              .addMethod(getDisconnectMethod())
               .addMethod(getIsConnectedMethod())
               .build();
         }

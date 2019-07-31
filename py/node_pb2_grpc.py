@@ -24,6 +24,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.ConnectRequest.SerializeToString,
         response_deserializer=node__pb2.Empty.FromString,
         )
+    self.Disconnect = channel.unary_unary(
+        '/pb.NodeAPI/Disconnect',
+        request_serializer=node__pb2.DisconnectRequest.SerializeToString,
+        response_deserializer=node__pb2.DisconnectResponse.FromString,
+        )
     self.IsConnected = channel.unary_unary(
         '/pb.NodeAPI/IsConnected',
         request_serializer=node__pb2.IsConnectedRequest.SerializeToString,
@@ -49,6 +54,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Disconnect(self, request, context):
+    """Disconnect is used to disconnect remote libp2p peer connections
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def IsConnected(self, request, context):
     """IsConnected is used to check if we are connected with a given peer
     """
@@ -68,6 +80,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.Connect,
           request_deserializer=node__pb2.ConnectRequest.FromString,
           response_serializer=node__pb2.Empty.SerializeToString,
+      ),
+      'Disconnect': grpc.unary_unary_rpc_method_handler(
+          servicer.Disconnect,
+          request_deserializer=node__pb2.DisconnectRequest.FromString,
+          response_serializer=node__pb2.DisconnectResponse.SerializeToString,
       ),
       'IsConnected': grpc.unary_unary_rpc_method_handler(
           servicer.IsConnected,
