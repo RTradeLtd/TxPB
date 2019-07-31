@@ -25,8 +25,8 @@ service StatusAPI {
 
 // VersionResponse is used to return API version information
 message VersionResponse {
-    // denotes the github release tag that was present when the api was built
-    string release = 1;
+    // version denotes the github version that was present when the api was built
+    string version = 1;
 }
 
 // APISTATUS is an enum to return a concise description of api status

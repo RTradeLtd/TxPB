@@ -63,7 +63,7 @@ proto.pb.VersionResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.VersionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    release: jspb.Message.getFieldWithDefault(msg, 1, "")
+    version: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -102,7 +102,7 @@ proto.pb.VersionResponse.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRelease(value);
+      msg.setVersion(value);
       break;
     default:
       reader.skipField();
@@ -133,7 +133,7 @@ proto.pb.VersionResponse.prototype.serializeBinary = function() {
  */
 proto.pb.VersionResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRelease();
+  f = message.getVersion();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -144,16 +144,16 @@ proto.pb.VersionResponse.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string release = 1;
+ * optional string version = 1;
  * @return {string}
  */
-proto.pb.VersionResponse.prototype.getRelease = function() {
+proto.pb.VersionResponse.prototype.getVersion = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.pb.VersionResponse.prototype.setRelease = function(value) {
+proto.pb.VersionResponse.prototype.setVersion = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
