@@ -1,0 +1,74 @@
+syntax = "proto3";
+package pb;
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+
+// NodeAPI provide an API to control the underlying custom ipfs node
+service NodeAPI {
+    // GetPeers returns a message containing a slice of current peers in our peerstore
+    rpc GetPeers(Empty) returns (GetPeersResponse) { };
+    // Connect is used to connect to remote libp2p peers
+    rpc Connect(ConnectRequest) returns (Empty) { };
+    // Disconnect is used to disconnect remote libp2p peer connections
+    rpc Disconnect(DisconnectRequest) returns (DisconnectResponse) { };
+    // IsConnected is used to check if we are connected with a given peer
+    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { }
+}
+
+// Empty is an empty message
+message Empty { }
+
+// GetPeersResponse is a response to GetPeers containing a slice of peer IDs
+message GetPeersResponse {
+    // a slice of peer IDs
+    repeated string peerIDs = 1;
+}
+
+// ConnectRequest is used to connect to libp2p peers
+message ConnectRequest {
+    // a slice of all multiaddrs we want to connect to
+    repeated string multiAddrs = 1;
+}
+
+// IsConnectedRequest is used check whether or not we are currently peered with these peers
+message IsConnectedRequest {
+    // a slice of the peer IDs to examine
+    repeated string peerIDs = 1;
+}
+
+// IsConnectedResponse is a response to an IsConnectedRequest request
+message IsConnectedResponse {
+    // a map of the peer ID and a boolean indicating if we are connected with them
+    map<string, bool> connected = 1;
+}
+
+// DisconnectRequest is used to disconnect a connection to a libp2p peer
+message DisconnectRequest {
+    // a slice of the peer IDs to disconnect from
+    repeated string peerIDs = 1;
+}
+
+// DisconnectResponse is a response to a disconnect request
+message DisconnectResponse {
+    // a map of the peer id, and a custom message indicating success, or why there was a failure
+    map<string, StatusMessage> status = 1;
+    // StatusMessage is used to contain the status information about a particular disconnection attempt
+    message StatusMessage {
+        // indicate whether or not we actually disconnected
+        bool disconnected = 1;
+        // if disconnected is false, the reason why it is false
+        string reason = 2;
+    }
+}

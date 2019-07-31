@@ -273,6 +273,61 @@
         
           
           <li>
+            <a href="#node.proto">node.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.ConnectRequest"><span class="badge">M</span>ConnectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectRequest"><span class="badge">M</span>DisconnectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse"><span class="badge">M</span>DisconnectResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse.StatusEntry"><span class="badge">M</span>DisconnectResponse.StatusEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.DisconnectResponse.StatusMessage"><span class="badge">M</span>DisconnectResponse.StatusMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.GetPeersResponse"><span class="badge">M</span>GetPeersResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.IsConnectedRequest"><span class="badge">M</span>IsConnectedRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.IsConnectedResponse"><span class="badge">M</span>IsConnectedResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.IsConnectedResponse.ConnectedEntry"><span class="badge">M</span>IsConnectedResponse.ConnectedEntry</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#pb.NodeAPI"><span class="badge">S</span>NodeAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#util.proto">util.proto</a>
             <ul>
               
@@ -917,6 +972,304 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.DownloadRequest">DownloadRequest</a></td>
                 <td><a href="#pb.DownloadResponse">DownloadResponse</a> stream</td>
                 <td><p>DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="node.proto">node.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.ConnectRequest">ConnectRequest</h3>
+        <p>ConnectRequest is used to connect to libp2p peers</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>multiAddrs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of all multiaddrs we want to connect to </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectRequest">DisconnectRequest</h3>
+        <p>DisconnectRequest is used to disconnect a connection to a libp2p peer</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of the peer IDs to disconnect from </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse">DisconnectResponse</h3>
+        <p>DisconnectResponse is a response to a disconnect request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#pb.DisconnectResponse.StatusEntry">DisconnectResponse.StatusEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>a map of the peer id, and a custom message indicating success, or why there was a failure </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse.StatusEntry">DisconnectResponse.StatusEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#pb.DisconnectResponse.StatusMessage">DisconnectResponse.StatusMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.DisconnectResponse.StatusMessage">DisconnectResponse.StatusMessage</h3>
+        <p>StatusMessage is used to contain the status information about a particular disconnection attempt</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>disconnected</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>indicate whether or not we actually disconnected </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>if disconnected is false, the reason why it is false </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.Empty">Empty</h3>
+        <p>Empty is an empty message</p>
+
+        
+
+        
+      
+        <h3 id="pb.GetPeersResponse">GetPeersResponse</h3>
+        <p>GetPeersResponse is a response to GetPeers containing a slice of peer IDs</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of peer IDs </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.IsConnectedRequest">IsConnectedRequest</h3>
+        <p>IsConnectedRequest is used check whether or not we are currently peered with these peers</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peerIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>a slice of the peer IDs to examine </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.IsConnectedResponse">IsConnectedResponse</h3>
+        <p>IsConnectedResponse is a response to an IsConnectedRequest request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>connected</td>
+                  <td><a href="#pb.IsConnectedResponse.ConnectedEntry">IsConnectedResponse.ConnectedEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>a map of the peer ID and a boolean indicating if we are connected with them </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.IsConnectedResponse.ConnectedEntry">IsConnectedResponse.ConnectedEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="pb.NodeAPI">NodeAPI</h3>
+        <p>NodeAPI provide an API to control the underlying custom ipfs node</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetPeers</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><a href="#pb.GetPeersResponse">GetPeersResponse</a></td>
+                <td><p>GetPeers returns a message containing a slice of current peers in our peerstore</p></td>
+              </tr>
+            
+              <tr>
+                <td>Connect</td>
+                <td><a href="#pb.ConnectRequest">ConnectRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>Connect is used to connect to remote libp2p peers</p></td>
+              </tr>
+            
+              <tr>
+                <td>Disconnect</td>
+                <td><a href="#pb.DisconnectRequest">DisconnectRequest</a></td>
+                <td><a href="#pb.DisconnectResponse">DisconnectResponse</a></td>
+                <td><p>Disconnect is used to disconnect remote libp2p peer connections</p></td>
+              </tr>
+            
+              <tr>
+                <td>IsConnected</td>
+                <td><a href="#pb.IsConnectedRequest">IsConnectedRequest</a></td>
+                <td><a href="#pb.IsConnectedResponse">IsConnectedResponse</a></td>
+                <td><p>IsConnected is used to check if we are connected with a given peer</p></td>
               </tr>
             
           </tbody>
