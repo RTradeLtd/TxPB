@@ -297,10 +297,6 @@
                 </li>
               
                 <li>
-                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
-                </li>
-              
-                <li>
                   <a href="#pb.GetPeersResponse"><span class="badge">M</span>GetPeersResponse</a>
                 </li>
               
@@ -328,8 +324,27 @@
         
           
           <li>
+            <a href="#status.proto">status.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.Version"><span class="badge">M</span>Version</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#util.proto">util.proto</a>
             <ul>
+              
+                <li>
+                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
+                </li>
               
                 <li>
                   <a href="#pb.PutResponse"><span class="badge">M</span>PutResponse</a>
@@ -1120,13 +1135,6 @@ is useful on machines with low-memory </p></td>
 
         
       
-        <h3 id="pb.Empty">Empty</h3>
-        <p>Empty is an empty message</p>
-
-        
-
-        
-      
         <h3 id="pb.GetPeersResponse">GetPeersResponse</h3>
         <p>GetPeersResponse is a response to GetPeers containing a slice of peer IDs</p>
 
@@ -1279,10 +1287,55 @@ is useful on machines with low-memory </p></td>
     
       
       <div class="file-heading">
+        <h2 id="status.proto">status.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.Version">Version</h3>
+        <p>Version is used to return API version information</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>release</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>denotes the github release tag that was present when the api was built </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
         <h2 id="util.proto">util.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
 
+      
+        <h3 id="pb.Empty">Empty</h3>
+        <p>Empty is an empty message</p>
+
+        
+
+        
       
         <h3 id="pb.PutResponse">PutResponse</h3>
         <p>PutResponse is a response to any data storage (put) requests</p>

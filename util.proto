@@ -21,3 +21,6 @@ message PutResponse {
     // hash is hash/cid (content identifier) of the data that was stored
     string hash = 1;
 }
+
+// Empty is an empty message
+message Empty { }

@@ -12,6 +12,8 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 
+var util_pb = require('./util_pb.js')
+
 var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js')
 const proto = {};
 proto.pb = require('./node_pb.js');
@@ -150,12 +152,12 @@ proto.pb.NodeAPIPromiseClient.prototype.getPeers =
  *   !proto.pb.Empty>}
  */
 const methodInfo_NodeAPI_Connect = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.Empty,
+  util_pb.Empty,
   /** @param {!proto.pb.ConnectRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.Empty.deserializeBinary
+  util_pb.Empty.deserializeBinary
 );
 
 

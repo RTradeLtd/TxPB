@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nutil.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x1b\n\x0bPutResponse\x12\x0c\n\x04hash\x18\x01 \x01(\tB(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nutil.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x1b\n\x0bPutResponse\x12\x0c\n\x04hash\x18\x01 \x01(\t\"\x07\n\x05\x45mptyB(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -58,7 +58,32 @@ _PUTRESPONSE = _descriptor.Descriptor(
   serialized_end=92,
 )
 
+
+_EMPTY = _descriptor.Descriptor(
+  name='Empty',
+  full_name='pb.Empty',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=94,
+  serialized_end=101,
+)
+
 DESCRIPTOR.message_types_by_name['PutResponse'] = _PUTRESPONSE
+DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PutResponse = _reflection.GeneratedProtocolMessageType('PutResponse', (_message.Message,), {
@@ -67,6 +92,13 @@ PutResponse = _reflection.GeneratedProtocolMessageType('PutResponse', (_message.
   # @@protoc_insertion_point(class_scope:pb.PutResponse)
   })
 _sym_db.RegisterMessage(PutResponse)
+
+Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTY,
+  '__module__' : 'util_pb2'
+  # @@protoc_insertion_point(class_scope:pb.Empty)
+  })
+_sym_db.RegisterMessage(Empty)
 
 
 DESCRIPTOR._options = None

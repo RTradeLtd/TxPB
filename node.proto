@@ -1,5 +1,6 @@
 syntax = "proto3";
 package pb;
+import "util.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 option (gogoproto.gostring_all) = true;
 option (gogoproto.equal_all) = true;
@@ -26,9 +27,6 @@ service NodeAPI {
     // IsConnected is used to check if we are connected with a given peer
     rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { }
 }
-
-// Empty is an empty message
-message Empty { }
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 message GetPeersResponse {

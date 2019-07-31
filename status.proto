@@ -1,0 +1,52 @@
+syntax = "proto3";
+package pb;
+import "util.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// provides utilities to retrieve api status information from
+service StatusAPI {
+    // Version is used to retrieve api version information
+    rpc Version(Empty) returns (VersionResponse) { };
+    // Status is used to retrieve api status information.
+    rpc Status(Empty) returns (StatusResponse) { };
+}
+
+// VersionResponse is used to return API version information
+message VersionResponse {
+    // denotes the github release tag that was present when the api was built
+    string release = 1;
+}
+
+// APISTATUS is an enum to return a concise description of api status
+enum APISTATUS {
+    // ONLINE indicates everything is working as expected
+    ONLINE = 0;
+    // PURGING indicates the system is undergoing data removal
+    // a purging system is not available for use unless all other nodes are unavailable
+    PURGING = 1;
+    // DEGRADED_PERFORMANCE indicates the system is currently under heavy load
+    DEGRADED_PERFORMANCE = 2;
+    // ERROR indicates that the system is currently experiencing an error and should not be used
+    ERROR = 3;
+}
+
+// StatusResponse is used to return API status information
+message StatusResponse {
+    // host is an identifier for the host of the system responding to the request.
+    // it may or may not be the hostname, it is up to the implementer of the service to choose what is here
+    string host = 1;
+    // status contains a status enum indicating the state of the system
+    APISTATUS status = 2;
+}
