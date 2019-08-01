@@ -25,7 +25,11 @@ service NodeAPI {
     // Disconnect is used to disconnect remote libp2p peer connections
     rpc Disconnect(DisconnectRequest) returns (DisconnectResponse) { };
     // IsConnected is used to check if we are connected with a given peer
-    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { }
+    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { };
+    // EnableExtras is used to enable a particular extras feature
+    rpc EnableExtras(EnableExtrasRequest) returns (Empty) { };
+    // DisableExtras is used to disable a particular extras feature
+    rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
 }
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
@@ -69,4 +73,24 @@ message DisconnectResponse {
         // if disconnected is false, the reason why it is false
         string reason = 2;
     }
+}
+
+// EXTRASTYPE denotes a particular extras type
+enum EXTRASTYPE {
+    // IDENTIFY is the identify service
+    IDENTIFY = 0;
+    // PUBSUB is the libp2p pubsub system
+    PUBSUB = 1;
+}
+
+// EnableExtrasRequest is used to enable a particular extras feature
+message EnableExtrasRequest {
+    // extrasFeature denotes the particular extras functionality to enable
+    EXTRASTYPE extrasFeature = 1;
+}
+
+// DisableExtrasRequest is used to disable a particular extras feature
+message DisableExtrasRequest {
+    // extrasFeature denotes the particular extras functionality to disable
+    EXTRASTYPE extrasFeature = 1;
 }

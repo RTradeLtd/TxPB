@@ -4,6 +4,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -22,10 +23,35 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t2\xe5\x01\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*&\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x32\xd3\x02\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
+_EXTRASTYPE = _descriptor.EnumDescriptor(
+  name='EXTRASTYPE',
+  full_name='pb.EXTRASTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='IDENTIFY', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PUBSUB', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=702,
+  serialized_end=740,
+)
+_sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
+
+EXTRASTYPE = enum_type_wrapper.EnumTypeWrapper(_EXTRASTYPE)
+IDENTIFY = 0
+PUBSUB = 1
 
 
 
@@ -325,18 +351,85 @@ _DISCONNECTRESPONSE = _descriptor.Descriptor(
   serialized_end=575,
 )
 
+
+_ENABLEEXTRASREQUEST = _descriptor.Descriptor(
+  name='EnableExtrasRequest',
+  full_name='pb.EnableExtrasRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='extrasFeature', full_name='pb.EnableExtrasRequest.extrasFeature', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=577,
+  serialized_end=637,
+)
+
+
+_DISABLEEXTRASREQUEST = _descriptor.Descriptor(
+  name='DisableExtrasRequest',
+  full_name='pb.DisableExtrasRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='extrasFeature', full_name='pb.DisableExtrasRequest.extrasFeature', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=639,
+  serialized_end=700,
+)
+
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY.containing_type = _ISCONNECTEDRESPONSE
 _ISCONNECTEDRESPONSE.fields_by_name['connected'].message_type = _ISCONNECTEDRESPONSE_CONNECTEDENTRY
 _DISCONNECTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _DISCONNECTRESPONSE_STATUSMESSAGE
 _DISCONNECTRESPONSE_STATUSENTRY.containing_type = _DISCONNECTRESPONSE
 _DISCONNECTRESPONSE_STATUSMESSAGE.containing_type = _DISCONNECTRESPONSE
 _DISCONNECTRESPONSE.fields_by_name['status'].message_type = _DISCONNECTRESPONSE_STATUSENTRY
+_ENABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
+_DISABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
 DESCRIPTOR.message_types_by_name['GetPeersResponse'] = _GETPEERSRESPONSE
 DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
 DESCRIPTOR.message_types_by_name['IsConnectedRequest'] = _ISCONNECTEDREQUEST
 DESCRIPTOR.message_types_by_name['IsConnectedResponse'] = _ISCONNECTEDRESPONSE
 DESCRIPTOR.message_types_by_name['DisconnectRequest'] = _DISCONNECTREQUEST
 DESCRIPTOR.message_types_by_name['DisconnectResponse'] = _DISCONNECTRESPONSE
+DESCRIPTOR.message_types_by_name['EnableExtrasRequest'] = _ENABLEEXTRASREQUEST
+DESCRIPTOR.message_types_by_name['DisableExtrasRequest'] = _DISABLEEXTRASREQUEST
+DESCRIPTOR.enum_types_by_name['EXTRASTYPE'] = _EXTRASTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetPeersResponse = _reflection.GeneratedProtocolMessageType('GetPeersResponse', (_message.Message,), {
@@ -405,6 +498,20 @@ _sym_db.RegisterMessage(DisconnectResponse)
 _sym_db.RegisterMessage(DisconnectResponse.StatusEntry)
 _sym_db.RegisterMessage(DisconnectResponse.StatusMessage)
 
+EnableExtrasRequest = _reflection.GeneratedProtocolMessageType('EnableExtrasRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ENABLEEXTRASREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.EnableExtrasRequest)
+  })
+_sym_db.RegisterMessage(EnableExtrasRequest)
+
+DisableExtrasRequest = _reflection.GeneratedProtocolMessageType('DisableExtrasRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DISABLEEXTRASREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.DisableExtrasRequest)
+  })
+_sym_db.RegisterMessage(DisableExtrasRequest)
+
 
 DESCRIPTOR._options = None
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY._options = None
@@ -416,8 +523,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=578,
-  serialized_end=807,
+  serialized_start=743,
+  serialized_end=1082,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPeers',
@@ -453,6 +560,24 @@ _NODEAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_ISCONNECTEDREQUEST,
     output_type=_ISCONNECTEDRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='EnableExtras',
+    full_name='pb.NodeAPI.EnableExtras',
+    index=4,
+    containing_service=None,
+    input_type=_ENABLEEXTRASREQUEST,
+    output_type=util__pb2._EMPTY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DisableExtras',
+    full_name='pb.NodeAPI.DisableExtras',
+    index=5,
+    containing_service=None,
+    input_type=_DISABLEEXTRASREQUEST,
+    output_type=util__pb2._EMPTY,
     serialized_options=None,
   ),
 ])

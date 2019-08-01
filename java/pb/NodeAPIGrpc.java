@@ -158,6 +158,70 @@ public final class NodeAPIGrpc {
      return getIsConnectedMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest,
+      pb.Util.Empty> getEnableExtrasMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "EnableExtras",
+      requestType = pb.Node.EnableExtrasRequest.class,
+      responseType = pb.Util.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest,
+      pb.Util.Empty> getEnableExtrasMethod() {
+    io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest, pb.Util.Empty> getEnableExtrasMethod;
+    if ((getEnableExtrasMethod = NodeAPIGrpc.getEnableExtrasMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getEnableExtrasMethod = NodeAPIGrpc.getEnableExtrasMethod) == null) {
+          NodeAPIGrpc.getEnableExtrasMethod = getEnableExtrasMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.EnableExtrasRequest, pb.Util.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "EnableExtras"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.EnableExtrasRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Util.Empty.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("EnableExtras"))
+                  .build();
+          }
+        }
+     }
+     return getEnableExtrasMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest,
+      pb.Util.Empty> getDisableExtrasMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DisableExtras",
+      requestType = pb.Node.DisableExtrasRequest.class,
+      responseType = pb.Util.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest,
+      pb.Util.Empty> getDisableExtrasMethod() {
+    io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest, pb.Util.Empty> getDisableExtrasMethod;
+    if ((getDisableExtrasMethod = NodeAPIGrpc.getDisableExtrasMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getDisableExtrasMethod = NodeAPIGrpc.getDisableExtrasMethod) == null) {
+          NodeAPIGrpc.getDisableExtrasMethod = getDisableExtrasMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.DisableExtrasRequest, pb.Util.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "DisableExtras"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DisableExtrasRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Util.Empty.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("DisableExtras"))
+                  .build();
+          }
+        }
+     }
+     return getDisableExtrasMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -228,6 +292,26 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getIsConnectedMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * EnableExtras is used to enable a particular extras feature
+     * </pre>
+     */
+    public void enableExtras(pb.Node.EnableExtrasRequest request,
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getEnableExtrasMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * DisableExtras is used to disable a particular extras feature
+     * </pre>
+     */
+    public void disableExtras(pb.Node.DisableExtrasRequest request,
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
+      asyncUnimplementedUnaryCall(getDisableExtrasMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -258,6 +342,20 @@ public final class NodeAPIGrpc {
                 pb.Node.IsConnectedRequest,
                 pb.Node.IsConnectedResponse>(
                   this, METHODID_IS_CONNECTED)))
+          .addMethod(
+            getEnableExtrasMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.EnableExtrasRequest,
+                pb.Util.Empty>(
+                  this, METHODID_ENABLE_EXTRAS)))
+          .addMethod(
+            getDisableExtrasMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.DisableExtrasRequest,
+                pb.Util.Empty>(
+                  this, METHODID_DISABLE_EXTRAS)))
           .build();
     }
   }
@@ -326,6 +424,28 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getIsConnectedMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * EnableExtras is used to enable a particular extras feature
+     * </pre>
+     */
+    public void enableExtras(pb.Node.EnableExtrasRequest request,
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getEnableExtrasMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * DisableExtras is used to disable a particular extras feature
+     * </pre>
+     */
+    public void disableExtras(pb.Node.DisableExtrasRequest request,
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -387,6 +507,26 @@ public final class NodeAPIGrpc {
     public pb.Node.IsConnectedResponse isConnected(pb.Node.IsConnectedRequest request) {
       return blockingUnaryCall(
           getChannel(), getIsConnectedMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * EnableExtras is used to enable a particular extras feature
+     * </pre>
+     */
+    public pb.Util.Empty enableExtras(pb.Node.EnableExtrasRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getEnableExtrasMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * DisableExtras is used to disable a particular extras feature
+     * </pre>
+     */
+    public pb.Util.Empty disableExtras(pb.Node.DisableExtrasRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDisableExtrasMethod(), getCallOptions(), request);
     }
   }
 
@@ -454,12 +594,36 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getIsConnectedMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * EnableExtras is used to enable a particular extras feature
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> enableExtras(
+        pb.Node.EnableExtrasRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getEnableExtrasMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * DisableExtras is used to disable a particular extras feature
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> disableExtras(
+        pb.Node.DisableExtrasRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_PEERS = 0;
   private static final int METHODID_CONNECT = 1;
   private static final int METHODID_DISCONNECT = 2;
   private static final int METHODID_IS_CONNECTED = 3;
+  private static final int METHODID_ENABLE_EXTRAS = 4;
+  private static final int METHODID_DISABLE_EXTRAS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -493,6 +657,14 @@ public final class NodeAPIGrpc {
         case METHODID_IS_CONNECTED:
           serviceImpl.isConnected((pb.Node.IsConnectedRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.IsConnectedResponse>) responseObserver);
+          break;
+        case METHODID_ENABLE_EXTRAS:
+          serviceImpl.enableExtras((pb.Node.EnableExtrasRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
+          break;
+        case METHODID_DISABLE_EXTRAS:
+          serviceImpl.disableExtras((pb.Node.DisableExtrasRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -559,6 +731,8 @@ public final class NodeAPIGrpc {
               .addMethod(getConnectMethod())
               .addMethod(getDisconnectMethod())
               .addMethod(getIsConnectedMethod())
+              .addMethod(getEnableExtrasMethod())
+              .addMethod(getDisableExtrasMethod())
               .build();
         }
       }
