@@ -2,6 +2,7 @@
 import grpc
 
 import node_pb2 as node__pb2
+import util_pb2 as util__pb2
 
 
 class NodeAPIStub(object):
@@ -16,13 +17,13 @@ class NodeAPIStub(object):
     """
     self.GetPeers = channel.unary_unary(
         '/pb.NodeAPI/GetPeers',
-        request_serializer=node__pb2.Empty.SerializeToString,
+        request_serializer=util__pb2.Empty.SerializeToString,
         response_deserializer=node__pb2.GetPeersResponse.FromString,
         )
     self.Connect = channel.unary_unary(
         '/pb.NodeAPI/Connect',
         request_serializer=node__pb2.ConnectRequest.SerializeToString,
-        response_deserializer=node__pb2.Empty.FromString,
+        response_deserializer=util__pb2.Empty.FromString,
         )
     self.Disconnect = channel.unary_unary(
         '/pb.NodeAPI/Disconnect',
@@ -73,13 +74,13 @@ def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetPeers': grpc.unary_unary_rpc_method_handler(
           servicer.GetPeers,
-          request_deserializer=node__pb2.Empty.FromString,
+          request_deserializer=util__pb2.Empty.FromString,
           response_serializer=node__pb2.GetPeersResponse.SerializeToString,
       ),
       'Connect': grpc.unary_unary_rpc_method_handler(
           servicer.Connect,
           request_deserializer=node__pb2.ConnectRequest.FromString,
-          response_serializer=node__pb2.Empty.SerializeToString,
+          response_serializer=util__pb2.Empty.SerializeToString,
       ),
       'Disconnect': grpc.unary_unary_rpc_method_handler(
           servicer.Disconnect,

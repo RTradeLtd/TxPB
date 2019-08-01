@@ -297,10 +297,6 @@
                 </li>
               
                 <li>
-                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
-                </li>
-              
-                <li>
                   <a href="#pb.GetPeersResponse"><span class="badge">M</span>GetPeersResponse</a>
                 </li>
               
@@ -328,8 +324,39 @@
         
           
           <li>
+            <a href="#status.proto">status.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.StatusResponse"><span class="badge">M</span>StatusResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.VersionResponse"><span class="badge">M</span>VersionResponse</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#pb.APISTATUS"><span class="badge">E</span>APISTATUS</a>
+                </li>
+              
+              
+              
+                <li>
+                  <a href="#pb.StatusAPI"><span class="badge">S</span>StatusAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#util.proto">util.proto</a>
             <ul>
+              
+                <li>
+                  <a href="#pb.Empty"><span class="badge">M</span>Empty</a>
+                </li>
               
                 <li>
                   <a href="#pb.PutResponse"><span class="badge">M</span>PutResponse</a>
@@ -1120,13 +1147,6 @@ is useful on machines with low-memory </p></td>
 
         
       
-        <h3 id="pb.Empty">Empty</h3>
-        <p>Empty is an empty message</p>
-
-        
-
-        
-      
         <h3 id="pb.GetPeersResponse">GetPeersResponse</h3>
         <p>GetPeersResponse is a response to GetPeers containing a slice of peer IDs</p>
 
@@ -1279,10 +1299,149 @@ is useful on machines with low-memory </p></td>
     
       
       <div class="file-heading">
+        <h2 id="status.proto">status.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.StatusResponse">StatusResponse</h3>
+        <p>StatusResponse is used to return API status information</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>host</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>host is an identifier for the host of the system responding to the request.
+it may or may not be the hostname, it is up to the implementer of the service to choose what is here </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#pb.APISTATUS">APISTATUS</a></td>
+                  <td></td>
+                  <td><p>status contains a status enum indicating the state of the system </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.VersionResponse">VersionResponse</h3>
+        <p>VersionResponse is used to return API version information</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>version denotes the github version that was present when the api was built </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="pb.APISTATUS">APISTATUS</h3>
+        <p>APISTATUS is an enum to return a concise description of api status</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ONLINE</td>
+                <td>0</td>
+                <td><p>ONLINE indicates everything is working as expected</p></td>
+              </tr>
+            
+              <tr>
+                <td>PURGING</td>
+                <td>1</td>
+                <td><p>PURGING indicates the system is undergoing data removal
+a purging system is not available for use unless all other nodes are unavailable</p></td>
+              </tr>
+            
+              <tr>
+                <td>DEGRADED_PERFORMANCE</td>
+                <td>2</td>
+                <td><p>DEGRADED_PERFORMANCE indicates the system is currently under heavy load</p></td>
+              </tr>
+            
+              <tr>
+                <td>ERROR</td>
+                <td>3</td>
+                <td><p>ERROR indicates that the system is currently experiencing an error and should not be used</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <h3 id="pb.StatusAPI">StatusAPI</h3>
+        <p>provides utilities to retrieve api status information from</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Version</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><a href="#pb.VersionResponse">VersionResponse</a></td>
+                <td><p>Version is used to retrieve api version information</p></td>
+              </tr>
+            
+              <tr>
+                <td>Status</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><a href="#pb.StatusResponse">StatusResponse</a></td>
+                <td><p>Status is used to retrieve api status information.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
         <h2 id="util.proto">util.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
 
+      
+        <h3 id="pb.Empty">Empty</h3>
+        <p>Empty is an empty message</p>
+
+        
+
+        
       
         <h3 id="pb.PutResponse">PutResponse</h3>
         <p>PutResponse is a response to any data storage (put) requests</p>

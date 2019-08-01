@@ -30,28 +30,28 @@ public final class NodeAPIGrpc {
   public static final String SERVICE_NAME = "pb.NodeAPI";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<pb.Node.Empty,
+  private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
       pb.Node.GetPeersResponse> getGetPeersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetPeers",
-      requestType = pb.Node.Empty.class,
+      requestType = pb.Util.Empty.class,
       responseType = pb.Node.GetPeersResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.Empty,
+  public static io.grpc.MethodDescriptor<pb.Util.Empty,
       pb.Node.GetPeersResponse> getGetPeersMethod() {
-    io.grpc.MethodDescriptor<pb.Node.Empty, pb.Node.GetPeersResponse> getGetPeersMethod;
+    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Node.GetPeersResponse> getGetPeersMethod;
     if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
           NodeAPIGrpc.getGetPeersMethod = getGetPeersMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.Empty, pb.Node.GetPeersResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Node.GetPeersResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.NodeAPI", "GetPeers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.Empty.getDefaultInstance()))
+                  pb.Util.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.GetPeersResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("GetPeers"))
@@ -63,21 +63,21 @@ public final class NodeAPIGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.ConnectRequest,
-      pb.Node.Empty> getConnectMethod;
+      pb.Util.Empty> getConnectMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Connect",
       requestType = pb.Node.ConnectRequest.class,
-      responseType = pb.Node.Empty.class,
+      responseType = pb.Util.Empty.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Node.ConnectRequest,
-      pb.Node.Empty> getConnectMethod() {
-    io.grpc.MethodDescriptor<pb.Node.ConnectRequest, pb.Node.Empty> getConnectMethod;
+      pb.Util.Empty> getConnectMethod() {
+    io.grpc.MethodDescriptor<pb.Node.ConnectRequest, pb.Util.Empty> getConnectMethod;
     if ((getConnectMethod = NodeAPIGrpc.getConnectMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getConnectMethod = NodeAPIGrpc.getConnectMethod) == null) {
           NodeAPIGrpc.getConnectMethod = getConnectMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.ConnectRequest, pb.Node.Empty>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Node.ConnectRequest, pb.Util.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.NodeAPI", "Connect"))
@@ -85,7 +85,7 @@ public final class NodeAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.ConnectRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.Empty.getDefaultInstance()))
+                  pb.Util.Empty.getDefaultInstance()))
                   .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Connect"))
                   .build();
           }
@@ -193,7 +193,7 @@ public final class NodeAPIGrpc {
      * GetPeers returns a message containing a slice of current peers in our peerstore
      * </pre>
      */
-    public void getPeers(pb.Node.Empty request,
+    public void getPeers(pb.Util.Empty request,
         io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetPeersMethod(), responseObserver);
     }
@@ -204,7 +204,7 @@ public final class NodeAPIGrpc {
      * </pre>
      */
     public void connect(pb.Node.ConnectRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(getConnectMethod(), responseObserver);
     }
 
@@ -234,7 +234,7 @@ public final class NodeAPIGrpc {
             getGetPeersMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Node.Empty,
+                pb.Util.Empty,
                 pb.Node.GetPeersResponse>(
                   this, METHODID_GET_PEERS)))
           .addMethod(
@@ -242,7 +242,7 @@ public final class NodeAPIGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Node.ConnectRequest,
-                pb.Node.Empty>(
+                pb.Util.Empty>(
                   this, METHODID_CONNECT)))
           .addMethod(
             getDisconnectMethod(),
@@ -288,7 +288,7 @@ public final class NodeAPIGrpc {
      * GetPeers returns a message containing a slice of current peers in our peerstore
      * </pre>
      */
-    public void getPeers(pb.Node.Empty request,
+    public void getPeers(pb.Util.Empty request,
         io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getGetPeersMethod(), getCallOptions()), request, responseObserver);
@@ -300,7 +300,7 @@ public final class NodeAPIGrpc {
      * </pre>
      */
     public void connect(pb.Node.ConnectRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.Empty> responseObserver) {
+        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getConnectMethod(), getCallOptions()), request, responseObserver);
     }
@@ -354,7 +354,7 @@ public final class NodeAPIGrpc {
      * GetPeers returns a message containing a slice of current peers in our peerstore
      * </pre>
      */
-    public pb.Node.GetPeersResponse getPeers(pb.Node.Empty request) {
+    public pb.Node.GetPeersResponse getPeers(pb.Util.Empty request) {
       return blockingUnaryCall(
           getChannel(), getGetPeersMethod(), getCallOptions(), request);
     }
@@ -364,7 +364,7 @@ public final class NodeAPIGrpc {
      * Connect is used to connect to remote libp2p peers
      * </pre>
      */
-    public pb.Node.Empty connect(pb.Node.ConnectRequest request) {
+    public pb.Util.Empty connect(pb.Node.ConnectRequest request) {
       return blockingUnaryCall(
           getChannel(), getConnectMethod(), getCallOptions(), request);
     }
@@ -417,7 +417,7 @@ public final class NodeAPIGrpc {
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Node.GetPeersResponse> getPeers(
-        pb.Node.Empty request) {
+        pb.Util.Empty request) {
       return futureUnaryCall(
           getChannel().newCall(getGetPeersMethod(), getCallOptions()), request);
     }
@@ -427,7 +427,7 @@ public final class NodeAPIGrpc {
      * Connect is used to connect to remote libp2p peers
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.Empty> connect(
+    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> connect(
         pb.Node.ConnectRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getConnectMethod(), getCallOptions()), request);
@@ -479,12 +479,12 @@ public final class NodeAPIGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_PEERS:
-          serviceImpl.getPeers((pb.Node.Empty) request,
+          serviceImpl.getPeers((pb.Util.Empty) request,
               (io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse>) responseObserver);
           break;
         case METHODID_CONNECT:
           serviceImpl.connect((pb.Node.ConnectRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Node.Empty>) responseObserver);
+              (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
           break;
         case METHODID_DISCONNECT:
           serviceImpl.disconnect((pb.Node.DisconnectRequest) request,
