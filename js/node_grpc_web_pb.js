@@ -310,5 +310,115 @@ proto.pb.NodeAPIPromiseClient.prototype.isConnected =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.EnableExtrasRequest,
+ *   !proto.pb.Empty>}
+ */
+const methodInfo_NodeAPI_EnableExtras = new grpc.web.AbstractClientBase.MethodInfo(
+  util_pb.Empty,
+  /** @param {!proto.pb.EnableExtrasRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  util_pb.Empty.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.EnableExtrasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.Empty)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.Empty>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.NodeAPIClient.prototype.enableExtras =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.NodeAPI/EnableExtras',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_EnableExtras,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.EnableExtrasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.Empty>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.NodeAPIPromiseClient.prototype.enableExtras =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.NodeAPI/EnableExtras',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_EnableExtras);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.DisableExtrasRequest,
+ *   !proto.pb.Empty>}
+ */
+const methodInfo_NodeAPI_DisableExtras = new grpc.web.AbstractClientBase.MethodInfo(
+  util_pb.Empty,
+  /** @param {!proto.pb.DisableExtrasRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  util_pb.Empty.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.DisableExtrasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.Empty)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.Empty>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.NodeAPIClient.prototype.disableExtras =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.NodeAPI/DisableExtras',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_DisableExtras,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.DisableExtrasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.Empty>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.NodeAPIPromiseClient.prototype.disableExtras =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.NodeAPI/DisableExtras',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_DisableExtras);
+};
+
+
 module.exports = proto.pb;
 

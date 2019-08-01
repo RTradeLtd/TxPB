@@ -281,6 +281,10 @@
                 </li>
               
                 <li>
+                  <a href="#pb.DisableExtrasRequest"><span class="badge">M</span>DisableExtrasRequest</a>
+                </li>
+              
+                <li>
                   <a href="#pb.DisconnectRequest"><span class="badge">M</span>DisconnectRequest</a>
                 </li>
               
@@ -294,6 +298,10 @@
               
                 <li>
                   <a href="#pb.DisconnectResponse.StatusMessage"><span class="badge">M</span>DisconnectResponse.StatusMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.EnableExtrasRequest"><span class="badge">M</span>EnableExtrasRequest</a>
                 </li>
               
                 <li>
@@ -312,6 +320,10 @@
                   <a href="#pb.IsConnectedResponse.ConnectedEntry"><span class="badge">M</span>IsConnectedResponse.ConnectedEntry</a>
                 </li>
               
+              
+                <li>
+                  <a href="#pb.EXTRASTYPE"><span class="badge">E</span>EXTRASTYPE</a>
+                </li>
               
               
               
@@ -1037,6 +1049,30 @@ is useful on machines with low-memory </p></td>
 
         
       
+        <h3 id="pb.DisableExtrasRequest">DisableExtrasRequest</h3>
+        <p>DisableExtrasRequest is used to disable a particular extras feature</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>extrasFeature</td>
+                  <td><a href="#pb.EXTRASTYPE">EXTRASTYPE</a></td>
+                  <td></td>
+                  <td><p>extrasFeature denotes the particular extras functionality to disable </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="pb.DisconnectRequest">DisconnectRequest</h3>
         <p>DisconnectRequest is used to disconnect a connection to a libp2p peer</p>
 
@@ -1138,6 +1174,30 @@ is useful on machines with low-memory </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>if disconnected is false, the reason why it is false </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.EnableExtrasRequest">EnableExtrasRequest</h3>
+        <p>EnableExtrasRequest is used to enable a particular extras feature</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>extrasFeature</td>
+                  <td><a href="#pb.EXTRASTYPE">EXTRASTYPE</a></td>
+                  <td></td>
+                  <td><p>extrasFeature denotes the particular extras functionality to enable </p></td>
                 </tr>
               
             </tbody>
@@ -1252,6 +1312,29 @@ is useful on machines with low-memory </p></td>
       
 
       
+        <h3 id="pb.EXTRASTYPE">EXTRASTYPE</h3>
+        <p>EXTRASTYPE denotes a particular extras type</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>IDENTIFY</td>
+                <td>0</td>
+                <td><p>IDENTIFY is the identify service</p></td>
+              </tr>
+            
+              <tr>
+                <td>PUBSUB</td>
+                <td>1</td>
+                <td><p>PUBSUB is the libp2p pubsub system</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
 
       
 
@@ -1290,6 +1373,20 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.IsConnectedRequest">IsConnectedRequest</a></td>
                 <td><a href="#pb.IsConnectedResponse">IsConnectedResponse</a></td>
                 <td><p>IsConnected is used to check if we are connected with a given peer</p></td>
+              </tr>
+            
+              <tr>
+                <td>EnableExtras</td>
+                <td><a href="#pb.EnableExtrasRequest">EnableExtrasRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>EnableExtras is used to enable a particular extras feature</p></td>
+              </tr>
+            
+              <tr>
+                <td>DisableExtras</td>
+                <td><a href="#pb.DisableExtrasRequest">DisableExtrasRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>DisableExtras is used to disable a particular extras feature</p></td>
               </tr>
             
           </tbody>

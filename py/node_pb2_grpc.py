@@ -35,6 +35,16 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.IsConnectedRequest.SerializeToString,
         response_deserializer=node__pb2.IsConnectedResponse.FromString,
         )
+    self.EnableExtras = channel.unary_unary(
+        '/pb.NodeAPI/EnableExtras',
+        request_serializer=node__pb2.EnableExtrasRequest.SerializeToString,
+        response_deserializer=util__pb2.Empty.FromString,
+        )
+    self.DisableExtras = channel.unary_unary(
+        '/pb.NodeAPI/DisableExtras',
+        request_serializer=node__pb2.DisableExtrasRequest.SerializeToString,
+        response_deserializer=util__pb2.Empty.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -69,6 +79,20 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def EnableExtras(self, request, context):
+    """EnableExtras is used to enable a particular extras feature
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DisableExtras(self, request, context):
+    """DisableExtras is used to disable a particular extras feature
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -91,6 +115,16 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.IsConnected,
           request_deserializer=node__pb2.IsConnectedRequest.FromString,
           response_serializer=node__pb2.IsConnectedResponse.SerializeToString,
+      ),
+      'EnableExtras': grpc.unary_unary_rpc_method_handler(
+          servicer.EnableExtras,
+          request_deserializer=node__pb2.EnableExtrasRequest.FromString,
+          response_serializer=util__pb2.Empty.SerializeToString,
+      ),
+      'DisableExtras': grpc.unary_unary_rpc_method_handler(
+          servicer.DisableExtras,
+          request_deserializer=node__pb2.DisableExtrasRequest.FromString,
+          response_serializer=util__pb2.Empty.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
