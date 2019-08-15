@@ -336,6 +336,49 @@
         
           
           <li>
+            <a href="#pubsub.proto">pubsub.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.ListPeersRequest"><span class="badge">M</span>ListPeersRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.ListPeersResponse"><span class="badge">M</span>ListPeersResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.ListPeersResponse.Peer"><span class="badge">M</span>ListPeersResponse.Peer</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.PubSubMessageResponse"><span class="badge">M</span>PubSubMessageResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.PublishRequest"><span class="badge">M</span>PublishRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.SubscribeRequest"><span class="badge">M</span>SubscribeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.TopicsResponse"><span class="badge">M</span>TopicsResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#pb.PubSubAPI"><span class="badge">S</span>PubSubAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#status.proto">status.proto</a>
             <ul>
               
@@ -1387,6 +1430,298 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.DisableExtrasRequest">DisableExtrasRequest</a></td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>DisableExtras is used to disable a particular extras feature</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="pubsub.proto">pubsub.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.ListPeersRequest">ListPeersRequest</h3>
+        <p>ListPeersRequest is used to return a list of</p><p>peers that are subscribed to the given topic(s)</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topics</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>the topics for which we should
+list peers for </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.ListPeersResponse">ListPeersResponse</h3>
+        <p>ListPeersResponse is a response to a ListPeersRequest</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peers</td>
+                  <td><a href="#pb.ListPeersResponse.Peer">ListPeersResponse.Peer</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.ListPeersResponse.Peer">ListPeersResponse.Peer</h3>
+        <p>peer is a single peer</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>topic is the topic this peer is a part of </p></td>
+                </tr>
+              
+                <tr>
+                  <td>peerID</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>lists the peerid for this peer </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.PubSubMessageResponse">PubSubMessageResponse</h3>
+        <p>PubSubMessageResposne is a received pubsub message</p><p>sent as a response to a subscription rpc call</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>from</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>who this message is from </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the data of this message </p></td>
+                </tr>
+              
+                <tr>
+                  <td>seqno</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the sequence number of this message </p></td>
+                </tr>
+              
+                <tr>
+                  <td>topicIDs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>the topic IDs this message is sent to </p></td>
+                </tr>
+              
+                <tr>
+                  <td>signature</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the signature of the sender </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the key of the sender </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.PublishRequest">PublishRequest</h3>
+        <p>PublishRequest is a message used to publish data to a topic</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the topic we are publishing too </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the data we are publishing </p></td>
+                </tr>
+              
+                <tr>
+                  <td>advertise</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>whether or not we should engage in advertise operations </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.SubscribeRequest">SubscribeRequest</h3>
+        <p>SubscribeRequest is used to initiate a subscription</p><p>to a given pubsub topic and stream received messages</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>topic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the topic we should subscribe to </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discover</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>indicates whether the server should 
+perform service discover for peers on the same topic </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.TopicsResponse">TopicsResponse</h3>
+        <p>Topics is a response that returns</p><p>the names of all known topics</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>names</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>the names of topics </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="pb.PubSubAPI">PubSubAPI</h3>
+        <p>PubSubAPI provides a gRPC API for a libp2p pubsub instance</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetTopics</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><a href="#pb.TopicsResponse">TopicsResponse</a></td>
+                <td><p>GetTopics is used to return a list of all
+known topics the pubsub instance is subscribed to.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListPeers</td>
+                <td><a href="#pb.ListPeersRequest">ListPeersRequest</a></td>
+                <td><a href="#pb.ListPeersResponse">ListPeersResponse</a></td>
+                <td><p>ListPeers is used to return a list of peers subscribed
+to a given topic or topics.</p></td>
+              </tr>
+            
+              <tr>
+                <td>Subscribe</td>
+                <td><a href="#pb.SubscribeRequest">SubscribeRequest</a></td>
+                <td><a href="#pb.PubSubMessageResponse">PubSubMessageResponse</a> stream</td>
+                <td><p>Subscribe is used to subscribe to a topic and receive messages
+Server will stream the messages received on the topic specified 
+during the initial subscription call, and send each message
+back to the client as it is received.</p></td>
+              </tr>
+            
+              <tr>
+                <td>Publish</td>
+                <td><a href="#pb.PublishRequest">PublishRequest</a> stream</td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>Publish is used to send a stream of messages to a pubsub topic.</p></td>
               </tr>
             
           </tbody>
