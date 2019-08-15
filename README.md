@@ -11,6 +11,10 @@ It has gRPC bindings for the following languages:
 
 If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
 
+# Clients
+
+Currently the only "pre-built" client available is for Golang, and is available within `clients/go`. Eventually we'll extend this to include pre-built clients in the other available languages.
+
 # Documentation
 
 We use [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) to automatically generate documentation for the protocol definitions. To view them, see [here](https://rtradeltd.github.io/TxPB/doc/index.html). 
