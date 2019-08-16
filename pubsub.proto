@@ -1,0 +1,102 @@
+syntax = "proto3";
+package pb;
+import "util.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+
+// PubSubAPI provides a gRPC API for a libp2p pubsub instance
+service PubSubAPI {
+    // GetTopics is used to return a list of all
+    // known topics the pubsub instance is subscribed to.
+    rpc GetTopics(Empty) returns (TopicsResponse) { };
+
+    // ListPeers is used to return a list of peers subscribed
+    // to a given topic or topics.
+    rpc ListPeers(ListPeersRequest) returns (ListPeersResponse) { };
+
+    // Subscribe is used to subscribe to a topic and receive messages
+    // Server will stream the messages received on the topic specified 
+    // during the initial subscription call, and send each message
+    // back to the client as it is received. 
+    rpc Subscribe(SubscribeRequest) returns (stream PubSubMessageResponse) { };
+
+    // Publish is used to send a stream of messages to a pubsub topic.
+    rpc Publish(stream PublishRequest) returns (Empty) { };   
+}
+
+// ListPeersRequest is used to return a list of
+// peers that are subscribed to the given topic(s)
+message ListPeersRequest {
+    // the topics for which we should
+    // list peers for
+    repeated string topics = 1;
+}
+
+// ListPeersResponse is a response to a ListPeersRequest
+message ListPeersResponse {
+    // peer is a single peer
+    message Peer {
+        // topic is the topic this peer is a part of
+        string topic = 1;
+        // lists the peerid for this peer
+        string peerID = 2;
+    }
+    repeated Peer peers = 1;
+}
+
+// PublishRequest is a message used to publish data to a topic
+message PublishRequest {
+    // the topic we are publishing too
+    string topic = 1;
+    // the data we are publishing
+    bytes  data  = 2;
+    // whether or not we should engage in advertise operations
+    bool   advertise = 3;
+}
+
+// SubscribeRequest is used to initiate a subscription
+// to a given pubsub topic and stream received messages
+message SubscribeRequest {
+    // the topic we should subscribe to
+    string topic = 1;
+    // indicates whether the server should 
+    // perform service discover for peers on the same topic
+    bool discover = 2;
+}
+
+// Topics is a response that returns
+// the names of all known topics
+message TopicsResponse {
+    // the names of topics
+    repeated string names = 1;
+}
+
+// PubSubMessageResposne is a received pubsub message
+// sent as a response to a subscription rpc call
+message PubSubMessageResponse {
+    // who this message is from
+    bytes from = 1;
+    // the data of this message
+    bytes data = 2;
+    // the sequence number of this message
+    bytes seqno = 3;
+    // the topic IDs this message is sent to
+    repeated string topicIDs = 4;
+    // the signature of the sender
+    bytes signature = 5;
+    // the key of the sender
+    bytes key = 6;
+}
+  
