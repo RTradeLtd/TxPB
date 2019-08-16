@@ -175,6 +175,33 @@
         
           
           <li>
+            <a href="#admin.proto">admin.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.ManageGCRequest"><span class="badge">M</span>ManageGCRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.ManageGCResponse"><span class="badge">M</span>ManageGCResponse</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#pb.GCREQTYPE"><span class="badge">E</span>GCREQTYPE</a>
+                </li>
+              
+              
+              
+                <li>
+                  <a href="#pb.AdminAPI"><span class="badge">S</span>AdminAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#dag.proto">dag.proto</a>
             <ul>
               
@@ -384,6 +411,116 @@
       </ul>
     </div>
 
+    
+      
+      <div class="file-heading">
+        <h2 id="admin.proto">admin.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.ManageGCRequest">ManageGCRequest</h3>
+        <p>ManageGCRequest is a message used to control TemporalX garbage collection</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#pb.GCREQTYPE">GCREQTYPE</a></td>
+                  <td></td>
+                  <td><p>type is the type of gc request being performed </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.ManageGCResponse">ManageGCResponse</h3>
+        <p>ManageGCResponse is a message used as a response to gc control requests</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="pb.GCREQTYPE">GCREQTYPE</h3>
+        <p>GCREQTYPE specifies the type of GC management call being performed</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>START</td>
+                <td>0</td>
+                <td><p>START is used to start gc</p></td>
+              </tr>
+            
+              <tr>
+                <td>STOP</td>
+                <td>1</td>
+                <td><p>STOP is used to stop GC</p></td>
+              </tr>
+            
+              <tr>
+                <td>STATUS</td>
+                <td>2</td>
+                <td><p>STATUS is used to retrieve gc status</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <h3 id="pb.AdminAPI">AdminAPI</h3>
+        <p>AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ManageGC</td>
+                <td><a href="#pb.ManageGCRequest">ManageGCRequest</a></td>
+                <td><a href="#pb.ManageGCResponse">ManageGCResponse</a></td>
+                <td><p>ManageGC is used to manage TemporalX&#39;s garbage collection process</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
     
       
       <div class="file-heading">
