@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*,\n\tGCREQTYPE\x12\t\n\x05START\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\n\n\x06STATUS\x10\x02\x32\x43\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\".\n\x0fRefCountRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\"m\n\x10RefCountResponse\x12,\n\x04\x63ids\x18\x01 \x03(\x0b\x32\x1e.pb.RefCountResponse.CidsEntry\x1a+\n\tCidsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01*,\n\tGCREQTYPE\x12\t\n\x05START\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\n\n\x06STATUS\x10\x02\x32|\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x12\x37\n\x08RefCount\x12\x13.pb.RefCountRequest\x1a\x14.pb.RefCountResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -47,8 +47,8 @@ _GCREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=150,
-  serialized_end=194,
+  serialized_start=309,
+  serialized_end=353,
 )
 _sym_db.RegisterEnumDescriptor(_GCREQTYPE)
 
@@ -120,9 +120,119 @@ _MANAGEGCRESPONSE = _descriptor.Descriptor(
   serialized_end=148,
 )
 
+
+_REFCOUNTREQUEST = _descriptor.Descriptor(
+  name='RefCountRequest',
+  full_name='pb.RefCountRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cids', full_name='pb.RefCountRequest.cids', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='limit', full_name='pb.RefCountRequest.limit', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=150,
+  serialized_end=196,
+)
+
+
+_REFCOUNTRESPONSE_CIDSENTRY = _descriptor.Descriptor(
+  name='CidsEntry',
+  full_name='pb.RefCountResponse.CidsEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.RefCountResponse.CidsEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.RefCountResponse.CidsEntry.value', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=264,
+  serialized_end=307,
+)
+
+_REFCOUNTRESPONSE = _descriptor.Descriptor(
+  name='RefCountResponse',
+  full_name='pb.RefCountResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cids', full_name='pb.RefCountResponse.cids', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_REFCOUNTRESPONSE_CIDSENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=198,
+  serialized_end=307,
+)
+
 _MANAGEGCREQUEST.fields_by_name['type'].enum_type = _GCREQTYPE
+_REFCOUNTRESPONSE_CIDSENTRY.containing_type = _REFCOUNTRESPONSE
+_REFCOUNTRESPONSE.fields_by_name['cids'].message_type = _REFCOUNTRESPONSE_CIDSENTRY
 DESCRIPTOR.message_types_by_name['ManageGCRequest'] = _MANAGEGCREQUEST
 DESCRIPTOR.message_types_by_name['ManageGCResponse'] = _MANAGEGCRESPONSE
+DESCRIPTOR.message_types_by_name['RefCountRequest'] = _REFCOUNTREQUEST
+DESCRIPTOR.message_types_by_name['RefCountResponse'] = _REFCOUNTRESPONSE
 DESCRIPTOR.enum_types_by_name['GCREQTYPE'] = _GCREQTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -140,8 +250,31 @@ ManageGCResponse = _reflection.GeneratedProtocolMessageType('ManageGCResponse', 
   })
 _sym_db.RegisterMessage(ManageGCResponse)
 
+RefCountRequest = _reflection.GeneratedProtocolMessageType('RefCountRequest', (_message.Message,), {
+  'DESCRIPTOR' : _REFCOUNTREQUEST,
+  '__module__' : 'admin_pb2'
+  # @@protoc_insertion_point(class_scope:pb.RefCountRequest)
+  })
+_sym_db.RegisterMessage(RefCountRequest)
+
+RefCountResponse = _reflection.GeneratedProtocolMessageType('RefCountResponse', (_message.Message,), {
+
+  'CidsEntry' : _reflection.GeneratedProtocolMessageType('CidsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _REFCOUNTRESPONSE_CIDSENTRY,
+    '__module__' : 'admin_pb2'
+    # @@protoc_insertion_point(class_scope:pb.RefCountResponse.CidsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _REFCOUNTRESPONSE,
+  '__module__' : 'admin_pb2'
+  # @@protoc_insertion_point(class_scope:pb.RefCountResponse)
+  })
+_sym_db.RegisterMessage(RefCountResponse)
+_sym_db.RegisterMessage(RefCountResponse.CidsEntry)
+
 
 DESCRIPTOR._options = None
+_REFCOUNTRESPONSE_CIDSENTRY._options = None
 
 _ADMINAPI = _descriptor.ServiceDescriptor(
   name='AdminAPI',
@@ -149,8 +282,8 @@ _ADMINAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=196,
-  serialized_end=263,
+  serialized_start=355,
+  serialized_end=479,
   methods=[
   _descriptor.MethodDescriptor(
     name='ManageGC',
@@ -159,6 +292,15 @@ _ADMINAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MANAGEGCREQUEST,
     output_type=_MANAGEGCRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RefCount',
+    full_name='pb.AdminAPI.RefCount',
+    index=1,
+    containing_service=None,
+    input_type=_REFCOUNTREQUEST,
+    output_type=_REFCOUNTRESPONSE,
     serialized_options=None,
   ),
 ])

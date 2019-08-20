@@ -19,6 +19,11 @@ class AdminAPIStub(object):
         request_serializer=admin__pb2.ManageGCRequest.SerializeToString,
         response_deserializer=admin__pb2.ManageGCResponse.FromString,
         )
+    self.RefCount = channel.unary_unary(
+        '/pb.AdminAPI/RefCount',
+        request_serializer=admin__pb2.RefCountRequest.SerializeToString,
+        response_deserializer=admin__pb2.RefCountResponse.FromString,
+        )
 
 
 class AdminAPIServicer(object):
@@ -32,6 +37,13 @@ class AdminAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def RefCount(self, request, context):
+    """RefCount is used to analyze the counter store and pull reference count information
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_AdminAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -39,6 +51,11 @@ def add_AdminAPIServicer_to_server(servicer, server):
           servicer.ManageGC,
           request_deserializer=admin__pb2.ManageGCRequest.FromString,
           response_serializer=admin__pb2.ManageGCResponse.SerializeToString,
+      ),
+      'RefCount': grpc.unary_unary_rpc_method_handler(
+          servicer.RefCount,
+          request_deserializer=admin__pb2.RefCountRequest.FromString,
+          response_serializer=admin__pb2.RefCountResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

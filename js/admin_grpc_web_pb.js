@@ -143,5 +143,60 @@ proto.pb.AdminAPIPromiseClient.prototype.manageGC =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.RefCountRequest,
+ *   !proto.pb.RefCountResponse>}
+ */
+const methodInfo_AdminAPI_RefCount = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.RefCountResponse,
+  /** @param {!proto.pb.RefCountRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.pb.RefCountResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.RefCountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.RefCountResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.RefCountResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.AdminAPIClient.prototype.refCount =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.AdminAPI/RefCount',
+      request,
+      metadata || {},
+      methodInfo_AdminAPI_RefCount,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.RefCountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.RefCountResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.AdminAPIPromiseClient.prototype.refCount =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.AdminAPI/RefCount',
+      request,
+      metadata || {},
+      methodInfo_AdminAPI_RefCount);
+};
+
+
 module.exports = proto.pb;
 

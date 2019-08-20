@@ -62,6 +62,38 @@ public final class AdminAPIGrpc {
      return getManageGCMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Admin.RefCountRequest,
+      pb.Admin.RefCountResponse> getRefCountMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "RefCount",
+      requestType = pb.Admin.RefCountRequest.class,
+      responseType = pb.Admin.RefCountResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Admin.RefCountRequest,
+      pb.Admin.RefCountResponse> getRefCountMethod() {
+    io.grpc.MethodDescriptor<pb.Admin.RefCountRequest, pb.Admin.RefCountResponse> getRefCountMethod;
+    if ((getRefCountMethod = AdminAPIGrpc.getRefCountMethod) == null) {
+      synchronized (AdminAPIGrpc.class) {
+        if ((getRefCountMethod = AdminAPIGrpc.getRefCountMethod) == null) {
+          AdminAPIGrpc.getRefCountMethod = getRefCountMethod = 
+              io.grpc.MethodDescriptor.<pb.Admin.RefCountRequest, pb.Admin.RefCountResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.AdminAPI", "RefCount"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Admin.RefCountRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Admin.RefCountResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("RefCount"))
+                  .build();
+          }
+        }
+     }
+     return getRefCountMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -102,6 +134,16 @@ public final class AdminAPIGrpc {
       asyncUnimplementedUnaryCall(getManageGCMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * RefCount is used to analyze the counter store and pull reference count information
+     * </pre>
+     */
+    public void refCount(pb.Admin.RefCountRequest request,
+        io.grpc.stub.StreamObserver<pb.Admin.RefCountResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getRefCountMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -111,6 +153,13 @@ public final class AdminAPIGrpc {
                 pb.Admin.ManageGCRequest,
                 pb.Admin.ManageGCResponse>(
                   this, METHODID_MANAGE_GC)))
+          .addMethod(
+            getRefCountMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Admin.RefCountRequest,
+                pb.Admin.RefCountResponse>(
+                  this, METHODID_REF_COUNT)))
           .build();
     }
   }
@@ -146,6 +195,17 @@ public final class AdminAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getManageGCMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * RefCount is used to analyze the counter store and pull reference count information
+     * </pre>
+     */
+    public void refCount(pb.Admin.RefCountRequest request,
+        io.grpc.stub.StreamObserver<pb.Admin.RefCountResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getRefCountMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -177,6 +237,16 @@ public final class AdminAPIGrpc {
     public pb.Admin.ManageGCResponse manageGC(pb.Admin.ManageGCRequest request) {
       return blockingUnaryCall(
           getChannel(), getManageGCMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * RefCount is used to analyze the counter store and pull reference count information
+     * </pre>
+     */
+    public pb.Admin.RefCountResponse refCount(pb.Admin.RefCountRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getRefCountMethod(), getCallOptions(), request);
     }
   }
 
@@ -211,9 +281,21 @@ public final class AdminAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getManageGCMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * RefCount is used to analyze the counter store and pull reference count information
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Admin.RefCountResponse> refCount(
+        pb.Admin.RefCountRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getRefCountMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_MANAGE_GC = 0;
+  private static final int METHODID_REF_COUNT = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -235,6 +317,10 @@ public final class AdminAPIGrpc {
         case METHODID_MANAGE_GC:
           serviceImpl.manageGC((pb.Admin.ManageGCRequest) request,
               (io.grpc.stub.StreamObserver<pb.Admin.ManageGCResponse>) responseObserver);
+          break;
+        case METHODID_REF_COUNT:
+          serviceImpl.refCount((pb.Admin.RefCountRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Admin.RefCountResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -298,6 +384,7 @@ public final class AdminAPIGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new AdminAPIFileDescriptorSupplier())
               .addMethod(getManageGCMethod())
+              .addMethod(getRefCountMethod())
               .build();
         }
       }

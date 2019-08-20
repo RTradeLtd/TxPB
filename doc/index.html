@@ -186,6 +186,18 @@
                   <a href="#pb.ManageGCResponse"><span class="badge">M</span>ManageGCResponse</a>
                 </li>
               
+                <li>
+                  <a href="#pb.RefCountRequest"><span class="badge">M</span>RefCountRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.RefCountResponse"><span class="badge">M</span>RefCountResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.RefCountResponse.CidsEntry"><span class="badge">M</span>RefCountResponse.CidsEntry</a>
+                </li>
+              
               
                 <li>
                   <a href="#pb.GCREQTYPE"><span class="badge">E</span>GCREQTYPE</a>
@@ -510,6 +522,95 @@
 
         
       
+        <h3 id="pb.RefCountRequest">RefCountRequest</h3>
+        <p>RefCountRequest is used to analyze the reference</p><p>counter store, and retrieve usage information</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>cids are optional cids to filter for our search query by.
+if this is empty, then we will only examine the counter store
+for information related to those cids. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limit</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>if performing a generic search, the maximum number of results.
+a value of 0 means unlimited </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.RefCountResponse">RefCountResponse</h3>
+        <p>RefCountResponse is used to return the information</p><p>gathered by a RefCount rpc call.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cids</td>
+                  <td><a href="#pb.RefCountResponse.CidsEntry">RefCountResponse.CidsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>cids is a mapping of the cid to its reference count </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.RefCountResponse.CidsEntry">RefCountResponse.CidsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
         <h3 id="pb.GCREQTYPE">GCREQTYPE</h3>
@@ -558,6 +659,13 @@
                 <td><a href="#pb.ManageGCRequest">ManageGCRequest</a></td>
                 <td><a href="#pb.ManageGCResponse">ManageGCResponse</a></td>
                 <td><p>ManageGC is used to manage TemporalX&#39;s garbage collection process</p></td>
+              </tr>
+            
+              <tr>
+                <td>RefCount</td>
+                <td><a href="#pb.RefCountRequest">RefCountRequest</a></td>
+                <td><a href="#pb.RefCountResponse">RefCountResponse</a></td>
+                <td><p>RefCount is used to analyze the counter store and pull reference count information</p></td>
               </tr>
             
           </tbody>
