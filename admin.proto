@@ -1,0 +1,66 @@
+syntax = "proto3";
+package pb;
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
+service AdminAPI {
+    // ManageGC is used to manage TemporalX's garbage collection process
+    rpc ManageGC(ManageGCRequest) returns (ManageGCResponse) { };
+    // RefCount is used to analyze the counter store and pull reference count information
+    rpc RefCount(RefCountRequest) returns (RefCountResponse) { };
+}
+
+// GCREQTYPE specifies the type of GC management call being performed
+enum GCREQTYPE {
+    // START is used to start gc
+    START = 0;
+    // STOP is used to stop GC
+    STOP = 1;
+    // STATUS is used to retrieve gc status
+    STATUS = 2;
+}
+
+
+// ManageGCRequest is a message used to control TemporalX garbage collection
+message ManageGCRequest {
+    // type is the type of gc request being performed
+    GCREQTYPE type = 1;
+}
+
+
+// ManageGCResponse is a message used as a response to gc control requests
+message ManageGCResponse {
+    string status = 1;
+}
+
+
+// RefCountRequest is used to analyze the reference
+// counter store, and retrieve usage information
+message RefCountRequest {
+    // cids are optional cids to filter for our search query by.
+    // if this is empty, then we will only examine the counter store
+    // for information related to those cids.
+    repeated string cids = 1;
+    // if performing a generic search, the maximum number of results.
+    // a value of 0 means unlimited
+    int64 limit = 2;
+}
+
+// RefCountResponse is used to return the information
+// gathered by a RefCount rpc call.
+message RefCountResponse {
+    // cids is a mapping of the cid to its reference count
+    map<string, int64> cids = 1;
+}
