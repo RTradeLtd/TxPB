@@ -222,38 +222,6 @@ public final class NodeAPIGrpc {
      return getDisableExtrasMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
-      pb.Node.BlockstoreResponse> getBlockstoreMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Blockstore",
-      requestType = pb.Node.BlockstoreRequest.class,
-      responseType = pb.Node.BlockstoreResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
-      pb.Node.BlockstoreResponse> getBlockstoreMethod() {
-    io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse> getBlockstoreMethod;
-    if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
-          NodeAPIGrpc.getBlockstoreMethod = getBlockstoreMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Blockstore"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.BlockstoreRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.BlockstoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Blockstore"))
-                  .build();
-          }
-        }
-     }
-     return getBlockstoreMethod;
-  }
-
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -344,16 +312,6 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getDisableExtrasMethod(), responseObserver);
     }
 
-    /**
-     * <pre>
-     * Blockstore allows management of blockstores
-     * </pre>
-     */
-    public void blockstore(pb.Node.BlockstoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getBlockstoreMethod(), responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -398,13 +356,6 @@ public final class NodeAPIGrpc {
                 pb.Node.DisableExtrasRequest,
                 pb.Util.Empty>(
                   this, METHODID_DISABLE_EXTRAS)))
-          .addMethod(
-            getBlockstoreMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Node.BlockstoreRequest,
-                pb.Node.BlockstoreResponse>(
-                  this, METHODID_BLOCKSTORE)))
           .build();
     }
   }
@@ -495,17 +446,6 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request, responseObserver);
     }
-
-    /**
-     * <pre>
-     * Blockstore allows management of blockstores
-     * </pre>
-     */
-    public void blockstore(pb.Node.BlockstoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
-    }
   }
 
   /**
@@ -587,16 +527,6 @@ public final class NodeAPIGrpc {
     public pb.Util.Empty disableExtras(pb.Node.DisableExtrasRequest request) {
       return blockingUnaryCall(
           getChannel(), getDisableExtrasMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Blockstore allows management of blockstores
-     * </pre>
-     */
-    public pb.Node.BlockstoreResponse blockstore(pb.Node.BlockstoreRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getBlockstoreMethod(), getCallOptions(), request);
     }
   }
 
@@ -686,17 +616,6 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request);
     }
-
-    /**
-     * <pre>
-     * Blockstore allows management of blockstores
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.BlockstoreResponse> blockstore(
-        pb.Node.BlockstoreRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_GET_PEERS = 0;
@@ -705,7 +624,6 @@ public final class NodeAPIGrpc {
   private static final int METHODID_IS_CONNECTED = 3;
   private static final int METHODID_ENABLE_EXTRAS = 4;
   private static final int METHODID_DISABLE_EXTRAS = 5;
-  private static final int METHODID_BLOCKSTORE = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -747,10 +665,6 @@ public final class NodeAPIGrpc {
         case METHODID_DISABLE_EXTRAS:
           serviceImpl.disableExtras((pb.Node.DisableExtrasRequest) request,
               (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
-          break;
-        case METHODID_BLOCKSTORE:
-          serviceImpl.blockstore((pb.Node.BlockstoreRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -819,7 +733,6 @@ public final class NodeAPIGrpc {
               .addMethod(getIsConnectedMethod())
               .addMethod(getEnableExtrasMethod())
               .addMethod(getDisableExtrasMethod())
-              .addMethod(getBlockstoreMethod())
               .build();
         }
       }

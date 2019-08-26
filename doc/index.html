@@ -179,6 +179,18 @@
             <ul>
               
                 <li>
+                  <a href="#pb.Block"><span class="badge">M</span>Block</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.BlockstoreRequest"><span class="badge">M</span>BlockstoreRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.BlockstoreResponse"><span class="badge">M</span>BlockstoreResponse</a>
+                </li>
+              
+                <li>
                   <a href="#pb.ManageGCRequest"><span class="badge">M</span>ManageGCRequest</a>
                 </li>
               
@@ -198,6 +210,14 @@
                   <a href="#pb.RefCountResponse.CidsEntry"><span class="badge">M</span>RefCountResponse.CidsEntry</a>
                 </li>
               
+              
+                <li>
+                  <a href="#pb.BSREQOPTS"><span class="badge">E</span>BSREQOPTS</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.BSREQTYPE"><span class="badge">E</span>BSREQTYPE</a>
+                </li>
               
                 <li>
                   <a href="#pb.GCREQTYPE"><span class="badge">E</span>GCREQTYPE</a>
@@ -316,18 +336,6 @@
             <ul>
               
                 <li>
-                  <a href="#pb.Block"><span class="badge">M</span>Block</a>
-                </li>
-              
-                <li>
-                  <a href="#pb.BlockstoreRequest"><span class="badge">M</span>BlockstoreRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#pb.BlockstoreResponse"><span class="badge">M</span>BlockstoreResponse</a>
-                </li>
-              
-                <li>
                   <a href="#pb.ConnectRequest"><span class="badge">M</span>ConnectRequest</a>
                 </li>
               
@@ -371,14 +379,6 @@
                   <a href="#pb.IsConnectedResponse.ConnectedEntry"><span class="badge">M</span>IsConnectedResponse.ConnectedEntry</a>
                 </li>
               
-              
-                <li>
-                  <a href="#pb.BSREQOPTS"><span class="badge">E</span>BSREQOPTS</a>
-                </li>
-              
-                <li>
-                  <a href="#pb.BSREQTYPE"><span class="badge">E</span>BSREQTYPE</a>
-                </li>
               
                 <li>
                   <a href="#pb.EXTRASTYPE"><span class="badge">E</span>EXTRASTYPE</a>
@@ -493,6 +493,99 @@
       </div>
       <p></p>
 
+      
+        <h3 id="pb.Block">Block</h3>
+        <p>Block is a single block of ipfs data</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cid</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>cid is the identifier of the block </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>data is the actual contnets of this block </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.BlockstoreRequest">BlockstoreRequest</h3>
+        <p>BlockstoreRequest is a message used to control blockstores</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>cids holds at least 1 cid, to hold 0 is considered an error </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reqType</td>
+                  <td><a href="#pb.BSREQTYPE">BSREQTYPE</a></td>
+                  <td></td>
+                  <td><p>reqType is used to indicate the particular request being mande </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reqOpts</td>
+                  <td><a href="#pb.BSREQOPTS">BSREQOPTS</a></td>
+                  <td></td>
+                  <td><p>reqOpts is an optional parameter that can be used for fine-tuned request control </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.BlockstoreResponse">BlockstoreResponse</h3>
+        <p>BlockstoreResponse is a response to a BlockstoreqRequest</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>blocks</td>
+                  <td><a href="#pb.Block">Block</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
       
         <h3 id="pb.ManageGCRequest">ManageGCRequest</h3>
         <p>ManageGCRequest is a message used to control TemporalX garbage collection</p>
@@ -633,6 +726,64 @@ a value of 0 means unlimited </p></td>
       
 
       
+        <h3 id="pb.BSREQOPTS">BSREQOPTS</h3>
+        <p>BSREQOPTS are options for blockstore requests</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>FORCE</td>
+                <td>0</td>
+                <td><p>FORCE indicates to force the request regardless of any possible issues</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="pb.BSREQTYPE">BSREQTYPE</h3>
+        <p>BSREQTYPE is a particular blockstore request type</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>DELETE</td>
+                <td>0</td>
+                <td><p>DELETE is used to delete a block from the store</p></td>
+              </tr>
+            
+              <tr>
+                <td>PUT</td>
+                <td>1</td>
+                <td><p>PUT is used to put a single block in the store</p></td>
+              </tr>
+            
+              <tr>
+                <td>PUT_MANY</td>
+                <td>2</td>
+                <td><p>PUT_MANY is used to put many blocks in the store</p></td>
+              </tr>
+            
+              <tr>
+                <td>GET</td>
+                <td>3</td>
+                <td><p>GET is used to get a block from the store</p></td>
+              </tr>
+            
+              <tr>
+                <td>GET_MANY</td>
+                <td>4</td>
+                <td><p>GET_MANY is used to get many blocks from the store</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="pb.GCREQTYPE">GCREQTYPE</h3>
         <p>GCREQTYPE specifies the type of GC management call being performed</p>
         <table class="enum-table">
@@ -686,6 +837,13 @@ a value of 0 means unlimited </p></td>
                 <td><a href="#pb.RefCountRequest">RefCountRequest</a></td>
                 <td><a href="#pb.RefCountResponse">RefCountResponse</a></td>
                 <td><p>RefCount is used to analyze the counter store and pull reference count information</p></td>
+              </tr>
+            
+              <tr>
+                <td>Blockstore</td>
+                <td><a href="#pb.BlockstoreRequest">BlockstoreRequest</a></td>
+                <td><a href="#pb.BlockstoreResponse">BlockstoreResponse</a></td>
+                <td><p>Blockstore allows management of blockstores</p></td>
               </tr>
             
           </tbody>
@@ -1333,99 +1491,6 @@ is useful on machines with low-memory </p></td>
       <p></p>
 
       
-        <h3 id="pb.Block">Block</h3>
-        <p>Block is a single block of ipfs data</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>cid</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>cid is the identifier of the block </p></td>
-                </tr>
-              
-                <tr>
-                  <td>data</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p>data is the actual contnets of this block </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="pb.BlockstoreRequest">BlockstoreRequest</h3>
-        <p>BlockstoreRequest is a message used to control blockstores</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>cids</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>cids holds at least 1 cid, to hold 0 is considered an error </p></td>
-                </tr>
-              
-                <tr>
-                  <td>reqType</td>
-                  <td><a href="#pb.BSREQTYPE">BSREQTYPE</a></td>
-                  <td></td>
-                  <td><p>reqType is used to indicate the particular request being mande </p></td>
-                </tr>
-              
-                <tr>
-                  <td>reqOpts</td>
-                  <td><a href="#pb.BSREQOPTS">BSREQOPTS</a></td>
-                  <td></td>
-                  <td><p>reqOpts is an optional parameter that can be used for fine-tuned request control </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="pb.BlockstoreResponse">BlockstoreResponse</h3>
-        <p>BlockstoreResponse is a response to a BlockstoreqRequest</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>blocks</td>
-                  <td><a href="#pb.Block">Block</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="pb.ConnectRequest">ConnectRequest</h3>
         <p>ConnectRequest is used to connect to libp2p peers</p>
 
@@ -1713,64 +1778,6 @@ is useful on machines with low-memory </p></td>
       
 
       
-        <h3 id="pb.BSREQOPTS">BSREQOPTS</h3>
-        <p>BSREQOPTS are options for blockstore requests</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>FORCE</td>
-                <td>0</td>
-                <td><p>FORCE indicates to force the request regardless of any possible issues</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
-        <h3 id="pb.BSREQTYPE">BSREQTYPE</h3>
-        <p>BSREQTYPE is a particular blockstore request type</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>DELETE</td>
-                <td>0</td>
-                <td><p>DELETE is used to delete a block from the store</p></td>
-              </tr>
-            
-              <tr>
-                <td>PUT</td>
-                <td>1</td>
-                <td><p>PUT is used to put a single block in the store</p></td>
-              </tr>
-            
-              <tr>
-                <td>PUT_MANY</td>
-                <td>2</td>
-                <td><p>PUT_MANY is used to put many blocks in the store</p></td>
-              </tr>
-            
-              <tr>
-                <td>GET</td>
-                <td>3</td>
-                <td><p>GET is used to get a block from the store</p></td>
-              </tr>
-            
-              <tr>
-                <td>GET_MANY</td>
-                <td>4</td>
-                <td><p>GET_MANY is used to get many blocks from the store</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
         <h3 id="pb.EXTRASTYPE">EXTRASTYPE</h3>
         <p>EXTRASTYPE denotes a particular extras type</p>
         <table class="enum-table">
@@ -1846,13 +1853,6 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.DisableExtrasRequest">DisableExtrasRequest</a></td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>DisableExtras is used to disable a particular extras feature</p></td>
-              </tr>
-            
-              <tr>
-                <td>Blockstore</td>
-                <td><a href="#pb.BlockstoreRequest">BlockstoreRequest</a></td>
-                <td><a href="#pb.BlockstoreResponse">BlockstoreResponse</a></td>
-                <td><p>Blockstore allows management of blockstores</p></td>
               </tr>
             
           </tbody>

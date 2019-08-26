@@ -24,6 +24,11 @@ class AdminAPIStub(object):
         request_serializer=admin__pb2.RefCountRequest.SerializeToString,
         response_deserializer=admin__pb2.RefCountResponse.FromString,
         )
+    self.Blockstore = channel.unary_unary(
+        '/pb.AdminAPI/Blockstore',
+        request_serializer=admin__pb2.BlockstoreRequest.SerializeToString,
+        response_deserializer=admin__pb2.BlockstoreResponse.FromString,
+        )
 
 
 class AdminAPIServicer(object):
@@ -44,6 +49,13 @@ class AdminAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Blockstore(self, request, context):
+    """Blockstore allows management of blockstores
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_AdminAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -56,6 +68,11 @@ def add_AdminAPIServicer_to_server(servicer, server):
           servicer.RefCount,
           request_deserializer=admin__pb2.RefCountRequest.FromString,
           response_serializer=admin__pb2.RefCountResponse.SerializeToString,
+      ),
+      'Blockstore': grpc.unary_unary_rpc_method_handler(
+          servicer.Blockstore,
+          request_deserializer=admin__pb2.BlockstoreRequest.FromString,
+          response_serializer=admin__pb2.BlockstoreResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

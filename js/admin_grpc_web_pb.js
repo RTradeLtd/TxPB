@@ -198,5 +198,60 @@ proto.pb.AdminAPIPromiseClient.prototype.refCount =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.BlockstoreRequest,
+ *   !proto.pb.BlockstoreResponse>}
+ */
+const methodInfo_AdminAPI_Blockstore = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.BlockstoreResponse,
+  /** @param {!proto.pb.BlockstoreRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.pb.BlockstoreResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.BlockstoreRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.BlockstoreResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.BlockstoreResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.AdminAPIClient.prototype.blockstore =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.AdminAPI/Blockstore',
+      request,
+      metadata || {},
+      methodInfo_AdminAPI_Blockstore,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.BlockstoreRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.BlockstoreResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.AdminAPIPromiseClient.prototype.blockstore =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.AdminAPI/Blockstore',
+      request,
+      metadata || {},
+      methodInfo_AdminAPI_Blockstore);
+};
+
+
 module.exports = proto.pb;
 
