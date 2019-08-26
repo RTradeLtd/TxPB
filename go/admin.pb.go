@@ -4,7 +4,6 @@
 package pb
 
 import (
-	bytes "bytes"
 	context "context"
 	fmt "fmt"
 	io "io"
@@ -64,10 +63,7 @@ func (GCREQTYPE) EnumDescriptor() ([]byte, []int) {
 // ManageGCRequest is a message used to control TemporalX garbage collection
 type ManageGCRequest struct {
 	// type is the type of gc request being performed
-	Type                 GCREQTYPE `protobuf:"varint,1,opt,name=type,proto3,enum=pb.GCREQTYPE" json:"type,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Type GCREQTYPE `protobuf:"varint,1,opt,name=type,proto3,enum=pb.GCREQTYPE" json:"type,omitempty"`
 }
 
 func (m *ManageGCRequest) Reset()      { *m = ManageGCRequest{} }
@@ -111,10 +107,7 @@ func (m *ManageGCRequest) GetType() GCREQTYPE {
 
 // ManageGCResponse is a message used as a response to gc control requests
 type ManageGCResponse struct {
-	Status               string   `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (m *ManageGCResponse) Reset()      { *m = ManageGCResponse{} }
@@ -165,10 +158,7 @@ type RefCountRequest struct {
 	Cids []string `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty"`
 	// if performing a generic search, the maximum number of results.
 	// a value of 0 means unlimited
-	Limit                int64    `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Limit int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 }
 
 func (m *RefCountRequest) Reset()      { *m = RefCountRequest{} }
@@ -221,10 +211,7 @@ func (m *RefCountRequest) GetLimit() int64 {
 // gathered by a RefCount rpc call.
 type RefCountResponse struct {
 	// cids is a mapping of the cid to its reference count
-	Cids                 map[string]int64 `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `json:"-"`
-	XXX_sizecache        int32            `json:"-"`
+	Cids map[string]int64 `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
 func (m *RefCountResponse) Reset()      { *m = RefCountResponse{} }
@@ -278,32 +265,33 @@ func init() {
 func init() { proto.RegisterFile("admin.proto", fileDescriptor_73a7fc70dcc2027c) }
 
 var fileDescriptor_73a7fc70dcc2027c = []byte{
-	// 389 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x91, 0xcf, 0xae, 0x93, 0x40,
-	0x14, 0xc6, 0x19, 0xfa, 0x27, 0xe5, 0x34, 0x5a, 0x32, 0x36, 0xa6, 0xe9, 0x62, 0x52, 0x59, 0x91,
-	0x46, 0x69, 0x82, 0x26, 0x35, 0xba, 0x42, 0xd2, 0x34, 0x2e, 0x8c, 0x75, 0xc0, 0x85, 0x4b, 0x68,
-	0xa7, 0x48, 0x6c, 0x01, 0xcb, 0x60, 0xd2, 0xc4, 0x44, 0x1f, 0xc7, 0x47, 0xf0, 0x11, 0x5c, 0xba,
-	0x74, 0x59, 0x78, 0x02, 0x97, 0x77, 0x79, 0xc3, 0x50, 0xda, 0x7b, 0xd9, 0x9d, 0x6f, 0x66, 0x7e,
-	0xf3, 0x7d, 0xe7, 0x1c, 0xe8, 0x7b, 0x9b, 0x7d, 0x18, 0x19, 0xc9, 0x21, 0xe6, 0x31, 0x96, 0x13,
-	0x7f, 0xfc, 0x2c, 0x08, 0xf9, 0xe7, 0xcc, 0x37, 0xd6, 0xf1, 0x7e, 0x16, 0xc4, 0x41, 0x3c, 0x13,
-	0x57, 0x7e, 0xb6, 0x15, 0x4a, 0x08, 0x51, 0x55, 0x88, 0xf6, 0x02, 0x06, 0xef, 0xbc, 0xc8, 0x0b,
-	0xd8, 0xd2, 0xa6, 0xec, 0x6b, 0xc6, 0x52, 0x8e, 0x9f, 0x40, 0x9b, 0x1f, 0x13, 0x36, 0x42, 0x13,
-	0xa4, 0x3f, 0x34, 0x1f, 0x18, 0x89, 0x6f, 0x2c, 0x6d, 0xba, 0xf8, 0xe0, 0x7e, 0x5a, 0x2d, 0xa8,
-	0xb8, 0xd2, 0xa6, 0xa0, 0x5e, 0xa9, 0x34, 0x89, 0xa3, 0x94, 0xe1, 0xc7, 0xd0, 0x4d, 0xb9, 0xc7,
-	0xb3, 0x54, 0x80, 0x0a, 0x3d, 0x2b, 0xed, 0x35, 0x0c, 0x28, 0xdb, 0xda, 0x71, 0x16, 0xf1, 0xda,
-	0x01, 0x43, 0x7b, 0x1d, 0x6e, 0xca, 0x87, 0x2d, 0x5d, 0xa1, 0xa2, 0xc6, 0x43, 0xe8, 0xec, 0xc2,
-	0x7d, 0xc8, 0x47, 0xf2, 0x04, 0xe9, 0x2d, 0x5a, 0x09, 0xed, 0x07, 0xa8, 0x57, 0xf8, 0x6c, 0x64,
-	0xde, 0xa1, 0xfb, 0x26, 0x29, 0xf3, 0x35, 0xdf, 0x18, 0x76, 0xb8, 0x49, 0x17, 0x11, 0x3f, 0x1c,
-	0xab, 0xdf, 0xc7, 0x73, 0x50, 0x2e, 0x47, 0x58, 0x85, 0xd6, 0x17, 0x76, 0x3c, 0xc7, 0x2c, 0xcb,
-	0xd2, 0xfc, 0x9b, 0xb7, 0xcb, 0x58, 0x6d, 0x2e, 0xc4, 0x2b, 0xf9, 0x25, 0x9a, 0x3e, 0x05, 0xe5,
-	0xd2, 0x3c, 0x56, 0xa0, 0xe3, 0xb8, 0x16, 0x75, 0x55, 0x09, 0xf7, 0xa0, 0xed, 0xb8, 0xef, 0x57,
-	0x2a, 0xc2, 0x00, 0x5d, 0xc7, 0xb5, 0xdc, 0x8f, 0x8e, 0x2a, 0x9b, 0xdf, 0xa1, 0x67, 0x95, 0xfb,
-	0xb0, 0x56, 0x6f, 0xf1, 0x1c, 0x7a, 0xf5, 0x8c, 0xf0, 0xa3, 0x32, 0x64, 0x63, 0xce, 0xe3, 0xe1,
-	0xfd, 0xc3, 0x2a, 0xb9, 0x26, 0x95, 0x60, 0xdd, 0x4f, 0x05, 0x36, 0xc6, 0x57, 0x81, 0xcd, 0x96,
-	0x35, 0xe9, 0x8d, 0xfe, 0x2f, 0x27, 0xd2, 0x29, 0x27, 0xe8, 0x7f, 0x4e, 0xd0, 0x4d, 0x4e, 0xd0,
-	0xcf, 0x82, 0xa0, 0x5f, 0x05, 0x41, 0xbf, 0x0b, 0x82, 0xfe, 0x14, 0x04, 0xfd, 0x2d, 0x08, 0x3a,
-	0x15, 0x04, 0xf9, 0x5d, 0xb1, 0xfc, 0xe7, 0xb7, 0x01, 0x00, 0x00, 0xff, 0xff, 0x06, 0xe3, 0x23,
-	0x3a, 0x3e, 0x02, 0x00, 0x00,
+	// 401 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x92, 0xc1, 0xae, 0xd2, 0x40,
+	0x14, 0x86, 0x3b, 0x85, 0x4b, 0xe8, 0xb9, 0xd1, 0xdb, 0x8c, 0xc4, 0x10, 0x16, 0x13, 0xec, 0x8a,
+	0x10, 0x2d, 0x49, 0x25, 0xc1, 0xe8, 0xaa, 0x36, 0x84, 0xb8, 0x30, 0xe2, 0xb4, 0x2e, 0x5c, 0xb6,
+	0x30, 0xd4, 0x46, 0x68, 0x2b, 0x9d, 0x9a, 0x90, 0x98, 0xe8, 0x23, 0xf8, 0x18, 0x3e, 0x82, 0x8f,
+	0xe0, 0x92, 0x25, 0x4b, 0x5a, 0x5e, 0xc0, 0xa5, 0x4b, 0xd3, 0x29, 0x05, 0xed, 0xee, 0xfc, 0x33,
+	0xe7, 0xeb, 0xff, 0x9f, 0xd3, 0x81, 0x5b, 0x77, 0xb9, 0x09, 0x42, 0x3d, 0xde, 0x46, 0x3c, 0xc2,
+	0x72, 0xec, 0xf5, 0x9e, 0xf8, 0x01, 0xff, 0x90, 0x7a, 0xfa, 0x22, 0xda, 0x8c, 0xfc, 0xc8, 0x8f,
+	0x46, 0xe2, 0xca, 0x4b, 0x57, 0x42, 0x09, 0x21, 0xaa, 0x12, 0xd1, 0xc6, 0x70, 0xf7, 0xda, 0x0d,
+	0x5d, 0x9f, 0xcd, 0x2c, 0xca, 0x3e, 0xa5, 0x2c, 0xe1, 0xf8, 0x11, 0x34, 0xf9, 0x2e, 0x66, 0x5d,
+	0xd4, 0x47, 0x83, 0xfb, 0xc6, 0x3d, 0x3d, 0xf6, 0xf4, 0x99, 0x45, 0xa7, 0x6f, 0x9d, 0xf7, 0xf3,
+	0x29, 0x15, 0x57, 0xda, 0x10, 0xd4, 0x2b, 0x95, 0xc4, 0x51, 0x98, 0x30, 0xfc, 0x10, 0x5a, 0x09,
+	0x77, 0x79, 0x9a, 0x08, 0x50, 0xa1, 0x67, 0xa5, 0xbd, 0x80, 0x3b, 0xca, 0x56, 0x56, 0x94, 0x86,
+	0xbc, 0x72, 0xc0, 0xd0, 0x5c, 0x04, 0xcb, 0xa2, 0xb1, 0x31, 0x50, 0xa8, 0xa8, 0x71, 0x07, 0x6e,
+	0xd6, 0xc1, 0x26, 0xe0, 0x5d, 0xb9, 0x8f, 0x06, 0x0d, 0x5a, 0x0a, 0xed, 0x2b, 0xa8, 0x57, 0xf8,
+	0x6c, 0x64, 0xfc, 0x43, 0xdf, 0x1a, 0xa4, 0xc8, 0x57, 0xef, 0xd1, 0xad, 0x60, 0x99, 0x4c, 0x43,
+	0xbe, 0xdd, 0x95, 0x5f, 0xef, 0x4d, 0x40, 0xb9, 0x1c, 0x61, 0x15, 0x1a, 0x1f, 0xd9, 0xee, 0x1c,
+	0xb3, 0x28, 0x0b, 0xf3, 0xcf, 0xee, 0x3a, 0x65, 0x95, 0xb9, 0x10, 0xcf, 0xe5, 0x67, 0x68, 0xf8,
+	0x18, 0x94, 0xcb, 0xf0, 0x58, 0x81, 0x1b, 0xdb, 0x31, 0xa9, 0xa3, 0x4a, 0xb8, 0x0d, 0x4d, 0xdb,
+	0x79, 0x33, 0x57, 0x11, 0x06, 0x68, 0xd9, 0x8e, 0xe9, 0xbc, 0xb3, 0x55, 0xd9, 0xf8, 0x02, 0x6d,
+	0xb3, 0xf8, 0x1f, 0xe6, 0xfc, 0x15, 0x9e, 0x40, 0xbb, 0xda, 0x11, 0x7e, 0x50, 0x84, 0xac, 0xed,
+	0xb9, 0xd7, 0xf9, 0xff, 0xb0, 0x4c, 0xae, 0x49, 0x05, 0x58, 0xcd, 0x53, 0x82, 0xb5, 0xf5, 0x95,
+	0x60, 0x7d, 0x64, 0x4d, 0x7a, 0x39, 0x3e, 0x64, 0x44, 0x3a, 0x66, 0x04, 0xfd, 0xce, 0x08, 0xfa,
+	0x93, 0x11, 0xf4, 0x2d, 0x27, 0xe8, 0x47, 0x4e, 0xd0, 0xcf, 0x9c, 0xa0, 0x5f, 0x39, 0x41, 0xfb,
+	0x9c, 0xa0, 0x63, 0x4e, 0xd0, 0xf7, 0x13, 0x91, 0xf6, 0x27, 0x22, 0x1d, 0x4e, 0x44, 0xf2, 0x5a,
+	0xe2, 0x21, 0x3c, 0xfd, 0x1b, 0x00, 0x00, 0xff, 0xff, 0x6d, 0xb9, 0x0c, 0xa9, 0x4a, 0x02, 0x00,
+	0x00,
 }
 
 func (this *ManageGCRequest) VerboseEqual(that interface{}) error {
@@ -334,9 +322,6 @@ func (this *ManageGCRequest) VerboseEqual(that interface{}) error {
 	if this.Type != that1.Type {
 		return fmt.Errorf("Type this(%v) Not Equal that(%v)", this.Type, that1.Type)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *ManageGCRequest) Equal(that interface{}) bool {
@@ -359,9 +344,6 @@ func (this *ManageGCRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Type != that1.Type {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -394,9 +376,6 @@ func (this *ManageGCResponse) VerboseEqual(that interface{}) error {
 	if this.Status != that1.Status {
 		return fmt.Errorf("Status this(%v) Not Equal that(%v)", this.Status, that1.Status)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *ManageGCResponse) Equal(that interface{}) bool {
@@ -419,9 +398,6 @@ func (this *ManageGCResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Status != that1.Status {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -462,9 +438,6 @@ func (this *RefCountRequest) VerboseEqual(that interface{}) error {
 	if this.Limit != that1.Limit {
 		return fmt.Errorf("Limit this(%v) Not Equal that(%v)", this.Limit, that1.Limit)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *RefCountRequest) Equal(that interface{}) bool {
@@ -495,9 +468,6 @@ func (this *RefCountRequest) Equal(that interface{}) bool {
 		}
 	}
 	if this.Limit != that1.Limit {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -535,9 +505,6 @@ func (this *RefCountResponse) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *RefCountResponse) Equal(that interface{}) bool {
@@ -567,9 +534,6 @@ func (this *RefCountResponse) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
 }
 func (this *ManageGCRequest) GoString() string {
@@ -579,9 +543,6 @@ func (this *ManageGCRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.ManageGCRequest{")
 	s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -592,9 +553,6 @@ func (this *ManageGCResponse) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.ManageGCResponse{")
 	s = append(s, "Status: "+fmt.Sprintf("%#v", this.Status)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -606,9 +564,6 @@ func (this *RefCountRequest) GoString() string {
 	s = append(s, "&pb.RefCountRequest{")
 	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
 	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -630,9 +585,6 @@ func (this *RefCountResponse) GoString() string {
 	mapStringForCids += "}"
 	if this.Cids != nil {
 		s = append(s, "Cids: "+mapStringForCids+",\n")
-	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -775,9 +727,6 @@ func (m *ManageGCRequest) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintAdmin(dAtA, i, uint64(m.Type))
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -801,9 +750,6 @@ func (m *ManageGCResponse) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintAdmin(dAtA, i, uint64(len(m.Status)))
 		i += copy(dAtA[i:], m.Status)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -843,9 +789,6 @@ func (m *RefCountRequest) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintAdmin(dAtA, i, uint64(m.Limit))
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -880,9 +823,6 @@ func (m *RefCountResponse) MarshalTo(dAtA []byte) (int, error) {
 			i = encodeVarintAdmin(dAtA, i, uint64(v))
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -899,7 +839,6 @@ func NewPopulatedManageGCRequest(r randyAdmin, easy bool) *ManageGCRequest {
 	this := &ManageGCRequest{}
 	this.Type = GCREQTYPE([]int32{0, 1, 2}[r.Intn(3)])
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
@@ -908,7 +847,6 @@ func NewPopulatedManageGCResponse(r randyAdmin, easy bool) *ManageGCResponse {
 	this := &ManageGCResponse{}
 	this.Status = string(randStringAdmin(r))
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
@@ -925,7 +863,6 @@ func NewPopulatedRefCountRequest(r randyAdmin, easy bool) *RefCountRequest {
 		this.Limit *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 3)
 	}
 	return this
 }
@@ -944,7 +881,6 @@ func NewPopulatedRefCountResponse(r randyAdmin, easy bool) *RefCountResponse {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
@@ -1030,9 +966,6 @@ func (m *ManageGCRequest) Size() (n int) {
 	if m.Type != 0 {
 		n += 1 + sovAdmin(uint64(m.Type))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1045,9 +978,6 @@ func (m *ManageGCResponse) Size() (n int) {
 	l = len(m.Status)
 	if l > 0 {
 		n += 1 + l + sovAdmin(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1067,9 +997,6 @@ func (m *RefCountRequest) Size() (n int) {
 	if m.Limit != 0 {
 		n += 1 + sovAdmin(uint64(m.Limit))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1086,9 +1013,6 @@ func (m *RefCountResponse) Size() (n int) {
 			mapEntrySize := 1 + len(k) + sovAdmin(uint64(len(k))) + 1 + sovAdmin(uint64(v))
 			n += mapEntrySize + 1 + sovAdmin(uint64(mapEntrySize))
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1112,7 +1036,6 @@ func (this *ManageGCRequest) String() string {
 	}
 	s := strings.Join([]string{`&ManageGCRequest{`,
 		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1123,7 +1046,6 @@ func (this *ManageGCResponse) String() string {
 	}
 	s := strings.Join([]string{`&ManageGCResponse{`,
 		`Status:` + fmt.Sprintf("%v", this.Status) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1135,7 +1057,6 @@ func (this *RefCountRequest) String() string {
 	s := strings.Join([]string{`&RefCountRequest{`,
 		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
 		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1156,7 +1077,6 @@ func (this *RefCountResponse) String() string {
 	mapStringForCids += "}"
 	s := strings.Join([]string{`&RefCountResponse{`,
 		`Cids:` + mapStringForCids + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1232,7 +1152,6 @@ func (m *ManageGCRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1318,7 +1237,6 @@ func (m *ManageGCResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1423,7 +1341,6 @@ func (m *RefCountRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1590,7 +1507,6 @@ func (m *RefCountResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

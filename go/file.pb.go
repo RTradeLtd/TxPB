@@ -33,10 +33,7 @@ type UploadRequest struct {
 	// blob is a single chunk of data
 	Blob *Blob `protobuf:"bytes,1,opt,name=blob,proto3" json:"blob,omitempty"`
 	// options allows setting the optoins for this upload
-	Options              *UploadOptions `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `json:"-"`
-	XXX_sizecache        int32          `json:"-"`
+	Options *UploadOptions `protobuf:"bytes,2,opt,name=options,proto3" json:"options,omitempty"`
 }
 
 func (m *UploadRequest) Reset()      { *m = UploadRequest{} }
@@ -92,10 +89,7 @@ type UploadOptions struct {
 	// specifies the dag layout (balanced, tricklet)
 	Layout string `protobuf:"bytes,2,opt,name=layout,proto3" json:"layout,omitempty"`
 	// specifies the chunker type (rabin, default, etc...)
-	Chunker              string   `protobuf:"bytes,3,opt,name=chunker,proto3" json:"chunker,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Chunker string `protobuf:"bytes,3,opt,name=chunker,proto3" json:"chunker,omitempty"`
 }
 
 func (m *UploadOptions) Reset()      { *m = UploadOptions{} }
@@ -160,10 +154,7 @@ type DownloadRequest struct {
 	// chunkSize specifies the size of chunks to be sent to the client
 	// it allows us to efficiently control incoming data amounts which
 	// is useful on machines with low-memory
-	ChunkSize            int32    `protobuf:"varint,2,opt,name=chunkSize,proto3" json:"chunkSize,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	ChunkSize int32 `protobuf:"varint,2,opt,name=chunkSize,proto3" json:"chunkSize,omitempty"`
 }
 
 func (m *DownloadRequest) Reset()      { *m = DownloadRequest{} }
@@ -216,10 +207,7 @@ func (m *DownloadRequest) GetChunkSize() int32 {
 // which allows the gRPC server to stream blobs to the client
 type DownloadResponse struct {
 	// blob is a single chunk of data
-	Blob                 *Blob    `protobuf:"bytes,1,opt,name=blob,proto3" json:"blob,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Blob *Blob `protobuf:"bytes,1,opt,name=blob,proto3" json:"blob,omitempty"`
 }
 
 func (m *DownloadResponse) Reset()      { *m = DownloadResponse{} }
@@ -264,10 +252,7 @@ func (m *DownloadResponse) GetBlob() *Blob {
 // Blob is a chunk of binary data
 type Blob struct {
 	// content is the actual binary data contained in this message
-	Content              []byte   `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Content []byte `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (m *Blob) Reset()      { *m = Blob{} }
@@ -320,31 +305,32 @@ func init() {
 func init() { proto.RegisterFile("file.proto", fileDescriptor_9188e3b7e55e1162) }
 
 var fileDescriptor_9188e3b7e55e1162 = []byte{
-	// 374 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x52, 0xb1, 0x4e, 0xe3, 0x40,
-	0x10, 0xcd, 0xe6, 0x72, 0xc9, 0x65, 0x2e, 0xa7, 0xdc, 0xed, 0x9d, 0x4e, 0x96, 0x15, 0xad, 0x22,
-	0x57, 0x91, 0x4e, 0xe7, 0x44, 0xb9, 0x6b, 0x29, 0x08, 0x08, 0x41, 0x45, 0x64, 0x44, 0x43, 0x83,
-	0xb2, 0x61, 0x13, 0x5b, 0x6c, 0xbc, 0x26, 0xde, 0x15, 0x82, 0x02, 0xf1, 0x39, 0x7c, 0x02, 0x9f,
-	0x40, 0x49, 0x49, 0x19, 0xfb, 0x0b, 0x28, 0x29, 0x91, 0xc7, 0xb1, 0x1c, 0x28, 0xe8, 0xe6, 0xbd,
-	0x79, 0xf3, 0xe6, 0xed, 0x68, 0x01, 0x66, 0x81, 0x14, 0x6e, 0xb4, 0x54, 0x5a, 0xd1, 0x6a, 0xc4,
-	0x6d, 0x30, 0x3a, 0x90, 0x39, 0xb6, 0xff, 0xce, 0x03, 0xed, 0x1b, 0xee, 0x4e, 0xd5, 0xa2, 0x3f,
-	0x57, 0x73, 0xd5, 0x47, 0x9a, 0x9b, 0x19, 0x22, 0x04, 0x58, 0xe5, 0x72, 0xe7, 0x04, 0xbe, 0x1d,
-	0x47, 0x52, 0x4d, 0xce, 0x3c, 0x71, 0x61, 0x44, 0xac, 0x69, 0x07, 0x6a, 0x5c, 0x2a, 0x6e, 0x91,
-	0x2e, 0xe9, 0x7d, 0x1d, 0x7e, 0x71, 0x23, 0xee, 0x8e, 0xa4, 0xe2, 0x1e, 0xb2, 0xf4, 0x0f, 0x34,
-	0x54, 0xa4, 0x03, 0x15, 0xc6, 0x56, 0x15, 0x05, 0x3f, 0x32, 0x41, 0xee, 0x70, 0x98, 0x37, 0xbc,
-	0x42, 0xe1, 0x9c, 0x16, 0xde, 0xeb, 0x0e, 0xed, 0x40, 0x73, 0x61, 0xa4, 0x0e, 0xf6, 0x27, 0xb1,
-	0x8f, 0x0b, 0x9a, 0x5e, 0x49, 0xd0, 0xdf, 0x50, 0x97, 0x93, 0x2b, 0x65, 0x34, 0x5a, 0x37, 0xbd,
-	0x35, 0xa2, 0x16, 0x34, 0xa6, 0xbe, 0x09, 0xcf, 0xc5, 0xd2, 0xfa, 0x84, 0x8d, 0x02, 0x3a, 0x3b,
-	0xd0, 0xde, 0x55, 0x97, 0xe1, 0x66, 0x7c, 0x0a, 0x35, 0xbf, 0x74, 0xc7, 0x3a, 0x5b, 0x8b, 0x13,
-	0x47, 0xc1, 0xb5, 0x40, 0xef, 0xcf, 0x5e, 0x49, 0x38, 0x03, 0xf8, 0x5e, 0x9a, 0xc4, 0x91, 0x0a,
-	0x63, 0xf1, 0xf1, 0x11, 0x9c, 0x2e, 0xd4, 0x32, 0x84, 0xc1, 0x54, 0xa8, 0x45, 0xa8, 0x51, 0xd8,
-	0xf2, 0x0a, 0x38, 0xbc, 0x81, 0xc6, 0x5e, 0x20, 0xc5, 0xf6, 0xf8, 0x80, 0xfe, 0x07, 0xc8, 0x8f,
-	0x90, 0x11, 0x74, 0xe3, 0x5c, 0xeb, 0xc4, 0x76, 0x3b, 0xa3, 0xc6, 0x46, 0x17, 0xcb, 0x9d, 0x4a,
-	0x8f, 0xd0, 0x2d, 0x68, 0x15, 0xa1, 0x70, 0xee, 0x67, 0x26, 0x7a, 0xf7, 0x56, 0xfb, 0xd7, 0x5b,
-	0xb2, 0x18, 0x1f, 0x90, 0x51, 0xef, 0x29, 0x61, 0x95, 0x55, 0xc2, 0xc8, 0x73, 0xc2, 0xc8, 0x4b,
-	0xc2, 0xc8, 0x6d, 0xca, 0xc8, 0x5d, 0xca, 0xc8, 0x7d, 0xca, 0xc8, 0x43, 0xca, 0xc8, 0x63, 0xca,
-	0xc8, 0x2a, 0x65, 0x84, 0xd7, 0xf1, 0x1b, 0xfc, 0x7b, 0x0d, 0x00, 0x00, 0xff, 0xff, 0x71, 0x13,
-	0xd0, 0xd2, 0x53, 0x02, 0x00, 0x00,
+	// 387 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x52, 0xb1, 0x8e, 0xd3, 0x40,
+	0x10, 0xf5, 0x86, 0x90, 0x90, 0x21, 0x28, 0xb0, 0x20, 0x64, 0x59, 0xd1, 0x2a, 0x72, 0x15, 0x09,
+	0xe1, 0x44, 0x21, 0x2d, 0x05, 0x01, 0x21, 0xa8, 0x88, 0x8c, 0x68, 0x68, 0x50, 0x36, 0x6c, 0x62,
+	0x8b, 0x8d, 0xd7, 0xc4, 0xbb, 0x42, 0x5c, 0x71, 0xba, 0x4f, 0xb8, 0xcf, 0xb8, 0x4f, 0xb8, 0x4f,
+	0xb8, 0x32, 0x65, 0xca, 0xd8, 0xf9, 0x81, 0x2b, 0xaf, 0x3c, 0x79, 0x1c, 0xcb, 0xb9, 0x2b, 0xae,
+	0x9b, 0xf7, 0xe6, 0xcd, 0x9b, 0xb7, 0xa3, 0x05, 0x58, 0x84, 0x52, 0x78, 0xf1, 0x5a, 0x69, 0x45,
+	0x6b, 0x31, 0x77, 0xc0, 0xe8, 0x50, 0x16, 0xd8, 0x79, 0xbb, 0x0c, 0x75, 0x60, 0xb8, 0x37, 0x57,
+	0xab, 0xc1, 0x52, 0x2d, 0xd5, 0x00, 0x69, 0x6e, 0x16, 0x88, 0x10, 0x60, 0x55, 0xc8, 0xdd, 0x9f,
+	0xf0, 0xec, 0x47, 0x2c, 0xd5, 0xec, 0xb7, 0x2f, 0xfe, 0x1a, 0x91, 0x68, 0xda, 0x85, 0x3a, 0x97,
+	0x8a, 0xdb, 0xa4, 0x47, 0xfa, 0x4f, 0x47, 0x4f, 0xbc, 0x98, 0x7b, 0x13, 0xa9, 0xb8, 0x8f, 0x2c,
+	0x7d, 0x03, 0x4d, 0x15, 0xeb, 0x50, 0x45, 0x89, 0x5d, 0x43, 0xc1, 0x8b, 0x5c, 0x50, 0x38, 0x7c,
+	0x2b, 0x1a, 0x7e, 0xa9, 0x70, 0x7f, 0x95, 0xde, 0x87, 0x0e, 0xed, 0x42, 0x6b, 0x65, 0xa4, 0x0e,
+	0xbf, 0xcc, 0x92, 0x00, 0x17, 0xb4, 0xfc, 0x8a, 0xa0, 0xaf, 0xa1, 0x21, 0x67, 0xff, 0x95, 0xd1,
+	0x68, 0xdd, 0xf2, 0x0f, 0x88, 0xda, 0xd0, 0x9c, 0x07, 0x26, 0xfa, 0x23, 0xd6, 0xf6, 0x23, 0x6c,
+	0x94, 0xd0, 0xfd, 0x08, 0x9d, 0x4f, 0xea, 0x5f, 0x74, 0x1c, 0x9f, 0x42, 0x3d, 0xa8, 0xdc, 0xb1,
+	0xce, 0xd7, 0xe2, 0xc4, 0xf7, 0xf0, 0x44, 0xa0, 0xf7, 0x63, 0xbf, 0x22, 0xdc, 0x21, 0x3c, 0xaf,
+	0x4c, 0x92, 0x58, 0x45, 0x89, 0x78, 0xf8, 0x08, 0x6e, 0x0f, 0xea, 0x39, 0xc2, 0x60, 0x2a, 0xd2,
+	0x22, 0xd2, 0x28, 0x6c, 0xfb, 0x25, 0x1c, 0x9d, 0x42, 0xf3, 0x73, 0x28, 0xc5, 0x87, 0xe9, 0x57,
+	0x3a, 0x06, 0x28, 0x8e, 0x90, 0x13, 0xf4, 0xe8, 0x5c, 0x87, 0xc4, 0x4e, 0x27, 0xa7, 0xa6, 0x46,
+	0x97, 0xcb, 0x5d, 0xab, 0x4f, 0xe8, 0x7b, 0x68, 0x97, 0xa1, 0x70, 0xee, 0x65, 0x2e, 0xba, 0xf7,
+	0x56, 0xe7, 0xd5, 0x5d, 0xb2, 0x1c, 0x1f, 0x92, 0xc9, 0x78, 0x9b, 0x32, 0x6b, 0x97, 0x32, 0x72,
+	0x9d, 0x32, 0x72, 0x93, 0x32, 0x72, 0x96, 0x31, 0x72, 0x91, 0x31, 0x72, 0x99, 0x31, 0x72, 0x95,
+	0x31, 0xb2, 0xc9, 0x18, 0xd9, 0x65, 0x8c, 0x9c, 0xef, 0x99, 0xb5, 0xd9, 0x33, 0x6b, 0xbb, 0x67,
+	0x16, 0x6f, 0xe0, 0x97, 0x78, 0x77, 0x1b, 0x00, 0x00, 0xff, 0xff, 0x13, 0xa2, 0x88, 0x0a, 0x5f,
+	0x02, 0x00, 0x00,
 }
 
 func (this *UploadRequest) VerboseEqual(that interface{}) error {
@@ -378,9 +364,6 @@ func (this *UploadRequest) VerboseEqual(that interface{}) error {
 	if !this.Options.Equal(that1.Options) {
 		return fmt.Errorf("Options this(%v) Not Equal that(%v)", this.Options, that1.Options)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *UploadRequest) Equal(that interface{}) bool {
@@ -406,9 +389,6 @@ func (this *UploadRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Options.Equal(that1.Options) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -447,9 +427,6 @@ func (this *UploadOptions) VerboseEqual(that interface{}) error {
 	if this.Chunker != that1.Chunker {
 		return fmt.Errorf("Chunker this(%v) Not Equal that(%v)", this.Chunker, that1.Chunker)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *UploadOptions) Equal(that interface{}) bool {
@@ -478,9 +455,6 @@ func (this *UploadOptions) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Chunker != that1.Chunker {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -516,9 +490,6 @@ func (this *DownloadRequest) VerboseEqual(that interface{}) error {
 	if this.ChunkSize != that1.ChunkSize {
 		return fmt.Errorf("ChunkSize this(%v) Not Equal that(%v)", this.ChunkSize, that1.ChunkSize)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DownloadRequest) Equal(that interface{}) bool {
@@ -544,9 +515,6 @@ func (this *DownloadRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if this.ChunkSize != that1.ChunkSize {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -579,9 +547,6 @@ func (this *DownloadResponse) VerboseEqual(that interface{}) error {
 	if !this.Blob.Equal(that1.Blob) {
 		return fmt.Errorf("Blob this(%v) Not Equal that(%v)", this.Blob, that1.Blob)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DownloadResponse) Equal(that interface{}) bool {
@@ -604,9 +569,6 @@ func (this *DownloadResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if !this.Blob.Equal(that1.Blob) {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -639,9 +601,6 @@ func (this *Blob) VerboseEqual(that interface{}) error {
 	if !bytes.Equal(this.Content, that1.Content) {
 		return fmt.Errorf("Content this(%v) Not Equal that(%v)", this.Content, that1.Content)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *Blob) Equal(that interface{}) bool {
@@ -666,9 +625,6 @@ func (this *Blob) Equal(that interface{}) bool {
 	if !bytes.Equal(this.Content, that1.Content) {
 		return false
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
 }
 func (this *UploadRequest) GoString() string {
@@ -683,9 +639,6 @@ func (this *UploadRequest) GoString() string {
 	if this.Options != nil {
 		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
 	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -698,9 +651,6 @@ func (this *UploadOptions) GoString() string {
 	s = append(s, "MultiHash: "+fmt.Sprintf("%#v", this.MultiHash)+",\n")
 	s = append(s, "Layout: "+fmt.Sprintf("%#v", this.Layout)+",\n")
 	s = append(s, "Chunker: "+fmt.Sprintf("%#v", this.Chunker)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -712,9 +662,6 @@ func (this *DownloadRequest) GoString() string {
 	s = append(s, "&pb.DownloadRequest{")
 	s = append(s, "Hash: "+fmt.Sprintf("%#v", this.Hash)+",\n")
 	s = append(s, "ChunkSize: "+fmt.Sprintf("%#v", this.ChunkSize)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -727,9 +674,6 @@ func (this *DownloadResponse) GoString() string {
 	if this.Blob != nil {
 		s = append(s, "Blob: "+fmt.Sprintf("%#v", this.Blob)+",\n")
 	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -740,9 +684,6 @@ func (this *Blob) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.Blob{")
 	s = append(s, "Content: "+fmt.Sprintf("%#v", this.Content)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -960,9 +901,6 @@ func (m *UploadRequest) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n2
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -999,9 +937,6 @@ func (m *UploadOptions) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintFile(dAtA, i, uint64(len(m.Chunker)))
 		i += copy(dAtA[i:], m.Chunker)
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1031,9 +966,6 @@ func (m *DownloadRequest) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintFile(dAtA, i, uint64(m.ChunkSize))
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1062,9 +994,6 @@ func (m *DownloadResponse) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n3
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1089,9 +1018,6 @@ func (m *Blob) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintFile(dAtA, i, uint64(len(m.Content)))
 		i += copy(dAtA[i:], m.Content)
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1113,7 +1039,6 @@ func NewPopulatedUploadRequest(r randyFile, easy bool) *UploadRequest {
 		this.Options = NewPopulatedUploadOptions(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedFile(r, 3)
 	}
 	return this
 }
@@ -1124,7 +1049,6 @@ func NewPopulatedUploadOptions(r randyFile, easy bool) *UploadOptions {
 	this.Layout = string(randStringFile(r))
 	this.Chunker = string(randStringFile(r))
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedFile(r, 4)
 	}
 	return this
 }
@@ -1137,7 +1061,6 @@ func NewPopulatedDownloadRequest(r randyFile, easy bool) *DownloadRequest {
 		this.ChunkSize *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedFile(r, 3)
 	}
 	return this
 }
@@ -1148,7 +1071,6 @@ func NewPopulatedDownloadResponse(r randyFile, easy bool) *DownloadResponse {
 		this.Blob = NewPopulatedBlob(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedFile(r, 2)
 	}
 	return this
 }
@@ -1161,7 +1083,6 @@ func NewPopulatedBlob(r randyFile, easy bool) *Blob {
 		this.Content[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedFile(r, 2)
 	}
 	return this
 }
@@ -1252,9 +1173,6 @@ func (m *UploadRequest) Size() (n int) {
 		l = m.Options.Size()
 		n += 1 + l + sovFile(uint64(l))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1276,9 +1194,6 @@ func (m *UploadOptions) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovFile(uint64(l))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1295,9 +1210,6 @@ func (m *DownloadRequest) Size() (n int) {
 	if m.ChunkSize != 0 {
 		n += 1 + sovFile(uint64(m.ChunkSize))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1311,9 +1223,6 @@ func (m *DownloadResponse) Size() (n int) {
 		l = m.Blob.Size()
 		n += 1 + l + sovFile(uint64(l))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1326,9 +1235,6 @@ func (m *Blob) Size() (n int) {
 	l = len(m.Content)
 	if l > 0 {
 		n += 1 + l + sovFile(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1353,7 +1259,6 @@ func (this *UploadRequest) String() string {
 	s := strings.Join([]string{`&UploadRequest{`,
 		`Blob:` + strings.Replace(fmt.Sprintf("%v", this.Blob), "Blob", "Blob", 1) + `,`,
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "UploadOptions", "UploadOptions", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1366,7 +1271,6 @@ func (this *UploadOptions) String() string {
 		`MultiHash:` + fmt.Sprintf("%v", this.MultiHash) + `,`,
 		`Layout:` + fmt.Sprintf("%v", this.Layout) + `,`,
 		`Chunker:` + fmt.Sprintf("%v", this.Chunker) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1378,7 +1282,6 @@ func (this *DownloadRequest) String() string {
 	s := strings.Join([]string{`&DownloadRequest{`,
 		`Hash:` + fmt.Sprintf("%v", this.Hash) + `,`,
 		`ChunkSize:` + fmt.Sprintf("%v", this.ChunkSize) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1389,7 +1292,6 @@ func (this *DownloadResponse) String() string {
 	}
 	s := strings.Join([]string{`&DownloadResponse{`,
 		`Blob:` + strings.Replace(fmt.Sprintf("%v", this.Blob), "Blob", "Blob", 1) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1400,7 +1302,6 @@ func (this *Blob) String() string {
 	}
 	s := strings.Join([]string{`&Blob{`,
 		`Content:` + fmt.Sprintf("%v", this.Content) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1529,7 +1430,6 @@ func (m *UploadRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1679,7 +1579,6 @@ func (m *UploadOptions) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1784,7 +1683,6 @@ func (m *DownloadRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1874,7 +1772,6 @@ func (m *DownloadResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1962,7 +1859,6 @@ func (m *Blob) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

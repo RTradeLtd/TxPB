@@ -23,10 +23,64 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*&\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x32\xd3\x02\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"a\n\x11\x42lockstoreRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\x1e\n\x07reqType\x18\x02 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x03 \x01(\x0e\x32\r.pb.BSREQOPTS\"/\n\x12\x42lockstoreResponse\x12\x19\n\x06\x62locks\x18\x01 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*E\n\tBSREQTYPE\x12\n\n\x06\x44\x45LETE\x10\x00\x12\x07\n\x03PUT\x10\x01\x12\x0c\n\x08PUT_MANY\x10\x02\x12\x07\n\x03GET\x10\x03\x12\x0c\n\x08GET_MANY\x10\x04*\x16\n\tBSREQOPTS\x12\t\n\x05\x46ORCE\x10\x00*&\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x32\x92\x03\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
+_BSREQTYPE = _descriptor.EnumDescriptor(
+  name='BSREQTYPE',
+  full_name='pb.BSREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='DELETE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PUT', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PUT_MANY', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GET', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GET_MANY', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=886,
+  serialized_end=955,
+)
+_sym_db.RegisterEnumDescriptor(_BSREQTYPE)
+
+BSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_BSREQTYPE)
+_BSREQOPTS = _descriptor.EnumDescriptor(
+  name='BSREQOPTS',
+  full_name='pb.BSREQOPTS',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='FORCE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=957,
+  serialized_end=979,
+)
+_sym_db.RegisterEnumDescriptor(_BSREQOPTS)
+
+BSREQOPTS = enum_type_wrapper.EnumTypeWrapper(_BSREQOPTS)
 _EXTRASTYPE = _descriptor.EnumDescriptor(
   name='EXTRASTYPE',
   full_name='pb.EXTRASTYPE',
@@ -44,15 +98,135 @@ _EXTRASTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=702,
-  serialized_end=740,
+  serialized_start=981,
+  serialized_end=1019,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
 
 EXTRASTYPE = enum_type_wrapper.EnumTypeWrapper(_EXTRASTYPE)
+DELETE = 0
+PUT = 1
+PUT_MANY = 2
+GET = 3
+GET_MANY = 4
+FORCE = 0
 IDENTIFY = 0
 PUBSUB = 1
 
+
+
+_BLOCKSTOREREQUEST = _descriptor.Descriptor(
+  name='BlockstoreRequest',
+  full_name='pb.BlockstoreRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cids', full_name='pb.BlockstoreRequest.cids', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reqType', full_name='pb.BlockstoreRequest.reqType', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reqOpts', full_name='pb.BlockstoreRequest.reqOpts', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=77,
+  serialized_end=174,
+)
+
+
+_BLOCKSTORERESPONSE = _descriptor.Descriptor(
+  name='BlockstoreResponse',
+  full_name='pb.BlockstoreResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='blocks', full_name='pb.BlockstoreResponse.blocks', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=176,
+  serialized_end=223,
+)
+
+
+_BLOCK = _descriptor.Descriptor(
+  name='Block',
+  full_name='pb.Block',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cid', full_name='pb.Block.cid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='pb.Block.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=225,
+  serialized_end=259,
+)
 
 
 _GETPEERSRESPONSE = _descriptor.Descriptor(
@@ -81,8 +255,8 @@ _GETPEERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=77,
-  serialized_end=112,
+  serialized_start=261,
+  serialized_end=296,
 )
 
 
@@ -112,8 +286,8 @@ _CONNECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=114,
-  serialized_end=150,
+  serialized_start=298,
+  serialized_end=334,
 )
 
 
@@ -143,8 +317,8 @@ _ISCONNECTEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=152,
-  serialized_end=189,
+  serialized_start=336,
+  serialized_end=373,
 )
 
 
@@ -181,8 +355,8 @@ _ISCONNECTEDRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=274,
-  serialized_end=322,
+  serialized_start=458,
+  serialized_end=506,
 )
 
 _ISCONNECTEDRESPONSE = _descriptor.Descriptor(
@@ -211,8 +385,8 @@ _ISCONNECTEDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=192,
-  serialized_end=322,
+  serialized_start=376,
+  serialized_end=506,
 )
 
 
@@ -242,8 +416,8 @@ _DISCONNECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=324,
-  serialized_end=360,
+  serialized_start=508,
+  serialized_end=544,
 )
 
 
@@ -280,8 +454,8 @@ _DISCONNECTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=437,
-  serialized_end=520,
+  serialized_start=621,
+  serialized_end=704,
 )
 
 _DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
@@ -317,8 +491,8 @@ _DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=522,
-  serialized_end=575,
+  serialized_start=706,
+  serialized_end=759,
 )
 
 _DISCONNECTRESPONSE = _descriptor.Descriptor(
@@ -347,8 +521,8 @@ _DISCONNECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=363,
-  serialized_end=575,
+  serialized_start=547,
+  serialized_end=759,
 )
 
 
@@ -378,8 +552,8 @@ _ENABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=577,
-  serialized_end=637,
+  serialized_start=761,
+  serialized_end=821,
 )
 
 
@@ -409,10 +583,13 @@ _DISABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=639,
-  serialized_end=700,
+  serialized_start=823,
+  serialized_end=884,
 )
 
+_BLOCKSTOREREQUEST.fields_by_name['reqType'].enum_type = _BSREQTYPE
+_BLOCKSTOREREQUEST.fields_by_name['reqOpts'].enum_type = _BSREQOPTS
+_BLOCKSTORERESPONSE.fields_by_name['blocks'].message_type = _BLOCK
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY.containing_type = _ISCONNECTEDRESPONSE
 _ISCONNECTEDRESPONSE.fields_by_name['connected'].message_type = _ISCONNECTEDRESPONSE_CONNECTEDENTRY
 _DISCONNECTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _DISCONNECTRESPONSE_STATUSMESSAGE
@@ -421,6 +598,9 @@ _DISCONNECTRESPONSE_STATUSMESSAGE.containing_type = _DISCONNECTRESPONSE
 _DISCONNECTRESPONSE.fields_by_name['status'].message_type = _DISCONNECTRESPONSE_STATUSENTRY
 _ENABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
 _DISABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
+DESCRIPTOR.message_types_by_name['BlockstoreRequest'] = _BLOCKSTOREREQUEST
+DESCRIPTOR.message_types_by_name['BlockstoreResponse'] = _BLOCKSTORERESPONSE
+DESCRIPTOR.message_types_by_name['Block'] = _BLOCK
 DESCRIPTOR.message_types_by_name['GetPeersResponse'] = _GETPEERSRESPONSE
 DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
 DESCRIPTOR.message_types_by_name['IsConnectedRequest'] = _ISCONNECTEDREQUEST
@@ -429,8 +609,31 @@ DESCRIPTOR.message_types_by_name['DisconnectRequest'] = _DISCONNECTREQUEST
 DESCRIPTOR.message_types_by_name['DisconnectResponse'] = _DISCONNECTRESPONSE
 DESCRIPTOR.message_types_by_name['EnableExtrasRequest'] = _ENABLEEXTRASREQUEST
 DESCRIPTOR.message_types_by_name['DisableExtrasRequest'] = _DISABLEEXTRASREQUEST
+DESCRIPTOR.enum_types_by_name['BSREQTYPE'] = _BSREQTYPE
+DESCRIPTOR.enum_types_by_name['BSREQOPTS'] = _BSREQOPTS
 DESCRIPTOR.enum_types_by_name['EXTRASTYPE'] = _EXTRASTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+BlockstoreRequest = _reflection.GeneratedProtocolMessageType('BlockstoreRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCKSTOREREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.BlockstoreRequest)
+  })
+_sym_db.RegisterMessage(BlockstoreRequest)
+
+BlockstoreResponse = _reflection.GeneratedProtocolMessageType('BlockstoreResponse', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCKSTORERESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.BlockstoreResponse)
+  })
+_sym_db.RegisterMessage(BlockstoreResponse)
+
+Block = _reflection.GeneratedProtocolMessageType('Block', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCK,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.Block)
+  })
+_sym_db.RegisterMessage(Block)
 
 GetPeersResponse = _reflection.GeneratedProtocolMessageType('GetPeersResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETPEERSRESPONSE,
@@ -523,8 +726,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=743,
-  serialized_end=1082,
+  serialized_start=1022,
+  serialized_end=1424,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPeers',
@@ -578,6 +781,15 @@ _NODEAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_DISABLEEXTRASREQUEST,
     output_type=util__pb2._EMPTY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Blockstore',
+    full_name='pb.NodeAPI.Blockstore',
+    index=6,
+    containing_service=None,
+    input_type=_BLOCKSTOREREQUEST,
+    output_type=_BLOCKSTORERESPONSE,
     serialized_options=None,
   ),
 ])

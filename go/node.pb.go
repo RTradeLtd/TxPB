@@ -29,6 +29,70 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
+// BSREQTYPE is a particular blockstore request type
+type BSREQTYPE int32
+
+const (
+	// DELETE is used to delete a block from the store
+	BSREQTYPE_DELETE BSREQTYPE = 0
+	// PUT is used to put a single block in the store
+	BSREQTYPE_PUT BSREQTYPE = 1
+	// PUT_MANY is used to put many blocks in the store
+	BSREQTYPE_PUT_MANY BSREQTYPE = 2
+	// GET is used to get a block from the store
+	BSREQTYPE_GET BSREQTYPE = 3
+	// GET_MANY is used to get many blocks from the store
+	BSREQTYPE_GET_MANY BSREQTYPE = 4
+)
+
+var BSREQTYPE_name = map[int32]string{
+	0: "DELETE",
+	1: "PUT",
+	2: "PUT_MANY",
+	3: "GET",
+	4: "GET_MANY",
+}
+
+var BSREQTYPE_value = map[string]int32{
+	"DELETE":   0,
+	"PUT":      1,
+	"PUT_MANY": 2,
+	"GET":      3,
+	"GET_MANY": 4,
+}
+
+func (x BSREQTYPE) String() string {
+	return proto.EnumName(BSREQTYPE_name, int32(x))
+}
+
+func (BSREQTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{0}
+}
+
+// BSREQOPTS are options for blockstore requests
+type BSREQOPTS int32
+
+const (
+	// FORCE indicates to force the request regardless of any possible issues
+	BSREQOPTS_FORCE BSREQOPTS = 0
+)
+
+var BSREQOPTS_name = map[int32]string{
+	0: "FORCE",
+}
+
+var BSREQOPTS_value = map[string]int32{
+	"FORCE": 0,
+}
+
+func (x BSREQOPTS) String() string {
+	return proto.EnumName(BSREQOPTS_name, int32(x))
+}
+
+func (BSREQOPTS) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{1}
+}
+
 // EXTRASTYPE denotes a particular extras type
 type EXTRASTYPE int32
 
@@ -54,22 +118,180 @@ func (x EXTRASTYPE) String() string {
 }
 
 func (EXTRASTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{2}
+}
+
+// BlockstoreRequest is a message used to control blockstores
+type BlockstoreRequest struct {
+	// cids holds at least 1 cid, to hold 0 is considered an error
+	Cids []string `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty"`
+	// reqType is used to indicate the particular request being mande
+	ReqType BSREQTYPE `protobuf:"varint,2,opt,name=reqType,proto3,enum=pb.BSREQTYPE" json:"reqType,omitempty"`
+	// reqOpts is an optional parameter that can be used for fine-tuned request control
+	ReqOpts BSREQOPTS `protobuf:"varint,3,opt,name=reqOpts,proto3,enum=pb.BSREQOPTS" json:"reqOpts,omitempty"`
+}
+
+func (m *BlockstoreRequest) Reset()      { *m = BlockstoreRequest{} }
+func (*BlockstoreRequest) ProtoMessage() {}
+func (*BlockstoreRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{0}
+}
+func (m *BlockstoreRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BlockstoreRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BlockstoreRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *BlockstoreRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BlockstoreRequest.Merge(m, src)
+}
+func (m *BlockstoreRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *BlockstoreRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_BlockstoreRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BlockstoreRequest proto.InternalMessageInfo
+
+func (m *BlockstoreRequest) GetCids() []string {
+	if m != nil {
+		return m.Cids
+	}
+	return nil
+}
+
+func (m *BlockstoreRequest) GetReqType() BSREQTYPE {
+	if m != nil {
+		return m.ReqType
+	}
+	return BSREQTYPE_DELETE
+}
+
+func (m *BlockstoreRequest) GetReqOpts() BSREQOPTS {
+	if m != nil {
+		return m.ReqOpts
+	}
+	return BSREQOPTS_FORCE
+}
+
+// BlockstoreResponse is a response to a BlockstoreqRequest
+type BlockstoreResponse struct {
+	Blocks []*Block `protobuf:"bytes,1,rep,name=blocks,proto3" json:"blocks,omitempty"`
+}
+
+func (m *BlockstoreResponse) Reset()      { *m = BlockstoreResponse{} }
+func (*BlockstoreResponse) ProtoMessage() {}
+func (*BlockstoreResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{1}
+}
+func (m *BlockstoreResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BlockstoreResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BlockstoreResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *BlockstoreResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BlockstoreResponse.Merge(m, src)
+}
+func (m *BlockstoreResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *BlockstoreResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_BlockstoreResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BlockstoreResponse proto.InternalMessageInfo
+
+func (m *BlockstoreResponse) GetBlocks() []*Block {
+	if m != nil {
+		return m.Blocks
+	}
+	return nil
+}
+
+// Block is a single block of ipfs data
+type Block struct {
+	// cid is the identifier of the block
+	Cid string `protobuf:"bytes,1,opt,name=cid,proto3" json:"cid,omitempty"`
+	// data is the actual contnets of this block
+	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *Block) Reset()      { *m = Block{} }
+func (*Block) ProtoMessage() {}
+func (*Block) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{2}
+}
+func (m *Block) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Block) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Block.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Block) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Block.Merge(m, src)
+}
+func (m *Block) XXX_Size() int {
+	return m.Size()
+}
+func (m *Block) XXX_DiscardUnknown() {
+	xxx_messageInfo_Block.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Block proto.InternalMessageInfo
+
+func (m *Block) GetCid() string {
+	if m != nil {
+		return m.Cid
+	}
+	return ""
+}
+
+func (m *Block) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
 }
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 type GetPeersResponse struct {
 	// a slice of peer IDs
-	PeerIDs              []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
 func (m *GetPeersResponse) Reset()      { *m = GetPeersResponse{} }
 func (*GetPeersResponse) ProtoMessage() {}
 func (*GetPeersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{0}
+	return fileDescriptor_0c843d59d2d938e7, []int{3}
 }
 func (m *GetPeersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -108,16 +330,13 @@ func (m *GetPeersResponse) GetPeerIDs() []string {
 // ConnectRequest is used to connect to libp2p peers
 type ConnectRequest struct {
 	// a slice of all multiaddrs we want to connect to
-	MultiAddrs           []string `protobuf:"bytes,1,rep,name=multiAddrs,proto3" json:"multiAddrs,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	MultiAddrs []string `protobuf:"bytes,1,rep,name=multiAddrs,proto3" json:"multiAddrs,omitempty"`
 }
 
 func (m *ConnectRequest) Reset()      { *m = ConnectRequest{} }
 func (*ConnectRequest) ProtoMessage() {}
 func (*ConnectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{1}
+	return fileDescriptor_0c843d59d2d938e7, []int{4}
 }
 func (m *ConnectRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -156,16 +375,13 @@ func (m *ConnectRequest) GetMultiAddrs() []string {
 // IsConnectedRequest is used check whether or not we are currently peered with these peers
 type IsConnectedRequest struct {
 	// a slice of the peer IDs to examine
-	PeerIDs              []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
 func (m *IsConnectedRequest) Reset()      { *m = IsConnectedRequest{} }
 func (*IsConnectedRequest) ProtoMessage() {}
 func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{2}
+	return fileDescriptor_0c843d59d2d938e7, []int{5}
 }
 func (m *IsConnectedRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -204,16 +420,13 @@ func (m *IsConnectedRequest) GetPeerIDs() []string {
 // IsConnectedResponse is a response to an IsConnectedRequest request
 type IsConnectedResponse struct {
 	// a map of the peer ID and a boolean indicating if we are connected with them
-	Connected            map[string]bool `protobuf:"bytes,1,rep,name=connected,proto3" json:"connected,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
+	Connected map[string]bool `protobuf:"bytes,1,rep,name=connected,proto3" json:"connected,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
 func (m *IsConnectedResponse) Reset()      { *m = IsConnectedResponse{} }
 func (*IsConnectedResponse) ProtoMessage() {}
 func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{3}
+	return fileDescriptor_0c843d59d2d938e7, []int{6}
 }
 func (m *IsConnectedResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -252,16 +465,13 @@ func (m *IsConnectedResponse) GetConnected() map[string]bool {
 // DisconnectRequest is used to disconnect a connection to a libp2p peer
 type DisconnectRequest struct {
 	// a slice of the peer IDs to disconnect from
-	PeerIDs              []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
 func (m *DisconnectRequest) Reset()      { *m = DisconnectRequest{} }
 func (*DisconnectRequest) ProtoMessage() {}
 func (*DisconnectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{4}
+	return fileDescriptor_0c843d59d2d938e7, []int{7}
 }
 func (m *DisconnectRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -300,16 +510,13 @@ func (m *DisconnectRequest) GetPeerIDs() []string {
 // DisconnectResponse is a response to a disconnect request
 type DisconnectResponse struct {
 	// a map of the peer id, and a custom message indicating success, or why there was a failure
-	Status               map[string]*DisconnectResponse_StatusMessage `protobuf:"bytes,1,rep,name=status,proto3" json:"status,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}                                     `json:"-"`
-	XXX_unrecognized     []byte                                       `json:"-"`
-	XXX_sizecache        int32                                        `json:"-"`
+	Status map[string]*DisconnectResponse_StatusMessage `protobuf:"bytes,1,rep,name=status,proto3" json:"status,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (m *DisconnectResponse) Reset()      { *m = DisconnectResponse{} }
 func (*DisconnectResponse) ProtoMessage() {}
 func (*DisconnectResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{5}
+	return fileDescriptor_0c843d59d2d938e7, []int{8}
 }
 func (m *DisconnectResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -350,16 +557,13 @@ type DisconnectResponse_StatusMessage struct {
 	// indicate whether or not we actually disconnected
 	Disconnected bool `protobuf:"varint,1,opt,name=disconnected,proto3" json:"disconnected,omitempty"`
 	// if disconnected is false, the reason why it is false
-	Reason               string   `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Reason string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 }
 
 func (m *DisconnectResponse_StatusMessage) Reset()      { *m = DisconnectResponse_StatusMessage{} }
 func (*DisconnectResponse_StatusMessage) ProtoMessage() {}
 func (*DisconnectResponse_StatusMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{5, 1}
+	return fileDescriptor_0c843d59d2d938e7, []int{8, 1}
 }
 func (m *DisconnectResponse_StatusMessage) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -405,16 +609,13 @@ func (m *DisconnectResponse_StatusMessage) GetReason() string {
 // EnableExtrasRequest is used to enable a particular extras feature
 type EnableExtrasRequest struct {
 	// extrasFeature denotes the particular extras functionality to enable
-	ExtrasFeature        EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	ExtrasFeature EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
 }
 
 func (m *EnableExtrasRequest) Reset()      { *m = EnableExtrasRequest{} }
 func (*EnableExtrasRequest) ProtoMessage() {}
 func (*EnableExtrasRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{6}
+	return fileDescriptor_0c843d59d2d938e7, []int{9}
 }
 func (m *EnableExtrasRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -453,16 +654,13 @@ func (m *EnableExtrasRequest) GetExtrasFeature() EXTRASTYPE {
 // DisableExtrasRequest is used to disable a particular extras feature
 type DisableExtrasRequest struct {
 	// extrasFeature denotes the particular extras functionality to disable
-	ExtrasFeature        EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	ExtrasFeature EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
 }
 
 func (m *DisableExtrasRequest) Reset()      { *m = DisableExtrasRequest{} }
 func (*DisableExtrasRequest) ProtoMessage() {}
 func (*DisableExtrasRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{7}
+	return fileDescriptor_0c843d59d2d938e7, []int{10}
 }
 func (m *DisableExtrasRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -499,7 +697,12 @@ func (m *DisableExtrasRequest) GetExtrasFeature() EXTRASTYPE {
 }
 
 func init() {
+	proto.RegisterEnum("pb.BSREQTYPE", BSREQTYPE_name, BSREQTYPE_value)
+	proto.RegisterEnum("pb.BSREQOPTS", BSREQOPTS_name, BSREQOPTS_value)
 	proto.RegisterEnum("pb.EXTRASTYPE", EXTRASTYPE_name, EXTRASTYPE_value)
+	proto.RegisterType((*BlockstoreRequest)(nil), "pb.BlockstoreRequest")
+	proto.RegisterType((*BlockstoreResponse)(nil), "pb.BlockstoreResponse")
+	proto.RegisterType((*Block)(nil), "pb.Block")
 	proto.RegisterType((*GetPeersResponse)(nil), "pb.GetPeersResponse")
 	proto.RegisterType((*ConnectRequest)(nil), "pb.ConnectRequest")
 	proto.RegisterType((*IsConnectedRequest)(nil), "pb.IsConnectedRequest")
@@ -516,46 +719,258 @@ func init() {
 func init() { proto.RegisterFile("node.proto", fileDescriptor_0c843d59d2d938e7) }
 
 var fileDescriptor_0c843d59d2d938e7 = []byte{
-	// 586 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
-	0x10, 0xf5, 0xa6, 0x22, 0x6d, 0x26, 0x6d, 0x15, 0xb6, 0x25, 0x44, 0x3e, 0x58, 0xd1, 0x0a, 0x55,
-	0x51, 0x45, 0x5c, 0x14, 0x2a, 0x84, 0x22, 0x90, 0x48, 0x88, 0x8b, 0xa2, 0x42, 0x15, 0x39, 0xa9,
-	0x44, 0x4f, 0xc8, 0x8e, 0x97, 0x10, 0x91, 0xd8, 0xc6, 0xbb, 0x46, 0xe4, 0xc6, 0x6f, 0xf0, 0x07,
-	0x7c, 0x02, 0x9f, 0xc0, 0x11, 0x89, 0x0b, 0xc7, 0xc6, 0x5f, 0xc0, 0x91, 0x13, 0x42, 0x5e, 0xdb,
-	0x89, 0xdd, 0x26, 0x3d, 0x71, 0xdb, 0x79, 0xfb, 0xde, 0xec, 0x9b, 0x19, 0x8f, 0x01, 0x6c, 0xc7,
-	0xa2, 0xaa, 0xeb, 0x39, 0xdc, 0xc1, 0x39, 0xd7, 0x94, 0xc1, 0xe7, 0xe3, 0x49, 0x14, 0xcb, 0xf5,
-	0xd1, 0x98, 0xbf, 0xf3, 0x4d, 0x75, 0xe8, 0x4c, 0x8f, 0x46, 0xce, 0xc8, 0x39, 0x12, 0xb0, 0xe9,
-	0xbf, 0x15, 0x91, 0x08, 0xc4, 0x29, 0xa2, 0x93, 0xfb, 0x50, 0x7a, 0x41, 0x79, 0x8f, 0x52, 0x8f,
-	0xe9, 0x94, 0xb9, 0x8e, 0xcd, 0x28, 0xae, 0xc0, 0xa6, 0x4b, 0xa9, 0xd7, 0xed, 0xb0, 0x0a, 0xaa,
-	0x6e, 0xd4, 0x0a, 0x7a, 0x12, 0x92, 0x07, 0xb0, 0xfb, 0xdc, 0xb1, 0x6d, 0x3a, 0xe4, 0x3a, 0xfd,
-	0xe0, 0x53, 0xc6, 0xb1, 0x02, 0x30, 0xf5, 0x27, 0x7c, 0xdc, 0xb2, 0x2c, 0x2f, 0xa1, 0xa7, 0x10,
-	0xa2, 0x02, 0xee, 0xb2, 0x58, 0x43, 0xad, 0x44, 0xb5, 0xfe, 0x85, 0x2f, 0x08, 0xf6, 0x32, 0x82,
-	0xd8, 0x53, 0x07, 0x0a, 0xc3, 0x04, 0x14, 0x9a, 0x62, 0xe3, 0x40, 0x75, 0x4d, 0x75, 0x05, 0x57,
-	0x5d, 0x20, 0x9a, 0xcd, 0xbd, 0x99, 0xbe, 0x14, 0xca, 0x4f, 0x16, 0xfe, 0xe3, 0x4b, 0x5c, 0x82,
-	0x8d, 0xf7, 0x74, 0x56, 0x41, 0x55, 0x54, 0x2b, 0xe8, 0xe1, 0x11, 0xef, 0xc3, 0xad, 0x8f, 0xc6,
-	0xc4, 0xa7, 0x95, 0x5c, 0x15, 0xd5, 0xb6, 0xf4, 0x28, 0x68, 0xe6, 0x1e, 0x23, 0x52, 0x87, 0xdb,
-	0x9d, 0x31, 0x1b, 0x66, 0x1b, 0xb0, 0xbe, 0x94, 0xbf, 0x08, 0x70, 0x9a, 0x1f, 0x57, 0xd2, 0x84,
-	0x3c, 0xe3, 0x06, 0xf7, 0x59, 0x5c, 0x06, 0x09, 0xcb, 0xb8, 0xce, 0x53, 0xfb, 0x82, 0x14, 0x95,
-	0x10, 0x2b, 0xe4, 0x37, 0x50, 0x4c, 0xc1, 0x2b, 0xcc, 0x37, 0xd3, 0xe6, 0x8b, 0x8d, 0x7b, 0x37,
-	0xe6, 0x7e, 0x45, 0x19, 0x33, 0x46, 0x34, 0x55, 0xa2, 0x7c, 0x0a, 0x3b, 0x99, 0x3b, 0x4c, 0x60,
-	0xdb, 0x5a, 0xe8, 0x45, 0xeb, 0xc3, 0xa6, 0x64, 0x30, 0x5c, 0x86, 0xbc, 0x47, 0x0d, 0xe6, 0xd8,
-	0xe2, 0xd5, 0x82, 0x1e, 0x47, 0xe4, 0x14, 0xf6, 0x34, 0xdb, 0x30, 0x27, 0x54, 0xfb, 0xc4, 0x3d,
-	0x83, 0x25, 0x1d, 0x3b, 0x86, 0x1d, 0x2a, 0x80, 0x13, 0x6a, 0x70, 0xdf, 0xa3, 0x22, 0xe7, 0x6e,
-	0x63, 0x37, 0xf4, 0xaa, 0xbd, 0x1e, 0xe8, 0xad, 0xfe, 0xe0, 0xa2, 0xa7, 0xe9, 0x59, 0x12, 0x79,
-	0x09, 0xfb, 0x9d, 0x31, 0xfb, 0x4f, 0xd9, 0x0e, 0x0f, 0x00, 0x96, 0x97, 0x78, 0x1b, 0xb6, 0xba,
-	0x1d, 0xed, 0x6c, 0xd0, 0x3d, 0xb9, 0x28, 0x49, 0x18, 0x20, 0xdf, 0x3b, 0x6f, 0xf7, 0xcf, 0xdb,
-	0x25, 0xd4, 0xf8, 0x99, 0x83, 0xcd, 0x33, 0xc7, 0xa2, 0xad, 0x5e, 0x17, 0xd7, 0x61, 0x2b, 0x59,
-	0x15, 0x5c, 0x10, 0xe9, 0xa7, 0x2e, 0x9f, 0xc9, 0xfb, 0xe1, 0xf1, 0xea, 0x0e, 0x11, 0x09, 0x1f,
-	0xc2, 0x66, 0xfc, 0xad, 0x61, 0x1c, 0x52, 0xb2, 0x8b, 0x23, 0x2f, 0x33, 0x10, 0x09, 0x3f, 0x05,
-	0x58, 0x4e, 0x09, 0xdf, 0xb9, 0x3a, 0xb5, 0x48, 0x51, 0x5e, 0x3d, 0x4c, 0x22, 0xe1, 0x67, 0x50,
-	0x4c, 0xed, 0x01, 0x2e, 0x5f, 0x5b, 0x8c, 0x28, 0xc1, 0xdd, 0x35, 0x0b, 0x43, 0x24, 0x7c, 0x0c,
-	0xdb, 0xe9, 0x51, 0x61, 0x41, 0x5d, 0x31, 0xbc, 0xac, 0xed, 0x47, 0xb0, 0x93, 0x99, 0x09, 0xae,
-	0xc4, 0x16, 0x6f, 0xd6, 0xb5, 0x6b, 0xbf, 0xe6, 0x8a, 0x74, 0x39, 0x57, 0xd0, 0xef, 0xb9, 0x82,
-	0xfe, 0xcc, 0x15, 0xf4, 0x39, 0x50, 0xd0, 0xd7, 0x40, 0x41, 0xdf, 0x02, 0x05, 0x7d, 0x0f, 0x14,
-	0xf4, 0x23, 0x50, 0xd0, 0x65, 0xa0, 0x20, 0x33, 0x2f, 0xfe, 0x52, 0x0f, 0xff, 0x05, 0x00, 0x00,
-	0xff, 0xff, 0x4f, 0xdc, 0x0d, 0x10, 0xf2, 0x04, 0x00, 0x00,
+	// 782 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0x4d, 0x6f, 0xe2, 0x46,
+	0x18, 0xf6, 0x40, 0xc2, 0xc7, 0xcb, 0x87, 0x9c, 0x49, 0x4a, 0x11, 0x07, 0x2b, 0x1d, 0x55, 0x69,
+	0x84, 0x0a, 0xa9, 0x68, 0xd4, 0x56, 0x51, 0x23, 0x15, 0x82, 0x13, 0xa1, 0x7c, 0x51, 0x63, 0xa4,
+	0xe6, 0x14, 0x19, 0x3c, 0xa5, 0x28, 0x04, 0x3b, 0xf6, 0xb8, 0x2a, 0xb7, 0xfe, 0x84, 0xaa, 0xb7,
+	0xfd, 0x07, 0xfb, 0x13, 0xf6, 0x27, 0xec, 0x31, 0xc7, 0x1c, 0x03, 0xf9, 0x03, 0x7b, 0xdc, 0xd3,
+	0x6a, 0xe5, 0xb1, 0x0d, 0x76, 0x20, 0xbb, 0x97, 0xbd, 0xcd, 0xfb, 0xcc, 0xf3, 0x7e, 0xfa, 0x7d,
+	0xc6, 0x00, 0x63, 0x43, 0xa7, 0x55, 0xd3, 0x32, 0x98, 0x81, 0x63, 0x66, 0xaf, 0x04, 0x0e, 0x1b,
+	0x8e, 0x3c, 0xbb, 0x54, 0x19, 0x0c, 0xd9, 0x5f, 0x4e, 0xaf, 0xda, 0x37, 0x6e, 0xf7, 0x06, 0xc6,
+	0xc0, 0xd8, 0xe3, 0x70, 0xcf, 0xf9, 0x93, 0x5b, 0xdc, 0xe0, 0x27, 0x8f, 0x4e, 0x26, 0xb0, 0xd1,
+	0x18, 0x19, 0xfd, 0x1b, 0x9b, 0x19, 0x16, 0x55, 0xe8, 0x9d, 0x43, 0x6d, 0x86, 0x31, 0xac, 0xf5,
+	0x87, 0xba, 0x5d, 0x44, 0xdb, 0xf1, 0xdd, 0xb4, 0xc2, 0xcf, 0xf8, 0x3b, 0x48, 0x5a, 0xf4, 0x4e,
+	0x9d, 0x98, 0xb4, 0x18, 0xdb, 0x46, 0xbb, 0xf9, 0x5a, 0xae, 0x6a, 0xf6, 0xaa, 0x8d, 0x8e, 0x22,
+	0xff, 0xae, 0x5e, 0xb5, 0x65, 0x25, 0xb8, 0xf5, 0x89, 0x97, 0x26, 0xb3, 0x8b, 0xf1, 0x67, 0xc4,
+	0xcb, 0xb6, 0xda, 0x51, 0x82, 0x5b, 0xf2, 0x33, 0xe0, 0x70, 0x6a, 0xdb, 0x34, 0xc6, 0x36, 0xc5,
+	0xdf, 0x40, 0xa2, 0xc7, 0x51, 0x9e, 0x3d, 0x53, 0x4b, 0x73, 0x6f, 0x17, 0x51, 0xfc, 0x0b, 0x52,
+	0x81, 0x75, 0x0e, 0x60, 0x11, 0xe2, 0xfd, 0xa1, 0x5e, 0x44, 0xdb, 0x68, 0x37, 0xad, 0xb8, 0x47,
+	0xb7, 0x72, 0x5d, 0x63, 0x1a, 0x2f, 0x31, 0xab, 0xf0, 0x33, 0xf9, 0x1e, 0xc4, 0x13, 0xca, 0xda,
+	0x94, 0x5a, 0xf6, 0x3c, 0x4b, 0x11, 0x92, 0x26, 0xa5, 0x56, 0xab, 0x19, 0x34, 0x19, 0x98, 0xe4,
+	0x07, 0xc8, 0x1f, 0x19, 0xe3, 0x31, 0xed, 0xb3, 0x60, 0x1a, 0x12, 0xc0, 0xad, 0x33, 0x62, 0xc3,
+	0xba, 0xae, 0x5b, 0x01, 0x3d, 0x84, 0x90, 0x2a, 0xe0, 0x96, 0xed, 0xfb, 0x50, 0x3d, 0xf0, 0x7a,
+	0x39, 0xc3, 0x2b, 0x04, 0x9b, 0x11, 0x07, 0xbf, 0xa6, 0x26, 0xa4, 0xfb, 0x01, 0xe8, 0x37, 0xbf,
+	0xe3, 0x36, 0xbf, 0x82, 0x5b, 0x9d, 0x23, 0xf2, 0x98, 0x59, 0x13, 0x65, 0xe1, 0x58, 0xfa, 0x75,
+	0x5e, 0xbf, 0x7f, 0xe9, 0x4e, 0xe9, 0x86, 0x4e, 0x82, 0x29, 0xdd, 0xd0, 0x09, 0xde, 0x82, 0xf5,
+	0xbf, 0xb5, 0x91, 0xe3, 0x7d, 0xc9, 0x94, 0xe2, 0x19, 0x07, 0xb1, 0x5f, 0x10, 0xa9, 0xc0, 0x46,
+	0x73, 0x68, 0xf7, 0xa3, 0x03, 0x78, 0xb9, 0x95, 0x0f, 0x08, 0x70, 0x98, 0xef, 0x77, 0x72, 0x00,
+	0x09, 0x9b, 0x69, 0xcc, 0x09, 0xbe, 0x21, 0x71, 0xdb, 0x58, 0xe6, 0x55, 0x3b, 0x9c, 0xe4, 0xb5,
+	0xe0, 0x7b, 0x94, 0xae, 0x21, 0x13, 0x82, 0x57, 0x14, 0x7f, 0x10, 0x2e, 0x3e, 0x53, 0xfb, 0xf6,
+	0x93, 0xb1, 0xcf, 0xa9, 0x6d, 0x6b, 0x03, 0x1a, 0x6a, 0xb1, 0x74, 0x0a, 0xb9, 0xc8, 0x1d, 0x26,
+	0x90, 0xd5, 0xe7, 0xfe, 0xd4, 0x5b, 0xa7, 0x94, 0x12, 0xc1, 0x70, 0x01, 0x12, 0x16, 0xd5, 0x6c,
+	0x63, 0xcc, 0xb3, 0xa6, 0x15, 0xdf, 0x22, 0xa7, 0xb0, 0x29, 0x8f, 0xb5, 0xde, 0x88, 0xca, 0xff,
+	0x30, 0x4b, 0xb3, 0x83, 0x89, 0xed, 0x43, 0x8e, 0x72, 0xe0, 0x98, 0x6a, 0xcc, 0xb1, 0x28, 0x8f,
+	0x99, 0xaf, 0xe5, 0xdd, 0x5a, 0xe5, 0x3f, 0x54, 0xa5, 0xde, 0xe1, 0x9a, 0x89, 0x92, 0xc8, 0x19,
+	0x6c, 0x35, 0x87, 0xf6, 0x17, 0x8a, 0x56, 0x96, 0x21, 0x3d, 0x57, 0x27, 0x06, 0x48, 0x34, 0xe5,
+	0x33, 0x59, 0x95, 0x45, 0x01, 0x27, 0x21, 0xde, 0xee, 0xaa, 0x22, 0xc2, 0x59, 0x48, 0xb5, 0xbb,
+	0xea, 0xf5, 0x79, 0xfd, 0xe2, 0x4a, 0x8c, 0xb9, 0xf0, 0x89, 0xac, 0x8a, 0x71, 0x17, 0x3e, 0x91,
+	0x7d, 0x78, 0xad, 0x5c, 0xf0, 0xc3, 0xb8, 0xda, 0xc5, 0x69, 0x58, 0x3f, 0xbe, 0x54, 0x8e, 0x64,
+	0x51, 0x28, 0xef, 0x00, 0x2c, 0x72, 0xbb, 0x3e, 0xad, 0xa6, 0x7c, 0xa1, 0xb6, 0x8e, 0xaf, 0x44,
+	0xc1, 0xcd, 0xd6, 0xee, 0x36, 0x3a, 0xdd, 0x86, 0x88, 0x6a, 0xff, 0xc7, 0x21, 0x79, 0x61, 0xe8,
+	0xb4, 0xde, 0x6e, 0xe1, 0x0a, 0xa4, 0x02, 0x25, 0x62, 0xae, 0x6b, 0xf9, 0xd6, 0x64, 0x93, 0xd2,
+	0x96, 0x7b, 0x7c, 0x2e, 0x51, 0x22, 0xe0, 0x32, 0x24, 0xfd, 0x55, 0xc6, 0xd8, 0xa5, 0x44, 0x75,
+	0x59, 0x5a, 0x44, 0x20, 0x02, 0x3e, 0x04, 0x58, 0x2c, 0x01, 0xfe, 0xea, 0xf9, 0x52, 0x78, 0x1e,
+	0x85, 0xd5, 0xbb, 0x42, 0x04, 0xfc, 0x1b, 0x64, 0x42, 0x32, 0xc3, 0x85, 0x25, 0xdd, 0x79, 0x01,
+	0xbe, 0x7e, 0x41, 0x8f, 0x44, 0xc0, 0xfb, 0x90, 0x0d, 0x6f, 0x02, 0xe6, 0xd4, 0x15, 0xbb, 0x11,
+	0x2d, 0xfb, 0x27, 0xc8, 0x45, 0x3e, 0x39, 0x2e, 0xfa, 0x25, 0x7e, 0xc6, 0xef, 0x10, 0x60, 0xf1,
+	0x76, 0x7a, 0xed, 0x2e, 0x3d, 0xe3, 0x5e, 0xbb, 0xcb, 0x4f, 0x2c, 0x11, 0x1a, 0xfb, 0x0f, 0x53,
+	0x49, 0x78, 0x9c, 0x4a, 0xe8, 0xdd, 0x54, 0x42, 0xef, 0xa7, 0x12, 0xfa, 0x77, 0x26, 0xa1, 0xd7,
+	0x33, 0x09, 0xbd, 0x99, 0x49, 0xe8, 0xed, 0x4c, 0x42, 0xf7, 0x33, 0x09, 0x3d, 0xce, 0x24, 0xf4,
+	0xdf, 0x93, 0x24, 0xdc, 0x3f, 0x49, 0xc2, 0xc3, 0x93, 0x24, 0xf4, 0x12, 0xfc, 0x97, 0xf1, 0xe3,
+	0xc7, 0x00, 0x00, 0x00, 0xff, 0xff, 0x9e, 0x69, 0x84, 0xfe, 0x7f, 0x06, 0x00, 0x00,
 }
 
+func (this *BlockstoreRequest) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*BlockstoreRequest)
+	if !ok {
+		that2, ok := that.(BlockstoreRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *BlockstoreRequest")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *BlockstoreRequest but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *BlockstoreRequest but is not nil && this == nil")
+	}
+	if len(this.Cids) != len(that1.Cids) {
+		return fmt.Errorf("Cids this(%v) Not Equal that(%v)", len(this.Cids), len(that1.Cids))
+	}
+	for i := range this.Cids {
+		if this.Cids[i] != that1.Cids[i] {
+			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
+		}
+	}
+	if this.ReqType != that1.ReqType {
+		return fmt.Errorf("ReqType this(%v) Not Equal that(%v)", this.ReqType, that1.ReqType)
+	}
+	if this.ReqOpts != that1.ReqOpts {
+		return fmt.Errorf("ReqOpts this(%v) Not Equal that(%v)", this.ReqOpts, that1.ReqOpts)
+	}
+	return nil
+}
+func (this *BlockstoreRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*BlockstoreRequest)
+	if !ok {
+		that2, ok := that.(BlockstoreRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.Cids) != len(that1.Cids) {
+		return false
+	}
+	for i := range this.Cids {
+		if this.Cids[i] != that1.Cids[i] {
+			return false
+		}
+	}
+	if this.ReqType != that1.ReqType {
+		return false
+	}
+	if this.ReqOpts != that1.ReqOpts {
+		return false
+	}
+	return true
+}
+func (this *BlockstoreResponse) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*BlockstoreResponse)
+	if !ok {
+		that2, ok := that.(BlockstoreResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *BlockstoreResponse")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *BlockstoreResponse but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *BlockstoreResponse but is not nil && this == nil")
+	}
+	if len(this.Blocks) != len(that1.Blocks) {
+		return fmt.Errorf("Blocks this(%v) Not Equal that(%v)", len(this.Blocks), len(that1.Blocks))
+	}
+	for i := range this.Blocks {
+		if !this.Blocks[i].Equal(that1.Blocks[i]) {
+			return fmt.Errorf("Blocks this[%v](%v) Not Equal that[%v](%v)", i, this.Blocks[i], i, that1.Blocks[i])
+		}
+	}
+	return nil
+}
+func (this *BlockstoreResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*BlockstoreResponse)
+	if !ok {
+		that2, ok := that.(BlockstoreResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.Blocks) != len(that1.Blocks) {
+		return false
+	}
+	for i := range this.Blocks {
+		if !this.Blocks[i].Equal(that1.Blocks[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Block) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Block)
+	if !ok {
+		that2, ok := that.(Block)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Block")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Block but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Block but is not nil && this == nil")
+	}
+	if this.Cid != that1.Cid {
+		return fmt.Errorf("Cid this(%v) Not Equal that(%v)", this.Cid, that1.Cid)
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
+	}
+	return nil
+}
+func (this *Block) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Block)
+	if !ok {
+		that2, ok := that.(Block)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Cid != that1.Cid {
+		return false
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return false
+	}
+	return true
+}
 func (this *GetPeersResponse) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -589,9 +1004,6 @@ func (this *GetPeersResponse) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *GetPeersResponse) Equal(that interface{}) bool {
@@ -620,9 +1032,6 @@ func (this *GetPeersResponse) Equal(that interface{}) bool {
 		if this.PeerIDs[i] != that1.PeerIDs[i] {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -659,9 +1068,6 @@ func (this *ConnectRequest) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("MultiAddrs this[%v](%v) Not Equal that[%v](%v)", i, this.MultiAddrs[i], i, that1.MultiAddrs[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *ConnectRequest) Equal(that interface{}) bool {
@@ -690,9 +1096,6 @@ func (this *ConnectRequest) Equal(that interface{}) bool {
 		if this.MultiAddrs[i] != that1.MultiAddrs[i] {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -729,9 +1132,6 @@ func (this *IsConnectedRequest) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *IsConnectedRequest) Equal(that interface{}) bool {
@@ -760,9 +1160,6 @@ func (this *IsConnectedRequest) Equal(that interface{}) bool {
 		if this.PeerIDs[i] != that1.PeerIDs[i] {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -799,9 +1196,6 @@ func (this *IsConnectedResponse) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Connected this[%v](%v) Not Equal that[%v](%v)", i, this.Connected[i], i, that1.Connected[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *IsConnectedResponse) Equal(that interface{}) bool {
@@ -830,9 +1224,6 @@ func (this *IsConnectedResponse) Equal(that interface{}) bool {
 		if this.Connected[i] != that1.Connected[i] {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -869,9 +1260,6 @@ func (this *DisconnectRequest) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DisconnectRequest) Equal(that interface{}) bool {
@@ -900,9 +1288,6 @@ func (this *DisconnectRequest) Equal(that interface{}) bool {
 		if this.PeerIDs[i] != that1.PeerIDs[i] {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -939,9 +1324,6 @@ func (this *DisconnectResponse) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Status this[%v](%v) Not Equal that[%v](%v)", i, this.Status[i], i, that1.Status[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DisconnectResponse) Equal(that interface{}) bool {
@@ -970,9 +1352,6 @@ func (this *DisconnectResponse) Equal(that interface{}) bool {
 		if !this.Status[i].Equal(that1.Status[i]) {
 			return false
 		}
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
 	}
 	return true
 }
@@ -1007,9 +1386,6 @@ func (this *DisconnectResponse_StatusMessage) VerboseEqual(that interface{}) err
 	if this.Reason != that1.Reason {
 		return fmt.Errorf("Reason this(%v) Not Equal that(%v)", this.Reason, that1.Reason)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DisconnectResponse_StatusMessage) Equal(that interface{}) bool {
@@ -1035,9 +1411,6 @@ func (this *DisconnectResponse_StatusMessage) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Reason != that1.Reason {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1070,9 +1443,6 @@ func (this *EnableExtrasRequest) VerboseEqual(that interface{}) error {
 	if this.ExtrasFeature != that1.ExtrasFeature {
 		return fmt.Errorf("ExtrasFeature this(%v) Not Equal that(%v)", this.ExtrasFeature, that1.ExtrasFeature)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *EnableExtrasRequest) Equal(that interface{}) bool {
@@ -1095,9 +1465,6 @@ func (this *EnableExtrasRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if this.ExtrasFeature != that1.ExtrasFeature {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -1130,9 +1497,6 @@ func (this *DisableExtrasRequest) VerboseEqual(that interface{}) error {
 	if this.ExtrasFeature != that1.ExtrasFeature {
 		return fmt.Errorf("ExtrasFeature this(%v) Not Equal that(%v)", this.ExtrasFeature, that1.ExtrasFeature)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *DisableExtrasRequest) Equal(that interface{}) bool {
@@ -1157,10 +1521,42 @@ func (this *DisableExtrasRequest) Equal(that interface{}) bool {
 	if this.ExtrasFeature != that1.ExtrasFeature {
 		return false
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
+}
+func (this *BlockstoreRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.BlockstoreRequest{")
+	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
+	s = append(s, "ReqType: "+fmt.Sprintf("%#v", this.ReqType)+",\n")
+	s = append(s, "ReqOpts: "+fmt.Sprintf("%#v", this.ReqOpts)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *BlockstoreResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.BlockstoreResponse{")
+	if this.Blocks != nil {
+		s = append(s, "Blocks: "+fmt.Sprintf("%#v", this.Blocks)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Block) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.Block{")
+	s = append(s, "Cid: "+fmt.Sprintf("%#v", this.Cid)+",\n")
+	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *GetPeersResponse) GoString() string {
 	if this == nil {
@@ -1169,9 +1565,6 @@ func (this *GetPeersResponse) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.GetPeersResponse{")
 	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1182,9 +1575,6 @@ func (this *ConnectRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.ConnectRequest{")
 	s = append(s, "MultiAddrs: "+fmt.Sprintf("%#v", this.MultiAddrs)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1195,9 +1585,6 @@ func (this *IsConnectedRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.IsConnectedRequest{")
 	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1220,9 +1607,6 @@ func (this *IsConnectedResponse) GoString() string {
 	if this.Connected != nil {
 		s = append(s, "Connected: "+mapStringForConnected+",\n")
 	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1233,9 +1617,6 @@ func (this *DisconnectRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.DisconnectRequest{")
 	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1258,9 +1639,6 @@ func (this *DisconnectResponse) GoString() string {
 	if this.Status != nil {
 		s = append(s, "Status: "+mapStringForStatus+",\n")
 	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1272,9 +1650,6 @@ func (this *DisconnectResponse_StatusMessage) GoString() string {
 	s = append(s, "&pb.DisconnectResponse_StatusMessage{")
 	s = append(s, "Disconnected: "+fmt.Sprintf("%#v", this.Disconnected)+",\n")
 	s = append(s, "Reason: "+fmt.Sprintf("%#v", this.Reason)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1285,9 +1660,6 @@ func (this *EnableExtrasRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.EnableExtrasRequest{")
 	s = append(s, "ExtrasFeature: "+fmt.Sprintf("%#v", this.ExtrasFeature)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1298,9 +1670,6 @@ func (this *DisableExtrasRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.DisableExtrasRequest{")
 	s = append(s, "ExtrasFeature: "+fmt.Sprintf("%#v", this.ExtrasFeature)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1337,6 +1706,8 @@ type NodeAPIClient interface {
 	EnableExtras(ctx context.Context, in *EnableExtrasRequest, opts ...grpc.CallOption) (*Empty, error)
 	// DisableExtras is used to disable a particular extras feature
 	DisableExtras(ctx context.Context, in *DisableExtrasRequest, opts ...grpc.CallOption) (*Empty, error)
+	// Blockstore allows management of blockstores
+	Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error)
 }
 
 type nodeAPIClient struct {
@@ -1401,6 +1772,15 @@ func (c *nodeAPIClient) DisableExtras(ctx context.Context, in *DisableExtrasRequ
 	return out, nil
 }
 
+func (c *nodeAPIClient) Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error) {
+	out := new(BlockstoreResponse)
+	err := c.cc.Invoke(ctx, "/pb.NodeAPI/Blockstore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodeAPIServer is the server API for NodeAPI service.
 type NodeAPIServer interface {
 	// GetPeers returns a message containing a slice of current peers in our peerstore
@@ -1415,6 +1795,8 @@ type NodeAPIServer interface {
 	EnableExtras(context.Context, *EnableExtrasRequest) (*Empty, error)
 	// DisableExtras is used to disable a particular extras feature
 	DisableExtras(context.Context, *DisableExtrasRequest) (*Empty, error)
+	// Blockstore allows management of blockstores
+	Blockstore(context.Context, *BlockstoreRequest) (*BlockstoreResponse, error)
 }
 
 func RegisterNodeAPIServer(s *grpc.Server, srv NodeAPIServer) {
@@ -1529,6 +1911,24 @@ func _NodeAPI_DisableExtras_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NodeAPI_Blockstore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlockstoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeAPIServer).Blockstore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.NodeAPI/Blockstore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeAPIServer).Blockstore(ctx, req.(*BlockstoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.NodeAPI",
 	HandlerType: (*NodeAPIServer)(nil),
@@ -1557,9 +1957,116 @@ var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 			MethodName: "DisableExtras",
 			Handler:    _NodeAPI_DisableExtras_Handler,
 		},
+		{
+			MethodName: "Blockstore",
+			Handler:    _NodeAPI_Blockstore_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "node.proto",
+}
+
+func (m *BlockstoreRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockstoreRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Cids) > 0 {
+		for _, s := range m.Cids {
+			dAtA[i] = 0xa
+			i++
+			l = len(s)
+			for l >= 1<<7 {
+				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
+				l >>= 7
+				i++
+			}
+			dAtA[i] = uint8(l)
+			i++
+			i += copy(dAtA[i:], s)
+		}
+	}
+	if m.ReqType != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintNode(dAtA, i, uint64(m.ReqType))
+	}
+	if m.ReqOpts != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintNode(dAtA, i, uint64(m.ReqOpts))
+	}
+	return i, nil
+}
+
+func (m *BlockstoreResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockstoreResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Blocks) > 0 {
+		for _, msg := range m.Blocks {
+			dAtA[i] = 0xa
+			i++
+			i = encodeVarintNode(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	return i, nil
+}
+
+func (m *Block) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Block) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Cid) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintNode(dAtA, i, uint64(len(m.Cid)))
+		i += copy(dAtA[i:], m.Cid)
+	}
+	if len(m.Data) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintNode(dAtA, i, uint64(len(m.Data)))
+		i += copy(dAtA[i:], m.Data)
+	}
+	return i, nil
 }
 
 func (m *GetPeersResponse) Marshal() (dAtA []byte, err error) {
@@ -1591,9 +2098,6 @@ func (m *GetPeersResponse) MarshalTo(dAtA []byte) (int, error) {
 			i++
 			i += copy(dAtA[i:], s)
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1628,9 +2132,6 @@ func (m *ConnectRequest) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1663,9 +2164,6 @@ func (m *IsConnectedRequest) MarshalTo(dAtA []byte) (int, error) {
 			i++
 			i += copy(dAtA[i:], s)
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1706,9 +2204,6 @@ func (m *IsConnectedResponse) MarshalTo(dAtA []byte) (int, error) {
 			i++
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1741,9 +2236,6 @@ func (m *DisconnectRequest) MarshalTo(dAtA []byte) (int, error) {
 			i++
 			i += copy(dAtA[i:], s)
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1791,9 +2283,6 @@ func (m *DisconnectResponse) MarshalTo(dAtA []byte) (int, error) {
 			}
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1828,9 +2317,6 @@ func (m *DisconnectResponse_StatusMessage) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintNode(dAtA, i, uint64(len(m.Reason)))
 		i += copy(dAtA[i:], m.Reason)
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1853,9 +2339,6 @@ func (m *EnableExtrasRequest) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintNode(dAtA, i, uint64(m.ExtrasFeature))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1880,9 +2363,6 @@ func (m *DisableExtrasRequest) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintNode(dAtA, i, uint64(m.ExtrasFeature))
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -1895,41 +2375,79 @@ func encodeVarintNode(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return offset + 1
 }
+func NewPopulatedBlockstoreRequest(r randyNode, easy bool) *BlockstoreRequest {
+	this := &BlockstoreRequest{}
+	v1 := r.Intn(10)
+	this.Cids = make([]string, v1)
+	for i := 0; i < v1; i++ {
+		this.Cids[i] = string(randStringNode(r))
+	}
+	this.ReqType = BSREQTYPE([]int32{0, 1, 2, 3, 4}[r.Intn(5)])
+	this.ReqOpts = BSREQOPTS([]int32{0}[r.Intn(1)])
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedBlockstoreResponse(r randyNode, easy bool) *BlockstoreResponse {
+	this := &BlockstoreResponse{}
+	if r.Intn(10) != 0 {
+		v2 := r.Intn(5)
+		this.Blocks = make([]*Block, v2)
+		for i := 0; i < v2; i++ {
+			this.Blocks[i] = NewPopulatedBlock(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedBlock(r randyNode, easy bool) *Block {
+	this := &Block{}
+	this.Cid = string(randStringNode(r))
+	v3 := r.Intn(100)
+	this.Data = make([]byte, v3)
+	for i := 0; i < v3; i++ {
+		this.Data[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 func NewPopulatedGetPeersResponse(r randyNode, easy bool) *GetPeersResponse {
 	this := &GetPeersResponse{}
-	v1 := r.Intn(10)
-	this.PeerIDs = make([]string, v1)
-	for i := 0; i < v1; i++ {
+	v4 := r.Intn(10)
+	this.PeerIDs = make([]string, v4)
+	for i := 0; i < v4; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
 
 func NewPopulatedConnectRequest(r randyNode, easy bool) *ConnectRequest {
 	this := &ConnectRequest{}
-	v2 := r.Intn(10)
-	this.MultiAddrs = make([]string, v2)
-	for i := 0; i < v2; i++ {
+	v5 := r.Intn(10)
+	this.MultiAddrs = make([]string, v5)
+	for i := 0; i < v5; i++ {
 		this.MultiAddrs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
 
 func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest {
 	this := &IsConnectedRequest{}
-	v3 := r.Intn(10)
-	this.PeerIDs = make([]string, v3)
-	for i := 0; i < v3; i++ {
+	v6 := r.Intn(10)
+	this.PeerIDs = make([]string, v6)
+	for i := 0; i < v6; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
@@ -1937,28 +2455,26 @@ func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest 
 func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedResponse {
 	this := &IsConnectedResponse{}
 	if r.Intn(10) != 0 {
-		v4 := r.Intn(10)
+		v7 := r.Intn(10)
 		this.Connected = make(map[string]bool)
-		for i := 0; i < v4; i++ {
-			v5 := randStringNode(r)
-			this.Connected[v5] = bool(bool(r.Intn(2) == 0))
+		for i := 0; i < v7; i++ {
+			v8 := randStringNode(r)
+			this.Connected[v8] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
 
 func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
 	this := &DisconnectRequest{}
-	v6 := r.Intn(10)
-	this.PeerIDs = make([]string, v6)
-	for i := 0; i < v6; i++ {
+	v9 := r.Intn(10)
+	this.PeerIDs = make([]string, v9)
+	for i := 0; i < v9; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
@@ -1966,14 +2482,13 @@ func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
 func NewPopulatedDisconnectResponse(r randyNode, easy bool) *DisconnectResponse {
 	this := &DisconnectResponse{}
 	if r.Intn(10) != 0 {
-		v7 := r.Intn(10)
+		v10 := r.Intn(10)
 		this.Status = make(map[string]*DisconnectResponse_StatusMessage)
-		for i := 0; i < v7; i++ {
+		for i := 0; i < v10; i++ {
 			this.Status[randStringNode(r)] = NewPopulatedDisconnectResponse_StatusMessage(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
@@ -1983,7 +2498,6 @@ func NewPopulatedDisconnectResponse_StatusMessage(r randyNode, easy bool) *Disco
 	this.Disconnected = bool(bool(r.Intn(2) == 0))
 	this.Reason = string(randStringNode(r))
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 3)
 	}
 	return this
 }
@@ -1992,7 +2506,6 @@ func NewPopulatedEnableExtrasRequest(r randyNode, easy bool) *EnableExtrasReques
 	this := &EnableExtrasRequest{}
 	this.ExtrasFeature = EXTRASTYPE([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
@@ -2001,7 +2514,6 @@ func NewPopulatedDisableExtrasRequest(r randyNode, easy bool) *DisableExtrasRequ
 	this := &DisableExtrasRequest{}
 	this.ExtrasFeature = EXTRASTYPE([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedNode(r, 2)
 	}
 	return this
 }
@@ -2025,9 +2537,9 @@ func randUTF8RuneNode(r randyNode) rune {
 	return rune(ru + 61)
 }
 func randStringNode(r randyNode) string {
-	v8 := r.Intn(100)
-	tmps := make([]rune, v8)
-	for i := 0; i < v8; i++ {
+	v11 := r.Intn(100)
+	tmps := make([]rune, v11)
+	for i := 0; i < v11; i++ {
 		tmps[i] = randUTF8RuneNode(r)
 	}
 	return string(tmps)
@@ -2049,11 +2561,11 @@ func randFieldNode(dAtA []byte, r randyNode, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		v9 := r.Int63()
+		v12 := r.Int63()
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			v12 *= -1
 		}
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(v9))
+		dAtA = encodeVarintPopulateNode(dAtA, uint64(v12))
 	case 1:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -2078,6 +2590,59 @@ func encodeVarintPopulateNode(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
+func (m *BlockstoreRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Cids) > 0 {
+		for _, s := range m.Cids {
+			l = len(s)
+			n += 1 + l + sovNode(uint64(l))
+		}
+	}
+	if m.ReqType != 0 {
+		n += 1 + sovNode(uint64(m.ReqType))
+	}
+	if m.ReqOpts != 0 {
+		n += 1 + sovNode(uint64(m.ReqOpts))
+	}
+	return n
+}
+
+func (m *BlockstoreResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Blocks) > 0 {
+		for _, e := range m.Blocks {
+			l = e.Size()
+			n += 1 + l + sovNode(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *Block) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Cid)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	l = len(m.Data)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	return n
+}
+
 func (m *GetPeersResponse) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2089,9 +2654,6 @@ func (m *GetPeersResponse) Size() (n int) {
 			l = len(s)
 			n += 1 + l + sovNode(uint64(l))
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2108,9 +2670,6 @@ func (m *ConnectRequest) Size() (n int) {
 			n += 1 + l + sovNode(uint64(l))
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -2125,9 +2684,6 @@ func (m *IsConnectedRequest) Size() (n int) {
 			l = len(s)
 			n += 1 + l + sovNode(uint64(l))
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2146,9 +2702,6 @@ func (m *IsConnectedResponse) Size() (n int) {
 			n += mapEntrySize + 1 + sovNode(uint64(mapEntrySize))
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -2163,9 +2716,6 @@ func (m *DisconnectRequest) Size() (n int) {
 			l = len(s)
 			n += 1 + l + sovNode(uint64(l))
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2189,9 +2739,6 @@ func (m *DisconnectResponse) Size() (n int) {
 			n += mapEntrySize + 1 + sovNode(uint64(mapEntrySize))
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -2208,9 +2755,6 @@ func (m *DisconnectResponse_StatusMessage) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovNode(uint64(l))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -2223,9 +2767,6 @@ func (m *EnableExtrasRequest) Size() (n int) {
 	if m.ExtrasFeature != 0 {
 		n += 1 + sovNode(uint64(m.ExtrasFeature))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -2237,9 +2778,6 @@ func (m *DisableExtrasRequest) Size() (n int) {
 	_ = l
 	if m.ExtrasFeature != 0 {
 		n += 1 + sovNode(uint64(m.ExtrasFeature))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2257,13 +2795,45 @@ func sovNode(x uint64) (n int) {
 func sozNode(x uint64) (n int) {
 	return sovNode(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
+func (this *BlockstoreRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&BlockstoreRequest{`,
+		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
+		`ReqType:` + fmt.Sprintf("%v", this.ReqType) + `,`,
+		`ReqOpts:` + fmt.Sprintf("%v", this.ReqOpts) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *BlockstoreResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&BlockstoreResponse{`,
+		`Blocks:` + strings.Replace(fmt.Sprintf("%v", this.Blocks), "Block", "Block", 1) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Block) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Block{`,
+		`Cid:` + fmt.Sprintf("%v", this.Cid) + `,`,
+		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *GetPeersResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
 	s := strings.Join([]string{`&GetPeersResponse{`,
 		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2274,7 +2844,6 @@ func (this *ConnectRequest) String() string {
 	}
 	s := strings.Join([]string{`&ConnectRequest{`,
 		`MultiAddrs:` + fmt.Sprintf("%v", this.MultiAddrs) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2285,7 +2854,6 @@ func (this *IsConnectedRequest) String() string {
 	}
 	s := strings.Join([]string{`&IsConnectedRequest{`,
 		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2306,7 +2874,6 @@ func (this *IsConnectedResponse) String() string {
 	mapStringForConnected += "}"
 	s := strings.Join([]string{`&IsConnectedResponse{`,
 		`Connected:` + mapStringForConnected + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2317,7 +2884,6 @@ func (this *DisconnectRequest) String() string {
 	}
 	s := strings.Join([]string{`&DisconnectRequest{`,
 		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2338,7 +2904,6 @@ func (this *DisconnectResponse) String() string {
 	mapStringForStatus += "}"
 	s := strings.Join([]string{`&DisconnectResponse{`,
 		`Status:` + mapStringForStatus + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2350,7 +2915,6 @@ func (this *DisconnectResponse_StatusMessage) String() string {
 	s := strings.Join([]string{`&DisconnectResponse_StatusMessage{`,
 		`Disconnected:` + fmt.Sprintf("%v", this.Disconnected) + `,`,
 		`Reason:` + fmt.Sprintf("%v", this.Reason) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2361,7 +2925,6 @@ func (this *EnableExtrasRequest) String() string {
 	}
 	s := strings.Join([]string{`&EnableExtrasRequest{`,
 		`ExtrasFeature:` + fmt.Sprintf("%v", this.ExtrasFeature) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2372,7 +2935,6 @@ func (this *DisableExtrasRequest) String() string {
 	}
 	s := strings.Join([]string{`&DisableExtrasRequest{`,
 		`ExtrasFeature:` + fmt.Sprintf("%v", this.ExtrasFeature) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2384,6 +2946,335 @@ func valueToStringNode(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
+}
+func (m *BlockstoreRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockstoreRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockstoreRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Cids", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Cids = append(m.Cids, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReqType", wireType)
+			}
+			m.ReqType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReqType |= BSREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReqOpts", wireType)
+			}
+			m.ReqOpts = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReqOpts |= BSREQOPTS(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockstoreResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockstoreResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockstoreResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Blocks", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Blocks = append(m.Blocks, &Block{})
+			if err := m.Blocks[len(m.Blocks)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Block) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Block: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Block: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Cid", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Cid = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
+			if m.Data == nil {
+				m.Data = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *GetPeersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -2461,7 +3352,6 @@ func (m *GetPeersResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2547,7 +3437,6 @@ func (m *ConnectRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2633,7 +3522,6 @@ func (m *IsConnectedRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2802,7 +3690,6 @@ func (m *IsConnectedResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -2888,7 +3775,6 @@ func (m *DisconnectRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -3071,7 +3957,6 @@ func (m *DisconnectResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -3177,7 +4062,6 @@ func (m *DisconnectResponse_StatusMessage) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -3250,7 +4134,6 @@ func (m *EnableExtrasRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -3323,7 +4206,6 @@ func (m *DisableExtrasRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
