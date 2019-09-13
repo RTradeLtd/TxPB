@@ -40,8 +40,10 @@ enum BSREQTYPE {
 
 // BSREQOPTS are options for blockstore requests
 enum BSREQOPTS {
+    // DEFAULT indicates to use the default settings
+    DEFAULT = 0;
     // BS_FORCE indicates to force the request regardless of any possible issues
-    BS_FORCE = 0;
+    BS_FORCE = 1;
 }
 
 // BlockstoreRequest is a message used to control blockstores
