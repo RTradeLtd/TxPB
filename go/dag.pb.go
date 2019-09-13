@@ -9,6 +9,7 @@ import (
 	fmt "fmt"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 
@@ -16,6 +17,8 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,7 +30,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // DagPutResponse contains the hashes of ipld nodes generated
 // by the dag put request
@@ -49,7 +52,7 @@ func (m *DagPutResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return xxx_messageInfo_DagPutResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -102,7 +105,7 @@ func (m *DagPutRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_DagPutRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -179,7 +182,7 @@ func (m *DagGetRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_DagGetRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -225,7 +228,7 @@ func (m *DagGetResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return xxx_messageInfo_DagGetResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -275,7 +278,7 @@ func (m *NewIPLDNodeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return xxx_messageInfo_NewIPLDNodeRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -339,7 +342,7 @@ func (m *AddLinksRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_AddLinksRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -398,7 +401,7 @@ func (m *GetLinksRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_GetLinksRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -444,7 +447,7 @@ func (m *GetLinksResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return xxx_messageInfo_GetLinksResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -493,7 +496,7 @@ func (m *IPLDLink) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_IPLDLink.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -554,7 +557,7 @@ func (m *IPLDNode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_IPLDNode.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1543,6 +1546,26 @@ type DagAPIServer interface {
 	GetLinks(context.Context, *GetLinksRequest) (*GetLinksResponse, error)
 }
 
+// UnimplementedDagAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedDagAPIServer struct {
+}
+
+func (*UnimplementedDagAPIServer) DagPut(ctx context.Context, req *DagPutRequest) (*DagPutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DagPut not implemented")
+}
+func (*UnimplementedDagAPIServer) DagGet(ctx context.Context, req *DagGetRequest) (*DagGetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DagGet not implemented")
+}
+func (*UnimplementedDagAPIServer) NewIPLDNode(ctx context.Context, req *NewIPLDNodeRequest) (*DagPutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewIPLDNode not implemented")
+}
+func (*UnimplementedDagAPIServer) AddLinksToNode(ctx context.Context, req *AddLinksRequest) (*DagPutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddLinksToNode not implemented")
+}
+func (*UnimplementedDagAPIServer) GetLinks(ctx context.Context, req *GetLinksRequest) (*GetLinksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLinks not implemented")
+}
+
 func RegisterDagAPIServer(s *grpc.Server, srv DagAPIServer) {
 	s.RegisterService(&_DagAPI_serviceDesc, srv)
 }
@@ -1669,7 +1692,7 @@ var _DagAPI_serviceDesc = grpc.ServiceDesc{
 func (m *DagPutResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1677,32 +1700,31 @@ func (m *DagPutResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DagPutResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DagPutResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Hashes) > 0 {
-		for _, s := range m.Hashes {
+		for iNdEx := len(m.Hashes) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Hashes[iNdEx])
+			copy(dAtA[i:], m.Hashes[iNdEx])
+			i = encodeVarintDag(dAtA, i, uint64(len(m.Hashes[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DagPutRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1710,46 +1732,55 @@ func (m *DagPutRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DagPutRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DagPutRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Data) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
-	if len(m.ObjectEncoding) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.ObjectEncoding)))
-		i += copy(dAtA[i:], m.ObjectEncoding)
-	}
-	if len(m.SerializationFormat) > 0 {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.SerializationFormat)))
-		i += copy(dAtA[i:], m.SerializationFormat)
+	if m.CidVersion != 0 {
+		i = encodeVarintDag(dAtA, i, uint64(m.CidVersion))
+		i--
+		dAtA[i] = 0x28
 	}
 	if len(m.HashFunc) > 0 {
-		dAtA[i] = 0x22
-		i++
+		i -= len(m.HashFunc)
+		copy(dAtA[i:], m.HashFunc)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
-		i += copy(dAtA[i:], m.HashFunc)
+		i--
+		dAtA[i] = 0x22
 	}
-	if m.CidVersion != 0 {
-		dAtA[i] = 0x28
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(m.CidVersion))
+	if len(m.SerializationFormat) > 0 {
+		i -= len(m.SerializationFormat)
+		copy(dAtA[i:], m.SerializationFormat)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.SerializationFormat)))
+		i--
+		dAtA[i] = 0x1a
 	}
-	return i, nil
+	if len(m.ObjectEncoding) > 0 {
+		i -= len(m.ObjectEncoding)
+		copy(dAtA[i:], m.ObjectEncoding)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.ObjectEncoding)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Data) > 0 {
+		i -= len(m.Data)
+		copy(dAtA[i:], m.Data)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *DagGetRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1757,23 +1788,29 @@ func (m *DagGetRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DagGetRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DagGetRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Hash) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DagGetResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1781,23 +1818,29 @@ func (m *DagGetResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DagGetResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DagGetResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.RawData) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.RawData)
+		copy(dAtA[i:], m.RawData)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.RawData)))
-		i += copy(dAtA[i:], m.RawData)
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NewIPLDNodeRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1805,46 +1848,55 @@ func (m *NewIPLDNodeRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NewIPLDNodeRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NewIPLDNodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Links) > 0 {
-		for k := range m.Links {
-			dAtA[i] = 0xa
-			i++
-			v := m.Links[k]
-			mapSize := 1 + len(k) + sovDag(uint64(len(k))) + 1 + len(v) + sovDag(uint64(len(v)))
-			i = encodeVarintDag(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
+	if len(m.HashFunc) > 0 {
+		i -= len(m.HashFunc)
+		copy(dAtA[i:], m.HashFunc)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if len(m.Data) > 0 {
-		dAtA[i] = 0x12
-		i++
+		i -= len(m.Data)
+		copy(dAtA[i:], m.Data)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
+		i--
+		dAtA[i] = 0x12
 	}
-	if len(m.HashFunc) > 0 {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
-		i += copy(dAtA[i:], m.HashFunc)
+	if len(m.Links) > 0 {
+		for k := range m.Links {
+			v := m.Links[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintDag(dAtA, i, uint64(len(v)))
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDag(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDag(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *AddLinksRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1852,46 +1904,55 @@ func (m *AddLinksRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *AddLinksRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *AddLinksRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Links) > 0 {
-		for k := range m.Links {
-			dAtA[i] = 0xa
-			i++
-			v := m.Links[k]
-			mapSize := 1 + len(k) + sovDag(uint64(len(k))) + 1 + len(v) + sovDag(uint64(len(v)))
-			i = encodeVarintDag(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
+	if len(m.HashFunc) > 0 {
+		i -= len(m.HashFunc)
+		copy(dAtA[i:], m.HashFunc)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if len(m.Hash) > 0 {
-		dAtA[i] = 0x12
-		i++
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
+		i--
+		dAtA[i] = 0x12
 	}
-	if len(m.HashFunc) > 0 {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
-		i += copy(dAtA[i:], m.HashFunc)
+	if len(m.Links) > 0 {
+		for k := range m.Links {
+			v := m.Links[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintDag(dAtA, i, uint64(len(v)))
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDag(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDag(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *GetLinksRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1899,23 +1960,29 @@ func (m *GetLinksRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *GetLinksRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetLinksRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Hash) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *GetLinksResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1923,29 +1990,36 @@ func (m *GetLinksResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *GetLinksResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetLinksResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Links) > 0 {
-		for _, msg := range m.Links {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+		for iNdEx := len(m.Links) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Links[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintDag(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *IPLDLink) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1953,34 +2027,41 @@ func (m *IPLDLink) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *IPLDLink) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *IPLDLink) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Hash) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
+	if m.Size_ != 0 {
+		i = encodeVarintDag(dAtA, i, uint64(m.Size_))
+		i--
+		dAtA[i] = 0x18
 	}
 	if len(m.Name) > 0 {
-		dAtA[i] = 0x12
-		i++
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Name)))
-		i += copy(dAtA[i:], m.Name)
+		i--
+		dAtA[i] = 0x12
 	}
-	if m.Size_ != 0 {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(m.Size_))
+	if len(m.Hash) > 0 {
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *IPLDNode) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1988,39 +2069,49 @@ func (m *IPLDNode) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *IPLDNode) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *IPLDNode) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Data) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
-		i += copy(dAtA[i:], m.Data)
-	}
 	if len(m.Links) > 0 {
-		for _, msg := range m.Links {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintDag(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+		for iNdEx := len(m.Links) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Links[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintDag(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0x12
 		}
 	}
-	return i, nil
+	if len(m.Data) > 0 {
+		i -= len(m.Data)
+		copy(dAtA[i:], m.Data)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintDag(dAtA []byte, offset int, v uint64) int {
+	offset -= sovDag(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedDagPutResponse(r randyDag, easy bool) *DagPutResponse {
 	this := &DagPutResponse{}
@@ -2075,7 +2166,7 @@ func NewPopulatedDagGetResponse(r randyDag, easy bool) *DagGetResponse {
 
 func NewPopulatedNewIPLDNodeRequest(r randyDag, easy bool) *NewIPLDNodeRequest {
 	this := &NewIPLDNodeRequest{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v4 := r.Intn(10)
 		this.Links = make(map[string]string)
 		for i := 0; i < v4; i++ {
@@ -2095,7 +2186,7 @@ func NewPopulatedNewIPLDNodeRequest(r randyDag, easy bool) *NewIPLDNodeRequest {
 
 func NewPopulatedAddLinksRequest(r randyDag, easy bool) *AddLinksRequest {
 	this := &AddLinksRequest{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v6 := r.Intn(10)
 		this.Links = make(map[string]string)
 		for i := 0; i < v6; i++ {
@@ -2119,7 +2210,7 @@ func NewPopulatedGetLinksRequest(r randyDag, easy bool) *GetLinksRequest {
 
 func NewPopulatedGetLinksResponse(r randyDag, easy bool) *GetLinksResponse {
 	this := &GetLinksResponse{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v7 := r.Intn(5)
 		this.Links = make([]*IPLDLink, v7)
 		for i := 0; i < v7; i++ {
@@ -2152,7 +2243,7 @@ func NewPopulatedIPLDNode(r randyDag, easy bool) *IPLDNode {
 	for i := 0; i < v9; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v10 := r.Intn(5)
 		this.Links = make([]*IPLDLink, v10)
 		for i := 0; i < v10; i++ {
@@ -2423,14 +2514,7 @@ func (m *IPLDNode) Size() (n int) {
 }
 
 func sovDag(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozDag(x uint64) (n int) {
 	return sovDag(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -2537,8 +2621,13 @@ func (this *GetLinksResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForLinks := "[]*IPLDLink{"
+	for _, f := range this.Links {
+		repeatedStringForLinks += strings.Replace(f.String(), "IPLDLink", "IPLDLink", 1) + ","
+	}
+	repeatedStringForLinks += "}"
 	s := strings.Join([]string{`&GetLinksResponse{`,
-		`Links:` + strings.Replace(fmt.Sprintf("%v", this.Links), "IPLDLink", "IPLDLink", 1) + `,`,
+		`Links:` + repeatedStringForLinks + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2559,9 +2648,14 @@ func (this *IPLDNode) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForLinks := "[]*IPLDLink{"
+	for _, f := range this.Links {
+		repeatedStringForLinks += strings.Replace(f.String(), "IPLDLink", "IPLDLink", 1) + ","
+	}
+	repeatedStringForLinks += "}"
 	s := strings.Join([]string{`&IPLDNode{`,
 		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`Links:` + strings.Replace(fmt.Sprintf("%v", this.Links), "IPLDLink", "IPLDLink", 1) + `,`,
+		`Links:` + repeatedStringForLinks + `,`,
 		`}`,
 	}, "")
 	return s

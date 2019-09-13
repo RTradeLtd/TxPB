@@ -178,7 +178,7 @@ public final class AdminAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of blockstores
+     * Blockstore allows management of the blockstore, and optionally, the counted store
      * </pre>
      */
     public void blockstore(pb.Admin.BlockstoreRequest request,
@@ -258,7 +258,7 @@ public final class AdminAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of blockstores
+     * Blockstore allows management of the blockstore, and optionally, the counted store
      * </pre>
      */
     public void blockstore(pb.Admin.BlockstoreRequest request,
@@ -311,7 +311,7 @@ public final class AdminAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of blockstores
+     * Blockstore allows management of the blockstore, and optionally, the counted store
      * </pre>
      */
     public pb.Admin.BlockstoreResponse blockstore(pb.Admin.BlockstoreRequest request) {
@@ -365,7 +365,7 @@ public final class AdminAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of blockstores
+     * Blockstore allows management of the blockstore, and optionally, the counted store
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Admin.BlockstoreResponse> blockstore(

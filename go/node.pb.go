@@ -8,6 +8,7 @@ import (
 	fmt "fmt"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 
@@ -15,6 +16,8 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -26,7 +29,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // EXTRASTYPE denotes a particular extras type
 type EXTRASTYPE int32
@@ -75,7 +78,7 @@ func (m *GetPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return xxx_messageInfo_GetPeersResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -120,7 +123,7 @@ func (m *ConnectRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return xxx_messageInfo_ConnectRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -165,7 +168,7 @@ func (m *IsConnectedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return xxx_messageInfo_IsConnectedRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -210,7 +213,7 @@ func (m *IsConnectedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return xxx_messageInfo_IsConnectedResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -255,7 +258,7 @@ func (m *DisconnectRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return xxx_messageInfo_DisconnectRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -300,7 +303,7 @@ func (m *DisconnectResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return xxx_messageInfo_DisconnectResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -347,7 +350,7 @@ func (m *DisconnectResponse_StatusMessage) XXX_Marshal(b []byte, deterministic b
 		return xxx_messageInfo_DisconnectResponse_StatusMessage.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -399,7 +402,7 @@ func (m *EnableExtrasRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return xxx_messageInfo_EnableExtrasRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -444,7 +447,7 @@ func (m *DisableExtrasRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return xxx_messageInfo_DisableExtrasRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1309,6 +1312,29 @@ type NodeAPIServer interface {
 	DisableExtras(context.Context, *DisableExtrasRequest) (*Empty, error)
 }
 
+// UnimplementedNodeAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedNodeAPIServer struct {
+}
+
+func (*UnimplementedNodeAPIServer) GetPeers(ctx context.Context, req *Empty) (*GetPeersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPeers not implemented")
+}
+func (*UnimplementedNodeAPIServer) Connect(ctx context.Context, req *ConnectRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Connect not implemented")
+}
+func (*UnimplementedNodeAPIServer) Disconnect(ctx context.Context, req *DisconnectRequest) (*DisconnectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Disconnect not implemented")
+}
+func (*UnimplementedNodeAPIServer) IsConnected(ctx context.Context, req *IsConnectedRequest) (*IsConnectedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsConnected not implemented")
+}
+func (*UnimplementedNodeAPIServer) EnableExtras(ctx context.Context, req *EnableExtrasRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableExtras not implemented")
+}
+func (*UnimplementedNodeAPIServer) DisableExtras(ctx context.Context, req *DisableExtrasRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisableExtras not implemented")
+}
+
 func RegisterNodeAPIServer(s *grpc.Server, srv NodeAPIServer) {
 	s.RegisterService(&_NodeAPI_serviceDesc, srv)
 }
@@ -1457,7 +1483,7 @@ var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 func (m *GetPeersResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1465,32 +1491,31 @@ func (m *GetPeersResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *GetPeersResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.PeerIDs) > 0 {
-		for _, s := range m.PeerIDs {
+		for iNdEx := len(m.PeerIDs) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.PeerIDs[iNdEx])
+			copy(dAtA[i:], m.PeerIDs[iNdEx])
+			i = encodeVarintNode(dAtA, i, uint64(len(m.PeerIDs[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *ConnectRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1498,32 +1523,31 @@ func (m *ConnectRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ConnectRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ConnectRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.MultiAddrs) > 0 {
-		for _, s := range m.MultiAddrs {
+		for iNdEx := len(m.MultiAddrs) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.MultiAddrs[iNdEx])
+			copy(dAtA[i:], m.MultiAddrs[iNdEx])
+			i = encodeVarintNode(dAtA, i, uint64(len(m.MultiAddrs[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *IsConnectedRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1531,32 +1555,31 @@ func (m *IsConnectedRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *IsConnectedRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *IsConnectedRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.PeerIDs) > 0 {
-		for _, s := range m.PeerIDs {
+		for iNdEx := len(m.PeerIDs) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.PeerIDs[iNdEx])
+			copy(dAtA[i:], m.PeerIDs[iNdEx])
+			i = encodeVarintNode(dAtA, i, uint64(len(m.PeerIDs[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *IsConnectedResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1564,38 +1587,44 @@ func (m *IsConnectedResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *IsConnectedResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *IsConnectedResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Connected) > 0 {
 		for k := range m.Connected {
-			dAtA[i] = 0xa
-			i++
 			v := m.Connected[k]
-			mapSize := 1 + len(k) + sovNode(uint64(len(k))) + 1 + 1
-			i = encodeVarintNode(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintNode(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x10
-			i++
+			baseI := i
+			i--
 			if v {
 				dAtA[i] = 1
 			} else {
 				dAtA[i] = 0
 			}
-			i++
+			i--
+			dAtA[i] = 0x10
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintNode(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintNode(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DisconnectRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1603,32 +1632,31 @@ func (m *DisconnectRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DisconnectRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DisconnectRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.PeerIDs) > 0 {
-		for _, s := range m.PeerIDs {
+		for iNdEx := len(m.PeerIDs) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.PeerIDs[iNdEx])
+			copy(dAtA[i:], m.PeerIDs[iNdEx])
+			i = encodeVarintNode(dAtA, i, uint64(len(m.PeerIDs[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DisconnectResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1636,45 +1664,48 @@ func (m *DisconnectResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DisconnectResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DisconnectResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Status) > 0 {
 		for k := range m.Status {
-			dAtA[i] = 0xa
-			i++
 			v := m.Status[k]
-			msgSize := 0
+			baseI := i
 			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovNode(uint64(msgSize))
-			}
-			mapSize := 1 + len(k) + sovNode(uint64(len(k))) + msgSize
-			i = encodeVarintNode(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintNode(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintNode(dAtA, i, uint64(v.Size()))
-				n1, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintNode(dAtA, i, uint64(size))
 				}
-				i += n1
+				i--
+				dAtA[i] = 0x12
 			}
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintNode(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintNode(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DisconnectResponse_StatusMessage) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1682,33 +1713,39 @@ func (m *DisconnectResponse_StatusMessage) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DisconnectResponse_StatusMessage) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DisconnectResponse_StatusMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if len(m.Reason) > 0 {
+		i -= len(m.Reason)
+		copy(dAtA[i:], m.Reason)
+		i = encodeVarintNode(dAtA, i, uint64(len(m.Reason)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if m.Disconnected {
-		dAtA[i] = 0x8
-		i++
+		i--
 		if m.Disconnected {
 			dAtA[i] = 1
 		} else {
 			dAtA[i] = 0
 		}
-		i++
+		i--
+		dAtA[i] = 0x8
 	}
-	if len(m.Reason) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintNode(dAtA, i, uint64(len(m.Reason)))
-		i += copy(dAtA[i:], m.Reason)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *EnableExtrasRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1716,22 +1753,27 @@ func (m *EnableExtrasRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *EnableExtrasRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *EnableExtrasRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.ExtrasFeature != 0 {
-		dAtA[i] = 0x8
-		i++
 		i = encodeVarintNode(dAtA, i, uint64(m.ExtrasFeature))
+		i--
+		dAtA[i] = 0x8
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DisableExtrasRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1739,26 +1781,33 @@ func (m *DisableExtrasRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DisableExtrasRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DisableExtrasRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.ExtrasFeature != 0 {
-		dAtA[i] = 0x8
-		i++
 		i = encodeVarintNode(dAtA, i, uint64(m.ExtrasFeature))
+		i--
+		dAtA[i] = 0x8
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintNode(dAtA []byte, offset int, v uint64) int {
+	offset -= sovNode(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedGetPeersResponse(r randyNode, easy bool) *GetPeersResponse {
 	this := &GetPeersResponse{}
@@ -1798,7 +1847,7 @@ func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest 
 
 func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedResponse {
 	this := &IsConnectedResponse{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v4 := r.Intn(10)
 		this.Connected = make(map[string]bool)
 		for i := 0; i < v4; i++ {
@@ -1825,7 +1874,7 @@ func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
 
 func NewPopulatedDisconnectResponse(r randyNode, easy bool) *DisconnectResponse {
 	this := &DisconnectResponse{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v7 := r.Intn(10)
 		this.Status = make(map[string]*DisconnectResponse_StatusMessage)
 		for i := 0; i < v7; i++ {
@@ -2074,14 +2123,7 @@ func (m *DisableExtrasRequest) Size() (n int) {
 }
 
 func sovNode(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozNode(x uint64) (n int) {
 	return sovNode(uint64((x << 1) ^ uint64((int64(x) >> 63))))

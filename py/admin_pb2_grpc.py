@@ -50,7 +50,7 @@ class AdminAPIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def Blockstore(self, request, context):
-    """Blockstore allows management of blockstores
+    """Blockstore allows management of the blockstore, and optionally, the counted store
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

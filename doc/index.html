@@ -223,6 +223,14 @@
                   <a href="#pb.GCREQTYPE"><span class="badge">E</span>GCREQTYPE</a>
                 </li>
               
+                <li>
+                  <a href="#pb.REFREQOPTS"><span class="badge">E</span>REFREQOPTS</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.REFREQTYPE"><span class="badge">E</span>REFREQTYPE</a>
+                </li>
+              
               
               
                 <li>
@@ -625,7 +633,7 @@
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>status contains a status message </p></td>
                 </tr>
               
             </tbody>
@@ -649,17 +657,14 @@
                   <td>cids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>cids are optional cids to filter for our search query by.
-if this is empty, then we will only examine the counter store
-for information related to those cids. </p></td>
+                  <td><p>cids are optional cids to filter our requests by </p></td>
                 </tr>
               
                 <tr>
                   <td>limit</td>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
-                  <td><p>if performing a generic search, the maximum number of results.
-a value of 0 means unlimited </p></td>
+                  <td><p>can be used to apply limits to the number of store requests made, search limits, etc.. </p></td>
                 </tr>
               
             </tbody>
@@ -735,9 +740,15 @@ a value of 0 means unlimited </p></td>
           <tbody>
             
               <tr>
-                <td>FORCE</td>
+                <td>DEFAULT</td>
                 <td>0</td>
-                <td><p>FORCE indicates to force the request regardless of any possible issues</p></td>
+                <td><p>DEFAULT indicates to use the default settings</p></td>
+              </tr>
+            
+              <tr>
+                <td>BS_FORCE</td>
+                <td>1</td>
+                <td><p>BS_FORCE indicates to force the request regardless of any possible issues</p></td>
               </tr>
             
           </tbody>
@@ -752,33 +763,33 @@ a value of 0 means unlimited </p></td>
           <tbody>
             
               <tr>
-                <td>DELETE</td>
+                <td>BS_DELETE</td>
                 <td>0</td>
-                <td><p>DELETE is used to delete a block from the store</p></td>
+                <td><p>BS_DELETE is used to delete a block from the store</p></td>
               </tr>
             
               <tr>
-                <td>PUT</td>
+                <td>BS_PUT</td>
                 <td>1</td>
-                <td><p>PUT is used to put a single block in the store</p></td>
+                <td><p>BS_PUT is used to put a single block in the store</p></td>
               </tr>
             
               <tr>
-                <td>PUT_MANY</td>
+                <td>BS_PUT_MANY</td>
                 <td>2</td>
-                <td><p>PUT_MANY is used to put many blocks in the store</p></td>
+                <td><p>BS_PUT_MANY is used to put many blocks in the store</p></td>
               </tr>
             
               <tr>
-                <td>GET</td>
+                <td>BS_GET</td>
                 <td>3</td>
-                <td><p>GET is used to get a block from the store</p></td>
+                <td><p>BS_GET is used to get a block from the store</p></td>
               </tr>
             
               <tr>
-                <td>GET_MANY</td>
+                <td>BS_GET_MANY</td>
                 <td>4</td>
-                <td><p>GET_MANY is used to get many blocks from the store</p></td>
+                <td><p>BS_GET_MANY is used to get many blocks from the store</p></td>
               </tr>
             
           </tbody>
@@ -793,21 +804,61 @@ a value of 0 means unlimited </p></td>
           <tbody>
             
               <tr>
-                <td>START</td>
+                <td>GC_START</td>
                 <td>0</td>
-                <td><p>START is used to start gc</p></td>
+                <td><p>GC_START is used to start gc</p></td>
               </tr>
             
               <tr>
-                <td>STOP</td>
+                <td>GC_STOP</td>
                 <td>1</td>
-                <td><p>STOP is used to stop GC</p></td>
+                <td><p>C_STOP is used to stop GC</p></td>
               </tr>
             
               <tr>
-                <td>STATUS</td>
+                <td>GC_STATUS</td>
                 <td>2</td>
-                <td><p>STATUS is used to retrieve gc status</p></td>
+                <td><p>GC_STATUS is used to retrieve gc status</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="pb.REFREQOPTS">REFREQOPTS</h3>
+        <p>REFREQOPTS are options for fine-tuning ref count requests</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>REF_FORCE</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="pb.REFREQTYPE">REFREQTYPE</h3>
+        <p>REFREQTYPE is used to indicate the type of ref count request being made</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>REF_GET_COUNT</td>
+                <td>0</td>
+                <td><p>REF_GET_COUNT is used to get the reference count of a particular cid</p></td>
+              </tr>
+            
+              <tr>
+                <td>REF_DELETE</td>
+                <td>1</td>
+                <td><p></p></td>
               </tr>
             
           </tbody>
@@ -843,7 +894,7 @@ a value of 0 means unlimited </p></td>
                 <td>Blockstore</td>
                 <td><a href="#pb.BlockstoreRequest">BlockstoreRequest</a></td>
                 <td><a href="#pb.BlockstoreResponse">BlockstoreResponse</a></td>
-                <td><p>Blockstore allows management of blockstores</p></td>
+                <td><p>Blockstore allows management of the blockstore, and optionally, the counted store</p></td>
               </tr>
             
           </tbody>

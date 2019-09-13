@@ -9,12 +9,15 @@ import (
 	fmt "fmt"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -26,7 +29,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // UploadRequest is used to upload data as a UnixFS object
 type UploadRequest struct {
@@ -49,7 +52,7 @@ func (m *UploadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_UploadRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -105,7 +108,7 @@ func (m *UploadOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_UploadOptions.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -170,7 +173,7 @@ func (m *DownloadRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_DownloadRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -223,7 +226,7 @@ func (m *DownloadResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return xxx_messageInfo_DownloadResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -268,7 +271,7 @@ func (m *Blob) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Blob.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -796,6 +799,17 @@ type FileAPIServer interface {
 	DownloadFile(*DownloadRequest, FileAPI_DownloadFileServer) error
 }
 
+// UnimplementedFileAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedFileAPIServer struct {
+}
+
+func (*UnimplementedFileAPIServer) UploadFile(srv FileAPI_UploadFileServer) error {
+	return status.Errorf(codes.Unimplemented, "method UploadFile not implemented")
+}
+func (*UnimplementedFileAPIServer) DownloadFile(req *DownloadRequest, srv FileAPI_DownloadFileServer) error {
+	return status.Errorf(codes.Unimplemented, "method DownloadFile not implemented")
+}
+
 func RegisterFileAPIServer(s *grpc.Server, srv FileAPIServer) {
 	s.RegisterService(&_FileAPI_serviceDesc, srv)
 }
@@ -869,7 +883,7 @@ var _FileAPI_serviceDesc = grpc.ServiceDesc{
 func (m *UploadRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -877,37 +891,46 @@ func (m *UploadRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *UploadRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UploadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Blob != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(m.Blob.Size()))
-		n1, err := m.Blob.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n1
-	}
 	if m.Options != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(m.Options.Size()))
-		n2, err := m.Options.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		{
+			size, err := m.Options.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintFile(dAtA, i, uint64(size))
 		}
-		i += n2
+		i--
+		dAtA[i] = 0x12
 	}
-	return i, nil
+	if m.Blob != nil {
+		{
+			size, err := m.Blob.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintFile(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *UploadOptions) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -915,35 +938,43 @@ func (m *UploadOptions) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *UploadOptions) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UploadOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.MultiHash) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(len(m.MultiHash)))
-		i += copy(dAtA[i:], m.MultiHash)
+	if len(m.Chunker) > 0 {
+		i -= len(m.Chunker)
+		copy(dAtA[i:], m.Chunker)
+		i = encodeVarintFile(dAtA, i, uint64(len(m.Chunker)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if len(m.Layout) > 0 {
-		dAtA[i] = 0x12
-		i++
+		i -= len(m.Layout)
+		copy(dAtA[i:], m.Layout)
 		i = encodeVarintFile(dAtA, i, uint64(len(m.Layout)))
-		i += copy(dAtA[i:], m.Layout)
+		i--
+		dAtA[i] = 0x12
 	}
-	if len(m.Chunker) > 0 {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(len(m.Chunker)))
-		i += copy(dAtA[i:], m.Chunker)
+	if len(m.MultiHash) > 0 {
+		i -= len(m.MultiHash)
+		copy(dAtA[i:], m.MultiHash)
+		i = encodeVarintFile(dAtA, i, uint64(len(m.MultiHash)))
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *DownloadRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -951,28 +982,34 @@ func (m *DownloadRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DownloadRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DownloadRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Hash) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
-	}
 	if m.ChunkSize != 0 {
-		dAtA[i] = 0x10
-		i++
 		i = encodeVarintFile(dAtA, i, uint64(m.ChunkSize))
+		i--
+		dAtA[i] = 0x10
 	}
-	return i, nil
+	if len(m.Hash) > 0 {
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
+		i = encodeVarintFile(dAtA, i, uint64(len(m.Hash)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *DownloadResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -980,27 +1017,34 @@ func (m *DownloadResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *DownloadResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DownloadResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.Blob != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintFile(dAtA, i, uint64(m.Blob.Size()))
-		n3, err := m.Blob.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		{
+			size, err := m.Blob.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintFile(dAtA, i, uint64(size))
 		}
-		i += n3
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *Blob) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1008,34 +1052,42 @@ func (m *Blob) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Blob) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Blob) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Content) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.Content)
+		copy(dAtA[i:], m.Content)
 		i = encodeVarintFile(dAtA, i, uint64(len(m.Content)))
-		i += copy(dAtA[i:], m.Content)
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintFile(dAtA []byte, offset int, v uint64) int {
+	offset -= sovFile(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedUploadRequest(r randyFile, easy bool) *UploadRequest {
 	this := &UploadRequest{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Blob = NewPopulatedBlob(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Options = NewPopulatedUploadOptions(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1067,7 +1119,7 @@ func NewPopulatedDownloadRequest(r randyFile, easy bool) *DownloadRequest {
 
 func NewPopulatedDownloadResponse(r randyFile, easy bool) *DownloadResponse {
 	this := &DownloadResponse{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Blob = NewPopulatedBlob(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1240,14 +1292,7 @@ func (m *Blob) Size() (n int) {
 }
 
 func sovFile(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozFile(x uint64) (n int) {
 	return sovFile(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -1257,8 +1302,8 @@ func (this *UploadRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&UploadRequest{`,
-		`Blob:` + strings.Replace(fmt.Sprintf("%v", this.Blob), "Blob", "Blob", 1) + `,`,
-		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "UploadOptions", "UploadOptions", 1) + `,`,
+		`Blob:` + strings.Replace(this.Blob.String(), "Blob", "Blob", 1) + `,`,
+		`Options:` + strings.Replace(this.Options.String(), "UploadOptions", "UploadOptions", 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1291,7 +1336,7 @@ func (this *DownloadResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&DownloadResponse{`,
-		`Blob:` + strings.Replace(fmt.Sprintf("%v", this.Blob), "Blob", "Blob", 1) + `,`,
+		`Blob:` + strings.Replace(this.Blob.String(), "Blob", "Blob", 1) + `,`,
 		`}`,
 	}, "")
 	return s
