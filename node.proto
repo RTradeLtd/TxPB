@@ -82,6 +82,8 @@ enum EXTRASTYPE {
     IDENTIFY = 0;
     // PUBSUB is the libp2p pubsub system
     PUBSUB = 1;
+    // DISCOVERY is a libp2p discovery service
+    DISCOVERY = 2;
 }
 
 // EnableExtrasRequest is used to enable a particular extras feature

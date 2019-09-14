@@ -1530,7 +1530,8 @@ proto.pb.DisableExtrasRequest.prototype.setExtrasfeature = function(value) {
  */
 proto.pb.EXTRASTYPE = {
   IDENTIFY: 0,
-  PUBSUB: 1
+  PUBSUB: 1,
+  DISCOVERY: 2
 };
 
 goog.object.extend(exports, proto.pb);
