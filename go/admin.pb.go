@@ -9,6 +9,7 @@ import (
 	fmt "fmt"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 
@@ -16,6 +17,8 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,30 +30,98 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
+
+// BSREQTYPE is a particular blockstore request type
+type BSREQTYPE int32
+
+const (
+	// BS_DELETE is used to delete a block from the store
+	BSREQTYPE_BS_DELETE BSREQTYPE = 0
+	// BS_PUT is used to put a single block in the store
+	BSREQTYPE_BS_PUT BSREQTYPE = 1
+	// BS_PUT_MANY is used to put many blocks in the store
+	BSREQTYPE_BS_PUT_MANY BSREQTYPE = 2
+	// BS_GET is used to get a block from the store
+	BSREQTYPE_BS_GET BSREQTYPE = 3
+	// BS_GET_MANY is used to get many blocks from the store
+	BSREQTYPE_BS_GET_MANY BSREQTYPE = 4
+)
+
+var BSREQTYPE_name = map[int32]string{
+	0: "BS_DELETE",
+	1: "BS_PUT",
+	2: "BS_PUT_MANY",
+	3: "BS_GET",
+	4: "BS_GET_MANY",
+}
+
+var BSREQTYPE_value = map[string]int32{
+	"BS_DELETE":   0,
+	"BS_PUT":      1,
+	"BS_PUT_MANY": 2,
+	"BS_GET":      3,
+	"BS_GET_MANY": 4,
+}
+
+func (x BSREQTYPE) String() string {
+	return proto.EnumName(BSREQTYPE_name, int32(x))
+}
+
+func (BSREQTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{0}
+}
+
+// BSREQOPTS are options for blockstore requests
+type BSREQOPTS int32
+
+const (
+	// DEFAULT indicates to use the default settings
+	BSREQOPTS_DEFAULT BSREQOPTS = 0
+	// BS_FORCE indicates to force the request regardless of any possible issues
+	BSREQOPTS_BS_FORCE BSREQOPTS = 1
+)
+
+var BSREQOPTS_name = map[int32]string{
+	0: "DEFAULT",
+	1: "BS_FORCE",
+}
+
+var BSREQOPTS_value = map[string]int32{
+	"DEFAULT":  0,
+	"BS_FORCE": 1,
+}
+
+func (x BSREQOPTS) String() string {
+	return proto.EnumName(BSREQOPTS_name, int32(x))
+}
+
+func (BSREQOPTS) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{1}
+}
 
 // GCREQTYPE specifies the type of GC management call being performed
 type GCREQTYPE int32
 
 const (
-	// START is used to start gc
-	GCREQTYPE_START GCREQTYPE = 0
-	// STOP is used to stop GC
-	GCREQTYPE_STOP GCREQTYPE = 1
-	// STATUS is used to retrieve gc status
-	GCREQTYPE_STATUS GCREQTYPE = 2
+	// GC_START is used to start gc
+	GCREQTYPE_GC_START GCREQTYPE = 0
+	// C_STOP is used to stop GC
+	GCREQTYPE_GC_STOP GCREQTYPE = 1
+	// GC_STATUS is used to retrieve gc status
+	GCREQTYPE_GC_STATUS GCREQTYPE = 2
 )
 
 var GCREQTYPE_name = map[int32]string{
-	0: "START",
-	1: "STOP",
-	2: "STATUS",
+	0: "GC_START",
+	1: "GC_STOP",
+	2: "GC_STATUS",
 }
 
 var GCREQTYPE_value = map[string]int32{
-	"START":  0,
-	"STOP":   1,
-	"STATUS": 2,
+	"GC_START":  0,
+	"GC_STOP":   1,
+	"GC_STATUS": 2,
 }
 
 func (x GCREQTYPE) String() string {
@@ -58,22 +129,230 @@ func (x GCREQTYPE) String() string {
 }
 
 func (GCREQTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{2}
+}
+
+// REFREQTYPE is used to indicate the type of ref count request being made
+type REFREQTYPE int32
+
+const (
+	// REF_GET_COUNT is used to get the reference count of a particular cid
+	REFREQTYPE_REF_GET_COUNT REFREQTYPE = 0
+	REFREQTYPE_REF_DELETE    REFREQTYPE = 1
+)
+
+var REFREQTYPE_name = map[int32]string{
+	0: "REF_GET_COUNT",
+	1: "REF_DELETE",
+}
+
+var REFREQTYPE_value = map[string]int32{
+	"REF_GET_COUNT": 0,
+	"REF_DELETE":    1,
+}
+
+func (x REFREQTYPE) String() string {
+	return proto.EnumName(REFREQTYPE_name, int32(x))
+}
+
+func (REFREQTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{3}
+}
+
+// REFREQOPTS are options for fine-tuning ref count requests
+type REFREQOPTS int32
+
+const (
+	REFREQOPTS_REF_FORCE REFREQOPTS = 0
+)
+
+var REFREQOPTS_name = map[int32]string{
+	0: "REF_FORCE",
+}
+
+var REFREQOPTS_value = map[string]int32{
+	"REF_FORCE": 0,
+}
+
+func (x REFREQOPTS) String() string {
+	return proto.EnumName(REFREQOPTS_name, int32(x))
+}
+
+func (REFREQOPTS) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{4}
+}
+
+// BlockstoreRequest is a message used to control blockstores
+type BlockstoreRequest struct {
+	// cids holds at least 1 cid, to hold 0 is considered an error
+	Cids []string `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty"`
+	// reqType is used to indicate the particular request being mande
+	ReqType BSREQTYPE `protobuf:"varint,2,opt,name=reqType,proto3,enum=pb.BSREQTYPE" json:"reqType,omitempty"`
+	// reqOpts is an optional parameter that can be used for fine-tuned request control
+	ReqOpts BSREQOPTS `protobuf:"varint,3,opt,name=reqOpts,proto3,enum=pb.BSREQOPTS" json:"reqOpts,omitempty"`
+}
+
+func (m *BlockstoreRequest) Reset()      { *m = BlockstoreRequest{} }
+func (*BlockstoreRequest) ProtoMessage() {}
+func (*BlockstoreRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{0}
+}
+func (m *BlockstoreRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BlockstoreRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BlockstoreRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *BlockstoreRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BlockstoreRequest.Merge(m, src)
+}
+func (m *BlockstoreRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *BlockstoreRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_BlockstoreRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BlockstoreRequest proto.InternalMessageInfo
+
+func (m *BlockstoreRequest) GetCids() []string {
+	if m != nil {
+		return m.Cids
+	}
+	return nil
+}
+
+func (m *BlockstoreRequest) GetReqType() BSREQTYPE {
+	if m != nil {
+		return m.ReqType
+	}
+	return BSREQTYPE_BS_DELETE
+}
+
+func (m *BlockstoreRequest) GetReqOpts() BSREQOPTS {
+	if m != nil {
+		return m.ReqOpts
+	}
+	return BSREQOPTS_DEFAULT
+}
+
+// BlockstoreResponse is a response to a BlockstoreqRequest
+type BlockstoreResponse struct {
+	Blocks []*Block `protobuf:"bytes,1,rep,name=blocks,proto3" json:"blocks,omitempty"`
+}
+
+func (m *BlockstoreResponse) Reset()      { *m = BlockstoreResponse{} }
+func (*BlockstoreResponse) ProtoMessage() {}
+func (*BlockstoreResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{1}
+}
+func (m *BlockstoreResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BlockstoreResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BlockstoreResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *BlockstoreResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BlockstoreResponse.Merge(m, src)
+}
+func (m *BlockstoreResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *BlockstoreResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_BlockstoreResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BlockstoreResponse proto.InternalMessageInfo
+
+func (m *BlockstoreResponse) GetBlocks() []*Block {
+	if m != nil {
+		return m.Blocks
+	}
+	return nil
+}
+
+// Block is a single block of ipfs data
+type Block struct {
+	// cid is the identifier of the block
+	Cid string `protobuf:"bytes,1,opt,name=cid,proto3" json:"cid,omitempty"`
+	// data is the actual contnets of this block
+	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *Block) Reset()      { *m = Block{} }
+func (*Block) ProtoMessage() {}
+func (*Block) Descriptor() ([]byte, []int) {
+	return fileDescriptor_73a7fc70dcc2027c, []int{2}
+}
+func (m *Block) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Block) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Block.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Block) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Block.Merge(m, src)
+}
+func (m *Block) XXX_Size() int {
+	return m.Size()
+}
+func (m *Block) XXX_DiscardUnknown() {
+	xxx_messageInfo_Block.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Block proto.InternalMessageInfo
+
+func (m *Block) GetCid() string {
+	if m != nil {
+		return m.Cid
+	}
+	return ""
+}
+
+func (m *Block) GetData() []byte {
+	if m != nil {
+		return m.Data
+	}
+	return nil
 }
 
 // ManageGCRequest is a message used to control TemporalX garbage collection
 type ManageGCRequest struct {
 	// type is the type of gc request being performed
-	Type                 GCREQTYPE `protobuf:"varint,1,opt,name=type,proto3,enum=pb.GCREQTYPE" json:"type,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Type GCREQTYPE `protobuf:"varint,1,opt,name=type,proto3,enum=pb.GCREQTYPE" json:"type,omitempty"`
 }
 
 func (m *ManageGCRequest) Reset()      { *m = ManageGCRequest{} }
 func (*ManageGCRequest) ProtoMessage() {}
 func (*ManageGCRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_73a7fc70dcc2027c, []int{0}
+	return fileDescriptor_73a7fc70dcc2027c, []int{3}
 }
 func (m *ManageGCRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -83,7 +362,7 @@ func (m *ManageGCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_ManageGCRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -106,21 +385,19 @@ func (m *ManageGCRequest) GetType() GCREQTYPE {
 	if m != nil {
 		return m.Type
 	}
-	return GCREQTYPE_START
+	return GCREQTYPE_GC_START
 }
 
 // ManageGCResponse is a message used as a response to gc control requests
 type ManageGCResponse struct {
-	Status               string   `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	// status contains a status message
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (m *ManageGCResponse) Reset()      { *m = ManageGCResponse{} }
 func (*ManageGCResponse) ProtoMessage() {}
 func (*ManageGCResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_73a7fc70dcc2027c, []int{1}
+	return fileDescriptor_73a7fc70dcc2027c, []int{4}
 }
 func (m *ManageGCResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -130,7 +407,7 @@ func (m *ManageGCResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return xxx_messageInfo_ManageGCResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -159,22 +436,16 @@ func (m *ManageGCResponse) GetStatus() string {
 // RefCountRequest is used to analyze the reference
 // counter store, and retrieve usage information
 type RefCountRequest struct {
-	// cids are optional cids to filter for our search query by.
-	// if this is empty, then we will only examine the counter store
-	// for information related to those cids.
+	// cids are optional cids to filter our requests by
 	Cids []string `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty"`
-	// if performing a generic search, the maximum number of results.
-	// a value of 0 means unlimited
-	Limit                int64    `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	// can be used to apply limits to the number of store requests made, search limits, etc..
+	Limit int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 }
 
 func (m *RefCountRequest) Reset()      { *m = RefCountRequest{} }
 func (*RefCountRequest) ProtoMessage() {}
 func (*RefCountRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_73a7fc70dcc2027c, []int{2}
+	return fileDescriptor_73a7fc70dcc2027c, []int{5}
 }
 func (m *RefCountRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -184,7 +455,7 @@ func (m *RefCountRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_RefCountRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -221,16 +492,13 @@ func (m *RefCountRequest) GetLimit() int64 {
 // gathered by a RefCount rpc call.
 type RefCountResponse struct {
 	// cids is a mapping of the cid to its reference count
-	Cids                 map[string]int64 `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `json:"-"`
-	XXX_sizecache        int32            `json:"-"`
+	Cids map[string]int64 `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
 func (m *RefCountResponse) Reset()      { *m = RefCountResponse{} }
 func (*RefCountResponse) ProtoMessage() {}
 func (*RefCountResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_73a7fc70dcc2027c, []int{3}
+	return fileDescriptor_73a7fc70dcc2027c, []int{6}
 }
 func (m *RefCountResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -240,7 +508,7 @@ func (m *RefCountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return xxx_messageInfo_RefCountResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -267,7 +535,14 @@ func (m *RefCountResponse) GetCids() map[string]int64 {
 }
 
 func init() {
+	proto.RegisterEnum("pb.BSREQTYPE", BSREQTYPE_name, BSREQTYPE_value)
+	proto.RegisterEnum("pb.BSREQOPTS", BSREQOPTS_name, BSREQOPTS_value)
 	proto.RegisterEnum("pb.GCREQTYPE", GCREQTYPE_name, GCREQTYPE_value)
+	proto.RegisterEnum("pb.REFREQTYPE", REFREQTYPE_name, REFREQTYPE_value)
+	proto.RegisterEnum("pb.REFREQOPTS", REFREQOPTS_name, REFREQOPTS_value)
+	proto.RegisterType((*BlockstoreRequest)(nil), "pb.BlockstoreRequest")
+	proto.RegisterType((*BlockstoreResponse)(nil), "pb.BlockstoreResponse")
+	proto.RegisterType((*Block)(nil), "pb.Block")
 	proto.RegisterType((*ManageGCRequest)(nil), "pb.ManageGCRequest")
 	proto.RegisterType((*ManageGCResponse)(nil), "pb.ManageGCResponse")
 	proto.RegisterType((*RefCountRequest)(nil), "pb.RefCountRequest")
@@ -278,34 +553,249 @@ func init() {
 func init() { proto.RegisterFile("admin.proto", fileDescriptor_73a7fc70dcc2027c) }
 
 var fileDescriptor_73a7fc70dcc2027c = []byte{
-	// 389 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x91, 0xcf, 0xae, 0x93, 0x40,
-	0x14, 0xc6, 0x19, 0xfa, 0x27, 0xe5, 0x34, 0x5a, 0x32, 0x36, 0xa6, 0xe9, 0x62, 0x52, 0x59, 0x91,
-	0x46, 0x69, 0x82, 0x26, 0x35, 0xba, 0x42, 0xd2, 0x34, 0x2e, 0x8c, 0x75, 0xc0, 0x85, 0x4b, 0x68,
-	0xa7, 0x48, 0x6c, 0x01, 0xcb, 0x60, 0xd2, 0xc4, 0x44, 0x1f, 0xc7, 0x47, 0xf0, 0x11, 0x5c, 0xba,
-	0x74, 0x59, 0x78, 0x02, 0x97, 0x77, 0x79, 0xc3, 0x50, 0xda, 0x7b, 0xd9, 0x9d, 0x6f, 0x66, 0x7e,
-	0xf3, 0x7d, 0xe7, 0x1c, 0xe8, 0x7b, 0x9b, 0x7d, 0x18, 0x19, 0xc9, 0x21, 0xe6, 0x31, 0x96, 0x13,
-	0x7f, 0xfc, 0x2c, 0x08, 0xf9, 0xe7, 0xcc, 0x37, 0xd6, 0xf1, 0x7e, 0x16, 0xc4, 0x41, 0x3c, 0x13,
-	0x57, 0x7e, 0xb6, 0x15, 0x4a, 0x08, 0x51, 0x55, 0x88, 0xf6, 0x02, 0x06, 0xef, 0xbc, 0xc8, 0x0b,
-	0xd8, 0xd2, 0xa6, 0xec, 0x6b, 0xc6, 0x52, 0x8e, 0x9f, 0x40, 0x9b, 0x1f, 0x13, 0x36, 0x42, 0x13,
-	0xa4, 0x3f, 0x34, 0x1f, 0x18, 0x89, 0x6f, 0x2c, 0x6d, 0xba, 0xf8, 0xe0, 0x7e, 0x5a, 0x2d, 0xa8,
-	0xb8, 0xd2, 0xa6, 0xa0, 0x5e, 0xa9, 0x34, 0x89, 0xa3, 0x94, 0xe1, 0xc7, 0xd0, 0x4d, 0xb9, 0xc7,
-	0xb3, 0x54, 0x80, 0x0a, 0x3d, 0x2b, 0xed, 0x35, 0x0c, 0x28, 0xdb, 0xda, 0x71, 0x16, 0xf1, 0xda,
-	0x01, 0x43, 0x7b, 0x1d, 0x6e, 0xca, 0x87, 0x2d, 0x5d, 0xa1, 0xa2, 0xc6, 0x43, 0xe8, 0xec, 0xc2,
-	0x7d, 0xc8, 0x47, 0xf2, 0x04, 0xe9, 0x2d, 0x5a, 0x09, 0xed, 0x07, 0xa8, 0x57, 0xf8, 0x6c, 0x64,
-	0xde, 0xa1, 0xfb, 0x26, 0x29, 0xf3, 0x35, 0xdf, 0x18, 0x76, 0xb8, 0x49, 0x17, 0x11, 0x3f, 0x1c,
-	0xab, 0xdf, 0xc7, 0x73, 0x50, 0x2e, 0x47, 0x58, 0x85, 0xd6, 0x17, 0x76, 0x3c, 0xc7, 0x2c, 0xcb,
-	0xd2, 0xfc, 0x9b, 0xb7, 0xcb, 0x58, 0x6d, 0x2e, 0xc4, 0x2b, 0xf9, 0x25, 0x9a, 0x3e, 0x05, 0xe5,
-	0xd2, 0x3c, 0x56, 0xa0, 0xe3, 0xb8, 0x16, 0x75, 0x55, 0x09, 0xf7, 0xa0, 0xed, 0xb8, 0xef, 0x57,
-	0x2a, 0xc2, 0x00, 0x5d, 0xc7, 0xb5, 0xdc, 0x8f, 0x8e, 0x2a, 0x9b, 0xdf, 0xa1, 0x67, 0x95, 0xfb,
-	0xb0, 0x56, 0x6f, 0xf1, 0x1c, 0x7a, 0xf5, 0x8c, 0xf0, 0xa3, 0x32, 0x64, 0x63, 0xce, 0xe3, 0xe1,
-	0xfd, 0xc3, 0x2a, 0xb9, 0x26, 0x95, 0x60, 0xdd, 0x4f, 0x05, 0x36, 0xc6, 0x57, 0x81, 0xcd, 0x96,
-	0x35, 0xe9, 0x8d, 0xfe, 0x2f, 0x27, 0xd2, 0x29, 0x27, 0xe8, 0x7f, 0x4e, 0xd0, 0x4d, 0x4e, 0xd0,
-	0xcf, 0x82, 0xa0, 0x5f, 0x05, 0x41, 0xbf, 0x0b, 0x82, 0xfe, 0x14, 0x04, 0xfd, 0x2d, 0x08, 0x3a,
-	0x15, 0x04, 0xf9, 0x5d, 0xb1, 0xfc, 0xe7, 0xb7, 0x01, 0x00, 0x00, 0xff, 0xff, 0x06, 0xe3, 0x23,
-	0x3a, 0x3e, 0x02, 0x00, 0x00,
+	// 632 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x54, 0xc1, 0x6e, 0xda, 0x4c,
+	0x10, 0xf6, 0x42, 0x42, 0xe2, 0x21, 0x24, 0xce, 0xfe, 0xf9, 0x23, 0x44, 0xa5, 0x55, 0xe2, 0x43,
+	0x1b, 0x21, 0x85, 0x48, 0x34, 0x55, 0xaa, 0x56, 0x3d, 0x80, 0xb3, 0xa0, 0x4a, 0x49, 0xa0, 0x8b,
+	0x39, 0xe4, 0x84, 0x0c, 0x38, 0xd4, 0x4a, 0x82, 0x09, 0x5e, 0x2a, 0x71, 0x6a, 0x1f, 0xa1, 0x8f,
+	0xd1, 0x47, 0xa8, 0xd4, 0x17, 0xe8, 0x31, 0xc7, 0x1c, 0x83, 0xf3, 0x02, 0x3d, 0xf6, 0x58, 0xed,
+	0xda, 0x0b, 0xd4, 0x87, 0xde, 0x66, 0xe6, 0x9b, 0xcf, 0xdf, 0xb7, 0x33, 0xbb, 0x86, 0xac, 0xd3,
+	0xbf, 0xf5, 0x86, 0xa5, 0xd1, 0xd8, 0xe7, 0x3e, 0x4e, 0x8d, 0xba, 0x85, 0xc3, 0x81, 0xc7, 0x3f,
+	0x4e, 0xba, 0xa5, 0x9e, 0x7f, 0x7b, 0x34, 0xf0, 0x07, 0xfe, 0x91, 0x84, 0xba, 0x93, 0x2b, 0x99,
+	0xc9, 0x44, 0x46, 0x11, 0xc5, 0x9c, 0xc2, 0x76, 0xf5, 0xc6, 0xef, 0x5d, 0x07, 0xdc, 0x1f, 0xbb,
+	0xcc, 0xbd, 0x9b, 0xb8, 0x01, 0xc7, 0x18, 0x56, 0x7a, 0x5e, 0x3f, 0xc8, 0xa3, 0xbd, 0xf4, 0x81,
+	0xce, 0x64, 0x8c, 0x5f, 0xc0, 0xda, 0xd8, 0xbd, 0xb3, 0xa7, 0x23, 0x37, 0x9f, 0xda, 0x43, 0x07,
+	0x9b, 0xe5, 0x5c, 0x69, 0xd4, 0x2d, 0x55, 0x5b, 0x8c, 0x7e, 0xb0, 0x2f, 0x9b, 0x94, 0x29, 0x34,
+	0x6e, 0x6c, 0x8c, 0x78, 0x90, 0x4f, 0x27, 0x1a, 0x1b, 0x4d, 0xbb, 0xc5, 0x14, 0x6a, 0x9e, 0x00,
+	0x5e, 0x96, 0x0e, 0x46, 0xfe, 0x30, 0x70, 0xf1, 0x3e, 0x64, 0xba, 0xb2, 0x2a, 0xd5, 0xb3, 0x65,
+	0x5d, 0xb2, 0x45, 0x85, 0xc5, 0x80, 0x79, 0x08, 0xab, 0xb2, 0x80, 0x0d, 0x48, 0xf7, 0xbc, 0x7e,
+	0x1e, 0xed, 0xa1, 0x03, 0x9d, 0x89, 0x50, 0x38, 0xef, 0x3b, 0xdc, 0x91, 0x16, 0x37, 0x98, 0x8c,
+	0xcd, 0x63, 0xd8, 0x3a, 0x77, 0x86, 0xce, 0xc0, 0xad, 0x5b, 0xea, 0x80, 0xfb, 0xb0, 0xc2, 0xc5,
+	0x49, 0xd0, 0xc2, 0x60, 0xdd, 0x52, 0x27, 0x91, 0x90, 0x59, 0x04, 0x63, 0xc1, 0x8a, 0xbd, 0xed,
+	0x42, 0x26, 0xe0, 0x0e, 0x9f, 0x04, 0xb1, 0x64, 0x9c, 0x99, 0x6f, 0x61, 0x8b, 0xb9, 0x57, 0x96,
+	0x3f, 0x19, 0xf2, 0x7f, 0x8d, 0x70, 0x07, 0x56, 0x6f, 0xbc, 0x5b, 0x8f, 0x4b, 0x77, 0x69, 0x16,
+	0x25, 0xe6, 0x67, 0x30, 0x16, 0xe4, 0x58, 0xa8, 0xbc, 0xc4, 0xce, 0x96, 0x89, 0xf0, 0x97, 0xec,
+	0x29, 0x59, 0x5e, 0x3f, 0xa0, 0x43, 0x3e, 0x9e, 0x46, 0x5f, 0x2f, 0x9c, 0x80, 0x3e, 0x2f, 0x89,
+	0xc9, 0x5c, 0xbb, 0x53, 0x35, 0x99, 0x6b, 0x77, 0x2a, 0xc4, 0x3f, 0x39, 0x37, 0x13, 0x57, 0x89,
+	0xcb, 0xe4, 0x4d, 0xea, 0x35, 0x2a, 0xda, 0xa0, 0xcf, 0xd7, 0x88, 0x73, 0x22, 0xe9, 0x9c, 0xd2,
+	0x33, 0x6a, 0x53, 0x43, 0xc3, 0x00, 0x99, 0x6a, 0xab, 0xd3, 0x6c, 0xdb, 0x06, 0xc2, 0x5b, 0x90,
+	0x8d, 0xe2, 0xce, 0x79, 0xe5, 0xe2, 0xd2, 0x48, 0xc5, 0x60, 0x9d, 0xda, 0x46, 0x3a, 0x06, 0xeb,
+	0x34, 0x06, 0x57, 0x8a, 0xcf, 0xe3, 0xaf, 0x8a, 0x9d, 0xe3, 0x2c, 0xac, 0x9d, 0xd2, 0x5a, 0xa5,
+	0x7d, 0x66, 0x1b, 0x1a, 0xde, 0x80, 0xf5, 0x6a, 0xab, 0x53, 0x6b, 0x30, 0x8b, 0x1a, 0xa8, 0xf8,
+	0x0a, 0xf4, 0xf9, 0xe8, 0x05, 0x54, 0xb7, 0x3a, 0x2d, 0xbb, 0xc2, 0x44, 0x63, 0x16, 0xd6, 0x64,
+	0xd6, 0x68, 0x1a, 0x48, 0x18, 0x8b, 0x20, 0xbb, 0xdd, 0x32, 0x52, 0xc5, 0x23, 0x00, 0x46, 0x6b,
+	0x8a, 0xb7, 0x0d, 0x39, 0x46, 0x6b, 0x52, 0xde, 0x6a, 0xb4, 0x2f, 0x04, 0x79, 0x53, 0x36, 0xa8,
+	0x93, 0xa0, 0xe2, 0x33, 0x45, 0x90, 0x86, 0x72, 0xa0, 0x0b, 0x34, 0x32, 0xa1, 0x95, 0x7f, 0x20,
+	0x58, 0xaf, 0x88, 0x87, 0x54, 0x69, 0xbe, 0xc7, 0x27, 0xb0, 0xae, 0x36, 0x8f, 0xff, 0x13, 0xa3,
+	0x4f, 0xdc, 0x9e, 0xc2, 0xce, 0xdf, 0xc5, 0x68, 0x1f, 0xa6, 0x26, 0x88, 0x6a, 0x4b, 0x11, 0x31,
+	0x71, 0x29, 0x22, 0x62, 0x72, 0x91, 0xa6, 0x86, 0xdf, 0x01, 0x2c, 0x5e, 0x02, 0xfe, 0x7f, 0x7e,
+	0xe3, 0x97, 0x1f, 0x65, 0x61, 0x37, 0x59, 0x56, 0xf4, 0xea, 0xf1, 0xc3, 0x8c, 0x68, 0x8f, 0x33,
+	0x82, 0x7e, 0xcd, 0x08, 0xfa, 0x3d, 0x23, 0xe8, 0x4b, 0x48, 0xd0, 0xb7, 0x90, 0xa0, 0xef, 0x21,
+	0x41, 0x3f, 0x43, 0x82, 0xee, 0x43, 0x82, 0x1e, 0x43, 0x82, 0xbe, 0x3e, 0x11, 0xed, 0xfe, 0x89,
+	0x68, 0x0f, 0x4f, 0x44, 0xeb, 0x66, 0xe4, 0x0f, 0xe0, 0xe5, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0xd7, 0x80, 0xfc, 0x1c, 0x42, 0x04, 0x00, 0x00,
 }
 
+func (this *BlockstoreRequest) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*BlockstoreRequest)
+	if !ok {
+		that2, ok := that.(BlockstoreRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *BlockstoreRequest")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *BlockstoreRequest but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *BlockstoreRequest but is not nil && this == nil")
+	}
+	if len(this.Cids) != len(that1.Cids) {
+		return fmt.Errorf("Cids this(%v) Not Equal that(%v)", len(this.Cids), len(that1.Cids))
+	}
+	for i := range this.Cids {
+		if this.Cids[i] != that1.Cids[i] {
+			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
+		}
+	}
+	if this.ReqType != that1.ReqType {
+		return fmt.Errorf("ReqType this(%v) Not Equal that(%v)", this.ReqType, that1.ReqType)
+	}
+	if this.ReqOpts != that1.ReqOpts {
+		return fmt.Errorf("ReqOpts this(%v) Not Equal that(%v)", this.ReqOpts, that1.ReqOpts)
+	}
+	return nil
+}
+func (this *BlockstoreRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*BlockstoreRequest)
+	if !ok {
+		that2, ok := that.(BlockstoreRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.Cids) != len(that1.Cids) {
+		return false
+	}
+	for i := range this.Cids {
+		if this.Cids[i] != that1.Cids[i] {
+			return false
+		}
+	}
+	if this.ReqType != that1.ReqType {
+		return false
+	}
+	if this.ReqOpts != that1.ReqOpts {
+		return false
+	}
+	return true
+}
+func (this *BlockstoreResponse) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*BlockstoreResponse)
+	if !ok {
+		that2, ok := that.(BlockstoreResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *BlockstoreResponse")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *BlockstoreResponse but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *BlockstoreResponse but is not nil && this == nil")
+	}
+	if len(this.Blocks) != len(that1.Blocks) {
+		return fmt.Errorf("Blocks this(%v) Not Equal that(%v)", len(this.Blocks), len(that1.Blocks))
+	}
+	for i := range this.Blocks {
+		if !this.Blocks[i].Equal(that1.Blocks[i]) {
+			return fmt.Errorf("Blocks this[%v](%v) Not Equal that[%v](%v)", i, this.Blocks[i], i, that1.Blocks[i])
+		}
+	}
+	return nil
+}
+func (this *BlockstoreResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*BlockstoreResponse)
+	if !ok {
+		that2, ok := that.(BlockstoreResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if len(this.Blocks) != len(that1.Blocks) {
+		return false
+	}
+	for i := range this.Blocks {
+		if !this.Blocks[i].Equal(that1.Blocks[i]) {
+			return false
+		}
+	}
+	return true
+}
+func (this *Block) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*Block)
+	if !ok {
+		that2, ok := that.(Block)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *Block")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *Block but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *Block but is not nil && this == nil")
+	}
+	if this.Cid != that1.Cid {
+		return fmt.Errorf("Cid this(%v) Not Equal that(%v)", this.Cid, that1.Cid)
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
+	}
+	return nil
+}
+func (this *Block) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*Block)
+	if !ok {
+		that2, ok := that.(Block)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Cid != that1.Cid {
+		return false
+	}
+	if !bytes.Equal(this.Data, that1.Data) {
+		return false
+	}
+	return true
+}
 func (this *ManageGCRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -334,9 +824,6 @@ func (this *ManageGCRequest) VerboseEqual(that interface{}) error {
 	if this.Type != that1.Type {
 		return fmt.Errorf("Type this(%v) Not Equal that(%v)", this.Type, that1.Type)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *ManageGCRequest) Equal(that interface{}) bool {
@@ -359,9 +846,6 @@ func (this *ManageGCRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Type != that1.Type {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -394,9 +878,6 @@ func (this *ManageGCResponse) VerboseEqual(that interface{}) error {
 	if this.Status != that1.Status {
 		return fmt.Errorf("Status this(%v) Not Equal that(%v)", this.Status, that1.Status)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *ManageGCResponse) Equal(that interface{}) bool {
@@ -419,9 +900,6 @@ func (this *ManageGCResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Status != that1.Status {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -462,9 +940,6 @@ func (this *RefCountRequest) VerboseEqual(that interface{}) error {
 	if this.Limit != that1.Limit {
 		return fmt.Errorf("Limit this(%v) Not Equal that(%v)", this.Limit, that1.Limit)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *RefCountRequest) Equal(that interface{}) bool {
@@ -495,9 +970,6 @@ func (this *RefCountRequest) Equal(that interface{}) bool {
 		}
 	}
 	if this.Limit != that1.Limit {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -535,9 +1007,6 @@ func (this *RefCountResponse) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *RefCountResponse) Equal(that interface{}) bool {
@@ -567,10 +1036,42 @@ func (this *RefCountResponse) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
+}
+func (this *BlockstoreRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&pb.BlockstoreRequest{")
+	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
+	s = append(s, "ReqType: "+fmt.Sprintf("%#v", this.ReqType)+",\n")
+	s = append(s, "ReqOpts: "+fmt.Sprintf("%#v", this.ReqOpts)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *BlockstoreResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&pb.BlockstoreResponse{")
+	if this.Blocks != nil {
+		s = append(s, "Blocks: "+fmt.Sprintf("%#v", this.Blocks)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Block) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.Block{")
+	s = append(s, "Cid: "+fmt.Sprintf("%#v", this.Cid)+",\n")
+	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
 }
 func (this *ManageGCRequest) GoString() string {
 	if this == nil {
@@ -579,9 +1080,6 @@ func (this *ManageGCRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.ManageGCRequest{")
 	s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -592,9 +1090,6 @@ func (this *ManageGCResponse) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.ManageGCResponse{")
 	s = append(s, "Status: "+fmt.Sprintf("%#v", this.Status)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -606,9 +1101,6 @@ func (this *RefCountRequest) GoString() string {
 	s = append(s, "&pb.RefCountRequest{")
 	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
 	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -630,9 +1122,6 @@ func (this *RefCountResponse) GoString() string {
 	mapStringForCids += "}"
 	if this.Cids != nil {
 		s = append(s, "Cids: "+mapStringForCids+",\n")
-	}
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -662,6 +1151,8 @@ type AdminAPIClient interface {
 	ManageGC(ctx context.Context, in *ManageGCRequest, opts ...grpc.CallOption) (*ManageGCResponse, error)
 	// RefCount is used to analyze the counter store and pull reference count information
 	RefCount(ctx context.Context, in *RefCountRequest, opts ...grpc.CallOption) (*RefCountResponse, error)
+	// Blockstore allows management of the blockstore, and optionally, the counted store
+	Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error)
 }
 
 type adminAPIClient struct {
@@ -690,12 +1181,37 @@ func (c *adminAPIClient) RefCount(ctx context.Context, in *RefCountRequest, opts
 	return out, nil
 }
 
+func (c *adminAPIClient) Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error) {
+	out := new(BlockstoreResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminAPI/Blockstore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminAPIServer is the server API for AdminAPI service.
 type AdminAPIServer interface {
 	// ManageGC is used to manage TemporalX's garbage collection process
 	ManageGC(context.Context, *ManageGCRequest) (*ManageGCResponse, error)
 	// RefCount is used to analyze the counter store and pull reference count information
 	RefCount(context.Context, *RefCountRequest) (*RefCountResponse, error)
+	// Blockstore allows management of the blockstore, and optionally, the counted store
+	Blockstore(context.Context, *BlockstoreRequest) (*BlockstoreResponse, error)
+}
+
+// UnimplementedAdminAPIServer can be embedded to have forward compatible implementations.
+type UnimplementedAdminAPIServer struct {
+}
+
+func (*UnimplementedAdminAPIServer) ManageGC(ctx context.Context, req *ManageGCRequest) (*ManageGCResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ManageGC not implemented")
+}
+func (*UnimplementedAdminAPIServer) RefCount(ctx context.Context, req *RefCountRequest) (*RefCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefCount not implemented")
+}
+func (*UnimplementedAdminAPIServer) Blockstore(ctx context.Context, req *BlockstoreRequest) (*BlockstoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Blockstore not implemented")
 }
 
 func RegisterAdminAPIServer(s *grpc.Server, srv AdminAPIServer) {
@@ -738,6 +1254,24 @@ func _AdminAPI_RefCount_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AdminAPI_Blockstore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlockstoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminAPIServer).Blockstore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminAPI/Blockstore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminAPIServer).Blockstore(ctx, req.(*BlockstoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _AdminAPI_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.AdminAPI",
 	HandlerType: (*AdminAPIServer)(nil),
@@ -750,15 +1284,135 @@ var _AdminAPI_serviceDesc = grpc.ServiceDesc{
 			MethodName: "RefCount",
 			Handler:    _AdminAPI_RefCount_Handler,
 		},
+		{
+			MethodName: "Blockstore",
+			Handler:    _AdminAPI_Blockstore_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "admin.proto",
 }
 
+func (m *BlockstoreRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockstoreRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *BlockstoreRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ReqOpts != 0 {
+		i = encodeVarintAdmin(dAtA, i, uint64(m.ReqOpts))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.ReqType != 0 {
+		i = encodeVarintAdmin(dAtA, i, uint64(m.ReqType))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Cids) > 0 {
+		for iNdEx := len(m.Cids) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Cids[iNdEx])
+			copy(dAtA[i:], m.Cids[iNdEx])
+			i = encodeVarintAdmin(dAtA, i, uint64(len(m.Cids[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *BlockstoreResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *BlockstoreResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *BlockstoreResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Blocks) > 0 {
+		for iNdEx := len(m.Blocks) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Blocks[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintAdmin(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Block) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Block) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Block) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Data) > 0 {
+		i -= len(m.Data)
+		copy(dAtA[i:], m.Data)
+		i = encodeVarintAdmin(dAtA, i, uint64(len(m.Data)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Cid) > 0 {
+		i -= len(m.Cid)
+		copy(dAtA[i:], m.Cid)
+		i = encodeVarintAdmin(dAtA, i, uint64(len(m.Cid)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *ManageGCRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -766,25 +1420,27 @@ func (m *ManageGCRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ManageGCRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ManageGCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.Type != 0 {
-		dAtA[i] = 0x8
-		i++
 		i = encodeVarintAdmin(dAtA, i, uint64(m.Type))
+		i--
+		dAtA[i] = 0x8
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *ManageGCResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -792,26 +1448,29 @@ func (m *ManageGCResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ManageGCResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ManageGCResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Status) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.Status)
+		copy(dAtA[i:], m.Status)
 		i = encodeVarintAdmin(dAtA, i, uint64(len(m.Status)))
-		i += copy(dAtA[i:], m.Status)
+		i--
+		dAtA[i] = 0xa
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *RefCountRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -819,40 +1478,36 @@ func (m *RefCountRequest) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *RefCountRequest) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RefCountRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.Limit != 0 {
+		i = encodeVarintAdmin(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x10
+	}
 	if len(m.Cids) > 0 {
-		for _, s := range m.Cids {
+		for iNdEx := len(m.Cids) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Cids[iNdEx])
+			copy(dAtA[i:], m.Cids[iNdEx])
+			i = encodeVarintAdmin(dAtA, i, uint64(len(m.Cids[iNdEx])))
+			i--
 			dAtA[i] = 0xa
-			i++
-			l = len(s)
-			for l >= 1<<7 {
-				dAtA[i] = uint8(uint64(l)&0x7f | 0x80)
-				l >>= 7
-				i++
-			}
-			dAtA[i] = uint8(l)
-			i++
-			i += copy(dAtA[i:], s)
 		}
 	}
-	if m.Limit != 0 {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintAdmin(dAtA, i, uint64(m.Limit))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *RefCountResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -860,46 +1515,91 @@ func (m *RefCountResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *RefCountResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RefCountResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Cids) > 0 {
 		for k := range m.Cids {
-			dAtA[i] = 0xa
-			i++
 			v := m.Cids[k]
-			mapSize := 1 + len(k) + sovAdmin(uint64(len(k))) + 1 + sovAdmin(uint64(v))
-			i = encodeVarintAdmin(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintAdmin(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x10
-			i++
+			baseI := i
 			i = encodeVarintAdmin(dAtA, i, uint64(v))
+			i--
+			dAtA[i] = 0x10
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintAdmin(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintAdmin(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintAdmin(dAtA []byte, offset int, v uint64) int {
+	offset -= sovAdmin(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
+func NewPopulatedBlockstoreRequest(r randyAdmin, easy bool) *BlockstoreRequest {
+	this := &BlockstoreRequest{}
+	v1 := r.Intn(10)
+	this.Cids = make([]string, v1)
+	for i := 0; i < v1; i++ {
+		this.Cids[i] = string(randStringAdmin(r))
+	}
+	this.ReqType = BSREQTYPE([]int32{0, 1, 2, 3, 4}[r.Intn(5)])
+	this.ReqOpts = BSREQOPTS([]int32{0, 1}[r.Intn(2)])
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedBlockstoreResponse(r randyAdmin, easy bool) *BlockstoreResponse {
+	this := &BlockstoreResponse{}
+	if r.Intn(5) != 0 {
+		v2 := r.Intn(5)
+		this.Blocks = make([]*Block, v2)
+		for i := 0; i < v2; i++ {
+			this.Blocks[i] = NewPopulatedBlock(r, easy)
+		}
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedBlock(r randyAdmin, easy bool) *Block {
+	this := &Block{}
+	this.Cid = string(randStringAdmin(r))
+	v3 := r.Intn(100)
+	this.Data = make([]byte, v3)
+	for i := 0; i < v3; i++ {
+		this.Data[i] = byte(r.Intn(256))
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 func NewPopulatedManageGCRequest(r randyAdmin, easy bool) *ManageGCRequest {
 	this := &ManageGCRequest{}
 	this.Type = GCREQTYPE([]int32{0, 1, 2}[r.Intn(3)])
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
@@ -908,16 +1608,15 @@ func NewPopulatedManageGCResponse(r randyAdmin, easy bool) *ManageGCResponse {
 	this := &ManageGCResponse{}
 	this.Status = string(randStringAdmin(r))
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
 
 func NewPopulatedRefCountRequest(r randyAdmin, easy bool) *RefCountRequest {
 	this := &RefCountRequest{}
-	v1 := r.Intn(10)
-	this.Cids = make([]string, v1)
-	for i := 0; i < v1; i++ {
+	v4 := r.Intn(10)
+	this.Cids = make([]string, v4)
+	for i := 0; i < v4; i++ {
 		this.Cids[i] = string(randStringAdmin(r))
 	}
 	this.Limit = int64(r.Int63())
@@ -925,26 +1624,24 @@ func NewPopulatedRefCountRequest(r randyAdmin, easy bool) *RefCountRequest {
 		this.Limit *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 3)
 	}
 	return this
 }
 
 func NewPopulatedRefCountResponse(r randyAdmin, easy bool) *RefCountResponse {
 	this := &RefCountResponse{}
-	if r.Intn(10) != 0 {
-		v2 := r.Intn(10)
+	if r.Intn(5) != 0 {
+		v5 := r.Intn(10)
 		this.Cids = make(map[string]int64)
-		for i := 0; i < v2; i++ {
-			v3 := randStringAdmin(r)
-			this.Cids[v3] = int64(r.Int63())
+		for i := 0; i < v5; i++ {
+			v6 := randStringAdmin(r)
+			this.Cids[v6] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Cids[v3] *= -1
+				this.Cids[v6] *= -1
 			}
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedAdmin(r, 2)
 	}
 	return this
 }
@@ -968,9 +1665,9 @@ func randUTF8RuneAdmin(r randyAdmin) rune {
 	return rune(ru + 61)
 }
 func randStringAdmin(r randyAdmin) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	v7 := r.Intn(100)
+	tmps := make([]rune, v7)
+	for i := 0; i < v7; i++ {
 		tmps[i] = randUTF8RuneAdmin(r)
 	}
 	return string(tmps)
@@ -992,11 +1689,11 @@ func randFieldAdmin(dAtA []byte, r randyAdmin, fieldNumber int, wire int) []byte
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
-		v5 := r.Int63()
+		v8 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			v8 *= -1
 		}
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(v8))
 	case 1:
 		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -1021,6 +1718,59 @@ func encodeVarintPopulateAdmin(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
+func (m *BlockstoreRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Cids) > 0 {
+		for _, s := range m.Cids {
+			l = len(s)
+			n += 1 + l + sovAdmin(uint64(l))
+		}
+	}
+	if m.ReqType != 0 {
+		n += 1 + sovAdmin(uint64(m.ReqType))
+	}
+	if m.ReqOpts != 0 {
+		n += 1 + sovAdmin(uint64(m.ReqOpts))
+	}
+	return n
+}
+
+func (m *BlockstoreResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Blocks) > 0 {
+		for _, e := range m.Blocks {
+			l = e.Size()
+			n += 1 + l + sovAdmin(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *Block) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Cid)
+	if l > 0 {
+		n += 1 + l + sovAdmin(uint64(l))
+	}
+	l = len(m.Data)
+	if l > 0 {
+		n += 1 + l + sovAdmin(uint64(l))
+	}
+	return n
+}
+
 func (m *ManageGCRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1029,9 +1779,6 @@ func (m *ManageGCRequest) Size() (n int) {
 	_ = l
 	if m.Type != 0 {
 		n += 1 + sovAdmin(uint64(m.Type))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1045,9 +1792,6 @@ func (m *ManageGCResponse) Size() (n int) {
 	l = len(m.Status)
 	if l > 0 {
 		n += 1 + l + sovAdmin(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1067,9 +1811,6 @@ func (m *RefCountRequest) Size() (n int) {
 	if m.Limit != 0 {
 		n += 1 + sovAdmin(uint64(m.Limit))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -1087,24 +1828,52 @@ func (m *RefCountResponse) Size() (n int) {
 			n += mapEntrySize + 1 + sovAdmin(uint64(mapEntrySize))
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
 func sovAdmin(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozAdmin(x uint64) (n int) {
 	return sovAdmin(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *BlockstoreRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&BlockstoreRequest{`,
+		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
+		`ReqType:` + fmt.Sprintf("%v", this.ReqType) + `,`,
+		`ReqOpts:` + fmt.Sprintf("%v", this.ReqOpts) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *BlockstoreResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	repeatedStringForBlocks := "[]*Block{"
+	for _, f := range this.Blocks {
+		repeatedStringForBlocks += strings.Replace(f.String(), "Block", "Block", 1) + ","
+	}
+	repeatedStringForBlocks += "}"
+	s := strings.Join([]string{`&BlockstoreResponse{`,
+		`Blocks:` + repeatedStringForBlocks + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Block) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Block{`,
+		`Cid:` + fmt.Sprintf("%v", this.Cid) + `,`,
+		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
+		`}`,
+	}, "")
+	return s
 }
 func (this *ManageGCRequest) String() string {
 	if this == nil {
@@ -1112,7 +1881,6 @@ func (this *ManageGCRequest) String() string {
 	}
 	s := strings.Join([]string{`&ManageGCRequest{`,
 		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1123,7 +1891,6 @@ func (this *ManageGCResponse) String() string {
 	}
 	s := strings.Join([]string{`&ManageGCResponse{`,
 		`Status:` + fmt.Sprintf("%v", this.Status) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1135,7 +1902,6 @@ func (this *RefCountRequest) String() string {
 	s := strings.Join([]string{`&RefCountRequest{`,
 		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
 		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1156,7 +1922,6 @@ func (this *RefCountResponse) String() string {
 	mapStringForCids += "}"
 	s := strings.Join([]string{`&RefCountResponse{`,
 		`Cids:` + mapStringForCids + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1168,6 +1933,335 @@ func valueToStringAdmin(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
+}
+func (m *BlockstoreRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAdmin
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockstoreRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockstoreRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Cids", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Cids = append(m.Cids, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReqType", wireType)
+			}
+			m.ReqType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReqType |= BSREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReqOpts", wireType)
+			}
+			m.ReqOpts = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ReqOpts |= BSREQOPTS(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAdmin(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *BlockstoreResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAdmin
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: BlockstoreResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: BlockstoreResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Blocks", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Blocks = append(m.Blocks, &Block{})
+			if err := m.Blocks[len(m.Blocks)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAdmin(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Block) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowAdmin
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Block: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Block: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Cid", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Cid = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowAdmin
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
+			if m.Data == nil {
+				m.Data = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipAdmin(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthAdmin
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *ManageGCRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -1232,7 +2326,6 @@ func (m *ManageGCRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1318,7 +2411,6 @@ func (m *ManageGCResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1423,7 +2515,6 @@ func (m *RefCountRequest) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1590,7 +2681,6 @@ func (m *RefCountResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}

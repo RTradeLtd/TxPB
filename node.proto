@@ -32,6 +32,7 @@ service NodeAPI {
     rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
 }
 
+
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 message GetPeersResponse {
     // a slice of peer IDs
@@ -81,6 +82,8 @@ enum EXTRASTYPE {
     IDENTIFY = 0;
     // PUBSUB is the libp2p pubsub system
     PUBSUB = 1;
+    // DISCOVERY is a libp2p discovery service
+    DISCOVERY = 2;
 }
 
 // EnableExtrasRequest is used to enable a particular extras feature

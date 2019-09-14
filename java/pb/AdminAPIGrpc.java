@@ -94,6 +94,38 @@ public final class AdminAPIGrpc {
      return getRefCountMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Admin.BlockstoreRequest,
+      pb.Admin.BlockstoreResponse> getBlockstoreMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Blockstore",
+      requestType = pb.Admin.BlockstoreRequest.class,
+      responseType = pb.Admin.BlockstoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Admin.BlockstoreRequest,
+      pb.Admin.BlockstoreResponse> getBlockstoreMethod() {
+    io.grpc.MethodDescriptor<pb.Admin.BlockstoreRequest, pb.Admin.BlockstoreResponse> getBlockstoreMethod;
+    if ((getBlockstoreMethod = AdminAPIGrpc.getBlockstoreMethod) == null) {
+      synchronized (AdminAPIGrpc.class) {
+        if ((getBlockstoreMethod = AdminAPIGrpc.getBlockstoreMethod) == null) {
+          AdminAPIGrpc.getBlockstoreMethod = getBlockstoreMethod = 
+              io.grpc.MethodDescriptor.<pb.Admin.BlockstoreRequest, pb.Admin.BlockstoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.AdminAPI", "Blockstore"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Admin.BlockstoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Admin.BlockstoreResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("Blockstore"))
+                  .build();
+          }
+        }
+     }
+     return getBlockstoreMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -144,6 +176,16 @@ public final class AdminAPIGrpc {
       asyncUnimplementedUnaryCall(getRefCountMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public void blockstore(pb.Admin.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Admin.BlockstoreResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getBlockstoreMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -160,6 +202,13 @@ public final class AdminAPIGrpc {
                 pb.Admin.RefCountRequest,
                 pb.Admin.RefCountResponse>(
                   this, METHODID_REF_COUNT)))
+          .addMethod(
+            getBlockstoreMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Admin.BlockstoreRequest,
+                pb.Admin.BlockstoreResponse>(
+                  this, METHODID_BLOCKSTORE)))
           .build();
     }
   }
@@ -206,6 +255,17 @@ public final class AdminAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getRefCountMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public void blockstore(pb.Admin.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Admin.BlockstoreResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -247,6 +307,16 @@ public final class AdminAPIGrpc {
     public pb.Admin.RefCountResponse refCount(pb.Admin.RefCountRequest request) {
       return blockingUnaryCall(
           getChannel(), getRefCountMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public pb.Admin.BlockstoreResponse blockstore(pb.Admin.BlockstoreRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getBlockstoreMethod(), getCallOptions(), request);
     }
   }
 
@@ -292,10 +362,22 @@ public final class AdminAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getRefCountMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Admin.BlockstoreResponse> blockstore(
+        pb.Admin.BlockstoreRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_MANAGE_GC = 0;
   private static final int METHODID_REF_COUNT = 1;
+  private static final int METHODID_BLOCKSTORE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -321,6 +403,10 @@ public final class AdminAPIGrpc {
         case METHODID_REF_COUNT:
           serviceImpl.refCount((pb.Admin.RefCountRequest) request,
               (io.grpc.stub.StreamObserver<pb.Admin.RefCountResponse>) responseObserver);
+          break;
+        case METHODID_BLOCKSTORE:
+          serviceImpl.blockstore((pb.Admin.BlockstoreRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Admin.BlockstoreResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -385,6 +471,7 @@ public final class AdminAPIGrpc {
               .setSchemaDescriptor(new AdminAPIFileDescriptorSupplier())
               .addMethod(getManageGCMethod())
               .addMethod(getRefCountMethod())
+              .addMethod(getBlockstoreMethod())
               .build();
         }
       }

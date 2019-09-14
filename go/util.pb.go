@@ -4,10 +4,10 @@
 package pb
 
 import (
-	bytes "bytes"
 	fmt "fmt"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 
@@ -24,15 +24,12 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // PutResponse is a response to any data storage (put) requests
 type PutResponse struct {
 	// hash is hash/cid (content identifier) of the data that was stored
-	Hash                 string   `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
 }
 
 func (m *PutResponse) Reset()      { *m = PutResponse{} }
@@ -48,7 +45,7 @@ func (m *PutResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_PutResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -76,9 +73,6 @@ func (m *PutResponse) GetHash() string {
 
 // Empty is an empty message
 type Empty struct {
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Empty) Reset()      { *m = Empty{} }
@@ -94,7 +88,7 @@ func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -121,17 +115,18 @@ func init() {
 func init() { proto.RegisterFile("util.proto", fileDescriptor_170ba741606d8a4c) }
 
 var fileDescriptor_170ba741606d8a4c = []byte{
-	// 160 bytes of a gzipped FileDescriptorProto
+	// 173 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2a, 0x2d, 0xc9, 0xcc,
 	0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x92, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9,
 	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0x4b, 0x25, 0x95,
 	0xa6, 0x81, 0x79, 0x60, 0x0e, 0x98, 0x05, 0xd1, 0xa2, 0xa4, 0xc8, 0xc5, 0x1d, 0x50, 0x5a, 0x12,
 	0x94, 0x5a, 0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x2a, 0x24, 0xc4, 0xc5, 0x92, 0x91, 0x58, 0x9c, 0x21,
 	0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0x66, 0x2b, 0xb1, 0x73, 0xb1, 0xba, 0xe6, 0x16, 0x94,
-	0x54, 0x3a, 0x69, 0xdc, 0x78, 0x28, 0xc7, 0xf0, 0xe0, 0xa1, 0x1c, 0xe3, 0x87, 0x87, 0x72, 0x8c,
+	0x54, 0x3a, 0x99, 0xdc, 0x78, 0x28, 0xc7, 0xf0, 0xe0, 0xa1, 0x1c, 0xe3, 0x87, 0x87, 0x72, 0x8c,
 	0x3f, 0x1e, 0xca, 0x31, 0x36, 0x3c, 0x92, 0x63, 0x5c, 0xf1, 0x48, 0x8e, 0x71, 0xc7, 0x23, 0x39,
-	0xc6, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x31, 0x89, 0x0d,
-	0x6c, 0xb8, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xee, 0xa2, 0xe5, 0x6e, 0x9d, 0x00, 0x00, 0x00,
+	0xc6, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63,
+	0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x48, 0x62, 0x03, 0x5b, 0x64, 0x0c,
+	0x08, 0x00, 0x00, 0xff, 0xff, 0xc8, 0x64, 0x4c, 0xaa, 0xa9, 0x00, 0x00, 0x00,
 }
 
 func (this *PutResponse) VerboseEqual(that interface{}) error {
@@ -162,9 +157,6 @@ func (this *PutResponse) VerboseEqual(that interface{}) error {
 	if this.Hash != that1.Hash {
 		return fmt.Errorf("Hash this(%v) Not Equal that(%v)", this.Hash, that1.Hash)
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *PutResponse) Equal(that interface{}) bool {
@@ -187,9 +179,6 @@ func (this *PutResponse) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Hash != that1.Hash {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
 	}
 	return true
@@ -219,9 +208,6 @@ func (this *Empty) VerboseEqual(that interface{}) error {
 	} else if this == nil {
 		return fmt.Errorf("that is type *Empty but is not nil && this == nil")
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
 	return nil
 }
 func (this *Empty) Equal(that interface{}) bool {
@@ -243,9 +229,6 @@ func (this *Empty) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
 	return true
 }
 func (this *PutResponse) GoString() string {
@@ -255,9 +238,6 @@ func (this *PutResponse) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.PutResponse{")
 	s = append(s, "Hash: "+fmt.Sprintf("%#v", this.Hash)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -267,9 +247,6 @@ func (this *Empty) GoString() string {
 	}
 	s := make([]string, 0, 4)
 	s = append(s, "&pb.Empty{")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -284,7 +261,7 @@ func valueToGoStringUtil(v interface{}, typ string) string {
 func (m *PutResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -292,26 +269,29 @@ func (m *PutResponse) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *PutResponse) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PutResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Hash) > 0 {
-		dAtA[i] = 0xa
-		i++
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
 		i = encodeVarintUtil(dAtA, i, uint64(len(m.Hash)))
-		i += copy(dAtA[i:], m.Hash)
+		i--
+		dAtA[i] = 0xa
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *Empty) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -319,30 +299,33 @@ func (m *Empty) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Empty) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintUtil(dAtA []byte, offset int, v uint64) int {
+	offset -= sovUtil(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedPutResponse(r randyUtil, easy bool) *PutResponse {
 	this := &PutResponse{}
 	this.Hash = string(randStringUtil(r))
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUtil(r, 2)
 	}
 	return this
 }
@@ -350,7 +333,6 @@ func NewPopulatedPutResponse(r randyUtil, easy bool) *PutResponse {
 func NewPopulatedEmpty(r randyUtil, easy bool) *Empty {
 	this := &Empty{}
 	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedUtil(r, 1)
 	}
 	return this
 }
@@ -437,9 +419,6 @@ func (m *PutResponse) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovUtil(uint64(l))
 	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
@@ -449,21 +428,11 @@ func (m *Empty) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
 	return n
 }
 
 func sovUtil(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozUtil(x uint64) (n int) {
 	return sovUtil(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -474,7 +443,6 @@ func (this *PutResponse) String() string {
 	}
 	s := strings.Join([]string{`&PutResponse{`,
 		`Hash:` + fmt.Sprintf("%v", this.Hash) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -484,7 +452,6 @@ func (this *Empty) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Empty{`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -573,7 +540,6 @@ func (m *PutResponse) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -627,7 +593,6 @@ func (m *Empty) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
