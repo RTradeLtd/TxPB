@@ -20,20 +20,20 @@ option (gogoproto.unmarshaler_all) = true;
 service PubSubAPI {
     // GetTopics is used to return a list of all
     // known topics the pubsub instance is subscribed to.
-    rpc GetTopics(Empty) returns (TopicsResponse) { };
+    rpc PubSubGetTopics(Empty) returns (TopicsResponse) { };
 
     // ListPeers is used to return a list of peers subscribed
     // to a given topic or topics.
-    rpc ListPeers(ListPeersRequest) returns (ListPeersResponse) { };
+    rpc PubSubListPeers(ListPeersRequest) returns (ListPeersResponse) { };
 
     // Subscribe is used to subscribe to a topic and receive messages
     // Server will stream the messages received on the topic specified 
     // during the initial subscription call, and send each message
     // back to the client as it is received. 
-    rpc Subscribe(PubSubSubscribeRequest) returns (stream PubSubMessageResponse) { };
+    rpc PubSubSubscribe(PubSubSubscribeRequest) returns (stream PubSubMessageResponse) { };
 
-    // Publish is used to send a stream of messages to a pubsub topic.
-    rpc Publish(stream PubSubPublishRequest) returns (Empty) { };   
+    // PubSubPublish is used to send a stream of messages to a pubsub topic.
+    rpc PubSubPublish(stream PubSubPublishRequest) returns (Empty) { };   
 }
 
 // ListPeersRequest is used to return a list of

@@ -2365,7 +2365,7 @@ perform service discover for peers on the same topic </p></td>
           <tbody>
             
               <tr>
-                <td>GetTopics</td>
+                <td>PubSubGetTopics</td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><a href="#pb.TopicsResponse">TopicsResponse</a></td>
                 <td><p>GetTopics is used to return a list of all
@@ -2373,7 +2373,7 @@ known topics the pubsub instance is subscribed to.</p></td>
               </tr>
             
               <tr>
-                <td>ListPeers</td>
+                <td>PubSubListPeers</td>
                 <td><a href="#pb.ListPeersRequest">ListPeersRequest</a></td>
                 <td><a href="#pb.ListPeersResponse">ListPeersResponse</a></td>
                 <td><p>ListPeers is used to return a list of peers subscribed
@@ -2381,7 +2381,7 @@ to a given topic or topics.</p></td>
               </tr>
             
               <tr>
-                <td>Subscribe</td>
+                <td>PubSubSubscribe</td>
                 <td><a href="#pb.PubSubSubscribeRequest">PubSubSubscribeRequest</a></td>
                 <td><a href="#pb.PubSubMessageResponse">PubSubMessageResponse</a> stream</td>
                 <td><p>Subscribe is used to subscribe to a topic and receive messages
@@ -2391,10 +2391,10 @@ back to the client as it is received.</p></td>
               </tr>
             
               <tr>
-                <td>Publish</td>
+                <td>PubSubPublish</td>
                 <td><a href="#pb.PubSubPublishRequest">PubSubPublishRequest</a> stream</td>
                 <td><a href="#pb.Empty">Empty</a></td>
-                <td><p>Publish is used to send a stream of messages to a pubsub topic.</p></td>
+                <td><p>PubSubPublish is used to send a stream of messages to a pubsub topic.</p></td>
               </tr>
             
           </tbody>

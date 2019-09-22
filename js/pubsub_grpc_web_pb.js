@@ -96,7 +96,7 @@ proto.pb.PubSubAPIPromiseClient =
  *   !proto.pb.Empty,
  *   !proto.pb.TopicsResponse>}
  */
-const methodInfo_PubSubAPI_GetTopics = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_PubSubAPI_PubSubGetTopics = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.TopicsResponse,
   /** @param {!proto.pb.Empty} request */
   function(request) {
@@ -116,13 +116,13 @@ const methodInfo_PubSubAPI_GetTopics = new grpc.web.AbstractClientBase.MethodInf
  * @return {!grpc.web.ClientReadableStream<!proto.pb.TopicsResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.getTopics =
+proto.pb.PubSubAPIClient.prototype.pubSubGetTopics =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.PubSubAPI/GetTopics',
+      '/pb.PubSubAPI/PubSubGetTopics',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_GetTopics,
+      methodInfo_PubSubAPI_PubSubGetTopics,
       callback);
 };
 
@@ -135,13 +135,13 @@ proto.pb.PubSubAPIClient.prototype.getTopics =
  * @return {!Promise<!proto.pb.TopicsResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.PubSubAPIPromiseClient.prototype.getTopics =
+proto.pb.PubSubAPIPromiseClient.prototype.pubSubGetTopics =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.PubSubAPI/GetTopics',
+      '/pb.PubSubAPI/PubSubGetTopics',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_GetTopics);
+      methodInfo_PubSubAPI_PubSubGetTopics);
 };
 
 
@@ -151,7 +151,7 @@ proto.pb.PubSubAPIPromiseClient.prototype.getTopics =
  *   !proto.pb.ListPeersRequest,
  *   !proto.pb.ListPeersResponse>}
  */
-const methodInfo_PubSubAPI_ListPeers = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_PubSubAPI_PubSubListPeers = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.ListPeersResponse,
   /** @param {!proto.pb.ListPeersRequest} request */
   function(request) {
@@ -171,13 +171,13 @@ const methodInfo_PubSubAPI_ListPeers = new grpc.web.AbstractClientBase.MethodInf
  * @return {!grpc.web.ClientReadableStream<!proto.pb.ListPeersResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.listPeers =
+proto.pb.PubSubAPIClient.prototype.pubSubListPeers =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.PubSubAPI/ListPeers',
+      '/pb.PubSubAPI/PubSubListPeers',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_ListPeers,
+      methodInfo_PubSubAPI_PubSubListPeers,
       callback);
 };
 
@@ -190,13 +190,13 @@ proto.pb.PubSubAPIClient.prototype.listPeers =
  * @return {!Promise<!proto.pb.ListPeersResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.PubSubAPIPromiseClient.prototype.listPeers =
+proto.pb.PubSubAPIPromiseClient.prototype.pubSubListPeers =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.PubSubAPI/ListPeers',
+      '/pb.PubSubAPI/PubSubListPeers',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_ListPeers);
+      methodInfo_PubSubAPI_PubSubListPeers);
 };
 
 
@@ -206,7 +206,7 @@ proto.pb.PubSubAPIPromiseClient.prototype.listPeers =
  *   !proto.pb.PubSubSubscribeRequest,
  *   !proto.pb.PubSubMessageResponse>}
  */
-const methodInfo_PubSubAPI_Subscribe = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_PubSubAPI_PubSubSubscribe = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.PubSubMessageResponse,
   /** @param {!proto.pb.PubSubSubscribeRequest} request */
   function(request) {
@@ -223,13 +223,13 @@ const methodInfo_PubSubAPI_Subscribe = new grpc.web.AbstractClientBase.MethodInf
  * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.subscribe =
+proto.pb.PubSubAPIClient.prototype.pubSubSubscribe =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/pb.PubSubAPI/Subscribe',
+      '/pb.PubSubAPI/PubSubSubscribe',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_Subscribe);
+      methodInfo_PubSubAPI_PubSubSubscribe);
 };
 
 
@@ -240,13 +240,13 @@ proto.pb.PubSubAPIClient.prototype.subscribe =
  * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIPromiseClient.prototype.subscribe =
+proto.pb.PubSubAPIPromiseClient.prototype.pubSubSubscribe =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/pb.PubSubAPI/Subscribe',
+      '/pb.PubSubAPI/PubSubSubscribe',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_Subscribe);
+      methodInfo_PubSubAPI_PubSubSubscribe);
 };
 
 
