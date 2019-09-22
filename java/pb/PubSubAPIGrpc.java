@@ -31,21 +31,21 @@ public final class PubSubAPIGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Pubsub.TopicsResponse> getPubSubGetTopicsMethod;
+      pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "PubSubGetTopics",
       requestType = pb.Util.Empty.class,
-      responseType = pb.Pubsub.TopicsResponse.class,
+      responseType = pb.Pubsub.PubSubTopicsResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Pubsub.TopicsResponse> getPubSubGetTopicsMethod() {
-    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Pubsub.TopicsResponse> getPubSubGetTopicsMethod;
+      pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod() {
+    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod;
     if ((getPubSubGetTopicsMethod = PubSubAPIGrpc.getPubSubGetTopicsMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
         if ((getPubSubGetTopicsMethod = PubSubAPIGrpc.getPubSubGetTopicsMethod) == null) {
           PubSubAPIGrpc.getPubSubGetTopicsMethod = getPubSubGetTopicsMethod = 
-              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Pubsub.TopicsResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Pubsub.PubSubTopicsResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.PubSubAPI", "PubSubGetTopics"))
@@ -53,7 +53,7 @@ public final class PubSubAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.TopicsResponse.getDefaultInstance()))
+                  pb.Pubsub.PubSubTopicsResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubGetTopics"))
                   .build();
           }
@@ -195,7 +195,7 @@ public final class PubSubAPIGrpc {
      * </pre>
      */
     public void pubSubGetTopics(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getPubSubGetTopicsMethod(), responseObserver);
     }
 
@@ -240,7 +240,7 @@ public final class PubSubAPIGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Util.Empty,
-                pb.Pubsub.TopicsResponse>(
+                pb.Pubsub.PubSubTopicsResponse>(
                   this, METHODID_PUB_SUB_GET_TOPICS)))
           .addMethod(
             getPubSubListPeersMethod(),
@@ -295,7 +295,7 @@ public final class PubSubAPIGrpc {
      * </pre>
      */
     public void pubSubGetTopics(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getPubSubGetTopicsMethod(), getCallOptions()), request, responseObserver);
     }
@@ -365,7 +365,7 @@ public final class PubSubAPIGrpc {
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public pb.Pubsub.TopicsResponse pubSubGetTopics(pb.Util.Empty request) {
+    public pb.Pubsub.PubSubTopicsResponse pubSubGetTopics(pb.Util.Empty request) {
       return blockingUnaryCall(
           getChannel(), getPubSubGetTopicsMethod(), getCallOptions(), request);
     }
@@ -423,7 +423,7 @@ public final class PubSubAPIGrpc {
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.TopicsResponse> pubSubGetTopics(
+    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.PubSubTopicsResponse> pubSubGetTopics(
         pb.Util.Empty request) {
       return futureUnaryCall(
           getChannel().newCall(getPubSubGetTopicsMethod(), getCallOptions()), request);
@@ -466,7 +466,7 @@ public final class PubSubAPIGrpc {
       switch (methodId) {
         case METHODID_PUB_SUB_GET_TOPICS:
           serviceImpl.pubSubGetTopics((pb.Util.Empty) request,
-              (io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse>) responseObserver);
           break;
         case METHODID_PUB_SUB_LIST_PEERS:
           serviceImpl.pubSubListPeers((pb.Pubsub.PubSubListPeersRequest) request,

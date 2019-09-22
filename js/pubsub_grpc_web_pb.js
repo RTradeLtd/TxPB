@@ -94,15 +94,15 @@ proto.pb.PubSubAPIPromiseClient =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.pb.Empty,
- *   !proto.pb.TopicsResponse>}
+ *   !proto.pb.PubSubTopicsResponse>}
  */
 const methodInfo_PubSubAPI_PubSubGetTopics = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.TopicsResponse,
+  proto.pb.PubSubTopicsResponse,
   /** @param {!proto.pb.Empty} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.TopicsResponse.deserializeBinary
+  proto.pb.PubSubTopicsResponse.deserializeBinary
 );
 
 
@@ -111,9 +111,9 @@ const methodInfo_PubSubAPI_PubSubGetTopics = new grpc.web.AbstractClientBase.Met
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.TopicsResponse)}
+ * @param {function(?grpc.web.Error, ?proto.pb.PubSubTopicsResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.TopicsResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubTopicsResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.PubSubAPIClient.prototype.pubSubGetTopics =
@@ -132,7 +132,7 @@ proto.pb.PubSubAPIClient.prototype.pubSubGetTopics =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.TopicsResponse>}
+ * @return {!Promise<!proto.pb.PubSubTopicsResponse>}
  *     A native promise that resolves to the response
  */
 proto.pb.PubSubAPIPromiseClient.prototype.pubSubGetTopics =

@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"(\n\x16PubSubListPeersRequest\x12\x0e\n\x06topics\x18\x01 \x03(\t\"q\n\x17PubSubListPeersResponse\x12/\n\x05peers\x18\x01 \x03(\x0b\x32 .pb.PubSubListPeersResponse.Peer\x1a%\n\x04Peer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t\"F\n\x14PubSubPublishRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x11\n\tadvertise\x18\x03 \x01(\x08\"9\n\x16PubSubSubscribeRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x10\n\x08\x64iscover\x18\x02 \x01(\x08\"\x1f\n\x0eTopicsResponse\x12\r\n\x05names\x18\x01 \x03(\t\"t\n\x15PubSubMessageResponse\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\x32\x95\x02\n\tPubSubAPI\x12\x32\n\x0fPubSubGetTopics\x12\t.pb.Empty\x1a\x12.pb.TopicsResponse\"\x00\x12L\n\x0fPubSubListPeers\x12\x1a.pb.PubSubListPeersRequest\x1a\x1b.pb.PubSubListPeersResponse\"\x00\x12L\n\x0fPubSubSubscribe\x12\x1a.pb.PubSubSubscribeRequest\x1a\x19.pb.PubSubMessageResponse\"\x00\x30\x01\x12\x38\n\rPubSubPublish\x12\x18.pb.PubSubPublishRequest\x1a\t.pb.Empty\"\x00(\x01\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"(\n\x16PubSubListPeersRequest\x12\x0e\n\x06topics\x18\x01 \x03(\t\"q\n\x17PubSubListPeersResponse\x12/\n\x05peers\x18\x01 \x03(\x0b\x32 .pb.PubSubListPeersResponse.Peer\x1a%\n\x04Peer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t\"F\n\x14PubSubPublishRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x11\n\tadvertise\x18\x03 \x01(\x08\"9\n\x16PubSubSubscribeRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x10\n\x08\x64iscover\x18\x02 \x01(\x08\"%\n\x14PubSubTopicsResponse\x12\r\n\x05names\x18\x01 \x03(\t\"t\n\x15PubSubMessageResponse\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\x32\x9b\x02\n\tPubSubAPI\x12\x38\n\x0fPubSubGetTopics\x12\t.pb.Empty\x1a\x18.pb.PubSubTopicsResponse\"\x00\x12L\n\x0fPubSubListPeers\x12\x1a.pb.PubSubListPeersRequest\x1a\x1b.pb.PubSubListPeersResponse\"\x00\x12L\n\x0fPubSubSubscribe\x12\x1a.pb.PubSubSubscribeRequest\x1a\x19.pb.PubSubMessageResponse\"\x00\x30\x01\x12\x38\n\rPubSubPublish\x12\x18.pb.PubSubPublishRequest\x1a\t.pb.Empty\"\x00(\x01\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -211,15 +211,15 @@ _PUBSUBSUBSCRIBEREQUEST = _descriptor.Descriptor(
 )
 
 
-_TOPICSRESPONSE = _descriptor.Descriptor(
-  name='TopicsResponse',
-  full_name='pb.TopicsResponse',
+_PUBSUBTOPICSRESPONSE = _descriptor.Descriptor(
+  name='PubSubTopicsResponse',
+  full_name='pb.PubSubTopicsResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='names', full_name='pb.TopicsResponse.names', index=0,
+      name='names', full_name='pb.PubSubTopicsResponse.names', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -238,7 +238,7 @@ _TOPICSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=367,
-  serialized_end=398,
+  serialized_end=404,
 )
 
 
@@ -303,8 +303,8 @@ _PUBSUBMESSAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=400,
-  serialized_end=516,
+  serialized_start=406,
+  serialized_end=522,
 )
 
 _PUBSUBLISTPEERSRESPONSE_PEER.containing_type = _PUBSUBLISTPEERSRESPONSE
@@ -313,7 +313,7 @@ DESCRIPTOR.message_types_by_name['PubSubListPeersRequest'] = _PUBSUBLISTPEERSREQ
 DESCRIPTOR.message_types_by_name['PubSubListPeersResponse'] = _PUBSUBLISTPEERSRESPONSE
 DESCRIPTOR.message_types_by_name['PubSubPublishRequest'] = _PUBSUBPUBLISHREQUEST
 DESCRIPTOR.message_types_by_name['PubSubSubscribeRequest'] = _PUBSUBSUBSCRIBEREQUEST
-DESCRIPTOR.message_types_by_name['TopicsResponse'] = _TOPICSRESPONSE
+DESCRIPTOR.message_types_by_name['PubSubTopicsResponse'] = _PUBSUBTOPICSRESPONSE
 DESCRIPTOR.message_types_by_name['PubSubMessageResponse'] = _PUBSUBMESSAGERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -353,12 +353,12 @@ PubSubSubscribeRequest = _reflection.GeneratedProtocolMessageType('PubSubSubscri
   })
 _sym_db.RegisterMessage(PubSubSubscribeRequest)
 
-TopicsResponse = _reflection.GeneratedProtocolMessageType('TopicsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _TOPICSRESPONSE,
+PubSubTopicsResponse = _reflection.GeneratedProtocolMessageType('PubSubTopicsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PUBSUBTOPICSRESPONSE,
   '__module__' : 'pubsub_pb2'
-  # @@protoc_insertion_point(class_scope:pb.TopicsResponse)
+  # @@protoc_insertion_point(class_scope:pb.PubSubTopicsResponse)
   })
-_sym_db.RegisterMessage(TopicsResponse)
+_sym_db.RegisterMessage(PubSubTopicsResponse)
 
 PubSubMessageResponse = _reflection.GeneratedProtocolMessageType('PubSubMessageResponse', (_message.Message,), {
   'DESCRIPTOR' : _PUBSUBMESSAGERESPONSE,
@@ -376,8 +376,8 @@ _PUBSUBAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=519,
-  serialized_end=796,
+  serialized_start=525,
+  serialized_end=808,
   methods=[
   _descriptor.MethodDescriptor(
     name='PubSubGetTopics',
@@ -385,7 +385,7 @@ _PUBSUBAPI = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=util__pb2._EMPTY,
-    output_type=_TOPICSRESPONSE,
+    output_type=_PUBSUBTOPICSRESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(

@@ -332,15 +332,15 @@ func TestPubSubSubscribeRequestMarshalTo(t *testing.T) {
 	}
 }
 
-func TestTopicsResponseProto(t *testing.T) {
+func TestPubSubTopicsResponseProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, false)
+	p := NewPopulatedPubSubTopicsResponse(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -366,10 +366,10 @@ func TestTopicsResponseProto(t *testing.T) {
 	}
 }
 
-func TestTopicsResponseMarshalTo(t *testing.T) {
+func TestPubSubTopicsResponseMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, false)
+	p := NewPopulatedPubSubTopicsResponse(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -379,7 +379,7 @@ func TestTopicsResponseMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -561,16 +561,16 @@ func TestPubSubSubscribeRequestJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestTopicsResponseJSON(t *testing.T) {
+func TestPubSubTopicsResponseJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, true)
+	p := NewPopulatedPubSubTopicsResponse(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -773,12 +773,12 @@ func TestPubSubSubscribeRequestProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestTopicsResponseProtoText(t *testing.T) {
+func TestPubSubTopicsResponseProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, true)
+	p := NewPopulatedPubSubTopicsResponse(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -790,12 +790,12 @@ func TestTopicsResponseProtoText(t *testing.T) {
 	}
 }
 
-func TestTopicsResponseProtoCompactText(t *testing.T) {
+func TestPubSubTopicsResponseProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, true)
+	p := NewPopulatedPubSubTopicsResponse(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -916,14 +916,14 @@ func TestPubSubSubscribeRequestVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestTopicsResponseVerboseEqual(t *testing.T) {
+func TestPubSubTopicsResponseVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedTopicsResponse(popr, false)
+	p := NewPopulatedPubSubTopicsResponse(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &TopicsResponse{}
+	msg := &PubSubTopicsResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -1011,9 +1011,9 @@ func TestPubSubSubscribeRequestGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestTopicsResponseGoString(t *testing.T) {
+func TestPubSubTopicsResponseGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedTopicsResponse(popr, false)
+	p := NewPopulatedPubSubTopicsResponse(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -1147,10 +1147,10 @@ func TestPubSubSubscribeRequestSize(t *testing.T) {
 	}
 }
 
-func TestTopicsResponseSize(t *testing.T) {
+func TestPubSubTopicsResponseSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedTopicsResponse(popr, true)
+	p := NewPopulatedPubSubTopicsResponse(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1236,9 +1236,9 @@ func TestPubSubSubscribeRequestStringer(t *testing.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestTopicsResponseStringer(t *testing.T) {
+func TestPubSubTopicsResponseStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedTopicsResponse(popr, false)
+	p := NewPopulatedPubSubTopicsResponse(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
