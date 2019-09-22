@@ -27,12 +27,12 @@ class PubSubAPIStub(object):
         )
     self.Subscribe = channel.unary_stream(
         '/pb.PubSubAPI/Subscribe',
-        request_serializer=pubsub__pb2.SubscribeRequest.SerializeToString,
+        request_serializer=pubsub__pb2.PubSubSubscribeRequest.SerializeToString,
         response_deserializer=pubsub__pb2.PubSubMessageResponse.FromString,
         )
     self.Publish = channel.stream_unary(
         '/pb.PubSubAPI/Publish',
-        request_serializer=pubsub__pb2.PublishRequest.SerializeToString,
+        request_serializer=pubsub__pb2.PubSubPublishRequest.SerializeToString,
         response_deserializer=util__pb2.Empty.FromString,
         )
 
@@ -89,12 +89,12 @@ def add_PubSubAPIServicer_to_server(servicer, server):
       ),
       'Subscribe': grpc.unary_stream_rpc_method_handler(
           servicer.Subscribe,
-          request_deserializer=pubsub__pb2.SubscribeRequest.FromString,
+          request_deserializer=pubsub__pb2.PubSubSubscribeRequest.FromString,
           response_serializer=pubsub__pb2.PubSubMessageResponse.SerializeToString,
       ),
       'Publish': grpc.stream_unary_rpc_method_handler(
           servicer.Publish,
-          request_deserializer=pubsub__pb2.PublishRequest.FromString,
+          request_deserializer=pubsub__pb2.PubSubPublishRequest.FromString,
           response_serializer=util__pb2.Empty.SerializeToString,
       ),
   }

@@ -450,11 +450,11 @@
                 </li>
               
                 <li>
-                  <a href="#pb.PublishRequest"><span class="badge">M</span>PublishRequest</a>
+                  <a href="#pb.PubSubPublishRequest"><span class="badge">M</span>PubSubPublishRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.SubscribeRequest"><span class="badge">M</span>SubscribeRequest</a>
+                  <a href="#pb.PubSubSubscribeRequest"><span class="badge">M</span>PubSubSubscribeRequest</a>
                 </li>
               
                 <li>
@@ -2256,8 +2256,8 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.PublishRequest">PublishRequest</h3>
-        <p>PublishRequest is a message used to publish data to a topic</p>
+        <h3 id="pb.PubSubPublishRequest">PubSubPublishRequest</h3>
+        <p>PubSubPublishRequest is a message used to publish data to a topic</p>
 
         
           <table class="field-table">
@@ -2294,8 +2294,8 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.SubscribeRequest">SubscribeRequest</h3>
-        <p>SubscribeRequest is used to initiate a subscription</p><p>to a given pubsub topic and stream received messages</p>
+        <h3 id="pb.PubSubSubscribeRequest">PubSubSubscribeRequest</h3>
+        <p>PubSubSubscribeRequest is used to initiate a subscription</p><p>to a given pubsub topic and stream received messages</p>
 
         
           <table class="field-table">
@@ -2382,7 +2382,7 @@ to a given topic or topics.</p></td>
             
               <tr>
                 <td>Subscribe</td>
-                <td><a href="#pb.SubscribeRequest">SubscribeRequest</a></td>
+                <td><a href="#pb.PubSubSubscribeRequest">PubSubSubscribeRequest</a></td>
                 <td><a href="#pb.PubSubMessageResponse">PubSubMessageResponse</a> stream</td>
                 <td><p>Subscribe is used to subscribe to a topic and receive messages
 Server will stream the messages received on the topic specified 
@@ -2392,7 +2392,7 @@ back to the client as it is received.</p></td>
             
               <tr>
                 <td>Publish</td>
-                <td><a href="#pb.PublishRequest">PublishRequest</a> stream</td>
+                <td><a href="#pb.PubSubPublishRequest">PubSubPublishRequest</a> stream</td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>Publish is used to send a stream of messages to a pubsub topic.</p></td>
               </tr>

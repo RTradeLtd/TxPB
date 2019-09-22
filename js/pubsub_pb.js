@@ -17,8 +17,8 @@ goog.exportSymbol('proto.pb.ListPeersRequest', null, global);
 goog.exportSymbol('proto.pb.ListPeersResponse', null, global);
 goog.exportSymbol('proto.pb.ListPeersResponse.Peer', null, global);
 goog.exportSymbol('proto.pb.PubSubMessageResponse', null, global);
-goog.exportSymbol('proto.pb.PublishRequest', null, global);
-goog.exportSymbol('proto.pb.SubscribeRequest', null, global);
+goog.exportSymbol('proto.pb.PubSubPublishRequest', null, global);
+goog.exportSymbol('proto.pb.PubSubSubscribeRequest', null, global);
 goog.exportSymbol('proto.pb.TopicsResponse', null, global);
 
 /**
@@ -531,12 +531,12 @@ proto.pb.ListPeersResponse.prototype.clearPeersList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.pb.PublishRequest = function(opt_data) {
+proto.pb.PubSubPublishRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.pb.PublishRequest, jspb.Message);
+goog.inherits(proto.pb.PubSubPublishRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.pb.PublishRequest.displayName = 'proto.pb.PublishRequest';
+  proto.pb.PubSubPublishRequest.displayName = 'proto.pb.PubSubPublishRequest';
 }
 
 
@@ -551,8 +551,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.pb.PublishRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.pb.PublishRequest.toObject(opt_includeInstance, this);
+proto.pb.PubSubPublishRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.pb.PubSubPublishRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -561,11 +561,11 @@ proto.pb.PublishRequest.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.pb.PublishRequest} msg The msg instance to transform.
+ * @param {!proto.pb.PubSubPublishRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.PublishRequest.toObject = function(includeInstance, msg) {
+proto.pb.PubSubPublishRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     topic: jspb.Message.getFieldWithDefault(msg, 1, ""),
     data: msg.getData_asB64(),
@@ -583,23 +583,23 @@ proto.pb.PublishRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.pb.PublishRequest}
+ * @return {!proto.pb.PubSubPublishRequest}
  */
-proto.pb.PublishRequest.deserializeBinary = function(bytes) {
+proto.pb.PubSubPublishRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.pb.PublishRequest;
-  return proto.pb.PublishRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.pb.PubSubPublishRequest;
+  return proto.pb.PubSubPublishRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.pb.PublishRequest} msg The message object to deserialize into.
+ * @param {!proto.pb.PubSubPublishRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.pb.PublishRequest}
+ * @return {!proto.pb.PubSubPublishRequest}
  */
-proto.pb.PublishRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.pb.PubSubPublishRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -631,9 +631,9 @@ proto.pb.PublishRequest.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.pb.PublishRequest.prototype.serializeBinary = function() {
+proto.pb.PubSubPublishRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.pb.PublishRequest.serializeBinaryToWriter(this, writer);
+  proto.pb.PubSubPublishRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -641,11 +641,11 @@ proto.pb.PublishRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.pb.PublishRequest} message
+ * @param {!proto.pb.PubSubPublishRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.PublishRequest.serializeBinaryToWriter = function(message, writer) {
+proto.pb.PubSubPublishRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTopic();
   if (f.length > 0) {
@@ -675,13 +675,13 @@ proto.pb.PublishRequest.serializeBinaryToWriter = function(message, writer) {
  * optional string topic = 1;
  * @return {string}
  */
-proto.pb.PublishRequest.prototype.getTopic = function() {
+proto.pb.PubSubPublishRequest.prototype.getTopic = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.pb.PublishRequest.prototype.setTopic = function(value) {
+proto.pb.PubSubPublishRequest.prototype.setTopic = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -690,7 +690,7 @@ proto.pb.PublishRequest.prototype.setTopic = function(value) {
  * optional bytes data = 2;
  * @return {string}
  */
-proto.pb.PublishRequest.prototype.getData = function() {
+proto.pb.PubSubPublishRequest.prototype.getData = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -700,7 +700,7 @@ proto.pb.PublishRequest.prototype.getData = function() {
  * This is a type-conversion wrapper around `getData()`
  * @return {string}
  */
-proto.pb.PublishRequest.prototype.getData_asB64 = function() {
+proto.pb.PubSubPublishRequest.prototype.getData_asB64 = function() {
   return /** @type {string} */ (jspb.Message.bytesAsB64(
       this.getData()));
 };
@@ -713,14 +713,14 @@ proto.pb.PublishRequest.prototype.getData_asB64 = function() {
  * This is a type-conversion wrapper around `getData()`
  * @return {!Uint8Array}
  */
-proto.pb.PublishRequest.prototype.getData_asU8 = function() {
+proto.pb.PubSubPublishRequest.prototype.getData_asU8 = function() {
   return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
       this.getData()));
 };
 
 
 /** @param {!(string|Uint8Array)} value */
-proto.pb.PublishRequest.prototype.setData = function(value) {
+proto.pb.PubSubPublishRequest.prototype.setData = function(value) {
   jspb.Message.setProto3BytesField(this, 2, value);
 };
 
@@ -731,13 +731,13 @@ proto.pb.PublishRequest.prototype.setData = function(value) {
  * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
-proto.pb.PublishRequest.prototype.getAdvertise = function() {
+proto.pb.PubSubPublishRequest.prototype.getAdvertise = function() {
   return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 3, false));
 };
 
 
 /** @param {boolean} value */
-proto.pb.PublishRequest.prototype.setAdvertise = function(value) {
+proto.pb.PubSubPublishRequest.prototype.setAdvertise = function(value) {
   jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
@@ -753,12 +753,12 @@ proto.pb.PublishRequest.prototype.setAdvertise = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.pb.SubscribeRequest = function(opt_data) {
+proto.pb.PubSubSubscribeRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.pb.SubscribeRequest, jspb.Message);
+goog.inherits(proto.pb.PubSubSubscribeRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.pb.SubscribeRequest.displayName = 'proto.pb.SubscribeRequest';
+  proto.pb.PubSubSubscribeRequest.displayName = 'proto.pb.PubSubSubscribeRequest';
 }
 
 
@@ -773,8 +773,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.pb.SubscribeRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.pb.SubscribeRequest.toObject(opt_includeInstance, this);
+proto.pb.PubSubSubscribeRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.pb.PubSubSubscribeRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -783,11 +783,11 @@ proto.pb.SubscribeRequest.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.pb.SubscribeRequest} msg The msg instance to transform.
+ * @param {!proto.pb.PubSubSubscribeRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.SubscribeRequest.toObject = function(includeInstance, msg) {
+proto.pb.PubSubSubscribeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     topic: jspb.Message.getFieldWithDefault(msg, 1, ""),
     discover: jspb.Message.getFieldWithDefault(msg, 2, false)
@@ -804,23 +804,23 @@ proto.pb.SubscribeRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.pb.SubscribeRequest}
+ * @return {!proto.pb.PubSubSubscribeRequest}
  */
-proto.pb.SubscribeRequest.deserializeBinary = function(bytes) {
+proto.pb.PubSubSubscribeRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.pb.SubscribeRequest;
-  return proto.pb.SubscribeRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.pb.PubSubSubscribeRequest;
+  return proto.pb.PubSubSubscribeRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.pb.SubscribeRequest} msg The message object to deserialize into.
+ * @param {!proto.pb.PubSubSubscribeRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.pb.SubscribeRequest}
+ * @return {!proto.pb.PubSubSubscribeRequest}
  */
-proto.pb.SubscribeRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.pb.PubSubSubscribeRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -848,9 +848,9 @@ proto.pb.SubscribeRequest.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.pb.SubscribeRequest.prototype.serializeBinary = function() {
+proto.pb.PubSubSubscribeRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.pb.SubscribeRequest.serializeBinaryToWriter(this, writer);
+  proto.pb.PubSubSubscribeRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -858,11 +858,11 @@ proto.pb.SubscribeRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.pb.SubscribeRequest} message
+ * @param {!proto.pb.PubSubSubscribeRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.SubscribeRequest.serializeBinaryToWriter = function(message, writer) {
+proto.pb.PubSubSubscribeRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTopic();
   if (f.length > 0) {
@@ -885,13 +885,13 @@ proto.pb.SubscribeRequest.serializeBinaryToWriter = function(message, writer) {
  * optional string topic = 1;
  * @return {string}
  */
-proto.pb.SubscribeRequest.prototype.getTopic = function() {
+proto.pb.PubSubSubscribeRequest.prototype.getTopic = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.pb.SubscribeRequest.prototype.setTopic = function(value) {
+proto.pb.PubSubSubscribeRequest.prototype.setTopic = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -902,13 +902,13 @@ proto.pb.SubscribeRequest.prototype.setTopic = function(value) {
  * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
-proto.pb.SubscribeRequest.prototype.getDiscover = function() {
+proto.pb.PubSubSubscribeRequest.prototype.getDiscover = function() {
   return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 2, false));
 };
 
 
 /** @param {boolean} value */
-proto.pb.SubscribeRequest.prototype.setDiscover = function(value) {
+proto.pb.PubSubSubscribeRequest.prototype.setDiscover = function(value) {
   jspb.Message.setProto3BooleanField(this, 2, value);
 };
 

@@ -208,15 +208,15 @@ func TestListPeersResponse_PeerMarshalTo(t *testing.T) {
 	}
 }
 
-func TestPublishRequestProto(t *testing.T) {
+func TestPubSubPublishRequestProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, false)
+	p := NewPopulatedPubSubPublishRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -242,10 +242,10 @@ func TestPublishRequestProto(t *testing.T) {
 	}
 }
 
-func TestPublishRequestMarshalTo(t *testing.T) {
+func TestPubSubPublishRequestMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, false)
+	p := NewPopulatedPubSubPublishRequest(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -255,7 +255,7 @@ func TestPublishRequestMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -270,15 +270,15 @@ func TestPublishRequestMarshalTo(t *testing.T) {
 	}
 }
 
-func TestSubscribeRequestProto(t *testing.T) {
+func TestPubSubSubscribeRequestProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, false)
+	p := NewPopulatedPubSubSubscribeRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -304,10 +304,10 @@ func TestSubscribeRequestProto(t *testing.T) {
 	}
 }
 
-func TestSubscribeRequestMarshalTo(t *testing.T) {
+func TestPubSubSubscribeRequestMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, false)
+	p := NewPopulatedPubSubSubscribeRequest(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -317,7 +317,7 @@ func TestSubscribeRequestMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -519,16 +519,16 @@ func TestListPeersResponse_PeerJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestPublishRequestJSON(t *testing.T) {
+func TestPubSubPublishRequestJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, true)
+	p := NewPopulatedPubSubPublishRequest(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -540,16 +540,16 @@ func TestPublishRequestJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestSubscribeRequestJSON(t *testing.T) {
+func TestPubSubSubscribeRequestJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, true)
+	p := NewPopulatedPubSubSubscribeRequest(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -705,12 +705,12 @@ func TestListPeersResponse_PeerProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestPublishRequestProtoText(t *testing.T) {
+func TestPubSubPublishRequestProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, true)
+	p := NewPopulatedPubSubPublishRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -722,12 +722,12 @@ func TestPublishRequestProtoText(t *testing.T) {
 	}
 }
 
-func TestPublishRequestProtoCompactText(t *testing.T) {
+func TestPubSubPublishRequestProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, true)
+	p := NewPopulatedPubSubPublishRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -739,12 +739,12 @@ func TestPublishRequestProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestSubscribeRequestProtoText(t *testing.T) {
+func TestPubSubSubscribeRequestProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, true)
+	p := NewPopulatedPubSubSubscribeRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -756,12 +756,12 @@ func TestSubscribeRequestProtoText(t *testing.T) {
 	}
 }
 
-func TestSubscribeRequestProtoCompactText(t *testing.T) {
+func TestPubSubSubscribeRequestProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, true)
+	p := NewPopulatedPubSubSubscribeRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -886,14 +886,14 @@ func TestListPeersResponse_PeerVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestPublishRequestVerboseEqual(t *testing.T) {
+func TestPubSubPublishRequestVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedPublishRequest(popr, false)
+	p := NewPopulatedPubSubPublishRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &PublishRequest{}
+	msg := &PubSubPublishRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -901,14 +901,14 @@ func TestPublishRequestVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestSubscribeRequestVerboseEqual(t *testing.T) {
+func TestPubSubSubscribeRequestVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedSubscribeRequest(popr, false)
+	p := NewPopulatedPubSubSubscribeRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &SubscribeRequest{}
+	msg := &PubSubSubscribeRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -985,9 +985,9 @@ func TestListPeersResponse_PeerGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestPublishRequestGoString(t *testing.T) {
+func TestPubSubPublishRequestGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedPublishRequest(popr, false)
+	p := NewPopulatedPubSubPublishRequest(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -998,9 +998,9 @@ func TestPublishRequestGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestSubscribeRequestGoString(t *testing.T) {
+func TestPubSubSubscribeRequestGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedSubscribeRequest(popr, false)
+	p := NewPopulatedPubSubSubscribeRequest(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -1103,10 +1103,10 @@ func TestListPeersResponse_PeerSize(t *testing.T) {
 	}
 }
 
-func TestPublishRequestSize(t *testing.T) {
+func TestPubSubPublishRequestSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedPublishRequest(popr, true)
+	p := NewPopulatedPubSubPublishRequest(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1125,10 +1125,10 @@ func TestPublishRequestSize(t *testing.T) {
 	}
 }
 
-func TestSubscribeRequestSize(t *testing.T) {
+func TestPubSubSubscribeRequestSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedSubscribeRequest(popr, true)
+	p := NewPopulatedPubSubSubscribeRequest(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1218,18 +1218,18 @@ func TestListPeersResponse_PeerStringer(t *testing.T) {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestPublishRequestStringer(t *testing.T) {
+func TestPubSubPublishRequestStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedPublishRequest(popr, false)
+	p := NewPopulatedPubSubPublishRequest(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestSubscribeRequestStringer(t *testing.T) {
+func TestPubSubSubscribeRequestStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedSubscribeRequest(popr, false)
+	p := NewPopulatedPubSubSubscribeRequest(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {

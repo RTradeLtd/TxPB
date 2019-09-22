@@ -30,10 +30,10 @@ service PubSubAPI {
     // Server will stream the messages received on the topic specified 
     // during the initial subscription call, and send each message
     // back to the client as it is received. 
-    rpc Subscribe(SubscribeRequest) returns (stream PubSubMessageResponse) { };
+    rpc Subscribe(PubSubSubscribeRequest) returns (stream PubSubMessageResponse) { };
 
     // Publish is used to send a stream of messages to a pubsub topic.
-    rpc Publish(stream PublishRequest) returns (Empty) { };   
+    rpc Publish(stream PubSubPublishRequest) returns (Empty) { };   
 }
 
 // ListPeersRequest is used to return a list of
@@ -56,8 +56,8 @@ message ListPeersResponse {
     repeated Peer peers = 1;
 }
 
-// PublishRequest is a message used to publish data to a topic
-message PublishRequest {
+// PubSubPublishRequest is a message used to publish data to a topic
+message PubSubPublishRequest {
     // the topic we are publishing too
     string topic = 1;
     // the data we are publishing
@@ -66,9 +66,9 @@ message PublishRequest {
     bool   advertise = 3;
 }
 
-// SubscribeRequest is used to initiate a subscription
+// PubSubSubscribeRequest is used to initiate a subscription
 // to a given pubsub topic and stream received messages
-message SubscribeRequest {
+message PubSubSubscribeRequest {
     // the topic we should subscribe to
     string topic = 1;
     // indicates whether the server should 

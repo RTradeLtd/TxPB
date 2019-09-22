@@ -203,12 +203,12 @@ proto.pb.PubSubAPIPromiseClient.prototype.listPeers =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.SubscribeRequest,
+ *   !proto.pb.PubSubSubscribeRequest,
  *   !proto.pb.PubSubMessageResponse>}
  */
 const methodInfo_PubSubAPI_Subscribe = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.PubSubMessageResponse,
-  /** @param {!proto.pb.SubscribeRequest} request */
+  /** @param {!proto.pb.PubSubSubscribeRequest} request */
   function(request) {
     return request.serializeBinary();
   },
@@ -217,7 +217,7 @@ const methodInfo_PubSubAPI_Subscribe = new grpc.web.AbstractClientBase.MethodInf
 
 
 /**
- * @param {!proto.pb.SubscribeRequest} request The request proto
+ * @param {!proto.pb.PubSubSubscribeRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
@@ -234,7 +234,7 @@ proto.pb.PubSubAPIClient.prototype.subscribe =
 
 
 /**
- * @param {!proto.pb.SubscribeRequest} request The request proto
+ * @param {!proto.pb.PubSubSubscribeRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
