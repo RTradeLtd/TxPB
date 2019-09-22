@@ -16,19 +16,19 @@ option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 
 
-// IPNSAPI provides an API to access IPNS functionality
-service IPNSAPI {
-    // Resolve is used to resolve a name, waiting for the request to complete
-    rpc Resolve(NameResolveRequest) returns (NameResolveResult) { };
+// NameSysAPI provides a generic name resolution API
+service NameSysAPI {
+    // NameSysResolve is used to resolve a name, waiting for the request to complete
+    rpc NameSysNameSysResolve(NameSysResolveRequest) returns (NameSysResolveResult) { };
     // ResolveAsync is like Resolve, except instead of waiting for the request
     // to complete, we send back a stream which we will send the result on
-    rpc ResolveAsync(NameResolveRequest) returns (stream NameResolveResult) { };
+    rpc NameSysResolveAsync(NameSysResolveRequest) returns (stream NameSysResolveResult) { };
     // Publish is used to publish an IPNS record, with/with-out an EOL
-    rpc Publish(NamePublishRequest) returns (Empty) { };
+    rpc NameSysPublish(NameSysPublishRequest) returns (Empty) { };
 }
  
-// NameResolveRequest is used to resolve an IPNS name
-message NameResolveRequest {
+// NameSysResolveRequest is used to resolve an IPNS name
+message NameSysResolveRequest {
     // the name to resolve
     string name = 1;
     // recursion depth limit
@@ -41,16 +41,16 @@ message NameResolveRequest {
     int32  dhtTimeout = 4; 
 }
 
-// NameResolveRequest is an answer to a resolve request
-message NameResolveResult {
+// NameSysResolveRequest is an answer to a resolve request
+message NameSysResolveResult {
     // the path that was resolved
     string path = 1;
     // an error if any
     string error = 2;
 }
 
-// NamePublishRequest is used to publish a value
-message NamePublishRequest {
+// NameSysPublishRequest is used to publish a value
+message NameSysPublishRequest {
     // the private key (name) for this record
     bytes privateKey = 1;
     // the value of this record

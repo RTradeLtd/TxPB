@@ -340,26 +340,26 @@
         
           
           <li>
-            <a href="#ipns.proto">ipns.proto</a>
+            <a href="#namesys.proto">namesys.proto</a>
             <ul>
               
                 <li>
-                  <a href="#pb.NamePublishRequest"><span class="badge">M</span>NamePublishRequest</a>
+                  <a href="#pb.NameSysPublishRequest"><span class="badge">M</span>NameSysPublishRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.NameResolveRequest"><span class="badge">M</span>NameResolveRequest</a>
+                  <a href="#pb.NameSysResolveRequest"><span class="badge">M</span>NameSysResolveRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.NameResolveResult"><span class="badge">M</span>NameResolveResult</a>
+                  <a href="#pb.NameSysResolveResult"><span class="badge">M</span>NameSysResolveResult</a>
                 </li>
               
               
               
               
                 <li>
-                  <a href="#pb.IPNSAPI"><span class="badge">S</span>IPNSAPI</a>
+                  <a href="#pb.NameSysAPI"><span class="badge">S</span>NameSysAPI</a>
                 </li>
               
             </ul>
@@ -1564,13 +1564,13 @@ is useful on machines with low-memory </p></td>
     
       
       <div class="file-heading">
-        <h2 id="ipns.proto">ipns.proto</h2><a href="#title">Top</a>
+        <h2 id="namesys.proto">namesys.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
 
       
-        <h3 id="pb.NamePublishRequest">NamePublishRequest</h3>
-        <p>NamePublishRequest is used to publish a value</p>
+        <h3 id="pb.NameSysPublishRequest">NameSysPublishRequest</h3>
+        <p>NameSysPublishRequest is used to publish a value</p>
 
         
           <table class="field-table">
@@ -1609,8 +1609,8 @@ a NameSys:PublishWithEOL call </p></td>
 
         
       
-        <h3 id="pb.NameResolveRequest">NameResolveRequest</h3>
-        <p>NameResolveRequest is used to resolve an IPNS name</p>
+        <h3 id="pb.NameSysResolveRequest">NameSysResolveRequest</h3>
+        <p>NameSysResolveRequest is used to resolve an IPNS name</p>
 
         
           <table class="field-table">
@@ -1656,8 +1656,8 @@ for records to be fetched and verified </p></td>
 
         
       
-        <h3 id="pb.NameResolveResult">NameResolveResult</h3>
-        <p>NameResolveRequest is an answer to a resolve request</p>
+        <h3 id="pb.NameSysResolveResult">NameSysResolveResult</h3>
+        <p>NameSysResolveRequest is an answer to a resolve request</p>
 
         
           <table class="field-table">
@@ -1693,8 +1693,8 @@ for records to be fetched and verified </p></td>
       
 
       
-        <h3 id="pb.IPNSAPI">IPNSAPI</h3>
-        <p>IPNSAPI provides an API to access IPNS functionality</p>
+        <h3 id="pb.NameSysAPI">NameSysAPI</h3>
+        <p>NameSysAPI provides a generic name resolution API</p>
         <table class="enum-table">
           <thead>
             <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
@@ -1702,23 +1702,23 @@ for records to be fetched and verified </p></td>
           <tbody>
             
               <tr>
-                <td>Resolve</td>
-                <td><a href="#pb.NameResolveRequest">NameResolveRequest</a></td>
-                <td><a href="#pb.NameResolveResult">NameResolveResult</a></td>
-                <td><p>Resolve is used to resolve a name, waiting for the request to complete</p></td>
+                <td>NameSysNameSysResolve</td>
+                <td><a href="#pb.NameSysResolveRequest">NameSysResolveRequest</a></td>
+                <td><a href="#pb.NameSysResolveResult">NameSysResolveResult</a></td>
+                <td><p>NameSysResolve is used to resolve a name, waiting for the request to complete</p></td>
               </tr>
             
               <tr>
-                <td>ResolveAsync</td>
-                <td><a href="#pb.NameResolveRequest">NameResolveRequest</a></td>
-                <td><a href="#pb.NameResolveResult">NameResolveResult</a> stream</td>
+                <td>NameSysResolveAsync</td>
+                <td><a href="#pb.NameSysResolveRequest">NameSysResolveRequest</a></td>
+                <td><a href="#pb.NameSysResolveResult">NameSysResolveResult</a> stream</td>
                 <td><p>ResolveAsync is like Resolve, except instead of waiting for the request
 to complete, we send back a stream which we will send the result on</p></td>
               </tr>
             
               <tr>
-                <td>Publish</td>
-                <td><a href="#pb.NamePublishRequest">NamePublishRequest</a></td>
+                <td>NameSysPublish</td>
+                <td><a href="#pb.NameSysPublishRequest">NameSysPublishRequest</a></td>
                 <td><a href="#pb.Empty">Empty</a></td>
                 <td><p>Publish is used to publish an IPNS record, with/with-out an EOL</p></td>
               </tr>

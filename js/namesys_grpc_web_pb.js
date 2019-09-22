@@ -16,7 +16,7 @@ var util_pb = require('./util_pb.js')
 
 var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js')
 const proto = {};
-proto.pb = require('./ipns_pb.js');
+proto.pb = require('./namesys_pb.js');
 
 /**
  * @param {string} hostname
@@ -26,7 +26,7 @@ proto.pb = require('./ipns_pb.js');
  * @struct
  * @final
  */
-proto.pb.IPNSAPIClient =
+proto.pb.NameSysAPIClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -62,7 +62,7 @@ proto.pb.IPNSAPIClient =
  * @struct
  * @final
  */
-proto.pb.IPNSAPIPromiseClient =
+proto.pb.NameSysAPIPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -93,117 +93,117 @@ proto.pb.IPNSAPIPromiseClient =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.NameResolveRequest,
- *   !proto.pb.NameResolveResult>}
+ *   !proto.pb.NameSysResolveRequest,
+ *   !proto.pb.NameSysResolveResult>}
  */
-const methodInfo_IPNSAPI_Resolve = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.NameResolveResult,
-  /** @param {!proto.pb.NameResolveRequest} request */
+const methodInfo_NameSysAPI_NameSysNameSysResolve = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.NameSysResolveResult,
+  /** @param {!proto.pb.NameSysResolveRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.NameResolveResult.deserializeBinary
+  proto.pb.NameSysResolveResult.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.NameResolveRequest} request The
+ * @param {!proto.pb.NameSysResolveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.NameResolveResult)}
+ * @param {function(?grpc.web.Error, ?proto.pb.NameSysResolveResult)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.NameResolveResult>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.IPNSAPIClient.prototype.resolve =
+proto.pb.NameSysAPIClient.prototype.nameSysNameSysResolve =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.IPNSAPI/Resolve',
+      '/pb.NameSysAPI/NameSysNameSysResolve',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_Resolve,
+      methodInfo_NameSysAPI_NameSysNameSysResolve,
       callback);
 };
 
 
 /**
- * @param {!proto.pb.NameResolveRequest} request The
+ * @param {!proto.pb.NameSysResolveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.NameResolveResult>}
+ * @return {!Promise<!proto.pb.NameSysResolveResult>}
  *     A native promise that resolves to the response
  */
-proto.pb.IPNSAPIPromiseClient.prototype.resolve =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysNameSysResolve =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.IPNSAPI/Resolve',
+      '/pb.NameSysAPI/NameSysNameSysResolve',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_Resolve);
+      methodInfo_NameSysAPI_NameSysNameSysResolve);
 };
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.NameResolveRequest,
- *   !proto.pb.NameResolveResult>}
+ *   !proto.pb.NameSysResolveRequest,
+ *   !proto.pb.NameSysResolveResult>}
  */
-const methodInfo_IPNSAPI_ResolveAsync = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.NameResolveResult,
-  /** @param {!proto.pb.NameResolveRequest} request */
+const methodInfo_NameSysAPI_NameSysResolveAsync = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.NameSysResolveResult,
+  /** @param {!proto.pb.NameSysResolveRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.NameResolveResult.deserializeBinary
+  proto.pb.NameSysResolveResult.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.NameResolveRequest} request The request proto
+ * @param {!proto.pb.NameSysResolveRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.pb.NameResolveResult>}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>}
  *     The XHR Node Readable Stream
  */
-proto.pb.IPNSAPIClient.prototype.resolveAsync =
+proto.pb.NameSysAPIClient.prototype.nameSysResolveAsync =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/pb.IPNSAPI/ResolveAsync',
+      '/pb.NameSysAPI/NameSysResolveAsync',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_ResolveAsync);
+      methodInfo_NameSysAPI_NameSysResolveAsync);
 };
 
 
 /**
- * @param {!proto.pb.NameResolveRequest} request The request proto
+ * @param {!proto.pb.NameSysResolveRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.pb.NameResolveResult>}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>}
  *     The XHR Node Readable Stream
  */
-proto.pb.IPNSAPIPromiseClient.prototype.resolveAsync =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysResolveAsync =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/pb.IPNSAPI/ResolveAsync',
+      '/pb.NameSysAPI/NameSysResolveAsync',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_ResolveAsync);
+      methodInfo_NameSysAPI_NameSysResolveAsync);
 };
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.NamePublishRequest,
+ *   !proto.pb.NameSysPublishRequest,
  *   !proto.pb.Empty>}
  */
-const methodInfo_IPNSAPI_Publish = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_NameSysAPI_NameSysPublish = new grpc.web.AbstractClientBase.MethodInfo(
   util_pb.Empty,
-  /** @param {!proto.pb.NamePublishRequest} request */
+  /** @param {!proto.pb.NameSysPublishRequest} request */
   function(request) {
     return request.serializeBinary();
   },
@@ -212,7 +212,7 @@ const methodInfo_IPNSAPI_Publish = new grpc.web.AbstractClientBase.MethodInfo(
 
 
 /**
- * @param {!proto.pb.NamePublishRequest} request The
+ * @param {!proto.pb.NameSysPublishRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -221,32 +221,32 @@ const methodInfo_IPNSAPI_Publish = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.pb.Empty>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.IPNSAPIClient.prototype.publish =
+proto.pb.NameSysAPIClient.prototype.nameSysPublish =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.IPNSAPI/Publish',
+      '/pb.NameSysAPI/NameSysPublish',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_Publish,
+      methodInfo_NameSysAPI_NameSysPublish,
       callback);
 };
 
 
 /**
- * @param {!proto.pb.NamePublishRequest} request The
+ * @param {!proto.pb.NameSysPublishRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.pb.Empty>}
  *     A native promise that resolves to the response
  */
-proto.pb.IPNSAPIPromiseClient.prototype.publish =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysPublish =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.IPNSAPI/Publish',
+      '/pb.NameSysAPI/NameSysPublish',
       request,
       metadata || {},
-      methodInfo_IPNSAPI_Publish);
+      methodInfo_NameSysAPI_NameSysPublish);
 };
 
 
