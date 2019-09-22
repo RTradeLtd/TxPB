@@ -518,10 +518,10 @@ const _ = grpc.SupportPackageIsVersion4
 type NameSysAPIClient interface {
 	// NameSysResolve is used to resolve a name, waiting for the request to complete
 	NameSysNameSysResolve(ctx context.Context, in *NameSysResolveRequest, opts ...grpc.CallOption) (*NameSysResolveResult, error)
-	// ResolveAsync is like Resolve, except instead of waiting for the request
+	// NameSysResolveAsync is like Resolve, except instead of waiting for the request
 	// to complete, we send back a stream which we will send the result on
 	NameSysResolveAsync(ctx context.Context, in *NameSysResolveRequest, opts ...grpc.CallOption) (NameSysAPI_NameSysResolveAsyncClient, error)
-	// Publish is used to publish an IPNS record, with/with-out an EOL
+	// NameSysPublish is used to publish an IPNS record, with/with-out an EOL
 	NameSysPublish(ctx context.Context, in *NameSysPublishRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
@@ -587,10 +587,10 @@ func (c *nameSysAPIClient) NameSysPublish(ctx context.Context, in *NameSysPublis
 type NameSysAPIServer interface {
 	// NameSysResolve is used to resolve a name, waiting for the request to complete
 	NameSysNameSysResolve(context.Context, *NameSysResolveRequest) (*NameSysResolveResult, error)
-	// ResolveAsync is like Resolve, except instead of waiting for the request
+	// NameSysResolveAsync is like Resolve, except instead of waiting for the request
 	// to complete, we send back a stream which we will send the result on
 	NameSysResolveAsync(*NameSysResolveRequest, NameSysAPI_NameSysResolveAsyncServer) error
-	// Publish is used to publish an IPNS record, with/with-out an EOL
+	// NameSysPublish is used to publish an IPNS record, with/with-out an EOL
 	NameSysPublish(context.Context, *NameSysPublishRequest) (*Empty, error)
 }
 

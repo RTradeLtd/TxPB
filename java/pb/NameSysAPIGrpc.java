@@ -168,7 +168,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * ResolveAsync is like Resolve, except instead of waiting for the request
+     * NameSysResolveAsync is like Resolve, except instead of waiting for the request
      * to complete, we send back a stream which we will send the result on
      * </pre>
      */
@@ -179,7 +179,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * Publish is used to publish an IPNS record, with/with-out an EOL
+     * NameSysPublish is used to publish an IPNS record, with/with-out an EOL
      * </pre>
      */
     public void nameSysPublish(pb.Namesys.NameSysPublishRequest request,
@@ -248,7 +248,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * ResolveAsync is like Resolve, except instead of waiting for the request
+     * NameSysResolveAsync is like Resolve, except instead of waiting for the request
      * to complete, we send back a stream which we will send the result on
      * </pre>
      */
@@ -260,7 +260,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * Publish is used to publish an IPNS record, with/with-out an EOL
+     * NameSysPublish is used to publish an IPNS record, with/with-out an EOL
      * </pre>
      */
     public void nameSysPublish(pb.Namesys.NameSysPublishRequest request,
@@ -303,7 +303,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * ResolveAsync is like Resolve, except instead of waiting for the request
+     * NameSysResolveAsync is like Resolve, except instead of waiting for the request
      * to complete, we send back a stream which we will send the result on
      * </pre>
      */
@@ -315,7 +315,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * Publish is used to publish an IPNS record, with/with-out an EOL
+     * NameSysPublish is used to publish an IPNS record, with/with-out an EOL
      * </pre>
      */
     public pb.Util.Empty nameSysPublish(pb.Namesys.NameSysPublishRequest request) {
@@ -358,7 +358,7 @@ public final class NameSysAPIGrpc {
 
     /**
      * <pre>
-     * Publish is used to publish an IPNS record, with/with-out an EOL
+     * NameSysPublish is used to publish an IPNS record, with/with-out an EOL
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> nameSysPublish(

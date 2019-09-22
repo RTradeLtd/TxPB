@@ -44,7 +44,7 @@ class NameSysAPIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def NameSysResolveAsync(self, request, context):
-    """ResolveAsync is like Resolve, except instead of waiting for the request
+    """NameSysResolveAsync is like Resolve, except instead of waiting for the request
     to complete, we send back a stream which we will send the result on
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -52,7 +52,7 @@ class NameSysAPIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def NameSysPublish(self, request, context):
-    """Publish is used to publish an IPNS record, with/with-out an EOL
+    """NameSysPublish is used to publish an IPNS record, with/with-out an EOL
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

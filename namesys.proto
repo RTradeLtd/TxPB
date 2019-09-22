@@ -20,10 +20,10 @@ option (gogoproto.unmarshaler_all) = true;
 service NameSysAPI {
     // NameSysResolve is used to resolve a name, waiting for the request to complete
     rpc NameSysNameSysResolve(NameSysResolveRequest) returns (NameSysResolveResult) { };
-    // ResolveAsync is like Resolve, except instead of waiting for the request
+    // NameSysResolveAsync is like Resolve, except instead of waiting for the request
     // to complete, we send back a stream which we will send the result on
     rpc NameSysResolveAsync(NameSysResolveRequest) returns (stream NameSysResolveResult) { };
-    // Publish is used to publish an IPNS record, with/with-out an EOL
+    // NameSysPublish is used to publish an IPNS record, with/with-out an EOL
     rpc NameSysPublish(NameSysPublishRequest) returns (Empty) { };
 }
  
