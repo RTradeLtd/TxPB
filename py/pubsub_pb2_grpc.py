@@ -22,8 +22,8 @@ class PubSubAPIStub(object):
         )
     self.PubSubListPeers = channel.unary_unary(
         '/pb.PubSubAPI/PubSubListPeers',
-        request_serializer=pubsub__pb2.ListPeersRequest.SerializeToString,
-        response_deserializer=pubsub__pb2.ListPeersResponse.FromString,
+        request_serializer=pubsub__pb2.PubSubListPeersRequest.SerializeToString,
+        response_deserializer=pubsub__pb2.PubSubListPeersResponse.FromString,
         )
     self.PubSubSubscribe = channel.unary_stream(
         '/pb.PubSubAPI/PubSubSubscribe',
@@ -84,8 +84,8 @@ def add_PubSubAPIServicer_to_server(servicer, server):
       ),
       'PubSubListPeers': grpc.unary_unary_rpc_method_handler(
           servicer.PubSubListPeers,
-          request_deserializer=pubsub__pb2.ListPeersRequest.FromString,
-          response_serializer=pubsub__pb2.ListPeersResponse.SerializeToString,
+          request_deserializer=pubsub__pb2.PubSubListPeersRequest.FromString,
+          response_serializer=pubsub__pb2.PubSubListPeersResponse.SerializeToString,
       ),
       'PubSubSubscribe': grpc.unary_stream_rpc_method_handler(
           servicer.PubSubSubscribe,

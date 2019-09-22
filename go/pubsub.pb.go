@@ -31,25 +31,25 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// ListPeersRequest is used to return a list of
+// PubSubListPeersRequest is used to return a list of
 // peers that are subscribed to the given topic(s)
-type ListPeersRequest struct {
+type PubSubListPeersRequest struct {
 	// the topics for which we should
 	// list peers for
 	Topics []string `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
 }
 
-func (m *ListPeersRequest) Reset()      { *m = ListPeersRequest{} }
-func (*ListPeersRequest) ProtoMessage() {}
-func (*ListPeersRequest) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersRequest) Reset()      { *m = PubSubListPeersRequest{} }
+func (*PubSubListPeersRequest) ProtoMessage() {}
+func (*PubSubListPeersRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{0}
 }
-func (m *ListPeersRequest) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -59,41 +59,41 @@ func (m *ListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return b[:n], nil
 	}
 }
-func (m *ListPeersRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersRequest.Merge(m, src)
+func (m *PubSubListPeersRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersRequest.Merge(m, src)
 }
-func (m *ListPeersRequest) XXX_Size() int {
+func (m *PubSubListPeersRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersRequest.DiscardUnknown(m)
+func (m *PubSubListPeersRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersRequest proto.InternalMessageInfo
 
-func (m *ListPeersRequest) GetTopics() []string {
+func (m *PubSubListPeersRequest) GetTopics() []string {
 	if m != nil {
 		return m.Topics
 	}
 	return nil
 }
 
-// ListPeersResponse is a response to a ListPeersRequest
-type ListPeersResponse struct {
-	Peers []*ListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
+// PubSubListPeersResponse is a response to a ListPeersRequest
+type PubSubListPeersResponse struct {
+	Peers []*PubSubListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
 }
 
-func (m *ListPeersResponse) Reset()      { *m = ListPeersResponse{} }
-func (*ListPeersResponse) ProtoMessage() {}
-func (*ListPeersResponse) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersResponse) Reset()      { *m = PubSubListPeersResponse{} }
+func (*PubSubListPeersResponse) ProtoMessage() {}
+func (*PubSubListPeersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1}
 }
-func (m *ListPeersResponse) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -103,19 +103,19 @@ func (m *ListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return b[:n], nil
 	}
 }
-func (m *ListPeersResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersResponse.Merge(m, src)
+func (m *PubSubListPeersResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersResponse.Merge(m, src)
 }
-func (m *ListPeersResponse) XXX_Size() int {
+func (m *PubSubListPeersResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersResponse.DiscardUnknown(m)
+func (m *PubSubListPeersResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersResponse proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersResponse proto.InternalMessageInfo
 
-func (m *ListPeersResponse) GetPeers() []*ListPeersResponse_Peer {
+func (m *PubSubListPeersResponse) GetPeers() []*PubSubListPeersResponse_Peer {
 	if m != nil {
 		return m.Peers
 	}
@@ -123,24 +123,24 @@ func (m *ListPeersResponse) GetPeers() []*ListPeersResponse_Peer {
 }
 
 // peer is a single peer
-type ListPeersResponse_Peer struct {
+type PubSubListPeersResponse_Peer struct {
 	// topic is the topic this peer is a part of
 	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
 	// lists the peerid for this peer
 	PeerID string `protobuf:"bytes,2,opt,name=peerID,proto3" json:"peerID,omitempty"`
 }
 
-func (m *ListPeersResponse_Peer) Reset()      { *m = ListPeersResponse_Peer{} }
-func (*ListPeersResponse_Peer) ProtoMessage() {}
-func (*ListPeersResponse_Peer) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersResponse_Peer) Reset()      { *m = PubSubListPeersResponse_Peer{} }
+func (*PubSubListPeersResponse_Peer) ProtoMessage() {}
+func (*PubSubListPeersResponse_Peer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1, 0}
 }
-func (m *ListPeersResponse_Peer) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersResponse_Peer) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersResponse_Peer.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersResponse_Peer.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -150,26 +150,26 @@ func (m *ListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *ListPeersResponse_Peer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersResponse_Peer.Merge(m, src)
+func (m *PubSubListPeersResponse_Peer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersResponse_Peer.Merge(m, src)
 }
-func (m *ListPeersResponse_Peer) XXX_Size() int {
+func (m *PubSubListPeersResponse_Peer) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersResponse_Peer) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersResponse_Peer.DiscardUnknown(m)
+func (m *PubSubListPeersResponse_Peer) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersResponse_Peer.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersResponse_Peer proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersResponse_Peer proto.InternalMessageInfo
 
-func (m *ListPeersResponse_Peer) GetTopic() string {
+func (m *PubSubListPeersResponse_Peer) GetTopic() string {
 	if m != nil {
 		return m.Topic
 	}
 	return ""
 }
 
-func (m *ListPeersResponse_Peer) GetPeerID() string {
+func (m *PubSubListPeersResponse_Peer) GetPeerID() string {
 	if m != nil {
 		return m.PeerID
 	}
@@ -433,9 +433,9 @@ func (m *PubSubMessageResponse) GetKey() []byte {
 }
 
 func init() {
-	proto.RegisterType((*ListPeersRequest)(nil), "pb.ListPeersRequest")
-	proto.RegisterType((*ListPeersResponse)(nil), "pb.ListPeersResponse")
-	proto.RegisterType((*ListPeersResponse_Peer)(nil), "pb.ListPeersResponse.Peer")
+	proto.RegisterType((*PubSubListPeersRequest)(nil), "pb.PubSubListPeersRequest")
+	proto.RegisterType((*PubSubListPeersResponse)(nil), "pb.PubSubListPeersResponse")
+	proto.RegisterType((*PubSubListPeersResponse_Peer)(nil), "pb.PubSubListPeersResponse.Peer")
 	proto.RegisterType((*PubSubPublishRequest)(nil), "pb.PubSubPublishRequest")
 	proto.RegisterType((*PubSubSubscribeRequest)(nil), "pb.PubSubSubscribeRequest")
 	proto.RegisterType((*TopicsResponse)(nil), "pb.TopicsResponse")
@@ -446,42 +446,42 @@ func init() { proto.RegisterFile("pubsub.proto", fileDescriptor_91df006b05e20cf7
 
 var fileDescriptor_91df006b05e20cf7 = []byte{
 	// 519 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x93, 0x3d, 0x6f, 0xd3, 0x40,
-	0x18, 0xc7, 0x7d, 0x79, 0x53, 0xf2, 0x10, 0xa0, 0x9c, 0xd2, 0xca, 0x58, 0xe8, 0x14, 0x79, 0x40,
-	0x11, 0x12, 0x69, 0x15, 0x3a, 0x30, 0x02, 0x2a, 0x42, 0x41, 0x45, 0x8a, 0x5c, 0x66, 0x24, 0x5f,
-	0x72, 0x4d, 0x2d, 0x9a, 0x9c, 0xeb, 0xbb, 0xab, 0x54, 0xb1, 0xb0, 0xb2, 0xf1, 0x15, 0xd8, 0xf8,
-	0x08, 0x7c, 0x04, 0xc6, 0x8e, 0x1d, 0x1b, 0xe7, 0x0b, 0x30, 0x32, 0xa2, 0x7b, 0xae, 0xb1, 0x49,
-	0x89, 0xd8, 0x9e, 0xdf, 0xe3, 0xff, 0x3d, 0xef, 0x86, 0x76, 0x6a, 0xb8, 0x32, 0xbc, 0x9f, 0x66,
-	0x52, 0x4b, 0x5a, 0x49, 0x79, 0x00, 0x46, 0x27, 0xa7, 0x8e, 0x83, 0xa7, 0xd3, 0x44, 0x9f, 0x18,
-	0xde, 0x1f, 0xcb, 0xd9, 0xee, 0x54, 0x4e, 0xe5, 0x2e, 0xba, 0xb9, 0x39, 0x46, 0x42, 0x40, 0xcb,
-	0xc9, 0xc3, 0x27, 0xb0, 0x75, 0x98, 0x28, 0x3d, 0x12, 0x22, 0x53, 0x91, 0x38, 0x33, 0x42, 0x69,
-	0xba, 0x03, 0x0d, 0x2d, 0xd3, 0x64, 0xac, 0x7c, 0xd2, 0xad, 0xf6, 0x5a, 0xd1, 0x0d, 0x85, 0x9f,
-	0xe0, 0xc1, 0x5f, 0x5a, 0x95, 0xca, 0xb9, 0x12, 0x74, 0x0f, 0xea, 0xa9, 0x75, 0xa0, 0xf6, 0xce,
-	0x20, 0xe8, 0xa7, 0xbc, 0xff, 0x8f, 0xaa, 0x6f, 0x29, 0x72, 0xc2, 0x60, 0x1f, 0x6a, 0x16, 0x69,
-	0x07, 0xea, 0x18, 0xd8, 0x27, 0x5d, 0xd2, 0x6b, 0x45, 0x0e, 0x6c, 0x72, 0x2b, 0x1b, 0x1e, 0xf8,
-	0x15, 0x74, 0xdf, 0x50, 0xf8, 0x01, 0x3a, 0x23, 0xc3, 0x8f, 0x0c, 0x1f, 0x19, 0x7e, 0x9a, 0xa8,
-	0x93, 0x55, 0xb1, 0x9b, 0xa3, 0x50, 0xa8, 0x4d, 0x62, 0x1d, 0x63, 0x8c, 0x76, 0x84, 0x36, 0x7d,
-	0x04, 0xad, 0x78, 0x72, 0x2e, 0x32, 0x9d, 0x28, 0xe1, 0x57, 0xbb, 0xa4, 0xd7, 0x8c, 0x4a, 0x47,
-	0xf8, 0x16, 0x76, 0x5c, 0xfc, 0x23, 0xc3, 0xd5, 0x38, 0x4b, 0xb8, 0xf8, 0x7f, 0x86, 0x00, 0x9a,
-	0x93, 0x44, 0x8d, 0xe5, 0xb9, 0xc8, 0x30, 0x4b, 0x33, 0x2a, 0x38, 0x7c, 0x0c, 0xf7, 0xde, 0xe3,
-	0xc8, 0x8a, 0x29, 0x75, 0xa0, 0x3e, 0x8f, 0x67, 0x62, 0x35, 0x51, 0x07, 0xe1, 0x37, 0x02, 0xdb,
-	0x2e, 0xe9, 0x3b, 0xa1, 0x54, 0x3c, 0x15, 0x85, 0x9e, 0x42, 0xed, 0x38, 0x93, 0x33, 0x4c, 0xd9,
-	0x8e, 0xd0, 0xde, 0xd8, 0x53, 0x07, 0xea, 0x4a, 0x9c, 0xcd, 0x25, 0xf6, 0xd3, 0x8e, 0x1c, 0xd8,
-	0xda, 0xb0, 0xc8, 0xe1, 0x81, 0xf2, 0x6b, 0x98, 0xb0, 0x60, 0x3b, 0x05, 0x95, 0x4c, 0xe7, 0xb1,
-	0x36, 0x99, 0xf0, 0xeb, 0xf8, 0xaa, 0x74, 0xd0, 0x2d, 0xa8, 0x7e, 0x14, 0x17, 0x7e, 0x03, 0xfd,
-	0xd6, 0x1c, 0x7c, 0xa9, 0x40, 0xcb, 0xd5, 0xf8, 0x72, 0x34, 0xa4, 0x03, 0xb8, 0xef, 0xe0, 0x8d,
-	0xd0, 0xae, 0x45, 0xda, 0xb2, 0x1b, 0x7f, 0x3d, 0x4b, 0xf5, 0x45, 0x40, 0xad, 0xb9, 0xde, 0x79,
-	0xe8, 0xd1, 0x17, 0xab, 0x37, 0xc5, 0x59, 0xd0, 0xce, 0xad, 0x2b, 0xc1, 0x41, 0x07, 0xdb, 0x1b,
-	0x6f, 0x27, 0xf4, 0xe8, 0xe1, 0x2a, 0x42, 0xb1, 0x1b, 0x8a, 0x77, 0xb6, 0x79, 0x61, 0xc1, 0xc3,
-	0xf2, 0xdb, 0xad, 0xb9, 0x86, 0xde, 0x1e, 0xa1, 0xcf, 0xe1, 0xee, 0xda, 0x25, 0x51, 0xbf, 0xd4,
-	0xaf, 0x1f, 0x57, 0x50, 0xf6, 0x16, 0x7a, 0x3d, 0xf2, 0x6a, 0xff, 0x6a, 0xc1, 0xbc, 0xeb, 0x05,
-	0x23, 0xbf, 0x16, 0x8c, 0xfc, 0x5e, 0x30, 0xf2, 0x39, 0x67, 0xe4, 0x7b, 0xce, 0xc8, 0x8f, 0x9c,
-	0x91, 0x9f, 0x39, 0x23, 0x97, 0x39, 0x23, 0xd7, 0x39, 0x23, 0x5f, 0x97, 0xcc, 0xbb, 0x5c, 0x32,
-	0xef, 0x6a, 0xc9, 0x3c, 0xde, 0xc0, 0x3f, 0xed, 0xd9, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x6f,
-	0xf9, 0xee, 0x6c, 0xb8, 0x03, 0x00, 0x00,
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x93, 0xbf, 0x6e, 0x13, 0x4f,
+	0x10, 0xc7, 0x6f, 0xfd, 0x4f, 0xf6, 0xfc, 0xfc, 0x03, 0xb4, 0x32, 0xe1, 0x38, 0xd0, 0xca, 0xba,
+	0x02, 0xb9, 0xc1, 0x89, 0x4c, 0x84, 0x68, 0x41, 0x41, 0xc8, 0x28, 0x48, 0xd6, 0x85, 0x1a, 0xe9,
+	0xd6, 0xde, 0x38, 0x27, 0x62, 0xef, 0xe5, 0x76, 0x37, 0x52, 0x3a, 0x3a, 0x5a, 0x1a, 0x1e, 0x80,
+	0x8e, 0x47, 0xe0, 0x11, 0x28, 0x53, 0xa6, 0x8c, 0xcf, 0x2f, 0x40, 0x49, 0x89, 0x76, 0x36, 0xbe,
+	0x8b, 0x83, 0x49, 0x37, 0x9f, 0xb9, 0xf9, 0xfb, 0xdd, 0x39, 0x68, 0xa7, 0x86, 0x2b, 0xc3, 0xfb,
+	0x69, 0x26, 0xb5, 0xa4, 0x95, 0x94, 0x07, 0x60, 0x74, 0x72, 0xec, 0x38, 0x78, 0x3a, 0x4d, 0xf4,
+	0x91, 0xe1, 0xfd, 0xb1, 0x9c, 0x6d, 0x4f, 0xe5, 0x54, 0x6e, 0xa3, 0x9b, 0x9b, 0x43, 0x24, 0x04,
+	0xb4, 0x5c, 0x78, 0xb8, 0x03, 0x5b, 0x23, 0xc3, 0x0f, 0x0c, 0xdf, 0x4f, 0x94, 0x1e, 0x09, 0x91,
+	0xa9, 0x48, 0x9c, 0x18, 0xa1, 0x34, 0xdd, 0x82, 0x86, 0x96, 0x69, 0x32, 0x56, 0x3e, 0xe9, 0x56,
+	0x7b, 0xad, 0xe8, 0x8a, 0xc2, 0xcf, 0x04, 0x1e, 0xfc, 0x95, 0xa2, 0x52, 0x39, 0x57, 0x82, 0x3e,
+	0x87, 0x7a, 0x6a, 0x1d, 0x98, 0xf2, 0xdf, 0xa0, 0xdb, 0x4f, 0x79, 0xff, 0x1f, 0xb1, 0x7d, 0x4b,
+	0x91, 0x0b, 0x0f, 0x76, 0xa1, 0x66, 0x91, 0x76, 0xa0, 0x8e, 0x5d, 0x7c, 0xd2, 0x25, 0xbd, 0x56,
+	0xe4, 0xc0, 0x4e, 0x62, 0xc3, 0x86, 0x7b, 0x7e, 0x05, 0xdd, 0x57, 0x14, 0x7e, 0x80, 0x8e, 0x2b,
+	0x3e, 0x32, 0xfc, 0x38, 0x51, 0x47, 0xab, 0xc9, 0x37, 0x57, 0xa1, 0x50, 0x9b, 0xc4, 0x3a, 0xc6,
+	0x1a, 0xed, 0x08, 0x6d, 0xfa, 0x18, 0x5a, 0xf1, 0xe4, 0x54, 0x64, 0x3a, 0x51, 0xc2, 0xaf, 0x76,
+	0x49, 0xaf, 0x19, 0x95, 0x8e, 0xf0, 0xed, 0x4a, 0x9b, 0x03, 0xc3, 0xd5, 0x38, 0x4b, 0xb8, 0xb8,
+	0xbd, 0x43, 0x00, 0xcd, 0x49, 0xa2, 0xc6, 0xf2, 0x54, 0x64, 0xd8, 0xa5, 0x19, 0x15, 0x1c, 0x3e,
+	0x81, 0x3b, 0xef, 0x51, 0xbf, 0x42, 0xab, 0x0e, 0xd4, 0xe7, 0xf1, 0x4c, 0xac, 0xe4, 0x75, 0x10,
+	0x7e, 0x23, 0x70, 0xdf, 0x35, 0x7d, 0x27, 0x94, 0x8a, 0xa7, 0xa2, 0x88, 0xa7, 0x50, 0x3b, 0xcc,
+	0xe4, 0x0c, 0x5b, 0xb6, 0x23, 0xb4, 0x37, 0xee, 0xd4, 0x81, 0xba, 0x12, 0x27, 0x73, 0x89, 0xfb,
+	0xb4, 0x23, 0x07, 0x76, 0x36, 0x1c, 0x72, 0xb8, 0xa7, 0xfc, 0x1a, 0x36, 0x2c, 0xd8, 0xaa, 0xa0,
+	0x92, 0xe9, 0x3c, 0xd6, 0x26, 0x13, 0x7e, 0x1d, 0xb3, 0x4a, 0x07, 0xbd, 0x07, 0xd5, 0x8f, 0xe2,
+	0xcc, 0x6f, 0xa0, 0xdf, 0x9a, 0x83, 0xaf, 0x15, 0x68, 0xb9, 0x19, 0x5f, 0x8e, 0x86, 0x74, 0x00,
+	0x77, 0x1d, 0xbc, 0x11, 0xda, 0xad, 0x48, 0x5b, 0xf6, 0xdd, 0x5f, 0xcf, 0x52, 0x7d, 0x16, 0x50,
+	0x6b, 0xae, 0x6f, 0x1e, 0x7a, 0x74, 0x7f, 0x95, 0x53, 0x9c, 0x05, 0x0d, 0x36, 0xde, 0x0a, 0xca,
+	0x1d, 0x3c, 0xba, 0xe5, 0x8e, 0xae, 0x57, 0x2b, 0xde, 0xe9, 0x7a, 0xb5, 0x9b, 0x8f, 0x17, 0x3c,
+	0x2c, 0xbf, 0xdd, 0xd0, 0x38, 0xf4, 0x76, 0x08, 0x7d, 0x01, 0xff, 0xaf, 0x5d, 0x15, 0xf5, 0xcb,
+	0xf8, 0xf5, 0x43, 0x0b, 0xca, 0x3d, 0x43, 0xaf, 0x47, 0x5e, 0xed, 0x5e, 0x2c, 0x98, 0x77, 0xb9,
+	0x60, 0xe4, 0xd7, 0x82, 0x91, 0xdf, 0x0b, 0x46, 0x3e, 0xe5, 0x8c, 0x7c, 0xcf, 0x19, 0xf9, 0x91,
+	0x33, 0xf2, 0x33, 0x67, 0xe4, 0x3c, 0x67, 0xe4, 0x32, 0x67, 0xe4, 0xcb, 0x92, 0x79, 0xe7, 0x4b,
+	0xe6, 0x5d, 0x2c, 0x99, 0xc7, 0x1b, 0xf8, 0x23, 0x3e, 0xfb, 0x13, 0x00, 0x00, 0xff, 0xff, 0x75,
+	0x3e, 0xf4, 0x34, 0xd7, 0x03, 0x00, 0x00,
 }
 
-func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -489,22 +489,22 @@ func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersRequest)
+	that1, ok := that.(*PubSubListPeersRequest)
 	if !ok {
-		that2, ok := that.(ListPeersRequest)
+		that2, ok := that.(PubSubListPeersRequest)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersRequest")
+			return fmt.Errorf("that is not of type *PubSubListPeersRequest")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersRequest but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersRequest but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersRequest but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersRequest but is not nil && this == nil")
 	}
 	if len(this.Topics) != len(that1.Topics) {
 		return fmt.Errorf("Topics this(%v) Not Equal that(%v)", len(this.Topics), len(that1.Topics))
@@ -516,14 +516,14 @@ func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersRequest) Equal(that interface{}) bool {
+func (this *PubSubListPeersRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersRequest)
+	that1, ok := that.(*PubSubListPeersRequest)
 	if !ok {
-		that2, ok := that.(ListPeersRequest)
+		that2, ok := that.(PubSubListPeersRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -545,7 +545,7 @@ func (this *ListPeersRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersResponse) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -553,22 +553,22 @@ func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersResponse)
+	that1, ok := that.(*PubSubListPeersResponse)
 	if !ok {
-		that2, ok := that.(ListPeersResponse)
+		that2, ok := that.(PubSubListPeersResponse)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersResponse")
+			return fmt.Errorf("that is not of type *PubSubListPeersResponse")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersResponse but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersResponse but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse but is not nil && this == nil")
 	}
 	if len(this.Peers) != len(that1.Peers) {
 		return fmt.Errorf("Peers this(%v) Not Equal that(%v)", len(this.Peers), len(that1.Peers))
@@ -580,14 +580,14 @@ func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersResponse) Equal(that interface{}) bool {
+func (this *PubSubListPeersResponse) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersResponse)
+	that1, ok := that.(*PubSubListPeersResponse)
 	if !ok {
-		that2, ok := that.(ListPeersResponse)
+		that2, ok := that.(PubSubListPeersResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -609,7 +609,7 @@ func (this *ListPeersResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -617,22 +617,22 @@ func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersResponse_Peer)
+	that1, ok := that.(*PubSubListPeersResponse_Peer)
 	if !ok {
-		that2, ok := that.(ListPeersResponse_Peer)
+		that2, ok := that.(PubSubListPeersResponse_Peer)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersResponse_Peer")
+			return fmt.Errorf("that is not of type *PubSubListPeersResponse_Peer")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersResponse_Peer but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersResponse_Peer but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is not nil && this == nil")
 	}
 	if this.Topic != that1.Topic {
 		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
@@ -642,14 +642,14 @@ func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersResponse_Peer) Equal(that interface{}) bool {
+func (this *PubSubListPeersResponse_Peer) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersResponse_Peer)
+	that1, ok := that.(*PubSubListPeersResponse_Peer)
 	if !ok {
-		that2, ok := that.(ListPeersResponse_Peer)
+		that2, ok := that.(PubSubListPeersResponse_Peer)
 		if ok {
 			that1 = &that2
 		} else {
@@ -953,34 +953,34 @@ func (this *PubSubMessageResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersRequest) GoString() string {
+func (this *PubSubListPeersRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 5)
-	s = append(s, "&pb.ListPeersRequest{")
+	s = append(s, "&pb.PubSubListPeersRequest{")
 	s = append(s, "Topics: "+fmt.Sprintf("%#v", this.Topics)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListPeersResponse) GoString() string {
+func (this *PubSubListPeersResponse) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 5)
-	s = append(s, "&pb.ListPeersResponse{")
+	s = append(s, "&pb.PubSubListPeersResponse{")
 	if this.Peers != nil {
 		s = append(s, "Peers: "+fmt.Sprintf("%#v", this.Peers)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListPeersResponse_Peer) GoString() string {
+func (this *PubSubListPeersResponse_Peer) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&pb.ListPeersResponse_Peer{")
+	s = append(s, "&pb.PubSubListPeersResponse_Peer{")
 	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
 	s = append(s, "PeerID: "+fmt.Sprintf("%#v", this.PeerID)+",\n")
 	s = append(s, "}")
@@ -1060,7 +1060,7 @@ type PubSubAPIClient interface {
 	PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TopicsResponse, error)
 	// ListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
-	PubSubListPeers(ctx context.Context, in *ListPeersRequest, opts ...grpc.CallOption) (*ListPeersResponse, error)
+	PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error)
 	// Subscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
@@ -1087,8 +1087,8 @@ func (c *pubSubAPIClient) PubSubGetTopics(ctx context.Context, in *Empty, opts .
 	return out, nil
 }
 
-func (c *pubSubAPIClient) PubSubListPeers(ctx context.Context, in *ListPeersRequest, opts ...grpc.CallOption) (*ListPeersResponse, error) {
-	out := new(ListPeersResponse)
+func (c *pubSubAPIClient) PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error) {
+	out := new(PubSubListPeersResponse)
 	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/PubSubListPeers", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1169,7 +1169,7 @@ type PubSubAPIServer interface {
 	PubSubGetTopics(context.Context, *Empty) (*TopicsResponse, error)
 	// ListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
-	PubSubListPeers(context.Context, *ListPeersRequest) (*ListPeersResponse, error)
+	PubSubListPeers(context.Context, *PubSubListPeersRequest) (*PubSubListPeersResponse, error)
 	// Subscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
@@ -1186,7 +1186,7 @@ type UnimplementedPubSubAPIServer struct {
 func (*UnimplementedPubSubAPIServer) PubSubGetTopics(ctx context.Context, req *Empty) (*TopicsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PubSubGetTopics not implemented")
 }
-func (*UnimplementedPubSubAPIServer) PubSubListPeers(ctx context.Context, req *ListPeersRequest) (*ListPeersResponse, error) {
+func (*UnimplementedPubSubAPIServer) PubSubListPeers(ctx context.Context, req *PubSubListPeersRequest) (*PubSubListPeersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PubSubListPeers not implemented")
 }
 func (*UnimplementedPubSubAPIServer) PubSubSubscribe(req *PubSubSubscribeRequest, srv PubSubAPI_PubSubSubscribeServer) error {
@@ -1219,7 +1219,7 @@ func _PubSubAPI_PubSubGetTopics_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _PubSubAPI_PubSubListPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPeersRequest)
+	in := new(PubSubListPeersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1231,7 +1231,7 @@ func _PubSubAPI_PubSubListPeers_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/pb.PubSubAPI/PubSubListPeers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSubAPIServer).PubSubListPeers(ctx, req.(*ListPeersRequest))
+		return srv.(PubSubAPIServer).PubSubListPeers(ctx, req.(*PubSubListPeersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1311,7 +1311,7 @@ var _PubSubAPI_serviceDesc = grpc.ServiceDesc{
 	Metadata: "pubsub.proto",
 }
 
-func (m *ListPeersRequest) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1321,12 +1321,12 @@ func (m *ListPeersRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1343,7 +1343,7 @@ func (m *ListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListPeersResponse) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1353,12 +1353,12 @@ func (m *ListPeersResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1380,7 +1380,7 @@ func (m *ListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1390,12 +1390,12 @@ func (m *ListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersResponse_Peer) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse_Peer) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1614,8 +1614,8 @@ func encodeVarintPubsub(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedListPeersRequest(r randyPubsub, easy bool) *ListPeersRequest {
-	this := &ListPeersRequest{}
+func NewPopulatedPubSubListPeersRequest(r randyPubsub, easy bool) *PubSubListPeersRequest {
+	this := &PubSubListPeersRequest{}
 	v1 := r.Intn(10)
 	this.Topics = make([]string, v1)
 	for i := 0; i < v1; i++ {
@@ -1626,13 +1626,13 @@ func NewPopulatedListPeersRequest(r randyPubsub, easy bool) *ListPeersRequest {
 	return this
 }
 
-func NewPopulatedListPeersResponse(r randyPubsub, easy bool) *ListPeersResponse {
-	this := &ListPeersResponse{}
+func NewPopulatedPubSubListPeersResponse(r randyPubsub, easy bool) *PubSubListPeersResponse {
+	this := &PubSubListPeersResponse{}
 	if r.Intn(5) != 0 {
 		v2 := r.Intn(5)
-		this.Peers = make([]*ListPeersResponse_Peer, v2)
+		this.Peers = make([]*PubSubListPeersResponse_Peer, v2)
 		for i := 0; i < v2; i++ {
-			this.Peers[i] = NewPopulatedListPeersResponse_Peer(r, easy)
+			this.Peers[i] = NewPopulatedPubSubListPeersResponse_Peer(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1640,8 +1640,8 @@ func NewPopulatedListPeersResponse(r randyPubsub, easy bool) *ListPeersResponse 
 	return this
 }
 
-func NewPopulatedListPeersResponse_Peer(r randyPubsub, easy bool) *ListPeersResponse_Peer {
-	this := &ListPeersResponse_Peer{}
+func NewPopulatedPubSubListPeersResponse_Peer(r randyPubsub, easy bool) *PubSubListPeersResponse_Peer {
+	this := &PubSubListPeersResponse_Peer{}
 	this.Topic = string(randStringPubsub(r))
 	this.PeerID = string(randStringPubsub(r))
 	if !easy && r.Intn(10) != 0 {
@@ -1793,7 +1793,7 @@ func encodeVarintPopulatePubsub(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
-func (m *ListPeersRequest) Size() (n int) {
+func (m *PubSubListPeersRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1808,7 +1808,7 @@ func (m *ListPeersRequest) Size() (n int) {
 	return n
 }
 
-func (m *ListPeersResponse) Size() (n int) {
+func (m *PubSubListPeersResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1823,7 +1823,7 @@ func (m *ListPeersResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListPeersResponse_Peer) Size() (n int) {
+func (m *PubSubListPeersResponse_Peer) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1932,36 +1932,36 @@ func sovPubsub(x uint64) (n int) {
 func sozPubsub(x uint64) (n int) {
 	return sovPubsub(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *ListPeersRequest) String() string {
+func (this *PubSubListPeersRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListPeersRequest{`,
+	s := strings.Join([]string{`&PubSubListPeersRequest{`,
 		`Topics:` + fmt.Sprintf("%v", this.Topics) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ListPeersResponse) String() string {
+func (this *PubSubListPeersResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForPeers := "[]*ListPeersResponse_Peer{"
+	repeatedStringForPeers := "[]*PubSubListPeersResponse_Peer{"
 	for _, f := range this.Peers {
-		repeatedStringForPeers += strings.Replace(fmt.Sprintf("%v", f), "ListPeersResponse_Peer", "ListPeersResponse_Peer", 1) + ","
+		repeatedStringForPeers += strings.Replace(fmt.Sprintf("%v", f), "PubSubListPeersResponse_Peer", "PubSubListPeersResponse_Peer", 1) + ","
 	}
 	repeatedStringForPeers += "}"
-	s := strings.Join([]string{`&ListPeersResponse{`,
+	s := strings.Join([]string{`&PubSubListPeersResponse{`,
 		`Peers:` + repeatedStringForPeers + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ListPeersResponse_Peer) String() string {
+func (this *PubSubListPeersResponse_Peer) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListPeersResponse_Peer{`,
+	s := strings.Join([]string{`&PubSubListPeersResponse_Peer{`,
 		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
 		`PeerID:` + fmt.Sprintf("%v", this.PeerID) + `,`,
 		`}`,
@@ -2024,7 +2024,7 @@ func valueToStringPubsub(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2047,10 +2047,10 @@ func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListPeersRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubListPeersRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListPeersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubListPeersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2109,7 +2109,7 @@ func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2132,10 +2132,10 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListPeersResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubListPeersResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListPeersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubListPeersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2167,7 +2167,7 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Peers = append(m.Peers, &ListPeersResponse_Peer{})
+			m.Peers = append(m.Peers, &PubSubListPeersResponse_Peer{})
 			if err := m.Peers[len(m.Peers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -2196,7 +2196,7 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {

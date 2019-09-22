@@ -13,9 +13,9 @@ var global = Function('return this')();
 
 var util_pb = require('./util_pb.js');
 var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js');
-goog.exportSymbol('proto.pb.ListPeersRequest', null, global);
-goog.exportSymbol('proto.pb.ListPeersResponse', null, global);
-goog.exportSymbol('proto.pb.ListPeersResponse.Peer', null, global);
+goog.exportSymbol('proto.pb.PubSubListPeersRequest', null, global);
+goog.exportSymbol('proto.pb.PubSubListPeersResponse', null, global);
+goog.exportSymbol('proto.pb.PubSubListPeersResponse.Peer', null, global);
 goog.exportSymbol('proto.pb.PubSubMessageResponse', null, global);
 goog.exportSymbol('proto.pb.PubSubPublishRequest', null, global);
 goog.exportSymbol('proto.pb.PubSubSubscribeRequest', null, global);
@@ -31,19 +31,19 @@ goog.exportSymbol('proto.pb.TopicsResponse', null, global);
  * @extends {jspb.Message}
  * @constructor
  */
-proto.pb.ListPeersRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.pb.ListPeersRequest.repeatedFields_, null);
+proto.pb.PubSubListPeersRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.pb.PubSubListPeersRequest.repeatedFields_, null);
 };
-goog.inherits(proto.pb.ListPeersRequest, jspb.Message);
+goog.inherits(proto.pb.PubSubListPeersRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.pb.ListPeersRequest.displayName = 'proto.pb.ListPeersRequest';
+  proto.pb.PubSubListPeersRequest.displayName = 'proto.pb.PubSubListPeersRequest';
 }
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.pb.ListPeersRequest.repeatedFields_ = [1];
+proto.pb.PubSubListPeersRequest.repeatedFields_ = [1];
 
 
 
@@ -58,8 +58,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.pb.ListPeersRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.pb.ListPeersRequest.toObject(opt_includeInstance, this);
+proto.pb.PubSubListPeersRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.pb.PubSubListPeersRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -68,11 +68,11 @@ proto.pb.ListPeersRequest.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.pb.ListPeersRequest} msg The msg instance to transform.
+ * @param {!proto.pb.PubSubListPeersRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersRequest.toObject = function(includeInstance, msg) {
+proto.pb.PubSubListPeersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     topicsList: jspb.Message.getRepeatedField(msg, 1)
   };
@@ -88,23 +88,23 @@ proto.pb.ListPeersRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.pb.ListPeersRequest}
+ * @return {!proto.pb.PubSubListPeersRequest}
  */
-proto.pb.ListPeersRequest.deserializeBinary = function(bytes) {
+proto.pb.PubSubListPeersRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.pb.ListPeersRequest;
-  return proto.pb.ListPeersRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.pb.PubSubListPeersRequest;
+  return proto.pb.PubSubListPeersRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.pb.ListPeersRequest} msg The message object to deserialize into.
+ * @param {!proto.pb.PubSubListPeersRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.pb.ListPeersRequest}
+ * @return {!proto.pb.PubSubListPeersRequest}
  */
-proto.pb.ListPeersRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.pb.PubSubListPeersRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -128,9 +128,9 @@ proto.pb.ListPeersRequest.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.pb.ListPeersRequest.prototype.serializeBinary = function() {
+proto.pb.PubSubListPeersRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.pb.ListPeersRequest.serializeBinaryToWriter(this, writer);
+  proto.pb.PubSubListPeersRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -138,11 +138,11 @@ proto.pb.ListPeersRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.pb.ListPeersRequest} message
+ * @param {!proto.pb.PubSubListPeersRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersRequest.serializeBinaryToWriter = function(message, writer) {
+proto.pb.PubSubListPeersRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTopicsList();
   if (f.length > 0) {
@@ -158,13 +158,13 @@ proto.pb.ListPeersRequest.serializeBinaryToWriter = function(message, writer) {
  * repeated string topics = 1;
  * @return {!Array<string>}
  */
-proto.pb.ListPeersRequest.prototype.getTopicsList = function() {
+proto.pb.PubSubListPeersRequest.prototype.getTopicsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /** @param {!Array<string>} value */
-proto.pb.ListPeersRequest.prototype.setTopicsList = function(value) {
+proto.pb.PubSubListPeersRequest.prototype.setTopicsList = function(value) {
   jspb.Message.setField(this, 1, value || []);
 };
 
@@ -173,12 +173,12 @@ proto.pb.ListPeersRequest.prototype.setTopicsList = function(value) {
  * @param {!string} value
  * @param {number=} opt_index
  */
-proto.pb.ListPeersRequest.prototype.addTopics = function(value, opt_index) {
+proto.pb.PubSubListPeersRequest.prototype.addTopics = function(value, opt_index) {
   jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
-proto.pb.ListPeersRequest.prototype.clearTopicsList = function() {
+proto.pb.PubSubListPeersRequest.prototype.clearTopicsList = function() {
   this.setTopicsList([]);
 };
 
@@ -194,19 +194,19 @@ proto.pb.ListPeersRequest.prototype.clearTopicsList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.pb.ListPeersResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.pb.ListPeersResponse.repeatedFields_, null);
+proto.pb.PubSubListPeersResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.pb.PubSubListPeersResponse.repeatedFields_, null);
 };
-goog.inherits(proto.pb.ListPeersResponse, jspb.Message);
+goog.inherits(proto.pb.PubSubListPeersResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.pb.ListPeersResponse.displayName = 'proto.pb.ListPeersResponse';
+  proto.pb.PubSubListPeersResponse.displayName = 'proto.pb.PubSubListPeersResponse';
 }
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.pb.ListPeersResponse.repeatedFields_ = [1];
+proto.pb.PubSubListPeersResponse.repeatedFields_ = [1];
 
 
 
@@ -221,8 +221,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.pb.ListPeersResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.pb.ListPeersResponse.toObject(opt_includeInstance, this);
+proto.pb.PubSubListPeersResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.pb.PubSubListPeersResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -231,14 +231,14 @@ proto.pb.ListPeersResponse.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.pb.ListPeersResponse} msg The msg instance to transform.
+ * @param {!proto.pb.PubSubListPeersResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersResponse.toObject = function(includeInstance, msg) {
+proto.pb.PubSubListPeersResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     peersList: jspb.Message.toObjectList(msg.getPeersList(),
-    proto.pb.ListPeersResponse.Peer.toObject, includeInstance)
+    proto.pb.PubSubListPeersResponse.Peer.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -252,23 +252,23 @@ proto.pb.ListPeersResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.pb.ListPeersResponse}
+ * @return {!proto.pb.PubSubListPeersResponse}
  */
-proto.pb.ListPeersResponse.deserializeBinary = function(bytes) {
+proto.pb.PubSubListPeersResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.pb.ListPeersResponse;
-  return proto.pb.ListPeersResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.pb.PubSubListPeersResponse;
+  return proto.pb.PubSubListPeersResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.pb.ListPeersResponse} msg The message object to deserialize into.
+ * @param {!proto.pb.PubSubListPeersResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.pb.ListPeersResponse}
+ * @return {!proto.pb.PubSubListPeersResponse}
  */
-proto.pb.ListPeersResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.pb.PubSubListPeersResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -276,8 +276,8 @@ proto.pb.ListPeersResponse.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.pb.ListPeersResponse.Peer;
-      reader.readMessage(value,proto.pb.ListPeersResponse.Peer.deserializeBinaryFromReader);
+      var value = new proto.pb.PubSubListPeersResponse.Peer;
+      reader.readMessage(value,proto.pb.PubSubListPeersResponse.Peer.deserializeBinaryFromReader);
       msg.addPeers(value);
       break;
     default:
@@ -293,9 +293,9 @@ proto.pb.ListPeersResponse.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.pb.ListPeersResponse.prototype.serializeBinary = function() {
+proto.pb.PubSubListPeersResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.pb.ListPeersResponse.serializeBinaryToWriter(this, writer);
+  proto.pb.PubSubListPeersResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -303,18 +303,18 @@ proto.pb.ListPeersResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.pb.ListPeersResponse} message
+ * @param {!proto.pb.PubSubListPeersResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersResponse.serializeBinaryToWriter = function(message, writer) {
+proto.pb.PubSubListPeersResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getPeersList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.pb.ListPeersResponse.Peer.serializeBinaryToWriter
+      proto.pb.PubSubListPeersResponse.Peer.serializeBinaryToWriter
     );
   }
 };
@@ -331,12 +331,12 @@ proto.pb.ListPeersResponse.serializeBinaryToWriter = function(message, writer) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.pb.ListPeersResponse.Peer = function(opt_data) {
+proto.pb.PubSubListPeersResponse.Peer = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.pb.ListPeersResponse.Peer, jspb.Message);
+goog.inherits(proto.pb.PubSubListPeersResponse.Peer, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.pb.ListPeersResponse.Peer.displayName = 'proto.pb.ListPeersResponse.Peer';
+  proto.pb.PubSubListPeersResponse.Peer.displayName = 'proto.pb.PubSubListPeersResponse.Peer';
 }
 
 
@@ -351,8 +351,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.pb.ListPeersResponse.Peer.prototype.toObject = function(opt_includeInstance) {
-  return proto.pb.ListPeersResponse.Peer.toObject(opt_includeInstance, this);
+proto.pb.PubSubListPeersResponse.Peer.prototype.toObject = function(opt_includeInstance) {
+  return proto.pb.PubSubListPeersResponse.Peer.toObject(opt_includeInstance, this);
 };
 
 
@@ -361,11 +361,11 @@ proto.pb.ListPeersResponse.Peer.prototype.toObject = function(opt_includeInstanc
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.pb.ListPeersResponse.Peer} msg The msg instance to transform.
+ * @param {!proto.pb.PubSubListPeersResponse.Peer} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersResponse.Peer.toObject = function(includeInstance, msg) {
+proto.pb.PubSubListPeersResponse.Peer.toObject = function(includeInstance, msg) {
   var f, obj = {
     topic: jspb.Message.getFieldWithDefault(msg, 1, ""),
     peerid: jspb.Message.getFieldWithDefault(msg, 2, "")
@@ -382,23 +382,23 @@ proto.pb.ListPeersResponse.Peer.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.pb.ListPeersResponse.Peer}
+ * @return {!proto.pb.PubSubListPeersResponse.Peer}
  */
-proto.pb.ListPeersResponse.Peer.deserializeBinary = function(bytes) {
+proto.pb.PubSubListPeersResponse.Peer.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.pb.ListPeersResponse.Peer;
-  return proto.pb.ListPeersResponse.Peer.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.pb.PubSubListPeersResponse.Peer;
+  return proto.pb.PubSubListPeersResponse.Peer.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.pb.ListPeersResponse.Peer} msg The message object to deserialize into.
+ * @param {!proto.pb.PubSubListPeersResponse.Peer} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.pb.ListPeersResponse.Peer}
+ * @return {!proto.pb.PubSubListPeersResponse.Peer}
  */
-proto.pb.ListPeersResponse.Peer.deserializeBinaryFromReader = function(msg, reader) {
+proto.pb.PubSubListPeersResponse.Peer.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -426,9 +426,9 @@ proto.pb.ListPeersResponse.Peer.deserializeBinaryFromReader = function(msg, read
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.pb.ListPeersResponse.Peer.prototype.serializeBinary = function() {
+proto.pb.PubSubListPeersResponse.Peer.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.pb.ListPeersResponse.Peer.serializeBinaryToWriter(this, writer);
+  proto.pb.PubSubListPeersResponse.Peer.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -436,11 +436,11 @@ proto.pb.ListPeersResponse.Peer.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.pb.ListPeersResponse.Peer} message
+ * @param {!proto.pb.PubSubListPeersResponse.Peer} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.pb.ListPeersResponse.Peer.serializeBinaryToWriter = function(message, writer) {
+proto.pb.PubSubListPeersResponse.Peer.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTopic();
   if (f.length > 0) {
@@ -463,13 +463,13 @@ proto.pb.ListPeersResponse.Peer.serializeBinaryToWriter = function(message, writ
  * optional string topic = 1;
  * @return {string}
  */
-proto.pb.ListPeersResponse.Peer.prototype.getTopic = function() {
+proto.pb.PubSubListPeersResponse.Peer.prototype.getTopic = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.pb.ListPeersResponse.Peer.prototype.setTopic = function(value) {
+proto.pb.PubSubListPeersResponse.Peer.prototype.setTopic = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -478,44 +478,44 @@ proto.pb.ListPeersResponse.Peer.prototype.setTopic = function(value) {
  * optional string peerID = 2;
  * @return {string}
  */
-proto.pb.ListPeersResponse.Peer.prototype.getPeerid = function() {
+proto.pb.PubSubListPeersResponse.Peer.prototype.getPeerid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.pb.ListPeersResponse.Peer.prototype.setPeerid = function(value) {
+proto.pb.PubSubListPeersResponse.Peer.prototype.setPeerid = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
  * repeated Peer peers = 1;
- * @return {!Array<!proto.pb.ListPeersResponse.Peer>}
+ * @return {!Array<!proto.pb.PubSubListPeersResponse.Peer>}
  */
-proto.pb.ListPeersResponse.prototype.getPeersList = function() {
-  return /** @type{!Array<!proto.pb.ListPeersResponse.Peer>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.pb.ListPeersResponse.Peer, 1));
+proto.pb.PubSubListPeersResponse.prototype.getPeersList = function() {
+  return /** @type{!Array<!proto.pb.PubSubListPeersResponse.Peer>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.pb.PubSubListPeersResponse.Peer, 1));
 };
 
 
-/** @param {!Array<!proto.pb.ListPeersResponse.Peer>} value */
-proto.pb.ListPeersResponse.prototype.setPeersList = function(value) {
+/** @param {!Array<!proto.pb.PubSubListPeersResponse.Peer>} value */
+proto.pb.PubSubListPeersResponse.prototype.setPeersList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.pb.ListPeersResponse.Peer=} opt_value
+ * @param {!proto.pb.PubSubListPeersResponse.Peer=} opt_value
  * @param {number=} opt_index
- * @return {!proto.pb.ListPeersResponse.Peer}
+ * @return {!proto.pb.PubSubListPeersResponse.Peer}
  */
-proto.pb.ListPeersResponse.prototype.addPeers = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.pb.ListPeersResponse.Peer, opt_index);
+proto.pb.PubSubListPeersResponse.prototype.addPeers = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.pb.PubSubListPeersResponse.Peer, opt_index);
 };
 
 
-proto.pb.ListPeersResponse.prototype.clearPeersList = function() {
+proto.pb.PubSubListPeersResponse.prototype.clearPeersList = function() {
   this.setPeersList([]);
 };
 

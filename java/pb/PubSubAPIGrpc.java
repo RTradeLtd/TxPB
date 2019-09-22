@@ -62,30 +62,30 @@ public final class PubSubAPIGrpc {
      return getPubSubGetTopicsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest,
-      pb.Pubsub.ListPeersResponse> getPubSubListPeersMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest,
+      pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "PubSubListPeers",
-      requestType = pb.Pubsub.ListPeersRequest.class,
-      responseType = pb.Pubsub.ListPeersResponse.class,
+      requestType = pb.Pubsub.PubSubListPeersRequest.class,
+      responseType = pb.Pubsub.PubSubListPeersResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest,
-      pb.Pubsub.ListPeersResponse> getPubSubListPeersMethod() {
-    io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest, pb.Pubsub.ListPeersResponse> getPubSubListPeersMethod;
+  public static io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest,
+      pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod() {
+    io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest, pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod;
     if ((getPubSubListPeersMethod = PubSubAPIGrpc.getPubSubListPeersMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
         if ((getPubSubListPeersMethod = PubSubAPIGrpc.getPubSubListPeersMethod) == null) {
           PubSubAPIGrpc.getPubSubListPeersMethod = getPubSubListPeersMethod = 
-              io.grpc.MethodDescriptor.<pb.Pubsub.ListPeersRequest, pb.Pubsub.ListPeersResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Pubsub.PubSubListPeersRequest, pb.Pubsub.PubSubListPeersResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.PubSubAPI", "PubSubListPeers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.ListPeersRequest.getDefaultInstance()))
+                  pb.Pubsub.PubSubListPeersRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.ListPeersResponse.getDefaultInstance()))
+                  pb.Pubsub.PubSubListPeersResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubListPeers"))
                   .build();
           }
@@ -205,8 +205,8 @@ public final class PubSubAPIGrpc {
      * to a given topic or topics.
      * </pre>
      */
-    public void pubSubListPeers(pb.Pubsub.ListPeersRequest request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse> responseObserver) {
+    public void pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getPubSubListPeersMethod(), responseObserver);
     }
 
@@ -246,8 +246,8 @@ public final class PubSubAPIGrpc {
             getPubSubListPeersMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Pubsub.ListPeersRequest,
-                pb.Pubsub.ListPeersResponse>(
+                pb.Pubsub.PubSubListPeersRequest,
+                pb.Pubsub.PubSubListPeersResponse>(
                   this, METHODID_PUB_SUB_LIST_PEERS)))
           .addMethod(
             getPubSubSubscribeMethod(),
@@ -306,8 +306,8 @@ public final class PubSubAPIGrpc {
      * to a given topic or topics.
      * </pre>
      */
-    public void pubSubListPeers(pb.Pubsub.ListPeersRequest request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse> responseObserver) {
+    public void pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getPubSubListPeersMethod(), getCallOptions()), request, responseObserver);
     }
@@ -376,7 +376,7 @@ public final class PubSubAPIGrpc {
      * to a given topic or topics.
      * </pre>
      */
-    public pb.Pubsub.ListPeersResponse pubSubListPeers(pb.Pubsub.ListPeersRequest request) {
+    public pb.Pubsub.PubSubListPeersResponse pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request) {
       return blockingUnaryCall(
           getChannel(), getPubSubListPeersMethod(), getCallOptions(), request);
     }
@@ -435,8 +435,8 @@ public final class PubSubAPIGrpc {
      * to a given topic or topics.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.ListPeersResponse> pubSubListPeers(
-        pb.Pubsub.ListPeersRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.PubSubListPeersResponse> pubSubListPeers(
+        pb.Pubsub.PubSubListPeersRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getPubSubListPeersMethod(), getCallOptions()), request);
     }
@@ -469,8 +469,8 @@ public final class PubSubAPIGrpc {
               (io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse>) responseObserver);
           break;
         case METHODID_PUB_SUB_LIST_PEERS:
-          serviceImpl.pubSubListPeers((pb.Pubsub.ListPeersRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse>) responseObserver);
+          serviceImpl.pubSubListPeers((pb.Pubsub.PubSubListPeersRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse>) responseObserver);
           break;
         case METHODID_PUB_SUB_SUBSCRIBE:
           serviceImpl.pubSubSubscribe((pb.Pubsub.PubSubSubscribeRequest) request,

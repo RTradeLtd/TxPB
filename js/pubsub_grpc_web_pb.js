@@ -148,27 +148,27 @@ proto.pb.PubSubAPIPromiseClient.prototype.pubSubGetTopics =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.ListPeersRequest,
- *   !proto.pb.ListPeersResponse>}
+ *   !proto.pb.PubSubListPeersRequest,
+ *   !proto.pb.PubSubListPeersResponse>}
  */
 const methodInfo_PubSubAPI_PubSubListPeers = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.ListPeersResponse,
-  /** @param {!proto.pb.ListPeersRequest} request */
+  proto.pb.PubSubListPeersResponse,
+  /** @param {!proto.pb.PubSubListPeersRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.ListPeersResponse.deserializeBinary
+  proto.pb.PubSubListPeersResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.ListPeersRequest} request The
+ * @param {!proto.pb.PubSubListPeersRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.ListPeersResponse)}
+ * @param {function(?grpc.web.Error, ?proto.pb.PubSubListPeersResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.ListPeersResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubListPeersResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.PubSubAPIClient.prototype.pubSubListPeers =
@@ -183,11 +183,11 @@ proto.pb.PubSubAPIClient.prototype.pubSubListPeers =
 
 
 /**
- * @param {!proto.pb.ListPeersRequest} request The
+ * @param {!proto.pb.PubSubListPeersRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.ListPeersResponse>}
+ * @return {!Promise<!proto.pb.PubSubListPeersResponse>}
  *     A native promise that resolves to the response
  */
 proto.pb.PubSubAPIPromiseClient.prototype.pubSubListPeers =

@@ -24,7 +24,7 @@ service PubSubAPI {
 
     // ListPeers is used to return a list of peers subscribed
     // to a given topic or topics.
-    rpc PubSubListPeers(ListPeersRequest) returns (ListPeersResponse) { };
+    rpc PubSubListPeers(PubSubListPeersRequest) returns (PubSubListPeersResponse) { };
 
     // Subscribe is used to subscribe to a topic and receive messages
     // Server will stream the messages received on the topic specified 
@@ -36,16 +36,16 @@ service PubSubAPI {
     rpc PubSubPublish(stream PubSubPublishRequest) returns (Empty) { };   
 }
 
-// ListPeersRequest is used to return a list of
+// PubSubListPeersRequest is used to return a list of
 // peers that are subscribed to the given topic(s)
-message ListPeersRequest {
+message PubSubListPeersRequest {
     // the topics for which we should
     // list peers for
     repeated string topics = 1;
 }
 
-// ListPeersResponse is a response to a ListPeersRequest
-message ListPeersResponse {
+// PubSubListPeersResponse is a response to a ListPeersRequest
+message PubSubListPeersResponse {
     // peer is a single peer
     message Peer {
         // topic is the topic this peer is a part of

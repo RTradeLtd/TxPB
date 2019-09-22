@@ -22,15 +22,15 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func TestListPeersRequestProto(t *testing.T) {
+func TestPubSubListPeersRequestProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, false)
+	p := NewPopulatedPubSubListPeersRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -56,10 +56,10 @@ func TestListPeersRequestProto(t *testing.T) {
 	}
 }
 
-func TestListPeersRequestMarshalTo(t *testing.T) {
+func TestPubSubListPeersRequestMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, false)
+	p := NewPopulatedPubSubListPeersRequest(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -69,7 +69,7 @@ func TestListPeersRequestMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -84,15 +84,15 @@ func TestListPeersRequestMarshalTo(t *testing.T) {
 	}
 }
 
-func TestListPeersResponseProto(t *testing.T) {
+func TestPubSubListPeersResponseProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, false)
+	p := NewPopulatedPubSubListPeersResponse(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -118,10 +118,10 @@ func TestListPeersResponseProto(t *testing.T) {
 	}
 }
 
-func TestListPeersResponseMarshalTo(t *testing.T) {
+func TestPubSubListPeersResponseMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, false)
+	p := NewPopulatedPubSubListPeersResponse(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -131,7 +131,7 @@ func TestListPeersResponseMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -146,15 +146,15 @@ func TestListPeersResponseMarshalTo(t *testing.T) {
 	}
 }
 
-func TestListPeersResponse_PeerProto(t *testing.T) {
+func TestPubSubListPeersResponse_PeerProto(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, false)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -180,10 +180,10 @@ func TestListPeersResponse_PeerProto(t *testing.T) {
 	}
 }
 
-func TestListPeersResponse_PeerMarshalTo(t *testing.T) {
+func TestPubSubListPeersResponse_PeerMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, false)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
 	for i := range dAtA {
@@ -193,7 +193,7 @@ func TestListPeersResponse_PeerMarshalTo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -456,16 +456,16 @@ func TestPubSubMessageResponseMarshalTo(t *testing.T) {
 	}
 }
 
-func TestListPeersRequestJSON(t *testing.T) {
+func TestPubSubListPeersRequestJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, true)
+	p := NewPopulatedPubSubListPeersRequest(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -477,16 +477,16 @@ func TestListPeersRequestJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestListPeersResponseJSON(t *testing.T) {
+func TestPubSubListPeersResponseJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, true)
+	p := NewPopulatedPubSubListPeersResponse(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -498,16 +498,16 @@ func TestListPeersResponseJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestListPeersResponse_PeerJSON(t *testing.T) {
+func TestPubSubListPeersResponse_PeerJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, true)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, true)
 	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
@@ -603,12 +603,12 @@ func TestPubSubMessageResponseJSON(t *testing.T) {
 		t.Fatalf("seed = %d, %#v !Json Equal %#v", seed, msg, p)
 	}
 }
-func TestListPeersRequestProtoText(t *testing.T) {
+func TestPubSubListPeersRequestProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, true)
+	p := NewPopulatedPubSubListPeersRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -620,12 +620,12 @@ func TestListPeersRequestProtoText(t *testing.T) {
 	}
 }
 
-func TestListPeersRequestProtoCompactText(t *testing.T) {
+func TestPubSubListPeersRequestProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, true)
+	p := NewPopulatedPubSubListPeersRequest(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -637,12 +637,12 @@ func TestListPeersRequestProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestListPeersResponseProtoText(t *testing.T) {
+func TestPubSubListPeersResponseProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, true)
+	p := NewPopulatedPubSubListPeersResponse(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -654,12 +654,12 @@ func TestListPeersResponseProtoText(t *testing.T) {
 	}
 }
 
-func TestListPeersResponseProtoCompactText(t *testing.T) {
+func TestPubSubListPeersResponseProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, true)
+	p := NewPopulatedPubSubListPeersResponse(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -671,12 +671,12 @@ func TestListPeersResponseProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestListPeersResponse_PeerProtoText(t *testing.T) {
+func TestPubSubListPeersResponse_PeerProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, true)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -688,12 +688,12 @@ func TestListPeersResponse_PeerProtoText(t *testing.T) {
 	}
 }
 
-func TestListPeersResponse_PeerProtoCompactText(t *testing.T) {
+func TestPubSubListPeersResponse_PeerProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, true)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, true)
 	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -841,14 +841,14 @@ func TestPubSubMessageResponseProtoCompactText(t *testing.T) {
 	}
 }
 
-func TestListPeersRequestVerboseEqual(t *testing.T) {
+func TestPubSubListPeersRequestVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersRequest(popr, false)
+	p := NewPopulatedPubSubListPeersRequest(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &ListPeersRequest{}
+	msg := &PubSubListPeersRequest{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -856,14 +856,14 @@ func TestListPeersRequestVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestListPeersResponseVerboseEqual(t *testing.T) {
+func TestPubSubListPeersResponseVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse(popr, false)
+	p := NewPopulatedPubSubListPeersResponse(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &ListPeersResponse{}
+	msg := &PubSubListPeersResponse{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -871,14 +871,14 @@ func TestListPeersResponseVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestListPeersResponse_PeerVerboseEqual(t *testing.T) {
+func TestPubSubListPeersResponse_PeerVerboseEqual(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse_Peer(popr, false)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, false)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
-	msg := &ListPeersResponse_Peer{}
+	msg := &PubSubListPeersResponse_Peer{}
 	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
@@ -946,9 +946,9 @@ func TestPubSubMessageResponseVerboseEqual(t *testing.T) {
 		t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
 }
-func TestListPeersRequestGoString(t *testing.T) {
+func TestPubSubListPeersRequestGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersRequest(popr, false)
+	p := NewPopulatedPubSubListPeersRequest(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -959,9 +959,9 @@ func TestListPeersRequestGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestListPeersResponseGoString(t *testing.T) {
+func TestPubSubListPeersResponseGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse(popr, false)
+	p := NewPopulatedPubSubListPeersResponse(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -972,9 +972,9 @@ func TestListPeersResponseGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestListPeersResponse_PeerGoString(t *testing.T) {
+func TestPubSubListPeersResponse_PeerGoString(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse_Peer(popr, false)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
@@ -1037,10 +1037,10 @@ func TestPubSubMessageResponseGoString(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestListPeersRequestSize(t *testing.T) {
+func TestPubSubListPeersRequestSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersRequest(popr, true)
+	p := NewPopulatedPubSubListPeersRequest(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1059,10 +1059,10 @@ func TestListPeersRequestSize(t *testing.T) {
 	}
 }
 
-func TestListPeersResponseSize(t *testing.T) {
+func TestPubSubListPeersResponseSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse(popr, true)
+	p := NewPopulatedPubSubListPeersResponse(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1081,10 +1081,10 @@ func TestListPeersResponseSize(t *testing.T) {
 	}
 }
 
-func TestListPeersResponse_PeerSize(t *testing.T) {
+func TestPubSubListPeersResponse_PeerSize(t *testing.T) {
 	seed := time.Now().UnixNano()
 	popr := math_rand.New(math_rand.NewSource(seed))
-	p := NewPopulatedListPeersResponse_Peer(popr, true)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, true)
 	size2 := github_com_gogo_protobuf_proto.Size(p)
 	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
@@ -1191,27 +1191,27 @@ func TestPubSubMessageResponseSize(t *testing.T) {
 	}
 }
 
-func TestListPeersRequestStringer(t *testing.T) {
+func TestPubSubListPeersRequestStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersRequest(popr, false)
+	p := NewPopulatedPubSubListPeersRequest(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestListPeersResponseStringer(t *testing.T) {
+func TestPubSubListPeersResponseStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse(popr, false)
+	p := NewPopulatedPubSubListPeersResponse(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
 		t.Fatalf("String want %v got %v", s1, s2)
 	}
 }
-func TestListPeersResponse_PeerStringer(t *testing.T) {
+func TestPubSubListPeersResponse_PeerStringer(t *testing.T) {
 	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
-	p := NewPopulatedListPeersResponse_Peer(popr, false)
+	p := NewPopulatedPubSubListPeersResponse_Peer(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
 	if s1 != s2 {
