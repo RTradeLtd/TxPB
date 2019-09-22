@@ -340,6 +340,33 @@
         
           
           <li>
+            <a href="#ipns.proto">ipns.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.NamePublishRequest"><span class="badge">M</span>NamePublishRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.NameResolveRequest"><span class="badge">M</span>NameResolveRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.NameResolveResult"><span class="badge">M</span>NameResolveResult</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#pb.IPNSAPI"><span class="badge">S</span>IPNSAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#node.proto">node.proto</a>
             <ul>
               
@@ -1528,6 +1555,172 @@ is useful on machines with low-memory </p></td>
                 <td><a href="#pb.DownloadRequest">DownloadRequest</a></td>
                 <td><a href="#pb.DownloadResponse">DownloadResponse</a> stream</td>
                 <td><p>DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="ipns.proto">ipns.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.NamePublishRequest">NamePublishRequest</h3>
+        <p>NamePublishRequest is used to publish a value</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>privateKey</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the private key (name) for this record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the value of this record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>eol</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the eol for this publish, if 0 implies
+as NameSys::Publish call, if non 0 implies
+a NameSys:PublishWithEOL call </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.NameResolveRequest">NameResolveRequest</h3>
+        <p>NameResolveRequest is used to resolve an IPNS name</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the name to resolve </p></td>
+                </tr>
+              
+                <tr>
+                  <td>depth</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>recursion depth limit </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dhtRecordCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>number of ipns records to retrieve
+before selecting the best record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dhtTimeout</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the amount of time to wait
+for records to be fetched and verified </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.NameResolveResult">NameResolveResult</h3>
+        <p>NameResolveRequest is an answer to a resolve request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>path</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the path that was resolved </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>an error if any </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="pb.IPNSAPI">IPNSAPI</h3>
+        <p>IPNSAPI provides an API to access IPNS functionality</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Resolve</td>
+                <td><a href="#pb.NameResolveRequest">NameResolveRequest</a></td>
+                <td><a href="#pb.NameResolveResult">NameResolveResult</a></td>
+                <td><p>Resolve is used to resolve a name, waiting for the request to complete</p></td>
+              </tr>
+            
+              <tr>
+                <td>ResolveAsync</td>
+                <td><a href="#pb.NameResolveRequest">NameResolveRequest</a></td>
+                <td><a href="#pb.NameResolveResult">NameResolveResult</a> stream</td>
+                <td><p>ResolveAsync is like Resolve, except instead of waiting for the request
+to complete, we send back a stream which we will send the result on</p></td>
+              </tr>
+            
+              <tr>
+                <td>Publish</td>
+                <td><a href="#pb.NamePublishRequest">NamePublishRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>Publish is used to publish an IPNS record, with/with-out an EOL</p></td>
               </tr>
             
           </tbody>

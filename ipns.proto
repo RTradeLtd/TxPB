@@ -19,16 +19,16 @@ option (gogoproto.unmarshaler_all) = true;
 // IPNSAPI provides an API to access IPNS functionality
 service IPNSAPI {
     // Resolve is used to resolve a name, waiting for the request to complete
-    rpc Resolve(ResolveRequest) returns (ResolveResult) { };
+    rpc Resolve(NameResolveRequest) returns (NameResolveResult) { };
     // ResolveAsync is like Resolve, except instead of waiting for the request
     // to complete, we send back a stream which we will send the result on
-    rpc ResolveAsync(ResolveRequest) returns (stream ResolveResult) { };
+    rpc ResolveAsync(NameResolveRequest) returns (stream NameResolveResult) { };
     // Publish is used to publish an IPNS record, with/with-out an EOL
-    rpc Publish(PublishRequest) returns (Empty) { };
+    rpc Publish(NamePublishRequest) returns (Empty) { };
 }
  
-// ResolveRequest is used to resolve an IPNS name
-message ResolveRequest {
+// NameResolveRequest is used to resolve an IPNS name
+message NameResolveRequest {
     // the name to resolve
     string name = 1;
     // recursion depth limit
@@ -41,16 +41,16 @@ message ResolveRequest {
     int32  dhtTimeout = 4; 
 }
 
-// ResolveRequest is an answer to a resolve request
-message ResolveResult {
+// NameResolveRequest is an answer to a resolve request
+message NameResolveResult {
     // the path that was resolved
     string path = 1;
     // an error if any
     string error = 2;
 }
 
-// PublishRequest is used to publish a value
-message PublishRequest {
+// NamePublishRequest is used to publish a value
+message NamePublishRequest {
     // the private key (name) for this record
     bytes privateKey = 1;
     // the value of this record
