@@ -15,8 +15,8 @@ class NameSysAPIStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.NameSysNameSysResolve = channel.unary_unary(
-        '/pb.NameSysAPI/NameSysNameSysResolve',
+    self.NameSysResolve = channel.unary_unary(
+        '/pb.NameSysAPI/NameSysResolve',
         request_serializer=namesys__pb2.NameSysResolveRequest.SerializeToString,
         response_deserializer=namesys__pb2.NameSysResolveResult.FromString,
         )
@@ -36,7 +36,7 @@ class NameSysAPIServicer(object):
   """NameSysAPI provides a generic name resolution API
   """
 
-  def NameSysNameSysResolve(self, request, context):
+  def NameSysResolve(self, request, context):
     """NameSysResolve is used to resolve a name, waiting for the request to complete
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -61,8 +61,8 @@ class NameSysAPIServicer(object):
 
 def add_NameSysAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'NameSysNameSysResolve': grpc.unary_unary_rpc_method_handler(
-          servicer.NameSysNameSysResolve,
+      'NameSysResolve': grpc.unary_unary_rpc_method_handler(
+          servicer.NameSysResolve,
           request_deserializer=namesys__pb2.NameSysResolveRequest.FromString,
           response_serializer=namesys__pb2.NameSysResolveResult.SerializeToString,
       ),

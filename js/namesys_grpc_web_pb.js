@@ -96,7 +96,7 @@ proto.pb.NameSysAPIPromiseClient =
  *   !proto.pb.NameSysResolveRequest,
  *   !proto.pb.NameSysResolveResult>}
  */
-const methodInfo_NameSysAPI_NameSysNameSysResolve = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_NameSysAPI_NameSysResolve = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.NameSysResolveResult,
   /** @param {!proto.pb.NameSysResolveRequest} request */
   function(request) {
@@ -116,13 +116,13 @@ const methodInfo_NameSysAPI_NameSysNameSysResolve = new grpc.web.AbstractClientB
  * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.NameSysAPIClient.prototype.nameSysNameSysResolve =
+proto.pb.NameSysAPIClient.prototype.nameSysResolve =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.NameSysAPI/NameSysNameSysResolve',
+      '/pb.NameSysAPI/NameSysResolve',
       request,
       metadata || {},
-      methodInfo_NameSysAPI_NameSysNameSysResolve,
+      methodInfo_NameSysAPI_NameSysResolve,
       callback);
 };
 
@@ -135,13 +135,13 @@ proto.pb.NameSysAPIClient.prototype.nameSysNameSysResolve =
  * @return {!Promise<!proto.pb.NameSysResolveResult>}
  *     A native promise that resolves to the response
  */
-proto.pb.NameSysAPIPromiseClient.prototype.nameSysNameSysResolve =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysResolve =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.NameSysAPI/NameSysNameSysResolve',
+      '/pb.NameSysAPI/NameSysResolve',
       request,
       metadata || {},
-      methodInfo_NameSysAPI_NameSysNameSysResolve);
+      methodInfo_NameSysAPI_NameSysResolve);
 };
 
 

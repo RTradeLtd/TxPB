@@ -31,35 +31,35 @@ public final class NameSysAPIGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest,
-      pb.Namesys.NameSysResolveResult> getNameSysNameSysResolveMethod;
+      pb.Namesys.NameSysResolveResult> getNameSysResolveMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "NameSysNameSysResolve",
+      fullMethodName = SERVICE_NAME + '/' + "NameSysResolve",
       requestType = pb.Namesys.NameSysResolveRequest.class,
       responseType = pb.Namesys.NameSysResolveResult.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest,
-      pb.Namesys.NameSysResolveResult> getNameSysNameSysResolveMethod() {
-    io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest, pb.Namesys.NameSysResolveResult> getNameSysNameSysResolveMethod;
-    if ((getNameSysNameSysResolveMethod = NameSysAPIGrpc.getNameSysNameSysResolveMethod) == null) {
+      pb.Namesys.NameSysResolveResult> getNameSysResolveMethod() {
+    io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest, pb.Namesys.NameSysResolveResult> getNameSysResolveMethod;
+    if ((getNameSysResolveMethod = NameSysAPIGrpc.getNameSysResolveMethod) == null) {
       synchronized (NameSysAPIGrpc.class) {
-        if ((getNameSysNameSysResolveMethod = NameSysAPIGrpc.getNameSysNameSysResolveMethod) == null) {
-          NameSysAPIGrpc.getNameSysNameSysResolveMethod = getNameSysNameSysResolveMethod = 
+        if ((getNameSysResolveMethod = NameSysAPIGrpc.getNameSysResolveMethod) == null) {
+          NameSysAPIGrpc.getNameSysResolveMethod = getNameSysResolveMethod = 
               io.grpc.MethodDescriptor.<pb.Namesys.NameSysResolveRequest, pb.Namesys.NameSysResolveResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.NameSysAPI", "NameSysNameSysResolve"))
+                  "pb.NameSysAPI", "NameSysResolve"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveResult.getDefaultInstance()))
-                  .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysNameSysResolve"))
+                  .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysResolve"))
                   .build();
           }
         }
      }
-     return getNameSysNameSysResolveMethod;
+     return getNameSysResolveMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest,
@@ -161,9 +161,9 @@ public final class NameSysAPIGrpc {
      * NameSysResolve is used to resolve a name, waiting for the request to complete
      * </pre>
      */
-    public void nameSysNameSysResolve(pb.Namesys.NameSysResolveRequest request,
+    public void nameSysResolve(pb.Namesys.NameSysResolveRequest request,
         io.grpc.stub.StreamObserver<pb.Namesys.NameSysResolveResult> responseObserver) {
-      asyncUnimplementedUnaryCall(getNameSysNameSysResolveMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getNameSysResolveMethod(), responseObserver);
     }
 
     /**
@@ -190,12 +190,12 @@ public final class NameSysAPIGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getNameSysNameSysResolveMethod(),
+            getNameSysResolveMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Namesys.NameSysResolveRequest,
                 pb.Namesys.NameSysResolveResult>(
-                  this, METHODID_NAME_SYS_NAME_SYS_RESOLVE)))
+                  this, METHODID_NAME_SYS_RESOLVE)))
           .addMethod(
             getNameSysResolveAsyncMethod(),
             asyncServerStreamingCall(
@@ -240,10 +240,10 @@ public final class NameSysAPIGrpc {
      * NameSysResolve is used to resolve a name, waiting for the request to complete
      * </pre>
      */
-    public void nameSysNameSysResolve(pb.Namesys.NameSysResolveRequest request,
+    public void nameSysResolve(pb.Namesys.NameSysResolveRequest request,
         io.grpc.stub.StreamObserver<pb.Namesys.NameSysResolveResult> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getNameSysNameSysResolveMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getNameSysResolveMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -296,9 +296,9 @@ public final class NameSysAPIGrpc {
      * NameSysResolve is used to resolve a name, waiting for the request to complete
      * </pre>
      */
-    public pb.Namesys.NameSysResolveResult nameSysNameSysResolve(pb.Namesys.NameSysResolveRequest request) {
+    public pb.Namesys.NameSysResolveResult nameSysResolve(pb.Namesys.NameSysResolveRequest request) {
       return blockingUnaryCall(
-          getChannel(), getNameSysNameSysResolveMethod(), getCallOptions(), request);
+          getChannel(), getNameSysResolveMethod(), getCallOptions(), request);
     }
 
     /**
@@ -350,10 +350,10 @@ public final class NameSysAPIGrpc {
      * NameSysResolve is used to resolve a name, waiting for the request to complete
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Namesys.NameSysResolveResult> nameSysNameSysResolve(
+    public com.google.common.util.concurrent.ListenableFuture<pb.Namesys.NameSysResolveResult> nameSysResolve(
         pb.Namesys.NameSysResolveRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getNameSysNameSysResolveMethod(), getCallOptions()), request);
+          getChannel().newCall(getNameSysResolveMethod(), getCallOptions()), request);
     }
 
     /**
@@ -368,7 +368,7 @@ public final class NameSysAPIGrpc {
     }
   }
 
-  private static final int METHODID_NAME_SYS_NAME_SYS_RESOLVE = 0;
+  private static final int METHODID_NAME_SYS_RESOLVE = 0;
   private static final int METHODID_NAME_SYS_RESOLVE_ASYNC = 1;
   private static final int METHODID_NAME_SYS_PUBLISH = 2;
 
@@ -389,8 +389,8 @@ public final class NameSysAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_NAME_SYS_NAME_SYS_RESOLVE:
-          serviceImpl.nameSysNameSysResolve((pb.Namesys.NameSysResolveRequest) request,
+        case METHODID_NAME_SYS_RESOLVE:
+          serviceImpl.nameSysResolve((pb.Namesys.NameSysResolveRequest) request,
               (io.grpc.stub.StreamObserver<pb.Namesys.NameSysResolveResult>) responseObserver);
           break;
         case METHODID_NAME_SYS_RESOLVE_ASYNC:
@@ -462,7 +462,7 @@ public final class NameSysAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new NameSysAPIFileDescriptorSupplier())
-              .addMethod(getNameSysNameSysResolveMethod())
+              .addMethod(getNameSysResolveMethod())
               .addMethod(getNameSysResolveAsyncMethod())
               .addMethod(getNameSysPublishMethod())
               .build();

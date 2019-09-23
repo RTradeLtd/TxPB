@@ -19,7 +19,7 @@ option (gogoproto.unmarshaler_all) = true;
 // NameSysAPI provides a generic name resolution API
 service NameSysAPI {
     // NameSysResolve is used to resolve a name, waiting for the request to complete
-    rpc NameSysNameSysResolve(NameSysResolveRequest) returns (NameSysResolveResult) { };
+    rpc NameSysResolve(NameSysResolveRequest) returns (NameSysResolveResult) { };
     // NameSysResolveAsync is like Resolve, except instead of waiting for the request
     // to complete, we send back a stream which we will send the result on
     rpc NameSysResolveAsync(NameSysResolveRequest) returns (stream NameSysResolveResult) { };
