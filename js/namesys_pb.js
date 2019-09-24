@@ -457,7 +457,8 @@ proto.pb.NameSysPublishRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     privatekey: msg.getPrivatekey_asB64(),
     value: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    eol: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    eol: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    ttl: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -506,6 +507,10 @@ proto.pb.NameSysPublishRequest.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {number} */ (reader.readInt32());
       msg.setEol(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setTtl(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -553,6 +558,13 @@ proto.pb.NameSysPublishRequest.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       3,
+      f
+    );
+  }
+  f = message.getTtl();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
       f
     );
   }
@@ -625,6 +637,21 @@ proto.pb.NameSysPublishRequest.prototype.getEol = function() {
 /** @param {number} value */
 proto.pb.NameSysPublishRequest.prototype.setEol = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int32 ttl = 4;
+ * @return {number}
+ */
+proto.pb.NameSysPublishRequest.prototype.getTtl = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.pb.NameSysPublishRequest.prototype.setTtl = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 

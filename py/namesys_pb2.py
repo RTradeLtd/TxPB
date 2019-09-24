@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\rnamesys.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"`\n\x15NameSysResolveRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x64\x65pth\x18\x02 \x01(\r\x12\x16\n\x0e\x64htRecordCount\x18\x03 \x01(\r\x12\x12\n\ndhtTimeout\x18\x04 \x01(\x05\"3\n\x14NameSysResolveResult\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"G\n\x15NameSysPublishRequest\x12\x12\n\nprivateKey\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0b\n\x03\x65ol\x18\x03 \x01(\x05\x32\xdf\x01\n\nNameSysAPI\x12G\n\x0eNameSysResolve\x12\x19.pb.NameSysResolveRequest\x1a\x18.pb.NameSysResolveResult\"\x00\x12N\n\x13NameSysResolveAsync\x12\x19.pb.NameSysResolveRequest\x1a\x18.pb.NameSysResolveResult\"\x00\x30\x01\x12\x38\n\x0eNameSysPublish\x12\x19.pb.NameSysPublishRequest\x1a\t.pb.Empty\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_pb=_b('\n\rnamesys.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"`\n\x15NameSysResolveRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x64\x65pth\x18\x02 \x01(\r\x12\x16\n\x0e\x64htRecordCount\x18\x03 \x01(\r\x12\x12\n\ndhtTimeout\x18\x04 \x01(\x05\"3\n\x14NameSysResolveResult\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"T\n\x15NameSysPublishRequest\x12\x12\n\nprivateKey\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0b\n\x03\x65ol\x18\x03 \x01(\x05\x12\x0b\n\x03ttl\x18\x04 \x01(\x05\x32\xdf\x01\n\nNameSysAPI\x12G\n\x0eNameSysResolve\x12\x19.pb.NameSysResolveRequest\x1a\x18.pb.NameSysResolveResult\"\x00\x12N\n\x13NameSysResolveAsync\x12\x19.pb.NameSysResolveRequest\x1a\x18.pb.NameSysResolveResult\"\x00\x30\x01\x12\x38\n\x0eNameSysPublish\x12\x19.pb.NameSysPublishRequest\x1a\t.pb.Empty\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
 
@@ -147,6 +147,13 @@ _NAMESYSPUBLISHREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ttl', full_name='pb.NameSysPublishRequest.ttl', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -160,7 +167,7 @@ _NAMESYSPUBLISHREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=231,
-  serialized_end=302,
+  serialized_end=315,
 )
 
 DESCRIPTOR.message_types_by_name['NameSysResolveRequest'] = _NAMESYSRESOLVEREQUEST
@@ -198,8 +205,8 @@ _NAMESYSAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=305,
-  serialized_end=528,
+  serialized_start=318,
+  serialized_end=541,
   methods=[
   _descriptor.MethodDescriptor(
     name='NameSysResolve',

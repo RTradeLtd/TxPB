@@ -59,4 +59,7 @@ message NameSysPublishRequest {
     // as NameSys::Publish call, if non 0 implies
     // a NameSys:PublishWithEOL call
     int32  eol = 3;
+    // if set, allows us to override default
+    // ttl value of ipns records
+    int32  ttl = 4;
 }
