@@ -16,7 +16,7 @@ var util_pb = require('./util_pb.js')
 
 var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js')
 const proto = {};
-proto.pb = require('./pubsub_pb.js');
+proto.pb = require('./namesys_pb.js');
 
 /**
  * @param {string} hostname
@@ -26,7 +26,7 @@ proto.pb = require('./pubsub_pb.js');
  * @struct
  * @final
  */
-proto.pb.PubSubAPIClient =
+proto.pb.NameSysAPIClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -62,7 +62,7 @@ proto.pb.PubSubAPIClient =
  * @struct
  * @final
  */
-proto.pb.PubSubAPIPromiseClient =
+proto.pb.NameSysAPIPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -93,160 +93,160 @@ proto.pb.PubSubAPIPromiseClient =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.Empty,
- *   !proto.pb.PubSubTopicsResponse>}
+ *   !proto.pb.NameSysResolveRequest,
+ *   !proto.pb.NameSysResolveResult>}
  */
-const methodInfo_PubSubAPI_PubSubGetTopics = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.PubSubTopicsResponse,
-  /** @param {!proto.pb.Empty} request */
+const methodInfo_NameSysAPI_NameSysResolve = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.NameSysResolveResult,
+  /** @param {!proto.pb.NameSysResolveRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.PubSubTopicsResponse.deserializeBinary
+  proto.pb.NameSysResolveResult.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.Empty} request The
+ * @param {!proto.pb.NameSysResolveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.PubSubTopicsResponse)}
+ * @param {function(?grpc.web.Error, ?proto.pb.NameSysResolveResult)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubTopicsResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.pubSubGetTopics =
+proto.pb.NameSysAPIClient.prototype.nameSysResolve =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.PubSubAPI/PubSubGetTopics',
+      '/pb.NameSysAPI/NameSysResolve',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubGetTopics,
+      methodInfo_NameSysAPI_NameSysResolve,
       callback);
 };
 
 
 /**
- * @param {!proto.pb.Empty} request The
+ * @param {!proto.pb.NameSysResolveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.PubSubTopicsResponse>}
+ * @return {!Promise<!proto.pb.NameSysResolveResult>}
  *     A native promise that resolves to the response
  */
-proto.pb.PubSubAPIPromiseClient.prototype.pubSubGetTopics =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysResolve =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.PubSubAPI/PubSubGetTopics',
+      '/pb.NameSysAPI/NameSysResolve',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubGetTopics);
+      methodInfo_NameSysAPI_NameSysResolve);
 };
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.PubSubListPeersRequest,
- *   !proto.pb.PubSubListPeersResponse>}
+ *   !proto.pb.NameSysResolveRequest,
+ *   !proto.pb.NameSysResolveResult>}
  */
-const methodInfo_PubSubAPI_PubSubListPeers = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.PubSubListPeersResponse,
-  /** @param {!proto.pb.PubSubListPeersRequest} request */
+const methodInfo_NameSysAPI_NameSysResolveAsync = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.NameSysResolveResult,
+  /** @param {!proto.pb.NameSysResolveRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.PubSubListPeersResponse.deserializeBinary
+  proto.pb.NameSysResolveResult.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.PubSubListPeersRequest} request The
- *     request proto
+ * @param {!proto.pb.NameSysResolveRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.PubSubListPeersResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubListPeersResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.pubSubListPeers =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/pb.PubSubAPI/PubSubListPeers',
+proto.pb.NameSysAPIClient.prototype.nameSysResolveAsync =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/pb.NameSysAPI/NameSysResolveAsync',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubListPeers,
-      callback);
+      methodInfo_NameSysAPI_NameSysResolveAsync);
 };
 
 
 /**
- * @param {!proto.pb.PubSubListPeersRequest} request The
- *     request proto
+ * @param {!proto.pb.NameSysResolveRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.PubSubListPeersResponse>}
- *     A native promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.NameSysResolveResult>}
+ *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIPromiseClient.prototype.pubSubListPeers =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysResolveAsync =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/pb.PubSubAPI/PubSubListPeers',
+  return this.client_.serverStreaming(this.hostname_ +
+      '/pb.NameSysAPI/NameSysResolveAsync',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubListPeers);
+      methodInfo_NameSysAPI_NameSysResolveAsync);
 };
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.pb.PubSubSubscribeRequest,
- *   !proto.pb.PubSubMessageResponse>}
+ *   !proto.pb.NameSysPublishRequest,
+ *   !proto.pb.Empty>}
  */
-const methodInfo_PubSubAPI_PubSubSubscribe = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.PubSubMessageResponse,
-  /** @param {!proto.pb.PubSubSubscribeRequest} request */
+const methodInfo_NameSysAPI_NameSysPublish = new grpc.web.AbstractClientBase.MethodInfo(
+  util_pb.Empty,
+  /** @param {!proto.pb.NameSysPublishRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.PubSubMessageResponse.deserializeBinary
+  util_pb.Empty.deserializeBinary
 );
 
 
 /**
- * @param {!proto.pb.PubSubSubscribeRequest} request The request proto
+ * @param {!proto.pb.NameSysPublishRequest} request The
+ *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
+ * @param {function(?grpc.web.Error, ?proto.pb.Empty)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.Empty>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.PubSubAPIClient.prototype.pubSubSubscribe =
-    function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/pb.PubSubAPI/PubSubSubscribe',
+proto.pb.NameSysAPIClient.prototype.nameSysPublish =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.NameSysAPI/NameSysPublish',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubSubscribe);
+      methodInfo_NameSysAPI_NameSysPublish,
+      callback);
 };
 
 
 /**
- * @param {!proto.pb.PubSubSubscribeRequest} request The request proto
+ * @param {!proto.pb.NameSysPublishRequest} request The
+ *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.pb.PubSubMessageResponse>}
- *     The XHR Node Readable Stream
+ * @return {!Promise<!proto.pb.Empty>}
+ *     A native promise that resolves to the response
  */
-proto.pb.PubSubAPIPromiseClient.prototype.pubSubSubscribe =
+proto.pb.NameSysAPIPromiseClient.prototype.nameSysPublish =
     function(request, metadata) {
-  return this.client_.serverStreaming(this.hostname_ +
-      '/pb.PubSubAPI/PubSubSubscribe',
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.NameSysAPI/NameSysPublish',
       request,
       metadata || {},
-      methodInfo_PubSubAPI_PubSubSubscribe);
+      methodInfo_NameSysAPI_NameSysPublish);
 };
 
 

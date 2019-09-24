@@ -31,25 +31,25 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// ListPeersRequest is used to return a list of
+// PubSubListPeersRequest is used to return a list of
 // peers that are subscribed to the given topic(s)
-type ListPeersRequest struct {
+type PubSubListPeersRequest struct {
 	// the topics for which we should
 	// list peers for
 	Topics []string `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
 }
 
-func (m *ListPeersRequest) Reset()      { *m = ListPeersRequest{} }
-func (*ListPeersRequest) ProtoMessage() {}
-func (*ListPeersRequest) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersRequest) Reset()      { *m = PubSubListPeersRequest{} }
+func (*PubSubListPeersRequest) ProtoMessage() {}
+func (*PubSubListPeersRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{0}
 }
-func (m *ListPeersRequest) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -59,41 +59,41 @@ func (m *ListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return b[:n], nil
 	}
 }
-func (m *ListPeersRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersRequest.Merge(m, src)
+func (m *PubSubListPeersRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersRequest.Merge(m, src)
 }
-func (m *ListPeersRequest) XXX_Size() int {
+func (m *PubSubListPeersRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersRequest.DiscardUnknown(m)
+func (m *PubSubListPeersRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersRequest proto.InternalMessageInfo
 
-func (m *ListPeersRequest) GetTopics() []string {
+func (m *PubSubListPeersRequest) GetTopics() []string {
 	if m != nil {
 		return m.Topics
 	}
 	return nil
 }
 
-// ListPeersResponse is a response to a ListPeersRequest
-type ListPeersResponse struct {
-	Peers []*ListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
+// PubSubListPeersResponse is a response to a ListPeersRequest
+type PubSubListPeersResponse struct {
+	Peers []*PubSubListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
 }
 
-func (m *ListPeersResponse) Reset()      { *m = ListPeersResponse{} }
-func (*ListPeersResponse) ProtoMessage() {}
-func (*ListPeersResponse) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersResponse) Reset()      { *m = PubSubListPeersResponse{} }
+func (*PubSubListPeersResponse) ProtoMessage() {}
+func (*PubSubListPeersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1}
 }
-func (m *ListPeersResponse) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -103,19 +103,19 @@ func (m *ListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return b[:n], nil
 	}
 }
-func (m *ListPeersResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersResponse.Merge(m, src)
+func (m *PubSubListPeersResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersResponse.Merge(m, src)
 }
-func (m *ListPeersResponse) XXX_Size() int {
+func (m *PubSubListPeersResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersResponse.DiscardUnknown(m)
+func (m *PubSubListPeersResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersResponse proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersResponse proto.InternalMessageInfo
 
-func (m *ListPeersResponse) GetPeers() []*ListPeersResponse_Peer {
+func (m *PubSubListPeersResponse) GetPeers() []*PubSubListPeersResponse_Peer {
 	if m != nil {
 		return m.Peers
 	}
@@ -123,24 +123,24 @@ func (m *ListPeersResponse) GetPeers() []*ListPeersResponse_Peer {
 }
 
 // peer is a single peer
-type ListPeersResponse_Peer struct {
+type PubSubListPeersResponse_Peer struct {
 	// topic is the topic this peer is a part of
 	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
 	// lists the peerid for this peer
 	PeerID string `protobuf:"bytes,2,opt,name=peerID,proto3" json:"peerID,omitempty"`
 }
 
-func (m *ListPeersResponse_Peer) Reset()      { *m = ListPeersResponse_Peer{} }
-func (*ListPeersResponse_Peer) ProtoMessage() {}
-func (*ListPeersResponse_Peer) Descriptor() ([]byte, []int) {
+func (m *PubSubListPeersResponse_Peer) Reset()      { *m = PubSubListPeersResponse_Peer{} }
+func (*PubSubListPeersResponse_Peer) ProtoMessage() {}
+func (*PubSubListPeersResponse_Peer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1, 0}
 }
-func (m *ListPeersResponse_Peer) XXX_Unmarshal(b []byte) error {
+func (m *PubSubListPeersResponse_Peer) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ListPeersResponse_Peer.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubListPeersResponse_Peer.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -150,34 +150,34 @@ func (m *ListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *ListPeersResponse_Peer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListPeersResponse_Peer.Merge(m, src)
+func (m *PubSubListPeersResponse_Peer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubListPeersResponse_Peer.Merge(m, src)
 }
-func (m *ListPeersResponse_Peer) XXX_Size() int {
+func (m *PubSubListPeersResponse_Peer) XXX_Size() int {
 	return m.Size()
 }
-func (m *ListPeersResponse_Peer) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListPeersResponse_Peer.DiscardUnknown(m)
+func (m *PubSubListPeersResponse_Peer) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubListPeersResponse_Peer.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ListPeersResponse_Peer proto.InternalMessageInfo
+var xxx_messageInfo_PubSubListPeersResponse_Peer proto.InternalMessageInfo
 
-func (m *ListPeersResponse_Peer) GetTopic() string {
+func (m *PubSubListPeersResponse_Peer) GetTopic() string {
 	if m != nil {
 		return m.Topic
 	}
 	return ""
 }
 
-func (m *ListPeersResponse_Peer) GetPeerID() string {
+func (m *PubSubListPeersResponse_Peer) GetPeerID() string {
 	if m != nil {
 		return m.PeerID
 	}
 	return ""
 }
 
-// PublishRequest is a message used to publish data to a topic
-type PublishRequest struct {
+// PubSubPublishRequest is a message used to publish data to a topic
+type PubSubPublishRequest struct {
 	// the topic we are publishing too
 	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
 	// the data we are publishing
@@ -186,17 +186,17 @@ type PublishRequest struct {
 	Advertise bool `protobuf:"varint,3,opt,name=advertise,proto3" json:"advertise,omitempty"`
 }
 
-func (m *PublishRequest) Reset()      { *m = PublishRequest{} }
-func (*PublishRequest) ProtoMessage() {}
-func (*PublishRequest) Descriptor() ([]byte, []int) {
+func (m *PubSubPublishRequest) Reset()      { *m = PubSubPublishRequest{} }
+func (*PubSubPublishRequest) ProtoMessage() {}
+func (*PubSubPublishRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{2}
 }
-func (m *PublishRequest) XXX_Unmarshal(b []byte) error {
+func (m *PubSubPublishRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *PublishRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubPublishRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_PublishRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubPublishRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -206,42 +206,42 @@ func (m *PublishRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *PublishRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PublishRequest.Merge(m, src)
+func (m *PubSubPublishRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubPublishRequest.Merge(m, src)
 }
-func (m *PublishRequest) XXX_Size() int {
+func (m *PubSubPublishRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *PublishRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PublishRequest.DiscardUnknown(m)
+func (m *PubSubPublishRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubPublishRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PublishRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubPublishRequest proto.InternalMessageInfo
 
-func (m *PublishRequest) GetTopic() string {
+func (m *PubSubPublishRequest) GetTopic() string {
 	if m != nil {
 		return m.Topic
 	}
 	return ""
 }
 
-func (m *PublishRequest) GetData() []byte {
+func (m *PubSubPublishRequest) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-func (m *PublishRequest) GetAdvertise() bool {
+func (m *PubSubPublishRequest) GetAdvertise() bool {
 	if m != nil {
 		return m.Advertise
 	}
 	return false
 }
 
-// SubscribeRequest is used to initiate a subscription
+// PubSubSubscribeRequest is used to initiate a subscription
 // to a given pubsub topic and stream received messages
-type SubscribeRequest struct {
+type PubSubSubscribeRequest struct {
 	// the topic we should subscribe to
 	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
 	// indicates whether the server should
@@ -249,17 +249,17 @@ type SubscribeRequest struct {
 	Discover bool `protobuf:"varint,2,opt,name=discover,proto3" json:"discover,omitempty"`
 }
 
-func (m *SubscribeRequest) Reset()      { *m = SubscribeRequest{} }
-func (*SubscribeRequest) ProtoMessage() {}
-func (*SubscribeRequest) Descriptor() ([]byte, []int) {
+func (m *PubSubSubscribeRequest) Reset()      { *m = PubSubSubscribeRequest{} }
+func (*PubSubSubscribeRequest) ProtoMessage() {}
+func (*PubSubSubscribeRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{3}
 }
-func (m *SubscribeRequest) XXX_Unmarshal(b []byte) error {
+func (m *PubSubSubscribeRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *SubscribeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubSubscribeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_SubscribeRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubSubscribeRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -269,50 +269,50 @@ func (m *SubscribeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 		return b[:n], nil
 	}
 }
-func (m *SubscribeRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubscribeRequest.Merge(m, src)
+func (m *PubSubSubscribeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubSubscribeRequest.Merge(m, src)
 }
-func (m *SubscribeRequest) XXX_Size() int {
+func (m *PubSubSubscribeRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *SubscribeRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_SubscribeRequest.DiscardUnknown(m)
+func (m *PubSubSubscribeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubSubscribeRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_SubscribeRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubSubscribeRequest proto.InternalMessageInfo
 
-func (m *SubscribeRequest) GetTopic() string {
+func (m *PubSubSubscribeRequest) GetTopic() string {
 	if m != nil {
 		return m.Topic
 	}
 	return ""
 }
 
-func (m *SubscribeRequest) GetDiscover() bool {
+func (m *PubSubSubscribeRequest) GetDiscover() bool {
 	if m != nil {
 		return m.Discover
 	}
 	return false
 }
 
-// Topics is a response that returns
+// PubSubTopics is a response that returns
 // the names of all known topics
-type TopicsResponse struct {
+type PubSubTopicsResponse struct {
 	// the names of topics
 	Names []string `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
 }
 
-func (m *TopicsResponse) Reset()      { *m = TopicsResponse{} }
-func (*TopicsResponse) ProtoMessage() {}
-func (*TopicsResponse) Descriptor() ([]byte, []int) {
+func (m *PubSubTopicsResponse) Reset()      { *m = PubSubTopicsResponse{} }
+func (*PubSubTopicsResponse) ProtoMessage() {}
+func (*PubSubTopicsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{4}
 }
-func (m *TopicsResponse) XXX_Unmarshal(b []byte) error {
+func (m *PubSubTopicsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *TopicsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubTopicsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_TopicsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubTopicsResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -322,19 +322,19 @@ func (m *TopicsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *TopicsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TopicsResponse.Merge(m, src)
+func (m *PubSubTopicsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubTopicsResponse.Merge(m, src)
 }
-func (m *TopicsResponse) XXX_Size() int {
+func (m *PubSubTopicsResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *TopicsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_TopicsResponse.DiscardUnknown(m)
+func (m *PubSubTopicsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubTopicsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_TopicsResponse proto.InternalMessageInfo
+var xxx_messageInfo_PubSubTopicsResponse proto.InternalMessageInfo
 
-func (m *TopicsResponse) GetNames() []string {
+func (m *PubSubTopicsResponse) GetNames() []string {
 	if m != nil {
 		return m.Names
 	}
@@ -433,54 +433,55 @@ func (m *PubSubMessageResponse) GetKey() []byte {
 }
 
 func init() {
-	proto.RegisterType((*ListPeersRequest)(nil), "pb.ListPeersRequest")
-	proto.RegisterType((*ListPeersResponse)(nil), "pb.ListPeersResponse")
-	proto.RegisterType((*ListPeersResponse_Peer)(nil), "pb.ListPeersResponse.Peer")
-	proto.RegisterType((*PublishRequest)(nil), "pb.PublishRequest")
-	proto.RegisterType((*SubscribeRequest)(nil), "pb.SubscribeRequest")
-	proto.RegisterType((*TopicsResponse)(nil), "pb.TopicsResponse")
+	proto.RegisterType((*PubSubListPeersRequest)(nil), "pb.PubSubListPeersRequest")
+	proto.RegisterType((*PubSubListPeersResponse)(nil), "pb.PubSubListPeersResponse")
+	proto.RegisterType((*PubSubListPeersResponse_Peer)(nil), "pb.PubSubListPeersResponse.Peer")
+	proto.RegisterType((*PubSubPublishRequest)(nil), "pb.PubSubPublishRequest")
+	proto.RegisterType((*PubSubSubscribeRequest)(nil), "pb.PubSubSubscribeRequest")
+	proto.RegisterType((*PubSubTopicsResponse)(nil), "pb.PubSubTopicsResponse")
 	proto.RegisterType((*PubSubMessageResponse)(nil), "pb.PubSubMessageResponse")
 }
 
 func init() { proto.RegisterFile("pubsub.proto", fileDescriptor_91df006b05e20cf7) }
 
 var fileDescriptor_91df006b05e20cf7 = []byte{
-	// 512 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x93, 0xcd, 0x6e, 0xd3, 0x4c,
-	0x14, 0x86, 0x3d, 0xcd, 0xcf, 0x17, 0x9f, 0x2f, 0xaa, 0xc2, 0x28, 0x45, 0xc6, 0x42, 0xa3, 0x68,
-	0x16, 0x28, 0x42, 0x25, 0xad, 0x4a, 0x57, 0xac, 0x00, 0x05, 0xa1, 0x48, 0x20, 0x45, 0x2e, 0x0b,
-	0xb6, 0x9e, 0x64, 0xea, 0x5a, 0x34, 0x19, 0xd7, 0x33, 0x53, 0xa9, 0x62, 0xc3, 0x25, 0x70, 0x0b,
-	0xec, 0xb8, 0x04, 0x2e, 0x81, 0x65, 0x97, 0x5d, 0x36, 0x8e, 0xd8, 0xb3, 0x64, 0x89, 0xe6, 0x38,
-	0x75, 0x4a, 0x89, 0xd8, 0x9d, 0xe7, 0xd5, 0x7b, 0x3c, 0xe7, 0xcf, 0xd0, 0xce, 0xac, 0xd0, 0x56,
-	0x0c, 0xb2, 0x5c, 0x19, 0x45, 0xb7, 0x32, 0x11, 0x82, 0x35, 0xe9, 0x69, 0xc9, 0xe1, 0x93, 0x24,
-	0x35, 0x27, 0x56, 0x0c, 0x26, 0x6a, 0xb6, 0x97, 0xa8, 0x44, 0xed, 0xa1, 0x2c, 0xec, 0x31, 0x12,
-	0x02, 0x46, 0xa5, 0x9d, 0x3f, 0x86, 0xce, 0x9b, 0x54, 0x9b, 0xb1, 0x94, 0xb9, 0x8e, 0xe4, 0x99,
-	0x95, 0xda, 0xd0, 0xfb, 0xd0, 0x34, 0x2a, 0x4b, 0x27, 0x3a, 0x20, 0xbd, 0x5a, 0xdf, 0x8f, 0x56,
-	0xc4, 0x3f, 0xc2, 0xbd, 0x5b, 0x5e, 0x9d, 0xa9, 0xb9, 0x96, 0x74, 0x1f, 0x1a, 0x99, 0x13, 0xd0,
-	0xfb, 0xff, 0x41, 0x38, 0xc8, 0xc4, 0xe0, 0x2f, 0xd7, 0xc0, 0x51, 0x54, 0x1a, 0xc3, 0x43, 0xa8,
-	0x3b, 0xa4, 0x5d, 0x68, 0xe0, 0x87, 0x03, 0xd2, 0x23, 0x7d, 0x3f, 0x2a, 0xc1, 0x3d, 0xee, 0x6c,
-	0xa3, 0x61, 0xb0, 0x85, 0xf2, 0x8a, 0xf8, 0x7b, 0xd8, 0x1e, 0x5b, 0x71, 0x9a, 0xea, 0x93, 0x9b,
-	0x32, 0x37, 0xe7, 0x53, 0xa8, 0x4f, 0x63, 0x13, 0x63, 0x76, 0x3b, 0xc2, 0x98, 0x3e, 0x04, 0x3f,
-	0x9e, 0x9e, 0xcb, 0xdc, 0xa4, 0x5a, 0x06, 0xb5, 0x1e, 0xe9, 0xb7, 0xa2, 0xb5, 0xc0, 0x87, 0xd0,
-	0x39, 0xb2, 0x42, 0x4f, 0xf2, 0x54, 0xc8, 0x7f, 0x7f, 0x3b, 0x84, 0xd6, 0x34, 0xd5, 0x13, 0x75,
-	0x2e, 0x73, 0xfc, 0x7e, 0x2b, 0xaa, 0x98, 0x3f, 0x82, 0xed, 0x77, 0x38, 0xa6, 0x6a, 0x32, 0x5d,
-	0x68, 0xcc, 0xe3, 0x99, 0xbc, 0x99, 0x62, 0x09, 0xfc, 0x0b, 0x81, 0x9d, 0xb1, 0x15, 0x47, 0x56,
-	0xbc, 0x95, 0x5a, 0xc7, 0x89, 0xac, 0xfc, 0x14, 0xea, 0xc7, 0xb9, 0x9a, 0xe1, 0x93, 0xed, 0x08,
-	0xe3, 0x8d, 0xdd, 0x74, 0xa1, 0xa1, 0xe5, 0xd9, 0x5c, 0x61, 0x27, 0xed, 0xa8, 0x04, 0x57, 0x1b,
-	0x16, 0x39, 0x1a, 0xea, 0xa0, 0x8e, 0x0f, 0x56, 0xec, 0xfa, 0xd7, 0x69, 0x32, 0x8f, 0x8d, 0xcd,
-	0x65, 0xd0, 0xc0, 0xac, 0xb5, 0x40, 0x3b, 0x50, 0xfb, 0x20, 0x2f, 0x82, 0x26, 0xea, 0x2e, 0x3c,
-	0xf8, 0x41, 0xc0, 0x2f, 0x6b, 0x7c, 0x31, 0x1e, 0xd1, 0x5d, 0xf0, 0x5f, 0x4b, 0x53, 0x36, 0x47,
-	0x7d, 0xb7, 0xdf, 0x57, 0xb3, 0xcc, 0x5c, 0x84, 0xd4, 0x85, 0x7f, 0xf6, 0xcc, 0x3d, 0xfa, 0x0c,
-	0xfc, 0x6a, 0xfd, 0xb4, 0x7b, 0xe7, 0x1a, 0x70, 0xb8, 0xe1, 0xce, 0xc6, 0x1b, 0xe1, 0x1e, 0x7d,
-	0x0e, 0x7e, 0xb5, 0x89, 0x32, 0xf7, 0xee, 0x62, 0xc2, 0x07, 0x4e, 0xdd, 0x38, 0x3f, 0xee, 0xed,
-	0x13, 0xba, 0x0b, 0xff, 0xad, 0xae, 0x84, 0xd2, 0x95, 0xf3, 0xd6, 0xc9, 0x84, 0xeb, 0xea, 0xb9,
-	0xd7, 0x27, 0x2f, 0x0f, 0xaf, 0x16, 0xcc, 0xbb, 0x5e, 0x30, 0xf2, 0x73, 0xc1, 0xc8, 0xaf, 0x05,
-	0x23, 0x9f, 0x0a, 0x46, 0xbe, 0x16, 0x8c, 0x7c, 0x2b, 0x18, 0xf9, 0x5e, 0x30, 0x72, 0x59, 0x30,
-	0x72, 0x5d, 0x30, 0xf2, 0x79, 0xc9, 0xbc, 0xcb, 0x25, 0xf3, 0xae, 0x96, 0xcc, 0x13, 0x4d, 0xfc,
-	0x73, 0x9e, 0xfe, 0x0e, 0x00, 0x00, 0xff, 0xff, 0xe7, 0x4a, 0x73, 0x4f, 0x88, 0x03, 0x00, 0x00,
+	// 519 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x93, 0x3f, 0x6f, 0xd3, 0x4e,
+	0x18, 0xc7, 0x7d, 0xf9, 0xa7, 0xe4, 0xf9, 0xe5, 0x27, 0xd0, 0x29, 0x14, 0x63, 0xd0, 0x29, 0xf2,
+	0x94, 0x01, 0xd2, 0xaa, 0x54, 0xa8, 0x2b, 0xa8, 0x08, 0x05, 0x15, 0x29, 0x72, 0x99, 0x91, 0x7c,
+	0xc9, 0xd5, 0xb5, 0x68, 0x72, 0xae, 0xef, 0xae, 0x52, 0x37, 0x36, 0x56, 0x76, 0x26, 0x36, 0x5e,
+	0x02, 0x2f, 0x81, 0xb1, 0x63, 0xc7, 0xc6, 0x79, 0x03, 0x8c, 0x8c, 0xc8, 0xcf, 0xd5, 0x76, 0x52,
+	0x42, 0xb7, 0xe7, 0xf3, 0xf8, 0xf9, 0xfb, 0xbd, 0xc7, 0xd0, 0x4d, 0x0c, 0x57, 0x86, 0x0f, 0x93,
+	0x54, 0x6a, 0x49, 0x6b, 0x09, 0xf7, 0xc0, 0xe8, 0xf8, 0xd4, 0xb2, 0xf7, 0x2c, 0x8a, 0xf5, 0x89,
+	0xe1, 0xc3, 0x89, 0x9c, 0x6d, 0x47, 0x32, 0x92, 0xdb, 0xe8, 0xe6, 0xe6, 0x18, 0x09, 0x01, 0x2d,
+	0x1b, 0xee, 0xef, 0xc0, 0xd6, 0xd8, 0xf0, 0x23, 0xc3, 0x0f, 0x63, 0xa5, 0xc7, 0x42, 0xa4, 0x2a,
+	0x10, 0x67, 0x46, 0x28, 0x4d, 0xb7, 0xa0, 0xa5, 0x65, 0x12, 0x4f, 0x94, 0x4b, 0xfa, 0xf5, 0x41,
+	0x27, 0xb8, 0x21, 0xff, 0x33, 0x81, 0x87, 0x7f, 0xa5, 0xa8, 0x44, 0xce, 0x95, 0xa0, 0x2f, 0xa0,
+	0x99, 0xe4, 0x0e, 0x4c, 0xf9, 0x6f, 0xb7, 0x3f, 0x4c, 0xf8, 0xf0, 0x1f, 0xb1, 0xc3, 0x9c, 0x02,
+	0x1b, 0xee, 0xed, 0x41, 0x23, 0x47, 0xda, 0x83, 0x26, 0x76, 0x71, 0x49, 0x9f, 0x0c, 0x3a, 0x81,
+	0x85, 0x7c, 0x92, 0x3c, 0x6c, 0x74, 0xe0, 0xd6, 0xd0, 0x7d, 0x43, 0xfe, 0x07, 0xe8, 0xd9, 0xe2,
+	0x63, 0xc3, 0x4f, 0x63, 0x75, 0x52, 0x4c, 0xbe, 0xb9, 0x0a, 0x85, 0xc6, 0x34, 0xd4, 0x21, 0xd6,
+	0xe8, 0x06, 0x68, 0xd3, 0x27, 0xd0, 0x09, 0xa7, 0xe7, 0x22, 0xd5, 0xb1, 0x12, 0x6e, 0xbd, 0x4f,
+	0x06, 0xed, 0xa0, 0x72, 0xf8, 0x6f, 0x0b, 0x6d, 0x8e, 0x0c, 0x57, 0x93, 0x34, 0xe6, 0xe2, 0xee,
+	0x0e, 0x1e, 0xb4, 0xa7, 0xb1, 0x9a, 0xc8, 0x73, 0x91, 0x62, 0x97, 0x76, 0x50, 0xb2, 0xff, 0xb4,
+	0x98, 0xf5, 0x3d, 0xaa, 0x58, 0x2a, 0xd6, 0x83, 0xe6, 0x3c, 0x9c, 0x89, 0x42, 0x64, 0x0b, 0xfe,
+	0x37, 0x02, 0x0f, 0x6c, 0xf8, 0x3b, 0xa1, 0x54, 0x18, 0x89, 0x32, 0x9e, 0x42, 0xe3, 0x38, 0x95,
+	0x33, 0x6c, 0xdc, 0x0d, 0xd0, 0xde, 0xb8, 0x59, 0x0f, 0x9a, 0x4a, 0x9c, 0xcd, 0x25, 0x6e, 0xd5,
+	0x0d, 0x2c, 0xe4, 0x13, 0xe2, 0xa8, 0xa3, 0x03, 0xe5, 0x36, 0xb0, 0x61, 0xc9, 0xb9, 0x16, 0x2a,
+	0x8e, 0xe6, 0xa1, 0x36, 0xa9, 0x70, 0x9b, 0x98, 0x55, 0x39, 0xe8, 0x7d, 0xa8, 0x7f, 0x14, 0x17,
+	0x6e, 0x0b, 0xfd, 0xb9, 0xb9, 0xfb, 0xb5, 0x06, 0x1d, 0x3b, 0xe3, 0xcb, 0xf1, 0x88, 0xee, 0xc3,
+	0x3d, 0x0b, 0x6f, 0x84, 0xb6, 0x2b, 0xd2, 0x4e, 0xfe, 0xfa, 0xaf, 0x67, 0x89, 0xbe, 0xf0, 0xdc,
+	0xea, 0x10, 0xd6, 0xf7, 0xf7, 0x1d, 0x7a, 0x58, 0x64, 0x96, 0x27, 0x42, 0xbd, 0x8d, 0x77, 0x83,
+	0xd2, 0x7b, 0x8f, 0xef, 0xb8, 0xa9, 0xd5, 0x6a, 0xe5, 0x9b, 0xad, 0x56, 0xbb, 0xfd, 0x90, 0xde,
+	0xa3, 0xea, 0xdb, 0x2d, 0xa5, 0x7d, 0x67, 0x87, 0xd0, 0x7d, 0xf8, 0x7f, 0xed, 0xc2, 0xe8, 0xca,
+	0x22, 0xeb, 0x47, 0xe7, 0x55, 0xdb, 0xfa, 0xce, 0x80, 0xbc, 0xda, 0xbb, 0x5a, 0x30, 0xe7, 0x7a,
+	0xc1, 0xc8, 0xaf, 0x05, 0x23, 0xbf, 0x17, 0x8c, 0x7c, 0xca, 0x18, 0xf9, 0x9e, 0x31, 0xf2, 0x23,
+	0x63, 0xe4, 0x67, 0xc6, 0xc8, 0x65, 0xc6, 0xc8, 0x75, 0xc6, 0xc8, 0x97, 0x25, 0x73, 0x2e, 0x97,
+	0xcc, 0xb9, 0x5a, 0x32, 0x87, 0xb7, 0xf0, 0xa7, 0x7c, 0xfe, 0x27, 0x00, 0x00, 0xff, 0xff, 0xcb,
+	0x2a, 0xee, 0xa5, 0xe3, 0x03, 0x00, 0x00,
 }
 
-func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -488,22 +489,22 @@ func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersRequest)
+	that1, ok := that.(*PubSubListPeersRequest)
 	if !ok {
-		that2, ok := that.(ListPeersRequest)
+		that2, ok := that.(PubSubListPeersRequest)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersRequest")
+			return fmt.Errorf("that is not of type *PubSubListPeersRequest")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersRequest but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersRequest but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersRequest but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersRequest but is not nil && this == nil")
 	}
 	if len(this.Topics) != len(that1.Topics) {
 		return fmt.Errorf("Topics this(%v) Not Equal that(%v)", len(this.Topics), len(that1.Topics))
@@ -515,14 +516,14 @@ func (this *ListPeersRequest) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersRequest) Equal(that interface{}) bool {
+func (this *PubSubListPeersRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersRequest)
+	that1, ok := that.(*PubSubListPeersRequest)
 	if !ok {
-		that2, ok := that.(ListPeersRequest)
+		that2, ok := that.(PubSubListPeersRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -544,7 +545,7 @@ func (this *ListPeersRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersResponse) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -552,22 +553,22 @@ func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersResponse)
+	that1, ok := that.(*PubSubListPeersResponse)
 	if !ok {
-		that2, ok := that.(ListPeersResponse)
+		that2, ok := that.(PubSubListPeersResponse)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersResponse")
+			return fmt.Errorf("that is not of type *PubSubListPeersResponse")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersResponse but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersResponse but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse but is not nil && this == nil")
 	}
 	if len(this.Peers) != len(that1.Peers) {
 		return fmt.Errorf("Peers this(%v) Not Equal that(%v)", len(this.Peers), len(that1.Peers))
@@ -579,14 +580,14 @@ func (this *ListPeersResponse) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersResponse) Equal(that interface{}) bool {
+func (this *PubSubListPeersResponse) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersResponse)
+	that1, ok := that.(*PubSubListPeersResponse)
 	if !ok {
-		that2, ok := that.(ListPeersResponse)
+		that2, ok := that.(PubSubListPeersResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -608,7 +609,7 @@ func (this *ListPeersResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
+func (this *PubSubListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -616,22 +617,22 @@ func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ListPeersResponse_Peer)
+	that1, ok := that.(*PubSubListPeersResponse_Peer)
 	if !ok {
-		that2, ok := that.(ListPeersResponse_Peer)
+		that2, ok := that.(PubSubListPeersResponse_Peer)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ListPeersResponse_Peer")
+			return fmt.Errorf("that is not of type *PubSubListPeersResponse_Peer")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ListPeersResponse_Peer but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ListPeersResponse_Peer but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is not nil && this == nil")
 	}
 	if this.Topic != that1.Topic {
 		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
@@ -641,14 +642,14 @@ func (this *ListPeersResponse_Peer) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ListPeersResponse_Peer) Equal(that interface{}) bool {
+func (this *PubSubListPeersResponse_Peer) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ListPeersResponse_Peer)
+	that1, ok := that.(*PubSubListPeersResponse_Peer)
 	if !ok {
-		that2, ok := that.(ListPeersResponse_Peer)
+		that2, ok := that.(PubSubListPeersResponse_Peer)
 		if ok {
 			that1 = &that2
 		} else {
@@ -668,7 +669,7 @@ func (this *ListPeersResponse_Peer) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *PublishRequest) VerboseEqual(that interface{}) error {
+func (this *PubSubPublishRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -676,22 +677,22 @@ func (this *PublishRequest) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*PublishRequest)
+	that1, ok := that.(*PubSubPublishRequest)
 	if !ok {
-		that2, ok := that.(PublishRequest)
+		that2, ok := that.(PubSubPublishRequest)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *PublishRequest")
+			return fmt.Errorf("that is not of type *PubSubPublishRequest")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *PublishRequest but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubPublishRequest but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *PublishRequest but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubPublishRequest but is not nil && this == nil")
 	}
 	if this.Topic != that1.Topic {
 		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
@@ -704,14 +705,14 @@ func (this *PublishRequest) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *PublishRequest) Equal(that interface{}) bool {
+func (this *PubSubPublishRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*PublishRequest)
+	that1, ok := that.(*PubSubPublishRequest)
 	if !ok {
-		that2, ok := that.(PublishRequest)
+		that2, ok := that.(PubSubPublishRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -734,7 +735,7 @@ func (this *PublishRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *SubscribeRequest) VerboseEqual(that interface{}) error {
+func (this *PubSubSubscribeRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -742,22 +743,22 @@ func (this *SubscribeRequest) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*SubscribeRequest)
+	that1, ok := that.(*PubSubSubscribeRequest)
 	if !ok {
-		that2, ok := that.(SubscribeRequest)
+		that2, ok := that.(PubSubSubscribeRequest)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *SubscribeRequest")
+			return fmt.Errorf("that is not of type *PubSubSubscribeRequest")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *SubscribeRequest but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubSubscribeRequest but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *SubscribeRequest but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubSubscribeRequest but is not nil && this == nil")
 	}
 	if this.Topic != that1.Topic {
 		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
@@ -767,14 +768,14 @@ func (this *SubscribeRequest) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *SubscribeRequest) Equal(that interface{}) bool {
+func (this *PubSubSubscribeRequest) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*SubscribeRequest)
+	that1, ok := that.(*PubSubSubscribeRequest)
 	if !ok {
-		that2, ok := that.(SubscribeRequest)
+		that2, ok := that.(PubSubSubscribeRequest)
 		if ok {
 			that1 = &that2
 		} else {
@@ -794,7 +795,7 @@ func (this *SubscribeRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *TopicsResponse) VerboseEqual(that interface{}) error {
+func (this *PubSubTopicsResponse) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -802,22 +803,22 @@ func (this *TopicsResponse) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*TopicsResponse)
+	that1, ok := that.(*PubSubTopicsResponse)
 	if !ok {
-		that2, ok := that.(TopicsResponse)
+		that2, ok := that.(PubSubTopicsResponse)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *TopicsResponse")
+			return fmt.Errorf("that is not of type *PubSubTopicsResponse")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *TopicsResponse but is nil && this != nil")
+		return fmt.Errorf("that is type *PubSubTopicsResponse but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *TopicsResponse but is not nil && this == nil")
+		return fmt.Errorf("that is type *PubSubTopicsResponse but is not nil && this == nil")
 	}
 	if len(this.Names) != len(that1.Names) {
 		return fmt.Errorf("Names this(%v) Not Equal that(%v)", len(this.Names), len(that1.Names))
@@ -829,14 +830,14 @@ func (this *TopicsResponse) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *TopicsResponse) Equal(that interface{}) bool {
+func (this *PubSubTopicsResponse) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*TopicsResponse)
+	that1, ok := that.(*PubSubTopicsResponse)
 	if !ok {
-		that2, ok := that.(TopicsResponse)
+		that2, ok := that.(PubSubTopicsResponse)
 		if ok {
 			that1 = &that2
 		} else {
@@ -952,68 +953,68 @@ func (this *PubSubMessageResponse) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ListPeersRequest) GoString() string {
+func (this *PubSubListPeersRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 5)
-	s = append(s, "&pb.ListPeersRequest{")
+	s = append(s, "&pb.PubSubListPeersRequest{")
 	s = append(s, "Topics: "+fmt.Sprintf("%#v", this.Topics)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListPeersResponse) GoString() string {
+func (this *PubSubListPeersResponse) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 5)
-	s = append(s, "&pb.ListPeersResponse{")
+	s = append(s, "&pb.PubSubListPeersResponse{")
 	if this.Peers != nil {
 		s = append(s, "Peers: "+fmt.Sprintf("%#v", this.Peers)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ListPeersResponse_Peer) GoString() string {
+func (this *PubSubListPeersResponse_Peer) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&pb.ListPeersResponse_Peer{")
+	s = append(s, "&pb.PubSubListPeersResponse_Peer{")
 	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
 	s = append(s, "PeerID: "+fmt.Sprintf("%#v", this.PeerID)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *PublishRequest) GoString() string {
+func (this *PubSubPublishRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 7)
-	s = append(s, "&pb.PublishRequest{")
+	s = append(s, "&pb.PubSubPublishRequest{")
 	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
 	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
 	s = append(s, "Advertise: "+fmt.Sprintf("%#v", this.Advertise)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *SubscribeRequest) GoString() string {
+func (this *PubSubSubscribeRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 6)
-	s = append(s, "&pb.SubscribeRequest{")
+	s = append(s, "&pb.PubSubSubscribeRequest{")
 	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
 	s = append(s, "Discover: "+fmt.Sprintf("%#v", this.Discover)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *TopicsResponse) GoString() string {
+func (this *PubSubTopicsResponse) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 5)
-	s = append(s, "&pb.TopicsResponse{")
+	s = append(s, "&pb.PubSubTopicsResponse{")
 	s = append(s, "Names: "+fmt.Sprintf("%#v", this.Names)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -1054,19 +1055,19 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PubSubAPIClient interface {
-	// GetTopics is used to return a list of all
+	// PubSubGetTopics is used to return a list of all
 	// known topics the pubsub instance is subscribed to.
-	GetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TopicsResponse, error)
-	// ListPeers is used to return a list of peers subscribed
+	PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*PubSubTopicsResponse, error)
+	// PubSubListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
-	ListPeers(ctx context.Context, in *ListPeersRequest, opts ...grpc.CallOption) (*ListPeersResponse, error)
-	// Subscribe is used to subscribe to a topic and receive messages
+	PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error)
+	// PubSubSubscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
 	// back to the client as it is received.
-	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_SubscribeClient, error)
-	// Publish is used to send a stream of messages to a pubsub topic.
-	Publish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PublishClient, error)
+	PubSubSubscribe(ctx context.Context, in *PubSubSubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_PubSubSubscribeClient, error)
+	// PubSubPublish is used to send a stream of messages to a pubsub topic.
+	PubSubPublish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubPublishClient, error)
 }
 
 type pubSubAPIClient struct {
@@ -1077,30 +1078,30 @@ func NewPubSubAPIClient(cc *grpc.ClientConn) PubSubAPIClient {
 	return &pubSubAPIClient{cc}
 }
 
-func (c *pubSubAPIClient) GetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*TopicsResponse, error) {
-	out := new(TopicsResponse)
-	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/GetTopics", in, out, opts...)
+func (c *pubSubAPIClient) PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*PubSubTopicsResponse, error) {
+	out := new(PubSubTopicsResponse)
+	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/PubSubGetTopics", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pubSubAPIClient) ListPeers(ctx context.Context, in *ListPeersRequest, opts ...grpc.CallOption) (*ListPeersResponse, error) {
-	out := new(ListPeersResponse)
-	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/ListPeers", in, out, opts...)
+func (c *pubSubAPIClient) PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error) {
+	out := new(PubSubListPeersResponse)
+	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/PubSubListPeers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pubSubAPIClient) Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_SubscribeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[0], "/pb.PubSubAPI/Subscribe", opts...)
+func (c *pubSubAPIClient) PubSubSubscribe(ctx context.Context, in *PubSubSubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_PubSubSubscribeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[0], "/pb.PubSubAPI/PubSubSubscribe", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &pubSubAPISubscribeClient{stream}
+	x := &pubSubAPIPubSubSubscribeClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -1110,16 +1111,16 @@ func (c *pubSubAPIClient) Subscribe(ctx context.Context, in *SubscribeRequest, o
 	return x, nil
 }
 
-type PubSubAPI_SubscribeClient interface {
+type PubSubAPI_PubSubSubscribeClient interface {
 	Recv() (*PubSubMessageResponse, error)
 	grpc.ClientStream
 }
 
-type pubSubAPISubscribeClient struct {
+type pubSubAPIPubSubSubscribeClient struct {
 	grpc.ClientStream
 }
 
-func (x *pubSubAPISubscribeClient) Recv() (*PubSubMessageResponse, error) {
+func (x *pubSubAPIPubSubSubscribeClient) Recv() (*PubSubMessageResponse, error) {
 	m := new(PubSubMessageResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -1127,30 +1128,30 @@ func (x *pubSubAPISubscribeClient) Recv() (*PubSubMessageResponse, error) {
 	return m, nil
 }
 
-func (c *pubSubAPIClient) Publish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PublishClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[1], "/pb.PubSubAPI/Publish", opts...)
+func (c *pubSubAPIClient) PubSubPublish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubPublishClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[1], "/pb.PubSubAPI/PubSubPublish", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &pubSubAPIPublishClient{stream}
+	x := &pubSubAPIPubSubPublishClient{stream}
 	return x, nil
 }
 
-type PubSubAPI_PublishClient interface {
-	Send(*PublishRequest) error
+type PubSubAPI_PubSubPublishClient interface {
+	Send(*PubSubPublishRequest) error
 	CloseAndRecv() (*Empty, error)
 	grpc.ClientStream
 }
 
-type pubSubAPIPublishClient struct {
+type pubSubAPIPubSubPublishClient struct {
 	grpc.ClientStream
 }
 
-func (x *pubSubAPIPublishClient) Send(m *PublishRequest) error {
+func (x *pubSubAPIPubSubPublishClient) Send(m *PubSubPublishRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *pubSubAPIPublishClient) CloseAndRecv() (*Empty, error) {
+func (x *pubSubAPIPubSubPublishClient) CloseAndRecv() (*Empty, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
@@ -1163,119 +1164,119 @@ func (x *pubSubAPIPublishClient) CloseAndRecv() (*Empty, error) {
 
 // PubSubAPIServer is the server API for PubSubAPI service.
 type PubSubAPIServer interface {
-	// GetTopics is used to return a list of all
+	// PubSubGetTopics is used to return a list of all
 	// known topics the pubsub instance is subscribed to.
-	GetTopics(context.Context, *Empty) (*TopicsResponse, error)
-	// ListPeers is used to return a list of peers subscribed
+	PubSubGetTopics(context.Context, *Empty) (*PubSubTopicsResponse, error)
+	// PubSubListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
-	ListPeers(context.Context, *ListPeersRequest) (*ListPeersResponse, error)
-	// Subscribe is used to subscribe to a topic and receive messages
+	PubSubListPeers(context.Context, *PubSubListPeersRequest) (*PubSubListPeersResponse, error)
+	// PubSubSubscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
 	// back to the client as it is received.
-	Subscribe(*SubscribeRequest, PubSubAPI_SubscribeServer) error
-	// Publish is used to send a stream of messages to a pubsub topic.
-	Publish(PubSubAPI_PublishServer) error
+	PubSubSubscribe(*PubSubSubscribeRequest, PubSubAPI_PubSubSubscribeServer) error
+	// PubSubPublish is used to send a stream of messages to a pubsub topic.
+	PubSubPublish(PubSubAPI_PubSubPublishServer) error
 }
 
 // UnimplementedPubSubAPIServer can be embedded to have forward compatible implementations.
 type UnimplementedPubSubAPIServer struct {
 }
 
-func (*UnimplementedPubSubAPIServer) GetTopics(ctx context.Context, req *Empty) (*TopicsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTopics not implemented")
+func (*UnimplementedPubSubAPIServer) PubSubGetTopics(ctx context.Context, req *Empty) (*PubSubTopicsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PubSubGetTopics not implemented")
 }
-func (*UnimplementedPubSubAPIServer) ListPeers(ctx context.Context, req *ListPeersRequest) (*ListPeersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPeers not implemented")
+func (*UnimplementedPubSubAPIServer) PubSubListPeers(ctx context.Context, req *PubSubListPeersRequest) (*PubSubListPeersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PubSubListPeers not implemented")
 }
-func (*UnimplementedPubSubAPIServer) Subscribe(req *SubscribeRequest, srv PubSubAPI_SubscribeServer) error {
-	return status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+func (*UnimplementedPubSubAPIServer) PubSubSubscribe(req *PubSubSubscribeRequest, srv PubSubAPI_PubSubSubscribeServer) error {
+	return status.Errorf(codes.Unimplemented, "method PubSubSubscribe not implemented")
 }
-func (*UnimplementedPubSubAPIServer) Publish(srv PubSubAPI_PublishServer) error {
-	return status.Errorf(codes.Unimplemented, "method Publish not implemented")
+func (*UnimplementedPubSubAPIServer) PubSubPublish(srv PubSubAPI_PubSubPublishServer) error {
+	return status.Errorf(codes.Unimplemented, "method PubSubPublish not implemented")
 }
 
 func RegisterPubSubAPIServer(s *grpc.Server, srv PubSubAPIServer) {
 	s.RegisterService(&_PubSubAPI_serviceDesc, srv)
 }
 
-func _PubSubAPI_GetTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PubSubAPI_PubSubGetTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubSubAPIServer).GetTopics(ctx, in)
+		return srv.(PubSubAPIServer).PubSubGetTopics(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.PubSubAPI/GetTopics",
+		FullMethod: "/pb.PubSubAPI/PubSubGetTopics",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSubAPIServer).GetTopics(ctx, req.(*Empty))
+		return srv.(PubSubAPIServer).PubSubGetTopics(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubSubAPI_ListPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPeersRequest)
+func _PubSubAPI_PubSubListPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PubSubListPeersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubSubAPIServer).ListPeers(ctx, in)
+		return srv.(PubSubAPIServer).PubSubListPeers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.PubSubAPI/ListPeers",
+		FullMethod: "/pb.PubSubAPI/PubSubListPeers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSubAPIServer).ListPeers(ctx, req.(*ListPeersRequest))
+		return srv.(PubSubAPIServer).PubSubListPeers(ctx, req.(*PubSubListPeersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubSubAPI_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeRequest)
+func _PubSubAPI_PubSubSubscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(PubSubSubscribeRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(PubSubAPIServer).Subscribe(m, &pubSubAPISubscribeServer{stream})
+	return srv.(PubSubAPIServer).PubSubSubscribe(m, &pubSubAPIPubSubSubscribeServer{stream})
 }
 
-type PubSubAPI_SubscribeServer interface {
+type PubSubAPI_PubSubSubscribeServer interface {
 	Send(*PubSubMessageResponse) error
 	grpc.ServerStream
 }
 
-type pubSubAPISubscribeServer struct {
+type pubSubAPIPubSubSubscribeServer struct {
 	grpc.ServerStream
 }
 
-func (x *pubSubAPISubscribeServer) Send(m *PubSubMessageResponse) error {
+func (x *pubSubAPIPubSubSubscribeServer) Send(m *PubSubMessageResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _PubSubAPI_Publish_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PubSubAPIServer).Publish(&pubSubAPIPublishServer{stream})
+func _PubSubAPI_PubSubPublish_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PubSubAPIServer).PubSubPublish(&pubSubAPIPubSubPublishServer{stream})
 }
 
-type PubSubAPI_PublishServer interface {
+type PubSubAPI_PubSubPublishServer interface {
 	SendAndClose(*Empty) error
-	Recv() (*PublishRequest, error)
+	Recv() (*PubSubPublishRequest, error)
 	grpc.ServerStream
 }
 
-type pubSubAPIPublishServer struct {
+type pubSubAPIPubSubPublishServer struct {
 	grpc.ServerStream
 }
 
-func (x *pubSubAPIPublishServer) SendAndClose(m *Empty) error {
+func (x *pubSubAPIPubSubPublishServer) SendAndClose(m *Empty) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *pubSubAPIPublishServer) Recv() (*PublishRequest, error) {
-	m := new(PublishRequest)
+func (x *pubSubAPIPubSubPublishServer) Recv() (*PubSubPublishRequest, error) {
+	m := new(PubSubPublishRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1287,30 +1288,30 @@ var _PubSubAPI_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*PubSubAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetTopics",
-			Handler:    _PubSubAPI_GetTopics_Handler,
+			MethodName: "PubSubGetTopics",
+			Handler:    _PubSubAPI_PubSubGetTopics_Handler,
 		},
 		{
-			MethodName: "ListPeers",
-			Handler:    _PubSubAPI_ListPeers_Handler,
+			MethodName: "PubSubListPeers",
+			Handler:    _PubSubAPI_PubSubListPeers_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "Subscribe",
-			Handler:       _PubSubAPI_Subscribe_Handler,
+			StreamName:    "PubSubSubscribe",
+			Handler:       _PubSubAPI_PubSubSubscribe_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "Publish",
-			Handler:       _PubSubAPI_Publish_Handler,
+			StreamName:    "PubSubPublish",
+			Handler:       _PubSubAPI_PubSubPublish_Handler,
 			ClientStreams: true,
 		},
 	},
 	Metadata: "pubsub.proto",
 }
 
-func (m *ListPeersRequest) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1320,12 +1321,12 @@ func (m *ListPeersRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1342,7 +1343,7 @@ func (m *ListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListPeersResponse) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1352,12 +1353,12 @@ func (m *ListPeersResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1379,7 +1380,7 @@ func (m *ListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *ListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
+func (m *PubSubListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1389,12 +1390,12 @@ func (m *ListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListPeersResponse_Peer) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse_Peer) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *ListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1416,7 +1417,7 @@ func (m *ListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *PublishRequest) Marshal() (dAtA []byte, err error) {
+func (m *PubSubPublishRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1426,12 +1427,12 @@ func (m *PublishRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *PublishRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubPublishRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *PublishRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubPublishRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1463,7 +1464,7 @@ func (m *PublishRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *SubscribeRequest) Marshal() (dAtA []byte, err error) {
+func (m *PubSubSubscribeRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1473,12 +1474,12 @@ func (m *SubscribeRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *SubscribeRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubSubscribeRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *SubscribeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubSubscribeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1503,7 +1504,7 @@ func (m *SubscribeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *TopicsResponse) Marshal() (dAtA []byte, err error) {
+func (m *PubSubTopicsResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1513,12 +1514,12 @@ func (m *TopicsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *TopicsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubTopicsResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *TopicsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubTopicsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1613,8 +1614,8 @@ func encodeVarintPubsub(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedListPeersRequest(r randyPubsub, easy bool) *ListPeersRequest {
-	this := &ListPeersRequest{}
+func NewPopulatedPubSubListPeersRequest(r randyPubsub, easy bool) *PubSubListPeersRequest {
+	this := &PubSubListPeersRequest{}
 	v1 := r.Intn(10)
 	this.Topics = make([]string, v1)
 	for i := 0; i < v1; i++ {
@@ -1625,13 +1626,13 @@ func NewPopulatedListPeersRequest(r randyPubsub, easy bool) *ListPeersRequest {
 	return this
 }
 
-func NewPopulatedListPeersResponse(r randyPubsub, easy bool) *ListPeersResponse {
-	this := &ListPeersResponse{}
+func NewPopulatedPubSubListPeersResponse(r randyPubsub, easy bool) *PubSubListPeersResponse {
+	this := &PubSubListPeersResponse{}
 	if r.Intn(5) != 0 {
 		v2 := r.Intn(5)
-		this.Peers = make([]*ListPeersResponse_Peer, v2)
+		this.Peers = make([]*PubSubListPeersResponse_Peer, v2)
 		for i := 0; i < v2; i++ {
-			this.Peers[i] = NewPopulatedListPeersResponse_Peer(r, easy)
+			this.Peers[i] = NewPopulatedPubSubListPeersResponse_Peer(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1639,8 +1640,8 @@ func NewPopulatedListPeersResponse(r randyPubsub, easy bool) *ListPeersResponse 
 	return this
 }
 
-func NewPopulatedListPeersResponse_Peer(r randyPubsub, easy bool) *ListPeersResponse_Peer {
-	this := &ListPeersResponse_Peer{}
+func NewPopulatedPubSubListPeersResponse_Peer(r randyPubsub, easy bool) *PubSubListPeersResponse_Peer {
+	this := &PubSubListPeersResponse_Peer{}
 	this.Topic = string(randStringPubsub(r))
 	this.PeerID = string(randStringPubsub(r))
 	if !easy && r.Intn(10) != 0 {
@@ -1648,8 +1649,8 @@ func NewPopulatedListPeersResponse_Peer(r randyPubsub, easy bool) *ListPeersResp
 	return this
 }
 
-func NewPopulatedPublishRequest(r randyPubsub, easy bool) *PublishRequest {
-	this := &PublishRequest{}
+func NewPopulatedPubSubPublishRequest(r randyPubsub, easy bool) *PubSubPublishRequest {
+	this := &PubSubPublishRequest{}
 	this.Topic = string(randStringPubsub(r))
 	v3 := r.Intn(100)
 	this.Data = make([]byte, v3)
@@ -1662,8 +1663,8 @@ func NewPopulatedPublishRequest(r randyPubsub, easy bool) *PublishRequest {
 	return this
 }
 
-func NewPopulatedSubscribeRequest(r randyPubsub, easy bool) *SubscribeRequest {
-	this := &SubscribeRequest{}
+func NewPopulatedPubSubSubscribeRequest(r randyPubsub, easy bool) *PubSubSubscribeRequest {
+	this := &PubSubSubscribeRequest{}
 	this.Topic = string(randStringPubsub(r))
 	this.Discover = bool(bool(r.Intn(2) == 0))
 	if !easy && r.Intn(10) != 0 {
@@ -1671,8 +1672,8 @@ func NewPopulatedSubscribeRequest(r randyPubsub, easy bool) *SubscribeRequest {
 	return this
 }
 
-func NewPopulatedTopicsResponse(r randyPubsub, easy bool) *TopicsResponse {
-	this := &TopicsResponse{}
+func NewPopulatedPubSubTopicsResponse(r randyPubsub, easy bool) *PubSubTopicsResponse {
+	this := &PubSubTopicsResponse{}
 	v4 := r.Intn(10)
 	this.Names = make([]string, v4)
 	for i := 0; i < v4; i++ {
@@ -1792,7 +1793,7 @@ func encodeVarintPopulatePubsub(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
-func (m *ListPeersRequest) Size() (n int) {
+func (m *PubSubListPeersRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1807,7 +1808,7 @@ func (m *ListPeersRequest) Size() (n int) {
 	return n
 }
 
-func (m *ListPeersResponse) Size() (n int) {
+func (m *PubSubListPeersResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1822,7 +1823,7 @@ func (m *ListPeersResponse) Size() (n int) {
 	return n
 }
 
-func (m *ListPeersResponse_Peer) Size() (n int) {
+func (m *PubSubListPeersResponse_Peer) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1839,7 +1840,7 @@ func (m *ListPeersResponse_Peer) Size() (n int) {
 	return n
 }
 
-func (m *PublishRequest) Size() (n int) {
+func (m *PubSubPublishRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1859,7 +1860,7 @@ func (m *PublishRequest) Size() (n int) {
 	return n
 }
 
-func (m *SubscribeRequest) Size() (n int) {
+func (m *PubSubSubscribeRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1875,7 +1876,7 @@ func (m *SubscribeRequest) Size() (n int) {
 	return n
 }
 
-func (m *TopicsResponse) Size() (n int) {
+func (m *PubSubTopicsResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1931,47 +1932,47 @@ func sovPubsub(x uint64) (n int) {
 func sozPubsub(x uint64) (n int) {
 	return sovPubsub(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (this *ListPeersRequest) String() string {
+func (this *PubSubListPeersRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListPeersRequest{`,
+	s := strings.Join([]string{`&PubSubListPeersRequest{`,
 		`Topics:` + fmt.Sprintf("%v", this.Topics) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ListPeersResponse) String() string {
+func (this *PubSubListPeersResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
-	repeatedStringForPeers := "[]*ListPeersResponse_Peer{"
+	repeatedStringForPeers := "[]*PubSubListPeersResponse_Peer{"
 	for _, f := range this.Peers {
-		repeatedStringForPeers += strings.Replace(fmt.Sprintf("%v", f), "ListPeersResponse_Peer", "ListPeersResponse_Peer", 1) + ","
+		repeatedStringForPeers += strings.Replace(fmt.Sprintf("%v", f), "PubSubListPeersResponse_Peer", "PubSubListPeersResponse_Peer", 1) + ","
 	}
 	repeatedStringForPeers += "}"
-	s := strings.Join([]string{`&ListPeersResponse{`,
+	s := strings.Join([]string{`&PubSubListPeersResponse{`,
 		`Peers:` + repeatedStringForPeers + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ListPeersResponse_Peer) String() string {
+func (this *PubSubListPeersResponse_Peer) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ListPeersResponse_Peer{`,
+	s := strings.Join([]string{`&PubSubListPeersResponse_Peer{`,
 		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
 		`PeerID:` + fmt.Sprintf("%v", this.PeerID) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *PublishRequest) String() string {
+func (this *PubSubPublishRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&PublishRequest{`,
+	s := strings.Join([]string{`&PubSubPublishRequest{`,
 		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
 		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
 		`Advertise:` + fmt.Sprintf("%v", this.Advertise) + `,`,
@@ -1979,22 +1980,22 @@ func (this *PublishRequest) String() string {
 	}, "")
 	return s
 }
-func (this *SubscribeRequest) String() string {
+func (this *PubSubSubscribeRequest) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&SubscribeRequest{`,
+	s := strings.Join([]string{`&PubSubSubscribeRequest{`,
 		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
 		`Discover:` + fmt.Sprintf("%v", this.Discover) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *TopicsResponse) String() string {
+func (this *PubSubTopicsResponse) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&TopicsResponse{`,
+	s := strings.Join([]string{`&PubSubTopicsResponse{`,
 		`Names:` + fmt.Sprintf("%v", this.Names) + `,`,
 		`}`,
 	}, "")
@@ -2023,7 +2024,7 @@ func valueToStringPubsub(v interface{}) string {
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
 }
-func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2046,10 +2047,10 @@ func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListPeersRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubListPeersRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListPeersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubListPeersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2108,7 +2109,7 @@ func (m *ListPeersRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2131,10 +2132,10 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListPeersResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubListPeersResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListPeersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubListPeersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2166,7 +2167,7 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Peers = append(m.Peers, &ListPeersResponse_Peer{})
+			m.Peers = append(m.Peers, &PubSubListPeersResponse_Peer{})
 			if err := m.Peers[len(m.Peers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -2195,7 +2196,7 @@ func (m *ListPeersResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
+func (m *PubSubListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2312,7 +2313,7 @@ func (m *ListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *PublishRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubPublishRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2335,10 +2336,10 @@ func (m *PublishRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: PublishRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubPublishRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PublishRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubPublishRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2451,7 +2452,7 @@ func (m *PublishRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *SubscribeRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubSubscribeRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2474,10 +2475,10 @@ func (m *SubscribeRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: SubscribeRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubSubscribeRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SubscribeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubSubscribeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2556,7 +2557,7 @@ func (m *SubscribeRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *TopicsResponse) Unmarshal(dAtA []byte) error {
+func (m *PubSubTopicsResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2579,10 +2580,10 @@ func (m *TopicsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: TopicsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubTopicsResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TopicsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubTopicsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

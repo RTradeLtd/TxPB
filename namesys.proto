@@ -1,0 +1,65 @@
+syntax = "proto3";
+package pb;
+import "util.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.gostring_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+// uncomment to enable bench generation
+// option (gogoproto.benchgen_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+
+// NameSysAPI provides a generic name resolution API
+service NameSysAPI {
+    // NameSysResolve is used to resolve a name, waiting for the request to complete
+    rpc NameSysResolve(NameSysResolveRequest) returns (NameSysResolveResult) { };
+    // NameSysResolveAsync is like Resolve, except instead of waiting for the request
+    // to complete, we send back a stream which we will send the result on
+    rpc NameSysResolveAsync(NameSysResolveRequest) returns (stream NameSysResolveResult) { };
+    // NameSysPublish is used to publish an IPNS record, with/with-out an EOL
+    rpc NameSysPublish(NameSysPublishRequest) returns (Empty) { };
+}
+ 
+// NameSysResolveRequest is used to resolve an IPNS name
+message NameSysResolveRequest {
+    // the name to resolve
+    string name = 1;
+    // recursion depth limit
+    uint32 depth = 2;
+    // number of ipns records to retrieve
+    // before selecting the best record
+    uint32 dhtRecordCount = 3;
+    // the amount of time to wait
+    // for records to be fetched and verified
+    int32  dhtTimeout = 4; 
+}
+
+// NameSysResolveRequest is an answer to a resolve request
+message NameSysResolveResult {
+    // the path that was resolved
+    string path = 1;
+    // an error if any
+    string error = 2;
+}
+
+// NameSysPublishRequest is used to publish a value
+message NameSysPublishRequest {
+    // the private key (name) for this record
+    bytes privateKey = 1;
+    // the value of this record
+    string value = 2;
+    // the eol for this publish, if 0 implies
+    // as NameSys::Publish call, if non 0 implies
+    // a NameSys:PublishWithEOL call
+    int32  eol = 3;
+    // if set, allows us to override default
+    // ttl value of ipns records
+    int32  ttl = 4;
+}

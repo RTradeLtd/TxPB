@@ -340,6 +340,33 @@
         
           
           <li>
+            <a href="#namesys.proto">namesys.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#pb.NameSysPublishRequest"><span class="badge">M</span>NameSysPublishRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.NameSysResolveRequest"><span class="badge">M</span>NameSysResolveRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#pb.NameSysResolveResult"><span class="badge">M</span>NameSysResolveResult</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#pb.NameSysAPI"><span class="badge">S</span>NameSysAPI</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#node.proto">node.proto</a>
             <ul>
               
@@ -407,15 +434,15 @@
             <ul>
               
                 <li>
-                  <a href="#pb.ListPeersRequest"><span class="badge">M</span>ListPeersRequest</a>
+                  <a href="#pb.PubSubListPeersRequest"><span class="badge">M</span>PubSubListPeersRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.ListPeersResponse"><span class="badge">M</span>ListPeersResponse</a>
+                  <a href="#pb.PubSubListPeersResponse"><span class="badge">M</span>PubSubListPeersResponse</a>
                 </li>
               
                 <li>
-                  <a href="#pb.ListPeersResponse.Peer"><span class="badge">M</span>ListPeersResponse.Peer</a>
+                  <a href="#pb.PubSubListPeersResponse.Peer"><span class="badge">M</span>PubSubListPeersResponse.Peer</a>
                 </li>
               
                 <li>
@@ -423,15 +450,15 @@
                 </li>
               
                 <li>
-                  <a href="#pb.PublishRequest"><span class="badge">M</span>PublishRequest</a>
+                  <a href="#pb.PubSubPublishRequest"><span class="badge">M</span>PubSubPublishRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.SubscribeRequest"><span class="badge">M</span>SubscribeRequest</a>
+                  <a href="#pb.PubSubSubscribeRequest"><span class="badge">M</span>PubSubSubscribeRequest</a>
                 </li>
               
                 <li>
-                  <a href="#pb.TopicsResponse"><span class="badge">M</span>TopicsResponse</a>
+                  <a href="#pb.PubSubTopicsResponse"><span class="badge">M</span>PubSubTopicsResponse</a>
                 </li>
               
               
@@ -1537,6 +1564,180 @@ is useful on machines with low-memory </p></td>
     
       
       <div class="file-heading">
+        <h2 id="namesys.proto">namesys.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="pb.NameSysPublishRequest">NameSysPublishRequest</h3>
+        <p>NameSysPublishRequest is used to publish a value</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>privateKey</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>the private key (name) for this record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the value of this record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>eol</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the eol for this publish, if 0 implies
+as NameSys::Publish call, if non 0 implies
+a NameSys:PublishWithEOL call </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ttl</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>if set, allows us to override default
+ttl value of ipns records </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.NameSysResolveRequest">NameSysResolveRequest</h3>
+        <p>NameSysResolveRequest is used to resolve an IPNS name</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the name to resolve </p></td>
+                </tr>
+              
+                <tr>
+                  <td>depth</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>recursion depth limit </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dhtRecordCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>number of ipns records to retrieve
+before selecting the best record </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dhtTimeout</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>the amount of time to wait
+for records to be fetched and verified </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="pb.NameSysResolveResult">NameSysResolveResult</h3>
+        <p>NameSysResolveRequest is an answer to a resolve request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>path</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the path that was resolved </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>an error if any </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="pb.NameSysAPI">NameSysAPI</h3>
+        <p>NameSysAPI provides a generic name resolution API</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>NameSysResolve</td>
+                <td><a href="#pb.NameSysResolveRequest">NameSysResolveRequest</a></td>
+                <td><a href="#pb.NameSysResolveResult">NameSysResolveResult</a></td>
+                <td><p>NameSysResolve is used to resolve a name, waiting for the request to complete</p></td>
+              </tr>
+            
+              <tr>
+                <td>NameSysResolveAsync</td>
+                <td><a href="#pb.NameSysResolveRequest">NameSysResolveRequest</a></td>
+                <td><a href="#pb.NameSysResolveResult">NameSysResolveResult</a> stream</td>
+                <td><p>NameSysResolveAsync is like Resolve, except instead of waiting for the request
+to complete, we send back a stream which we will send the result on</p></td>
+              </tr>
+            
+              <tr>
+                <td>NameSysPublish</td>
+                <td><a href="#pb.NameSysPublishRequest">NameSysPublishRequest</a></td>
+                <td><a href="#pb.Empty">Empty</a></td>
+                <td><p>NameSysPublish is used to publish an IPNS record, with/with-out an EOL</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
         <h2 id="node.proto">node.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
@@ -1924,8 +2125,8 @@ is useful on machines with low-memory </p></td>
       <p></p>
 
       
-        <h3 id="pb.ListPeersRequest">ListPeersRequest</h3>
-        <p>ListPeersRequest is used to return a list of</p><p>peers that are subscribed to the given topic(s)</p>
+        <h3 id="pb.PubSubListPeersRequest">PubSubListPeersRequest</h3>
+        <p>PubSubListPeersRequest is used to return a list of</p><p>peers that are subscribed to the given topic(s)</p>
 
         
           <table class="field-table">
@@ -1949,8 +2150,8 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.ListPeersResponse">ListPeersResponse</h3>
-        <p>ListPeersResponse is a response to a ListPeersRequest</p>
+        <h3 id="pb.PubSubListPeersResponse">PubSubListPeersResponse</h3>
+        <p>PubSubListPeersResponse is a response to a ListPeersRequest</p>
 
         
           <table class="field-table">
@@ -1961,7 +2162,7 @@ list peers for </p></td>
               
                 <tr>
                   <td>peers</td>
-                  <td><a href="#pb.ListPeersResponse.Peer">ListPeersResponse.Peer</a></td>
+                  <td><a href="#pb.PubSubListPeersResponse.Peer">PubSubListPeersResponse.Peer</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -1973,7 +2174,7 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.ListPeersResponse.Peer">ListPeersResponse.Peer</h3>
+        <h3 id="pb.PubSubListPeersResponse.Peer">PubSubListPeersResponse.Peer</h3>
         <p>peer is a single peer</p>
 
         
@@ -2063,8 +2264,8 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.PublishRequest">PublishRequest</h3>
-        <p>PublishRequest is a message used to publish data to a topic</p>
+        <h3 id="pb.PubSubPublishRequest">PubSubPublishRequest</h3>
+        <p>PubSubPublishRequest is a message used to publish data to a topic</p>
 
         
           <table class="field-table">
@@ -2101,8 +2302,8 @@ list peers for </p></td>
 
         
       
-        <h3 id="pb.SubscribeRequest">SubscribeRequest</h3>
-        <p>SubscribeRequest is used to initiate a subscription</p><p>to a given pubsub topic and stream received messages</p>
+        <h3 id="pb.PubSubSubscribeRequest">PubSubSubscribeRequest</h3>
+        <p>PubSubSubscribeRequest is used to initiate a subscription</p><p>to a given pubsub topic and stream received messages</p>
 
         
           <table class="field-table">
@@ -2133,8 +2334,8 @@ perform service discover for peers on the same topic </p></td>
 
         
       
-        <h3 id="pb.TopicsResponse">TopicsResponse</h3>
-        <p>Topics is a response that returns</p><p>the names of all known topics</p>
+        <h3 id="pb.PubSubTopicsResponse">PubSubTopicsResponse</h3>
+        <p>PubSubTopics is a response that returns</p><p>the names of all known topics</p>
 
         
           <table class="field-table">
@@ -2172,36 +2373,36 @@ perform service discover for peers on the same topic </p></td>
           <tbody>
             
               <tr>
-                <td>GetTopics</td>
+                <td>PubSubGetTopics</td>
                 <td><a href="#pb.Empty">Empty</a></td>
-                <td><a href="#pb.TopicsResponse">TopicsResponse</a></td>
-                <td><p>GetTopics is used to return a list of all
+                <td><a href="#pb.PubSubTopicsResponse">PubSubTopicsResponse</a></td>
+                <td><p>PubSubGetTopics is used to return a list of all
 known topics the pubsub instance is subscribed to.</p></td>
               </tr>
             
               <tr>
-                <td>ListPeers</td>
-                <td><a href="#pb.ListPeersRequest">ListPeersRequest</a></td>
-                <td><a href="#pb.ListPeersResponse">ListPeersResponse</a></td>
-                <td><p>ListPeers is used to return a list of peers subscribed
+                <td>PubSubListPeers</td>
+                <td><a href="#pb.PubSubListPeersRequest">PubSubListPeersRequest</a></td>
+                <td><a href="#pb.PubSubListPeersResponse">PubSubListPeersResponse</a></td>
+                <td><p>PubSubListPeers is used to return a list of peers subscribed
 to a given topic or topics.</p></td>
               </tr>
             
               <tr>
-                <td>Subscribe</td>
-                <td><a href="#pb.SubscribeRequest">SubscribeRequest</a></td>
+                <td>PubSubSubscribe</td>
+                <td><a href="#pb.PubSubSubscribeRequest">PubSubSubscribeRequest</a></td>
                 <td><a href="#pb.PubSubMessageResponse">PubSubMessageResponse</a> stream</td>
-                <td><p>Subscribe is used to subscribe to a topic and receive messages
+                <td><p>PubSubSubscribe is used to subscribe to a topic and receive messages
 Server will stream the messages received on the topic specified 
 during the initial subscription call, and send each message
 back to the client as it is received.</p></td>
               </tr>
             
               <tr>
-                <td>Publish</td>
-                <td><a href="#pb.PublishRequest">PublishRequest</a> stream</td>
+                <td>PubSubPublish</td>
+                <td><a href="#pb.PubSubPublishRequest">PubSubPublishRequest</a> stream</td>
                 <td><a href="#pb.Empty">Empty</a></td>
-                <td><p>Publish is used to send a stream of messages to a pubsub topic.</p></td>
+                <td><p>PubSubPublish is used to send a stream of messages to a pubsub topic.</p></td>
               </tr>
             
           </tbody>

@@ -18,34 +18,34 @@ option (gogoproto.unmarshaler_all) = true;
 
 // PubSubAPI provides a gRPC API for a libp2p pubsub instance
 service PubSubAPI {
-    // GetTopics is used to return a list of all
+    // PubSubGetTopics is used to return a list of all
     // known topics the pubsub instance is subscribed to.
-    rpc GetTopics(Empty) returns (TopicsResponse) { };
+    rpc PubSubGetTopics(Empty) returns (PubSubTopicsResponse) { };
 
-    // ListPeers is used to return a list of peers subscribed
+    // PubSubListPeers is used to return a list of peers subscribed
     // to a given topic or topics.
-    rpc ListPeers(ListPeersRequest) returns (ListPeersResponse) { };
+    rpc PubSubListPeers(PubSubListPeersRequest) returns (PubSubListPeersResponse) { };
 
-    // Subscribe is used to subscribe to a topic and receive messages
+    // PubSubSubscribe is used to subscribe to a topic and receive messages
     // Server will stream the messages received on the topic specified 
     // during the initial subscription call, and send each message
     // back to the client as it is received. 
-    rpc Subscribe(SubscribeRequest) returns (stream PubSubMessageResponse) { };
+    rpc PubSubSubscribe(PubSubSubscribeRequest) returns (stream PubSubMessageResponse) { };
 
-    // Publish is used to send a stream of messages to a pubsub topic.
-    rpc Publish(stream PublishRequest) returns (Empty) { };   
+    // PubSubPublish is used to send a stream of messages to a pubsub topic.
+    rpc PubSubPublish(stream PubSubPublishRequest) returns (Empty) { };   
 }
 
-// ListPeersRequest is used to return a list of
+// PubSubListPeersRequest is used to return a list of
 // peers that are subscribed to the given topic(s)
-message ListPeersRequest {
+message PubSubListPeersRequest {
     // the topics for which we should
     // list peers for
     repeated string topics = 1;
 }
 
-// ListPeersResponse is a response to a ListPeersRequest
-message ListPeersResponse {
+// PubSubListPeersResponse is a response to a ListPeersRequest
+message PubSubListPeersResponse {
     // peer is a single peer
     message Peer {
         // topic is the topic this peer is a part of
@@ -56,8 +56,8 @@ message ListPeersResponse {
     repeated Peer peers = 1;
 }
 
-// PublishRequest is a message used to publish data to a topic
-message PublishRequest {
+// PubSubPublishRequest is a message used to publish data to a topic
+message PubSubPublishRequest {
     // the topic we are publishing too
     string topic = 1;
     // the data we are publishing
@@ -66,9 +66,9 @@ message PublishRequest {
     bool   advertise = 3;
 }
 
-// SubscribeRequest is used to initiate a subscription
+// PubSubSubscribeRequest is used to initiate a subscription
 // to a given pubsub topic and stream received messages
-message SubscribeRequest {
+message PubSubSubscribeRequest {
     // the topic we should subscribe to
     string topic = 1;
     // indicates whether the server should 
@@ -76,9 +76,9 @@ message SubscribeRequest {
     bool discover = 2;
 }
 
-// Topics is a response that returns
+// PubSubTopics is a response that returns
 // the names of all known topics
-message TopicsResponse {
+message PubSubTopicsResponse {
     // the names of topics
     repeated string names = 1;
 }

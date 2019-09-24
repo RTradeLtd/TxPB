@@ -31,131 +31,131 @@ public final class PubSubAPIGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Pubsub.TopicsResponse> getGetTopicsMethod;
+      pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetTopics",
+      fullMethodName = SERVICE_NAME + '/' + "PubSubGetTopics",
       requestType = pb.Util.Empty.class,
-      responseType = pb.Pubsub.TopicsResponse.class,
+      responseType = pb.Pubsub.PubSubTopicsResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Pubsub.TopicsResponse> getGetTopicsMethod() {
-    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Pubsub.TopicsResponse> getGetTopicsMethod;
-    if ((getGetTopicsMethod = PubSubAPIGrpc.getGetTopicsMethod) == null) {
+      pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod() {
+    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Pubsub.PubSubTopicsResponse> getPubSubGetTopicsMethod;
+    if ((getPubSubGetTopicsMethod = PubSubAPIGrpc.getPubSubGetTopicsMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
-        if ((getGetTopicsMethod = PubSubAPIGrpc.getGetTopicsMethod) == null) {
-          PubSubAPIGrpc.getGetTopicsMethod = getGetTopicsMethod = 
-              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Pubsub.TopicsResponse>newBuilder()
+        if ((getPubSubGetTopicsMethod = PubSubAPIGrpc.getPubSubGetTopicsMethod) == null) {
+          PubSubAPIGrpc.getPubSubGetTopicsMethod = getPubSubGetTopicsMethod = 
+              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Pubsub.PubSubTopicsResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.PubSubAPI", "GetTopics"))
+                  "pb.PubSubAPI", "PubSubGetTopics"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.TopicsResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("GetTopics"))
+                  pb.Pubsub.PubSubTopicsResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubGetTopics"))
                   .build();
           }
         }
      }
-     return getGetTopicsMethod;
+     return getPubSubGetTopicsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest,
-      pb.Pubsub.ListPeersResponse> getListPeersMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest,
+      pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "ListPeers",
-      requestType = pb.Pubsub.ListPeersRequest.class,
-      responseType = pb.Pubsub.ListPeersResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "PubSubListPeers",
+      requestType = pb.Pubsub.PubSubListPeersRequest.class,
+      responseType = pb.Pubsub.PubSubListPeersResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest,
-      pb.Pubsub.ListPeersResponse> getListPeersMethod() {
-    io.grpc.MethodDescriptor<pb.Pubsub.ListPeersRequest, pb.Pubsub.ListPeersResponse> getListPeersMethod;
-    if ((getListPeersMethod = PubSubAPIGrpc.getListPeersMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest,
+      pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod() {
+    io.grpc.MethodDescriptor<pb.Pubsub.PubSubListPeersRequest, pb.Pubsub.PubSubListPeersResponse> getPubSubListPeersMethod;
+    if ((getPubSubListPeersMethod = PubSubAPIGrpc.getPubSubListPeersMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
-        if ((getListPeersMethod = PubSubAPIGrpc.getListPeersMethod) == null) {
-          PubSubAPIGrpc.getListPeersMethod = getListPeersMethod = 
-              io.grpc.MethodDescriptor.<pb.Pubsub.ListPeersRequest, pb.Pubsub.ListPeersResponse>newBuilder()
+        if ((getPubSubListPeersMethod = PubSubAPIGrpc.getPubSubListPeersMethod) == null) {
+          PubSubAPIGrpc.getPubSubListPeersMethod = getPubSubListPeersMethod = 
+              io.grpc.MethodDescriptor.<pb.Pubsub.PubSubListPeersRequest, pb.Pubsub.PubSubListPeersResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.PubSubAPI", "ListPeers"))
+                  "pb.PubSubAPI", "PubSubListPeers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.ListPeersRequest.getDefaultInstance()))
+                  pb.Pubsub.PubSubListPeersRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.ListPeersResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("ListPeers"))
+                  pb.Pubsub.PubSubListPeersResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubListPeers"))
                   .build();
           }
         }
      }
-     return getListPeersMethod;
+     return getPubSubListPeersMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.SubscribeRequest,
-      pb.Pubsub.PubSubMessageResponse> getSubscribeMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.PubSubSubscribeRequest,
+      pb.Pubsub.PubSubMessageResponse> getPubSubSubscribeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Subscribe",
-      requestType = pb.Pubsub.SubscribeRequest.class,
+      fullMethodName = SERVICE_NAME + '/' + "PubSubSubscribe",
+      requestType = pb.Pubsub.PubSubSubscribeRequest.class,
       responseType = pb.Pubsub.PubSubMessageResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<pb.Pubsub.SubscribeRequest,
-      pb.Pubsub.PubSubMessageResponse> getSubscribeMethod() {
-    io.grpc.MethodDescriptor<pb.Pubsub.SubscribeRequest, pb.Pubsub.PubSubMessageResponse> getSubscribeMethod;
-    if ((getSubscribeMethod = PubSubAPIGrpc.getSubscribeMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Pubsub.PubSubSubscribeRequest,
+      pb.Pubsub.PubSubMessageResponse> getPubSubSubscribeMethod() {
+    io.grpc.MethodDescriptor<pb.Pubsub.PubSubSubscribeRequest, pb.Pubsub.PubSubMessageResponse> getPubSubSubscribeMethod;
+    if ((getPubSubSubscribeMethod = PubSubAPIGrpc.getPubSubSubscribeMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
-        if ((getSubscribeMethod = PubSubAPIGrpc.getSubscribeMethod) == null) {
-          PubSubAPIGrpc.getSubscribeMethod = getSubscribeMethod = 
-              io.grpc.MethodDescriptor.<pb.Pubsub.SubscribeRequest, pb.Pubsub.PubSubMessageResponse>newBuilder()
+        if ((getPubSubSubscribeMethod = PubSubAPIGrpc.getPubSubSubscribeMethod) == null) {
+          PubSubAPIGrpc.getPubSubSubscribeMethod = getPubSubSubscribeMethod = 
+              io.grpc.MethodDescriptor.<pb.Pubsub.PubSubSubscribeRequest, pb.Pubsub.PubSubMessageResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "pb.PubSubAPI", "Subscribe"))
+                  "pb.PubSubAPI", "PubSubSubscribe"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.SubscribeRequest.getDefaultInstance()))
+                  pb.Pubsub.PubSubSubscribeRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Pubsub.PubSubMessageResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("Subscribe"))
+                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubSubscribe"))
                   .build();
           }
         }
      }
-     return getSubscribeMethod;
+     return getPubSubSubscribeMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.PublishRequest,
-      pb.Util.Empty> getPublishMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Pubsub.PubSubPublishRequest,
+      pb.Util.Empty> getPubSubPublishMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Publish",
-      requestType = pb.Pubsub.PublishRequest.class,
+      fullMethodName = SERVICE_NAME + '/' + "PubSubPublish",
+      requestType = pb.Pubsub.PubSubPublishRequest.class,
       responseType = pb.Util.Empty.class,
       methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<pb.Pubsub.PublishRequest,
-      pb.Util.Empty> getPublishMethod() {
-    io.grpc.MethodDescriptor<pb.Pubsub.PublishRequest, pb.Util.Empty> getPublishMethod;
-    if ((getPublishMethod = PubSubAPIGrpc.getPublishMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Pubsub.PubSubPublishRequest,
+      pb.Util.Empty> getPubSubPublishMethod() {
+    io.grpc.MethodDescriptor<pb.Pubsub.PubSubPublishRequest, pb.Util.Empty> getPubSubPublishMethod;
+    if ((getPubSubPublishMethod = PubSubAPIGrpc.getPubSubPublishMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
-        if ((getPublishMethod = PubSubAPIGrpc.getPublishMethod) == null) {
-          PubSubAPIGrpc.getPublishMethod = getPublishMethod = 
-              io.grpc.MethodDescriptor.<pb.Pubsub.PublishRequest, pb.Util.Empty>newBuilder()
+        if ((getPubSubPublishMethod = PubSubAPIGrpc.getPubSubPublishMethod) == null) {
+          PubSubAPIGrpc.getPubSubPublishMethod = getPubSubPublishMethod = 
+              io.grpc.MethodDescriptor.<pb.Pubsub.PubSubPublishRequest, pb.Util.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "pb.PubSubAPI", "Publish"))
+                  "pb.PubSubAPI", "PubSubPublish"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Pubsub.PublishRequest.getDefaultInstance()))
+                  pb.Pubsub.PubSubPublishRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("Publish"))
+                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSubPublish"))
                   .build();
           }
         }
      }
-     return getPublishMethod;
+     return getPubSubPublishMethod;
   }
 
   /**
@@ -190,79 +190,79 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public void getTopics(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetTopicsMethod(), responseObserver);
+    public void pubSubGetTopics(pb.Util.Empty request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getPubSubGetTopicsMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
-    public void listPeers(pb.Pubsub.ListPeersRequest request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getListPeersMethod(), responseObserver);
+    public void pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getPubSubListPeersMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
      * </pre>
      */
-    public void subscribe(pb.Pubsub.SubscribeRequest request,
+    public void pubSubSubscribe(pb.Pubsub.PubSubSubscribeRequest request,
         io.grpc.stub.StreamObserver<pb.Pubsub.PubSubMessageResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getSubscribeMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getPubSubSubscribeMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * Publish is used to send a stream of messages to a pubsub topic.
+     * PubSubPublish is used to send a stream of messages to a pubsub topic.
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<pb.Pubsub.PublishRequest> publish(
+    public io.grpc.stub.StreamObserver<pb.Pubsub.PubSubPublishRequest> pubSubPublish(
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      return asyncUnimplementedStreamingCall(getPublishMethod(), responseObserver);
+      return asyncUnimplementedStreamingCall(getPubSubPublishMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getGetTopicsMethod(),
+            getPubSubGetTopicsMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Util.Empty,
-                pb.Pubsub.TopicsResponse>(
-                  this, METHODID_GET_TOPICS)))
+                pb.Pubsub.PubSubTopicsResponse>(
+                  this, METHODID_PUB_SUB_GET_TOPICS)))
           .addMethod(
-            getListPeersMethod(),
+            getPubSubListPeersMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Pubsub.ListPeersRequest,
-                pb.Pubsub.ListPeersResponse>(
-                  this, METHODID_LIST_PEERS)))
+                pb.Pubsub.PubSubListPeersRequest,
+                pb.Pubsub.PubSubListPeersResponse>(
+                  this, METHODID_PUB_SUB_LIST_PEERS)))
           .addMethod(
-            getSubscribeMethod(),
+            getPubSubSubscribeMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                pb.Pubsub.SubscribeRequest,
+                pb.Pubsub.PubSubSubscribeRequest,
                 pb.Pubsub.PubSubMessageResponse>(
-                  this, METHODID_SUBSCRIBE)))
+                  this, METHODID_PUB_SUB_SUBSCRIBE)))
           .addMethod(
-            getPublishMethod(),
+            getPubSubPublishMethod(),
             asyncClientStreamingCall(
               new MethodHandlers<
-                pb.Pubsub.PublishRequest,
+                pb.Pubsub.PubSubPublishRequest,
                 pb.Util.Empty>(
-                  this, METHODID_PUBLISH)))
+                  this, METHODID_PUB_SUB_PUBLISH)))
           .build();
     }
   }
@@ -290,51 +290,51 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public void getTopics(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse> responseObserver) {
+    public void pubSubGetTopics(pb.Util.Empty request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getGetTopicsMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getPubSubGetTopicsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
-    public void listPeers(pb.Pubsub.ListPeersRequest request,
-        io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse> responseObserver) {
+    public void pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request,
+        io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getListPeersMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getPubSubListPeersMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
      * </pre>
      */
-    public void subscribe(pb.Pubsub.SubscribeRequest request,
+    public void pubSubSubscribe(pb.Pubsub.PubSubSubscribeRequest request,
         io.grpc.stub.StreamObserver<pb.Pubsub.PubSubMessageResponse> responseObserver) {
       asyncServerStreamingCall(
-          getChannel().newCall(getSubscribeMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getPubSubSubscribeMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Publish is used to send a stream of messages to a pubsub topic.
+     * PubSubPublish is used to send a stream of messages to a pubsub topic.
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<pb.Pubsub.PublishRequest> publish(
+    public io.grpc.stub.StreamObserver<pb.Pubsub.PubSubPublishRequest> pubSubPublish(
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
       return asyncClientStreamingCall(
-          getChannel().newCall(getPublishMethod(), getCallOptions()), responseObserver);
+          getChannel().newCall(getPubSubPublishMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -361,38 +361,38 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public pb.Pubsub.TopicsResponse getTopics(pb.Util.Empty request) {
+    public pb.Pubsub.PubSubTopicsResponse pubSubGetTopics(pb.Util.Empty request) {
       return blockingUnaryCall(
-          getChannel(), getGetTopicsMethod(), getCallOptions(), request);
+          getChannel(), getPubSubGetTopicsMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
-    public pb.Pubsub.ListPeersResponse listPeers(pb.Pubsub.ListPeersRequest request) {
+    public pb.Pubsub.PubSubListPeersResponse pubSubListPeers(pb.Pubsub.PubSubListPeersRequest request) {
       return blockingUnaryCall(
-          getChannel(), getListPeersMethod(), getCallOptions(), request);
+          getChannel(), getPubSubListPeersMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
      * </pre>
      */
-    public java.util.Iterator<pb.Pubsub.PubSubMessageResponse> subscribe(
-        pb.Pubsub.SubscribeRequest request) {
+    public java.util.Iterator<pb.Pubsub.PubSubMessageResponse> pubSubSubscribe(
+        pb.Pubsub.PubSubSubscribeRequest request) {
       return blockingServerStreamingCall(
-          getChannel(), getSubscribeMethod(), getCallOptions(), request);
+          getChannel(), getPubSubSubscribeMethod(), getCallOptions(), request);
     }
   }
 
@@ -419,33 +419,33 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.TopicsResponse> getTopics(
+    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.PubSubTopicsResponse> pubSubGetTopics(
         pb.Util.Empty request) {
       return futureUnaryCall(
-          getChannel().newCall(getGetTopicsMethod(), getCallOptions()), request);
+          getChannel().newCall(getPubSubGetTopicsMethod(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.ListPeersResponse> listPeers(
-        pb.Pubsub.ListPeersRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<pb.Pubsub.PubSubListPeersResponse> pubSubListPeers(
+        pb.Pubsub.PubSubListPeersRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getListPeersMethod(), getCallOptions()), request);
+          getChannel().newCall(getPubSubListPeersMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_GET_TOPICS = 0;
-  private static final int METHODID_LIST_PEERS = 1;
-  private static final int METHODID_SUBSCRIBE = 2;
-  private static final int METHODID_PUBLISH = 3;
+  private static final int METHODID_PUB_SUB_GET_TOPICS = 0;
+  private static final int METHODID_PUB_SUB_LIST_PEERS = 1;
+  private static final int METHODID_PUB_SUB_SUBSCRIBE = 2;
+  private static final int METHODID_PUB_SUB_PUBLISH = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -464,16 +464,16 @@ public final class PubSubAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_TOPICS:
-          serviceImpl.getTopics((pb.Util.Empty) request,
-              (io.grpc.stub.StreamObserver<pb.Pubsub.TopicsResponse>) responseObserver);
+        case METHODID_PUB_SUB_GET_TOPICS:
+          serviceImpl.pubSubGetTopics((pb.Util.Empty) request,
+              (io.grpc.stub.StreamObserver<pb.Pubsub.PubSubTopicsResponse>) responseObserver);
           break;
-        case METHODID_LIST_PEERS:
-          serviceImpl.listPeers((pb.Pubsub.ListPeersRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Pubsub.ListPeersResponse>) responseObserver);
+        case METHODID_PUB_SUB_LIST_PEERS:
+          serviceImpl.pubSubListPeers((pb.Pubsub.PubSubListPeersRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Pubsub.PubSubListPeersResponse>) responseObserver);
           break;
-        case METHODID_SUBSCRIBE:
-          serviceImpl.subscribe((pb.Pubsub.SubscribeRequest) request,
+        case METHODID_PUB_SUB_SUBSCRIBE:
+          serviceImpl.pubSubSubscribe((pb.Pubsub.PubSubSubscribeRequest) request,
               (io.grpc.stub.StreamObserver<pb.Pubsub.PubSubMessageResponse>) responseObserver);
           break;
         default:
@@ -486,8 +486,8 @@ public final class PubSubAPIGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_PUBLISH:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.publish(
+        case METHODID_PUB_SUB_PUBLISH:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.pubSubPublish(
               (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
         default:
           throw new AssertionError();
@@ -540,10 +540,10 @@ public final class PubSubAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PubSubAPIFileDescriptorSupplier())
-              .addMethod(getGetTopicsMethod())
-              .addMethod(getListPeersMethod())
-              .addMethod(getSubscribeMethod())
-              .addMethod(getPublishMethod())
+              .addMethod(getPubSubGetTopicsMethod())
+              .addMethod(getPubSubListPeersMethod())
+              .addMethod(getPubSubSubscribeMethod())
+              .addMethod(getPubSubPublishMethod())
               .build();
         }
       }
