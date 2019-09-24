@@ -18,15 +18,15 @@ option (gogoproto.unmarshaler_all) = true;
 
 // PubSubAPI provides a gRPC API for a libp2p pubsub instance
 service PubSubAPI {
-    // GetTopics is used to return a list of all
+    // PubSubGetTopics is used to return a list of all
     // known topics the pubsub instance is subscribed to.
     rpc PubSubGetTopics(Empty) returns (PubSubTopicsResponse) { };
 
-    // ListPeers is used to return a list of peers subscribed
+    // PubSubListPeers is used to return a list of peers subscribed
     // to a given topic or topics.
     rpc PubSubListPeers(PubSubListPeersRequest) returns (PubSubListPeersResponse) { };
 
-    // Subscribe is used to subscribe to a topic and receive messages
+    // PubSubSubscribe is used to subscribe to a topic and receive messages
     // Server will stream the messages received on the topic specified 
     // during the initial subscription call, and send each message
     // back to the client as it is received. 

@@ -190,7 +190,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
@@ -201,7 +201,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
@@ -212,7 +212,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
@@ -290,7 +290,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
@@ -302,7 +302,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
@@ -314,7 +314,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
@@ -361,7 +361,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
@@ -372,7 +372,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */
@@ -383,7 +383,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * Subscribe is used to subscribe to a topic and receive messages
+     * PubSubSubscribe is used to subscribe to a topic and receive messages
      * Server will stream the messages received on the topic specified 
      * during the initial subscription call, and send each message
      * back to the client as it is received. 
@@ -419,7 +419,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * GetTopics is used to return a list of all
+     * PubSubGetTopics is used to return a list of all
      * known topics the pubsub instance is subscribed to.
      * </pre>
      */
@@ -431,7 +431,7 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * ListPeers is used to return a list of peers subscribed
+     * PubSubListPeers is used to return a list of peers subscribed
      * to a given topic or topics.
      * </pre>
      */

@@ -42,7 +42,7 @@ class PubSubAPIServicer(object):
   """
 
   def PubSubGetTopics(self, request, context):
-    """GetTopics is used to return a list of all
+    """PubSubGetTopics is used to return a list of all
     known topics the pubsub instance is subscribed to.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -50,7 +50,7 @@ class PubSubAPIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PubSubListPeers(self, request, context):
-    """ListPeers is used to return a list of peers subscribed
+    """PubSubListPeers is used to return a list of peers subscribed
     to a given topic or topics.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -58,7 +58,7 @@ class PubSubAPIServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PubSubSubscribe(self, request, context):
-    """Subscribe is used to subscribe to a topic and receive messages
+    """PubSubSubscribe is used to subscribe to a topic and receive messages
     Server will stream the messages received on the topic specified 
     during the initial subscription call, and send each message
     back to the client as it is received. 

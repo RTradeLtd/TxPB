@@ -1055,13 +1055,13 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PubSubAPIClient interface {
-	// GetTopics is used to return a list of all
+	// PubSubGetTopics is used to return a list of all
 	// known topics the pubsub instance is subscribed to.
 	PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*PubSubTopicsResponse, error)
-	// ListPeers is used to return a list of peers subscribed
+	// PubSubListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
 	PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error)
-	// Subscribe is used to subscribe to a topic and receive messages
+	// PubSubSubscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
 	// back to the client as it is received.
@@ -1164,13 +1164,13 @@ func (x *pubSubAPIPubSubPublishClient) CloseAndRecv() (*Empty, error) {
 
 // PubSubAPIServer is the server API for PubSubAPI service.
 type PubSubAPIServer interface {
-	// GetTopics is used to return a list of all
+	// PubSubGetTopics is used to return a list of all
 	// known topics the pubsub instance is subscribed to.
 	PubSubGetTopics(context.Context, *Empty) (*PubSubTopicsResponse, error)
-	// ListPeers is used to return a list of peers subscribed
+	// PubSubListPeers is used to return a list of peers subscribed
 	// to a given topic or topics.
 	PubSubListPeers(context.Context, *PubSubListPeersRequest) (*PubSubListPeersResponse, error)
-	// Subscribe is used to subscribe to a topic and receive messages
+	// PubSubSubscribe is used to subscribe to a topic and receive messages
 	// Server will stream the messages received on the topic specified
 	// during the initial subscription call, and send each message
 	// back to the client as it is received.
