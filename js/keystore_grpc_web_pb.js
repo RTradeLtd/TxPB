@@ -94,7 +94,7 @@ proto.pb.KeystoreAPIPromiseClient =
  *   !proto.pb.KeystoreRequest,
  *   !proto.pb.KeystoreResponse>}
  */
-const methodInfo_KeystoreAPI_Has = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_KeystoreAPI_KeystoreHas = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.KeystoreResponse,
   /** @param {!proto.pb.KeystoreRequest} request */
   function(request) {
@@ -114,13 +114,13 @@ const methodInfo_KeystoreAPI_Has = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.pb.KeystoreResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.KeystoreAPIClient.prototype.has =
+proto.pb.KeystoreAPIClient.prototype.keystoreHas =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.KeystoreAPI/Has',
+      '/pb.KeystoreAPI/KeystoreHas',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Has,
+      methodInfo_KeystoreAPI_KeystoreHas,
       callback);
 };
 
@@ -133,13 +133,13 @@ proto.pb.KeystoreAPIClient.prototype.has =
  * @return {!Promise<!proto.pb.KeystoreResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.KeystoreAPIPromiseClient.prototype.has =
+proto.pb.KeystoreAPIPromiseClient.prototype.keystoreHas =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.KeystoreAPI/Has',
+      '/pb.KeystoreAPI/KeystoreHas',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Has);
+      methodInfo_KeystoreAPI_KeystoreHas);
 };
 
 
@@ -149,7 +149,7 @@ proto.pb.KeystoreAPIPromiseClient.prototype.has =
  *   !proto.pb.KeystoreRequest,
  *   !proto.pb.KeystoreResponse>}
  */
-const methodInfo_KeystoreAPI_Get = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_KeystoreAPI_KeystoreGet = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.KeystoreResponse,
   /** @param {!proto.pb.KeystoreRequest} request */
   function(request) {
@@ -169,13 +169,13 @@ const methodInfo_KeystoreAPI_Get = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.pb.KeystoreResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.KeystoreAPIClient.prototype.get =
+proto.pb.KeystoreAPIClient.prototype.keystoreGet =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.KeystoreAPI/Get',
+      '/pb.KeystoreAPI/KeystoreGet',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Get,
+      methodInfo_KeystoreAPI_KeystoreGet,
       callback);
 };
 
@@ -188,13 +188,13 @@ proto.pb.KeystoreAPIClient.prototype.get =
  * @return {!Promise<!proto.pb.KeystoreResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.KeystoreAPIPromiseClient.prototype.get =
+proto.pb.KeystoreAPIPromiseClient.prototype.keystoreGet =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.KeystoreAPI/Get',
+      '/pb.KeystoreAPI/KeystoreGet',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Get);
+      methodInfo_KeystoreAPI_KeystoreGet);
 };
 
 
@@ -204,7 +204,7 @@ proto.pb.KeystoreAPIPromiseClient.prototype.get =
  *   !proto.pb.KeystoreRequest,
  *   !proto.pb.KeystoreResponse>}
  */
-const methodInfo_KeystoreAPI_Put = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_KeystoreAPI_KeystorePut = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.KeystoreResponse,
   /** @param {!proto.pb.KeystoreRequest} request */
   function(request) {
@@ -224,13 +224,13 @@ const methodInfo_KeystoreAPI_Put = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.pb.KeystoreResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.KeystoreAPIClient.prototype.put =
+proto.pb.KeystoreAPIClient.prototype.keystorePut =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.KeystoreAPI/Put',
+      '/pb.KeystoreAPI/KeystorePut',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Put,
+      methodInfo_KeystoreAPI_KeystorePut,
       callback);
 };
 
@@ -243,13 +243,13 @@ proto.pb.KeystoreAPIClient.prototype.put =
  * @return {!Promise<!proto.pb.KeystoreResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.KeystoreAPIPromiseClient.prototype.put =
+proto.pb.KeystoreAPIPromiseClient.prototype.keystorePut =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.KeystoreAPI/Put',
+      '/pb.KeystoreAPI/KeystorePut',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Put);
+      methodInfo_KeystoreAPI_KeystorePut);
 };
 
 
@@ -259,7 +259,7 @@ proto.pb.KeystoreAPIPromiseClient.prototype.put =
  *   !proto.pb.KeystoreRequest,
  *   !proto.pb.KeystoreResponse>}
  */
-const methodInfo_KeystoreAPI_Delete = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_KeystoreAPI_KeystoreDelete = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.KeystoreResponse,
   /** @param {!proto.pb.KeystoreRequest} request */
   function(request) {
@@ -279,13 +279,13 @@ const methodInfo_KeystoreAPI_Delete = new grpc.web.AbstractClientBase.MethodInfo
  * @return {!grpc.web.ClientReadableStream<!proto.pb.KeystoreResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.KeystoreAPIClient.prototype.delete =
+proto.pb.KeystoreAPIClient.prototype.keystoreDelete =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.KeystoreAPI/Delete',
+      '/pb.KeystoreAPI/KeystoreDelete',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Delete,
+      methodInfo_KeystoreAPI_KeystoreDelete,
       callback);
 };
 
@@ -298,13 +298,13 @@ proto.pb.KeystoreAPIClient.prototype.delete =
  * @return {!Promise<!proto.pb.KeystoreResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.KeystoreAPIPromiseClient.prototype.delete =
+proto.pb.KeystoreAPIPromiseClient.prototype.keystoreDelete =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.KeystoreAPI/Delete',
+      '/pb.KeystoreAPI/KeystoreDelete',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_Delete);
+      methodInfo_KeystoreAPI_KeystoreDelete);
 };
 
 
@@ -314,7 +314,7 @@ proto.pb.KeystoreAPIPromiseClient.prototype.delete =
  *   !proto.pb.KeystoreRequest,
  *   !proto.pb.KeystoreResponse>}
  */
-const methodInfo_KeystoreAPI_List = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_KeystoreAPI_KeystoreList = new grpc.web.AbstractClientBase.MethodInfo(
   proto.pb.KeystoreResponse,
   /** @param {!proto.pb.KeystoreRequest} request */
   function(request) {
@@ -334,13 +334,13 @@ const methodInfo_KeystoreAPI_List = new grpc.web.AbstractClientBase.MethodInfo(
  * @return {!grpc.web.ClientReadableStream<!proto.pb.KeystoreResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.pb.KeystoreAPIClient.prototype.list =
+proto.pb.KeystoreAPIClient.prototype.keystoreList =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/pb.KeystoreAPI/List',
+      '/pb.KeystoreAPI/KeystoreList',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_List,
+      methodInfo_KeystoreAPI_KeystoreList,
       callback);
 };
 
@@ -353,13 +353,13 @@ proto.pb.KeystoreAPIClient.prototype.list =
  * @return {!Promise<!proto.pb.KeystoreResponse>}
  *     A native promise that resolves to the response
  */
-proto.pb.KeystoreAPIPromiseClient.prototype.list =
+proto.pb.KeystoreAPIPromiseClient.prototype.keystoreList =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/pb.KeystoreAPI/List',
+      '/pb.KeystoreAPI/KeystoreList',
       request,
       metadata || {},
-      methodInfo_KeystoreAPI_List);
+      methodInfo_KeystoreAPI_KeystoreList);
 };
 
 
