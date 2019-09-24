@@ -90,7 +90,8 @@ func (m *KeystoreRequest) GetPrivateKey() []byte {
 // KeystoreResponse is a responsed to any keystore API request
 type KeystoreResponse struct {
 	// a generic status message
-	// returned by Has requests
+	// returned by Has requests, and may or may not
+	// be returned by other requests
 	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	// the actual private key
 	// returned by Get requests
