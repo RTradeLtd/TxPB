@@ -20,8 +20,8 @@ service AdminAPI {
     rpc ManageGC(ManageGCRequest) returns (ManageGCResponse) { };
     // RefCount is used to analyze the counter store and pull reference count information
     rpc RefCount(RefCountRequest) returns (RefCountResponse) { };
-   // Blockstore allows management of the blockstore, and optionally, the counted store
-   rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
+    // Blockstore allows management of the blockstore, and optionally, the counted store
+    rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
 }
 
 // BSREQTYPE is a particular blockstore request type
