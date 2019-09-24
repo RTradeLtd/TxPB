@@ -268,6 +268,39 @@ proto-gen:
   		--grpc-java_out=java \
 		namesys.proto
 
+	# generate golang bindings (keystore)
+	protoc \
+		-I=. \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		keystore.proto \
+		--gogofaster_out=plugins=grpc:go
+	# generate python bindings (keystore)
+	python3 -m grpc_tools.protoc \
+		-I=. \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		keystore.proto \
+		--python_out=py \
+		--grpc_python_out=py
+	# generate js bindings (keystore)
+	protoc \
+		-I=. \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs:js \
+		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		keystore.proto
+	# generate java bindings (keystore)
+	protoc \
+		-I=. \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
+  		--grpc-java_out=java \
+		keystore.proto
+
 	# generate documentation
 	protoc \
 		-I=. \
