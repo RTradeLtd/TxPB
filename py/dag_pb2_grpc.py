@@ -2,6 +2,7 @@
 import grpc
 
 import dag_pb2 as dag__pb2
+from github.com.ipfs.go_merkledag.pb import merkledag_pb2 as github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2
 
 
 class DagAPIStub(object):
@@ -19,22 +20,22 @@ class DagAPIStub(object):
     self.DagPut = channel.unary_unary(
         '/pb.DagAPI/DagPut',
         request_serializer=dag__pb2.DagPutRequest.SerializeToString,
-        response_deserializer=dag__pb2.DagPutResponse.FromString,
+        response_deserializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.FromString,
         )
     self.DagGet = channel.unary_unary(
         '/pb.DagAPI/DagGet',
         request_serializer=dag__pb2.DagGetRequest.SerializeToString,
-        response_deserializer=dag__pb2.DagGetResponse.FromString,
+        response_deserializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.FromString,
         )
     self.NewIPLDNode = channel.unary_unary(
         '/pb.DagAPI/NewIPLDNode',
         request_serializer=dag__pb2.NewIPLDNodeRequest.SerializeToString,
-        response_deserializer=dag__pb2.DagPutResponse.FromString,
+        response_deserializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.FromString,
         )
     self.AddLinksToNode = channel.unary_unary(
         '/pb.DagAPI/AddLinksToNode',
         request_serializer=dag__pb2.AddLinksRequest.SerializeToString,
-        response_deserializer=dag__pb2.DagPutResponse.FromString,
+        response_deserializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.FromString,
         )
     self.GetLinks = channel.unary_unary(
         '/pb.DagAPI/GetLinks',
@@ -91,22 +92,22 @@ def add_DagAPIServicer_to_server(servicer, server):
       'DagPut': grpc.unary_unary_rpc_method_handler(
           servicer.DagPut,
           request_deserializer=dag__pb2.DagPutRequest.FromString,
-          response_serializer=dag__pb2.DagPutResponse.SerializeToString,
+          response_serializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.SerializeToString,
       ),
       'DagGet': grpc.unary_unary_rpc_method_handler(
           servicer.DagGet,
           request_deserializer=dag__pb2.DagGetRequest.FromString,
-          response_serializer=dag__pb2.DagGetResponse.SerializeToString,
+          response_serializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.SerializeToString,
       ),
       'NewIPLDNode': grpc.unary_unary_rpc_method_handler(
           servicer.NewIPLDNode,
           request_deserializer=dag__pb2.NewIPLDNodeRequest.FromString,
-          response_serializer=dag__pb2.DagPutResponse.SerializeToString,
+          response_serializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.SerializeToString,
       ),
       'AddLinksToNode': grpc.unary_unary_rpc_method_handler(
           servicer.AddLinksToNode,
           request_deserializer=dag__pb2.AddLinksRequest.FromString,
-          response_serializer=dag__pb2.DagPutResponse.SerializeToString,
+          response_serializer=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.PBNode.SerializeToString,
       ),
       'GetLinks': grpc.unary_unary_rpc_method_handler(
           servicer.GetLinks,

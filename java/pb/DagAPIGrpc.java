@@ -31,21 +31,21 @@ public final class DagAPIGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<pb.Dag.DagPutRequest,
-      pb.Dag.DagPutResponse> getDagPutMethod;
+      merkledag.pb.Merkledag.PBNode> getDagPutMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "DagPut",
       requestType = pb.Dag.DagPutRequest.class,
-      responseType = pb.Dag.DagPutResponse.class,
+      responseType = merkledag.pb.Merkledag.PBNode.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Dag.DagPutRequest,
-      pb.Dag.DagPutResponse> getDagPutMethod() {
-    io.grpc.MethodDescriptor<pb.Dag.DagPutRequest, pb.Dag.DagPutResponse> getDagPutMethod;
+      merkledag.pb.Merkledag.PBNode> getDagPutMethod() {
+    io.grpc.MethodDescriptor<pb.Dag.DagPutRequest, merkledag.pb.Merkledag.PBNode> getDagPutMethod;
     if ((getDagPutMethod = DagAPIGrpc.getDagPutMethod) == null) {
       synchronized (DagAPIGrpc.class) {
         if ((getDagPutMethod = DagAPIGrpc.getDagPutMethod) == null) {
           DagAPIGrpc.getDagPutMethod = getDagPutMethod = 
-              io.grpc.MethodDescriptor.<pb.Dag.DagPutRequest, pb.Dag.DagPutResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Dag.DagPutRequest, merkledag.pb.Merkledag.PBNode>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.DagAPI", "DagPut"))
@@ -53,7 +53,7 @@ public final class DagAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Dag.DagPutRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Dag.DagPutResponse.getDefaultInstance()))
+                  merkledag.pb.Merkledag.PBNode.getDefaultInstance()))
                   .setSchemaDescriptor(new DagAPIMethodDescriptorSupplier("DagPut"))
                   .build();
           }
@@ -63,21 +63,21 @@ public final class DagAPIGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Dag.DagGetRequest,
-      pb.Dag.DagGetResponse> getDagGetMethod;
+      merkledag.pb.Merkledag.PBNode> getDagGetMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "DagGet",
       requestType = pb.Dag.DagGetRequest.class,
-      responseType = pb.Dag.DagGetResponse.class,
+      responseType = merkledag.pb.Merkledag.PBNode.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Dag.DagGetRequest,
-      pb.Dag.DagGetResponse> getDagGetMethod() {
-    io.grpc.MethodDescriptor<pb.Dag.DagGetRequest, pb.Dag.DagGetResponse> getDagGetMethod;
+      merkledag.pb.Merkledag.PBNode> getDagGetMethod() {
+    io.grpc.MethodDescriptor<pb.Dag.DagGetRequest, merkledag.pb.Merkledag.PBNode> getDagGetMethod;
     if ((getDagGetMethod = DagAPIGrpc.getDagGetMethod) == null) {
       synchronized (DagAPIGrpc.class) {
         if ((getDagGetMethod = DagAPIGrpc.getDagGetMethod) == null) {
           DagAPIGrpc.getDagGetMethod = getDagGetMethod = 
-              io.grpc.MethodDescriptor.<pb.Dag.DagGetRequest, pb.Dag.DagGetResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Dag.DagGetRequest, merkledag.pb.Merkledag.PBNode>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.DagAPI", "DagGet"))
@@ -85,7 +85,7 @@ public final class DagAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Dag.DagGetRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Dag.DagGetResponse.getDefaultInstance()))
+                  merkledag.pb.Merkledag.PBNode.getDefaultInstance()))
                   .setSchemaDescriptor(new DagAPIMethodDescriptorSupplier("DagGet"))
                   .build();
           }
@@ -95,21 +95,21 @@ public final class DagAPIGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Dag.NewIPLDNodeRequest,
-      pb.Dag.DagPutResponse> getNewIPLDNodeMethod;
+      merkledag.pb.Merkledag.PBNode> getNewIPLDNodeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "NewIPLDNode",
       requestType = pb.Dag.NewIPLDNodeRequest.class,
-      responseType = pb.Dag.DagPutResponse.class,
+      responseType = merkledag.pb.Merkledag.PBNode.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Dag.NewIPLDNodeRequest,
-      pb.Dag.DagPutResponse> getNewIPLDNodeMethod() {
-    io.grpc.MethodDescriptor<pb.Dag.NewIPLDNodeRequest, pb.Dag.DagPutResponse> getNewIPLDNodeMethod;
+      merkledag.pb.Merkledag.PBNode> getNewIPLDNodeMethod() {
+    io.grpc.MethodDescriptor<pb.Dag.NewIPLDNodeRequest, merkledag.pb.Merkledag.PBNode> getNewIPLDNodeMethod;
     if ((getNewIPLDNodeMethod = DagAPIGrpc.getNewIPLDNodeMethod) == null) {
       synchronized (DagAPIGrpc.class) {
         if ((getNewIPLDNodeMethod = DagAPIGrpc.getNewIPLDNodeMethod) == null) {
           DagAPIGrpc.getNewIPLDNodeMethod = getNewIPLDNodeMethod = 
-              io.grpc.MethodDescriptor.<pb.Dag.NewIPLDNodeRequest, pb.Dag.DagPutResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Dag.NewIPLDNodeRequest, merkledag.pb.Merkledag.PBNode>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.DagAPI", "NewIPLDNode"))
@@ -117,7 +117,7 @@ public final class DagAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Dag.NewIPLDNodeRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Dag.DagPutResponse.getDefaultInstance()))
+                  merkledag.pb.Merkledag.PBNode.getDefaultInstance()))
                   .setSchemaDescriptor(new DagAPIMethodDescriptorSupplier("NewIPLDNode"))
                   .build();
           }
@@ -127,21 +127,21 @@ public final class DagAPIGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Dag.AddLinksRequest,
-      pb.Dag.DagPutResponse> getAddLinksToNodeMethod;
+      merkledag.pb.Merkledag.PBNode> getAddLinksToNodeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "AddLinksToNode",
       requestType = pb.Dag.AddLinksRequest.class,
-      responseType = pb.Dag.DagPutResponse.class,
+      responseType = merkledag.pb.Merkledag.PBNode.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Dag.AddLinksRequest,
-      pb.Dag.DagPutResponse> getAddLinksToNodeMethod() {
-    io.grpc.MethodDescriptor<pb.Dag.AddLinksRequest, pb.Dag.DagPutResponse> getAddLinksToNodeMethod;
+      merkledag.pb.Merkledag.PBNode> getAddLinksToNodeMethod() {
+    io.grpc.MethodDescriptor<pb.Dag.AddLinksRequest, merkledag.pb.Merkledag.PBNode> getAddLinksToNodeMethod;
     if ((getAddLinksToNodeMethod = DagAPIGrpc.getAddLinksToNodeMethod) == null) {
       synchronized (DagAPIGrpc.class) {
         if ((getAddLinksToNodeMethod = DagAPIGrpc.getAddLinksToNodeMethod) == null) {
           DagAPIGrpc.getAddLinksToNodeMethod = getAddLinksToNodeMethod = 
-              io.grpc.MethodDescriptor.<pb.Dag.AddLinksRequest, pb.Dag.DagPutResponse>newBuilder()
+              io.grpc.MethodDescriptor.<pb.Dag.AddLinksRequest, merkledag.pb.Merkledag.PBNode>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "pb.DagAPI", "AddLinksToNode"))
@@ -149,7 +149,7 @@ public final class DagAPIGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Dag.AddLinksRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Dag.DagPutResponse.getDefaultInstance()))
+                  merkledag.pb.Merkledag.PBNode.getDefaultInstance()))
                   .setSchemaDescriptor(new DagAPIMethodDescriptorSupplier("AddLinksToNode"))
                   .build();
           }
@@ -226,7 +226,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void dagPut(pb.Dag.DagPutRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnimplementedUnaryCall(getDagPutMethod(), responseObserver);
     }
 
@@ -236,7 +236,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void dagGet(pb.Dag.DagGetRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagGetResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnimplementedUnaryCall(getDagGetMethod(), responseObserver);
     }
 
@@ -247,7 +247,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void newIPLDNode(pb.Dag.NewIPLDNodeRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnimplementedUnaryCall(getNewIPLDNodeMethod(), responseObserver);
     }
 
@@ -257,7 +257,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void addLinksToNode(pb.Dag.AddLinksRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnimplementedUnaryCall(getAddLinksToNodeMethod(), responseObserver);
     }
 
@@ -278,28 +278,28 @@ public final class DagAPIGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Dag.DagPutRequest,
-                pb.Dag.DagPutResponse>(
+                merkledag.pb.Merkledag.PBNode>(
                   this, METHODID_DAG_PUT)))
           .addMethod(
             getDagGetMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Dag.DagGetRequest,
-                pb.Dag.DagGetResponse>(
+                merkledag.pb.Merkledag.PBNode>(
                   this, METHODID_DAG_GET)))
           .addMethod(
             getNewIPLDNodeMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Dag.NewIPLDNodeRequest,
-                pb.Dag.DagPutResponse>(
+                merkledag.pb.Merkledag.PBNode>(
                   this, METHODID_NEW_IPLDNODE)))
           .addMethod(
             getAddLinksToNodeMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Dag.AddLinksRequest,
-                pb.Dag.DagPutResponse>(
+                merkledag.pb.Merkledag.PBNode>(
                   this, METHODID_ADD_LINKS_TO_NODE)))
           .addMethod(
             getGetLinksMethod(),
@@ -339,7 +339,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void dagPut(pb.Dag.DagPutRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getDagPutMethod(), getCallOptions()), request, responseObserver);
     }
@@ -350,7 +350,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void dagGet(pb.Dag.DagGetRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagGetResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getDagGetMethod(), getCallOptions()), request, responseObserver);
     }
@@ -362,7 +362,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void newIPLDNode(pb.Dag.NewIPLDNodeRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getNewIPLDNodeMethod(), getCallOptions()), request, responseObserver);
     }
@@ -373,7 +373,7 @@ public final class DagAPIGrpc {
      * </pre>
      */
     public void addLinksToNode(pb.Dag.AddLinksRequest request,
-        io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getAddLinksToNodeMethod(), getCallOptions()), request, responseObserver);
     }
@@ -416,7 +416,7 @@ public final class DagAPIGrpc {
      * DagPut is used to store arbitrary bytes as a custom IPLD object
      * </pre>
      */
-    public pb.Dag.DagPutResponse dagPut(pb.Dag.DagPutRequest request) {
+    public merkledag.pb.Merkledag.PBNode dagPut(pb.Dag.DagPutRequest request) {
       return blockingUnaryCall(
           getChannel(), getDagPutMethod(), getCallOptions(), request);
     }
@@ -426,7 +426,7 @@ public final class DagAPIGrpc {
      * DagGet is used to request the raw ipld node data for an IPLD object
      * </pre>
      */
-    public pb.Dag.DagGetResponse dagGet(pb.Dag.DagGetRequest request) {
+    public merkledag.pb.Merkledag.PBNode dagGet(pb.Dag.DagGetRequest request) {
       return blockingUnaryCall(
           getChannel(), getDagGetMethod(), getCallOptions(), request);
     }
@@ -437,7 +437,7 @@ public final class DagAPIGrpc {
      * This is the same type as in github.com/ipfs/go-ipld-format.Node
      * </pre>
      */
-    public pb.Dag.DagPutResponse newIPLDNode(pb.Dag.NewIPLDNodeRequest request) {
+    public merkledag.pb.Merkledag.PBNode newIPLDNode(pb.Dag.NewIPLDNodeRequest request) {
       return blockingUnaryCall(
           getChannel(), getNewIPLDNodeMethod(), getCallOptions(), request);
     }
@@ -447,7 +447,7 @@ public final class DagAPIGrpc {
      * AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
      * </pre>
      */
-    public pb.Dag.DagPutResponse addLinksToNode(pb.Dag.AddLinksRequest request) {
+    public merkledag.pb.Merkledag.PBNode addLinksToNode(pb.Dag.AddLinksRequest request) {
       return blockingUnaryCall(
           getChannel(), getAddLinksToNodeMethod(), getCallOptions(), request);
     }
@@ -489,7 +489,7 @@ public final class DagAPIGrpc {
      * DagPut is used to store arbitrary bytes as a custom IPLD object
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Dag.DagPutResponse> dagPut(
+    public com.google.common.util.concurrent.ListenableFuture<merkledag.pb.Merkledag.PBNode> dagPut(
         pb.Dag.DagPutRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getDagPutMethod(), getCallOptions()), request);
@@ -500,7 +500,7 @@ public final class DagAPIGrpc {
      * DagGet is used to request the raw ipld node data for an IPLD object
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Dag.DagGetResponse> dagGet(
+    public com.google.common.util.concurrent.ListenableFuture<merkledag.pb.Merkledag.PBNode> dagGet(
         pb.Dag.DagGetRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getDagGetMethod(), getCallOptions()), request);
@@ -512,7 +512,7 @@ public final class DagAPIGrpc {
      * This is the same type as in github.com/ipfs/go-ipld-format.Node
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Dag.DagPutResponse> newIPLDNode(
+    public com.google.common.util.concurrent.ListenableFuture<merkledag.pb.Merkledag.PBNode> newIPLDNode(
         pb.Dag.NewIPLDNodeRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getNewIPLDNodeMethod(), getCallOptions()), request);
@@ -523,7 +523,7 @@ public final class DagAPIGrpc {
      * AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Dag.DagPutResponse> addLinksToNode(
+    public com.google.common.util.concurrent.ListenableFuture<merkledag.pb.Merkledag.PBNode> addLinksToNode(
         pb.Dag.AddLinksRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getAddLinksToNodeMethod(), getCallOptions()), request);
@@ -566,19 +566,19 @@ public final class DagAPIGrpc {
       switch (methodId) {
         case METHODID_DAG_PUT:
           serviceImpl.dagPut((pb.Dag.DagPutRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode>) responseObserver);
           break;
         case METHODID_DAG_GET:
           serviceImpl.dagGet((pb.Dag.DagGetRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Dag.DagGetResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode>) responseObserver);
           break;
         case METHODID_NEW_IPLDNODE:
           serviceImpl.newIPLDNode((pb.Dag.NewIPLDNodeRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode>) responseObserver);
           break;
         case METHODID_ADD_LINKS_TO_NODE:
           serviceImpl.addLinksToNode((pb.Dag.AddLinksRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Dag.DagPutResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<merkledag.pb.Merkledag.PBNode>) responseObserver);
           break;
         case METHODID_GET_LINKS:
           serviceImpl.getLinks((pb.Dag.GetLinksRequest) request,

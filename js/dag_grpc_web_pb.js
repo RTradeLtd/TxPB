@@ -13,6 +13,8 @@ grpc.web = require('grpc-web');
 
 
 var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js')
+
+var github_com_ipfs_go$merkledag_pb_merkledag_pb = require('./github.com/ipfs/go-merkledag/pb/merkledag_pb.js')
 const proto = {};
 proto.pb = require('./dag_pb.js');
 
@@ -92,15 +94,15 @@ proto.pb.DagAPIPromiseClient =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.pb.DagPutRequest,
- *   !proto.pb.DagPutResponse>}
+ *   !proto.merkledag.pb.PBNode>}
  */
 const methodInfo_DagAPI_DagPut = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.DagPutResponse,
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode,
   /** @param {!proto.pb.DagPutRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.DagPutResponse.deserializeBinary
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.deserializeBinary
 );
 
 
@@ -109,9 +111,9 @@ const methodInfo_DagAPI_DagPut = new grpc.web.AbstractClientBase.MethodInfo(
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.DagPutResponse)}
+ * @param {function(?grpc.web.Error, ?proto.merkledag.pb.PBNode)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.DagPutResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.merkledag.pb.PBNode>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.DagAPIClient.prototype.dagPut =
@@ -130,7 +132,7 @@ proto.pb.DagAPIClient.prototype.dagPut =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.DagPutResponse>}
+ * @return {!Promise<!proto.merkledag.pb.PBNode>}
  *     A native promise that resolves to the response
  */
 proto.pb.DagAPIPromiseClient.prototype.dagPut =
@@ -147,15 +149,15 @@ proto.pb.DagAPIPromiseClient.prototype.dagPut =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.pb.DagGetRequest,
- *   !proto.pb.DagGetResponse>}
+ *   !proto.merkledag.pb.PBNode>}
  */
 const methodInfo_DagAPI_DagGet = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.DagGetResponse,
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode,
   /** @param {!proto.pb.DagGetRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.DagGetResponse.deserializeBinary
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.deserializeBinary
 );
 
 
@@ -164,9 +166,9 @@ const methodInfo_DagAPI_DagGet = new grpc.web.AbstractClientBase.MethodInfo(
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.DagGetResponse)}
+ * @param {function(?grpc.web.Error, ?proto.merkledag.pb.PBNode)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.DagGetResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.merkledag.pb.PBNode>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.DagAPIClient.prototype.dagGet =
@@ -185,7 +187,7 @@ proto.pb.DagAPIClient.prototype.dagGet =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.DagGetResponse>}
+ * @return {!Promise<!proto.merkledag.pb.PBNode>}
  *     A native promise that resolves to the response
  */
 proto.pb.DagAPIPromiseClient.prototype.dagGet =
@@ -202,15 +204,15 @@ proto.pb.DagAPIPromiseClient.prototype.dagGet =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.pb.NewIPLDNodeRequest,
- *   !proto.pb.DagPutResponse>}
+ *   !proto.merkledag.pb.PBNode>}
  */
 const methodInfo_DagAPI_NewIPLDNode = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.DagPutResponse,
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode,
   /** @param {!proto.pb.NewIPLDNodeRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.DagPutResponse.deserializeBinary
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.deserializeBinary
 );
 
 
@@ -219,9 +221,9 @@ const methodInfo_DagAPI_NewIPLDNode = new grpc.web.AbstractClientBase.MethodInfo
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.DagPutResponse)}
+ * @param {function(?grpc.web.Error, ?proto.merkledag.pb.PBNode)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.DagPutResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.merkledag.pb.PBNode>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.DagAPIClient.prototype.newIPLDNode =
@@ -240,7 +242,7 @@ proto.pb.DagAPIClient.prototype.newIPLDNode =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.DagPutResponse>}
+ * @return {!Promise<!proto.merkledag.pb.PBNode>}
  *     A native promise that resolves to the response
  */
 proto.pb.DagAPIPromiseClient.prototype.newIPLDNode =
@@ -257,15 +259,15 @@ proto.pb.DagAPIPromiseClient.prototype.newIPLDNode =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.pb.AddLinksRequest,
- *   !proto.pb.DagPutResponse>}
+ *   !proto.merkledag.pb.PBNode>}
  */
 const methodInfo_DagAPI_AddLinksToNode = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.pb.DagPutResponse,
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode,
   /** @param {!proto.pb.AddLinksRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.pb.DagPutResponse.deserializeBinary
+  github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.deserializeBinary
 );
 
 
@@ -274,9 +276,9 @@ const methodInfo_DagAPI_AddLinksToNode = new grpc.web.AbstractClientBase.MethodI
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.pb.DagPutResponse)}
+ * @param {function(?grpc.web.Error, ?proto.merkledag.pb.PBNode)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.pb.DagPutResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.merkledag.pb.PBNode>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.pb.DagAPIClient.prototype.addLinksToNode =
@@ -295,7 +297,7 @@ proto.pb.DagAPIClient.prototype.addLinksToNode =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.pb.DagPutResponse>}
+ * @return {!Promise<!proto.merkledag.pb.PBNode>}
  *     A native promise that resolves to the response
  */
 proto.pb.DagAPIPromiseClient.prototype.addLinksToNode =

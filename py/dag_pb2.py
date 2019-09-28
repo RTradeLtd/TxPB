@@ -14,49 +14,19 @@ _sym_db = _symbol_database.Default()
 
 
 from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
+from github.com.ipfs.go_merkledag.pb import merkledag_pb2 as github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='dag.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\tdag.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\" \n\x0e\x44\x61gPutResponse\x12\x0e\n\x06hashes\x18\x01 \x03(\t\"x\n\rDagPutRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x02 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x03 \x01(\t\x12\x10\n\x08hashFunc\x18\x04 \x01(\t\x12\x12\n\ncidVersion\x18\x05 \x01(\x03\"\x1d\n\rDagGetRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\"!\n\x0e\x44\x61gGetResponse\x12\x0f\n\x07rawData\x18\x01 \x01(\x0c\"\x94\x01\n\x12NewIPLDNodeRequest\x12\x30\n\x05links\x18\x01 \x03(\x0b\x32!.pb.NewIPLDNodeRequest.LinksEntry\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x10\n\x08hashFunc\x18\x03 \x01(\t\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x8e\x01\n\x0f\x41\x64\x64LinksRequest\x12-\n\x05links\x18\x01 \x03(\x0b\x32\x1e.pb.AddLinksRequest.LinksEntry\x12\x0c\n\x04hash\x18\x02 \x01(\t\x12\x10\n\x08hashFunc\x18\x03 \x01(\t\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1f\n\x0fGetLinksRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\"/\n\x10GetLinksResponse\x12\x1b\n\x05links\x18\x01 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x32\xa1\x02\n\x06\x44\x61gAPI\x12\x31\n\x06\x44\x61gPut\x12\x11.pb.DagPutRequest\x1a\x12.pb.DagPutResponse\"\x00\x12\x31\n\x06\x44\x61gGet\x12\x11.pb.DagGetRequest\x1a\x12.pb.DagGetResponse\"\x00\x12;\n\x0bNewIPLDNode\x12\x16.pb.NewIPLDNodeRequest\x1a\x12.pb.DagPutResponse\"\x00\x12;\n\x0e\x41\x64\x64LinksToNode\x12\x13.pb.AddLinksRequest\x1a\x12.pb.DagPutResponse\"\x00\x12\x37\n\x08GetLinks\x12\x13.pb.GetLinksRequest\x1a\x14.pb.GetLinksResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
+  serialized_pb=_b('\n\tdag.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\x1a/github.com/ipfs/go-merkledag/pb/merkledag.proto\"x\n\rDagPutRequest\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x02 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x03 \x01(\t\x12\x10\n\x08hashFunc\x18\x04 \x01(\t\x12\x12\n\ncidVersion\x18\x05 \x01(\x03\"\x1d\n\rDagGetRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\"\x94\x01\n\x12NewIPLDNodeRequest\x12\x30\n\x05links\x18\x01 \x03(\x0b\x32!.pb.NewIPLDNodeRequest.LinksEntry\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x10\n\x08hashFunc\x18\x03 \x01(\t\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x8e\x01\n\x0f\x41\x64\x64LinksRequest\x12-\n\x05links\x18\x01 \x03(\x0b\x32\x1e.pb.AddLinksRequest.LinksEntry\x12\x0c\n\x04hash\x18\x02 \x01(\t\x12\x10\n\x08hashFunc\x18\x03 \x01(\t\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1f\n\x0fGetLinksRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\"/\n\x10GetLinksResponse\x12\x1b\n\x05links\x18\x01 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\x32\xa9\x02\n\x06\x44\x61gAPI\x12\x33\n\x06\x44\x61gPut\x12\x11.pb.DagPutRequest\x1a\x14.merkledag.pb.PBNode\"\x00\x12\x33\n\x06\x44\x61gGet\x12\x11.pb.DagGetRequest\x1a\x14.merkledag.pb.PBNode\"\x00\x12=\n\x0bNewIPLDNode\x12\x16.pb.NewIPLDNodeRequest\x1a\x14.merkledag.pb.PBNode\"\x00\x12=\n\x0e\x41\x64\x64LinksToNode\x12\x13.pb.AddLinksRequest\x1a\x14.merkledag.pb.PBNode\"\x00\x12\x37\n\x08GetLinks\x12\x13.pb.GetLinksRequest\x1a\x14.pb.GetLinksResponse\"\x00\x42$\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
   ,
-  dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2.DESCRIPTOR,])
 
 
-
-
-_DAGPUTRESPONSE = _descriptor.Descriptor(
-  name='DagPutResponse',
-  full_name='pb.DagPutResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='hashes', full_name='pb.DagPutResponse.hashes', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=64,
-  serialized_end=96,
-)
 
 
 _DAGPUTREQUEST = _descriptor.Descriptor(
@@ -113,8 +83,8 @@ _DAGPUTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=98,
-  serialized_end=218,
+  serialized_start=113,
+  serialized_end=233,
 )
 
 
@@ -144,39 +114,8 @@ _DAGGETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=220,
-  serialized_end=249,
-)
-
-
-_DAGGETRESPONSE = _descriptor.Descriptor(
-  name='DagGetResponse',
-  full_name='pb.DagGetResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='rawData', full_name='pb.DagGetResponse.rawData', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=251,
-  serialized_end=284,
+  serialized_start=235,
+  serialized_end=264,
 )
 
 
@@ -213,8 +152,8 @@ _NEWIPLDNODEREQUEST_LINKSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=391,
-  serialized_end=435,
+  serialized_start=371,
+  serialized_end=415,
 )
 
 _NEWIPLDNODEREQUEST = _descriptor.Descriptor(
@@ -257,8 +196,8 @@ _NEWIPLDNODEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=287,
-  serialized_end=435,
+  serialized_start=267,
+  serialized_end=415,
 )
 
 
@@ -295,8 +234,8 @@ _ADDLINKSREQUEST_LINKSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=391,
-  serialized_end=435,
+  serialized_start=371,
+  serialized_end=415,
 )
 
 _ADDLINKSREQUEST = _descriptor.Descriptor(
@@ -339,8 +278,8 @@ _ADDLINKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=438,
-  serialized_end=580,
+  serialized_start=418,
+  serialized_end=560,
 )
 
 
@@ -370,8 +309,8 @@ _GETLINKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=582,
-  serialized_end=613,
+  serialized_start=562,
+  serialized_end=593,
 )
 
 
@@ -401,8 +340,8 @@ _GETLINKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=615,
-  serialized_end=662,
+  serialized_start=595,
+  serialized_end=642,
 )
 
 
@@ -446,46 +385,8 @@ _IPLDLINK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=664,
-  serialized_end=716,
-)
-
-
-_IPLDNODE = _descriptor.Descriptor(
-  name='IPLDNode',
-  full_name='pb.IPLDNode',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='links', full_name='pb.IPLDNode.links', index=0,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='pb.IPLDNode.data', index=1,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=718,
-  serialized_end=771,
+  serialized_start=644,
+  serialized_end=696,
 )
 
 _NEWIPLDNODEREQUEST_LINKSENTRY.containing_type = _NEWIPLDNODEREQUEST
@@ -493,25 +394,14 @@ _NEWIPLDNODEREQUEST.fields_by_name['links'].message_type = _NEWIPLDNODEREQUEST_L
 _ADDLINKSREQUEST_LINKSENTRY.containing_type = _ADDLINKSREQUEST
 _ADDLINKSREQUEST.fields_by_name['links'].message_type = _ADDLINKSREQUEST_LINKSENTRY
 _GETLINKSRESPONSE.fields_by_name['links'].message_type = _IPLDLINK
-_IPLDNODE.fields_by_name['links'].message_type = _IPLDLINK
-DESCRIPTOR.message_types_by_name['DagPutResponse'] = _DAGPUTRESPONSE
 DESCRIPTOR.message_types_by_name['DagPutRequest'] = _DAGPUTREQUEST
 DESCRIPTOR.message_types_by_name['DagGetRequest'] = _DAGGETREQUEST
-DESCRIPTOR.message_types_by_name['DagGetResponse'] = _DAGGETRESPONSE
 DESCRIPTOR.message_types_by_name['NewIPLDNodeRequest'] = _NEWIPLDNODEREQUEST
 DESCRIPTOR.message_types_by_name['AddLinksRequest'] = _ADDLINKSREQUEST
 DESCRIPTOR.message_types_by_name['GetLinksRequest'] = _GETLINKSREQUEST
 DESCRIPTOR.message_types_by_name['GetLinksResponse'] = _GETLINKSRESPONSE
 DESCRIPTOR.message_types_by_name['IPLDLink'] = _IPLDLINK
-DESCRIPTOR.message_types_by_name['IPLDNode'] = _IPLDNODE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-DagPutResponse = _reflection.GeneratedProtocolMessageType('DagPutResponse', (_message.Message,), {
-  'DESCRIPTOR' : _DAGPUTRESPONSE,
-  '__module__' : 'dag_pb2'
-  # @@protoc_insertion_point(class_scope:pb.DagPutResponse)
-  })
-_sym_db.RegisterMessage(DagPutResponse)
 
 DagPutRequest = _reflection.GeneratedProtocolMessageType('DagPutRequest', (_message.Message,), {
   'DESCRIPTOR' : _DAGPUTREQUEST,
@@ -526,13 +416,6 @@ DagGetRequest = _reflection.GeneratedProtocolMessageType('DagGetRequest', (_mess
   # @@protoc_insertion_point(class_scope:pb.DagGetRequest)
   })
 _sym_db.RegisterMessage(DagGetRequest)
-
-DagGetResponse = _reflection.GeneratedProtocolMessageType('DagGetResponse', (_message.Message,), {
-  'DESCRIPTOR' : _DAGGETRESPONSE,
-  '__module__' : 'dag_pb2'
-  # @@protoc_insertion_point(class_scope:pb.DagGetResponse)
-  })
-_sym_db.RegisterMessage(DagGetResponse)
 
 NewIPLDNodeRequest = _reflection.GeneratedProtocolMessageType('NewIPLDNodeRequest', (_message.Message,), {
 
@@ -585,13 +468,6 @@ IPLDLink = _reflection.GeneratedProtocolMessageType('IPLDLink', (_message.Messag
   })
 _sym_db.RegisterMessage(IPLDLink)
 
-IPLDNode = _reflection.GeneratedProtocolMessageType('IPLDNode', (_message.Message,), {
-  'DESCRIPTOR' : _IPLDNODE,
-  '__module__' : 'dag_pb2'
-  # @@protoc_insertion_point(class_scope:pb.IPLDNode)
-  })
-_sym_db.RegisterMessage(IPLDNode)
-
 
 DESCRIPTOR._options = None
 _NEWIPLDNODEREQUEST_LINKSENTRY._options = None
@@ -603,8 +479,8 @@ _DAGAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=774,
-  serialized_end=1063,
+  serialized_start=699,
+  serialized_end=996,
   methods=[
   _descriptor.MethodDescriptor(
     name='DagPut',
@@ -612,7 +488,7 @@ _DAGAPI = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=_DAGPUTREQUEST,
-    output_type=_DAGPUTRESPONSE,
+    output_type=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2._PBNODE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
@@ -621,7 +497,7 @@ _DAGAPI = _descriptor.ServiceDescriptor(
     index=1,
     containing_service=None,
     input_type=_DAGGETREQUEST,
-    output_type=_DAGGETRESPONSE,
+    output_type=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2._PBNODE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
@@ -630,7 +506,7 @@ _DAGAPI = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_NEWIPLDNODEREQUEST,
-    output_type=_DAGPUTRESPONSE,
+    output_type=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2._PBNODE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
@@ -639,7 +515,7 @@ _DAGAPI = _descriptor.ServiceDescriptor(
     index=3,
     containing_service=None,
     input_type=_ADDLINKSREQUEST,
-    output_type=_DAGPUTRESPONSE,
+    output_type=github_dot_com_dot_ipfs_dot_go__merkledag_dot_pb_dot_merkledag__pb2._PBNODE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(

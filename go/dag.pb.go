@@ -16,6 +16,7 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	pb "github.com/ipfs/go-merkledag/pb"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -31,52 +32,6 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
-
-// DagPutResponse contains the hashes of ipld nodes generated
-// by the dag put request
-type DagPutResponse struct {
-	// an array of hashes (cids) of the root ipld nod
-	Hashes []string `protobuf:"bytes,1,rep,name=hashes,proto3" json:"hashes,omitempty"`
-}
-
-func (m *DagPutResponse) Reset()      { *m = DagPutResponse{} }
-func (*DagPutResponse) ProtoMessage() {}
-func (*DagPutResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{0}
-}
-func (m *DagPutResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DagPutResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DagPutResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DagPutResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagPutResponse.Merge(m, src)
-}
-func (m *DagPutResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *DagPutResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagPutResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DagPutResponse proto.InternalMessageInfo
-
-func (m *DagPutResponse) GetHashes() []string {
-	if m != nil {
-		return m.Hashes
-	}
-	return nil
-}
 
 // DagPut allows us to store arbitrary bytes as a custom IPLD object
 type DagPutRequest struct {
@@ -95,7 +50,7 @@ type DagPutRequest struct {
 func (m *DagPutRequest) Reset()      { *m = DagPutRequest{} }
 func (*DagPutRequest) ProtoMessage() {}
 func (*DagPutRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{1}
+	return fileDescriptor_228b96b95413374c, []int{0}
 }
 func (m *DagPutRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -172,7 +127,7 @@ type DagGetRequest struct {
 func (m *DagGetRequest) Reset()      { *m = DagGetRequest{} }
 func (*DagGetRequest) ProtoMessage() {}
 func (*DagGetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{2}
+	return fileDescriptor_228b96b95413374c, []int{1}
 }
 func (m *DagGetRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -208,52 +163,6 @@ func (m *DagGetRequest) GetHash() string {
 	return ""
 }
 
-// DagGetResponse is a response to DagGetRequest
-// that returns the raw data of the matching ipld node
-type DagGetResponse struct {
-	// the raw data of the ipld node
-	RawData []byte `protobuf:"bytes,1,opt,name=rawData,proto3" json:"rawData,omitempty"`
-}
-
-func (m *DagGetResponse) Reset()      { *m = DagGetResponse{} }
-func (*DagGetResponse) ProtoMessage() {}
-func (*DagGetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{3}
-}
-func (m *DagGetResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DagGetResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DagGetResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DagGetResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagGetResponse.Merge(m, src)
-}
-func (m *DagGetResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *DagGetResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagGetResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DagGetResponse proto.InternalMessageInfo
-
-func (m *DagGetResponse) GetRawData() []byte {
-	if m != nil {
-		return m.RawData
-	}
-	return nil
-}
-
 // NewIPLDNodeRequest is used to create a new ipld node
 type NewIPLDNodeRequest struct {
 	// links are optional hashes to include as links of the node
@@ -268,7 +177,7 @@ type NewIPLDNodeRequest struct {
 func (m *NewIPLDNodeRequest) Reset()      { *m = NewIPLDNodeRequest{} }
 func (*NewIPLDNodeRequest) ProtoMessage() {}
 func (*NewIPLDNodeRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{4}
+	return fileDescriptor_228b96b95413374c, []int{2}
 }
 func (m *NewIPLDNodeRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -332,7 +241,7 @@ type AddLinksRequest struct {
 func (m *AddLinksRequest) Reset()      { *m = AddLinksRequest{} }
 func (*AddLinksRequest) ProtoMessage() {}
 func (*AddLinksRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{5}
+	return fileDescriptor_228b96b95413374c, []int{3}
 }
 func (m *AddLinksRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -391,7 +300,7 @@ type GetLinksRequest struct {
 func (m *GetLinksRequest) Reset()      { *m = GetLinksRequest{} }
 func (*GetLinksRequest) ProtoMessage() {}
 func (*GetLinksRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{6}
+	return fileDescriptor_228b96b95413374c, []int{4}
 }
 func (m *GetLinksRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -437,7 +346,7 @@ type GetLinksResponse struct {
 func (m *GetLinksResponse) Reset()      { *m = GetLinksResponse{} }
 func (*GetLinksResponse) ProtoMessage() {}
 func (*GetLinksResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{7}
+	return fileDescriptor_228b96b95413374c, []int{5}
 }
 func (m *GetLinksResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -486,7 +395,7 @@ type IPLDLink struct {
 func (m *IPLDLink) Reset()      { *m = IPLDLink{} }
 func (*IPLDLink) ProtoMessage() {}
 func (*IPLDLink) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{8}
+	return fileDescriptor_228b96b95413374c, []int{6}
 }
 func (m *IPLDLink) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -536,65 +445,9 @@ func (m *IPLDLink) GetSize_() uint64 {
 	return 0
 }
 
-// An IPFS MerkleDAG Node
-type IPLDNode struct {
-	// refs to other objects
-	Links []*IPLDLink `protobuf:"bytes,2,rep,name=links,proto3" json:"links,omitempty"`
-	// opaque user data
-	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-}
-
-func (m *IPLDNode) Reset()      { *m = IPLDNode{} }
-func (*IPLDNode) ProtoMessage() {}
-func (*IPLDNode) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{9}
-}
-func (m *IPLDNode) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *IPLDNode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_IPLDNode.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *IPLDNode) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IPLDNode.Merge(m, src)
-}
-func (m *IPLDNode) XXX_Size() int {
-	return m.Size()
-}
-func (m *IPLDNode) XXX_DiscardUnknown() {
-	xxx_messageInfo_IPLDNode.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_IPLDNode proto.InternalMessageInfo
-
-func (m *IPLDNode) GetLinks() []*IPLDLink {
-	if m != nil {
-		return m.Links
-	}
-	return nil
-}
-
-func (m *IPLDNode) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
 func init() {
-	proto.RegisterType((*DagPutResponse)(nil), "pb.DagPutResponse")
 	proto.RegisterType((*DagPutRequest)(nil), "pb.DagPutRequest")
 	proto.RegisterType((*DagGetRequest)(nil), "pb.DagGetRequest")
-	proto.RegisterType((*DagGetResponse)(nil), "pb.DagGetResponse")
 	proto.RegisterType((*NewIPLDNodeRequest)(nil), "pb.NewIPLDNodeRequest")
 	proto.RegisterMapType((map[string]string)(nil), "pb.NewIPLDNodeRequest.LinksEntry")
 	proto.RegisterType((*AddLinksRequest)(nil), "pb.AddLinksRequest")
@@ -602,117 +455,50 @@ func init() {
 	proto.RegisterType((*GetLinksRequest)(nil), "pb.GetLinksRequest")
 	proto.RegisterType((*GetLinksResponse)(nil), "pb.GetLinksResponse")
 	proto.RegisterType((*IPLDLink)(nil), "pb.IPLDLink")
-	proto.RegisterType((*IPLDNode)(nil), "pb.IPLDNode")
 }
 
 func init() { proto.RegisterFile("dag.proto", fileDescriptor_228b96b95413374c) }
 
 var fileDescriptor_228b96b95413374c = []byte{
-	// 598 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x54, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0xf6, 0x3a, 0x69, 0x49, 0xa6, 0x21, 0x2d, 0xdb, 0xaa, 0xb2, 0x72, 0x58, 0x05, 0x23, 0x50,
-	0x84, 0x44, 0x0a, 0xa5, 0xa2, 0x15, 0x3d, 0xb5, 0x4a, 0x13, 0x55, 0xaa, 0xaa, 0xc8, 0x42, 0xdc,
-	0xd7, 0xf1, 0xe2, 0x98, 0x26, 0xde, 0xe0, 0x1f, 0xaa, 0xf6, 0xc4, 0x23, 0xf0, 0x0a, 0xdc, 0xb8,
-	0x72, 0x02, 0xde, 0x80, 0x63, 0x8f, 0x3d, 0x36, 0xce, 0x0b, 0x70, 0xe4, 0x88, 0xbc, 0xb6, 0x63,
-	0x3b, 0x38, 0x47, 0x6e, 0x33, 0xe3, 0xef, 0xdb, 0xfd, 0xbe, 0x99, 0x59, 0x43, 0xd5, 0xa0, 0x66,
-	0x7b, 0xe2, 0x70, 0x8f, 0x63, 0x79, 0xa2, 0x37, 0x9e, 0x99, 0x96, 0x37, 0xf4, 0xf5, 0xf6, 0x80,
-	0x8f, 0x77, 0x4c, 0x6e, 0xf2, 0x1d, 0xf1, 0x49, 0xf7, 0xdf, 0x89, 0x4c, 0x24, 0x22, 0x8a, 0x28,
-	0x6a, 0x0b, 0xea, 0x1d, 0x6a, 0xf6, 0x7d, 0x4f, 0x63, 0xee, 0x84, 0xdb, 0x2e, 0xc3, 0xdb, 0xb0,
-	0x3a, 0xa4, 0xee, 0x90, 0xb9, 0x0a, 0x6a, 0x96, 0x5a, 0x55, 0x2d, 0xce, 0xd4, 0x9f, 0x08, 0xee,
-	0x27, 0xd0, 0x0f, 0x3e, 0x73, 0x3d, 0x8c, 0xa1, 0x6c, 0x50, 0x8f, 0x2a, 0xa8, 0x89, 0x5a, 0x35,
-	0x4d, 0xc4, 0xf8, 0x09, 0xd4, 0xb9, 0xfe, 0x9e, 0x0d, 0xbc, 0x13, 0x7b, 0xc0, 0x0d, 0xcb, 0x36,
-	0x15, 0xb9, 0x89, 0x5a, 0x55, 0x6d, 0xa1, 0x8a, 0x9f, 0xc3, 0xa6, 0xcb, 0x1c, 0x8b, 0x8e, 0xac,
-	0x6b, 0xea, 0x59, 0xdc, 0xee, 0x72, 0x67, 0x4c, 0x3d, 0xa5, 0x24, 0xc0, 0x45, 0x9f, 0x70, 0x03,
-	0x2a, 0xa1, 0x92, 0xae, 0x6f, 0x0f, 0x94, 0xb2, 0x80, 0xcd, 0x73, 0x4c, 0x00, 0x06, 0x96, 0xf1,
-	0x96, 0x39, 0xae, 0xc5, 0x6d, 0x65, 0xa5, 0x89, 0x5a, 0x25, 0x2d, 0x53, 0x51, 0x1f, 0x09, 0xe9,
-	0x3d, 0x96, 0x95, 0x1e, 0x92, 0x85, 0xf4, 0xaa, 0x26, 0x62, 0xf5, 0xa9, 0x68, 0x85, 0x00, 0xc5,
-	0xad, 0x50, 0xe0, 0x9e, 0x43, 0x2f, 0x3b, 0xa9, 0xc7, 0x24, 0x55, 0xbf, 0x23, 0xc0, 0xe7, 0xec,
-	0xf2, 0xb4, 0x7f, 0xd6, 0x39, 0xe7, 0x06, 0x4b, 0x8e, 0xdd, 0x87, 0x95, 0x91, 0x65, 0x5f, 0x44,
-	0xad, 0x5b, 0xdb, 0x7d, 0xd8, 0x9e, 0xe8, 0xed, 0x7f, 0x61, 0xed, 0xb3, 0x10, 0x73, 0x62, 0x7b,
-	0xce, 0x95, 0x16, 0xe1, 0xe7, 0xad, 0x94, 0x33, 0xad, 0xcc, 0x1a, 0x2e, 0xe5, 0x0d, 0x37, 0x0e,
-	0x00, 0xd2, 0x43, 0xf0, 0x06, 0x94, 0x2e, 0xd8, 0x55, 0x6c, 0x26, 0x0c, 0xf1, 0x16, 0xac, 0x7c,
-	0xa4, 0x23, 0x9f, 0xc5, 0xdd, 0x8f, 0x92, 0xd7, 0xf2, 0x01, 0x52, 0xbf, 0x21, 0x58, 0x3f, 0x32,
-	0x0c, 0xc1, 0x4e, 0x64, 0xef, 0xe5, 0x65, 0x93, 0x50, 0xf6, 0x02, 0xa6, 0x58, 0xb3, 0xe8, 0xa1,
-	0x9c, 0xf6, 0xf0, 0x3f, 0x69, 0x7e, 0x0c, 0xeb, 0x3d, 0xe6, 0xe5, 0x24, 0x17, 0x0d, 0xf0, 0x15,
-	0x6c, 0xa4, 0xb0, 0x78, 0x84, 0x6a, 0xde, 0x5a, 0x2d, 0xb4, 0x16, 0x8e, 0x23, 0x44, 0xc5, 0x46,
-	0xd4, 0x2e, 0x54, 0x92, 0x52, 0xee, 0xdc, 0x5a, 0x6c, 0x0a, 0x43, 0xd9, 0xa6, 0xe3, 0x44, 0x97,
-	0x88, 0xc3, 0x9a, 0x6b, 0x5d, 0x33, 0x61, 0xb2, 0xac, 0x89, 0x58, 0x3d, 0x8e, 0xce, 0x09, 0x27,
-	0x9d, 0xde, 0x2b, 0x2f, 0xbd, 0xb7, 0xe8, 0xfd, 0xec, 0x7e, 0x91, 0x61, 0xb5, 0x43, 0xcd, 0xa3,
-	0xfe, 0x29, 0x7e, 0x21, 0xa2, 0xbe, 0xef, 0xe1, 0x07, 0x21, 0x3b, 0xf7, 0xf6, 0x1a, 0x38, 0x5b,
-	0x8a, 0xbc, 0xaa, 0x52, 0x4c, 0xe9, 0xb1, 0x94, 0x92, 0xee, 0xfc, 0x9c, 0x92, 0xd9, 0x70, 0x55,
-	0xc2, 0x87, 0xb0, 0x96, 0xd9, 0x50, 0xbc, 0x5d, 0xbc, 0xb2, 0x4b, 0xee, 0x3b, 0x84, 0x7a, 0xb2,
-	0x27, 0x6f, 0xb8, 0xe0, 0x6f, 0x16, 0xec, 0xce, 0x12, 0xf2, 0x3e, 0x54, 0x92, 0x71, 0x45, 0xb4,
-	0x85, 0x19, 0x37, 0xb6, 0xf2, 0xc5, 0x84, 0x78, 0xbc, 0x77, 0x3b, 0x25, 0xd2, 0xdd, 0x94, 0xa0,
-	0xdf, 0x53, 0x82, 0xfe, 0x4c, 0x09, 0xfa, 0x14, 0x10, 0xf4, 0x35, 0x20, 0xe8, 0x47, 0x40, 0xd0,
-	0xaf, 0x80, 0xa0, 0x9b, 0x80, 0xa0, 0xbb, 0x80, 0xa0, 0xcf, 0x33, 0x22, 0xdd, 0xcc, 0x88, 0x74,
-	0x3b, 0x23, 0x92, 0xbe, 0x2a, 0x7e, 0x78, 0x2f, 0xff, 0x06, 0x00, 0x00, 0xff, 0xff, 0x58, 0x59,
-	0xcc, 0xd0, 0x30, 0x05, 0x00, 0x00,
+	// 573 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x54, 0xcf, 0x6e, 0xd3, 0x4e,
+	0x10, 0xf6, 0x3a, 0x49, 0x95, 0x4c, 0xf3, 0x6b, 0xfb, 0xdb, 0x46, 0xc8, 0xf2, 0x61, 0x15, 0x8c,
+	0x40, 0xb9, 0xd4, 0xae, 0x5a, 0x44, 0x2b, 0x24, 0x0e, 0xad, 0xd2, 0x44, 0x95, 0xaa, 0x2a, 0xb2,
+	0x10, 0xf7, 0x75, 0xbc, 0x75, 0x4c, 0x12, 0xaf, 0xf1, 0x1f, 0x50, 0x7b, 0xe2, 0x11, 0x78, 0x0c,
+	0x38, 0x72, 0x42, 0xbc, 0x01, 0xc7, 0x1e, 0x7b, 0x6c, 0x92, 0x17, 0xe0, 0xc8, 0x11, 0x79, 0x1d,
+	0x27, 0x76, 0x48, 0xb9, 0x71, 0x9b, 0x99, 0xfd, 0xbe, 0xf5, 0xf7, 0xcd, 0xcc, 0x1a, 0x6a, 0x36,
+	0x75, 0x74, 0x3f, 0xe0, 0x11, 0xc7, 0xb2, 0x6f, 0xa9, 0x7b, 0x8e, 0x1b, 0x0d, 0x62, 0x4b, 0xef,
+	0xf3, 0xb1, 0xe1, 0x70, 0x87, 0x1b, 0xe2, 0xc8, 0x8a, 0xaf, 0x44, 0x26, 0x12, 0x11, 0xa5, 0x14,
+	0xd5, 0xc8, 0xc1, 0x5d, 0xff, 0x2a, 0x34, 0x1c, 0xbe, 0x37, 0x66, 0xc1, 0x70, 0xc4, 0x6c, 0xea,
+	0x18, 0xbe, 0x65, 0x2c, 0x92, 0x94, 0xa0, 0x7d, 0x47, 0xf0, 0x5f, 0x9b, 0x3a, 0xbd, 0x38, 0x32,
+	0xd9, 0xbb, 0x98, 0x85, 0x11, 0xc6, 0x50, 0xb6, 0x69, 0x44, 0x15, 0xd4, 0x44, 0xad, 0xba, 0x29,
+	0x62, 0xfc, 0x0c, 0xb6, 0xb8, 0xf5, 0x96, 0xf5, 0xa3, 0x33, 0xaf, 0xcf, 0x6d, 0xd7, 0x73, 0x14,
+	0xb9, 0x89, 0x5a, 0x35, 0x73, 0xa5, 0x8a, 0xf7, 0x61, 0x37, 0x64, 0x81, 0x4b, 0x47, 0xee, 0x0d,
+	0x8d, 0x5c, 0xee, 0x75, 0x78, 0x30, 0xa6, 0x91, 0x52, 0x12, 0xe0, 0x75, 0x47, 0x58, 0x85, 0xea,
+	0x80, 0x86, 0x83, 0x4e, 0xec, 0xf5, 0x95, 0xb2, 0x80, 0x2d, 0x72, 0x4c, 0x00, 0xfa, 0xae, 0xfd,
+	0x86, 0x05, 0xa1, 0xcb, 0x3d, 0xa5, 0xd2, 0x44, 0xad, 0x92, 0x99, 0xab, 0x68, 0x4f, 0x84, 0xf4,
+	0x2e, 0xcb, 0x4b, 0x4f, 0xc8, 0x42, 0x7a, 0xcd, 0x14, 0xb1, 0xf6, 0x0d, 0x01, 0xbe, 0x64, 0x1f,
+	0xce, 0x7b, 0x17, 0xed, 0x4b, 0x6e, 0xb3, 0x0c, 0x7a, 0x04, 0x95, 0x91, 0xeb, 0x0d, 0x43, 0x05,
+	0x35, 0x4b, 0xad, 0xcd, 0x83, 0xc7, 0xba, 0x6f, 0xe9, 0x7f, 0xc2, 0xf4, 0x8b, 0x04, 0x73, 0xe6,
+	0x45, 0xc1, 0xb5, 0x99, 0xe2, 0x17, 0xed, 0x91, 0x73, 0xed, 0xc9, 0x9b, 0x28, 0x15, 0x4d, 0xa8,
+	0xc7, 0x00, 0xcb, 0x4b, 0xf0, 0x0e, 0x94, 0x86, 0xec, 0x7a, 0x2e, 0x30, 0x09, 0x71, 0x03, 0x2a,
+	0xef, 0xe9, 0x28, 0x66, 0xf3, 0x8e, 0xa6, 0xc9, 0x4b, 0xf9, 0x18, 0x69, 0x5f, 0x11, 0x6c, 0x9f,
+	0xd8, 0xb6, 0x60, 0x67, 0xb2, 0x9f, 0x17, 0x65, 0x93, 0x44, 0xf6, 0x0a, 0x66, 0xbd, 0x66, 0xd1,
+	0x17, 0x79, 0xd9, 0x97, 0x7f, 0xa4, 0xf9, 0x29, 0x6c, 0x77, 0x59, 0x54, 0x90, 0xbc, 0x6e, 0x28,
+	0x2f, 0x60, 0x67, 0x09, 0x0b, 0x7d, 0xee, 0x85, 0x0c, 0x6b, 0x45, 0x6b, 0xf5, 0xc4, 0x5a, 0x32,
+	0x8e, 0x04, 0x35, 0x37, 0xa2, 0x75, 0xa0, 0x9a, 0x95, 0x0a, 0xf7, 0xd6, 0xe7, 0xa6, 0x30, 0x94,
+	0x3d, 0x3a, 0xce, 0x74, 0x89, 0x38, 0xa9, 0x85, 0xee, 0x0d, 0x13, 0x26, 0xcb, 0xa6, 0x88, 0x0f,
+	0xbe, 0xc8, 0xb0, 0xd1, 0xa6, 0xce, 0x49, 0xef, 0x1c, 0x1f, 0x8a, 0xa8, 0x17, 0x47, 0xf8, 0xff,
+	0xe4, 0x8b, 0x85, 0xb7, 0xa0, 0x36, 0xf4, 0xdc, 0x7b, 0xb1, 0xf4, 0xde, 0x69, 0xb2, 0x1b, 0x9a,
+	0x34, 0x27, 0x75, 0xd9, 0x92, 0xb4, 0xdc, 0xc2, 0x07, 0x49, 0xaf, 0x60, 0x33, 0xb7, 0x61, 0xf8,
+	0xd1, 0xfa, 0x95, 0xfb, 0x0b, 0x7d, 0x2b, 0x9b, 0xf4, 0x6b, 0x2e, 0x6e, 0xd8, 0x5d, 0x33, 0xfd,
+	0x07, 0xe9, 0x47, 0x50, 0xcd, 0x5a, 0x9e, 0x12, 0x57, 0xe6, 0xa4, 0x36, 0x8a, 0xc5, 0x74, 0x2a,
+	0x9a, 0x74, 0xba, 0x7f, 0x37, 0x21, 0xd2, 0xfd, 0x84, 0xa0, 0x9f, 0x13, 0x82, 0x7e, 0x4d, 0x08,
+	0xfa, 0x38, 0x25, 0xe8, 0xf3, 0x94, 0xa0, 0x1f, 0x53, 0x82, 0x6e, 0xa7, 0x04, 0xdd, 0x4f, 0x09,
+	0xfa, 0x34, 0x23, 0xd2, 0xed, 0x8c, 0x48, 0x77, 0x33, 0x22, 0x59, 0x1b, 0xe2, 0xd7, 0x72, 0xf8,
+	0x3b, 0x00, 0x00, 0xff, 0xff, 0xdd, 0x7b, 0xf4, 0xea, 0xcb, 0x04, 0x00, 0x00,
 }
 
-func (this *DagPutResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DagPutResponse)
-	if !ok {
-		that2, ok := that.(DagPutResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DagPutResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DagPutResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DagPutResponse but is not nil && this == nil")
-	}
-	if len(this.Hashes) != len(that1.Hashes) {
-		return fmt.Errorf("Hashes this(%v) Not Equal that(%v)", len(this.Hashes), len(that1.Hashes))
-	}
-	for i := range this.Hashes {
-		if this.Hashes[i] != that1.Hashes[i] {
-			return fmt.Errorf("Hashes this[%v](%v) Not Equal that[%v](%v)", i, this.Hashes[i], i, that1.Hashes[i])
-		}
-	}
-	return nil
-}
-func (this *DagPutResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DagPutResponse)
-	if !ok {
-		that2, ok := that.(DagPutResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Hashes) != len(that1.Hashes) {
-		return false
-	}
-	for i := range this.Hashes {
-		if this.Hashes[i] != that1.Hashes[i] {
-			return false
-		}
-	}
-	return true
-}
 func (this *DagPutRequest) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -841,60 +627,6 @@ func (this *DagGetRequest) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Hash != that1.Hash {
-		return false
-	}
-	return true
-}
-func (this *DagGetResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DagGetResponse)
-	if !ok {
-		that2, ok := that.(DagGetResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DagGetResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DagGetResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DagGetResponse but is not nil && this == nil")
-	}
-	if !bytes.Equal(this.RawData, that1.RawData) {
-		return fmt.Errorf("RawData this(%v) Not Equal that(%v)", this.RawData, that1.RawData)
-	}
-	return nil
-}
-func (this *DagGetResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DagGetResponse)
-	if !ok {
-		that2, ok := that.(DagGetResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !bytes.Equal(this.RawData, that1.RawData) {
 		return false
 	}
 	return true
@@ -1235,86 +967,6 @@ func (this *IPLDLink) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *IPLDNode) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*IPLDNode)
-	if !ok {
-		that2, ok := that.(IPLDNode)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *IPLDNode")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *IPLDNode but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *IPLDNode but is not nil && this == nil")
-	}
-	if len(this.Links) != len(that1.Links) {
-		return fmt.Errorf("Links this(%v) Not Equal that(%v)", len(this.Links), len(that1.Links))
-	}
-	for i := range this.Links {
-		if !this.Links[i].Equal(that1.Links[i]) {
-			return fmt.Errorf("Links this[%v](%v) Not Equal that[%v](%v)", i, this.Links[i], i, that1.Links[i])
-		}
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
-	}
-	return nil
-}
-func (this *IPLDNode) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*IPLDNode)
-	if !ok {
-		that2, ok := that.(IPLDNode)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Links) != len(that1.Links) {
-		return false
-	}
-	for i := range this.Links {
-		if !this.Links[i].Equal(that1.Links[i]) {
-			return false
-		}
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return false
-	}
-	return true
-}
-func (this *DagPutResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.DagPutResponse{")
-	s = append(s, "Hashes: "+fmt.Sprintf("%#v", this.Hashes)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func (this *DagPutRequest) GoString() string {
 	if this == nil {
 		return "nil"
@@ -1336,16 +988,6 @@ func (this *DagGetRequest) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&pb.DagGetRequest{")
 	s = append(s, "Hash: "+fmt.Sprintf("%#v", this.Hash)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *DagGetResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.DagGetResponse{")
-	s = append(s, "RawData: "+fmt.Sprintf("%#v", this.RawData)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -1431,19 +1073,6 @@ func (this *IPLDLink) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *IPLDNode) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.IPLDNode{")
-	if this.Links != nil {
-		s = append(s, "Links: "+fmt.Sprintf("%#v", this.Links)+",\n")
-	}
-	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
 func valueToGoStringDag(v interface{}, typ string) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -1466,14 +1095,14 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DagAPIClient interface {
 	// DagPut is used to store arbitrary bytes as a custom IPLD object
-	DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
+	DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*pb.PBNode, error)
 	// DagGet is used to request the raw ipld node data for an IPLD object
-	DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*DagGetResponse, error)
+	DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*pb.PBNode, error)
 	// NewIPLDNode is used to create a new IPFS MerkleDAG node.
 	// This is the same type as in github.com/ipfs/go-ipld-format.Node
-	NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
+	NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*pb.PBNode, error)
 	// AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
-	AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
+	AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*pb.PBNode, error)
 	// GetLinks is used to request all the links for a given object
 	GetLinks(ctx context.Context, in *GetLinksRequest, opts ...grpc.CallOption) (*GetLinksResponse, error)
 }
@@ -1486,8 +1115,8 @@ func NewDagAPIClient(cc *grpc.ClientConn) DagAPIClient {
 	return &dagAPIClient{cc}
 }
 
-func (c *dagAPIClient) DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
+func (c *dagAPIClient) DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*pb.PBNode, error) {
+	out := new(pb.PBNode)
 	err := c.cc.Invoke(ctx, "/pb.DagAPI/DagPut", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1495,8 +1124,8 @@ func (c *dagAPIClient) DagPut(ctx context.Context, in *DagPutRequest, opts ...gr
 	return out, nil
 }
 
-func (c *dagAPIClient) DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*DagGetResponse, error) {
-	out := new(DagGetResponse)
+func (c *dagAPIClient) DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*pb.PBNode, error) {
+	out := new(pb.PBNode)
 	err := c.cc.Invoke(ctx, "/pb.DagAPI/DagGet", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1504,8 +1133,8 @@ func (c *dagAPIClient) DagGet(ctx context.Context, in *DagGetRequest, opts ...gr
 	return out, nil
 }
 
-func (c *dagAPIClient) NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
+func (c *dagAPIClient) NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*pb.PBNode, error) {
+	out := new(pb.PBNode)
 	err := c.cc.Invoke(ctx, "/pb.DagAPI/NewIPLDNode", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1513,8 +1142,8 @@ func (c *dagAPIClient) NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, 
 	return out, nil
 }
 
-func (c *dagAPIClient) AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
+func (c *dagAPIClient) AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*pb.PBNode, error) {
+	out := new(pb.PBNode)
 	err := c.cc.Invoke(ctx, "/pb.DagAPI/AddLinksToNode", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1534,14 +1163,14 @@ func (c *dagAPIClient) GetLinks(ctx context.Context, in *GetLinksRequest, opts .
 // DagAPIServer is the server API for DagAPI service.
 type DagAPIServer interface {
 	// DagPut is used to store arbitrary bytes as a custom IPLD object
-	DagPut(context.Context, *DagPutRequest) (*DagPutResponse, error)
+	DagPut(context.Context, *DagPutRequest) (*pb.PBNode, error)
 	// DagGet is used to request the raw ipld node data for an IPLD object
-	DagGet(context.Context, *DagGetRequest) (*DagGetResponse, error)
+	DagGet(context.Context, *DagGetRequest) (*pb.PBNode, error)
 	// NewIPLDNode is used to create a new IPFS MerkleDAG node.
 	// This is the same type as in github.com/ipfs/go-ipld-format.Node
-	NewIPLDNode(context.Context, *NewIPLDNodeRequest) (*DagPutResponse, error)
+	NewIPLDNode(context.Context, *NewIPLDNodeRequest) (*pb.PBNode, error)
 	// AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
-	AddLinksToNode(context.Context, *AddLinksRequest) (*DagPutResponse, error)
+	AddLinksToNode(context.Context, *AddLinksRequest) (*pb.PBNode, error)
 	// GetLinks is used to request all the links for a given object
 	GetLinks(context.Context, *GetLinksRequest) (*GetLinksResponse, error)
 }
@@ -1550,16 +1179,16 @@ type DagAPIServer interface {
 type UnimplementedDagAPIServer struct {
 }
 
-func (*UnimplementedDagAPIServer) DagPut(ctx context.Context, req *DagPutRequest) (*DagPutResponse, error) {
+func (*UnimplementedDagAPIServer) DagPut(ctx context.Context, req *DagPutRequest) (*pb.PBNode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DagPut not implemented")
 }
-func (*UnimplementedDagAPIServer) DagGet(ctx context.Context, req *DagGetRequest) (*DagGetResponse, error) {
+func (*UnimplementedDagAPIServer) DagGet(ctx context.Context, req *DagGetRequest) (*pb.PBNode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DagGet not implemented")
 }
-func (*UnimplementedDagAPIServer) NewIPLDNode(ctx context.Context, req *NewIPLDNodeRequest) (*DagPutResponse, error) {
+func (*UnimplementedDagAPIServer) NewIPLDNode(ctx context.Context, req *NewIPLDNodeRequest) (*pb.PBNode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewIPLDNode not implemented")
 }
-func (*UnimplementedDagAPIServer) AddLinksToNode(ctx context.Context, req *AddLinksRequest) (*DagPutResponse, error) {
+func (*UnimplementedDagAPIServer) AddLinksToNode(ctx context.Context, req *AddLinksRequest) (*pb.PBNode, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddLinksToNode not implemented")
 }
 func (*UnimplementedDagAPIServer) GetLinks(ctx context.Context, req *GetLinksRequest) (*GetLinksResponse, error) {
@@ -1689,38 +1318,6 @@ var _DagAPI_serviceDesc = grpc.ServiceDesc{
 	Metadata: "dag.proto",
 }
 
-func (m *DagPutResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DagPutResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DagPutResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Hashes) > 0 {
-		for iNdEx := len(m.Hashes) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.Hashes[iNdEx])
-			copy(dAtA[i:], m.Hashes[iNdEx])
-			i = encodeVarintDag(dAtA, i, uint64(len(m.Hashes[iNdEx])))
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *DagPutRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1801,36 +1398,6 @@ func (m *DagGetRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.Hash)
 		copy(dAtA[i:], m.Hash)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DagGetResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DagGetResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DagGetResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.RawData) > 0 {
-		i -= len(m.RawData)
-		copy(dAtA[i:], m.RawData)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.RawData)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -2058,50 +1625,6 @@ func (m *IPLDLink) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *IPLDNode) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *IPLDNode) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *IPLDNode) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Links) > 0 {
-		for iNdEx := len(m.Links) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Links[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintDag(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
-	}
-	if len(m.Data) > 0 {
-		i -= len(m.Data)
-		copy(dAtA[i:], m.Data)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func encodeVarintDag(dAtA []byte, offset int, v uint64) int {
 	offset -= sovDag(v)
 	base := offset
@@ -2113,23 +1636,11 @@ func encodeVarintDag(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedDagPutResponse(r randyDag, easy bool) *DagPutResponse {
-	this := &DagPutResponse{}
-	v1 := r.Intn(10)
-	this.Hashes = make([]string, v1)
-	for i := 0; i < v1; i++ {
-		this.Hashes[i] = string(randStringDag(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
 func NewPopulatedDagPutRequest(r randyDag, easy bool) *DagPutRequest {
 	this := &DagPutRequest{}
-	v2 := r.Intn(100)
-	this.Data = make([]byte, v2)
-	for i := 0; i < v2; i++ {
+	v1 := r.Intn(100)
+	this.Data = make([]byte, v1)
+	for i := 0; i < v1; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
 	this.ObjectEncoding = string(randStringDag(r))
@@ -2152,30 +1663,18 @@ func NewPopulatedDagGetRequest(r randyDag, easy bool) *DagGetRequest {
 	return this
 }
 
-func NewPopulatedDagGetResponse(r randyDag, easy bool) *DagGetResponse {
-	this := &DagGetResponse{}
-	v3 := r.Intn(100)
-	this.RawData = make([]byte, v3)
-	for i := 0; i < v3; i++ {
-		this.RawData[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
 func NewPopulatedNewIPLDNodeRequest(r randyDag, easy bool) *NewIPLDNodeRequest {
 	this := &NewIPLDNodeRequest{}
 	if r.Intn(5) != 0 {
-		v4 := r.Intn(10)
+		v2 := r.Intn(10)
 		this.Links = make(map[string]string)
-		for i := 0; i < v4; i++ {
+		for i := 0; i < v2; i++ {
 			this.Links[randStringDag(r)] = randStringDag(r)
 		}
 	}
-	v5 := r.Intn(100)
-	this.Data = make([]byte, v5)
-	for i := 0; i < v5; i++ {
+	v3 := r.Intn(100)
+	this.Data = make([]byte, v3)
+	for i := 0; i < v3; i++ {
 		this.Data[i] = byte(r.Intn(256))
 	}
 	this.HashFunc = string(randStringDag(r))
@@ -2187,9 +1686,9 @@ func NewPopulatedNewIPLDNodeRequest(r randyDag, easy bool) *NewIPLDNodeRequest {
 func NewPopulatedAddLinksRequest(r randyDag, easy bool) *AddLinksRequest {
 	this := &AddLinksRequest{}
 	if r.Intn(5) != 0 {
-		v6 := r.Intn(10)
+		v4 := r.Intn(10)
 		this.Links = make(map[string]string)
-		for i := 0; i < v6; i++ {
+		for i := 0; i < v4; i++ {
 			this.Links[randStringDag(r)] = randStringDag(r)
 		}
 	}
@@ -2211,9 +1710,9 @@ func NewPopulatedGetLinksRequest(r randyDag, easy bool) *GetLinksRequest {
 func NewPopulatedGetLinksResponse(r randyDag, easy bool) *GetLinksResponse {
 	this := &GetLinksResponse{}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(5)
-		this.Links = make([]*IPLDLink, v7)
-		for i := 0; i < v7; i++ {
+		v5 := r.Intn(5)
+		this.Links = make([]*IPLDLink, v5)
+		for i := 0; i < v5; i++ {
 			this.Links[i] = NewPopulatedIPLDLink(r, easy)
 		}
 	}
@@ -2224,32 +1723,13 @@ func NewPopulatedGetLinksResponse(r randyDag, easy bool) *GetLinksResponse {
 
 func NewPopulatedIPLDLink(r randyDag, easy bool) *IPLDLink {
 	this := &IPLDLink{}
-	v8 := r.Intn(100)
-	this.Hash = make([]byte, v8)
-	for i := 0; i < v8; i++ {
+	v6 := r.Intn(100)
+	this.Hash = make([]byte, v6)
+	for i := 0; i < v6; i++ {
 		this.Hash[i] = byte(r.Intn(256))
 	}
 	this.Name = string(randStringDag(r))
 	this.Size_ = uint64(uint64(r.Uint32()))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedIPLDNode(r randyDag, easy bool) *IPLDNode {
-	this := &IPLDNode{}
-	v9 := r.Intn(100)
-	this.Data = make([]byte, v9)
-	for i := 0; i < v9; i++ {
-		this.Data[i] = byte(r.Intn(256))
-	}
-	if r.Intn(5) != 0 {
-		v10 := r.Intn(5)
-		this.Links = make([]*IPLDLink, v10)
-		for i := 0; i < v10; i++ {
-			this.Links[i] = NewPopulatedIPLDLink(r, easy)
-		}
-	}
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -2274,9 +1754,9 @@ func randUTF8RuneDag(r randyDag) rune {
 	return rune(ru + 61)
 }
 func randStringDag(r randyDag) string {
-	v11 := r.Intn(100)
-	tmps := make([]rune, v11)
-	for i := 0; i < v11; i++ {
+	v7 := r.Intn(100)
+	tmps := make([]rune, v7)
+	for i := 0; i < v7; i++ {
 		tmps[i] = randUTF8RuneDag(r)
 	}
 	return string(tmps)
@@ -2298,11 +1778,11 @@ func randFieldDag(dAtA []byte, r randyDag, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateDag(dAtA, uint64(key))
-		v12 := r.Int63()
+		v8 := r.Int63()
 		if r.Intn(2) == 0 {
-			v12 *= -1
+			v8 *= -1
 		}
-		dAtA = encodeVarintPopulateDag(dAtA, uint64(v12))
+		dAtA = encodeVarintPopulateDag(dAtA, uint64(v8))
 	case 1:
 		dAtA = encodeVarintPopulateDag(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -2327,21 +1807,6 @@ func encodeVarintPopulateDag(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
-func (m *DagPutResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.Hashes) > 0 {
-		for _, s := range m.Hashes {
-			l = len(s)
-			n += 1 + l + sovDag(uint64(l))
-		}
-	}
-	return n
-}
-
 func (m *DagPutRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2377,19 +1842,6 @@ func (m *DagGetRequest) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Hash)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	return n
-}
-
-func (m *DagGetResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.RawData)
 	if l > 0 {
 		n += 1 + l + sovDag(uint64(l))
 	}
@@ -2494,40 +1946,11 @@ func (m *IPLDLink) Size() (n int) {
 	return n
 }
 
-func (m *IPLDNode) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Data)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	if len(m.Links) > 0 {
-		for _, e := range m.Links {
-			l = e.Size()
-			n += 1 + l + sovDag(uint64(l))
-		}
-	}
-	return n
-}
-
 func sovDag(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozDag(x uint64) (n int) {
 	return sovDag(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *DagPutResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DagPutResponse{`,
-		`Hashes:` + fmt.Sprintf("%v", this.Hashes) + `,`,
-		`}`,
-	}, "")
-	return s
 }
 func (this *DagPutRequest) String() string {
 	if this == nil {
@@ -2549,16 +1972,6 @@ func (this *DagGetRequest) String() string {
 	}
 	s := strings.Join([]string{`&DagGetRequest{`,
 		`Hash:` + fmt.Sprintf("%v", this.Hash) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DagGetResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DagGetResponse{`,
-		`RawData:` + fmt.Sprintf("%v", this.RawData) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -2644,22 +2057,6 @@ func (this *IPLDLink) String() string {
 	}, "")
 	return s
 }
-func (this *IPLDNode) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForLinks := "[]*IPLDLink{"
-	for _, f := range this.Links {
-		repeatedStringForLinks += strings.Replace(f.String(), "IPLDLink", "IPLDLink", 1) + ","
-	}
-	repeatedStringForLinks += "}"
-	s := strings.Join([]string{`&IPLDNode{`,
-		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`Links:` + repeatedStringForLinks + `,`,
-		`}`,
-	}, "")
-	return s
-}
 func valueToStringDag(v interface{}) string {
 	rv := reflect.ValueOf(v)
 	if rv.IsNil() {
@@ -2667,91 +2064,6 @@ func valueToStringDag(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
-}
-func (m *DagPutResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DagPutResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagPutResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hashes", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hashes = append(m.Hashes, string(dAtA[iNdEx:postIndex]))
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -3015,93 +2327,6 @@ func (m *DagGetRequest) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Hash = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DagGetResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DagGetResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagGetResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RawData", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.RawData = append(m.RawData[:0], dAtA[iNdEx:postIndex]...)
-			if m.RawData == nil {
-				m.RawData = []byte{}
-			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -3903,127 +3128,6 @@ func (m *IPLDLink) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *IPLDNode) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: IPLDNode: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: IPLDNode: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
-			if m.Data == nil {
-				m.Data = []byte{}
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Links", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Links = append(m.Links, &IPLDLink{})
-			if err := m.Links[len(m.Links)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDag(dAtA[iNdEx:])

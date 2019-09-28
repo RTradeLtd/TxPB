@@ -9,13 +9,16 @@ proto-gen:
 		-I=. \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		-I=${GOPATH}/src/github.com/ipfs/go-merkledag/pb \
 		dag.proto \
 		--gogofaster_out=plugins=grpc:go
+	sed -i 's/m\.Node\.MarshalToSizedBuffer/m\.Node\.MarshalTo/g' go/dag.pb.go
 	# generate python bindings (dag)
 	python3 -m grpc_tools.protoc \
 		-I=. \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		-I=${GOPATH}/src/github.com/ipfs/go-merkledag/pb \
 		dag.proto \
 		--python_out=py \
 		--grpc_python_out=py
@@ -24,6 +27,7 @@ proto-gen:
 		-I=. \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		-I=${GOPATH}/src/github.com/ipfs/go-merkledag/pb \
 		--js_out=import_style=commonjs:js \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -33,6 +37,7 @@ proto-gen:
 		-I=. \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		-I=${GOPATH}/src/github.com/ipfs/go-merkledag/pb \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		dag.proto

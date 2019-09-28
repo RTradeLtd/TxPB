@@ -258,15 +258,7 @@
                 </li>
               
                 <li>
-                  <a href="#pb.DagGetResponse"><span class="badge">M</span>DagGetResponse</a>
-                </li>
-              
-                <li>
                   <a href="#pb.DagPutRequest"><span class="badge">M</span>DagPutRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#pb.DagPutResponse"><span class="badge">M</span>DagPutResponse</a>
                 </li>
               
                 <li>
@@ -279,10 +271,6 @@
               
                 <li>
                   <a href="#pb.IPLDLink"><span class="badge">M</span>IPLDLink</a>
-                </li>
-              
-                <li>
-                  <a href="#pb.IPLDNode"><span class="badge">M</span>IPLDNode</a>
                 </li>
               
                 <li>
@@ -1053,30 +1041,6 @@ the name is used as the key, while the value of the key is used as the hash </p>
 
         
       
-        <h3 id="pb.DagGetResponse">DagGetResponse</h3>
-        <p>DagGetResponse is a response to DagGetRequest</p><p>that returns the raw data of the matching ipld node</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>rawData</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p>the raw data of the ipld node </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="pb.DagPutRequest">DagPutRequest</h3>
         <p>DagPut allows us to store arbitrary bytes as a custom IPLD object</p>
 
@@ -1120,30 +1084,6 @@ the name is used as the key, while the value of the key is used as the hash </p>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p>the cid version to use (0, 1) </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="pb.DagPutResponse">DagPutResponse</h3>
-        <p>DagPutResponse contains the hashes of ipld nodes generated</p><p>by the dag put request</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>hashes</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>an array of hashes (cids) of the root ipld nod </p></td>
                 </tr>
               
             </tbody>
@@ -1230,37 +1170,6 @@ the name is used as the key, while the value of the key is used as the hash </p>
                   <td><a href="#uint64">uint64</a></td>
                   <td></td>
                   <td><p>cumulative size of target object </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="pb.IPLDNode">IPLDNode</h3>
-        <p>An IPFS MerkleDAG Node</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>links</td>
-                  <td><a href="#pb.IPLDLink">IPLDLink</a></td>
-                  <td>repeated</td>
-                  <td><p>refs to other objects </p></td>
-                </tr>
-              
-                <tr>
-                  <td>data</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p>opaque user data </p></td>
                 </tr>
               
             </tbody>
@@ -1357,21 +1266,21 @@ the name is used as the key, while the value of the key is used as the hash </p>
               <tr>
                 <td>DagPut</td>
                 <td><a href="#pb.DagPutRequest">DagPutRequest</a></td>
-                <td><a href="#pb.DagPutResponse">DagPutResponse</a></td>
+                <td><a href="#merkledag.pb.PBNode">.merkledag.pb.PBNode</a></td>
                 <td><p>DagPut is used to store arbitrary bytes as a custom IPLD object</p></td>
               </tr>
             
               <tr>
                 <td>DagGet</td>
                 <td><a href="#pb.DagGetRequest">DagGetRequest</a></td>
-                <td><a href="#pb.DagGetResponse">DagGetResponse</a></td>
+                <td><a href="#merkledag.pb.PBNode">.merkledag.pb.PBNode</a></td>
                 <td><p>DagGet is used to request the raw ipld node data for an IPLD object</p></td>
               </tr>
             
               <tr>
                 <td>NewIPLDNode</td>
                 <td><a href="#pb.NewIPLDNodeRequest">NewIPLDNodeRequest</a></td>
-                <td><a href="#pb.DagPutResponse">DagPutResponse</a></td>
+                <td><a href="#merkledag.pb.PBNode">.merkledag.pb.PBNode</a></td>
                 <td><p>NewIPLDNode is used to create a new IPFS MerkleDAG node.
 This is the same type as in github.com/ipfs/go-ipld-format.Node</p></td>
               </tr>
@@ -1379,7 +1288,7 @@ This is the same type as in github.com/ipfs/go-ipld-format.Node</p></td>
               <tr>
                 <td>AddLinksToNode</td>
                 <td><a href="#pb.AddLinksRequest">AddLinksRequest</a></td>
-                <td><a href="#pb.DagPutResponse">DagPutResponse</a></td>
+                <td><a href="#merkledag.pb.PBNode">.merkledag.pb.PBNode</a></td>
                 <td><p>AddLinksToNode is used to add links to an existing IPFS MerkleDAG node</p></td>
               </tr>
             
