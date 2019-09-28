@@ -707,7 +707,8 @@ proto.pb.AddLinksRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     linksMap: (f = msg.getLinksMap()) ? f.toObject(includeInstance, undefined) : [],
     hash: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    hashfunc: jspb.Message.getFieldWithDefault(msg, 3, "")
+    hashfunc: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    node: (f = msg.getNode()) && github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -758,6 +759,11 @@ proto.pb.AddLinksRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setHashfunc(value);
       break;
+    case 4:
+      var value = new github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode;
+      reader.readMessage(value,github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.deserializeBinaryFromReader);
+      msg.setNode(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -803,6 +809,14 @@ proto.pb.AddLinksRequest.serializeBinaryToWriter = function(message, writer) {
     writer.writeString(
       3,
       f
+    );
+  }
+  f = message.getNode();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode.serializeBinaryToWriter
     );
   }
 };
@@ -853,6 +867,36 @@ proto.pb.AddLinksRequest.prototype.getHashfunc = function() {
 /** @param {string} value */
 proto.pb.AddLinksRequest.prototype.setHashfunc = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional merkledag.pb.PBNode node = 4;
+ * @return {?proto.merkledag.pb.PBNode}
+ */
+proto.pb.AddLinksRequest.prototype.getNode = function() {
+  return /** @type{?proto.merkledag.pb.PBNode} */ (
+    jspb.Message.getWrapperField(this, github_com_ipfs_go$merkledag_pb_merkledag_pb.PBNode, 4));
+};
+
+
+/** @param {?proto.merkledag.pb.PBNode|undefined} value */
+proto.pb.AddLinksRequest.prototype.setNode = function(value) {
+  jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+proto.pb.AddLinksRequest.prototype.clearNode = function() {
+  this.setNode(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.pb.AddLinksRequest.prototype.hasNode = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 

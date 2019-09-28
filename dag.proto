@@ -77,6 +77,7 @@ message AddLinksRequest {
     string hash = 2;
     // the hash function to to use (sha2-256, sha3-512, etc...)
     string hashFunc = 3;
+    merkledag.pb.PBNode node = 4;
 }
 
 // GetLinksRequest is used to return all the links associated with a particular hash
