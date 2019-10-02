@@ -122,6 +122,9 @@ node:
     pubsub: true
     # enable/disable ipns and other name resolution systems
     namesys: true
+    # persistently store DHT information between reboots
+    # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
+    persistentDHT: true
 # the file we will dump logs into
 log_file: ./logger.log
 ```
