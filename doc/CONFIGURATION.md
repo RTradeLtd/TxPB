@@ -50,7 +50,7 @@ node:
     # accepted values: badger, pebble, leveldb, memory
     type: badger
     # the path to the datastore
-    path: storage
+    path: /temporalx/storage
     # options  that may be use to alter datastore configuration.
     # badger options:
     # fileLoadingMode: 0 (FileIO), 2 (MemoryMap)
@@ -59,6 +59,14 @@ node:
     # withSync: true, false
     opts:
       withSync: "false"
+      # enable/disable reference counted blockstore
+      countedStore: true
+      # the key namespace used for the ref counter queue
+      counterQueueNamespace: cqueuenamespace
+      # the key namespace used for ref counter entries
+      counterStoreNamespace: cstorenamespace
+        # the path to store ref counter entries in
+      counterStorePath: /temporalx/counterstore
   # configures the libp2p peerstore
   peerstore:
     # the type of peerstore to use
@@ -109,6 +117,10 @@ node:
     # whether or not we are running on a low power device
     # useful if running TemporalX on low-memory devices like RPi
     lowPower: false
+    # enable/disable pubsub
+    pubsub: true
+    # enable/disable ipns and other name resolution systems
+    namesys: true
 # the file we will dump logs into
 log_file: ./logger.log
 ```
