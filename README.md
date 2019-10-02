@@ -19,7 +19,7 @@ We use [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) to automat
 
 ## TemporalX Config File
 
-To see documentation for the configuration file used when running TemporalX, see [CONFIGURATION.MD](https://rtradeltd.github.io/TxPB/doc/CONFIGURATION.MD)
+To see documentation for the configuration file used when running TemporalX, see [CONFIGURATION.md](doc/CONFIGURATION.md)
 
 # Notes
 
