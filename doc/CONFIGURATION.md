@@ -60,7 +60,6 @@ node:
     # pebble options:
     # withSync: true, false
     opts:
-      withSync: "false"
       # enable/disable reference counted blockstore
       countedStore: true
       # the key namespace used for the ref counter queue
