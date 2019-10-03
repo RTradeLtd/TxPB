@@ -57,3 +57,15 @@ To start your node with the config file located at `/tmp/config.yml` run:
 If you want to bootstrap against the public libp2p bootstrap servers, and Temporal's public IPFS infrastructure, use the `--bp` flag like so:
 
 `tex-cli --config /tmp/config.yml --bp server`
+
+This bootstrap process is done in the background, and does not block the startup process.
+
+## Logging
+
+By default, logs are printed to standard out, and also stored on disk where ever you specify by the `log_file` config file key. By default we display, and log all levels *except* **debug**.
+
+There are a few environment variables that can be used to adjust logging:
+
+* `DEV_LOGGING=true` - enables logging of extra processing information useful when developing on TemporalX.
+* `DEBUG_LOGGING=true`- enables collection of debug level information.
+* `FILE_LOGGING=true` - disables logging of information to standard out, and only logs to the log file.
