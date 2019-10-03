@@ -11,7 +11,9 @@ This documentation covers everything you need to know to quickly get your Tempor
   <br>
   · <a href="#starting-the-node"><strong>Starting The Node</strong></a>
   <br> 
-  · <a href="#stopping-the-node"><strong>StoppingThe Node</strong></a>
+  · <a href="#stopping-the-node"><strong>Stopping The Node</strong></a>
+  <br>
+   · <a href="#your-first-upload"><strong>Your First Upload</strong></a>
   <br>
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
@@ -81,6 +83,22 @@ This bootstrap process is done in the background, and does not block the startup
 To stop the node after running the server, you can use any of the following os calls and system calls against the tex-cli server process, such as `kill -9` or `CTRL+C` in the terminal window you are running the server from. This will trigger a graceful shutdown of the node which can take up to 30 seconds. 
 
 Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
+
+## Your First Upload
+
+To upload a file located at `/tmp/foo.txt` as a unixfs object to your local node, and make it publicly available to the IPFS network run the command:
+
+`tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt`
+
+Which will return output like:
+
+`hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4`
+
+To download the file and save it at `/tmp/foo2.txt` run the command
+
+`tex-cli --config /path/to/config.yml --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4 --save.path /tmp/foo2.txt`
+
+When you run the `client file upload` command, you end up storing the given file as a unixfs object, and you announce to the network that you are providing the returned hash. When you run the `client file download` command, we first check if node has the data for the given cid locally, and if not we ask the rest of the network for that data.
 
 ## Logging
 
