@@ -109,6 +109,8 @@ $ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.t
 Which will return output like:
 
 ```
+$ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt
+
 hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4
 ```
 
@@ -119,6 +121,8 @@ $ tex-cli --config /path/to/config.yml --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrp
 ```
 
 When you run the `client file upload` command, you end up storing the given file as a unixfs object, and you announce to the network that you are providing the returned hash. When you run the `client file download` command, we first check if node has the data for the given cid locally, and if not we ask the rest of the network for that data.
+
+No output isn't a sign of anything going wrong, and means your action completed. For example `client file download` and `client file upload` by default dont give any output.  If you want to display some additional information, try the flag `--print-progress` or `--pp`
 
 ## Logging
 
