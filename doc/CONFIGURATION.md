@@ -60,6 +60,8 @@ node:
     # pebble options:
     # withSync: true, false
     opts:
+      # this is unsuitable for use on memory constrained devices
+      fileLoadingMode: 2
       # enable/disable reference counted blockstore
       countedStore: true
       # the key namespace used for the ref counter queue
@@ -76,7 +78,7 @@ node:
     # if using datastore peerstore, can be used to configure the storage component
     datastore:
       type: leveldb
-      path: peerstore
+      path: /temporalx/peerstore
   # configure underyling keystore
   keystore:
     # the type of keystore to use
@@ -85,8 +87,9 @@ node:
     # if using krab or filesystem keystore allows configuring the storage component
     # if uing filesystem keystore, the only required parameter is path
     datastore:
-      type: leveldb
-      path: keystore
+      type: badger
+      path: /temporalx/keystore
+      fileLoadingMode: 2
   # provides configuration of libp2p itself
   libp2p:
     # provides configuration of the host connection manager
@@ -94,9 +97,9 @@ node:
       # enable/disable the configuration manager
       enabled: true
       # the minimum number of peers that we will try to connect to
-      low_water_mark: 600
+      low_water_mark: 6000
       # the maximum number of peers we will connect to
-      high_water_mark: 900
+      high_water_mark: 9000
       # the time we wait before considering a new connection eligible for removal;
       grace_period: 20s
     # provides configuration of the circuit relay system
