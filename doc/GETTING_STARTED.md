@@ -60,6 +60,12 @@ If you want to bootstrap against the public libp2p bootstrap servers, and Tempor
 
 This bootstrap process is done in the background, and does not block the startup process.
 
+## Stopping Your Node
+
+To stop your node after running the server, you can use any of the following os calls and system calls against the tex-cli server process, such as `kill -9` or `CTRL+C` in the terminal window you are running the server from. This will trigger a graceful shutdown of the node which can take up to 30 seconds. 
+
+Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
+
 ## Logging
 
 By default, logs are printed to standard out, and also stored on disk where ever you specify by the `log_file` config file key. By default we display, and log all levels *except* **debug**.
