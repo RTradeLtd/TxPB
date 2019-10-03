@@ -13,7 +13,13 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
+## gRPC API
+
 We use [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) to automatically generate documentation for the protocol definitions. To view them, see [here](https://rtradeltd.github.io/TxPB/doc/index.html). 
+
+## TemporalX Config File
+
+To see documentation for the configuration file used when running TemporalX, see [CONFIGURATION.md](doc/CONFIGURATION.md)
 
 # Notes
 
