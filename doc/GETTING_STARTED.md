@@ -69,3 +69,6 @@ There are a few environment variables that can be used to adjust logging:
 * `DEV_LOGGING=true` - enables logging of extra processing information useful when developing on TemporalX.
 * `DEBUG_LOGGING=true`- enables collection of debug level information.
 * `FILE_LOGGING=true` - disables logging of information to standard out, and only logs to the log file.
+
+
+Additionally some of the libraries we use such as `go-libp2p` have internal logging systems. To enable those, you can use the environment variable name `IPFS_LOGGING`, and set it to a log level. For example `IPFS_LOGGING=debug` will enable debug level log collection from libraries use `github.com/ipfs/go-log` internally.
