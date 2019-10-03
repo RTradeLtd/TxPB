@@ -94,9 +94,9 @@ node:
       # enable/disable the configuration manager
       enabled: true
       # the minimum number of peers that we will try to connect to
-      low_water_mark: 100
+      low_water_mark: 600
       # the maximum number of peers we will connect to
-      high_water_mark: 300
+      high_water_mark: 900
       # the time we wait before considering a new connection eligible for removal;
       grace_period: 20s
     # provides configuration of the circuit relay system
@@ -114,7 +114,7 @@ node:
   opts:
     # enables a bloom+arc cache ontop of the blockstore
     # can improve query performance and reduce disk IO
-    blockstoreCaching: false
+    blockstoreCaching: true
     # whether or not we are running on a low power device
     # useful if running TemporalX on low-memory devices like RPi
     lowPower: false
