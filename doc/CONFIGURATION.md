@@ -44,7 +44,7 @@ node:
   # the various address to expose the libp2p swarm connection on
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
-  # a hex encoded private key
+  # a hex encoded ed25519 private key
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
   # configures the main datastore used for things like the dht, blockstore, etc...
   storage:
