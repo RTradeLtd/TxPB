@@ -1,4 +1,8 @@
-<h1> Getting Started </h1>
+# Getting Started
+
+This documentation covers everything you need to know to quickly get your TemporalX server up and running. If this is your first time installation TemporalX, this is the documentation you should be reading.
+
+## Table Of Contents
 
 <p align="left">
  ·  <a href="#command-overview"><strong>Command Overview</strong></a>
@@ -12,8 +16,8 @@
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
 
-
 ## Comand Overview
+
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
 **Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v1.0.0-rc4-3-g14ab982`**
