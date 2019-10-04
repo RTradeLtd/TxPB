@@ -5,7 +5,7 @@ This documentation covers everything you need to know to quickly get your Tempor
 ## Table Of Contents
 
 <p align="left">
- ·  <a href="#command-overview"><strong>Command Overview</strong></a>
+  · <a href="#command-overview"><strong>Command Overview</strong></a>
   <br>
   · <a href="#configuration-initialization"><strong>Configuration Initialization</strong></a> 
   <br>
@@ -14,6 +14,8 @@ This documentation covers everything you need to know to quickly get your Tempor
   · <a href="#stopping-the-node"><strong>Stopping The Node</strong></a>
   <br>
    · <a href="#your-first-upload"><strong>Your First Upload</strong></a>
+  <br>
+  . <a href="#monitoring"><strong>Monitoring</string></a>
   <br>
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
@@ -123,6 +125,14 @@ $ tex-cli --config /path/to/config.yml --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrp
 When you run the `client file upload` command, you end up storing the given file as a unixfs object, and you announce to the network that you are providing the returned hash. When you run the `client file download` command, we first check if node has the data for the given cid locally, and if not we ask the rest of the network for that data.
 
 No output isn't a sign of anything going wrong, and means your action completed. For example `client file download` and `client file upload` by default dont give any output.  If you want to display some additional information, try the flag `--print-progress` or `--pp`
+
+## Monitoring
+
+Using the configuration file you can enable metric collection that gets exposed via a prometheus http endpoint. You can either consume from this endpoint directly, or plug it into tools like Grafana for nice looking charts.
+
+Within the config file set `prometheus.enabled: true` and provide an ip+port you want to expose the metrics on. The metrics will be available on the path `/metrics`. For example if you provided the ip+port `127.0.0.1:9093` you can go to `127.0.0.1:9093/metrics` and start collecting your data.
+
+Additionally you can enable system profiling in the same way, however the path for that information is `/debug/pprof`.
 
 ## Logging
 
