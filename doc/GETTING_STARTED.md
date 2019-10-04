@@ -17,6 +17,8 @@ This documentation covers everything you need to know to quickly get your Tempor
   <br>
   . <a href="#monitoring"><strong>Monitoring</string></a>
   <br>
+  . <a href="#admin-api"><strong>Admin API</string></a>
+  <br>
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
 
@@ -133,6 +135,10 @@ Using the configuration file you can enable metric collection that gets exposed 
 Within the config file set `prometheus.enabled: true` and provide an ip+port you want to expose the metrics on. The metrics will be available on the path `/metrics`. For example if you provided the ip+port `127.0.0.1:9093` you can go to `127.0.0.1:9093/metrics` and start collecting your data.
 
 Additionally you can enable system profiling in the same way, however the path for that information is `/debug/pprof`.
+
+## Admin API
+
+Expose via `localhost:9999` we have an admin gRPC API that allows low-level management of TemporalX, in particular it allows blockstore management, and reference counting management. This API is only enabled when using the reference counted blockstore which is configured in the config file.
 
 ## Logging
 
