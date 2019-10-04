@@ -15,9 +15,9 @@ This documentation covers everything you need to know to quickly get your Tempor
   <br>
    · <a href="#your-first-upload"><strong>Your First Upload</strong></a>
   <br>
-  . <a href="#monitoring"><strong>Monitoring</string></a>
+  . <a href="#monitoring"><strong>Monitoring</strong></a>
   <br>
-  . <a href="#admin-api"><strong>Admin API</string></a>
+  . <a href="#admin-api"><strong>Admin API</strong></a>
   <br>
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
