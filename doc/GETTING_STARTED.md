@@ -5,6 +5,8 @@ This documentation covers everything you need to know to quickly get your Tempor
 ## Table Of Contents
 
 <p align="left">
+  · <a href="#installation-and-license-registration"><strong>Installation And License Registration</strong></a>
+  <br>
   · <a href="#command-overview"><strong>Command Overview</strong></a>
   <br>
   · <a href="#configuration-initialization"><strong>Configuration Initialization</strong></a> 
@@ -29,6 +31,40 @@ To install TemporalX, all you have to do is take the binary that you download an
 Before you can use TemporalX, you need to register a license key. When purchasing TemporalX you'll be given a unique identifier called a UUID. To register TemporalX you need to set the identifier under the environment variable `TEMPORAL_UUID`. For example, if your UUID is 1, you would want to set `TEMPORAL_UUID=1`. After this run the command `tex-cli` and you'll go through the registration process automatically. 
 
 You only need to register TemporalX the first time you run it on a machine. Each license is restricted to the machine it is registered on, and during the license registration process, both the license key and uuid get saved to the `.temporalx` of your home directory.
+
+If you use systemd we have a systemd service file that you can use to handle starting/stopping TemporalX:
+
+```
+[Unit]
+Description=Starts the TemporalX service
+After=network.target
+
+[Service]
+User=temporal
+Group=temporal
+Type=simple
+PIDFile=/var/run/temporalx.pid
+ExecStart=/boot_scripts/temporalx_management.sh server
+
+[Install]
+WantedBy=multi-user.target
+```
+
+And the TemporalX management script
+```
+#! /bin/bash
+
+# used to manage a TemporalX installation
+CONFIG_FILE="/boot_scripts/temporalx.yml"
+
+case "$1" in
+
+    server)
+        tex-cli --config "$CONFIG_FILE" --bp server
+        ;;
+
+esac
+```
 
 ## Comand Overview
 
