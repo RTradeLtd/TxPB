@@ -1,6 +1,6 @@
 # Getting Started
 
-This documentation covers everything you need to know to quickly get your TemporalX server up and running. If this is your first time installation TemporalX, this is the documentation you should be reading.
+This documentation covers everything you need to know to quickly get your TemporalX server up and running. If this is your first time installating TemporalX, this is the documentation you should be reading.
 
 ## Table Of Contents
 
