@@ -113,6 +113,19 @@ node:
       discovery: false
       # enable being a relay hop (this means we will relay connections)
       relay_hop: false
+    # enables modifying the available transports
+    enabled_transports:
+      # enables and prefers tls security/transport over secio
+      # default is true
+      tls: true
+      # enables the quic transport
+      # default is false
+      quic: false
+    # enables modifying dht settings
+    dht_options:
+      # persistently store DHT information between reboots
+      # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
+      persistentDHT: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache ontop of the blockstore
@@ -125,9 +138,6 @@ node:
     pubsub: true
     # enable/disable ipns and other name resolution systems
     namesys: true
-    # persistently store DHT information between reboots
-    # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
-    persistentDHT: true
 # the file we will dump logs into
 log_file: ./logger.log
 ```
