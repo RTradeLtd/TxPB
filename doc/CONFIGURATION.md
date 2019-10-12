@@ -44,7 +44,7 @@ node:
   # the various address to expose the libp2p swarm connection on
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
-  # a hex encoded private key
+  # a hex encoded ed25519 private key
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
   # configures the main datastore used for things like the dht, blockstore, etc...
   storage:
@@ -60,6 +60,8 @@ node:
     # pebble options:
     # withSync: true, false
     opts:
+      # this is unsuitable for use on memory constrained devices
+      fileLoadingMode: 2
       # enable/disable reference counted blockstore
       countedStore: true
       # the key namespace used for the ref counter queue
@@ -76,7 +78,7 @@ node:
     # if using datastore peerstore, can be used to configure the storage component
     datastore:
       type: leveldb
-      path: peerstore
+      path: /temporalx/peerstore
   # configure underyling keystore
   keystore:
     # the type of keystore to use
@@ -85,8 +87,9 @@ node:
     # if using krab or filesystem keystore allows configuring the storage component
     # if uing filesystem keystore, the only required parameter is path
     datastore:
-      type: leveldb
-      path: keystore
+      type: badger
+      path: /temporalx/keystore
+      fileLoadingMode: 2
   # provides configuration of libp2p itself
   libp2p:
     # provides configuration of the host connection manager
@@ -94,9 +97,9 @@ node:
       # enable/disable the configuration manager
       enabled: true
       # the minimum number of peers that we will try to connect to
-      low_water_mark: 100
+      low_water_mark: 6000
       # the maximum number of peers we will connect to
-      high_water_mark: 300
+      high_water_mark: 9000
       # the time we wait before considering a new connection eligible for removal;
       grace_period: 20s
     # provides configuration of the circuit relay system
@@ -110,11 +113,24 @@ node:
       discovery: false
       # enable being a relay hop (this means we will relay connections)
       relay_hop: false
+    # enables modifying the available transports
+    enabled_transports:
+      # enables and prefers tls security/transport over secio
+      # default is true
+      tls: true
+      # enables the quic transport
+      # default is false
+      quic: false
+    # enables modifying dht settings
+    dht_options:
+      # persistently store DHT information between reboots
+      # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
+      persistentDHT: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache ontop of the blockstore
     # can improve query performance and reduce disk IO
-    blockstoreCaching: false
+    blockstoreCaching: true
     # whether or not we are running on a low power device
     # useful if running TemporalX on low-memory devices like RPi
     lowPower: false
@@ -122,9 +138,6 @@ node:
     pubsub: true
     # enable/disable ipns and other name resolution systems
     namesys: true
-    # persistently store DHT information between reboots
-    # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
-    persistentDHT: true
 # the file we will dump logs into
 log_file: ./logger.log
 ```
