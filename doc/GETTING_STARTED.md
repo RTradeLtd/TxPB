@@ -22,6 +22,14 @@ This documentation covers everything you need to know to quickly get your Tempor
   · <a href="#logging"><strong>Logging</strong></a> 
 </p>
 
+## Installation And License Registration
+
+To install TemporalX, all you have to do is take the binary that you download and place it in a location that you can execute commands from. Typically this is somewhere in the `$PATH` variable but you'll want to consult the manual for your specific operating system. We recommend that you name the executable `tex-cli`.
+
+Before you can use TemporalX, you need to register a license key. When purchasing TemporalX you'll be given a unique identifier called a UUID. To register TemporalX you need to set the identifier under the environment variable `TEMPORAL_UUID`. For example, if your UUID is 1, you would want to set `TEMPORAL_UUID=1`. After this run the command `tex-cli` and you'll go through the registration process automatically. 
+
+You only need to register TemporalX the first time you run it on a machine. Each license is restricted to the machine it is registered on, and during the license registration process, both the license key and uuid get saved to the `.temporalx` of your home directory.
+
 ## Comand Overview
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
