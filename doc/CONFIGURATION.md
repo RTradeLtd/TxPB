@@ -164,8 +164,8 @@ The current `opts` for all `datastore` sections are as follows. Note that whenev
 
 | Name            | Values                 | Details                          |
 |-----------------|------------------------|----------------------------------|
-| fileLoadingMode | * 0 (FileIO - default)<br> * 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices |
-| withSync | * false (default)<br> * true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type.
+| fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
+| withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
 
 # Peerstore
 
