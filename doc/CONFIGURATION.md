@@ -1,6 +1,21 @@
 # Configuration File Documentation
 
-TemporalX configuration is done through a yaml file, while the command line `tex-cli` has a helper command to generate a fully populated config file. 
+TemporalX configuration is done through a yaml file, while the command line tool `tex-cli` has a commad `tex-cli config` that can be used to generate default configuration files.
+
+## Table Of Contents
+
+<p align="left">
+  · <a href="#the-config-file"><strong>The Config File</strong></a>
+  <br>
+  · <a href="#datastore-configuration"><strong>Datastore Configuration</strong></a>
+  <br>
+  · <a href="#node-configuration"><strong>Node Configuration</strong></a> 
+  <br>
+  · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
+</p>
+
+
+# The Config File
 
 The following example configuration file is a fully populated config file, with reference counting enabled. A much more basic config file can be produced with the command `tex-cli config gen`.
 
@@ -136,7 +151,7 @@ node:
 log_file: ./logger.log
 ```
 
-# Datastore
+# Datastore Configuration
 
 The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other. In fact in the code-base, they all use the same code.
 
@@ -167,9 +182,21 @@ The current `opts` for all `datastore` sections are as follows. Note that whenev
 | fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
 | withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
 
-# Node
+# Node Configuration
 
 The `node` section is used to configure the underlying libp2p, and ipfs subsystems used by TemporalX.
+
+<p align="left">
+  · <a href="#storage"><strong>Storage</strong></a>
+  <br>
+  · <a href="#peerstore"><strong>Peerstore</strong></a>
+  <br>
+  · <a href="#keystore"><strong>Keystore</strong></a>
+  <br>
+  · <a href="#libp2p"><strong>LibP2P</strong></a> 
+  <br>
+  · <a href="#opts"><strong>Opts</strong></a> 
+</p>
 
 ## Storage
 
@@ -292,6 +319,16 @@ Memory
 ## LibP2P
 
 The `libp2p` section is used to configure the libp2p host that we start up, and is a core component of TemporalX. All these configurations are from libp2p itself, so for those who have used existing IPFS solutions these may seem familiar.
+
+<p align="left">
+  · <a href="#connection-manager"><strong>Connection Manager</strong></a>
+  <br>
+  · <a href="#circuit"><strong>Circuit</strong></a>
+  <br>
+  · <a href="#enabled-transports"><strong>Enabled Transports</strong></a>
+  <br>
+  · <a href="#dht-options"><strong>DHT Options</strong></a> 
+</p>
 
 
 ### Connection Manager
