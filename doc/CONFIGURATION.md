@@ -53,14 +53,12 @@ node:
     type: badger
     # the path to the datastore
     path: /temporalx/storage
-    # options  that may be use to alter datastore configuration.
-    # badger options:
-    # fileLoadingMode: 0 (FileIO), 2 (MemoryMap)
-    #
-    # pebble options:
-    # withSync: true, false
     opts:
-      # this is unsuitable for use on memory constrained devices
+      # this is a config setting for use with badger
+      # the default when left out is 0, which is FileIO and
+      # is suitable for use with devices like the Raspberry Pi 3B+.
+      # Here we are overriding the default to 2 (MemoryMap) which
+      # is more performant, at the cost of increased memory consumption
       fileLoadingMode: 2
       # enable/disable reference counted blockstore
       countedStore: true
@@ -83,13 +81,9 @@ node:
   keystore:
     # the type of keystore to use
     # accepted values: krab, memory, filesystem
-    type: krab
-    # if using krab or filesystem keystore allows configuring the storage component
-    # if uing filesystem keystore, the only required parameter is path
+    type: filesystem
     datastore:
-      type: badger
       path: /temporalx/keystore
-      fileLoadingMode: 2
   # provides configuration of libp2p itself
   libp2p:
     # provides configuration of the host connection manager
@@ -140,4 +134,96 @@ node:
     namesys: true
 # the file we will dump logs into
 log_file: ./logger.log
+```
+
+# Datastore
+
+The `datastore` portions of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other. In fact in the code-base, they all use the same code.
+
+One thing thing to note is the section of the `node` configuration called `storage`. This is really just an aliased/renamed `datastore` section that is used for the storing all our data. By this we mean things like files, documents, movies, etc... It is for all intents and purposes our "main storage".  The one exception to this is the example configuration file earlier in the documentation which enables the `countedStore` which is a reference counted blockstore. If this is used in other `datastore` configuration sections it is simply ignored.
+
+The current datastore types are supported:
+
+* pebble
+  * currently experimental, but is generally the fastest datastore next to pure in-memory stores
+  * it is generally okay, however it can cause unexpected errors, and should be used at your own risk.
+  * not quite as expensive on memory as badger
+* badger
+  * not quite as fast as pebble, but still extremely fast and stable.
+  * The badger default was adjusted to use `fileLoadingMode` with `FileIO` to enable use on low-memory devices.
+  * If using on server environments, change `fileLoadingMode` to 2.
+* leveldb
+  * generally the lowest memory requirements, and suitable for low-memory devices.
+  * generally the slowest datastore
+* memory
+  * consumes the most memory out of everything since it resides entirely in-memory
+  * all data is lost on crash, or restart of service and should only be used for testing
+
+The current `opts` for all `datastore` sections are as follows. Note that whenever an `opt`ion is left out, the default is implied:
+
+
+| Name            | Values                 | Details                          |
+|-----------------|------------------------|----------------------------------|
+| fileLoadingMode | * 0 (FileIO - default)<br> * 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices |
+| withSync | * false (default)<br> * true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type.
+
+# Peerstore
+
+The peerstore is used to define configuration options for the libp2p peerstore, which is where records of all libp2p peers we encounter are stored. We currently have two supported types:
+
+*  `datastore`
+* `memory`
+
+Example Configurations:
+
+Memory
+
+```yaml
+  peerstore:
+    type: memory
+```
+
+Datastore (badger)
+
+```yaml
+  peerstore:
+    type: datastore
+    datastore:
+      type: badger
+      path: /temporalx/peerstore
+      opts:
+         fileLoadingMode: 2
+```
+
+# Keystore
+
+The keystore is used to define configuration options for the keystore, which is a repository used by services like namesys to manage private keys. We currently have three supported types:
+
+* `krab`
+* `memory`
+* `filesystem`
+
+We personally recommended usage of `krab` as it encrypts all keys on disk when not in use, and only decrypts them in memory when needing to be used. It is however more resource intensive and should only be used in server environments.
+
+Example Configurations:
+
+Datastore (krab)
+
+```yaml
+  keystore:
+    type: krab
+    # the password we encrypt keys with
+    passphrase: password123
+    datastore:
+      type: badger
+      path: /temporalx/keystore
+      opts:
+         fileLoadingMode: 2
+```
+
+Memory
+
+```yaml
+  keystore:
+    type: memory
 ```
