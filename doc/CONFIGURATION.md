@@ -255,3 +255,18 @@ Configuration Options:
 * `active` configures the relay transport to actively establish outbound connections on behalf of clients.
 * `discovery` configures the relay transport to discover new relays by probing every single new peer. This can seriously impact performance.
 * `relay_hop` configures the relay transport to accept requests to relay traffic on behalf of third-parties. Unless `active` is set to true, this will only relay traffic between peers that are already connected to our node.
+
+## Enabled Transports
+
+The `enabled_transports` section is used to configure the various transports that will be used by our node. By default we will use TCP and Web Socket transports with transport security provided by [secio](https://github.com/libp2p/go-libp2p-secio)
+
+Configuration Options:
+
+* `tls` is used to enable the [tls](https://github.com/libp2p/go-libp2p-tls) encrypted security transport, and will prefer tls transport security over secio transport security.
+* `quic` is used to enable the [quic](https://github.com/libp2p/go-libp2p-quic-transport) transport.
+
+## DHT Options
+
+The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently only supports one setting `persistentDHT` which is used to store DHT records on disk. This has the side effect of decreasing memory consumption, so if you are using a memory-constrained device, this will be something to consider. 
+
+If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
