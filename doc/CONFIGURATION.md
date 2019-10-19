@@ -1,6 +1,6 @@
 # Configuration File Documentation
 
-TemporalX configuration is done through a yaml file, while the command line `tex-cli` has a helper command to generate a fully populated config file.
+TemporalX configuration is done through a yaml file, while the command line `tex-cli` has a helper command to generate a fully populated config file. 
 
 The following example configuration file is a fully populated config file, with reference counting enabled. A much more basic config file can be produced with the command `tex-cli config gen`.
 
@@ -167,7 +167,68 @@ The current `opts` for all `datastore` sections are as follows. Note that whenev
 | fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
 | withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
 
-# Peerstore
+# Node
+
+The `node` section is used to configure the underlying libp2p, and ipfs subsystems used by TemporalX.
+
+## Storage
+
+The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` ontop, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
+
+When using the reference counted blockstore, anytime a delete operation is performed on the blockstore, we do not pass the call through to the underlying datastore. We instead use it to "decrease" the reference count of a block. Once a block has a reference count of 0, anytime we perform a garbage collection on the blockstore, it will be removed.
+
+The default setting is to not use a reference counted blockstore, in which case anytime a delete operation is performed on the blockstore, the call is passed trough to the underlying datastore and the data is removed. When not using a reference counted blockstore, it is recommended you implemenet your own system outside of TemporalX so you don't accidentally delete data that is needed by other blocks.
+
+
+Example Configurations:
+
+Memory
+
+```yaml
+  storage:
+    type: memory
+```
+
+LevelDB
+
+```yaml
+  storage:
+    type: leveldb
+    path: /temporalx/storage
+```
+
+Pebble
+```yaml
+  storage:
+    type: pebble
+    path: /temporalx/storage
+    opts:
+      withSync: true
+```
+
+LevelDB (reference counted)
+
+```yaml
+  storage:
+    type: leveldb
+    path: /temporalx/storage
+    opts:
+      countedStore: true
+      counterQueueNamespace: cqueuenamespace
+      counterStoreNamespace: cstorenamespace
+      counterStorePath: /temporalx/counterstore
+```
+
+A breakdown of the reference counter configurations is as follows
+
+name                  | example            | explanation                                     |
+----------------------|--------------------|-------------------------------------------------|
+countedStore          | true               | enables reference counted storage               |
+counterQueueNamespace | counterqueuespace  | the key namespace for the counter queue         |
+counterStoreNamespace | counterstorespace  | the key namespace for the counter store         |
+counterStorePath      | counterstorage     | the path for storing reference counter metadata |
+
+## Peerstore
 
 The `peerstore` section is used to define configuration options for the libp2p peerstore, which is where records of all libp2p peers we encounter are stored. We currently have two supported types:
 
@@ -195,7 +256,7 @@ Datastore (badger)
          fileLoadingMode: 2
 ```
 
-# Keystore
+## Keystore
 
 The `keystore` section is used to define configuration options for the keystore, which is a repository used by services like namesys to manage private keys. We currently have three supported types:
 
@@ -228,12 +289,12 @@ Memory
     type: memory
 ```
 
-# LibP2P
+## LibP2P
 
 The `libp2p` section is used to configure the libp2p host that we start up, and is a core component of TemporalX. All these configurations are from libp2p itself, so for those who have used existing IPFS solutions these may seem familiar.
 
 
-## Connection Manager
+### Connection Manager
 
 The `connection_manager` section is used to configure our libp2p connection management subsystem. It is not technically a "required" configuration, however it is strongly recommended you use it to keep resource consumption underwatch.
 
@@ -245,7 +306,7 @@ Configuration Options:
 * `high_water_mark` is the number of connections that, when exceeded, will trigger a connection GC operation which will trim connections until the `low_water_mark` is reached.
 * `grace_period` is a time duration that new connections are immune from being closed by the connection manager. It uses Golang `time.Duration` syntax so values like `1h` (1 hour), `10m` (10 minutes) are acceptable
 
-## Circuit
+### Circuit
 
 The `circuit` section is used to configure libp2p circuit relay capabilities. It is recommended that unless you have a specific requirement you either leave this disabled, or simply set `enable` to true. You probably don't want to alter any of the settings here unless you know what you are doing and are familiar with the way libp2p works.
 
@@ -256,7 +317,7 @@ Configuration Options:
 * `discovery` configures the relay transport to discover new relays by probing every single new peer. This can seriously impact performance.
 * `relay_hop` configures the relay transport to accept requests to relay traffic on behalf of third-parties. Unless `active` is set to true, this will only relay traffic between peers that are already connected to our node.
 
-## Enabled Transports
+### Enabled Transports
 
 The `enabled_transports` section is used to configure the various transports that will be used by our node. By default we will use TCP and Web Socket transports with transport security provided by [secio](https://github.com/libp2p/go-libp2p-secio)
 
@@ -265,8 +326,197 @@ Configuration Options:
 * `tls` is used to enable the [tls](https://github.com/libp2p/go-libp2p-tls) encrypted security transport, and will prefer tls transport security over secio transport security.
 * `quic` is used to enable the [quic](https://github.com/libp2p/go-libp2p-quic-transport) transport.
 
-## DHT Options
+### DHT Options
 
-The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently only supports one setting `persistentDHT` which is used to store DHT records on disk. This has the side effect of decreasing memory consumption, so if you are using a memory-constrained device, this will be something to consider. 
+The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently only supports one setting `persistentDHT` which is used to store DHT records on disk. It enables persisting DHT records long-term, and avoiding storing them in memory which has the side-effect of reducing memory consumption. If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
 
-If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
+## Opts
+
+The `opts` section is used to provide generalized configuration of TemporalX's IPFS node, and can be used to disable/enable certain internal components.
+
+Configuration Options:
+
+* `blockstoreCaching` is used to enable a bloom+arc cache that sits ontop of the blockstore, which can be used to improve query performance and reduce disk IO at the cost of increased memory consumption.
+* `lowPower` is used to enable preference for settings friendly to low power devices.
+* `pubsub` is used to enable the libp2p pubsub subsystem. It is disabled by default.
+* `namesys` is used to enable the libp2p name resolution subsystem which provdies support for resolving IPNS, ENS, DNSLink, and more. It is disabled by default.
+
+
+# Config File Templates
+
+Server (high CPU, high memory):
+
+* Blockstore caching
+* Reference counted
+* PubSub enabled
+* NameSys enabled
+* TLS encryption preferred
+
+```yaml
+temporalx: 
+  api: 
+    listen_address: 0.0.0.0:9090 
+    listen_proto: tcp
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: badger
+    path: /temporalx/storage
+    opts:
+      fileLoadingMode: 2
+      countedStore: true
+      counterQueueNamespace: cqueuenamespace
+      counterStoreNamespace: cstorenamespace
+      counterStorePath: /temporalx/counterstore
+  peerstore:
+    type: memory
+  keystore:
+    type: krab
+    passphrase: password123
+    datastore:
+      type: badger
+      path: /temporalx/keystore
+      opts:
+         fileLoadingMode: 2
+  libp2p:
+    connection_manager:
+      enabled: true
+      low_water_mark: 6000
+      high_water_mark: 9000
+      grace_period: 20s
+    enabled_transports:
+      tls: true
+  opts:
+    blockstoreCaching: true
+    lowPower: false
+    pubsub: true
+    namesys: true
+log_file: ./logger.log
+```
+
+Server (low CPU, low memory):
+
+* No blockstore caching
+* Reference counted
+* PubSub enabled
+* NameSys enabled
+* TLS encryption preferred
+
+```yaml
+temporalx: 
+  api: 
+    listen_address: 0.0.0.0:9090 
+    listen_proto: tcp
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: badger
+    path: /temporalx/storage
+    opts:
+      fileLoadingMode: 2
+      countedStore: true
+      counterQueueNamespace: cqueuenamespace
+      counterStoreNamespace: cstorenamespace
+      counterStorePath: /temporalx/counterstore
+  peerstore:
+    type: memory
+  keystore:
+    type: krab
+    passphrase: password123
+    datastore:
+      type: leveldb
+      path: /temporalx/keystore
+  libp2p:
+    connection_manager:
+      enabled: true
+      low_water_mark: 2000
+      high_water_mark: 4000
+      grace_period: 20s
+    enabled_transports:
+      tls: true
+  opts:
+    pubsub: true
+    namesys: true
+log_file: ./logger.log
+```
+
+Low Power (high memory):
+
+* Not reference counted
+* PubSub disabled
+* NameSys disabled
+
+```yaml
+temporalx: 
+  api: 
+    listen_address: 0.0.0.0:9090 
+    listen_proto: tcp
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: badger
+    path: /temporalx/storage
+  peerstore:
+    type: memory
+  keystore:
+    type: filesystem
+    datastore:
+      path: /temporalx/keystore
+  libp2p:
+    connection_manager:
+      enabled: true
+      low_water_mark: 600
+      high_water_mark: 900
+      grace_period: 20s
+    dht_options:
+      persistentDHT: "true"
+  opts:
+    lowPower: true
+log_file: ./logger.log
+```
+
+Low Power (low memory):
+
+* Not reference counted
+* PubSub disabled
+* NameSys disabled
+
+```yaml
+temporalx: 
+  api: 
+    listen_address: 0.0.0.0:9090 
+    listen_proto: tcp
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: leveldb
+    path: /temporalx/storage
+  peerstore:
+    type: datastore
+    datastore:
+      type: leveldb
+      path: /temporalx/peerstore
+  keystore:
+    type: filesystem
+    datastore:
+      path: /temporalx/keystore
+  libp2p:
+    connection_manager:
+      enabled: true
+      low_water_mark: 600
+      high_water_mark: 900
+      grace_period: 20s
+    dht_options:
+      persistentDHT: "true"
+  opts:
+    lowPower: true
+log_file: ./logger.log
+```
