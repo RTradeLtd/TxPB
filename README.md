@@ -13,14 +13,4 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-## Protocol Buffer/gRPC 
-
-To view the generated protocol buffer and gRPC documentation click [here](https://rtradeltd.github.io/TxPB/doc/index.html)
-
-All of our `.proto` files are thoroughly commented and combined with [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) to generate the documentation.
-
-## TemporalX Manual
-
-* [Configuration](doc/CONFIGURATION.md)
-* [Getting Started](doc/GETTING_STARTED.md)
-* [License Overview](doc/LICENSE_OVERVIEW.md)
+We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc/README.md)'s folder.
