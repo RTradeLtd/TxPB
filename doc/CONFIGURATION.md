@@ -100,7 +100,7 @@ node:
     # WARNING: do not use unless you know what you are doing
     circuit:
       # enable/disable circuit relay capabilities
-      enable: false
+      enable: true
       # activate/disable circuit relay
       active: false
       # enable/disable circuit relay discovery
@@ -138,7 +138,7 @@ log_file: ./logger.log
 
 # Datastore
 
-The `datastore` portions of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other. In fact in the code-base, they all use the same code.
+The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other. In fact in the code-base, they all use the same code.
 
 One thing thing to note is the section of the `node` configuration called `storage`. This is really just an aliased/renamed `datastore` section that is used for the storing all our data. By this we mean things like files, documents, movies, etc... It is for all intents and purposes our "main storage".  The one exception to this is the example configuration file earlier in the documentation which enables the `countedStore` which is a reference counted blockstore. If this is used in other `datastore` configuration sections it is simply ignored.
 
@@ -169,7 +169,7 @@ The current `opts` for all `datastore` sections are as follows. Note that whenev
 
 # Peerstore
 
-The peerstore is used to define configuration options for the libp2p peerstore, which is where records of all libp2p peers we encounter are stored. We currently have two supported types:
+The `peerstore` section is used to define configuration options for the libp2p peerstore, which is where records of all libp2p peers we encounter are stored. We currently have two supported types:
 
 *  `datastore`
 * `memory`
@@ -197,7 +197,7 @@ Datastore (badger)
 
 # Keystore
 
-The keystore is used to define configuration options for the keystore, which is a repository used by services like namesys to manage private keys. We currently have three supported types:
+The `keystore` section is used to define configuration options for the keystore, which is a repository used by services like namesys to manage private keys. We currently have three supported types:
 
 * `krab`
 * `memory`
@@ -227,3 +227,31 @@ Memory
   keystore:
     type: memory
 ```
+
+# LibP2P
+
+The `libp2p` section is used to configure the libp2p host that we start up, and is a core component of TemporalX. All these configurations are from libp2p itself, so for those who have used existing IPFS solutions these may seem familiar.
+
+
+## Connection Manager
+
+The `connection_manager` section is used to configure our libp2p connection management subsystem. It is not technically a "required" configuration, however it is strongly recommended you use it to keep resource consumption underwatch.
+
+
+Configuration Options:
+
+* `enabled` is used to enable/disable the connection manager.
+* `low_water_mark` is the minimum number of connections we attempt to maintain
+* `high_water_mark` is the number of connections that, when exceeded, will trigger a connection GC operation which will trim connections until the `low_water_mark` is reached.
+* `grace_period` is a time duration that new connections are immune from being closed by the connection manager. It uses Golang `time.Duration` syntax so values like `1h` (1 hour), `10m` (10 minutes) are acceptable
+
+## Circuit
+
+The `circuit` section is used to configure libp2p circuit relay capabilities. It is recommended that unless you have a specific requirement you either leave this disabled, or simply set `enable` to true. You probably don't want to alter any of the settings here unless you know what you are doing and are familiar with the way libp2p works.
+
+Configuration Options:
+
+* `enable` is used to enable/disable the circuit relay. When set to true, our node will be allowed to dial through relay peers, and will listen for incoming connections from relay peers.
+* `active` configures the relay transport to actively establish outbound connections on behalf of clients.
+* `discovery` configures the relay transport to discover new relays by probing every single new peer. This can seriously impact performance.
+* `relay_hop` configures the relay transport to accept requests to relay traffic on behalf of third-parties. Unless `active` is set to true, this will only relay traffic between peers that are already connected to our node.
