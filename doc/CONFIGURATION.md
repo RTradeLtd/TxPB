@@ -14,7 +14,6 @@ TemporalX configuration is done through a yaml file, while the command line tool
   · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
 </p>
 
-
 # The Config File
 
 The following example configuration file is a fully populated config file, with reference counting enabled. A much more basic config file can be produced with the command `tex-cli config gen`.
@@ -181,6 +180,50 @@ The current `opts` for all `datastore` sections are as follows. Note that whenev
 |-----------------|------------------------|----------------------------------|
 | fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
 | withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
+
+# TemporalX
+
+The `temporalx` section is used to configure the TemporalX gRPC server that facilitates interaction with our custom node. Additionally it enables things like tracing, and monitoring.
+
+<p align="left">
+  · <a href="#api"><strong>API</strong></a>
+  <br>
+  · <a href="#prometheus"><strong>Prometheus</strong></a>
+  <br>
+  · <a href="#profiling"><strong>Profiling</strong></a>
+</p>
+
+## API
+
+The `api` section is used to configure the gRPC API server. 
+
+Configuration Options:
+
+* `tracing` enables/disables jaeger tracing
+* `listen_address` is the address to listen on for gRPC connections
+* `listen_proto` is the protocol the gRPC endpoint is using
+* `tls.cert_file` is the location to a tls certificate
+* `tls.key_file` is the location to the tls certificate key file
+* `jwt.realm` is the realm of the jwt
+* `jwt.key` is they used for signing jwt's
+
+## Prometheus
+
+The `prometheus` section is used to configure a prometheus endpoint that can be used for metric collection. The default setting is disabled. Metric collection via prometheus can sometimes be impactful on resources
+
+Configuration Options:
+
+* `enabled` enables/disables the prometheus endpoint
+* `endpoint` the ip+port to expose the `/metrics` handler on.
+
+## Profiling
+
+The `profiling` section is used to configure profiling of TemporalX via pprof, and exposes `net/http/pprof` handlers.
+
+Configuration Options:
+
+* `enabled` enables/disables profiling collection
+* `endpoint` is the ip+port to expose `net/http/pprof` handlers on.
 
 # Node Configuration
 
