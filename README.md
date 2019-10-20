@@ -1,6 +1,6 @@
 # TxPB
 
-`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation.
+`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.
 
 We have pre-generated gRPC bindings for the following languages:
 
