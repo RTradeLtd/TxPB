@@ -13,4 +13,8 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc/README.md)'s folder.
+We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc/README.md) folder.
+
+# License
+
+All code in this repository is licensed under `AGPL-3.0`, all documentation is licensed under MIT. Documentation is anything that is a readme, or html file. This is different than the license key that is used to authorize your purchase and ownership of TemporalX.
