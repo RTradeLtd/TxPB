@@ -202,10 +202,9 @@ The `node` section is used to configure the underlying libp2p, and ipfs subsyste
 
 The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` ontop, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
 
-When using the reference counted blockstore, anytime a delete operation is performed on the blockstore, we do not pass the call through to the underlying datastore. We instead use it to "decrease" the reference count of a block. Once a block has a reference count of 0, anytime we perform a garbage collection on the blockstore, it will be removed.
+This is also where we configure the reference counted blockstore, which is an optional feature that is disabled by default. To read about the reference counter, click [here](REFERENCE_COUNTER.md).
 
-The default setting is to not use a reference counted blockstore, in which case anytime a delete operation is performed on the blockstore, the call is passed trough to the underlying datastore and the data is removed. When not using a reference counted blockstore, it is recommended you implemenet your own system outside of TemporalX so you don't accidentally delete data that is needed by other blocks.
-
+When not using a reference counted blockstore, delete requests are not blocked, even if you are attempting to delete a block that may be referenced/used by more than one other block. If you do this you can inadvertently lose data. Therefore when not using a reference counted blockstore, you must implement a data management system outside of TemporalX and ensure you consult with it before deleting any blocks.
 
 Example Configurations:
 
