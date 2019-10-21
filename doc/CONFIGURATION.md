@@ -136,7 +136,7 @@ node:
       persistentDHT: "true"
   # general node configuration
   opts:
-    # enables a bloom+arc cache ontop of the blockstore
+    # enables a bloom+arc cache on top of the blockstore
     # can improve query performance and reduce disk IO
     blockstoreCaching: true
     # whether or not we are running on a low power device
@@ -243,7 +243,7 @@ The `node` section is used to configure the underlying libp2p, and ipfs subsyste
 
 ## Storage
 
-The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` ontop, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
+The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` on top, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
 
 This is also where we configure the reference counted blockstore, which is an optional feature that is disabled by default. To read about the reference counter, click [here](REFERENCE_COUNTER.md).
 
@@ -415,7 +415,7 @@ The `opts` section is used to provide generalized configuration of TemporalX's I
 
 Configuration Options:
 
-* `blockstoreCaching` is used to enable a bloom+arc cache that sits ontop of the blockstore, which can be used to improve query performance and reduce disk IO at the cost of increased memory consumption.
+* `blockstoreCaching` is used to enable a bloom+arc cache that sits on top of the blockstore, which can be used to improve query performance and reduce disk IO at the cost of increased memory consumption.
 * `lowPower` is used to enable preference for settings friendly to low power devices.
 * `pubsub` is used to enable the libp2p pubsub subsystem. It is disabled by default.
 * `namesys` is used to enable the libp2p name resolution subsystem which provdies support for resolving IPNS, ENS, DNSLink, and more. It is disabled by default.
