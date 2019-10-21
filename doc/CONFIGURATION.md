@@ -1,6 +1,6 @@
 # Configuration File Documentation
 
-TemporalX configuration is done through a yaml file, while the command line tool `tex-cli` has a commad `tex-cli config` that can be used to generate default configuration files.
+TemporalX configuration is done through a yaml file, while the command line tool `tex-cli` has a commad `tex-cli config` that can be used to generate default configuration files. There is no required location of the config file. By default `tex-cli` looks for a file named `config.yml` in the current directory, but this can be changed by specifying the `--config` or `--cfg` CLI flag.
 
 ## Table Of Contents
 
@@ -152,7 +152,7 @@ log_file: ./logger.log
 
 # Datastore Configuration
 
-The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other. In fact in the code-base, they all use the same code.
+The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other.
 
 One thing thing to note is the section of the `node` configuration called `storage`. This is really just an aliased/renamed `datastore` section that is used for the storing all our data. By this we mean things like files, documents, movies, etc... It is for all intents and purposes our "main storage".  The one exception to this is the example configuration file earlier in the documentation which enables the `countedStore` which is a reference counted blockstore. If this is used in other `datastore` configuration sections it is simply ignored.
 
@@ -201,9 +201,9 @@ Configuration Options:
 
 * `tracing` enables/disables jaeger tracing
 * `listen_address` is the address to listen on for gRPC connections
-* `listen_proto` is the protocol the gRPC endpoint is using
-* `tls.cert_file` is the location to a tls certificate
-* `tls.key_file` is the location to the tls certificate key file
+* `listen_proto` is the protocol the gRPC endpoint is using. Only supported protocol is TCP, although UDP may work. 
+* `tls.cert_file` is the path to the server's TLS certificate saved as a PEM file
+* `tls.key_file` is the path  to the server's private key
 * `jwt.realm` is the realm of the jwt
 * `jwt.key` is they used for signing jwt's
 
@@ -222,7 +222,7 @@ The `profiling` section is used to configure profiling of TemporalX via pprof, a
 
 Configuration Options:
 
-* `enabled` enables/disables profiling collection
+* `enabled` enables/disables profiling collection with a default of disabled.
 * `endpoint` is the ip+port to expose `net/http/pprof` handlers on.
 
 # Node Configuration
