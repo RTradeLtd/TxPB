@@ -247,7 +247,7 @@ The `storage` section is used to configure the main storage layer of our node. I
 
 This is also where we configure the reference counted blockstore, which is an optional feature that is disabled by default. To read about the reference counter, click [here](REFERENCE_COUNTER.md).
 
-When not using a reference counted blockstore, delete requests are not blocked, even if you are attempting to delete a block that may be referenced/used by more than one other block. If you do this you can inadvertently lose data. Therefore when not using a reference counted blockstore, you must implement a data management system outside of TemporalX and ensure you consult with it before deleting any blocks.
+When not using a reference-counted blockstore, delete requests operate on the backing data directly. Therefore, an external data management system is required if the reference-counted blockstore is not enabled.
 
 Example Configurations:
 
