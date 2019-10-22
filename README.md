@@ -13,7 +13,7 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc/README.md) folder.
+We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc) folder.
 
 # License
 
