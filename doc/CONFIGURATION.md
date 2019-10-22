@@ -358,6 +358,15 @@ Memory
     type: memory
 ```
 
+Filesystem
+
+```yaml
+  keystore:
+    type: filesystem
+    datastore:
+      path: /temporalx/keystore
+```
+
 ## LibP2P
 
 The `libp2p` section is used to configure the libp2p host that we start up, and is a core component of TemporalX. All these configurations are from libp2p itself, so for those who have used existing IPFS solutions these may seem familiar.
