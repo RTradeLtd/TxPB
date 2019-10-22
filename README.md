@@ -1,6 +1,6 @@
 # TxPB
 
-`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation.
+`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.
 
 We have pre-generated gRPC bindings for the following languages:
 
@@ -13,14 +13,10 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-## Protocol Buffer/gRPC 
+We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc/README.md) folder.
 
-To view the generated protocol buffer and gRPC documentation click [here](https://rtradeltd.github.io/TxPB/doc/index.html)
+# License
 
-All of our `.proto` files are thoroughly commented and combined with [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) to generate the documentation.
+All code in this repository is licensed under `AGPL-3.0`, and all documentation is licensed under `MIT`. Documentation is anything that is a readme, or html file. Code is pretty much anything other than documentation such as javascript, java, golang, python, and `.proto` files.
 
-## TemporalX Manual
-
-* [Configuration](doc/CONFIGURATION.md)
-* [Getting Started](doc/GETTING_STARTED.md)
-* [License Overview](doc/LICENSE_OVERVIEW.md)
+This is different than the license key that is used to authorize your purchase and ownership of TemporalX.

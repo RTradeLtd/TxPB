@@ -1,0 +1,9 @@
+# Reference Counter
+
+TemporalX uses a novel reference counter designed to work with IPFS Content Identifiers (CIDs). We use this in place of a pinning system like that used by `js-ipfs` and `go-ipfs`, which allows us to realize significant performance and efficiency gains.
+
+The reference counter is implemented as a reference counter blockstore, which satisfies the IPFS blockstore interface. It intercepts all `Put`, `PutMany` and `Delete` calls and processes the block, while forwarding the request down the processing chain. `Delete` calls are handled a little differently, and the request is not actually forwarded down the procesisng chain. We use `Delete` calls as a "dereference" operation, that decreases the reference count of the block in question.
+
+One of the really awesome features about our reference counter unlike the pinning system used by `go-ipfs` is that it is *non-blocking* unless you are doing a garbage collection run! If you want to see just how much faster our non-blocking reference counter is, check out our [benchmark blog post](https://medium.com/temporal-cloud/temporalx-vs-go-ipfs-official-node-benchmarks-8457037a77cf).
+
+In order to permanently remove blocks that have a reference count of 0, you must trigger a garbage collection using TemporalX's admin api. The admin api is only enabled when using the reference counted blockstore, and is exposed on `localhost:9999` by default.  When you trigger a garbage collection, all blockstore interaction calls are blocked, while we wait for pending reference count operations to complete. Once all pending reference count operations have finished, we look for any unferenced blocks. These blocks are then subsequently permanently removed. After removing all unreferenced blocks, we resume normal operation and unblock all blockstore interaction calls.
