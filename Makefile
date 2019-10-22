@@ -1,5 +1,5 @@
 .PHONY: proto
-proto: proto-gen tidy
+proto: proto-gen docs tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
@@ -301,15 +301,6 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/keystore.proto
 
-	# generate documentation
-	protoc \
-		-I=pb \
-		-I=${GOPATH}/src \
-		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--doc_out=doc \
-		--doc_opt=html,index.html \
-		pb/*.proto
-
 # run standard go tooling for better readability
 .PHONY: tidy
 tidy: imports fmt
@@ -325,3 +316,14 @@ imports:
 .PHONY: fmt
 fmt:
 	find . -type f -name '*.go' -exec gofmt -s -w {} \;
+
+.PHONY: docs
+docs:
+	# generate documentation
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--doc_out=doc \
+		--doc_opt=markdown,PROTO.md \
+		pb/*.proto

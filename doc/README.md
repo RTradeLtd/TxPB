@@ -8,5 +8,5 @@ This folder contains all of our documentation including protocol buffer docs, co
 * [Configuration File Documentation](CONFIGURATION.md)
 * [Reference Counter Overview](REFERENCE_COUNTER.md)
 * [License Key Overview](LICENSE_OVERVIEW.md)
-* [Protocol Buffer Documentation](proto.html)
+* [Protocol Buffer Documentation](PROTO.md)
 
