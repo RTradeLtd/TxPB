@@ -1,6 +1,6 @@
 # Reference Counter
 
-TemporalX uses a customized reference counter designed to work with IPFS Content Identifiers (CIDs). We use this in place of a pinning system like that used by `js-ipfs` and `go-ipfs`, which allows us to realize significant performance, and efficiency gains.
+TemporalX uses a novel reference counter designed to work with IPFS Content Identifiers (CIDs). We use this in place of a pinning system like that used by `js-ipfs` and `go-ipfs`, which allows us to realize significant performance and efficiency gains.
 
 The reference counter is implemented as a reference counter blockstore, which satisfies the IPFS blockstore interface. It intercepts all `Put`, `PutMany` and `Delete` calls and processes the block, while forwarding the request down the processing chain. `Delete` calls are handled a little differently, and the request is not actually forwarded down the procesisng chain. We use `Delete` calls as a "dereference" operation, that decreases the reference count of the block in question.
 
