@@ -1,11 +1,50 @@
 PROTOC_GEN_TS_PATH=${HOME}/.npm_modules/bin/protoc-gen-ts
 
 .PHONY: proto
-proto: proto-gen docs tidy
+proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen:
+proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-docs
+
+
+# run standard go tooling for better readability
+.PHONY: tidy
+tidy: imports fmt
+	go vet ./...
+	golint ./...
+
+# automatically add missing imports
+.PHONY: imports
+imports:
+	find . -type f -name '*.go' -exec goimports -w {} \;
+
+# format code and simplify if possible
+.PHONY: fmt
+fmt:
+	find . -type f -name '*.go' -exec gofmt -s -w {} \;
+
+# install supplementary tooling
+.PHONY: install
+install:
+	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
+	go get -u github.com/gogo/protobuf/protoc-gen-gogofaster
+	go get -u github.com/gogo/protobuf/protoc-gen-gogofast
+	go get -u github.com/gogo/protobuf/protoc-gen-gogo
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+	go get -u github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
+	go get -u github.com/gogo/protobuf/proto
+	go get -u github.com/gogo/protobuf/gogoproto
+	go get -u -github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	npm install -g ts-protoc-gen
+	python3 -m pip install grpcio-tools
+	bash .script/protoc-js.sh
+	bash .script/protoc-java.sh
+
+# protocol buffer generation targets
+
+gen-dag:
 	# generate golang bindings (dag)
 	protoc \
 		-I=pb \
@@ -42,6 +81,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/dag.proto
 
+gen-file:
 	# generate golang bindings (file)
 	protoc \
 		-I=pb \
@@ -77,6 +117,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/file.proto
 
+gen-util:
 	# generate golang bindings (util)
 	protoc \
 		-I=pb \
@@ -111,6 +152,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/dag.proto
 
+gen-node:
 	# generate golang bindings (node)
 	protoc \
 		-I=pb \
@@ -146,6 +188,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/node.proto
 
+gen-status:
 	# generate golang bindings (status)
 	protoc \
 		-I=pb \
@@ -181,6 +224,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/status.proto
 
+gen-pubsub:
 	# generate golang bindings (pubsub)
 	protoc \
 		-I=pb \
@@ -216,6 +260,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/pubsub.proto
 
+gen-admin:
 	# generate golang bindings (admin)
 	protoc \
 		-I=pb \
@@ -251,6 +296,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/admin.proto
 
+gen-namesys:
 	# generate golang bindings (namesys)
 	protoc \
 		-I=pb \
@@ -286,6 +332,7 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/namesys.proto
 
+gen-keystore:
 	# generate golang bindings (keystore)
 	protoc \
 		-I=pb \
@@ -321,25 +368,8 @@ proto-gen:
   		--grpc-java_out=java \
 		pb/keystore.proto
 
-# run standard go tooling for better readability
-.PHONY: tidy
-tidy: imports fmt
-	go vet ./...
-	golint ./...
-
-# automatically add missing imports
-.PHONY: imports
-imports:
-	find . -type f -name '*.go' -exec goimports -w {} \;
-
-# format code and simplify if possible
-.PHONY: fmt
-fmt:
-	find . -type f -name '*.go' -exec gofmt -s -w {} \;
-
-.PHONY: docs
-docs:
-	# generate documentation
+gen-docs:
+		# generate documentation
 	protoc \
 		-I=pb \
 		-I=${GOPATH}/src \
@@ -347,22 +377,3 @@ docs:
 		--doc_out=doc \
 		--doc_opt=markdown,PROTO.md \
 		pb/*.proto
-
-
-# install supplementary tooling
-.PHONY: install
-install:
-	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
-	go get -u github.com/gogo/protobuf/protoc-gen-gogofaster
-	go get -u github.com/gogo/protobuf/protoc-gen-gogofast
-	go get -u github.com/gogo/protobuf/protoc-gen-gogo
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-	go get -u github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
-	go get -u github.com/gogo/protobuf/proto
-	go get -u github.com/gogo/protobuf/gogoproto
-	go get -u -github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-	npm install -g ts-protoc-gen
-	python3 -m pip install grpcio-tools
-	bash .script/protoc-js.sh
-	bash .script/protoc-java.sh
