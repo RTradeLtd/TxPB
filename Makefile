@@ -352,6 +352,9 @@ docs:
 # install supplementary tooling
 .PHONY: install
 install:
+	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
+	go get -u github.com/gogo/protobuf/protoc-gen-gogofaster
+	go get -u github.com/gogo/protobuf/protoc-gen-gogofast
 	go get -u github.com/gogo/protobuf/protoc-gen-gogo
 	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -359,3 +362,7 @@ install:
 	go get -u github.com/gogo/protobuf/proto
 	go get -u github.com/gogo/protobuf/gogoproto
 	go get -u -github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	npm install -g ts-protoc-gen
+	python3 -m pip install grpcio-tools
+	bash .script/protoc-js.sh
+	bash .script/protoc-java.sh
