@@ -53,6 +53,18 @@ temporalx:
     enabled: false
     # the address to expose the net/http/pprof endpoint on 
     endpoint: 127.0.0.1:9091
+  # ipfs http gateway configuration
+  gateway:
+    # enables the http gateway
+    enabled: true
+    # the address to listen on
+    address: 0.0.0.0:8080
+    # the http methods to accept
+    allowed_methods: ["POST", "GET"]
+    # the origins to accept requests from
+    allowed_origins: ["*"]
+    # the headers to accept
+    allowed_headers: ["*"]
 # configures the custom IPFS node TemporalX uses 
 node:
   # the various address to expose the libp2p swarm connection on
