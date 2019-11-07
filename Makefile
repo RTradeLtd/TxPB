@@ -28,7 +28,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/dag.proto
@@ -64,7 +64,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/file.proto
@@ -98,7 +98,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/util.proto
@@ -126,14 +126,14 @@ proto-gen:
 		pb/node.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js bindings (node)
+	# generate js and typescript bindings (node)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/node.proto
@@ -168,7 +168,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/status.proto
@@ -203,7 +203,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/pubsub.proto
@@ -238,7 +238,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/admin.proto
@@ -273,7 +273,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/namesys.proto
@@ -308,7 +308,7 @@ proto-gen:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs:js \
-		--ts_out=ts \
+		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		keystore.proto
