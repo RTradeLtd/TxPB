@@ -5,7 +5,9 @@ TemporalX configuration is done through a yaml file, while the command line tool
 ## Table Of Contents
 
 <p align="left">
-  · <a href="#the-config-file"><strong>The Config File</strong></a>
+  · <a href="#configuration-file-reference"><strong>Configuration File Reference</strong></a>
+  <br>
+  · <a href="#temporalx"><strong>TemporalX Configuration</strong></a>
   <br>
   · <a href="#datastore-configuration"><strong>Datastore Configuration</strong></a>
   <br>
@@ -14,7 +16,7 @@ TemporalX configuration is done through a yaml file, while the command line tool
   · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
 </p>
 
-# The Config File
+# Configuration File Reference
 
 The following example configuration file is a fully populated config file, with reference counting enabled. A much more basic config file can be produced with the command `tex-cli config gen`.
 
@@ -203,6 +205,8 @@ The `temporalx` section is used to configure the TemporalX gRPC server that faci
   · <a href="#prometheus"><strong>Prometheus</strong></a>
   <br>
   · <a href="#profiling"><strong>Profiling</strong></a>
+  <br>
+  · <a href="#gateway"><strong>Gateway</strong></a>
 </p>
 
 ## API
@@ -236,6 +240,18 @@ Configuration Options:
 
 * `enabled` enables/disables profiling collection with a default of disabled.
 * `endpoint` is the ip+port to expose `net/http/pprof` handlers on.
+
+## Gateway
+
+The `gateway` section is ued to configure the IPFS HTTP Gateway that TemporalX exposes. It is the same in functionality to the gateway exposed by `go-ipfs`, with the exception of enabling IPFS, IPNS, and IPLD requests. At the moment we only support resolution of requests using a single CID path. That is, you may only ever request paths like `/ipfs/CID`, `/ipns/CID`, or `/ipld/CID`. It is not currently supported to request paths like `/ipfs/CIDa/CIDb`, etc..
+
+Configuration Options:
+
+* `enabled` enables/disables http gateway (default false)
+* `address` specifies the address and port we will listen on (default is empty string)
+* `allowed_methods` specifies the http methods we allow (default is all)
+* `allowed_origins` specifies the origins we will accept requests from (default is all)
+* `allowed_headers` specifies the http headers we will process (default is all)
 
 # Node Configuration
 
