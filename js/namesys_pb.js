@@ -612,10 +612,10 @@ proto.pb.NameSysPublishRequest.serializeBinaryToWriter = function(message, write
 
 /**
  * optional bytes privateKey = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.NameSysPublishRequest.prototype.getPrivatekey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 

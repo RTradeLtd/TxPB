@@ -802,10 +802,10 @@ proto.pb.PubSubPublishRequest.prototype.setTopic = function(value) {
 
 /**
  * optional bytes data = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubPublishRequest.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -1357,10 +1357,10 @@ proto.pb.PubSubMessageResponse.serializeBinaryToWriter = function(message, write
 
 /**
  * optional bytes from = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubMessageResponse.prototype.getFrom = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -1399,10 +1399,10 @@ proto.pb.PubSubMessageResponse.prototype.setFrom = function(value) {
 
 /**
  * optional bytes data = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubMessageResponse.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -1441,10 +1441,10 @@ proto.pb.PubSubMessageResponse.prototype.setData = function(value) {
 
 /**
  * optional bytes seqno = 3;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubMessageResponse.prototype.getSeqno = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
@@ -1520,10 +1520,10 @@ proto.pb.PubSubMessageResponse.prototype.clearTopicidsList = function() {
 
 /**
  * optional bytes signature = 5;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubMessageResponse.prototype.getSignature = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
@@ -1562,10 +1562,10 @@ proto.pb.PubSubMessageResponse.prototype.setSignature = function(value) {
 
 /**
  * optional bytes key = 6;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubMessageResponse.prototype.getKey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 

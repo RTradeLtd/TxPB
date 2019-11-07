@@ -66,7 +66,7 @@ gen-dag:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -103,7 +103,7 @@ gen-file:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -138,7 +138,7 @@ gen-util:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -174,7 +174,7 @@ gen-node:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -210,7 +210,7 @@ gen-status:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -246,7 +246,7 @@ gen-pubsub:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -282,7 +282,7 @@ gen-admin:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -318,7 +318,7 @@ gen-namesys:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
@@ -354,7 +354,7 @@ gen-keystore:
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs:js \
+		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \

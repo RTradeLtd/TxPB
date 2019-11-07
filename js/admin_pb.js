@@ -693,10 +693,10 @@ proto.pb.Block.prototype.setCid = function(value) {
 
 /**
  * optional bytes data = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.Block.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 

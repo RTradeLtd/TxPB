@@ -202,10 +202,10 @@ proto.pb.KeystoreRequest.prototype.setName = function(value) {
 
 /**
  * optional bytes privateKey = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.KeystoreRequest.prototype.getPrivatekey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -405,10 +405,10 @@ proto.pb.KeystoreResponse.prototype.setStatus = function(value) {
 
 /**
  * optional bytes privateKey = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.KeystoreResponse.prototype.getPrivatekey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 

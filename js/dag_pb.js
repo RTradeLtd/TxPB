@@ -552,10 +552,10 @@ proto.pb.DagPutRequest.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * optional bytes data = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.DagPutRequest.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -908,10 +908,10 @@ proto.pb.DagGetResponse.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * optional bytes rawData = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.DagGetResponse.prototype.getRawdata = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -1107,10 +1107,10 @@ proto.pb.NewIPLDNodeRequest.prototype.clearLinksMap = function() {
 
 /**
  * optional bytes data = 2;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.NewIPLDNodeRequest.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -1786,10 +1786,10 @@ proto.pb.IPLDLink.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * optional bytes hash = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.IPLDLink.prototype.getHash = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -2036,10 +2036,10 @@ proto.pb.IPLDNode.prototype.clearLinksList = function() {
 
 /**
  * optional bytes data = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.IPLDNode.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 

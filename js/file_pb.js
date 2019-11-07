@@ -943,10 +943,10 @@ proto.pb.Blob.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * optional bytes content = 1;
- * @return {string}
+ * @return {!(string|Uint8Array)}
  */
 proto.pb.Blob.prototype.getContent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
