@@ -6,6 +6,7 @@ We have pre-generated gRPC bindings for the following languages:
 
 * [golang](https://github.com/RTradeLtd/TxPB/tree/master/go)
 * [javascript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/js)
+* [typescript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/ts)
 * [java](https://github.com/RTradeLtd/TxPB/tree/master/java/pb)
 * [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
 
