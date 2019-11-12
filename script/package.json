@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.11.0",
+    "@improbable-eng/grpc-web-node-http-transport": "^0.11.0",
     "google-protobuf": "^3.10.0"
   }
 }

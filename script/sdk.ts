@@ -1,5 +1,5 @@
 import {grpc} from "@improbable-eng/grpc-web"; 
-
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import {DagAPI} from "./dag_pb_service";
 
 import {DagPutRequest, DagPutResponse} from "./dag_pb";
@@ -13,6 +13,7 @@ putRequest.setData("hello world")
 grpc.invoke(DagAPI.DagPut, {
     request: putRequest,
     host: "xapi-dev.temporal.cloud:9090",
+    transport: NodeHttpTransport(),
     onMessage: (message: DagPutResponse) => {
         console.log("got response: ", message.toObject());
     },
