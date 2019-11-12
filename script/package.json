@@ -1,0 +1,19 @@
+{
+  "name": "temx-script-sdk",
+  "version": "1.0.0",
+  "description": "TemporalX javascript and typescript api code",
+  "main": "sdk.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/RTradeLtd/TxPB"
+  },
+  "author": "Bonedaddy (Alex T)",
+  "license": "ISC",
+  "dependencies": {
+    "@improbable-eng/grpc-web": "^0.11.0",
+    "google-protobuf": "^3.10.0"
+  }
+}

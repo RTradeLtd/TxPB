@@ -1,7 +1,7 @@
 PROTOC_GEN_TS_PATH=${HOME}/.npm_modules/bin/protoc-gen-ts
 
 .PHONY: proto
-proto: proto-gen tidy
+proto: proto-gen tidy gen-script-cleanup
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
@@ -69,7 +69,7 @@ gen-dag:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/dag.proto
 
 	# generate java bindings (dag)
@@ -106,7 +106,7 @@ gen-file:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/file.proto
 	# generate java bindings (file)
 	protoc \
@@ -141,7 +141,7 @@ gen-util:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/util.proto
 	# generate java bindings (util)
 	protoc \
@@ -177,7 +177,7 @@ gen-node:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/node.proto
 	# generate java bindings (node)
 	protoc \
@@ -213,7 +213,7 @@ gen-status:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/status.proto
 	# generate java bindings (status)
 	protoc \
@@ -249,7 +249,7 @@ gen-pubsub:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/pubsub.proto
 	# generate java bindings (pubsub)
 	protoc \
@@ -285,7 +285,7 @@ gen-admin:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/admin.proto
 	# generate java bindings (admin)
 	protoc \
@@ -321,7 +321,7 @@ gen-namesys:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		pb/namesys.proto
 	# generate java bindings (namesys)
 	protoc \
@@ -357,7 +357,7 @@ gen-keystore:
 		--js_out=import_style=commonjs,binary:script \
 		--ts_out=service=grpc-web:script \
 		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:script \
 		keystore.proto
 	# generate java bindings (keystore)
 	protoc \
@@ -377,3 +377,9 @@ gen-docs:
 		--doc_out=doc \
 		--doc_opt=markdown,PROTO.md \
 		pb/*.proto
+		
+
+.PHONY: gen-script-cleanup
+gen-script-cleanup:
+	find script/* -maxdepth 1 -type f -name "*.ts" -exec sed -i '/github_com_gogo_protobuf_gogoproto_gogo_pb/d' {} \;
+	find script/* -maxdepth 1 -type f -name "*.js" -exec sed -i '/github_com_gogo_protobuf_gogoproto_gogo_pb/d' {} \;
