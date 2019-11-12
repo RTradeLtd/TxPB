@@ -1,15 +1,30 @@
 import {grpc} from "@improbable-eng/grpc-web"; 
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import {DagAPI} from "./dag_pb_service";
-
+import {StatusAPI} from "./status_pb_service";
+import {Empty} from "./util_pb"
+import {StatusResponse} from "./status_pb";
 import {DagPutRequest, DagPutResponse} from "./dag_pb";
 
+const statRequest = new Empty();
+grpc.invoke(StatusAPI.Status, {
+  request: statRequest,
+  host: "xapi-dev.temporal.cloud:9090",
+  transport: NodeHttpTransport(),
+  onMessage: (message: StatusResponse) => {
+      console.log("got response: ", message.toObject());
+  },
+  onEnd: (code: grpc.Code, msg: string | undefined, trailers: grpc.Metadata) => {
+      if (code == grpc.Code.OK) {
+        console.log("all ok")
+      } else {
+        console.log("hit an error", code, msg, trailers);
+      }
+    }
+});
 
 const putRequest = new DagPutRequest();
-
-
 putRequest.setData("hello world")
-
 grpc.invoke(DagAPI.DagPut, {
     request: putRequest,
     host: "xapi-dev.temporal.cloud:9090",
