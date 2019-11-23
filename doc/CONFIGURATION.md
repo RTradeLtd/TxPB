@@ -148,6 +148,11 @@ node:
       # persistently store DHT information between reboots
       # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
       persistentDHT: "true"
+    # enables modifying libp2p host options
+    host_options:
+      # enable nat port mapping
+      # useful if blocked by a residential connection
+      natPortMap: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -449,6 +454,10 @@ Configuration Options:
 ### DHT Options
 
 The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently only supports one setting `persistentDHT` which is used to store DHT records on disk. It enables persisting DHT records long-term, and avoiding storing them in memory which has the side-effect of reducing memory consumption. If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
+
+### Host Options
+
+The `host_options` sectino is used to provide optional control of libp2p host configurations. It currently only supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed.
 
 ## Opts
 
