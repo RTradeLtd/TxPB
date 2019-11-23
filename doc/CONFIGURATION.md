@@ -148,6 +148,11 @@ node:
       # persistently store DHT information between reboots
       # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
       persistentDHT: "true"
+    # enables modifying libp2p host options
+    host_options:
+      # enable nat port mapping
+      # useful if blocked by a residential connection
+      natPortMap: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -243,7 +248,11 @@ Configuration Options:
 
 ## Gateway
 
-The `gateway` section is ued to configure the IPFS HTTP Gateway that TemporalX exposes. It is the same in functionality to the gateway exposed by `go-ipfs`, with the exception of enabling IPFS, IPNS, and IPLD requests. At the moment we only support resolution of requests using a single CID path. That is, you may only ever request paths like `/ipfs/CID`, `/ipns/CID`, or `/ipld/CID`. It is not currently supported to request paths like `/ipfs/CIDa/CIDb`, etc..
+The `gateway` section is used to configure the IPFS HTTP Gateway that TemporalX exposes. It has feature parity with `go-ipfs` to a certain extent, ignoring some of the `X-Ipfs-*` headers, while also supporting `/ipld` lookups. When encountering UnixFS directories, a slightly different "directory index" is displayed than what is shown when using `go-ipfs`.
+
+The gateway http server by default enables gzip "level 3" compression, and has a max processing limit of 1000 requests/second, and a 2 minute timeout for inactive connections. Eventually these will be configurable, but for now they are some sensible defualts. Additionally the gateway will error out when processing a request body 1GB or larger in size.
+
+The gateway offers no write capabilities, and is strictly focused on read-only purposes. Planned features include an in-memory cache. 
 
 Configuration Options:
 
@@ -444,7 +453,11 @@ Configuration Options:
 
 ### DHT Options
 
-The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently only supports one setting `persistentDHT` which is used to store DHT records on disk. It enables persisting DHT records long-term, and avoiding storing them in memory which has the side-effect of reducing memory consumption. If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
+The `dht_options` section is used to provide optional control of kad dht we instantiate. It currently supports one setting `persistentDHT` which is used to store DHT records on disk. It enables persisting DHT records long-term, and avoiding storing them in memory which has the side-effect of reducing memory consumption. If set to true, it uses datastore key [namespaces](https://github.com/ipfs/go-datastore/tree/master/namespace) to wrap around the main storage layer of our node. This means that it will use whatever datastore type you define in `node.storage`, and wrap all keys with a `dhtdatastore` prefix.
+
+### Host Options
+
+The `host_options` section is used to provide optional control of libp2p host configurations. It currently supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed. For documentation about the exact type of nat port mapping methods used please consult the [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat). 
 
 ## Opts
 

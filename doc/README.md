@@ -10,3 +10,4 @@ This folder contains all of our documentation including protocol buffer docs, co
 * [License Key Overview](LICENSE_OVERVIEW.md)
 * [Protocol Buffer Documentation](PROTO.md)
 * [TemporalX HTTP Gateway](GATEWAY.md)
+* [Benchmarks](BENCHMARKS.md)
