@@ -14,7 +14,7 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc) folder.
+We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc) folder, although the github pages version [here](https://rtradeltd.github.io/TxPB/) is much nicer to look at.
 
 # License
 
