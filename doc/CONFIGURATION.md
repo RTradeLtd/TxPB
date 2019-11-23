@@ -457,7 +457,7 @@ The `dht_options` section is used to provide optional control of kad dht we inst
 
 ### Host Options
 
-The `host_options` section is used to provide optional control of libp2p host configurations. It currently supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed.
+The `host_options` section is used to provide optional control of libp2p host configurations. It currently supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed. For documentation about the exact type of nat port mapping methods used please consult the [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat). 
 
 ## Opts
 
