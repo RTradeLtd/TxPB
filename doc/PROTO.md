@@ -85,6 +85,7 @@
     - [IsConnectedRequest](#pb.IsConnectedRequest)
     - [IsConnectedResponse](#pb.IsConnectedResponse)
     - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
+    - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
   
@@ -1006,6 +1007,23 @@ IsConnectedResponse is a response to an IsConnectedRequest request
 
 
 
+<a name="pb.P2PLsInfo"></a>
+
+### P2PLsInfo
+P2PLsInfo contains information about a single p2p stream
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| protocolName | [string](#string) |  |  |
+| listenAddress | [string](#string) |  |  |
+| targetAddress | [string](#string) |  |  |
+
+
+
+
+
+
 <a name="pb.P2PRequest"></a>
 
 ### P2PRequest
@@ -1038,6 +1056,7 @@ P2PResponse is a response message sent in response to a P2PRequest message
 | requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  |  |
 | names | [string](#string) | repeated | sent by: P2PREQTYPE.LISTEN |
 | connsClosed | [int32](#int32) |  | sent by: P2PREQTYPE.CLOSE to indicate the number of connections closed |
+| streamInfos | [P2PLsInfo](#pb.P2PLsInfo) | repeated | sent by: P2PREQTYPE.LS and contains all known stream information |
 
 
 

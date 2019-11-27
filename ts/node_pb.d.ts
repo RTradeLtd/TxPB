@@ -61,6 +61,11 @@ export class P2PResponse extends jspb.Message {
   getConnsclosed(): number;
   setConnsclosed(value: number): void;
 
+  clearStreaminfosList(): void;
+  getStreaminfosList(): Array<P2PLsInfo>;
+  setStreaminfosList(value: Array<P2PLsInfo>): void;
+  addStreaminfos(value?: P2PLsInfo, index?: number): P2PLsInfo;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): P2PResponse.AsObject;
   static toObject(includeInstance: boolean, msg: P2PResponse): P2PResponse.AsObject;
@@ -76,6 +81,35 @@ export namespace P2PResponse {
     requesttype: P2PREQTYPEMap[keyof P2PREQTYPEMap],
     namesList: Array<string>,
     connsclosed: number,
+    streaminfosList: Array<P2PLsInfo.AsObject>,
+  }
+}
+
+export class P2PLsInfo extends jspb.Message {
+  getProtocolname(): string;
+  setProtocolname(value: string): void;
+
+  getListenaddress(): string;
+  setListenaddress(value: string): void;
+
+  getTargetaddress(): string;
+  setTargetaddress(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): P2PLsInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: P2PLsInfo): P2PLsInfo.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: P2PLsInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): P2PLsInfo;
+  static deserializeBinaryFromReader(message: P2PLsInfo, reader: jspb.BinaryReader): P2PLsInfo;
+}
+
+export namespace P2PLsInfo {
+  export type AsObject = {
+    protocolname: string,
+    listenaddress: string,
+    targetaddress: string,
   }
 }
 

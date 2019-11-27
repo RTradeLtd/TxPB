@@ -73,8 +73,17 @@ message P2PResponse {
     repeated string names = 2;
     // sent by: P2PREQTYPE.CLOSE to indicate the number of connections closed
     int32 connsClosed = 3;
+    // sent by: P2PREQTYPE.LS and contains all known stream information
+    repeated P2PLsInfo streamInfos = 4;
 }
 
+
+// P2PLsInfo contains information about a single p2p stream
+message P2PLsInfo {
+    string protocolName = 1;
+    string listenAddress = 2;
+    string targetAddress = 3;
+}
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 message GetPeersResponse {
