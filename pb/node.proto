@@ -30,6 +30,47 @@ service NodeAPI {
     rpc EnableExtras(EnableExtrasRequest) returns (Empty) { };
     // DisableExtras is used to disable a particular extras feature
     rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
+    // P2P allows control of generalized p2p streams for tcp/udp based protocol.
+    // By using this RPC, we can tunnel traffic similar to ssh tunneling
+    // except using libp2p as the transport layer, and and tcp/udp port.
+    rpc P2P(P2PRequest) returns (P2PResponse) { };
+}
+
+// P2PREQTYPE denotes the particular type of request being used in the p2p rpc
+enum P2PREQTYPE {
+    // equivalent of ipfs p2p close
+    CLOSE = 0;
+    // equivalent of ipfs p2p forward
+    FORWARD = 1;
+    // equivalent of ipfs p2p listen
+    LISTEN = 2;
+    // equivalent of ipfs p2p ls
+    LS = 3;
+}
+
+// P2PRequest is a request message holding the details of a particular P2P rpc call
+message P2PRequest {
+    // indicates the reuqest type
+    P2PREQTYPE requestType = 1;  
+    // used by: P2PREQTYPE.CLOSE
+    bool all = 2;
+    // used by: P2PREQTYPE.LS
+    bool verbose = 3;
+    // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN
+    string protocolName = 4;
+    // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+    string listenAddress = 5;
+    // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+    string targetAddress = 6;
+    // used by: P2PREQTYPE.LISTEN
+    string remoteAddress = 7;
+}
+
+// P2PResponse is a response message sent in response to a P2PRequest message
+message P2PResponse {
+    P2PREQTYPE requestType = 1;
+    // sent by: P2PREQTYPE.LISTEN
+    repeated string names = 2;
 }
 
 
