@@ -64,6 +64,8 @@ message P2PRequest {
     string targetAddress = 6;
     // used by: P2PREQTYPE.LISTEN
     string remoteAddress = 7;
+    // used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD
+    bool allowCustomProtocols = 8;
 }
 
 // P2PResponse is a response message sent in response to a P2PRequest message

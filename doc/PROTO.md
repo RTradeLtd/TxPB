@@ -1039,6 +1039,7 @@ P2PRequest is a request message holding the details of a particular P2P rpc call
 | listenAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
 | targetAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
 | remoteAddress | [string](#string) |  | used by: P2PREQTYPE.LISTEN |
+| allowCustomProtocols | [bool](#bool) |  | used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD |
 
 
 
