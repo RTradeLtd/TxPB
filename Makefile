@@ -5,7 +5,7 @@ proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-docs
+proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-p2p gen-docs
 
 
 # run standard go tooling for better readability
@@ -367,6 +367,42 @@ gen-keystore:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/keystore.proto
+
+gen-p2p:
+	# generate golang bindings (file)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		pb/p2p.proto \
+		--gogofaster_out=plugins=grpc:go
+	# generate python bindings (file)
+	python3 -m grpc_tools.protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		pb/p2p.proto \
+		--python_out=py \
+		--grpc_python_out=py
+	# generate js  and typescript bindings (file)
+	protoc \
+		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--ts_out=service=grpc-web:ts \
+		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/p2p.proto
+	# generate java bindings (file)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
+  		--grpc-java_out=java \
+		pb/p2p.proto
 
 gen-docs:
 		# generate documentation

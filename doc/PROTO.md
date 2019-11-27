@@ -92,6 +92,18 @@
     - [NodeAPI](#pb.NodeAPI)
   
 
+- [p2p.proto](#p2p.proto)
+    - [CloseRequest](#pb.CloseRequest)
+    - [ForwardRequest](#pb.ForwardRequest)
+    - [ListenRequest](#pb.ListenRequest)
+    - [LsRequest](#pb.LsRequest)
+    - [LsResponse](#pb.LsResponse)
+  
+  
+  
+    - [P2PAPI](#pb.P2PAPI)
+  
+
 - [pubsub.proto](#pubsub.proto)
     - [PubSubListPeersRequest](#pb.PubSubListPeersRequest)
     - [PubSubListPeersResponse](#pb.PubSubListPeersResponse)
@@ -1035,6 +1047,116 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
 | EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
 | DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+
+ 
+
+
+
+<a name="p2p.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## p2p.proto
+
+
+
+<a name="pb.CloseRequest"></a>
+
+### CloseRequest
+equivalent of ipfs p2p close
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| all | [bool](#bool) |  |  |
+| protocolName | [string](#string) |  |  |
+| listenAddress | [string](#string) |  |  |
+| targetAddress | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.ForwardRequest"></a>
+
+### ForwardRequest
+equivalent of ipfs p2p forward
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| protocolName | [string](#string) |  |  |
+| listenAddress | [string](#string) |  |  |
+| targetAddress | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.ListenRequest"></a>
+
+### ListenRequest
+equivalent of ipfs p2p listen
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| protocolName | [string](#string) |  |  |
+| remoteAddress | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.LsRequest"></a>
+
+### LsRequest
+equivalent of ipfs p2p ls
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| verbose | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="pb.LsResponse"></a>
+
+### LsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| names | [string](#string) | repeated |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="pb.P2PAPI"></a>
+
+### P2PAPI
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Close | [CloseRequest](#pb.CloseRequest) | [Empty](#pb.Empty) |  |
+| Forward | [ForwardRequest](#pb.ForwardRequest) | [Empty](#pb.Empty) |  |
+| Listen | [ListenRequest](#pb.ListenRequest) | [Empty](#pb.Empty) |  |
+| Ls | [LsRequest](#pb.LsRequest) | [LsResponse](#pb.LsResponse) |  |
 
  
 
