@@ -321,7 +321,8 @@ proto.pb.P2PRequest.toObject = function(includeInstance, msg) {
     listenaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     targetaddress: jspb.Message.getFieldWithDefault(msg, 6, ""),
     remoteaddress: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    allowcustomprotocols: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
+    allowcustomprotocols: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+    reportpeerid: jspb.Message.getBooleanFieldWithDefault(msg, 9, false)
   };
 
   if (includeInstance) {
@@ -389,6 +390,10 @@ proto.pb.P2PRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setAllowcustomprotocols(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReportpeerid(value);
       break;
     default:
       reader.skipField();
@@ -472,6 +477,13 @@ proto.pb.P2PRequest.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       8,
+      f
+    );
+  }
+  f = message.getReportpeerid();
+  if (f) {
+    writer.writeBool(
+      9,
       f
     );
   }
@@ -619,6 +631,24 @@ proto.pb.P2PRequest.prototype.getAllowcustomprotocols = function() {
  */
 proto.pb.P2PRequest.prototype.setAllowcustomprotocols = function(value) {
   return jspb.Message.setProto3BooleanField(this, 8, value);
+};
+
+
+/**
+ * optional bool reportPeerID = 9;
+ * @return {boolean}
+ */
+proto.pb.P2PRequest.prototype.getReportpeerid = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.P2PRequest} returns this
+ */
+proto.pb.P2PRequest.prototype.setReportpeerid = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
 };
 
 

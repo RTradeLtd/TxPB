@@ -30,6 +30,9 @@ export class P2PRequest extends jspb.Message {
   getAllowcustomprotocols(): boolean;
   setAllowcustomprotocols(value: boolean): void;
 
+  getReportpeerid(): boolean;
+  setReportpeerid(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): P2PRequest.AsObject;
   static toObject(includeInstance: boolean, msg: P2PRequest): P2PRequest.AsObject;
@@ -50,6 +53,7 @@ export namespace P2PRequest {
     targetaddress: string,
     remoteaddress: string,
     allowcustomprotocols: boolean,
+    reportpeerid: boolean,
   }
 }
 
