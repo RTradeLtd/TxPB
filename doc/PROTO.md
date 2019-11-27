@@ -85,6 +85,7 @@
     - [IsConnectedRequest](#pb.IsConnectedRequest)
     - [IsConnectedResponse](#pb.IsConnectedResponse)
     - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
+    - [PersistCIDRequest](#pb.PersistCIDRequest)
   
     - [EXTRASTYPE](#pb.EXTRASTYPE)
   
@@ -1002,6 +1003,21 @@ IsConnectedResponse is a response to an IsConnectedRequest request
 
 
 
+
+<a name="pb.PersistCIDRequest"></a>
+
+### PersistCIDRequest
+PersistCIDRequest is used to persist a cid on the local retaining it in permanent storage.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cid | [string](#string) |  | the cid we will request from the network |
+
+
+
+
+
  
 
 
@@ -1035,6 +1051,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
 | EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
 | DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+| PersistCID | [PersistCIDRequest](#pb.PersistCIDRequest) | [Empty](#pb.Empty) | PersistCID is used to persist a cid in local storage, and is the equivalent of running ipfs pin add |
 
  
 

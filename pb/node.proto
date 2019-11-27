@@ -30,8 +30,15 @@ service NodeAPI {
     rpc EnableExtras(EnableExtrasRequest) returns (Empty) { };
     // DisableExtras is used to disable a particular extras feature
     rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
+    // PersistCID is used to persist a cid in local storage, and is the equivalent of running ipfs pin add
+    rpc PersistCID(PersistCIDRequest) returns (Empty) { };
 }
 
+// PersistCIDRequest is used to persist a cid on the local retaining it in permanent storage.
+message PersistCIDRequest {
+    // the cid we will request from the network
+    string cid = 1;
+}
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 message GetPeersResponse {

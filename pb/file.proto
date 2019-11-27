@@ -26,7 +26,6 @@ service FileAPI {
     rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) { };
 }
 
-
 // UploadRequest is used to upload data as a UnixFS object
 message UploadRequest {
     // blob is a single chunk of data
