@@ -610,7 +610,8 @@ proto.pb.P2PResponse.prototype.toObject = function(opt_includeInstance) {
 proto.pb.P2PResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    namesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+    namesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    connsclosed: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -655,6 +656,10 @@ proto.pb.P2PResponse.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.addNames(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setConnsclosed(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -695,6 +700,13 @@ proto.pb.P2PResponse.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeRepeatedString(
       2,
+      f
+    );
+  }
+  f = message.getConnsclosed();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
       f
     );
   }
@@ -753,6 +765,24 @@ proto.pb.P2PResponse.prototype.addNames = function(value, opt_index) {
  */
 proto.pb.P2PResponse.prototype.clearNamesList = function() {
   return this.setNamesList([]);
+};
+
+
+/**
+ * optional int32 connsClosed = 3;
+ * @return {number}
+ */
+proto.pb.P2PResponse.prototype.getConnsclosed = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.pb.P2PResponse} returns this
+ */
+proto.pb.P2PResponse.prototype.setConnsclosed = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 

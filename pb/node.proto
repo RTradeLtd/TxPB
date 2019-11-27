@@ -71,6 +71,8 @@ message P2PResponse {
     P2PREQTYPE requestType = 1;
     // sent by: P2PREQTYPE.LISTEN
     repeated string names = 2;
+    // sent by: P2PREQTYPE.CLOSE to indicate the number of connections closed
+    int32 connsClosed = 3;
 }
 
 

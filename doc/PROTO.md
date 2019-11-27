@@ -1037,6 +1037,7 @@ P2PResponse is a response message sent in response to a P2PRequest message
 | ----- | ---- | ----- | ----------- |
 | requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  |  |
 | names | [string](#string) | repeated | sent by: P2PREQTYPE.LISTEN |
+| connsClosed | [int32](#int32) |  | sent by: P2PREQTYPE.CLOSE to indicate the number of connections closed |
 
 
 

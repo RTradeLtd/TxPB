@@ -58,6 +58,9 @@ export class P2PResponse extends jspb.Message {
   setNamesList(value: Array<string>): void;
   addNames(value: string, index?: number): string;
 
+  getConnsclosed(): number;
+  setConnsclosed(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): P2PResponse.AsObject;
   static toObject(includeInstance: boolean, msg: P2PResponse): P2PResponse.AsObject;
@@ -72,6 +75,7 @@ export namespace P2PResponse {
   export type AsObject = {
     requesttype: P2PREQTYPEMap[keyof P2PREQTYPEMap],
     namesList: Array<string>,
+    connsclosed: number,
   }
 }
 
