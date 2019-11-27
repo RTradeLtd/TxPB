@@ -85,23 +85,14 @@
     - [IsConnectedRequest](#pb.IsConnectedRequest)
     - [IsConnectedResponse](#pb.IsConnectedResponse)
     - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
+    - [P2PRequest](#pb.P2PRequest)
+    - [P2PResponse](#pb.P2PResponse)
   
     - [EXTRASTYPE](#pb.EXTRASTYPE)
+    - [P2PREQTYPE](#pb.P2PREQTYPE)
   
   
     - [NodeAPI](#pb.NodeAPI)
-  
-
-- [p2p.proto](#p2p.proto)
-    - [CloseRequest](#pb.CloseRequest)
-    - [ForwardRequest](#pb.ForwardRequest)
-    - [ListenRequest](#pb.ListenRequest)
-    - [LsRequest](#pb.LsRequest)
-    - [LsResponse](#pb.LsResponse)
-  
-  
-  
-    - [P2PAPI](#pb.P2PAPI)
   
 
 - [pubsub.proto](#pubsub.proto)
@@ -1014,6 +1005,43 @@ IsConnectedResponse is a response to an IsConnectedRequest request
 
 
 
+
+<a name="pb.P2PRequest"></a>
+
+### P2PRequest
+P2PRequest is a request message holding the details of a particular P2P rpc call
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  | indicates the reuqest type |
+| all | [bool](#bool) |  | used by: P2PREQTYPE.CLOSE |
+| verbose | [bool](#bool) |  | used by: P2PREQTYPE.LS |
+| protocolName | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN |
+| listenAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
+| targetAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
+| remoteAddress | [string](#string) |  | used by: P2PREQTYPE.LISTEN |
+
+
+
+
+
+
+<a name="pb.P2PResponse"></a>
+
+### P2PResponse
+P2PResponse is a response message sent in response to a P2PRequest message
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  |  |
+| names | [string](#string) | repeated | sent by: P2PREQTYPE.LISTEN |
+
+
+
+
+
  
 
 
@@ -1027,6 +1055,20 @@ EXTRASTYPE denotes a particular extras type
 | IDENTIFY | 0 | IDENTIFY is the identify service |
 | PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
 | DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
+
+
+
+<a name="pb.P2PREQTYPE"></a>
+
+### P2PREQTYPE
+P2PREQTYPE denotes the particular type of request being used in the p2p rpc
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CLOSE | 0 | equivalent of ipfs p2p close |
+| FORWARD | 1 | equivalent of ipfs p2p forward |
+| LISTEN | 2 | equivalent of ipfs p2p listen |
+| LS | 3 | equivalent of ipfs p2p ls |
 
 
  
@@ -1047,116 +1089,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
 | EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
 | DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
-
- 
-
-
-
-<a name="p2p.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## p2p.proto
-
-
-
-<a name="pb.CloseRequest"></a>
-
-### CloseRequest
-equivalent of ipfs p2p close
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| all | [bool](#bool) |  |  |
-| protocolName | [string](#string) |  |  |
-| listenAddress | [string](#string) |  |  |
-| targetAddress | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="pb.ForwardRequest"></a>
-
-### ForwardRequest
-equivalent of ipfs p2p forward
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| protocolName | [string](#string) |  |  |
-| listenAddress | [string](#string) |  |  |
-| targetAddress | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="pb.ListenRequest"></a>
-
-### ListenRequest
-equivalent of ipfs p2p listen
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| protocolName | [string](#string) |  |  |
-| remoteAddress | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="pb.LsRequest"></a>
-
-### LsRequest
-equivalent of ipfs p2p ls
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| verbose | [bool](#bool) |  |  |
-
-
-
-
-
-
-<a name="pb.LsResponse"></a>
-
-### LsResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| names | [string](#string) | repeated |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="pb.P2PAPI"></a>
-
-### P2PAPI
-
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| Close | [CloseRequest](#pb.CloseRequest) | [Empty](#pb.Empty) |  |
-| Forward | [ForwardRequest](#pb.ForwardRequest) | [Empty](#pb.Empty) |  |
-| Listen | [ListenRequest](#pb.ListenRequest) | [Empty](#pb.Empty) |  |
-| Ls | [LsRequest](#pb.LsRequest) | [LsResponse](#pb.LsResponse) |  |
+| P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 
  
 
