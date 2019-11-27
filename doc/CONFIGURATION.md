@@ -216,7 +216,7 @@ The `temporalx` section is used to configure the TemporalX gRPC server that faci
 
 ## API
 
-The `api` section is used to configure the gRPC API server. 
+The `api` section is used to configure the gRPC API server. For a brief overview on jaeger tracing, see [our short tracing doc](TRACING.md).
 
 Configuration Options:
 
