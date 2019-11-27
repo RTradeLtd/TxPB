@@ -59,6 +59,15 @@ type NodeAPIDisableExtras = {
   readonly responseType: typeof util_pb.Empty;
 };
 
+type NodeAPIP2P = {
+  readonly methodName: string;
+  readonly service: typeof NodeAPI;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof node_pb.P2PRequest;
+  readonly responseType: typeof node_pb.P2PResponse;
+};
+
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly GetPeers: NodeAPIGetPeers;
@@ -67,6 +76,7 @@ export class NodeAPI {
   static readonly IsConnected: NodeAPIIsConnected;
   static readonly EnableExtras: NodeAPIEnableExtras;
   static readonly DisableExtras: NodeAPIDisableExtras;
+  static readonly P2P: NodeAPIP2P;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -154,6 +164,15 @@ export class NodeAPIClient {
   disableExtras(
     requestMessage: node_pb.DisableExtrasRequest,
     callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
+  ): UnaryResponse;
+  p2P(
+    requestMessage: node_pb.P2PRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: node_pb.P2PResponse|null) => void
+  ): UnaryResponse;
+  p2P(
+    requestMessage: node_pb.P2PRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.P2PResponse|null) => void
   ): UnaryResponse;
 }
 

@@ -45,6 +45,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.DisableExtrasRequest.SerializeToString,
         response_deserializer=util__pb2.Empty.FromString,
         )
+    self.P2P = channel.unary_unary(
+        '/pb.NodeAPI/P2P',
+        request_serializer=node__pb2.P2PRequest.SerializeToString,
+        response_deserializer=node__pb2.P2PResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -93,6 +98,15 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def P2P(self, request, context):
+    """P2P allows control of generalized p2p streams for tcp/udp based protocol.
+    By using this RPC, we can tunnel traffic similar to ssh tunneling
+    except using libp2p as the transport layer, and and tcp/udp port.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -125,6 +139,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.DisableExtras,
           request_deserializer=node__pb2.DisableExtrasRequest.FromString,
           response_serializer=util__pb2.Empty.SerializeToString,
+      ),
+      'P2P': grpc.unary_unary_rpc_method_handler(
+          servicer.P2P,
+          request_deserializer=node__pb2.P2PRequest.FromString,
+          response_serializer=node__pb2.P2PResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

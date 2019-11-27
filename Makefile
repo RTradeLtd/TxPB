@@ -5,7 +5,7 @@ proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-docs
+proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-node gen-docs
 
 
 # run standard go tooling for better readability

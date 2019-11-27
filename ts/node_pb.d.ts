@@ -5,6 +5,76 @@ import * as jspb from "google-protobuf";
 import * as util_pb from "./util_pb";
 import * as github_com_gogo_protobuf_gogoproto_gogo_pb from "./github.com/gogo/protobuf/gogoproto/gogo_pb";
 
+export class P2PRequest extends jspb.Message {
+  getRequesttype(): P2PREQTYPEMap[keyof P2PREQTYPEMap];
+  setRequesttype(value: P2PREQTYPEMap[keyof P2PREQTYPEMap]): void;
+
+  getAll(): boolean;
+  setAll(value: boolean): void;
+
+  getVerbose(): boolean;
+  setVerbose(value: boolean): void;
+
+  getProtocolname(): string;
+  setProtocolname(value: string): void;
+
+  getListenaddress(): string;
+  setListenaddress(value: string): void;
+
+  getTargetaddress(): string;
+  setTargetaddress(value: string): void;
+
+  getRemoteaddress(): string;
+  setRemoteaddress(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): P2PRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: P2PRequest): P2PRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: P2PRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): P2PRequest;
+  static deserializeBinaryFromReader(message: P2PRequest, reader: jspb.BinaryReader): P2PRequest;
+}
+
+export namespace P2PRequest {
+  export type AsObject = {
+    requesttype: P2PREQTYPEMap[keyof P2PREQTYPEMap],
+    all: boolean,
+    verbose: boolean,
+    protocolname: string,
+    listenaddress: string,
+    targetaddress: string,
+    remoteaddress: string,
+  }
+}
+
+export class P2PResponse extends jspb.Message {
+  getRequesttype(): P2PREQTYPEMap[keyof P2PREQTYPEMap];
+  setRequesttype(value: P2PREQTYPEMap[keyof P2PREQTYPEMap]): void;
+
+  clearNamesList(): void;
+  getNamesList(): Array<string>;
+  setNamesList(value: Array<string>): void;
+  addNames(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): P2PResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: P2PResponse): P2PResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: P2PResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): P2PResponse;
+  static deserializeBinaryFromReader(message: P2PResponse, reader: jspb.BinaryReader): P2PResponse;
+}
+
+export namespace P2PResponse {
+  export type AsObject = {
+    requesttype: P2PREQTYPEMap[keyof P2PREQTYPEMap],
+    namesList: Array<string>,
+  }
+}
+
 export class GetPeersResponse extends jspb.Message {
   clearPeeridsList(): void;
   getPeeridsList(): Array<string>;
@@ -194,6 +264,15 @@ export namespace DisableExtrasRequest {
     extrasfeature: EXTRASTYPEMap[keyof EXTRASTYPEMap],
   }
 }
+
+export interface P2PREQTYPEMap {
+  CLOSE: 0;
+  FORWARD: 1;
+  LISTEN: 2;
+  LS: 3;
+}
+
+export const P2PREQTYPE: P2PREQTYPEMap;
 
 export interface EXTRASTYPEMap {
   IDENTIFY: 0;

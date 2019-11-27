@@ -222,6 +222,38 @@ public final class NodeAPIGrpc {
      return getDisableExtrasMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.P2PRequest,
+      pb.Node.P2PResponse> getP2PMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "P2P",
+      requestType = pb.Node.P2PRequest.class,
+      responseType = pb.Node.P2PResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.P2PRequest,
+      pb.Node.P2PResponse> getP2PMethod() {
+    io.grpc.MethodDescriptor<pb.Node.P2PRequest, pb.Node.P2PResponse> getP2PMethod;
+    if ((getP2PMethod = NodeAPIGrpc.getP2PMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getP2PMethod = NodeAPIGrpc.getP2PMethod) == null) {
+          NodeAPIGrpc.getP2PMethod = getP2PMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.P2PRequest, pb.Node.P2PResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "P2P"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.P2PRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.P2PResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("P2P"))
+                  .build();
+          }
+        }
+     }
+     return getP2PMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -312,6 +344,18 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getDisableExtrasMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * P2P allows control of generalized p2p streams for tcp/udp based protocol.
+     * By using this RPC, we can tunnel traffic similar to ssh tunneling
+     * except using libp2p as the transport layer, and and tcp/udp port.
+     * </pre>
+     */
+    public void p2P(pb.Node.P2PRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.P2PResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getP2PMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -356,6 +400,13 @@ public final class NodeAPIGrpc {
                 pb.Node.DisableExtrasRequest,
                 pb.Util.Empty>(
                   this, METHODID_DISABLE_EXTRAS)))
+          .addMethod(
+            getP2PMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.P2PRequest,
+                pb.Node.P2PResponse>(
+                  this, METHODID_P2P)))
           .build();
     }
   }
@@ -446,6 +497,19 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * P2P allows control of generalized p2p streams for tcp/udp based protocol.
+     * By using this RPC, we can tunnel traffic similar to ssh tunneling
+     * except using libp2p as the transport layer, and and tcp/udp port.
+     * </pre>
+     */
+    public void p2P(pb.Node.P2PRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.P2PResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getP2PMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -527,6 +591,18 @@ public final class NodeAPIGrpc {
     public pb.Util.Empty disableExtras(pb.Node.DisableExtrasRequest request) {
       return blockingUnaryCall(
           getChannel(), getDisableExtrasMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * P2P allows control of generalized p2p streams for tcp/udp based protocol.
+     * By using this RPC, we can tunnel traffic similar to ssh tunneling
+     * except using libp2p as the transport layer, and and tcp/udp port.
+     * </pre>
+     */
+    public pb.Node.P2PResponse p2P(pb.Node.P2PRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getP2PMethod(), getCallOptions(), request);
     }
   }
 
@@ -616,6 +692,19 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * P2P allows control of generalized p2p streams for tcp/udp based protocol.
+     * By using this RPC, we can tunnel traffic similar to ssh tunneling
+     * except using libp2p as the transport layer, and and tcp/udp port.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.P2PResponse> p2P(
+        pb.Node.P2PRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getP2PMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_PEERS = 0;
@@ -624,6 +713,7 @@ public final class NodeAPIGrpc {
   private static final int METHODID_IS_CONNECTED = 3;
   private static final int METHODID_ENABLE_EXTRAS = 4;
   private static final int METHODID_DISABLE_EXTRAS = 5;
+  private static final int METHODID_P2P = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -665,6 +755,10 @@ public final class NodeAPIGrpc {
         case METHODID_DISABLE_EXTRAS:
           serviceImpl.disableExtras((pb.Node.DisableExtrasRequest) request,
               (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
+          break;
+        case METHODID_P2P:
+          serviceImpl.p2P((pb.Node.P2PRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.P2PResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -733,6 +827,7 @@ public final class NodeAPIGrpc {
               .addMethod(getIsConnectedMethod())
               .addMethod(getEnableExtrasMethod())
               .addMethod(getDisableExtrasMethod())
+              .addMethod(getP2PMethod())
               .build();
         }
       }

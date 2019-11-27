@@ -31,6 +31,42 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+// P2PREQTYPE denotes the particular type of request being used in the p2p rpc
+type P2PREQTYPE int32
+
+const (
+	// equivalent of ipfs p2p close
+	P2PREQTYPE_CLOSE P2PREQTYPE = 0
+	// equivalent of ipfs p2p forward
+	P2PREQTYPE_FORWARD P2PREQTYPE = 1
+	// equivalent of ipfs p2p listen
+	P2PREQTYPE_LISTEN P2PREQTYPE = 2
+	// equivalent of ipfs p2p ls
+	P2PREQTYPE_LS P2PREQTYPE = 3
+)
+
+var P2PREQTYPE_name = map[int32]string{
+	0: "CLOSE",
+	1: "FORWARD",
+	2: "LISTEN",
+	3: "LS",
+}
+
+var P2PREQTYPE_value = map[string]int32{
+	"CLOSE":   0,
+	"FORWARD": 1,
+	"LISTEN":  2,
+	"LS":      3,
+}
+
+func (x P2PREQTYPE) String() string {
+	return proto.EnumName(P2PREQTYPE_name, int32(x))
+}
+
+func (P2PREQTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{0}
+}
+
 // EXTRASTYPE denotes a particular extras type
 type EXTRASTYPE int32
 
@@ -60,7 +96,159 @@ func (x EXTRASTYPE) String() string {
 }
 
 func (EXTRASTYPE) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{1}
+}
+
+// P2PRequest is a request message holding the details of a particular P2P rpc call
+type P2PRequest struct {
+	// indicates the reuqest type
+	RequestType P2PREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.P2PREQTYPE" json:"requestType,omitempty"`
+	// used by: P2PREQTYPE.CLOSE
+	All bool `protobuf:"varint,2,opt,name=all,proto3" json:"all,omitempty"`
+	// used by: P2PREQTYPE.LS
+	Verbose bool `protobuf:"varint,3,opt,name=verbose,proto3" json:"verbose,omitempty"`
+	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN
+	ProtocolName string `protobuf:"bytes,4,opt,name=protocolName,proto3" json:"protocolName,omitempty"`
+	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+	ListenAddress string `protobuf:"bytes,5,opt,name=listenAddress,proto3" json:"listenAddress,omitempty"`
+	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+	TargetAddress string `protobuf:"bytes,6,opt,name=targetAddress,proto3" json:"targetAddress,omitempty"`
+	// used by: P2PREQTYPE.LISTEN
+	RemoteAddress string `protobuf:"bytes,7,opt,name=remoteAddress,proto3" json:"remoteAddress,omitempty"`
+}
+
+func (m *P2PRequest) Reset()      { *m = P2PRequest{} }
+func (*P2PRequest) ProtoMessage() {}
+func (*P2PRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{0}
+}
+func (m *P2PRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *P2PRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_P2PRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *P2PRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_P2PRequest.Merge(m, src)
+}
+func (m *P2PRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *P2PRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_P2PRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_P2PRequest proto.InternalMessageInfo
+
+func (m *P2PRequest) GetRequestType() P2PREQTYPE {
+	if m != nil {
+		return m.RequestType
+	}
+	return P2PREQTYPE_CLOSE
+}
+
+func (m *P2PRequest) GetAll() bool {
+	if m != nil {
+		return m.All
+	}
+	return false
+}
+
+func (m *P2PRequest) GetVerbose() bool {
+	if m != nil {
+		return m.Verbose
+	}
+	return false
+}
+
+func (m *P2PRequest) GetProtocolName() string {
+	if m != nil {
+		return m.ProtocolName
+	}
+	return ""
+}
+
+func (m *P2PRequest) GetListenAddress() string {
+	if m != nil {
+		return m.ListenAddress
+	}
+	return ""
+}
+
+func (m *P2PRequest) GetTargetAddress() string {
+	if m != nil {
+		return m.TargetAddress
+	}
+	return ""
+}
+
+func (m *P2PRequest) GetRemoteAddress() string {
+	if m != nil {
+		return m.RemoteAddress
+	}
+	return ""
+}
+
+// P2PResponse is a response message sent in response to a P2PRequest message
+type P2PResponse struct {
+	RequestType P2PREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.P2PREQTYPE" json:"requestType,omitempty"`
+	// sent by: P2PREQTYPE.LISTEN
+	Names []string `protobuf:"bytes,2,rep,name=names,proto3" json:"names,omitempty"`
+}
+
+func (m *P2PResponse) Reset()      { *m = P2PResponse{} }
+func (*P2PResponse) ProtoMessage() {}
+func (*P2PResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0c843d59d2d938e7, []int{1}
+}
+func (m *P2PResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *P2PResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_P2PResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *P2PResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_P2PResponse.Merge(m, src)
+}
+func (m *P2PResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *P2PResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_P2PResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_P2PResponse proto.InternalMessageInfo
+
+func (m *P2PResponse) GetRequestType() P2PREQTYPE {
+	if m != nil {
+		return m.RequestType
+	}
+	return P2PREQTYPE_CLOSE
+}
+
+func (m *P2PResponse) GetNames() []string {
+	if m != nil {
+		return m.Names
+	}
+	return nil
 }
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
@@ -72,7 +260,7 @@ type GetPeersResponse struct {
 func (m *GetPeersResponse) Reset()      { *m = GetPeersResponse{} }
 func (*GetPeersResponse) ProtoMessage() {}
 func (*GetPeersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{0}
+	return fileDescriptor_0c843d59d2d938e7, []int{2}
 }
 func (m *GetPeersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -117,7 +305,7 @@ type ConnectRequest struct {
 func (m *ConnectRequest) Reset()      { *m = ConnectRequest{} }
 func (*ConnectRequest) ProtoMessage() {}
 func (*ConnectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{1}
+	return fileDescriptor_0c843d59d2d938e7, []int{3}
 }
 func (m *ConnectRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -162,7 +350,7 @@ type IsConnectedRequest struct {
 func (m *IsConnectedRequest) Reset()      { *m = IsConnectedRequest{} }
 func (*IsConnectedRequest) ProtoMessage() {}
 func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{2}
+	return fileDescriptor_0c843d59d2d938e7, []int{4}
 }
 func (m *IsConnectedRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -207,7 +395,7 @@ type IsConnectedResponse struct {
 func (m *IsConnectedResponse) Reset()      { *m = IsConnectedResponse{} }
 func (*IsConnectedResponse) ProtoMessage() {}
 func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{3}
+	return fileDescriptor_0c843d59d2d938e7, []int{5}
 }
 func (m *IsConnectedResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -252,7 +440,7 @@ type DisconnectRequest struct {
 func (m *DisconnectRequest) Reset()      { *m = DisconnectRequest{} }
 func (*DisconnectRequest) ProtoMessage() {}
 func (*DisconnectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{4}
+	return fileDescriptor_0c843d59d2d938e7, []int{6}
 }
 func (m *DisconnectRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -297,7 +485,7 @@ type DisconnectResponse struct {
 func (m *DisconnectResponse) Reset()      { *m = DisconnectResponse{} }
 func (*DisconnectResponse) ProtoMessage() {}
 func (*DisconnectResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{5}
+	return fileDescriptor_0c843d59d2d938e7, []int{7}
 }
 func (m *DisconnectResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -344,7 +532,7 @@ type DisconnectResponse_StatusMessage struct {
 func (m *DisconnectResponse_StatusMessage) Reset()      { *m = DisconnectResponse_StatusMessage{} }
 func (*DisconnectResponse_StatusMessage) ProtoMessage() {}
 func (*DisconnectResponse_StatusMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{5, 1}
+	return fileDescriptor_0c843d59d2d938e7, []int{7, 1}
 }
 func (m *DisconnectResponse_StatusMessage) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -396,7 +584,7 @@ type EnableExtrasRequest struct {
 func (m *EnableExtrasRequest) Reset()      { *m = EnableExtrasRequest{} }
 func (*EnableExtrasRequest) ProtoMessage() {}
 func (*EnableExtrasRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{6}
+	return fileDescriptor_0c843d59d2d938e7, []int{8}
 }
 func (m *EnableExtrasRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -441,7 +629,7 @@ type DisableExtrasRequest struct {
 func (m *DisableExtrasRequest) Reset()      { *m = DisableExtrasRequest{} }
 func (*DisableExtrasRequest) ProtoMessage() {}
 func (*DisableExtrasRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0c843d59d2d938e7, []int{7}
+	return fileDescriptor_0c843d59d2d938e7, []int{9}
 }
 func (m *DisableExtrasRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -478,7 +666,10 @@ func (m *DisableExtrasRequest) GetExtrasFeature() EXTRASTYPE {
 }
 
 func init() {
+	proto.RegisterEnum("pb.P2PREQTYPE", P2PREQTYPE_name, P2PREQTYPE_value)
 	proto.RegisterEnum("pb.EXTRASTYPE", EXTRASTYPE_name, EXTRASTYPE_value)
+	proto.RegisterType((*P2PRequest)(nil), "pb.P2PRequest")
+	proto.RegisterType((*P2PResponse)(nil), "pb.P2PResponse")
 	proto.RegisterType((*GetPeersResponse)(nil), "pb.GetPeersResponse")
 	proto.RegisterType((*ConnectRequest)(nil), "pb.ConnectRequest")
 	proto.RegisterType((*IsConnectedRequest)(nil), "pb.IsConnectedRequest")
@@ -495,48 +686,219 @@ func init() {
 func init() { proto.RegisterFile("node.proto", fileDescriptor_0c843d59d2d938e7) }
 
 var fileDescriptor_0c843d59d2d938e7 = []byte{
-	// 613 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
-	0x10, 0xf5, 0xa6, 0x22, 0x6d, 0x26, 0x4d, 0x15, 0xa6, 0xa5, 0x44, 0x3e, 0xac, 0xaa, 0x15, 0x42,
-	0x55, 0x45, 0x5d, 0x14, 0x0a, 0x42, 0x15, 0x48, 0xb4, 0x8d, 0x8b, 0xa2, 0x42, 0x89, 0x9c, 0x16,
-	0xd1, 0x13, 0x72, 0x92, 0x25, 0x44, 0xa4, 0x76, 0xf0, 0xae, 0x11, 0xbd, 0xf1, 0x09, 0x5c, 0xf9,
-	0x03, 0x3e, 0x81, 0x4f, 0xe0, 0x58, 0x89, 0x4b, 0x8f, 0x8d, 0xfb, 0x03, 0x1c, 0x39, 0x21, 0xe4,
-	0xb5, 0xdd, 0xd8, 0x6d, 0xd2, 0x13, 0xb7, 0x9d, 0xb7, 0xef, 0xcd, 0xbe, 0x99, 0xf1, 0x18, 0xc0,
-	0x71, 0x3b, 0xdc, 0x18, 0x78, 0xae, 0x74, 0x31, 0x37, 0x68, 0xe9, 0xe0, 0xcb, 0x5e, 0x3f, 0x8a,
-	0xf5, 0xd5, 0x6e, 0x4f, 0xbe, 0xf7, 0x5b, 0x46, 0xdb, 0x3d, 0x5a, 0xeb, 0xba, 0x5d, 0x77, 0x4d,
-	0xc1, 0x2d, 0xff, 0x9d, 0x8a, 0x54, 0xa0, 0x4e, 0x11, 0x9d, 0xdd, 0x83, 0xf2, 0x73, 0x2e, 0x1b,
-	0x9c, 0x7b, 0xc2, 0xe2, 0x62, 0xe0, 0x3a, 0x82, 0x63, 0x05, 0xa6, 0x07, 0x9c, 0x7b, 0xf5, 0x9a,
-	0xa8, 0x90, 0xa5, 0xa9, 0xe5, 0x82, 0x95, 0x84, 0xec, 0x3e, 0xcc, 0x6d, 0xbb, 0x8e, 0xc3, 0xdb,
-	0xd2, 0xe2, 0x1f, 0x7d, 0x2e, 0x24, 0x52, 0x80, 0x23, 0xbf, 0x2f, 0x7b, 0x9b, 0x9d, 0x8e, 0x97,
-	0xd0, 0x53, 0x08, 0x33, 0x00, 0xeb, 0x22, 0xd6, 0xf0, 0x4e, 0xa2, 0x9a, 0xfc, 0xc2, 0x37, 0x02,
-	0xf3, 0x19, 0x41, 0xec, 0xa9, 0x06, 0x85, 0x76, 0x02, 0x2a, 0x4d, 0xb1, 0x7a, 0xd7, 0x18, 0xb4,
-	0x8c, 0x31, 0x5c, 0xe3, 0x02, 0x31, 0x1d, 0xe9, 0x1d, 0x5b, 0x23, 0xa1, 0xfe, 0xe4, 0xc2, 0x7f,
-	0x7c, 0x89, 0x65, 0x98, 0xfa, 0xc0, 0x8f, 0x2b, 0x64, 0x89, 0x2c, 0x17, 0xac, 0xf0, 0x88, 0x0b,
-	0x70, 0xe3, 0x93, 0xdd, 0xf7, 0x79, 0x25, 0xb7, 0x44, 0x96, 0x67, 0xac, 0x28, 0xd8, 0xc8, 0x3d,
-	0x26, 0x6c, 0x15, 0x6e, 0xd6, 0x7a, 0xa2, 0x9d, 0x6d, 0xc0, 0xe4, 0x52, 0xfe, 0x12, 0xc0, 0x34,
-	0x3f, 0xae, 0x64, 0x03, 0xf2, 0x42, 0xda, 0xd2, 0x17, 0x71, 0x19, 0x2c, 0x2c, 0xe3, 0x2a, 0xcf,
-	0x68, 0x2a, 0x52, 0x54, 0x42, 0xac, 0xd0, 0xdf, 0x42, 0x31, 0x05, 0x8f, 0x31, 0xbf, 0x91, 0x36,
-	0x5f, 0xac, 0xde, 0xb9, 0x36, 0xf7, 0x4b, 0x2e, 0x84, 0xdd, 0xe5, 0xa9, 0x12, 0xf5, 0x5d, 0x28,
-	0x65, 0xee, 0x90, 0xc1, 0x6c, 0xe7, 0x42, 0xaf, 0x5a, 0x1f, 0x36, 0x25, 0x83, 0xe1, 0x22, 0xe4,
-	0x3d, 0x6e, 0x0b, 0xd7, 0x51, 0xaf, 0x16, 0xac, 0x38, 0x62, 0xbb, 0x30, 0x6f, 0x3a, 0x76, 0xab,
-	0xcf, 0xcd, 0xcf, 0xd2, 0xb3, 0x45, 0xd2, 0xb1, 0x75, 0x28, 0x71, 0x05, 0xec, 0x70, 0x5b, 0xfa,
-	0x1e, 0x57, 0x39, 0xe7, 0xaa, 0x73, 0xa1, 0x57, 0xf3, 0xcd, 0xbe, 0xb5, 0xd9, 0xdc, 0x3f, 0x6c,
-	0x98, 0x56, 0x96, 0xc4, 0x5e, 0xc0, 0x42, 0xad, 0x27, 0xfe, 0x53, 0xb6, 0x95, 0x87, 0x00, 0xa3,
-	0x4b, 0x9c, 0x85, 0x99, 0x7a, 0xcd, 0xdc, 0xdb, 0xaf, 0xef, 0x1c, 0x96, 0x35, 0x04, 0xc8, 0x37,
-	0x0e, 0xb6, 0x9a, 0x07, 0x5b, 0x65, 0x82, 0x25, 0x28, 0xd4, 0xea, 0xcd, 0xed, 0x57, 0xaf, 0x4d,
-	0xeb, 0xb0, 0x9c, 0xab, 0xfe, 0xca, 0xc1, 0xf4, 0x9e, 0xdb, 0xe1, 0x9b, 0x8d, 0x3a, 0xae, 0xc2,
-	0x4c, 0xb2, 0x39, 0x58, 0x50, 0xaf, 0x1d, 0x0d, 0xe4, 0xb1, 0xbe, 0x10, 0x1e, 0x2f, 0xaf, 0x14,
-	0xd3, 0x70, 0x05, 0xa6, 0xe3, 0x4f, 0x0f, 0x31, 0xa4, 0x64, 0xf7, 0x48, 0x1f, 0x65, 0x60, 0x1a,
-	0x3e, 0x05, 0x18, 0x0d, 0x0d, 0x6f, 0x5d, 0x1e, 0x62, 0xa4, 0x58, 0x1c, 0x3f, 0x5b, 0xa6, 0xe1,
-	0x33, 0x28, 0xa6, 0xd6, 0x02, 0x17, 0xaf, 0xec, 0x49, 0x94, 0xe0, 0xf6, 0x84, 0xfd, 0x61, 0x1a,
-	0xae, 0xc3, 0x6c, 0x7a, 0x72, 0xa8, 0xa8, 0x63, 0x66, 0x99, 0xb5, 0xfd, 0x08, 0x4a, 0x99, 0x11,
-	0x61, 0x25, 0xb6, 0x78, 0xbd, 0x6e, 0x6b, 0xfd, 0x74, 0x48, 0xb5, 0xb3, 0x21, 0x25, 0xbf, 0x87,
-	0x94, 0xfc, 0x19, 0x52, 0xf2, 0x25, 0xa0, 0xe4, 0x7b, 0x40, 0xc9, 0x8f, 0x80, 0x92, 0x9f, 0x01,
-	0x25, 0x27, 0x01, 0x25, 0x67, 0x01, 0x25, 0x5f, 0xcf, 0xa9, 0x76, 0x72, 0x4e, 0xb5, 0xd3, 0x73,
-	0xaa, 0xb5, 0xf2, 0xea, 0x07, 0xf6, 0xe0, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x35, 0x03, 0x8a,
-	0x62, 0x0d, 0x05, 0x00, 0x00,
+	// 798 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x41, 0x4f, 0xe3, 0x46,
+	0x14, 0xc7, 0x3d, 0x4e, 0x49, 0xf0, 0x0b, 0xa1, 0xee, 0x40, 0xa9, 0x95, 0x83, 0x15, 0x59, 0xa8,
+	0x8a, 0x50, 0x09, 0x28, 0xa5, 0x15, 0x42, 0xad, 0xd4, 0x40, 0x4c, 0x15, 0x91, 0x06, 0xd7, 0x09,
+	0x6d, 0x39, 0x55, 0x4e, 0x32, 0x4d, 0xa3, 0x3a, 0x76, 0xea, 0x19, 0xa3, 0xe6, 0xc6, 0x47, 0xe8,
+	0x75, 0xbf, 0xc1, 0x7e, 0x84, 0xfd, 0x08, 0x7b, 0xe4, 0xc8, 0x91, 0x84, 0x2f, 0xb0, 0xc7, 0xbd,
+	0xec, 0x6a, 0xe5, 0xb1, 0x9d, 0xd8, 0x10, 0x76, 0xa5, 0xd5, 0xde, 0xe6, 0xfd, 0xfd, 0x7b, 0xcf,
+	0xef, 0xbd, 0x79, 0x6f, 0x00, 0x1c, 0xb7, 0x4f, 0x2a, 0x63, 0xcf, 0x65, 0x2e, 0x16, 0xc7, 0xdd,
+	0x22, 0xf8, 0x6c, 0x68, 0x87, 0x76, 0x71, 0x77, 0x30, 0x64, 0x7f, 0xfb, 0xdd, 0x4a, 0xcf, 0x1d,
+	0xed, 0x0d, 0xdc, 0x81, 0xbb, 0xc7, 0xe5, 0xae, 0xff, 0x17, 0xb7, 0xb8, 0xc1, 0x4f, 0x21, 0xae,
+	0x5d, 0x8b, 0x00, 0x46, 0xd5, 0x30, 0xc9, 0xbf, 0x3e, 0xa1, 0x0c, 0xef, 0x43, 0xde, 0x0b, 0x8f,
+	0x9d, 0xc9, 0x98, 0x28, 0xa8, 0x84, 0xca, 0xeb, 0xd5, 0xf5, 0xca, 0xb8, 0x5b, 0x09, 0x20, 0xfd,
+	0xd7, 0xce, 0xa5, 0xa1, 0x9b, 0x49, 0x04, 0xcb, 0x90, 0xb1, 0x6c, 0x5b, 0x11, 0x4b, 0xa8, 0xbc,
+	0x6a, 0x06, 0x47, 0xac, 0x40, 0xee, 0x8a, 0x78, 0x5d, 0x97, 0x12, 0x25, 0xc3, 0xd5, 0xd8, 0xc4,
+	0x1a, 0xac, 0xf1, 0xbf, 0xf6, 0x5c, 0xbb, 0x65, 0x8d, 0x88, 0xf2, 0x59, 0x09, 0x95, 0x25, 0x33,
+	0xa5, 0xe1, 0x6d, 0x28, 0xd8, 0x43, 0xca, 0x88, 0x53, 0xeb, 0xf7, 0x3d, 0x42, 0xa9, 0xb2, 0xc2,
+	0xa1, 0xb4, 0x18, 0x50, 0xcc, 0xf2, 0x06, 0x84, 0xc5, 0x54, 0x36, 0xa4, 0x52, 0x62, 0x40, 0x79,
+	0x64, 0xe4, 0x32, 0x12, 0x53, 0xb9, 0x90, 0x4a, 0x89, 0xda, 0x05, 0xe4, 0x79, 0x07, 0xe8, 0xd8,
+	0x75, 0x28, 0xf9, 0x88, 0x16, 0x6c, 0xc2, 0x8a, 0x63, 0x8d, 0x08, 0x55, 0xc4, 0x52, 0xa6, 0x2c,
+	0x99, 0xa1, 0xa1, 0x7d, 0x03, 0xf2, 0xcf, 0x84, 0x19, 0x84, 0x78, 0x74, 0x1e, 0x5b, 0x81, 0xdc,
+	0x98, 0x10, 0xaf, 0x51, 0xa7, 0x0a, 0xe2, 0x6c, 0x6c, 0x6a, 0xfb, 0xb0, 0x7e, 0xe2, 0x3a, 0x0e,
+	0xe9, 0xb1, 0xf8, 0x2a, 0x54, 0x80, 0x91, 0x6f, 0xb3, 0x61, 0x90, 0x66, 0x8c, 0x27, 0x14, 0xad,
+	0x02, 0xb8, 0x41, 0x23, 0x1f, 0xd2, 0x8f, 0xbd, 0x9e, 0xfe, 0xc3, 0x33, 0x04, 0x1b, 0x29, 0x87,
+	0x28, 0xa7, 0x3a, 0x48, 0xbd, 0x58, 0xe4, 0x3e, 0xf9, 0xea, 0xd7, 0x41, 0xb5, 0x4b, 0xd8, 0xca,
+	0x5c, 0xd1, 0x1d, 0xe6, 0x4d, 0xcc, 0x85, 0x63, 0xf1, 0x87, 0x79, 0xfe, 0xd1, 0xc7, 0x60, 0x30,
+	0xfe, 0x21, 0x13, 0xde, 0x3f, 0xc9, 0x0c, 0x8e, 0x41, 0x9f, 0xae, 0x2c, 0xdb, 0x27, 0xd1, 0xb0,
+	0x84, 0xc6, 0x91, 0x78, 0x88, 0xb4, 0x5d, 0xf8, 0xa2, 0x3e, 0xa4, 0xbd, 0x74, 0x03, 0x9e, 0x2e,
+	0xe5, 0x2d, 0x02, 0x9c, 0xe4, 0xa3, 0x4a, 0x8e, 0x20, 0x4b, 0x99, 0xc5, 0x7c, 0x1a, 0x95, 0xa1,
+	0x05, 0x65, 0x3c, 0xe6, 0x2a, 0x6d, 0x0e, 0x85, 0x25, 0x44, 0x1e, 0xc5, 0x3f, 0x21, 0x9f, 0x90,
+	0x97, 0x24, 0x7f, 0x94, 0x4c, 0x3e, 0x5f, 0xdd, 0x7e, 0x6f, 0xec, 0x5f, 0x08, 0xa5, 0xd6, 0x80,
+	0x24, 0x4a, 0x2c, 0x9e, 0x41, 0x21, 0xf5, 0x2d, 0x58, 0x86, 0xfe, 0xdc, 0x9f, 0xb7, 0x3e, 0x68,
+	0x4a, 0x4a, 0xc3, 0x5b, 0x90, 0xf5, 0x88, 0x45, 0x5d, 0x87, 0xff, 0x55, 0x32, 0x23, 0x4b, 0x3b,
+	0x83, 0x0d, 0xdd, 0xb1, 0xba, 0x36, 0xd1, 0xff, 0x63, 0x9e, 0x45, 0xe3, 0x8e, 0x1d, 0x40, 0x81,
+	0x70, 0xe1, 0x94, 0x58, 0xcc, 0xf7, 0x52, 0xc3, 0xab, 0xff, 0xd1, 0x31, 0x6b, 0x6d, 0x3e, 0xbc,
+	0x69, 0x48, 0x6b, 0xc2, 0x66, 0x7d, 0x48, 0x3f, 0x51, 0xb4, 0x9d, 0xc3, 0xf0, 0x3d, 0x09, 0xf7,
+	0x04, 0x4b, 0xb0, 0x72, 0xd2, 0x3c, 0x6f, 0xeb, 0xb2, 0x80, 0xf3, 0x90, 0x3b, 0x3d, 0x37, 0x7f,
+	0xaf, 0x99, 0x75, 0x19, 0x61, 0x80, 0x6c, 0xb3, 0xd1, 0xee, 0xe8, 0x2d, 0x59, 0xc4, 0x59, 0x10,
+	0x9b, 0x6d, 0x39, 0xb3, 0xf3, 0x1d, 0xc0, 0x22, 0x2c, 0x5e, 0x83, 0xd5, 0x46, 0x5d, 0x6f, 0x75,
+	0x1a, 0xa7, 0x97, 0xb2, 0x10, 0xf0, 0xc6, 0xc5, 0x71, 0xfb, 0xe2, 0x58, 0x46, 0xb8, 0x00, 0x52,
+	0xbd, 0xd1, 0x3e, 0x39, 0xff, 0x4d, 0x37, 0x2f, 0x65, 0xb1, 0xfa, 0x46, 0x84, 0x5c, 0xcb, 0xed,
+	0x93, 0x9a, 0xd1, 0xc0, 0xbb, 0xb0, 0x1a, 0xef, 0x1c, 0x96, 0x78, 0x9e, 0xa3, 0x31, 0x9b, 0x14,
+	0x37, 0x83, 0xe3, 0xc3, 0x65, 0xd4, 0x04, 0xbc, 0x03, 0xb9, 0x68, 0x68, 0x31, 0x0e, 0x90, 0xf4,
+	0x06, 0x16, 0x17, 0x11, 0x34, 0x01, 0xff, 0x08, 0xb0, 0xb8, 0x6e, 0xfc, 0xe5, 0xc3, 0xeb, 0x0f,
+	0x3d, 0xb6, 0x96, 0x4f, 0x85, 0x26, 0xe0, 0x9f, 0x20, 0x9f, 0x58, 0x28, 0xbc, 0xf5, 0x68, 0xc3,
+	0xc2, 0x00, 0x5f, 0x3d, 0xb1, 0x79, 0x9a, 0x80, 0x0f, 0x60, 0x2d, 0x79, 0xe7, 0x98, 0xa3, 0x4b,
+	0xa6, 0x20, 0x9d, 0xf6, 0xf7, 0x50, 0x48, 0x5d, 0x2e, 0x56, 0xa2, 0x14, 0x3f, 0xe0, 0x57, 0x86,
+	0x8c, 0x51, 0x35, 0xf0, 0xfc, 0xdd, 0x8b, 0x98, 0xcf, 0xe7, 0x76, 0x9c, 0xd7, 0xf1, 0xc1, 0xed,
+	0x54, 0x15, 0xee, 0xa6, 0x2a, 0x7a, 0x35, 0x55, 0xd1, 0xeb, 0xa9, 0x8a, 0xae, 0x67, 0x2a, 0x7a,
+	0x3e, 0x53, 0xd1, 0x8b, 0x99, 0x8a, 0x5e, 0xce, 0x54, 0x74, 0x33, 0x53, 0xd1, 0xdd, 0x4c, 0x45,
+	0xff, 0xdf, 0xab, 0xc2, 0xcd, 0xbd, 0x2a, 0xdc, 0xde, 0xab, 0x42, 0x37, 0xcb, 0x1f, 0xfd, 0x6f,
+	0xdf, 0x05, 0x00, 0x00, 0xff, 0xff, 0x62, 0xe1, 0x2d, 0xb1, 0xcb, 0x06, 0x00, 0x00,
 }
 
+func (this *P2PRequest) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*P2PRequest)
+	if !ok {
+		that2, ok := that.(P2PRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *P2PRequest")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *P2PRequest but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *P2PRequest but is not nil && this == nil")
+	}
+	if this.RequestType != that1.RequestType {
+		return fmt.Errorf("RequestType this(%v) Not Equal that(%v)", this.RequestType, that1.RequestType)
+	}
+	if this.All != that1.All {
+		return fmt.Errorf("All this(%v) Not Equal that(%v)", this.All, that1.All)
+	}
+	if this.Verbose != that1.Verbose {
+		return fmt.Errorf("Verbose this(%v) Not Equal that(%v)", this.Verbose, that1.Verbose)
+	}
+	if this.ProtocolName != that1.ProtocolName {
+		return fmt.Errorf("ProtocolName this(%v) Not Equal that(%v)", this.ProtocolName, that1.ProtocolName)
+	}
+	if this.ListenAddress != that1.ListenAddress {
+		return fmt.Errorf("ListenAddress this(%v) Not Equal that(%v)", this.ListenAddress, that1.ListenAddress)
+	}
+	if this.TargetAddress != that1.TargetAddress {
+		return fmt.Errorf("TargetAddress this(%v) Not Equal that(%v)", this.TargetAddress, that1.TargetAddress)
+	}
+	if this.RemoteAddress != that1.RemoteAddress {
+		return fmt.Errorf("RemoteAddress this(%v) Not Equal that(%v)", this.RemoteAddress, that1.RemoteAddress)
+	}
+	return nil
+}
+func (this *P2PRequest) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*P2PRequest)
+	if !ok {
+		that2, ok := that.(P2PRequest)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.RequestType != that1.RequestType {
+		return false
+	}
+	if this.All != that1.All {
+		return false
+	}
+	if this.Verbose != that1.Verbose {
+		return false
+	}
+	if this.ProtocolName != that1.ProtocolName {
+		return false
+	}
+	if this.ListenAddress != that1.ListenAddress {
+		return false
+	}
+	if this.TargetAddress != that1.TargetAddress {
+		return false
+	}
+	if this.RemoteAddress != that1.RemoteAddress {
+		return false
+	}
+	return true
+}
+func (this *P2PResponse) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*P2PResponse)
+	if !ok {
+		that2, ok := that.(P2PResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *P2PResponse")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *P2PResponse but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *P2PResponse but is not nil && this == nil")
+	}
+	if this.RequestType != that1.RequestType {
+		return fmt.Errorf("RequestType this(%v) Not Equal that(%v)", this.RequestType, that1.RequestType)
+	}
+	if len(this.Names) != len(that1.Names) {
+		return fmt.Errorf("Names this(%v) Not Equal that(%v)", len(this.Names), len(that1.Names))
+	}
+	for i := range this.Names {
+		if this.Names[i] != that1.Names[i] {
+			return fmt.Errorf("Names this[%v](%v) Not Equal that[%v](%v)", i, this.Names[i], i, that1.Names[i])
+		}
+	}
+	return nil
+}
+func (this *P2PResponse) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*P2PResponse)
+	if !ok {
+		that2, ok := that.(P2PResponse)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.RequestType != that1.RequestType {
+		return false
+	}
+	if len(this.Names) != len(that1.Names) {
+		return false
+	}
+	for i := range this.Names {
+		if this.Names[i] != that1.Names[i] {
+			return false
+		}
+	}
+	return true
+}
 func (this *GetPeersResponse) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -1089,6 +1451,33 @@ func (this *DisableExtrasRequest) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *P2PRequest) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 11)
+	s = append(s, "&pb.P2PRequest{")
+	s = append(s, "RequestType: "+fmt.Sprintf("%#v", this.RequestType)+",\n")
+	s = append(s, "All: "+fmt.Sprintf("%#v", this.All)+",\n")
+	s = append(s, "Verbose: "+fmt.Sprintf("%#v", this.Verbose)+",\n")
+	s = append(s, "ProtocolName: "+fmt.Sprintf("%#v", this.ProtocolName)+",\n")
+	s = append(s, "ListenAddress: "+fmt.Sprintf("%#v", this.ListenAddress)+",\n")
+	s = append(s, "TargetAddress: "+fmt.Sprintf("%#v", this.TargetAddress)+",\n")
+	s = append(s, "RemoteAddress: "+fmt.Sprintf("%#v", this.RemoteAddress)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *P2PResponse) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&pb.P2PResponse{")
+	s = append(s, "RequestType: "+fmt.Sprintf("%#v", this.RequestType)+",\n")
+	s = append(s, "Names: "+fmt.Sprintf("%#v", this.Names)+",\n")
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *GetPeersResponse) GoString() string {
 	if this == nil {
 		return "nil"
@@ -1237,6 +1626,10 @@ type NodeAPIClient interface {
 	EnableExtras(ctx context.Context, in *EnableExtrasRequest, opts ...grpc.CallOption) (*Empty, error)
 	// DisableExtras is used to disable a particular extras feature
 	DisableExtras(ctx context.Context, in *DisableExtrasRequest, opts ...grpc.CallOption) (*Empty, error)
+	// P2P allows control of generalized p2p streams for tcp/udp based protocol.
+	// By using this RPC, we can tunnel traffic similar to ssh tunneling
+	// except using libp2p as the transport layer, and and tcp/udp port.
+	P2P(ctx context.Context, in *P2PRequest, opts ...grpc.CallOption) (*P2PResponse, error)
 }
 
 type nodeAPIClient struct {
@@ -1301,6 +1694,15 @@ func (c *nodeAPIClient) DisableExtras(ctx context.Context, in *DisableExtrasRequ
 	return out, nil
 }
 
+func (c *nodeAPIClient) P2P(ctx context.Context, in *P2PRequest, opts ...grpc.CallOption) (*P2PResponse, error) {
+	out := new(P2PResponse)
+	err := c.cc.Invoke(ctx, "/pb.NodeAPI/P2P", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodeAPIServer is the server API for NodeAPI service.
 type NodeAPIServer interface {
 	// GetPeers returns a message containing a slice of current peers in our peerstore
@@ -1315,6 +1717,10 @@ type NodeAPIServer interface {
 	EnableExtras(context.Context, *EnableExtrasRequest) (*Empty, error)
 	// DisableExtras is used to disable a particular extras feature
 	DisableExtras(context.Context, *DisableExtrasRequest) (*Empty, error)
+	// P2P allows control of generalized p2p streams for tcp/udp based protocol.
+	// By using this RPC, we can tunnel traffic similar to ssh tunneling
+	// except using libp2p as the transport layer, and and tcp/udp port.
+	P2P(context.Context, *P2PRequest) (*P2PResponse, error)
 }
 
 // UnimplementedNodeAPIServer can be embedded to have forward compatible implementations.
@@ -1338,6 +1744,9 @@ func (*UnimplementedNodeAPIServer) EnableExtras(ctx context.Context, req *Enable
 }
 func (*UnimplementedNodeAPIServer) DisableExtras(ctx context.Context, req *DisableExtrasRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableExtras not implemented")
+}
+func (*UnimplementedNodeAPIServer) P2P(ctx context.Context, req *P2PRequest) (*P2PResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method P2P not implemented")
 }
 
 func RegisterNodeAPIServer(s *grpc.Server, srv NodeAPIServer) {
@@ -1452,6 +1861,24 @@ func _NodeAPI_DisableExtras_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NodeAPI_P2P_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(P2PRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeAPIServer).P2P(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.NodeAPI/P2P",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeAPIServer).P2P(ctx, req.(*P2PRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.NodeAPI",
 	HandlerType: (*NodeAPIServer)(nil),
@@ -1480,9 +1907,126 @@ var _NodeAPI_serviceDesc = grpc.ServiceDesc{
 			MethodName: "DisableExtras",
 			Handler:    _NodeAPI_DisableExtras_Handler,
 		},
+		{
+			MethodName: "P2P",
+			Handler:    _NodeAPI_P2P_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "node.proto",
+}
+
+func (m *P2PRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *P2PRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *P2PRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.RemoteAddress) > 0 {
+		i -= len(m.RemoteAddress)
+		copy(dAtA[i:], m.RemoteAddress)
+		i = encodeVarintNode(dAtA, i, uint64(len(m.RemoteAddress)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.TargetAddress) > 0 {
+		i -= len(m.TargetAddress)
+		copy(dAtA[i:], m.TargetAddress)
+		i = encodeVarintNode(dAtA, i, uint64(len(m.TargetAddress)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.ListenAddress) > 0 {
+		i -= len(m.ListenAddress)
+		copy(dAtA[i:], m.ListenAddress)
+		i = encodeVarintNode(dAtA, i, uint64(len(m.ListenAddress)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.ProtocolName) > 0 {
+		i -= len(m.ProtocolName)
+		copy(dAtA[i:], m.ProtocolName)
+		i = encodeVarintNode(dAtA, i, uint64(len(m.ProtocolName)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.Verbose {
+		i--
+		if m.Verbose {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.All {
+		i--
+		if m.All {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.RequestType != 0 {
+		i = encodeVarintNode(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *P2PResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *P2PResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *P2PResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Names) > 0 {
+		for iNdEx := len(m.Names) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Names[iNdEx])
+			copy(dAtA[i:], m.Names[iNdEx])
+			i = encodeVarintNode(dAtA, i, uint64(len(m.Names[iNdEx])))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if m.RequestType != 0 {
+		i = encodeVarintNode(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *GetPeersResponse) Marshal() (dAtA []byte, err error) {
@@ -1814,11 +2358,38 @@ func encodeVarintNode(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+func NewPopulatedP2PRequest(r randyNode, easy bool) *P2PRequest {
+	this := &P2PRequest{}
+	this.RequestType = P2PREQTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
+	this.All = bool(bool(r.Intn(2) == 0))
+	this.Verbose = bool(bool(r.Intn(2) == 0))
+	this.ProtocolName = string(randStringNode(r))
+	this.ListenAddress = string(randStringNode(r))
+	this.TargetAddress = string(randStringNode(r))
+	this.RemoteAddress = string(randStringNode(r))
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
+func NewPopulatedP2PResponse(r randyNode, easy bool) *P2PResponse {
+	this := &P2PResponse{}
+	this.RequestType = P2PREQTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
+	v1 := r.Intn(10)
+	this.Names = make([]string, v1)
+	for i := 0; i < v1; i++ {
+		this.Names[i] = string(randStringNode(r))
+	}
+	if !easy && r.Intn(10) != 0 {
+	}
+	return this
+}
+
 func NewPopulatedGetPeersResponse(r randyNode, easy bool) *GetPeersResponse {
 	this := &GetPeersResponse{}
-	v1 := r.Intn(10)
-	this.PeerIDs = make([]string, v1)
-	for i := 0; i < v1; i++ {
+	v2 := r.Intn(10)
+	this.PeerIDs = make([]string, v2)
+	for i := 0; i < v2; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1828,9 +2399,9 @@ func NewPopulatedGetPeersResponse(r randyNode, easy bool) *GetPeersResponse {
 
 func NewPopulatedConnectRequest(r randyNode, easy bool) *ConnectRequest {
 	this := &ConnectRequest{}
-	v2 := r.Intn(10)
-	this.MultiAddrs = make([]string, v2)
-	for i := 0; i < v2; i++ {
+	v3 := r.Intn(10)
+	this.MultiAddrs = make([]string, v3)
+	for i := 0; i < v3; i++ {
 		this.MultiAddrs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1840,9 +2411,9 @@ func NewPopulatedConnectRequest(r randyNode, easy bool) *ConnectRequest {
 
 func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest {
 	this := &IsConnectedRequest{}
-	v3 := r.Intn(10)
-	this.PeerIDs = make([]string, v3)
-	for i := 0; i < v3; i++ {
+	v4 := r.Intn(10)
+	this.PeerIDs = make([]string, v4)
+	for i := 0; i < v4; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1853,11 +2424,11 @@ func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest 
 func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedResponse {
 	this := &IsConnectedResponse{}
 	if r.Intn(5) != 0 {
-		v4 := r.Intn(10)
+		v5 := r.Intn(10)
 		this.Connected = make(map[string]bool)
-		for i := 0; i < v4; i++ {
-			v5 := randStringNode(r)
-			this.Connected[v5] = bool(bool(r.Intn(2) == 0))
+		for i := 0; i < v5; i++ {
+			v6 := randStringNode(r)
+			this.Connected[v6] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1867,9 +2438,9 @@ func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedRespons
 
 func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
 	this := &DisconnectRequest{}
-	v6 := r.Intn(10)
-	this.PeerIDs = make([]string, v6)
-	for i := 0; i < v6; i++ {
+	v7 := r.Intn(10)
+	this.PeerIDs = make([]string, v7)
+	for i := 0; i < v7; i++ {
 		this.PeerIDs[i] = string(randStringNode(r))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1880,9 +2451,9 @@ func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
 func NewPopulatedDisconnectResponse(r randyNode, easy bool) *DisconnectResponse {
 	this := &DisconnectResponse{}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(10)
+		v8 := r.Intn(10)
 		this.Status = make(map[string]*DisconnectResponse_StatusMessage)
-		for i := 0; i < v7; i++ {
+		for i := 0; i < v8; i++ {
 			this.Status[randStringNode(r)] = NewPopulatedDisconnectResponse_StatusMessage(r, easy)
 		}
 	}
@@ -1935,9 +2506,9 @@ func randUTF8RuneNode(r randyNode) rune {
 	return rune(ru + 61)
 }
 func randStringNode(r randyNode) string {
-	v8 := r.Intn(100)
-	tmps := make([]rune, v8)
-	for i := 0; i < v8; i++ {
+	v9 := r.Intn(100)
+	tmps := make([]rune, v9)
+	for i := 0; i < v9; i++ {
 		tmps[i] = randUTF8RuneNode(r)
 	}
 	return string(tmps)
@@ -1959,11 +2530,11 @@ func randFieldNode(dAtA []byte, r randyNode, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		v9 := r.Int63()
+		v10 := r.Int63()
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			v10 *= -1
 		}
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(v9))
+		dAtA = encodeVarintPopulateNode(dAtA, uint64(v10))
 	case 1:
 		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
@@ -1988,6 +2559,58 @@ func encodeVarintPopulateNode(dAtA []byte, v uint64) []byte {
 	dAtA = append(dAtA, uint8(v))
 	return dAtA
 }
+func (m *P2PRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.RequestType != 0 {
+		n += 1 + sovNode(uint64(m.RequestType))
+	}
+	if m.All {
+		n += 2
+	}
+	if m.Verbose {
+		n += 2
+	}
+	l = len(m.ProtocolName)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	l = len(m.ListenAddress)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	l = len(m.TargetAddress)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	l = len(m.RemoteAddress)
+	if l > 0 {
+		n += 1 + l + sovNode(uint64(l))
+	}
+	return n
+}
+
+func (m *P2PResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.RequestType != 0 {
+		n += 1 + sovNode(uint64(m.RequestType))
+	}
+	if len(m.Names) > 0 {
+		for _, s := range m.Names {
+			l = len(s)
+			n += 1 + l + sovNode(uint64(l))
+		}
+	}
+	return n
+}
+
 func (m *GetPeersResponse) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2133,6 +2756,33 @@ func sovNode(x uint64) (n int) {
 func sozNode(x uint64) (n int) {
 	return sovNode(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
+func (this *P2PRequest) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&P2PRequest{`,
+		`RequestType:` + fmt.Sprintf("%v", this.RequestType) + `,`,
+		`All:` + fmt.Sprintf("%v", this.All) + `,`,
+		`Verbose:` + fmt.Sprintf("%v", this.Verbose) + `,`,
+		`ProtocolName:` + fmt.Sprintf("%v", this.ProtocolName) + `,`,
+		`ListenAddress:` + fmt.Sprintf("%v", this.ListenAddress) + `,`,
+		`TargetAddress:` + fmt.Sprintf("%v", this.TargetAddress) + `,`,
+		`RemoteAddress:` + fmt.Sprintf("%v", this.RemoteAddress) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *P2PResponse) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&P2PResponse{`,
+		`RequestType:` + fmt.Sprintf("%v", this.RequestType) + `,`,
+		`Names:` + fmt.Sprintf("%v", this.Names) + `,`,
+		`}`,
+	}, "")
+	return s
+}
 func (this *GetPeersResponse) String() string {
 	if this == nil {
 		return "nil"
@@ -2251,6 +2901,350 @@ func valueToStringNode(v interface{}) string {
 	}
 	pv := reflect.Indirect(rv).Interface()
 	return fmt.Sprintf("*%v", pv)
+}
+func (m *P2PRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: P2PRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: P2PRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
+			}
+			m.RequestType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RequestType |= P2PREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field All", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.All = bool(v != 0)
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Verbose", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Verbose = bool(v != 0)
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProtocolName", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProtocolName = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ListenAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ListenAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TargetAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TargetAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RemoteAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RemoteAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *P2PResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowNode
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: P2PResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: P2PResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
+			}
+			m.RequestType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RequestType |= P2PREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Names", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowNode
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthNode
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthNode
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Names = append(m.Names, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipNode(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthNode
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *GetPeersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -3194,6 +4188,7 @@ func (m *DisableExtrasRequest) Unmarshal(dAtA []byte) error {
 func skipNode(dAtA []byte) (n int, err error) {
 	l := len(dAtA)
 	iNdEx := 0
+	depth := 0
 	for iNdEx < l {
 		var wire uint64
 		for shift := uint(0); ; shift += 7 {
@@ -3225,10 +4220,8 @@ func skipNode(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			return iNdEx, nil
 		case 1:
 			iNdEx += 8
-			return iNdEx, nil
 		case 2:
 			var length int
 			for shift := uint(0); ; shift += 7 {
@@ -3249,55 +4242,30 @@ func skipNode(dAtA []byte) (n int, err error) {
 				return 0, ErrInvalidLengthNode
 			}
 			iNdEx += length
-			if iNdEx < 0 {
-				return 0, ErrInvalidLengthNode
-			}
-			return iNdEx, nil
 		case 3:
-			for {
-				var innerWire uint64
-				var start int = iNdEx
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return 0, ErrIntOverflowNode
-					}
-					if iNdEx >= l {
-						return 0, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					innerWire |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				innerWireType := int(innerWire & 0x7)
-				if innerWireType == 4 {
-					break
-				}
-				next, err := skipNode(dAtA[start:])
-				if err != nil {
-					return 0, err
-				}
-				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthNode
-				}
-			}
-			return iNdEx, nil
+			depth++
 		case 4:
-			return iNdEx, nil
+			if depth == 0 {
+				return 0, ErrUnexpectedEndOfGroupNode
+			}
+			depth--
 		case 5:
 			iNdEx += 4
-			return iNdEx, nil
 		default:
 			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
 		}
+		if iNdEx < 0 {
+			return 0, ErrInvalidLengthNode
+		}
+		if depth == 0 {
+			return iNdEx, nil
+		}
 	}
-	panic("unreachable")
+	return 0, io.ErrUnexpectedEOF
 }
 
 var (
-	ErrInvalidLengthNode = fmt.Errorf("proto: negative length found during unmarshaling")
-	ErrIntOverflowNode   = fmt.Errorf("proto: integer overflow")
+	ErrInvalidLengthNode        = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowNode          = fmt.Errorf("proto: integer overflow")
+	ErrUnexpectedEndOfGroupNode = fmt.Errorf("proto: unexpected end of group")
 )
