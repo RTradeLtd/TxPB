@@ -955,7 +955,8 @@ proto.pb.P2PLsInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     protocolname: jspb.Message.getFieldWithDefault(msg, 1, ""),
     listenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    targetaddress: jspb.Message.getFieldWithDefault(msg, 3, "")
+    targetaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    local: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -1004,6 +1005,10 @@ proto.pb.P2PLsInfo.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setTargetaddress(value);
       break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setLocal(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1051,6 +1056,13 @@ proto.pb.P2PLsInfo.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getLocal();
+  if (f) {
+    writer.writeBool(
+      4,
       f
     );
   }
@@ -1108,6 +1120,24 @@ proto.pb.P2PLsInfo.prototype.getTargetaddress = function() {
  */
 proto.pb.P2PLsInfo.prototype.setTargetaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional bool local = 4;
+ * @return {boolean}
+ */
+proto.pb.P2PLsInfo.prototype.getLocal = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.P2PLsInfo} returns this
+ */
+proto.pb.P2PLsInfo.prototype.setLocal = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 

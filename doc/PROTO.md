@@ -1018,6 +1018,7 @@ P2PLsInfo contains information about a single p2p stream
 | protocolName | [string](#string) |  |  |
 | listenAddress | [string](#string) |  |  |
 | targetAddress | [string](#string) |  |  |
+| local | [bool](#bool) |  | indicates whether or not this is a p2p listener or local listener |
 
 
 

@@ -103,6 +103,9 @@ export class P2PLsInfo extends jspb.Message {
   getTargetaddress(): string;
   setTargetaddress(value: string): void;
 
+  getLocal(): boolean;
+  setLocal(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): P2PLsInfo.AsObject;
   static toObject(includeInstance: boolean, msg: P2PLsInfo): P2PLsInfo.AsObject;
@@ -118,6 +121,7 @@ export namespace P2PLsInfo {
     protocolname: string,
     listenaddress: string,
     targetaddress: string,
+    local: boolean,
   }
 }
 

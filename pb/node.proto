@@ -87,6 +87,8 @@ message P2PLsInfo {
     string protocolName = 1;
     string listenAddress = 2;
     string targetAddress = 3;
+    // indicates whether or not this is a p2p listener or local listener
+    bool local = 4;
 }
 
 // GetPeersResponse is a response to GetPeers containing a slice of peer IDs
