@@ -50,7 +50,7 @@ enum P2PREQTYPE {
 
 // P2PRequest is a request message holding the details of a particular P2P rpc call
 message P2PRequest {
-    // indicates the reuqest type
+    // indicates the request type
     P2PREQTYPE requestType = 1;  
     // used by: P2PREQTYPE.CLOSE
     bool all = 2;
@@ -59,10 +59,13 @@ message P2PRequest {
     // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN
     string protocolName = 4;
     // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+    // must be specified as a multiaddr
     string listenAddress = 5;
     // used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+    // must be specified as a multiaddr
     string targetAddress = 6;
     // used by: P2PREQTYPE.LISTEN
+    // must be specified as a multiaddr
     string remoteAddress = 7;
     // used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD
     bool allowCustomProtocols = 8;
