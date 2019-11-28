@@ -1033,13 +1033,13 @@ P2PRequest is a request message holding the details of a particular P2P rpc call
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  | indicates the reuqest type |
+| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  | indicates the request type |
 | all | [bool](#bool) |  | used by: P2PREQTYPE.CLOSE |
 | verbose | [bool](#bool) |  | used by: P2PREQTYPE.LS |
 | protocolName | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN |
-| listenAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
-| targetAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD |
-| remoteAddress | [string](#string) |  | used by: P2PREQTYPE.LISTEN |
+| listenAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD must be specified as a multiaddr |
+| targetAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD must be specified as a multiaddr |
+| remoteAddress | [string](#string) |  | used by: P2PREQTYPE.LISTEN must be specified as a multiaddr |
 | allowCustomProtocols | [bool](#bool) |  | used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD |
 | reportPeerID | [bool](#bool) |  | used by: P2PREQTYPE.LISTEN |
 

@@ -101,7 +101,7 @@ func (EXTRASTYPE) EnumDescriptor() ([]byte, []int) {
 
 // P2PRequest is a request message holding the details of a particular P2P rpc call
 type P2PRequest struct {
-	// indicates the reuqest type
+	// indicates the request type
 	RequestType P2PREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.P2PREQTYPE" json:"requestType,omitempty"`
 	// used by: P2PREQTYPE.CLOSE
 	All bool `protobuf:"varint,2,opt,name=all,proto3" json:"all,omitempty"`
@@ -110,10 +110,13 @@ type P2PRequest struct {
 	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN
 	ProtocolName string `protobuf:"bytes,4,opt,name=protocolName,proto3" json:"protocolName,omitempty"`
 	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+	// must be specified as a multiaddr
 	ListenAddress string `protobuf:"bytes,5,opt,name=listenAddress,proto3" json:"listenAddress,omitempty"`
 	// used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD
+	// must be specified as a multiaddr
 	TargetAddress string `protobuf:"bytes,6,opt,name=targetAddress,proto3" json:"targetAddress,omitempty"`
 	// used by: P2PREQTYPE.LISTEN
+	// must be specified as a multiaddr
 	RemoteAddress string `protobuf:"bytes,7,opt,name=remoteAddress,proto3" json:"remoteAddress,omitempty"`
 	// used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD
 	AllowCustomProtocols bool `protobuf:"varint,8,opt,name=allowCustomProtocols,proto3" json:"allowCustomProtocols,omitempty"`
