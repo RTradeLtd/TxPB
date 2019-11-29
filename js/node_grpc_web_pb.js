@@ -420,5 +420,60 @@ proto.pb.NodeAPIPromiseClient.prototype.disableExtras =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.pb.P2PRequest,
+ *   !proto.pb.P2PResponse>}
+ */
+const methodInfo_NodeAPI_P2P = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.pb.P2PResponse,
+  /** @param {!proto.pb.P2PRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.pb.P2PResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.pb.P2PRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.pb.P2PResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.pb.P2PResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.pb.NodeAPIClient.prototype.p2P =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/pb.NodeAPI/P2P',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_P2P,
+      callback);
+};
+
+
+/**
+ * @param {!proto.pb.P2PRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.pb.P2PResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.pb.NodeAPIPromiseClient.prototype.p2P =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/pb.NodeAPI/P2P',
+      request,
+      metadata || {},
+      methodInfo_NodeAPI_P2P);
+};
+
+
 module.exports = proto.pb;
 

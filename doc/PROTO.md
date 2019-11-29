@@ -85,8 +85,12 @@
     - [IsConnectedRequest](#pb.IsConnectedRequest)
     - [IsConnectedResponse](#pb.IsConnectedResponse)
     - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
+    - [P2PLsInfo](#pb.P2PLsInfo)
+    - [P2PRequest](#pb.P2PRequest)
+    - [P2PResponse](#pb.P2PResponse)
   
     - [EXTRASTYPE](#pb.EXTRASTYPE)
+    - [P2PREQTYPE](#pb.P2PREQTYPE)
   
   
     - [NodeAPI](#pb.NodeAPI)
@@ -1002,6 +1006,65 @@ IsConnectedResponse is a response to an IsConnectedRequest request
 
 
 
+
+<a name="pb.P2PLsInfo"></a>
+
+### P2PLsInfo
+P2PLsInfo contains information about a single p2p stream
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| protocolName | [string](#string) |  |  |
+| listenAddress | [string](#string) |  |  |
+| targetAddress | [string](#string) |  |  |
+| local | [bool](#bool) |  | indicates whether or not this is a p2p listener or local listener |
+
+
+
+
+
+
+<a name="pb.P2PRequest"></a>
+
+### P2PRequest
+P2PRequest is a request message holding the details of a particular P2P rpc call
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  | indicates the request type |
+| all | [bool](#bool) |  | used by: P2PREQTYPE.CLOSE |
+| verbose | [bool](#bool) |  | used by: P2PREQTYPE.LS |
+| protocolName | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD, P2PREQTYPE.LISTEN |
+| listenAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD must be specified as a multiaddr |
+| targetAddress | [string](#string) |  | used by: P2PREQTYPE.CLOSE, P2PREQTYPE.FORWARD must be specified as a multiaddr |
+| remoteAddress | [string](#string) |  | used by: P2PREQTYPE.LISTEN must be specified as a multiaddr |
+| allowCustomProtocols | [bool](#bool) |  | used by: P2PREQTYPE.LISTEN, P2PREQTYPE.FORWARD |
+| reportPeerID | [bool](#bool) |  | used by: P2PREQTYPE.LISTEN |
+
+
+
+
+
+
+<a name="pb.P2PResponse"></a>
+
+### P2PResponse
+P2PResponse is a response message sent in response to a P2PRequest message
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [P2PREQTYPE](#pb.P2PREQTYPE) |  |  |
+| names | [string](#string) | repeated | sent by: P2PREQTYPE.LISTEN |
+| connsClosed | [int32](#int32) |  | sent by: P2PREQTYPE.CLOSE to indicate the number of connections closed |
+| streamInfos | [P2PLsInfo](#pb.P2PLsInfo) | repeated | sent by: P2PREQTYPE.LS and contains all known stream information |
+
+
+
+
+
  
 
 
@@ -1015,6 +1078,20 @@ EXTRASTYPE denotes a particular extras type
 | IDENTIFY | 0 | IDENTIFY is the identify service |
 | PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
 | DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
+
+
+
+<a name="pb.P2PREQTYPE"></a>
+
+### P2PREQTYPE
+P2PREQTYPE denotes the particular type of request being used in the p2p rpc
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CLOSE | 0 | equivalent of ipfs p2p close |
+| FORWARD | 1 | equivalent of ipfs p2p forward |
+| LISTEN | 2 | equivalent of ipfs p2p listen |
+| LS | 3 | equivalent of ipfs p2p ls |
 
 
  
@@ -1035,6 +1112,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
 | EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
 | DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+| P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 
  
 

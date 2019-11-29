@@ -65,6 +65,15 @@ NodeAPI.DisableExtras = {
   responseType: util_pb.Empty
 };
 
+NodeAPI.P2P = {
+  methodName: "P2P",
+  service: NodeAPI,
+  requestStream: false,
+  responseStream: false,
+  requestType: node_pb.P2PRequest,
+  responseType: node_pb.P2PResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -232,6 +241,37 @@ NodeAPIClient.prototype.disableExtras = function disableExtras(requestMessage, m
     callback = arguments[1];
   }
   var client = grpc.unary(NodeAPI.DisableExtras, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.p2P = function p2P(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(NodeAPI.P2P, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

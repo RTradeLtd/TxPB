@@ -5,7 +5,7 @@ proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-docs
+proto-gen: gen-dag gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-keystore gen-node gen-docs
 
 
 # run standard go tooling for better readability
@@ -36,7 +36,7 @@ install:
 	go get -u github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
 	go get -u github.com/gogo/protobuf/proto
 	go get -u github.com/gogo/protobuf/gogoproto
-	go get -u -github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 	npm install -g ts-protoc-gen
 	python3 -m pip install grpcio-tools
 	bash .script/protoc-js.sh
