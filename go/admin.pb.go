@@ -4,18 +4,13 @@
 package pb
 
 import (
-	bytes "bytes"
 	context "context"
 	fmt "fmt"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
 
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -192,8 +187,9 @@ type BlockstoreRequest struct {
 	ReqOpts BSREQOPTS `protobuf:"varint,3,opt,name=reqOpts,proto3,enum=pb.BSREQOPTS" json:"reqOpts,omitempty"`
 }
 
-func (m *BlockstoreRequest) Reset()      { *m = BlockstoreRequest{} }
-func (*BlockstoreRequest) ProtoMessage() {}
+func (m *BlockstoreRequest) Reset()         { *m = BlockstoreRequest{} }
+func (m *BlockstoreRequest) String() string { return proto.CompactTextString(m) }
+func (*BlockstoreRequest) ProtoMessage()    {}
 func (*BlockstoreRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{0}
 }
@@ -250,8 +246,9 @@ type BlockstoreResponse struct {
 	Blocks []*Block `protobuf:"bytes,1,rep,name=blocks,proto3" json:"blocks,omitempty"`
 }
 
-func (m *BlockstoreResponse) Reset()      { *m = BlockstoreResponse{} }
-func (*BlockstoreResponse) ProtoMessage() {}
+func (m *BlockstoreResponse) Reset()         { *m = BlockstoreResponse{} }
+func (m *BlockstoreResponse) String() string { return proto.CompactTextString(m) }
+func (*BlockstoreResponse) ProtoMessage()    {}
 func (*BlockstoreResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{1}
 }
@@ -297,8 +294,9 @@ type Block struct {
 	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 }
 
-func (m *Block) Reset()      { *m = Block{} }
-func (*Block) ProtoMessage() {}
+func (m *Block) Reset()         { *m = Block{} }
+func (m *Block) String() string { return proto.CompactTextString(m) }
+func (*Block) ProtoMessage()    {}
 func (*Block) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{2}
 }
@@ -349,8 +347,9 @@ type ManageGCRequest struct {
 	Type GCREQTYPE `protobuf:"varint,1,opt,name=type,proto3,enum=pb.GCREQTYPE" json:"type,omitempty"`
 }
 
-func (m *ManageGCRequest) Reset()      { *m = ManageGCRequest{} }
-func (*ManageGCRequest) ProtoMessage() {}
+func (m *ManageGCRequest) Reset()         { *m = ManageGCRequest{} }
+func (m *ManageGCRequest) String() string { return proto.CompactTextString(m) }
+func (*ManageGCRequest) ProtoMessage()    {}
 func (*ManageGCRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{3}
 }
@@ -394,8 +393,9 @@ type ManageGCResponse struct {
 	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (m *ManageGCResponse) Reset()      { *m = ManageGCResponse{} }
-func (*ManageGCResponse) ProtoMessage() {}
+func (m *ManageGCResponse) Reset()         { *m = ManageGCResponse{} }
+func (m *ManageGCResponse) String() string { return proto.CompactTextString(m) }
+func (*ManageGCResponse) ProtoMessage()    {}
 func (*ManageGCResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{4}
 }
@@ -442,8 +442,9 @@ type RefCountRequest struct {
 	Limit int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 }
 
-func (m *RefCountRequest) Reset()      { *m = RefCountRequest{} }
-func (*RefCountRequest) ProtoMessage() {}
+func (m *RefCountRequest) Reset()         { *m = RefCountRequest{} }
+func (m *RefCountRequest) String() string { return proto.CompactTextString(m) }
+func (*RefCountRequest) ProtoMessage()    {}
 func (*RefCountRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{5}
 }
@@ -495,8 +496,9 @@ type RefCountResponse struct {
 	Cids map[string]int64 `protobuf:"bytes,1,rep,name=cids,proto3" json:"cids,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
-func (m *RefCountResponse) Reset()      { *m = RefCountResponse{} }
-func (*RefCountResponse) ProtoMessage() {}
+func (m *RefCountResponse) Reset()         { *m = RefCountResponse{} }
+func (m *RefCountResponse) String() string { return proto.CompactTextString(m) }
+func (*RefCountResponse) ProtoMessage()    {}
 func (*RefCountResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_73a7fc70dcc2027c, []int{6}
 }
@@ -553,586 +555,43 @@ func init() {
 func init() { proto.RegisterFile("admin.proto", fileDescriptor_73a7fc70dcc2027c) }
 
 var fileDescriptor_73a7fc70dcc2027c = []byte{
-	// 632 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x54, 0xc1, 0x6e, 0xda, 0x4c,
-	0x10, 0xf6, 0x42, 0x42, 0xe2, 0x21, 0x24, 0xce, 0xfe, 0xf9, 0x23, 0x44, 0xa5, 0x55, 0xe2, 0x43,
-	0x1b, 0x21, 0x85, 0x48, 0x34, 0x55, 0xaa, 0x56, 0x3d, 0x80, 0xb3, 0xa0, 0x4a, 0x49, 0xa0, 0x8b,
-	0x39, 0xe4, 0x84, 0x0c, 0x38, 0xd4, 0x4a, 0x82, 0x09, 0x5e, 0x2a, 0x71, 0x6a, 0x1f, 0xa1, 0x8f,
-	0xd1, 0x47, 0xa8, 0xd4, 0x17, 0xe8, 0x31, 0xc7, 0x1c, 0x83, 0xf3, 0x02, 0x3d, 0xf6, 0x58, 0xed,
-	0xda, 0x0b, 0xd4, 0x87, 0xde, 0x66, 0xe6, 0x9b, 0xcf, 0xdf, 0xb7, 0x33, 0xbb, 0x86, 0xac, 0xd3,
-	0xbf, 0xf5, 0x86, 0xa5, 0xd1, 0xd8, 0xe7, 0x3e, 0x4e, 0x8d, 0xba, 0x85, 0xc3, 0x81, 0xc7, 0x3f,
-	0x4e, 0xba, 0xa5, 0x9e, 0x7f, 0x7b, 0x34, 0xf0, 0x07, 0xfe, 0x91, 0x84, 0xba, 0x93, 0x2b, 0x99,
-	0xc9, 0x44, 0x46, 0x11, 0xc5, 0x9c, 0xc2, 0x76, 0xf5, 0xc6, 0xef, 0x5d, 0x07, 0xdc, 0x1f, 0xbb,
-	0xcc, 0xbd, 0x9b, 0xb8, 0x01, 0xc7, 0x18, 0x56, 0x7a, 0x5e, 0x3f, 0xc8, 0xa3, 0xbd, 0xf4, 0x81,
-	0xce, 0x64, 0x8c, 0x5f, 0xc0, 0xda, 0xd8, 0xbd, 0xb3, 0xa7, 0x23, 0x37, 0x9f, 0xda, 0x43, 0x07,
-	0x9b, 0xe5, 0x5c, 0x69, 0xd4, 0x2d, 0x55, 0x5b, 0x8c, 0x7e, 0xb0, 0x2f, 0x9b, 0x94, 0x29, 0x34,
-	0x6e, 0x6c, 0x8c, 0x78, 0x90, 0x4f, 0x27, 0x1a, 0x1b, 0x4d, 0xbb, 0xc5, 0x14, 0x6a, 0x9e, 0x00,
-	0x5e, 0x96, 0x0e, 0x46, 0xfe, 0x30, 0x70, 0xf1, 0x3e, 0x64, 0xba, 0xb2, 0x2a, 0xd5, 0xb3, 0x65,
-	0x5d, 0xb2, 0x45, 0x85, 0xc5, 0x80, 0x79, 0x08, 0xab, 0xb2, 0x80, 0x0d, 0x48, 0xf7, 0xbc, 0x7e,
-	0x1e, 0xed, 0xa1, 0x03, 0x9d, 0x89, 0x50, 0x38, 0xef, 0x3b, 0xdc, 0x91, 0x16, 0x37, 0x98, 0x8c,
-	0xcd, 0x63, 0xd8, 0x3a, 0x77, 0x86, 0xce, 0xc0, 0xad, 0x5b, 0xea, 0x80, 0xfb, 0xb0, 0xc2, 0xc5,
-	0x49, 0xd0, 0xc2, 0x60, 0xdd, 0x52, 0x27, 0x91, 0x90, 0x59, 0x04, 0x63, 0xc1, 0x8a, 0xbd, 0xed,
-	0x42, 0x26, 0xe0, 0x0e, 0x9f, 0x04, 0xb1, 0x64, 0x9c, 0x99, 0x6f, 0x61, 0x8b, 0xb9, 0x57, 0x96,
-	0x3f, 0x19, 0xf2, 0x7f, 0x8d, 0x70, 0x07, 0x56, 0x6f, 0xbc, 0x5b, 0x8f, 0x4b, 0x77, 0x69, 0x16,
-	0x25, 0xe6, 0x67, 0x30, 0x16, 0xe4, 0x58, 0xa8, 0xbc, 0xc4, 0xce, 0x96, 0x89, 0xf0, 0x97, 0xec,
-	0x29, 0x59, 0x5e, 0x3f, 0xa0, 0x43, 0x3e, 0x9e, 0x46, 0x5f, 0x2f, 0x9c, 0x80, 0x3e, 0x2f, 0x89,
-	0xc9, 0x5c, 0xbb, 0x53, 0x35, 0x99, 0x6b, 0x77, 0x2a, 0xc4, 0x3f, 0x39, 0x37, 0x13, 0x57, 0x89,
-	0xcb, 0xe4, 0x4d, 0xea, 0x35, 0x2a, 0xda, 0xa0, 0xcf, 0xd7, 0x88, 0x73, 0x22, 0xe9, 0x9c, 0xd2,
-	0x33, 0x6a, 0x53, 0x43, 0xc3, 0x00, 0x99, 0x6a, 0xab, 0xd3, 0x6c, 0xdb, 0x06, 0xc2, 0x5b, 0x90,
-	0x8d, 0xe2, 0xce, 0x79, 0xe5, 0xe2, 0xd2, 0x48, 0xc5, 0x60, 0x9d, 0xda, 0x46, 0x3a, 0x06, 0xeb,
-	0x34, 0x06, 0x57, 0x8a, 0xcf, 0xe3, 0xaf, 0x8a, 0x9d, 0xe3, 0x2c, 0xac, 0x9d, 0xd2, 0x5a, 0xa5,
-	0x7d, 0x66, 0x1b, 0x1a, 0xde, 0x80, 0xf5, 0x6a, 0xab, 0x53, 0x6b, 0x30, 0x8b, 0x1a, 0xa8, 0xf8,
-	0x0a, 0xf4, 0xf9, 0xe8, 0x05, 0x54, 0xb7, 0x3a, 0x2d, 0xbb, 0xc2, 0x44, 0x63, 0x16, 0xd6, 0x64,
-	0xd6, 0x68, 0x1a, 0x48, 0x18, 0x8b, 0x20, 0xbb, 0xdd, 0x32, 0x52, 0xc5, 0x23, 0x00, 0x46, 0x6b,
-	0x8a, 0xb7, 0x0d, 0x39, 0x46, 0x6b, 0x52, 0xde, 0x6a, 0xb4, 0x2f, 0x04, 0x79, 0x53, 0x36, 0xa8,
-	0x93, 0xa0, 0xe2, 0x33, 0x45, 0x90, 0x86, 0x72, 0xa0, 0x0b, 0x34, 0x32, 0xa1, 0x95, 0x7f, 0x20,
-	0x58, 0xaf, 0x88, 0x87, 0x54, 0x69, 0xbe, 0xc7, 0x27, 0xb0, 0xae, 0x36, 0x8f, 0xff, 0x13, 0xa3,
-	0x4f, 0xdc, 0x9e, 0xc2, 0xce, 0xdf, 0xc5, 0x68, 0x1f, 0xa6, 0x26, 0x88, 0x6a, 0x4b, 0x11, 0x31,
-	0x71, 0x29, 0x22, 0x62, 0x72, 0x91, 0xa6, 0x86, 0xdf, 0x01, 0x2c, 0x5e, 0x02, 0xfe, 0x7f, 0x7e,
-	0xe3, 0x97, 0x1f, 0x65, 0x61, 0x37, 0x59, 0x56, 0xf4, 0xea, 0xf1, 0xc3, 0x8c, 0x68, 0x8f, 0x33,
-	0x82, 0x7e, 0xcd, 0x08, 0xfa, 0x3d, 0x23, 0xe8, 0x4b, 0x48, 0xd0, 0xb7, 0x90, 0xa0, 0xef, 0x21,
-	0x41, 0x3f, 0x43, 0x82, 0xee, 0x43, 0x82, 0x1e, 0x43, 0x82, 0xbe, 0x3e, 0x11, 0xed, 0xfe, 0x89,
-	0x68, 0x0f, 0x4f, 0x44, 0xeb, 0x66, 0xe4, 0x0f, 0xe0, 0xe5, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff,
-	0xd7, 0x80, 0xfc, 0x1c, 0x42, 0x04, 0x00, 0x00,
-}
-
-func (this *BlockstoreRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*BlockstoreRequest)
-	if !ok {
-		that2, ok := that.(BlockstoreRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *BlockstoreRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *BlockstoreRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *BlockstoreRequest but is not nil && this == nil")
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return fmt.Errorf("Cids this(%v) Not Equal that(%v)", len(this.Cids), len(that1.Cids))
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
-		}
-	}
-	if this.ReqType != that1.ReqType {
-		return fmt.Errorf("ReqType this(%v) Not Equal that(%v)", this.ReqType, that1.ReqType)
-	}
-	if this.ReqOpts != that1.ReqOpts {
-		return fmt.Errorf("ReqOpts this(%v) Not Equal that(%v)", this.ReqOpts, that1.ReqOpts)
-	}
-	return nil
-}
-func (this *BlockstoreRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*BlockstoreRequest)
-	if !ok {
-		that2, ok := that.(BlockstoreRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return false
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return false
-		}
-	}
-	if this.ReqType != that1.ReqType {
-		return false
-	}
-	if this.ReqOpts != that1.ReqOpts {
-		return false
-	}
-	return true
-}
-func (this *BlockstoreResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*BlockstoreResponse)
-	if !ok {
-		that2, ok := that.(BlockstoreResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *BlockstoreResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *BlockstoreResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *BlockstoreResponse but is not nil && this == nil")
-	}
-	if len(this.Blocks) != len(that1.Blocks) {
-		return fmt.Errorf("Blocks this(%v) Not Equal that(%v)", len(this.Blocks), len(that1.Blocks))
-	}
-	for i := range this.Blocks {
-		if !this.Blocks[i].Equal(that1.Blocks[i]) {
-			return fmt.Errorf("Blocks this[%v](%v) Not Equal that[%v](%v)", i, this.Blocks[i], i, that1.Blocks[i])
-		}
-	}
-	return nil
-}
-func (this *BlockstoreResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*BlockstoreResponse)
-	if !ok {
-		that2, ok := that.(BlockstoreResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Blocks) != len(that1.Blocks) {
-		return false
-	}
-	for i := range this.Blocks {
-		if !this.Blocks[i].Equal(that1.Blocks[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *Block) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*Block)
-	if !ok {
-		that2, ok := that.(Block)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *Block")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *Block but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *Block but is not nil && this == nil")
-	}
-	if this.Cid != that1.Cid {
-		return fmt.Errorf("Cid this(%v) Not Equal that(%v)", this.Cid, that1.Cid)
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
-	}
-	return nil
-}
-func (this *Block) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Block)
-	if !ok {
-		that2, ok := that.(Block)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Cid != that1.Cid {
-		return false
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return false
-	}
-	return true
-}
-func (this *ManageGCRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*ManageGCRequest)
-	if !ok {
-		that2, ok := that.(ManageGCRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *ManageGCRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *ManageGCRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *ManageGCRequest but is not nil && this == nil")
-	}
-	if this.Type != that1.Type {
-		return fmt.Errorf("Type this(%v) Not Equal that(%v)", this.Type, that1.Type)
-	}
-	return nil
-}
-func (this *ManageGCRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ManageGCRequest)
-	if !ok {
-		that2, ok := that.(ManageGCRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Type != that1.Type {
-		return false
-	}
-	return true
-}
-func (this *ManageGCResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*ManageGCResponse)
-	if !ok {
-		that2, ok := that.(ManageGCResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *ManageGCResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *ManageGCResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *ManageGCResponse but is not nil && this == nil")
-	}
-	if this.Status != that1.Status {
-		return fmt.Errorf("Status this(%v) Not Equal that(%v)", this.Status, that1.Status)
-	}
-	return nil
-}
-func (this *ManageGCResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ManageGCResponse)
-	if !ok {
-		that2, ok := that.(ManageGCResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Status != that1.Status {
-		return false
-	}
-	return true
-}
-func (this *RefCountRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*RefCountRequest)
-	if !ok {
-		that2, ok := that.(RefCountRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *RefCountRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *RefCountRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *RefCountRequest but is not nil && this == nil")
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return fmt.Errorf("Cids this(%v) Not Equal that(%v)", len(this.Cids), len(that1.Cids))
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
-		}
-	}
-	if this.Limit != that1.Limit {
-		return fmt.Errorf("Limit this(%v) Not Equal that(%v)", this.Limit, that1.Limit)
-	}
-	return nil
-}
-func (this *RefCountRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*RefCountRequest)
-	if !ok {
-		that2, ok := that.(RefCountRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return false
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return false
-		}
-	}
-	if this.Limit != that1.Limit {
-		return false
-	}
-	return true
-}
-func (this *RefCountResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*RefCountResponse)
-	if !ok {
-		that2, ok := that.(RefCountResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *RefCountResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *RefCountResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *RefCountResponse but is not nil && this == nil")
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return fmt.Errorf("Cids this(%v) Not Equal that(%v)", len(this.Cids), len(that1.Cids))
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return fmt.Errorf("Cids this[%v](%v) Not Equal that[%v](%v)", i, this.Cids[i], i, that1.Cids[i])
-		}
-	}
-	return nil
-}
-func (this *RefCountResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*RefCountResponse)
-	if !ok {
-		that2, ok := that.(RefCountResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Cids) != len(that1.Cids) {
-		return false
-	}
-	for i := range this.Cids {
-		if this.Cids[i] != that1.Cids[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *BlockstoreRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.BlockstoreRequest{")
-	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
-	s = append(s, "ReqType: "+fmt.Sprintf("%#v", this.ReqType)+",\n")
-	s = append(s, "ReqOpts: "+fmt.Sprintf("%#v", this.ReqOpts)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *BlockstoreResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.BlockstoreResponse{")
-	if this.Blocks != nil {
-		s = append(s, "Blocks: "+fmt.Sprintf("%#v", this.Blocks)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *Block) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.Block{")
-	s = append(s, "Cid: "+fmt.Sprintf("%#v", this.Cid)+",\n")
-	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ManageGCRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.ManageGCRequest{")
-	s = append(s, "Type: "+fmt.Sprintf("%#v", this.Type)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ManageGCResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.ManageGCResponse{")
-	s = append(s, "Status: "+fmt.Sprintf("%#v", this.Status)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *RefCountRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.RefCountRequest{")
-	s = append(s, "Cids: "+fmt.Sprintf("%#v", this.Cids)+",\n")
-	s = append(s, "Limit: "+fmt.Sprintf("%#v", this.Limit)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *RefCountResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.RefCountResponse{")
-	keysForCids := make([]string, 0, len(this.Cids))
-	for k := range this.Cids {
-		keysForCids = append(keysForCids, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForCids)
-	mapStringForCids := "map[string]int64{"
-	for _, k := range keysForCids {
-		mapStringForCids += fmt.Sprintf("%#v: %#v,", k, this.Cids[k])
-	}
-	mapStringForCids += "}"
-	if this.Cids != nil {
-		s = append(s, "Cids: "+mapStringForCids+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringAdmin(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	// 572 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x53, 0xc1, 0x6e, 0xda, 0x40,
+	0x10, 0xf5, 0x42, 0x42, 0xe2, 0x71, 0x08, 0xce, 0x36, 0x8d, 0x10, 0x95, 0x2c, 0xe2, 0x43, 0x8b,
+	0x2c, 0x95, 0x4a, 0xb4, 0x15, 0x55, 0xab, 0x1e, 0xc0, 0x59, 0x50, 0xa5, 0x24, 0xd0, 0xb5, 0x39,
+	0xe4, 0x84, 0x0c, 0xb8, 0x95, 0x05, 0xc1, 0x0e, 0x5e, 0x2a, 0x71, 0xea, 0x2f, 0xf4, 0x7f, 0xfa,
+	0x03, 0x3d, 0xe6, 0xd8, 0x63, 0x05, 0x3f, 0x52, 0xed, 0xda, 0x0b, 0xd4, 0x87, 0xde, 0x66, 0xe6,
+	0xcd, 0xdb, 0x79, 0x33, 0xb3, 0x03, 0x9a, 0x37, 0xb9, 0x0f, 0xe6, 0xf5, 0x68, 0x11, 0xb2, 0x10,
+	0xe7, 0xa2, 0x91, 0xb9, 0x82, 0xb3, 0xf6, 0x2c, 0x1c, 0x4f, 0x63, 0x16, 0x2e, 0x7c, 0xea, 0x3f,
+	0x2c, 0xfd, 0x98, 0x61, 0x0c, 0x07, 0xe3, 0x60, 0x12, 0x97, 0x51, 0x35, 0x5f, 0x53, 0xa9, 0xb0,
+	0xf1, 0x0b, 0x38, 0x5a, 0xf8, 0x0f, 0xee, 0x2a, 0xf2, 0xcb, 0xb9, 0x2a, 0xaa, 0x9d, 0x36, 0x8a,
+	0xf5, 0x68, 0x54, 0x6f, 0x3b, 0x94, 0x7c, 0x76, 0xef, 0xfa, 0x84, 0x4a, 0x34, 0x4d, 0xec, 0x45,
+	0x2c, 0x2e, 0xe7, 0x33, 0x89, 0xbd, 0xbe, 0xeb, 0x50, 0x89, 0x9a, 0x4d, 0xc0, 0xfb, 0xa5, 0xe3,
+	0x28, 0x9c, 0xc7, 0x3e, 0xbe, 0x84, 0xc2, 0x48, 0x44, 0x45, 0x75, 0xad, 0xa1, 0x0a, 0x36, 0x8f,
+	0xd0, 0x14, 0x30, 0x5f, 0xc2, 0xa1, 0x08, 0x60, 0x1d, 0xf2, 0xe3, 0x60, 0x52, 0x46, 0x55, 0x54,
+	0x53, 0x29, 0x37, 0xb9, 0xf2, 0x89, 0xc7, 0x3c, 0x21, 0xf1, 0x84, 0x0a, 0xdb, 0x7c, 0x03, 0xa5,
+	0x1b, 0x6f, 0xee, 0x7d, 0xf5, 0xbb, 0xb6, 0x6c, 0xf0, 0x12, 0x0e, 0x18, 0xef, 0x04, 0xed, 0x04,
+	0x76, 0x6d, 0xd9, 0x89, 0x80, 0x4c, 0x0b, 0xf4, 0x1d, 0x2b, 0xd5, 0x76, 0x01, 0x85, 0x98, 0x79,
+	0x6c, 0x19, 0xa7, 0x25, 0x53, 0xcf, 0xfc, 0x00, 0x25, 0xea, 0x7f, 0xb1, 0xc3, 0xe5, 0x9c, 0xfd,
+	0x6f, 0x84, 0xe7, 0x70, 0x38, 0x0b, 0xee, 0x03, 0x26, 0xd4, 0xe5, 0x69, 0xe2, 0x98, 0xdf, 0x41,
+	0xdf, 0x91, 0xd3, 0x42, 0x8d, 0x3d, 0xb6, 0xd6, 0x30, 0xb8, 0xbe, 0x6c, 0x4e, 0xdd, 0x0e, 0x26,
+	0x31, 0x99, 0xb3, 0xc5, 0x2a, 0x79, 0xbd, 0xd2, 0x04, 0x75, 0x1b, 0xe2, 0x93, 0x99, 0xfa, 0x2b,
+	0x39, 0x99, 0xa9, 0xbf, 0xe2, 0xc5, 0xbf, 0x79, 0xb3, 0xa5, 0x2f, 0x8b, 0x0b, 0xe7, 0x7d, 0xee,
+	0x1d, 0xb2, 0x5c, 0x50, 0xb7, 0x6b, 0xc4, 0x45, 0xee, 0x0c, 0xaf, 0xc8, 0x35, 0x71, 0x89, 0xae,
+	0x60, 0x80, 0x42, 0xdb, 0x19, 0xf6, 0x07, 0xae, 0x8e, 0x70, 0x09, 0xb4, 0xc4, 0x1e, 0xde, 0xb4,
+	0x6e, 0xef, 0xf4, 0x5c, 0x0a, 0x76, 0x89, 0xab, 0xe7, 0x53, 0xb0, 0x4b, 0x52, 0xf0, 0xc0, 0x7a,
+	0x9e, 0xbe, 0xca, 0x77, 0x8e, 0x35, 0x38, 0xba, 0x22, 0x9d, 0xd6, 0xe0, 0xda, 0xd5, 0x15, 0x7c,
+	0x02, 0xc7, 0x6d, 0x67, 0xd8, 0xe9, 0x51, 0x9b, 0xe8, 0xc8, 0x7a, 0x0b, 0xea, 0x76, 0xf4, 0x1c,
+	0xea, 0xda, 0x43, 0xc7, 0x6d, 0x51, 0x9e, 0xa8, 0xc1, 0x91, 0xf0, 0x7a, 0x7d, 0x1d, 0x71, 0x61,
+	0x09, 0xe4, 0x0e, 0x1c, 0x3d, 0x67, 0xbd, 0x02, 0xa0, 0xa4, 0x23, 0x79, 0x67, 0x50, 0xa4, 0xa4,
+	0x23, 0xca, 0xdb, 0xbd, 0xc1, 0x2d, 0x27, 0x9f, 0x8a, 0x04, 0xd9, 0x09, 0xb2, 0x9e, 0x49, 0x82,
+	0x10, 0x54, 0x04, 0x95, 0xa3, 0x89, 0x08, 0xa5, 0xf1, 0x13, 0xc1, 0x71, 0x8b, 0x5f, 0x46, 0xab,
+	0xff, 0x09, 0x37, 0xe1, 0x58, 0x6e, 0x1e, 0x3f, 0xe1, 0xa3, 0xcf, 0xfc, 0x9e, 0xca, 0xf9, 0xbf,
+	0xc1, 0x64, 0x1f, 0xa6, 0xc2, 0x89, 0x72, 0x4b, 0x09, 0x31, 0xf3, 0x29, 0x12, 0x62, 0x76, 0x91,
+	0xa6, 0x82, 0x3f, 0x02, 0xec, 0x2e, 0x01, 0x3f, 0xdd, 0xfe, 0xf8, 0xfd, 0xa3, 0xac, 0x5c, 0x64,
+	0xc3, 0x92, 0xde, 0x2e, 0xff, 0x5a, 0x1b, 0xe8, 0x71, 0x6d, 0xa0, 0x3f, 0x6b, 0x03, 0xfd, 0xd8,
+	0x18, 0xca, 0xe3, 0xc6, 0x50, 0x7e, 0x6f, 0x0c, 0x65, 0x54, 0x10, 0x87, 0xfe, 0xfa, 0x6f, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0xc5, 0x09, 0xee, 0xe5, 0xf7, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1555,169 +1014,6 @@ func encodeVarintAdmin(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedBlockstoreRequest(r randyAdmin, easy bool) *BlockstoreRequest {
-	this := &BlockstoreRequest{}
-	v1 := r.Intn(10)
-	this.Cids = make([]string, v1)
-	for i := 0; i < v1; i++ {
-		this.Cids[i] = string(randStringAdmin(r))
-	}
-	this.ReqType = BSREQTYPE([]int32{0, 1, 2, 3, 4}[r.Intn(5)])
-	this.ReqOpts = BSREQOPTS([]int32{0, 1}[r.Intn(2)])
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedBlockstoreResponse(r randyAdmin, easy bool) *BlockstoreResponse {
-	this := &BlockstoreResponse{}
-	if r.Intn(5) != 0 {
-		v2 := r.Intn(5)
-		this.Blocks = make([]*Block, v2)
-		for i := 0; i < v2; i++ {
-			this.Blocks[i] = NewPopulatedBlock(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedBlock(r randyAdmin, easy bool) *Block {
-	this := &Block{}
-	this.Cid = string(randStringAdmin(r))
-	v3 := r.Intn(100)
-	this.Data = make([]byte, v3)
-	for i := 0; i < v3; i++ {
-		this.Data[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedManageGCRequest(r randyAdmin, easy bool) *ManageGCRequest {
-	this := &ManageGCRequest{}
-	this.Type = GCREQTYPE([]int32{0, 1, 2}[r.Intn(3)])
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedManageGCResponse(r randyAdmin, easy bool) *ManageGCResponse {
-	this := &ManageGCResponse{}
-	this.Status = string(randStringAdmin(r))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedRefCountRequest(r randyAdmin, easy bool) *RefCountRequest {
-	this := &RefCountRequest{}
-	v4 := r.Intn(10)
-	this.Cids = make([]string, v4)
-	for i := 0; i < v4; i++ {
-		this.Cids[i] = string(randStringAdmin(r))
-	}
-	this.Limit = int64(r.Int63())
-	if r.Intn(2) == 0 {
-		this.Limit *= -1
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedRefCountResponse(r randyAdmin, easy bool) *RefCountResponse {
-	this := &RefCountResponse{}
-	if r.Intn(5) != 0 {
-		v5 := r.Intn(10)
-		this.Cids = make(map[string]int64)
-		for i := 0; i < v5; i++ {
-			v6 := randStringAdmin(r)
-			this.Cids[v6] = int64(r.Int63())
-			if r.Intn(2) == 0 {
-				this.Cids[v6] *= -1
-			}
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyAdmin interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneAdmin(r randyAdmin) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringAdmin(r randyAdmin) string {
-	v7 := r.Intn(100)
-	tmps := make([]rune, v7)
-	for i := 0; i < v7; i++ {
-		tmps[i] = randUTF8RuneAdmin(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedAdmin(r randyAdmin, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldAdmin(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldAdmin(dAtA []byte, r randyAdmin, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
-		v8 := r.Int63()
-		if r.Intn(2) == 0 {
-			v8 *= -1
-		}
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(v8))
-	case 1:
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateAdmin(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateAdmin(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
 func (m *BlockstoreRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1836,103 +1132,6 @@ func sovAdmin(x uint64) (n int) {
 }
 func sozAdmin(x uint64) (n int) {
 	return sovAdmin(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *BlockstoreRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&BlockstoreRequest{`,
-		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
-		`ReqType:` + fmt.Sprintf("%v", this.ReqType) + `,`,
-		`ReqOpts:` + fmt.Sprintf("%v", this.ReqOpts) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *BlockstoreResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForBlocks := "[]*Block{"
-	for _, f := range this.Blocks {
-		repeatedStringForBlocks += strings.Replace(f.String(), "Block", "Block", 1) + ","
-	}
-	repeatedStringForBlocks += "}"
-	s := strings.Join([]string{`&BlockstoreResponse{`,
-		`Blocks:` + repeatedStringForBlocks + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *Block) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&Block{`,
-		`Cid:` + fmt.Sprintf("%v", this.Cid) + `,`,
-		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ManageGCRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&ManageGCRequest{`,
-		`Type:` + fmt.Sprintf("%v", this.Type) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ManageGCResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&ManageGCResponse{`,
-		`Status:` + fmt.Sprintf("%v", this.Status) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *RefCountRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&RefCountRequest{`,
-		`Cids:` + fmt.Sprintf("%v", this.Cids) + `,`,
-		`Limit:` + fmt.Sprintf("%v", this.Limit) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *RefCountResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForCids := make([]string, 0, len(this.Cids))
-	for k := range this.Cids {
-		keysForCids = append(keysForCids, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForCids)
-	mapStringForCids := "map[string]int64{"
-	for _, k := range keysForCids {
-		mapStringForCids += fmt.Sprintf("%v: %v,", k, this.Cids[k])
-	}
-	mapStringForCids += "}"
-	s := strings.Join([]string{`&RefCountResponse{`,
-		`Cids:` + mapStringForCids + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringAdmin(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
 }
 func (m *BlockstoreRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)

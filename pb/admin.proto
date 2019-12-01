@@ -1,6 +1,6 @@
 syntax = "proto3";
 package pb;
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+/*import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 option (gogoproto.gostring_all) = true;
 option (gogoproto.equal_all) = true;
 option (gogoproto.verbose_equal_all) = true;
@@ -13,7 +13,7 @@ option (gogoproto.testgen_all) = true;
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
-
+*/
 // AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
 service AdminAPI {
     // ManageGC is used to manage TemporalX's garbage collection process

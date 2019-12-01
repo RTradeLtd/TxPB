@@ -4,16 +4,12 @@
 package pb
 
 import (
-	bytes "bytes"
 	context "context"
 	fmt "fmt"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
 
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -45,8 +41,9 @@ type NameSysResolveRequest struct {
 	DhtTimeout int32 `protobuf:"varint,4,opt,name=dhtTimeout,proto3" json:"dhtTimeout,omitempty"`
 }
 
-func (m *NameSysResolveRequest) Reset()      { *m = NameSysResolveRequest{} }
-func (*NameSysResolveRequest) ProtoMessage() {}
+func (m *NameSysResolveRequest) Reset()         { *m = NameSysResolveRequest{} }
+func (m *NameSysResolveRequest) String() string { return proto.CompactTextString(m) }
+func (*NameSysResolveRequest) ProtoMessage()    {}
 func (*NameSysResolveRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_70d41f629e281f22, []int{0}
 }
@@ -113,8 +110,9 @@ type NameSysResolveResult struct {
 	Error string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
-func (m *NameSysResolveResult) Reset()      { *m = NameSysResolveResult{} }
-func (*NameSysResolveResult) ProtoMessage() {}
+func (m *NameSysResolveResult) Reset()         { *m = NameSysResolveResult{} }
+func (m *NameSysResolveResult) String() string { return proto.CompactTextString(m) }
+func (*NameSysResolveResult) ProtoMessage()    {}
 func (*NameSysResolveResult) Descriptor() ([]byte, []int) {
 	return fileDescriptor_70d41f629e281f22, []int{1}
 }
@@ -174,8 +172,9 @@ type NameSysPublishRequest struct {
 	Ttl int32 `protobuf:"varint,4,opt,name=ttl,proto3" json:"ttl,omitempty"`
 }
 
-func (m *NameSysPublishRequest) Reset()      { *m = NameSysPublishRequest{} }
-func (*NameSysPublishRequest) ProtoMessage() {}
+func (m *NameSysPublishRequest) Reset()         { *m = NameSysPublishRequest{} }
+func (m *NameSysPublishRequest) String() string { return proto.CompactTextString(m) }
+func (*NameSysPublishRequest) ProtoMessage()    {}
 func (*NameSysPublishRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_70d41f629e281f22, []int{2}
 }
@@ -243,283 +242,29 @@ func init() {
 func init() { proto.RegisterFile("namesys.proto", fileDescriptor_70d41f629e281f22) }
 
 var fileDescriptor_70d41f629e281f22 = []byte{
-	// 402 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xcd, 0xaa, 0xd3, 0x40,
-	0x18, 0xcd, 0x77, 0xef, 0xad, 0xd0, 0x0f, 0xef, 0x45, 0xc6, 0x2b, 0xc4, 0x2c, 0x86, 0x92, 0x85,
-	0x74, 0x63, 0xae, 0xa8, 0x0b, 0x97, 0x56, 0x11, 0x11, 0xa1, 0x94, 0xd1, 0x17, 0x48, 0x9a, 0xb1,
-	0x09, 0x24, 0x9d, 0x34, 0x33, 0x53, 0xc8, 0xce, 0xad, 0x3b, 0x1f, 0xc3, 0x47, 0xf0, 0x11, 0x5c,
-	0x76, 0xd9, 0x9d, 0x4d, 0xfa, 0x02, 0x2e, 0x5d, 0xca, 0x4c, 0xda, 0xd2, 0x94, 0xae, 0xdc, 0x9d,
-	0x9f, 0x70, 0xe6, 0x9c, 0x8f, 0xe0, 0xf5, 0x3c, 0xcc, 0xb9, 0xac, 0x64, 0x50, 0x94, 0x42, 0x09,
-	0x72, 0x51, 0x44, 0x1e, 0x6a, 0x95, 0x66, 0x2d, 0xf7, 0x9e, 0xce, 0x52, 0x95, 0xe8, 0x28, 0x98,
-	0x8a, 0xfc, 0x6e, 0x26, 0x66, 0xe2, 0xce, 0xca, 0x91, 0xfe, 0x62, 0x99, 0x25, 0x16, 0xb5, 0x9f,
-	0xfb, 0xdf, 0x00, 0x1f, 0x8d, 0xc3, 0x9c, 0x7f, 0xaa, 0x24, 0xe3, 0x52, 0x64, 0x4b, 0xce, 0xf8,
-	0x42, 0x73, 0xa9, 0x08, 0xc1, 0x2b, 0xf3, 0x92, 0x0b, 0x03, 0x18, 0xf6, 0x99, 0xc5, 0xe4, 0x16,
-	0x7b, 0x31, 0x2f, 0x54, 0xe2, 0x5e, 0x0c, 0x60, 0x78, 0xcd, 0x5a, 0x42, 0x9e, 0xe0, 0x4d, 0x9c,
-	0x28, 0xc6, 0xa7, 0xa2, 0x8c, 0xdf, 0x0a, 0x3d, 0x57, 0xee, 0xa5, 0xb5, 0x4f, 0x54, 0x42, 0x11,
-	0xe3, 0x44, 0x7d, 0x4e, 0x73, 0x2e, 0xb4, 0x72, 0xaf, 0x06, 0x30, 0xec, 0xb1, 0x23, 0xc5, 0x7f,
-	0x8d, 0xb7, 0xa7, 0x55, 0xa4, 0xce, 0x6c, 0x93, 0x22, 0x54, 0xc9, 0xbe, 0x89, 0xc1, 0xa6, 0x09,
-	0x2f, 0x4b, 0x51, 0xda, 0x26, 0x7d, 0xd6, 0x12, 0x7f, 0x71, 0x18, 0x33, 0xd1, 0x51, 0x96, 0xca,
-	0x64, 0x3f, 0x86, 0x22, 0x16, 0x65, 0xba, 0x0c, 0x15, 0xff, 0xc8, 0x2b, 0x1b, 0x74, 0x9f, 0x1d,
-	0x29, 0x26, 0x6e, 0x19, 0x66, 0x9a, 0xef, 0xe3, 0x2c, 0x21, 0x0f, 0xf0, 0x92, 0x8b, 0xcc, 0xae,
-	0xe9, 0x31, 0x03, 0x8d, 0xa2, 0x54, 0xb6, 0xeb, 0x6e, 0xe0, 0xf3, 0xdf, 0x80, 0xb8, 0x7b, 0x73,
-	0x34, 0xf9, 0x40, 0xde, 0xe3, 0x4d, 0x77, 0x03, 0x79, 0x1c, 0x14, 0x51, 0x70, 0xf6, 0xc4, 0x9e,
-	0x7b, 0xce, 0x32, 0x93, 0x7d, 0x87, 0x8c, 0xf1, 0x61, 0xd7, 0x19, 0xc9, 0x6a, 0x3e, 0xfd, 0xcf,
-	0xb4, 0x67, 0x40, 0x5e, 0x1d, 0x8a, 0xed, 0x4e, 0xd3, 0x89, 0xea, 0x9e, 0xcb, 0xeb, 0x1b, 0xeb,
-	0x5d, 0x5e, 0xa8, 0xca, 0x77, 0xde, 0xbc, 0x5c, 0xd7, 0xd4, 0xd9, 0xd4, 0x14, 0xfe, 0xd4, 0x14,
-	0xfe, 0xd6, 0x14, 0xbe, 0x36, 0x14, 0x7e, 0x34, 0x14, 0x7e, 0x36, 0x14, 0x7e, 0x35, 0x14, 0x56,
-	0x0d, 0x85, 0x4d, 0x43, 0xe1, 0xfb, 0x96, 0x3a, 0xab, 0x2d, 0x75, 0xd6, 0x5b, 0xea, 0x44, 0xf7,
-	0xec, 0xff, 0xf5, 0xe2, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x63, 0x5b, 0x3d, 0x32, 0xaf, 0x02,
-	0x00, 0x00,
-}
-
-func (this *NameSysResolveRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*NameSysResolveRequest)
-	if !ok {
-		that2, ok := that.(NameSysResolveRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *NameSysResolveRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *NameSysResolveRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *NameSysResolveRequest but is not nil && this == nil")
-	}
-	if this.Name != that1.Name {
-		return fmt.Errorf("Name this(%v) Not Equal that(%v)", this.Name, that1.Name)
-	}
-	if this.Depth != that1.Depth {
-		return fmt.Errorf("Depth this(%v) Not Equal that(%v)", this.Depth, that1.Depth)
-	}
-	if this.DhtRecordCount != that1.DhtRecordCount {
-		return fmt.Errorf("DhtRecordCount this(%v) Not Equal that(%v)", this.DhtRecordCount, that1.DhtRecordCount)
-	}
-	if this.DhtTimeout != that1.DhtTimeout {
-		return fmt.Errorf("DhtTimeout this(%v) Not Equal that(%v)", this.DhtTimeout, that1.DhtTimeout)
-	}
-	return nil
-}
-func (this *NameSysResolveRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*NameSysResolveRequest)
-	if !ok {
-		that2, ok := that.(NameSysResolveRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if this.Depth != that1.Depth {
-		return false
-	}
-	if this.DhtRecordCount != that1.DhtRecordCount {
-		return false
-	}
-	if this.DhtTimeout != that1.DhtTimeout {
-		return false
-	}
-	return true
-}
-func (this *NameSysResolveResult) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*NameSysResolveResult)
-	if !ok {
-		that2, ok := that.(NameSysResolveResult)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *NameSysResolveResult")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *NameSysResolveResult but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *NameSysResolveResult but is not nil && this == nil")
-	}
-	if this.Path != that1.Path {
-		return fmt.Errorf("Path this(%v) Not Equal that(%v)", this.Path, that1.Path)
-	}
-	if this.Error != that1.Error {
-		return fmt.Errorf("Error this(%v) Not Equal that(%v)", this.Error, that1.Error)
-	}
-	return nil
-}
-func (this *NameSysResolveResult) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*NameSysResolveResult)
-	if !ok {
-		that2, ok := that.(NameSysResolveResult)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Path != that1.Path {
-		return false
-	}
-	if this.Error != that1.Error {
-		return false
-	}
-	return true
-}
-func (this *NameSysPublishRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*NameSysPublishRequest)
-	if !ok {
-		that2, ok := that.(NameSysPublishRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *NameSysPublishRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *NameSysPublishRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *NameSysPublishRequest but is not nil && this == nil")
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return fmt.Errorf("PrivateKey this(%v) Not Equal that(%v)", this.PrivateKey, that1.PrivateKey)
-	}
-	if this.Value != that1.Value {
-		return fmt.Errorf("Value this(%v) Not Equal that(%v)", this.Value, that1.Value)
-	}
-	if this.Eol != that1.Eol {
-		return fmt.Errorf("Eol this(%v) Not Equal that(%v)", this.Eol, that1.Eol)
-	}
-	if this.Ttl != that1.Ttl {
-		return fmt.Errorf("Ttl this(%v) Not Equal that(%v)", this.Ttl, that1.Ttl)
-	}
-	return nil
-}
-func (this *NameSysPublishRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*NameSysPublishRequest)
-	if !ok {
-		that2, ok := that.(NameSysPublishRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return false
-	}
-	if this.Value != that1.Value {
-		return false
-	}
-	if this.Eol != that1.Eol {
-		return false
-	}
-	if this.Ttl != that1.Ttl {
-		return false
-	}
-	return true
-}
-func (this *NameSysResolveRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.NameSysResolveRequest{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "Depth: "+fmt.Sprintf("%#v", this.Depth)+",\n")
-	s = append(s, "DhtRecordCount: "+fmt.Sprintf("%#v", this.DhtRecordCount)+",\n")
-	s = append(s, "DhtTimeout: "+fmt.Sprintf("%#v", this.DhtTimeout)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *NameSysResolveResult) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.NameSysResolveResult{")
-	s = append(s, "Path: "+fmt.Sprintf("%#v", this.Path)+",\n")
-	s = append(s, "Error: "+fmt.Sprintf("%#v", this.Error)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *NameSysPublishRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.NameSysPublishRequest{")
-	s = append(s, "PrivateKey: "+fmt.Sprintf("%#v", this.PrivateKey)+",\n")
-	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
-	s = append(s, "Eol: "+fmt.Sprintf("%#v", this.Eol)+",\n")
-	s = append(s, "Ttl: "+fmt.Sprintf("%#v", this.Ttl)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringNamesys(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	// 345 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xcd, 0x4a, 0xeb, 0x40,
+	0x18, 0xcd, 0xf4, 0xe7, 0x42, 0x3f, 0x6e, 0xcb, 0x65, 0x6e, 0x85, 0xd8, 0xc5, 0x50, 0xb2, 0x90,
+	0xae, 0x8a, 0xe8, 0xc6, 0xa5, 0x55, 0x44, 0x44, 0x28, 0x65, 0xf4, 0x05, 0x92, 0xe6, 0x83, 0x04,
+	0x92, 0xce, 0x34, 0x33, 0x53, 0xc8, 0x23, 0xb8, 0xf3, 0xb1, 0x5c, 0x76, 0xe9, 0x4e, 0x69, 0x5f,
+	0x44, 0x66, 0xfa, 0x43, 0x53, 0xba, 0x72, 0x77, 0x7e, 0xc8, 0xc9, 0x39, 0x1f, 0x03, 0xed, 0x59,
+	0x98, 0xa3, 0x2a, 0xd5, 0x50, 0x16, 0x42, 0x0b, 0x5a, 0x93, 0x51, 0x0f, 0x8c, 0x4e, 0xb3, 0x0d,
+	0x0f, 0xde, 0x08, 0x9c, 0x8d, 0xc3, 0x1c, 0x5f, 0x4a, 0xc5, 0x51, 0x89, 0x6c, 0x81, 0x1c, 0xe7,
+	0x06, 0x95, 0xa6, 0x14, 0x1a, 0xf6, 0x53, 0x9f, 0xf4, 0xc9, 0xa0, 0xc5, 0x1d, 0xa6, 0x5d, 0x68,
+	0xc6, 0x28, 0x75, 0xe2, 0xd7, 0xfa, 0x64, 0xd0, 0xe6, 0x1b, 0x42, 0x2f, 0xa0, 0x13, 0x27, 0x9a,
+	0xe3, 0x54, 0x14, 0xf1, 0xbd, 0x30, 0x33, 0xed, 0xd7, 0x9d, 0x7d, 0xa4, 0x52, 0x06, 0x10, 0x27,
+	0xfa, 0x35, 0xcd, 0x51, 0x18, 0xed, 0x37, 0xfa, 0x64, 0xd0, 0xe4, 0x07, 0x4a, 0x70, 0x0b, 0xdd,
+	0xe3, 0x2a, 0xca, 0x64, 0xae, 0x89, 0x0c, 0x75, 0xb2, 0x6b, 0x62, 0xb1, 0x6d, 0x82, 0x45, 0x21,
+	0x0a, 0xd7, 0xa4, 0xc5, 0x37, 0x24, 0x98, 0xef, 0xc7, 0x4c, 0x4c, 0x94, 0xa5, 0x2a, 0xd9, 0x8d,
+	0x61, 0x00, 0xb2, 0x48, 0x17, 0xa1, 0xc6, 0x67, 0x2c, 0x5d, 0xd0, 0x5f, 0x7e, 0xa0, 0xd8, 0xb8,
+	0x45, 0x98, 0x19, 0xdc, 0xc5, 0x39, 0x42, 0xff, 0x41, 0x1d, 0x45, 0xe6, 0xd6, 0x34, 0xb9, 0x85,
+	0x56, 0xd1, 0x3a, 0xdb, 0x76, 0xb7, 0xf0, 0xea, 0x8b, 0x00, 0x6c, 0xff, 0x39, 0x9a, 0x3c, 0xd1,
+	0x47, 0xe8, 0x54, 0x37, 0xd0, 0xf3, 0xa1, 0x8c, 0x86, 0x27, 0x4f, 0xdc, 0xf3, 0x4f, 0x59, 0x76,
+	0x72, 0xe0, 0xd1, 0x31, 0xfc, 0xaf, 0x3a, 0x23, 0x55, 0xce, 0xa6, 0xbf, 0x4c, 0xbb, 0x24, 0xf4,
+	0x66, 0x5f, 0x6c, 0x7b, 0x9a, 0x4a, 0x54, 0xf5, 0x5c, 0xbd, 0x96, 0xb5, 0x1e, 0x72, 0xa9, 0xcb,
+	0xc0, 0xbb, 0xf3, 0x3f, 0x56, 0x8c, 0x2c, 0x57, 0x8c, 0x7c, 0xaf, 0x18, 0x79, 0x5f, 0x33, 0x6f,
+	0xb9, 0x66, 0xde, 0xe7, 0x9a, 0x79, 0xd1, 0x1f, 0xf7, 0x86, 0xae, 0x7f, 0x02, 0x00, 0x00, 0xff,
+	0xff, 0x57, 0x29, 0x6f, 0x5f, 0x64, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -850,122 +595,6 @@ func encodeVarintNamesys(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedNameSysResolveRequest(r randyNamesys, easy bool) *NameSysResolveRequest {
-	this := &NameSysResolveRequest{}
-	this.Name = string(randStringNamesys(r))
-	this.Depth = uint32(r.Uint32())
-	this.DhtRecordCount = uint32(r.Uint32())
-	this.DhtTimeout = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.DhtTimeout *= -1
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedNameSysResolveResult(r randyNamesys, easy bool) *NameSysResolveResult {
-	this := &NameSysResolveResult{}
-	this.Path = string(randStringNamesys(r))
-	this.Error = string(randStringNamesys(r))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedNameSysPublishRequest(r randyNamesys, easy bool) *NameSysPublishRequest {
-	this := &NameSysPublishRequest{}
-	v1 := r.Intn(100)
-	this.PrivateKey = make([]byte, v1)
-	for i := 0; i < v1; i++ {
-		this.PrivateKey[i] = byte(r.Intn(256))
-	}
-	this.Value = string(randStringNamesys(r))
-	this.Eol = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.Eol *= -1
-	}
-	this.Ttl = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.Ttl *= -1
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyNamesys interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneNamesys(r randyNamesys) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringNamesys(r randyNamesys) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
-		tmps[i] = randUTF8RuneNamesys(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedNamesys(r randyNamesys, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldNamesys(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldNamesys(dAtA []byte, r randyNamesys, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(key))
-		v3 := r.Int63()
-		if r.Intn(2) == 0 {
-			v3 *= -1
-		}
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(v3))
-	case 1:
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateNamesys(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateNamesys(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
 func (m *NameSysResolveRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1033,51 +662,6 @@ func sovNamesys(x uint64) (n int) {
 }
 func sozNamesys(x uint64) (n int) {
 	return sovNamesys(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *NameSysResolveRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&NameSysResolveRequest{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Depth:` + fmt.Sprintf("%v", this.Depth) + `,`,
-		`DhtRecordCount:` + fmt.Sprintf("%v", this.DhtRecordCount) + `,`,
-		`DhtTimeout:` + fmt.Sprintf("%v", this.DhtTimeout) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *NameSysResolveResult) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&NameSysResolveResult{`,
-		`Path:` + fmt.Sprintf("%v", this.Path) + `,`,
-		`Error:` + fmt.Sprintf("%v", this.Error) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *NameSysPublishRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&NameSysPublishRequest{`,
-		`PrivateKey:` + fmt.Sprintf("%v", this.PrivateKey) + `,`,
-		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
-		`Eol:` + fmt.Sprintf("%v", this.Eol) + `,`,
-		`Ttl:` + fmt.Sprintf("%v", this.Ttl) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringNamesys(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
 }
 func (m *NameSysResolveRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)

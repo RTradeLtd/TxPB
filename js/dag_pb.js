@@ -12,8 +12,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js');
-goog.object.extend(proto, github_com_gogo_protobuf_gogoproto_gogo_pb);
 goog.exportSymbol('proto.pb.AddLinksRequest', null, global);
 goog.exportSymbol('proto.pb.DagGetRequest', null, global);
 goog.exportSymbol('proto.pb.DagGetResponse', null, global);

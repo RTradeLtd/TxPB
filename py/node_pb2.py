@@ -15,17 +15,16 @@ _sym_db = _symbol_database.Default()
 
 
 import util_pb2 as util__pb2
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='node.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*5\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x32\xfd\x02\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_options=None,
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*5\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x32\xfd\x02\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x62\x06proto3')
   ,
-  dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  dependencies=[util__pb2.DESCRIPTOR,])
 
 _P2PREQTYPE = _descriptor.EnumDescriptor(
   name='P2PREQTYPE',
@@ -52,8 +51,8 @@ _P2PREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1147,
-  serialized_end=1203,
+  serialized_start=1100,
+  serialized_end=1156,
 )
 _sym_db.RegisterEnumDescriptor(_P2PREQTYPE)
 
@@ -79,8 +78,8 @@ _EXTRASTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1205,
-  serialized_end=1258,
+  serialized_start=1158,
+  serialized_end=1211,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
 
@@ -177,8 +176,8 @@ _P2PREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=78,
-  serialized_end=300,
+  serialized_start=31,
+  serialized_end=253,
 )
 
 
@@ -229,8 +228,8 @@ _P2PRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=424,
+  serialized_start=255,
+  serialized_end=377,
 )
 
 
@@ -281,8 +280,8 @@ _P2PLSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=426,
-  serialized_end=520,
+  serialized_start=379,
+  serialized_end=473,
 )
 
 
@@ -312,8 +311,8 @@ _GETPEERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=522,
-  serialized_end=557,
+  serialized_start=475,
+  serialized_end=510,
 )
 
 
@@ -343,8 +342,8 @@ _CONNECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=559,
-  serialized_end=595,
+  serialized_start=512,
+  serialized_end=548,
 )
 
 
@@ -374,8 +373,8 @@ _ISCONNECTEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=597,
-  serialized_end=634,
+  serialized_start=550,
+  serialized_end=587,
 )
 
 
@@ -412,8 +411,8 @@ _ISCONNECTEDRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=719,
-  serialized_end=767,
+  serialized_start=672,
+  serialized_end=720,
 )
 
 _ISCONNECTEDRESPONSE = _descriptor.Descriptor(
@@ -442,8 +441,8 @@ _ISCONNECTEDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=637,
-  serialized_end=767,
+  serialized_start=590,
+  serialized_end=720,
 )
 
 
@@ -473,8 +472,8 @@ _DISCONNECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=769,
-  serialized_end=805,
+  serialized_start=722,
+  serialized_end=758,
 )
 
 
@@ -511,8 +510,8 @@ _DISCONNECTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=882,
-  serialized_end=965,
+  serialized_start=835,
+  serialized_end=918,
 )
 
 _DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
@@ -548,8 +547,8 @@ _DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=967,
-  serialized_end=1020,
+  serialized_start=920,
+  serialized_end=973,
 )
 
 _DISCONNECTRESPONSE = _descriptor.Descriptor(
@@ -578,8 +577,8 @@ _DISCONNECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=808,
-  serialized_end=1020,
+  serialized_start=761,
+  serialized_end=973,
 )
 
 
@@ -609,8 +608,8 @@ _ENABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1022,
-  serialized_end=1082,
+  serialized_start=975,
+  serialized_end=1035,
 )
 
 
@@ -640,8 +639,8 @@ _DISABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1084,
-  serialized_end=1145,
+  serialized_start=1037,
+  serialized_end=1098,
 )
 
 _P2PREQUEST.fields_by_name['requestType'].enum_type = _P2PREQTYPE
@@ -772,7 +771,6 @@ DisableExtrasRequest = _reflection.GeneratedProtocolMessageType('DisableExtrasRe
 _sym_db.RegisterMessage(DisableExtrasRequest)
 
 
-DESCRIPTOR._options = None
 _ISCONNECTEDRESPONSE_CONNECTEDENTRY._options = None
 _DISCONNECTRESPONSE_STATUSENTRY._options = None
 
@@ -782,8 +780,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1261,
-  serialized_end=1642,
+  serialized_start=1214,
+  serialized_end=1595,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPeers',

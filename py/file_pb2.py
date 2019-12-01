@@ -14,17 +14,16 @@ _sym_db = _symbol_database.Default()
 
 
 import util_pb2 as util__pb2
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='file.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nfile.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"C\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\"2\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"\x17\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x32~\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_options=None,
+  serialized_pb=_b('\n\nfile.proto\x12\x02pb\x1a\nutil.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"C\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\"2\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"\x17\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x32~\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x62\x06proto3')
   ,
-  dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  dependencies=[util__pb2.DESCRIPTOR,])
 
 
 
@@ -62,8 +61,8 @@ _UPLOADREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=77,
-  serialized_end=152,
+  serialized_start=30,
+  serialized_end=105,
 )
 
 
@@ -107,8 +106,8 @@ _UPLOADOPTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=154,
-  serialized_end=221,
+  serialized_start=107,
+  serialized_end=174,
 )
 
 
@@ -145,8 +144,8 @@ _DOWNLOADREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=223,
-  serialized_end=273,
+  serialized_start=176,
+  serialized_end=226,
 )
 
 
@@ -176,8 +175,8 @@ _DOWNLOADRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=275,
-  serialized_end=317,
+  serialized_start=228,
+  serialized_end=270,
 )
 
 
@@ -207,8 +206,8 @@ _BLOB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=319,
-  serialized_end=342,
+  serialized_start=272,
+  serialized_end=295,
 )
 
 _UPLOADREQUEST.fields_by_name['blob'].message_type = _BLOB
@@ -257,7 +256,6 @@ Blob = _reflection.GeneratedProtocolMessageType('Blob', (_message.Message,), {
 _sym_db.RegisterMessage(Blob)
 
 
-DESCRIPTOR._options = None
 
 _FILEAPI = _descriptor.ServiceDescriptor(
   name='FileAPI',
@@ -265,8 +263,8 @@ _FILEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=344,
-  serialized_end=470,
+  serialized_start=297,
+  serialized_end=423,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadFile',
