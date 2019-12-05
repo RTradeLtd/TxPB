@@ -68,10 +68,18 @@ gen-dag:
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		--js_out=import_style=commonjs,binary:js \
-		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		--grpc_out=js \
+		pb/dag.proto
+	# generate typescript bindings (dag)
+	protoc \
+		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--ts_out=service=grpc:ts \
+		--js_out=import_style=commonjs,binary:ts \
+		--grpc_out=ts \
 		pb/dag.proto
 
 	# generate java bindings (dag)

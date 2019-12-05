@@ -1,16 +1,15 @@
 import * as grpc from "grpc";
-import * as dagService from "../../js/dag_grpc_pb";
-import * as dagMessages from "../../js/dag_pb";
-// import * as dagService from "../../ts/dag_pb_service";
-// import * as dagMessages from "../../ts/dag_pb";
+import * as dagMessages from "./dag_pb";
+import {DagAPIClient} from  "./dag_grpc_pb";
+
 
 class TClient {
-    private dagClient: dagService.DagAPIClient;
+    private dagClient: typeof DagAPIClient;
     constructor(endpoint: string, ssl: boolean) {
         if (ssl) {
-            this.dagClient = new dagService.DagAPIClient(endpoint, grpc.credentials.createSsl());
+            this.dagClient = new DagAPIClient(endpoint, grpc.credentials.createSsl());
         } else {
-            this.dagClient = new dagService.DagAPIClient(endpoint, grpc.credentials.createSsl());
+            this.dagClient = new DagAPIClient(endpoint, grpc.credentials.createInsecure());
         }
     }
 

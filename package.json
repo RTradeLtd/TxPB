@@ -1,0 +1,32 @@
+{
+  "name": "txpb",
+  "version": "1.0.0",
+  "description": "`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.",
+  "main": "examples/ts/index.js",
+  "directories": {
+    "doc": "doc",
+    "example": "examples"
+  },
+  "dependencies": {
+    "google-protobuf": "^3.11.1",
+    "grpc": "^1.24.2",
+    "grpc-tools": "^1.8.0",
+    "protobuf": "^0.11.1",
+    "protoc-gen-grpc": "^1.3.7",
+    "ts-protoc-gen": "^0.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RTradeLtd/TxPB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RTradeLtd/TxPB/issues"
+  },
+  "homepage": "https://github.com/RTradeLtd/TxPB#readme"
+}

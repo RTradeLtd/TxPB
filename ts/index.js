@@ -1,8 +1,8 @@
 "use strict";
 exports.__esModule = true;
 var grpc = require("grpc");
-var dagMessages = require("../../ts/dag_pb");
-var dag_grpc_pb_1 = require("../../ts/dag_grpc_pb");
+var dagMessages = require("./dag_pb");
+var dag_grpc_pb_1 = require("./dag_grpc_pb");
 var TClient = /** @class */ (function () {
     function TClient(endpoint, ssl) {
         if (ssl) {
