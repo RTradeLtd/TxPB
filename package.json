@@ -2,7 +2,7 @@
   "name": "txpb",
   "version": "1.0.0",
   "description": "`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.",
-  "main": "examples/ts/index.js",
+  "main": "ts/index.js",
   "directories": {
     "doc": "doc",
     "example": "examples"
@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ts/index.js"
   },
   "repository": {
     "type": "git",

@@ -14,16 +14,17 @@ var TClient = /** @class */ (function () {
     }
     TClient.prototype.dagPut = function (data) {
         var request = new dagMessages.DagPutRequest();
-        var hashes;
         request.setData(data);
-        this.dagClient.dagPut(request, function (err, response) {
+        var err, response = this.dagClient.dagPut(request, function (err, response) {
             if (err) {
                 throw console.error(err);
             }
             console.log(response.getHashesList());
-            hashes = response.getHashesList();
         });
-        return hashes;
+        if (err) {
+            throw err;
+        }
+        return response.hashesList;
     };
     return TClient;
 }());

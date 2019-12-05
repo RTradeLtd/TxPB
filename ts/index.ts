@@ -15,16 +15,17 @@ class TClient {
 
     dagPut(data: any): string[] {
         let request = new dagMessages.DagPutRequest();
-        let hashes: string[];
         request.setData(data);
-        this.dagClient.dagPut(request, function(err, response) {
+        let err, response = this.dagClient.dagPut(request, function(err: Error, response: dagMessages.DagPutResponse) {
             if (err) {
                 throw console.error(err);
             }
             console.log(response.getHashesList());
-            hashes = response.getHashesList();
         });
-        return hashes;
+        if (err) {
+            throw err;
+        }
+        return response.hashesList;
     }
 }
 let client = new TClient('xapi.temporal.cloud:9090', true);
