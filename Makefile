@@ -311,7 +311,7 @@ gen-pubsub:
 		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		--js_out=import_style=commonjs,binary:js \
 		--grpc_out=js \
-		pb/file.proto
+		pb/pubsub.proto
 	# generate typescript bindings (pubsub)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
@@ -322,7 +322,7 @@ gen-pubsub:
 		--ts_out=service=grpc:ts \
 		--js_out=import_style=commonjs,binary:ts \
 		--grpc_out=ts \
-		pb/file.proto
+		pb/pubsub.proto
 	# generate java bindings (pubsub)
 	protoc \
 		-I=pb \
