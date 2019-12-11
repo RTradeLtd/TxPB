@@ -145,6 +145,8 @@ enum EXTRASTYPE {
     PUBSUB = 1;
     // DISCOVERY is a libp2p discovery service
     DISCOVERY = 2;
+    // MDNS is used to discover libp2p hosts over mdns
+    MDNS = 3;
 }
 
 // EnableExtrasRequest is used to enable a particular extras feature

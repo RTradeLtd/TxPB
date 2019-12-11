@@ -2467,7 +2467,8 @@ proto.pb.P2PREQTYPE = {
 proto.pb.EXTRASTYPE = {
   IDENTIFY: 0,
   PUBSUB: 1,
-  DISCOVERY: 2
+  DISCOVERY: 2,
+  MDNS: 3
 };
 
 goog.object.extend(exports, proto.pb);

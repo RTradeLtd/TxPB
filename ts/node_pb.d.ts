@@ -328,6 +328,7 @@ export interface EXTRASTYPEMap {
   IDENTIFY: 0;
   PUBSUB: 1;
   DISCOVERY: 2;
+  MDNS: 3;
 }
 
 export const EXTRASTYPE: EXTRASTYPEMap;
