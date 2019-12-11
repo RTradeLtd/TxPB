@@ -1078,6 +1078,7 @@ EXTRASTYPE denotes a particular extras type
 | IDENTIFY | 0 | IDENTIFY is the identify service |
 | PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
 | DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
+| MDNS | 3 | MDNS is used to discover libp2p hosts over mdns |
 
 
 
