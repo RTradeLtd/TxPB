@@ -13,8 +13,6 @@ grpc.web = require('grpc-web');
 
 
 var util_pb = require('./util_pb.js')
-
-var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js')
 const proto = {};
 proto.pb = require('./namesys_pb.js');
 

@@ -13,17 +13,15 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='util.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\nutil.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\x1b\n\x0bPutResponse\x12\x0c\n\x04hash\x18\x01 \x01(\t\"\x07\n\x05\x45mptyB(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
-  ,
-  dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  serialized_options=None,
+  serialized_pb=_b('\n\nutil.proto\x12\x02pb\"\x1b\n\x0bPutResponse\x12\x0c\n\x04hash\x18\x01 \x01(\t\"\x07\n\x05\x45mptyb\x06proto3')
+)
 
 
 
@@ -54,8 +52,8 @@ _PUTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=65,
-  serialized_end=92,
+  serialized_start=18,
+  serialized_end=45,
 )
 
 
@@ -78,8 +76,8 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=94,
-  serialized_end=101,
+  serialized_start=47,
+  serialized_end=54,
 )
 
 DESCRIPTOR.message_types_by_name['PutResponse'] = _PUTRESPONSE
@@ -101,5 +99,4 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
 _sym_db.RegisterMessage(Empty)
 
 
-DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

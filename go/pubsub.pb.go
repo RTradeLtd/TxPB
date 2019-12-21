@@ -4,16 +4,12 @@
 package pb
 
 import (
-	bytes "bytes"
 	context "context"
 	fmt "fmt"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
 
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -39,8 +35,9 @@ type PubSubListPeersRequest struct {
 	Topics []string `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
 }
 
-func (m *PubSubListPeersRequest) Reset()      { *m = PubSubListPeersRequest{} }
-func (*PubSubListPeersRequest) ProtoMessage() {}
+func (m *PubSubListPeersRequest) Reset()         { *m = PubSubListPeersRequest{} }
+func (m *PubSubListPeersRequest) String() string { return proto.CompactTextString(m) }
+func (*PubSubListPeersRequest) ProtoMessage()    {}
 func (*PubSubListPeersRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{0}
 }
@@ -83,8 +80,9 @@ type PubSubListPeersResponse struct {
 	Peers []*PubSubListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
 }
 
-func (m *PubSubListPeersResponse) Reset()      { *m = PubSubListPeersResponse{} }
-func (*PubSubListPeersResponse) ProtoMessage() {}
+func (m *PubSubListPeersResponse) Reset()         { *m = PubSubListPeersResponse{} }
+func (m *PubSubListPeersResponse) String() string { return proto.CompactTextString(m) }
+func (*PubSubListPeersResponse) ProtoMessage()    {}
 func (*PubSubListPeersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1}
 }
@@ -130,8 +128,9 @@ type PubSubListPeersResponse_Peer struct {
 	PeerID string `protobuf:"bytes,2,opt,name=peerID,proto3" json:"peerID,omitempty"`
 }
 
-func (m *PubSubListPeersResponse_Peer) Reset()      { *m = PubSubListPeersResponse_Peer{} }
-func (*PubSubListPeersResponse_Peer) ProtoMessage() {}
+func (m *PubSubListPeersResponse_Peer) Reset()         { *m = PubSubListPeersResponse_Peer{} }
+func (m *PubSubListPeersResponse_Peer) String() string { return proto.CompactTextString(m) }
+func (*PubSubListPeersResponse_Peer) ProtoMessage()    {}
 func (*PubSubListPeersResponse_Peer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{1, 0}
 }
@@ -186,8 +185,9 @@ type PubSubPublishRequest struct {
 	Advertise bool `protobuf:"varint,3,opt,name=advertise,proto3" json:"advertise,omitempty"`
 }
 
-func (m *PubSubPublishRequest) Reset()      { *m = PubSubPublishRequest{} }
-func (*PubSubPublishRequest) ProtoMessage() {}
+func (m *PubSubPublishRequest) Reset()         { *m = PubSubPublishRequest{} }
+func (m *PubSubPublishRequest) String() string { return proto.CompactTextString(m) }
+func (*PubSubPublishRequest) ProtoMessage()    {}
 func (*PubSubPublishRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{2}
 }
@@ -249,8 +249,9 @@ type PubSubSubscribeRequest struct {
 	Discover bool `protobuf:"varint,2,opt,name=discover,proto3" json:"discover,omitempty"`
 }
 
-func (m *PubSubSubscribeRequest) Reset()      { *m = PubSubSubscribeRequest{} }
-func (*PubSubSubscribeRequest) ProtoMessage() {}
+func (m *PubSubSubscribeRequest) Reset()         { *m = PubSubSubscribeRequest{} }
+func (m *PubSubSubscribeRequest) String() string { return proto.CompactTextString(m) }
+func (*PubSubSubscribeRequest) ProtoMessage()    {}
 func (*PubSubSubscribeRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{3}
 }
@@ -302,8 +303,9 @@ type PubSubTopicsResponse struct {
 	Names []string `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
 }
 
-func (m *PubSubTopicsResponse) Reset()      { *m = PubSubTopicsResponse{} }
-func (*PubSubTopicsResponse) ProtoMessage() {}
+func (m *PubSubTopicsResponse) Reset()         { *m = PubSubTopicsResponse{} }
+func (m *PubSubTopicsResponse) String() string { return proto.CompactTextString(m) }
+func (*PubSubTopicsResponse) ProtoMessage()    {}
 func (*PubSubTopicsResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{4}
 }
@@ -358,8 +360,9 @@ type PubSubMessageResponse struct {
 	Key []byte `protobuf:"bytes,6,opt,name=key,proto3" json:"key,omitempty"`
 }
 
-func (m *PubSubMessageResponse) Reset()      { *m = PubSubMessageResponse{} }
-func (*PubSubMessageResponse) ProtoMessage() {}
+func (m *PubSubMessageResponse) Reset()         { *m = PubSubMessageResponse{} }
+func (m *PubSubMessageResponse) String() string { return proto.CompactTextString(m) }
+func (*PubSubMessageResponse) ProtoMessage()    {}
 func (*PubSubMessageResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{5}
 }
@@ -445,602 +448,36 @@ func init() {
 func init() { proto.RegisterFile("pubsub.proto", fileDescriptor_91df006b05e20cf7) }
 
 var fileDescriptor_91df006b05e20cf7 = []byte{
-	// 519 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x93, 0x3f, 0x6f, 0xd3, 0x4e,
-	0x18, 0xc7, 0x7d, 0xf9, 0xa7, 0xe4, 0xf9, 0xe5, 0x27, 0xd0, 0x29, 0x14, 0x63, 0xd0, 0x29, 0xf2,
-	0x94, 0x01, 0xd2, 0xaa, 0x54, 0xa8, 0x2b, 0xa8, 0x08, 0x05, 0x15, 0x29, 0x72, 0x99, 0x91, 0x7c,
-	0xc9, 0xd5, 0xb5, 0x68, 0x72, 0xae, 0xef, 0xae, 0x52, 0x37, 0x36, 0x56, 0x76, 0x26, 0x36, 0x5e,
-	0x02, 0x2f, 0x81, 0xb1, 0x63, 0xc7, 0xc6, 0x79, 0x03, 0x8c, 0x8c, 0xc8, 0xcf, 0xd5, 0x76, 0x52,
-	0x42, 0xb7, 0xe7, 0xf3, 0xf8, 0xf9, 0xfb, 0xbd, 0xc7, 0xd0, 0x4d, 0x0c, 0x57, 0x86, 0x0f, 0x93,
-	0x54, 0x6a, 0x49, 0x6b, 0x09, 0xf7, 0xc0, 0xe8, 0xf8, 0xd4, 0xb2, 0xf7, 0x2c, 0x8a, 0xf5, 0x89,
-	0xe1, 0xc3, 0x89, 0x9c, 0x6d, 0x47, 0x32, 0x92, 0xdb, 0xe8, 0xe6, 0xe6, 0x18, 0x09, 0x01, 0x2d,
-	0x1b, 0xee, 0xef, 0xc0, 0xd6, 0xd8, 0xf0, 0x23, 0xc3, 0x0f, 0x63, 0xa5, 0xc7, 0x42, 0xa4, 0x2a,
-	0x10, 0x67, 0x46, 0x28, 0x4d, 0xb7, 0xa0, 0xa5, 0x65, 0x12, 0x4f, 0x94, 0x4b, 0xfa, 0xf5, 0x41,
-	0x27, 0xb8, 0x21, 0xff, 0x33, 0x81, 0x87, 0x7f, 0xa5, 0xa8, 0x44, 0xce, 0x95, 0xa0, 0x2f, 0xa0,
-	0x99, 0xe4, 0x0e, 0x4c, 0xf9, 0x6f, 0xb7, 0x3f, 0x4c, 0xf8, 0xf0, 0x1f, 0xb1, 0xc3, 0x9c, 0x02,
-	0x1b, 0xee, 0xed, 0x41, 0x23, 0x47, 0xda, 0x83, 0x26, 0x76, 0x71, 0x49, 0x9f, 0x0c, 0x3a, 0x81,
-	0x85, 0x7c, 0x92, 0x3c, 0x6c, 0x74, 0xe0, 0xd6, 0xd0, 0x7d, 0x43, 0xfe, 0x07, 0xe8, 0xd9, 0xe2,
-	0x63, 0xc3, 0x4f, 0x63, 0x75, 0x52, 0x4c, 0xbe, 0xb9, 0x0a, 0x85, 0xc6, 0x34, 0xd4, 0x21, 0xd6,
-	0xe8, 0x06, 0x68, 0xd3, 0x27, 0xd0, 0x09, 0xa7, 0xe7, 0x22, 0xd5, 0xb1, 0x12, 0x6e, 0xbd, 0x4f,
-	0x06, 0xed, 0xa0, 0x72, 0xf8, 0x6f, 0x0b, 0x6d, 0x8e, 0x0c, 0x57, 0x93, 0x34, 0xe6, 0xe2, 0xee,
-	0x0e, 0x1e, 0xb4, 0xa7, 0xb1, 0x9a, 0xc8, 0x73, 0x91, 0x62, 0x97, 0x76, 0x50, 0xb2, 0xff, 0xb4,
-	0x98, 0xf5, 0x3d, 0xaa, 0x58, 0x2a, 0xd6, 0x83, 0xe6, 0x3c, 0x9c, 0x89, 0x42, 0x64, 0x0b, 0xfe,
-	0x37, 0x02, 0x0f, 0x6c, 0xf8, 0x3b, 0xa1, 0x54, 0x18, 0x89, 0x32, 0x9e, 0x42, 0xe3, 0x38, 0x95,
-	0x33, 0x6c, 0xdc, 0x0d, 0xd0, 0xde, 0xb8, 0x59, 0x0f, 0x9a, 0x4a, 0x9c, 0xcd, 0x25, 0x6e, 0xd5,
-	0x0d, 0x2c, 0xe4, 0x13, 0xe2, 0xa8, 0xa3, 0x03, 0xe5, 0x36, 0xb0, 0x61, 0xc9, 0xb9, 0x16, 0x2a,
-	0x8e, 0xe6, 0xa1, 0x36, 0xa9, 0x70, 0x9b, 0x98, 0x55, 0x39, 0xe8, 0x7d, 0xa8, 0x7f, 0x14, 0x17,
-	0x6e, 0x0b, 0xfd, 0xb9, 0xb9, 0xfb, 0xb5, 0x06, 0x1d, 0x3b, 0xe3, 0xcb, 0xf1, 0x88, 0xee, 0xc3,
-	0x3d, 0x0b, 0x6f, 0x84, 0xb6, 0x2b, 0xd2, 0x4e, 0xfe, 0xfa, 0xaf, 0x67, 0x89, 0xbe, 0xf0, 0xdc,
-	0xea, 0x10, 0xd6, 0xf7, 0xf7, 0x1d, 0x7a, 0x58, 0x64, 0x96, 0x27, 0x42, 0xbd, 0x8d, 0x77, 0x83,
-	0xd2, 0x7b, 0x8f, 0xef, 0xb8, 0xa9, 0xd5, 0x6a, 0xe5, 0x9b, 0xad, 0x56, 0xbb, 0xfd, 0x90, 0xde,
-	0xa3, 0xea, 0xdb, 0x2d, 0xa5, 0x7d, 0x67, 0x87, 0xd0, 0x7d, 0xf8, 0x7f, 0xed, 0xc2, 0xe8, 0xca,
-	0x22, 0xeb, 0x47, 0xe7, 0x55, 0xdb, 0xfa, 0xce, 0x80, 0xbc, 0xda, 0xbb, 0x5a, 0x30, 0xe7, 0x7a,
-	0xc1, 0xc8, 0xaf, 0x05, 0x23, 0xbf, 0x17, 0x8c, 0x7c, 0xca, 0x18, 0xf9, 0x9e, 0x31, 0xf2, 0x23,
-	0x63, 0xe4, 0x67, 0xc6, 0xc8, 0x65, 0xc6, 0xc8, 0x75, 0xc6, 0xc8, 0x97, 0x25, 0x73, 0x2e, 0x97,
-	0xcc, 0xb9, 0x5a, 0x32, 0x87, 0xb7, 0xf0, 0xa7, 0x7c, 0xfe, 0x27, 0x00, 0x00, 0xff, 0xff, 0xcb,
-	0x2a, 0xee, 0xa5, 0xe3, 0x03, 0x00, 0x00,
-}
-
-func (this *PubSubListPeersRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubListPeersRequest)
-	if !ok {
-		that2, ok := that.(PubSubListPeersRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubListPeersRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubListPeersRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubListPeersRequest but is not nil && this == nil")
-	}
-	if len(this.Topics) != len(that1.Topics) {
-		return fmt.Errorf("Topics this(%v) Not Equal that(%v)", len(this.Topics), len(that1.Topics))
-	}
-	for i := range this.Topics {
-		if this.Topics[i] != that1.Topics[i] {
-			return fmt.Errorf("Topics this[%v](%v) Not Equal that[%v](%v)", i, this.Topics[i], i, that1.Topics[i])
-		}
-	}
-	return nil
-}
-func (this *PubSubListPeersRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubListPeersRequest)
-	if !ok {
-		that2, ok := that.(PubSubListPeersRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Topics) != len(that1.Topics) {
-		return false
-	}
-	for i := range this.Topics {
-		if this.Topics[i] != that1.Topics[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *PubSubListPeersResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubListPeersResponse)
-	if !ok {
-		that2, ok := that.(PubSubListPeersResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubListPeersResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubListPeersResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubListPeersResponse but is not nil && this == nil")
-	}
-	if len(this.Peers) != len(that1.Peers) {
-		return fmt.Errorf("Peers this(%v) Not Equal that(%v)", len(this.Peers), len(that1.Peers))
-	}
-	for i := range this.Peers {
-		if !this.Peers[i].Equal(that1.Peers[i]) {
-			return fmt.Errorf("Peers this[%v](%v) Not Equal that[%v](%v)", i, this.Peers[i], i, that1.Peers[i])
-		}
-	}
-	return nil
-}
-func (this *PubSubListPeersResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubListPeersResponse)
-	if !ok {
-		that2, ok := that.(PubSubListPeersResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Peers) != len(that1.Peers) {
-		return false
-	}
-	for i := range this.Peers {
-		if !this.Peers[i].Equal(that1.Peers[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *PubSubListPeersResponse_Peer) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubListPeersResponse_Peer)
-	if !ok {
-		that2, ok := that.(PubSubListPeersResponse_Peer)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubListPeersResponse_Peer")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubListPeersResponse_Peer but is not nil && this == nil")
-	}
-	if this.Topic != that1.Topic {
-		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
-	}
-	if this.PeerID != that1.PeerID {
-		return fmt.Errorf("PeerID this(%v) Not Equal that(%v)", this.PeerID, that1.PeerID)
-	}
-	return nil
-}
-func (this *PubSubListPeersResponse_Peer) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubListPeersResponse_Peer)
-	if !ok {
-		that2, ok := that.(PubSubListPeersResponse_Peer)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Topic != that1.Topic {
-		return false
-	}
-	if this.PeerID != that1.PeerID {
-		return false
-	}
-	return true
-}
-func (this *PubSubPublishRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubPublishRequest)
-	if !ok {
-		that2, ok := that.(PubSubPublishRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubPublishRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubPublishRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubPublishRequest but is not nil && this == nil")
-	}
-	if this.Topic != that1.Topic {
-		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
-	}
-	if this.Advertise != that1.Advertise {
-		return fmt.Errorf("Advertise this(%v) Not Equal that(%v)", this.Advertise, that1.Advertise)
-	}
-	return nil
-}
-func (this *PubSubPublishRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubPublishRequest)
-	if !ok {
-		that2, ok := that.(PubSubPublishRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Topic != that1.Topic {
-		return false
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return false
-	}
-	if this.Advertise != that1.Advertise {
-		return false
-	}
-	return true
-}
-func (this *PubSubSubscribeRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubSubscribeRequest)
-	if !ok {
-		that2, ok := that.(PubSubSubscribeRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubSubscribeRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubSubscribeRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubSubscribeRequest but is not nil && this == nil")
-	}
-	if this.Topic != that1.Topic {
-		return fmt.Errorf("Topic this(%v) Not Equal that(%v)", this.Topic, that1.Topic)
-	}
-	if this.Discover != that1.Discover {
-		return fmt.Errorf("Discover this(%v) Not Equal that(%v)", this.Discover, that1.Discover)
-	}
-	return nil
-}
-func (this *PubSubSubscribeRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubSubscribeRequest)
-	if !ok {
-		that2, ok := that.(PubSubSubscribeRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Topic != that1.Topic {
-		return false
-	}
-	if this.Discover != that1.Discover {
-		return false
-	}
-	return true
-}
-func (this *PubSubTopicsResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubTopicsResponse)
-	if !ok {
-		that2, ok := that.(PubSubTopicsResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubTopicsResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubTopicsResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubTopicsResponse but is not nil && this == nil")
-	}
-	if len(this.Names) != len(that1.Names) {
-		return fmt.Errorf("Names this(%v) Not Equal that(%v)", len(this.Names), len(that1.Names))
-	}
-	for i := range this.Names {
-		if this.Names[i] != that1.Names[i] {
-			return fmt.Errorf("Names this[%v](%v) Not Equal that[%v](%v)", i, this.Names[i], i, that1.Names[i])
-		}
-	}
-	return nil
-}
-func (this *PubSubTopicsResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubTopicsResponse)
-	if !ok {
-		that2, ok := that.(PubSubTopicsResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Names) != len(that1.Names) {
-		return false
-	}
-	for i := range this.Names {
-		if this.Names[i] != that1.Names[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *PubSubMessageResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*PubSubMessageResponse)
-	if !ok {
-		that2, ok := that.(PubSubMessageResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *PubSubMessageResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *PubSubMessageResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *PubSubMessageResponse but is not nil && this == nil")
-	}
-	if !bytes.Equal(this.From, that1.From) {
-		return fmt.Errorf("From this(%v) Not Equal that(%v)", this.From, that1.From)
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
-	}
-	if !bytes.Equal(this.Seqno, that1.Seqno) {
-		return fmt.Errorf("Seqno this(%v) Not Equal that(%v)", this.Seqno, that1.Seqno)
-	}
-	if len(this.TopicIDs) != len(that1.TopicIDs) {
-		return fmt.Errorf("TopicIDs this(%v) Not Equal that(%v)", len(this.TopicIDs), len(that1.TopicIDs))
-	}
-	for i := range this.TopicIDs {
-		if this.TopicIDs[i] != that1.TopicIDs[i] {
-			return fmt.Errorf("TopicIDs this[%v](%v) Not Equal that[%v](%v)", i, this.TopicIDs[i], i, that1.TopicIDs[i])
-		}
-	}
-	if !bytes.Equal(this.Signature, that1.Signature) {
-		return fmt.Errorf("Signature this(%v) Not Equal that(%v)", this.Signature, that1.Signature)
-	}
-	if !bytes.Equal(this.Key, that1.Key) {
-		return fmt.Errorf("Key this(%v) Not Equal that(%v)", this.Key, that1.Key)
-	}
-	return nil
-}
-func (this *PubSubMessageResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*PubSubMessageResponse)
-	if !ok {
-		that2, ok := that.(PubSubMessageResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if !bytes.Equal(this.From, that1.From) {
-		return false
-	}
-	if !bytes.Equal(this.Data, that1.Data) {
-		return false
-	}
-	if !bytes.Equal(this.Seqno, that1.Seqno) {
-		return false
-	}
-	if len(this.TopicIDs) != len(that1.TopicIDs) {
-		return false
-	}
-	for i := range this.TopicIDs {
-		if this.TopicIDs[i] != that1.TopicIDs[i] {
-			return false
-		}
-	}
-	if !bytes.Equal(this.Signature, that1.Signature) {
-		return false
-	}
-	if !bytes.Equal(this.Key, that1.Key) {
-		return false
-	}
-	return true
-}
-func (this *PubSubListPeersRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.PubSubListPeersRequest{")
-	s = append(s, "Topics: "+fmt.Sprintf("%#v", this.Topics)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubListPeersResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.PubSubListPeersResponse{")
-	if this.Peers != nil {
-		s = append(s, "Peers: "+fmt.Sprintf("%#v", this.Peers)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubListPeersResponse_Peer) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.PubSubListPeersResponse_Peer{")
-	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
-	s = append(s, "PeerID: "+fmt.Sprintf("%#v", this.PeerID)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubPublishRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.PubSubPublishRequest{")
-	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
-	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
-	s = append(s, "Advertise: "+fmt.Sprintf("%#v", this.Advertise)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubSubscribeRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.PubSubSubscribeRequest{")
-	s = append(s, "Topic: "+fmt.Sprintf("%#v", this.Topic)+",\n")
-	s = append(s, "Discover: "+fmt.Sprintf("%#v", this.Discover)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubTopicsResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.PubSubTopicsResponse{")
-	s = append(s, "Names: "+fmt.Sprintf("%#v", this.Names)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *PubSubMessageResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 10)
-	s = append(s, "&pb.PubSubMessageResponse{")
-	s = append(s, "From: "+fmt.Sprintf("%#v", this.From)+",\n")
-	s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
-	s = append(s, "Seqno: "+fmt.Sprintf("%#v", this.Seqno)+",\n")
-	s = append(s, "TopicIDs: "+fmt.Sprintf("%#v", this.TopicIDs)+",\n")
-	s = append(s, "Signature: "+fmt.Sprintf("%#v", this.Signature)+",\n")
-	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringPubsub(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	// 464 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x53, 0xcf, 0x6f, 0xd3, 0x30,
+	0x14, 0x8e, 0xdb, 0xa6, 0x6a, 0x1e, 0x45, 0x20, 0xab, 0x0c, 0x13, 0x50, 0x54, 0xf9, 0xd4, 0x03,
+	0xaa, 0xa6, 0x81, 0xd0, 0xae, 0xa0, 0x21, 0x54, 0x34, 0xa4, 0xca, 0xe3, 0x8c, 0x14, 0xb7, 0x66,
+	0x44, 0xac, 0x4d, 0x16, 0xdb, 0x93, 0xf6, 0x17, 0x70, 0xe5, 0xce, 0x89, 0xff, 0x86, 0xe3, 0x8e,
+	0x1c, 0x51, 0xfb, 0x8f, 0x20, 0x3f, 0x2f, 0x49, 0x3b, 0x4a, 0x6f, 0xfe, 0x5e, 0xde, 0xaf, 0xef,
+	0x7b, 0x5f, 0xa0, 0x5f, 0x58, 0xa9, 0xad, 0x1c, 0x17, 0x65, 0x6e, 0x72, 0xda, 0x2a, 0x64, 0x0c,
+	0xd6, 0x64, 0x17, 0x1e, 0xf3, 0x43, 0x38, 0x98, 0x5a, 0x79, 0x66, 0xe5, 0x69, 0xa6, 0xcd, 0x54,
+	0xa9, 0x52, 0x0b, 0x75, 0x69, 0x95, 0x36, 0xf4, 0x00, 0xba, 0x26, 0x2f, 0xb2, 0x99, 0x66, 0x64,
+	0xd8, 0x1e, 0x45, 0xe2, 0x16, 0xf1, 0x6f, 0x04, 0x1e, 0xff, 0x53, 0xa2, 0x8b, 0x7c, 0xa9, 0x15,
+	0x7d, 0x05, 0x61, 0xe1, 0x02, 0x58, 0x72, 0xef, 0x68, 0x38, 0x2e, 0xe4, 0xf8, 0x3f, 0xb9, 0x63,
+	0x87, 0x84, 0x4f, 0x8f, 0x5f, 0x42, 0xc7, 0x41, 0x3a, 0x80, 0x10, 0xa7, 0x30, 0x32, 0x24, 0xa3,
+	0x48, 0x78, 0xe0, 0x36, 0x71, 0x69, 0x93, 0x13, 0xd6, 0xc2, 0xf0, 0x2d, 0xe2, 0x9f, 0x60, 0xe0,
+	0x9b, 0x4f, 0xad, 0xbc, 0xc8, 0xf4, 0x97, 0x6a, 0xf3, 0xdd, 0x5d, 0x28, 0x74, 0xe6, 0xa9, 0x49,
+	0xb1, 0x47, 0x5f, 0xe0, 0x9b, 0x3e, 0x83, 0x28, 0x9d, 0x5f, 0xa9, 0xd2, 0x64, 0x5a, 0xb1, 0xf6,
+	0x90, 0x8c, 0x7a, 0xa2, 0x09, 0xf0, 0xf7, 0x95, 0x36, 0x67, 0x56, 0xea, 0x59, 0x99, 0x49, 0xb5,
+	0x7f, 0x42, 0x0c, 0xbd, 0x79, 0xa6, 0x67, 0xf9, 0x95, 0x2a, 0x71, 0x4a, 0x4f, 0xd4, 0x98, 0x3f,
+	0xaf, 0x76, 0xfd, 0x88, 0x2a, 0xd6, 0x8a, 0x0d, 0x20, 0x5c, 0xa6, 0x0b, 0x55, 0x89, 0xec, 0x01,
+	0xff, 0x49, 0xe0, 0x91, 0x4f, 0xff, 0xa0, 0xb4, 0x4e, 0xcf, 0x55, 0x9d, 0x4f, 0xa1, 0xf3, 0xb9,
+	0xcc, 0x17, 0x38, 0xb8, 0x2f, 0xf0, 0xbd, 0x93, 0xd9, 0x00, 0x42, 0xad, 0x2e, 0x97, 0x39, 0xb2,
+	0xea, 0x0b, 0x0f, 0xdc, 0x86, 0xb8, 0xea, 0xe4, 0x44, 0xb3, 0x0e, 0x0e, 0xac, 0xb1, 0xd3, 0x42,
+	0x67, 0xe7, 0xcb, 0xd4, 0xd8, 0x52, 0xb1, 0x10, 0xab, 0x9a, 0x00, 0x7d, 0x08, 0xed, 0xaf, 0xea,
+	0x9a, 0x75, 0x31, 0xee, 0x9e, 0x47, 0x3f, 0x5a, 0x10, 0xf9, 0x1d, 0x5f, 0x4f, 0x27, 0xf4, 0x18,
+	0x1e, 0x78, 0xf0, 0x4e, 0x19, 0x4f, 0x91, 0x46, 0xee, 0xfa, 0x6f, 0x17, 0x85, 0xb9, 0x8e, 0x59,
+	0x63, 0x84, 0x6d, 0xfe, 0x3c, 0xa0, 0xa7, 0x55, 0x65, 0x6d, 0x11, 0x1a, 0xef, 0xf4, 0x0d, 0x4a,
+	0x1f, 0x3f, 0xdd, 0xe3, 0xa9, 0xcd, 0x6e, 0xf5, 0xcd, 0x36, 0xbb, 0xdd, 0x3d, 0x64, 0xfc, 0xa4,
+	0xf9, 0x76, 0x47, 0x69, 0x1e, 0x1c, 0x12, 0x7a, 0x0c, 0xf7, 0xb7, 0x1c, 0x46, 0x37, 0x88, 0x6c,
+	0x9b, 0x2e, 0x6e, 0xd8, 0xf2, 0x60, 0x44, 0xde, 0xb0, 0x5f, 0xab, 0x84, 0xdc, 0xac, 0x12, 0xf2,
+	0x67, 0x95, 0x90, 0xef, 0xeb, 0x24, 0xb8, 0x59, 0x27, 0xc1, 0xef, 0x75, 0x12, 0xc8, 0x2e, 0xfe,
+	0x78, 0x2f, 0xfe, 0x06, 0x00, 0x00, 0xff, 0xff, 0x5e, 0x01, 0x83, 0x4d, 0x98, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1614,185 +1051,6 @@ func encodeVarintPubsub(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedPubSubListPeersRequest(r randyPubsub, easy bool) *PubSubListPeersRequest {
-	this := &PubSubListPeersRequest{}
-	v1 := r.Intn(10)
-	this.Topics = make([]string, v1)
-	for i := 0; i < v1; i++ {
-		this.Topics[i] = string(randStringPubsub(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubListPeersResponse(r randyPubsub, easy bool) *PubSubListPeersResponse {
-	this := &PubSubListPeersResponse{}
-	if r.Intn(5) != 0 {
-		v2 := r.Intn(5)
-		this.Peers = make([]*PubSubListPeersResponse_Peer, v2)
-		for i := 0; i < v2; i++ {
-			this.Peers[i] = NewPopulatedPubSubListPeersResponse_Peer(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubListPeersResponse_Peer(r randyPubsub, easy bool) *PubSubListPeersResponse_Peer {
-	this := &PubSubListPeersResponse_Peer{}
-	this.Topic = string(randStringPubsub(r))
-	this.PeerID = string(randStringPubsub(r))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubPublishRequest(r randyPubsub, easy bool) *PubSubPublishRequest {
-	this := &PubSubPublishRequest{}
-	this.Topic = string(randStringPubsub(r))
-	v3 := r.Intn(100)
-	this.Data = make([]byte, v3)
-	for i := 0; i < v3; i++ {
-		this.Data[i] = byte(r.Intn(256))
-	}
-	this.Advertise = bool(bool(r.Intn(2) == 0))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubSubscribeRequest(r randyPubsub, easy bool) *PubSubSubscribeRequest {
-	this := &PubSubSubscribeRequest{}
-	this.Topic = string(randStringPubsub(r))
-	this.Discover = bool(bool(r.Intn(2) == 0))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubTopicsResponse(r randyPubsub, easy bool) *PubSubTopicsResponse {
-	this := &PubSubTopicsResponse{}
-	v4 := r.Intn(10)
-	this.Names = make([]string, v4)
-	for i := 0; i < v4; i++ {
-		this.Names[i] = string(randStringPubsub(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedPubSubMessageResponse(r randyPubsub, easy bool) *PubSubMessageResponse {
-	this := &PubSubMessageResponse{}
-	v5 := r.Intn(100)
-	this.From = make([]byte, v5)
-	for i := 0; i < v5; i++ {
-		this.From[i] = byte(r.Intn(256))
-	}
-	v6 := r.Intn(100)
-	this.Data = make([]byte, v6)
-	for i := 0; i < v6; i++ {
-		this.Data[i] = byte(r.Intn(256))
-	}
-	v7 := r.Intn(100)
-	this.Seqno = make([]byte, v7)
-	for i := 0; i < v7; i++ {
-		this.Seqno[i] = byte(r.Intn(256))
-	}
-	v8 := r.Intn(10)
-	this.TopicIDs = make([]string, v8)
-	for i := 0; i < v8; i++ {
-		this.TopicIDs[i] = string(randStringPubsub(r))
-	}
-	v9 := r.Intn(100)
-	this.Signature = make([]byte, v9)
-	for i := 0; i < v9; i++ {
-		this.Signature[i] = byte(r.Intn(256))
-	}
-	v10 := r.Intn(100)
-	this.Key = make([]byte, v10)
-	for i := 0; i < v10; i++ {
-		this.Key[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyPubsub interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RunePubsub(r randyPubsub) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringPubsub(r randyPubsub) string {
-	v11 := r.Intn(100)
-	tmps := make([]rune, v11)
-	for i := 0; i < v11; i++ {
-		tmps[i] = randUTF8RunePubsub(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedPubsub(r randyPubsub, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldPubsub(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldPubsub(dAtA []byte, r randyPubsub, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(key))
-		v12 := r.Int63()
-		if r.Intn(2) == 0 {
-			v12 *= -1
-		}
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(v12))
-	case 1:
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulatePubsub(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulatePubsub(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
 func (m *PubSubListPeersRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -1931,98 +1189,6 @@ func sovPubsub(x uint64) (n int) {
 }
 func sozPubsub(x uint64) (n int) {
 	return sovPubsub(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *PubSubListPeersRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubListPeersRequest{`,
-		`Topics:` + fmt.Sprintf("%v", this.Topics) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubListPeersResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForPeers := "[]*PubSubListPeersResponse_Peer{"
-	for _, f := range this.Peers {
-		repeatedStringForPeers += strings.Replace(fmt.Sprintf("%v", f), "PubSubListPeersResponse_Peer", "PubSubListPeersResponse_Peer", 1) + ","
-	}
-	repeatedStringForPeers += "}"
-	s := strings.Join([]string{`&PubSubListPeersResponse{`,
-		`Peers:` + repeatedStringForPeers + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubListPeersResponse_Peer) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubListPeersResponse_Peer{`,
-		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
-		`PeerID:` + fmt.Sprintf("%v", this.PeerID) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubPublishRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubPublishRequest{`,
-		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
-		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`Advertise:` + fmt.Sprintf("%v", this.Advertise) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubSubscribeRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubSubscribeRequest{`,
-		`Topic:` + fmt.Sprintf("%v", this.Topic) + `,`,
-		`Discover:` + fmt.Sprintf("%v", this.Discover) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubTopicsResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubTopicsResponse{`,
-		`Names:` + fmt.Sprintf("%v", this.Names) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *PubSubMessageResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&PubSubMessageResponse{`,
-		`From:` + fmt.Sprintf("%v", this.From) + `,`,
-		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
-		`Seqno:` + fmt.Sprintf("%v", this.Seqno) + `,`,
-		`TopicIDs:` + fmt.Sprintf("%v", this.TopicIDs) + `,`,
-		`Signature:` + fmt.Sprintf("%v", this.Signature) + `,`,
-		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringPubsub(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
 }
 func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)

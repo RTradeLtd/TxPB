@@ -9,12 +9,8 @@ import (
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
 
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -128,8 +124,9 @@ type P2PRequest struct {
 	ReportPeerID bool `protobuf:"varint,9,opt,name=reportPeerID,proto3" json:"reportPeerID,omitempty"`
 }
 
-func (m *P2PRequest) Reset()      { *m = P2PRequest{} }
-func (*P2PRequest) ProtoMessage() {}
+func (m *P2PRequest) Reset()         { *m = P2PRequest{} }
+func (m *P2PRequest) String() string { return proto.CompactTextString(m) }
+func (*P2PRequest) ProtoMessage()    {}
 func (*P2PRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{0}
 }
@@ -234,8 +231,9 @@ type P2PResponse struct {
 	StreamInfos []*P2PLsInfo `protobuf:"bytes,4,rep,name=streamInfos,proto3" json:"streamInfos,omitempty"`
 }
 
-func (m *P2PResponse) Reset()      { *m = P2PResponse{} }
-func (*P2PResponse) ProtoMessage() {}
+func (m *P2PResponse) Reset()         { *m = P2PResponse{} }
+func (m *P2PResponse) String() string { return proto.CompactTextString(m) }
+func (*P2PResponse) ProtoMessage()    {}
 func (*P2PResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{1}
 }
@@ -303,8 +301,9 @@ type P2PLsInfo struct {
 	Local bool `protobuf:"varint,4,opt,name=local,proto3" json:"local,omitempty"`
 }
 
-func (m *P2PLsInfo) Reset()      { *m = P2PLsInfo{} }
-func (*P2PLsInfo) ProtoMessage() {}
+func (m *P2PLsInfo) Reset()         { *m = P2PLsInfo{} }
+func (m *P2PLsInfo) String() string { return proto.CompactTextString(m) }
+func (*P2PLsInfo) ProtoMessage()    {}
 func (*P2PLsInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{2}
 }
@@ -369,8 +368,9 @@ type GetPeersResponse struct {
 	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
-func (m *GetPeersResponse) Reset()      { *m = GetPeersResponse{} }
-func (*GetPeersResponse) ProtoMessage() {}
+func (m *GetPeersResponse) Reset()         { *m = GetPeersResponse{} }
+func (m *GetPeersResponse) String() string { return proto.CompactTextString(m) }
+func (*GetPeersResponse) ProtoMessage()    {}
 func (*GetPeersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{3}
 }
@@ -414,8 +414,9 @@ type ConnectRequest struct {
 	MultiAddrs []string `protobuf:"bytes,1,rep,name=multiAddrs,proto3" json:"multiAddrs,omitempty"`
 }
 
-func (m *ConnectRequest) Reset()      { *m = ConnectRequest{} }
-func (*ConnectRequest) ProtoMessage() {}
+func (m *ConnectRequest) Reset()         { *m = ConnectRequest{} }
+func (m *ConnectRequest) String() string { return proto.CompactTextString(m) }
+func (*ConnectRequest) ProtoMessage()    {}
 func (*ConnectRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{4}
 }
@@ -459,8 +460,9 @@ type IsConnectedRequest struct {
 	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
-func (m *IsConnectedRequest) Reset()      { *m = IsConnectedRequest{} }
-func (*IsConnectedRequest) ProtoMessage() {}
+func (m *IsConnectedRequest) Reset()         { *m = IsConnectedRequest{} }
+func (m *IsConnectedRequest) String() string { return proto.CompactTextString(m) }
+func (*IsConnectedRequest) ProtoMessage()    {}
 func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{5}
 }
@@ -504,8 +506,9 @@ type IsConnectedResponse struct {
 	Connected map[string]bool `protobuf:"bytes,1,rep,name=connected,proto3" json:"connected,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
 }
 
-func (m *IsConnectedResponse) Reset()      { *m = IsConnectedResponse{} }
-func (*IsConnectedResponse) ProtoMessage() {}
+func (m *IsConnectedResponse) Reset()         { *m = IsConnectedResponse{} }
+func (m *IsConnectedResponse) String() string { return proto.CompactTextString(m) }
+func (*IsConnectedResponse) ProtoMessage()    {}
 func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{6}
 }
@@ -549,8 +552,9 @@ type DisconnectRequest struct {
 	PeerIDs []string `protobuf:"bytes,1,rep,name=peerIDs,proto3" json:"peerIDs,omitempty"`
 }
 
-func (m *DisconnectRequest) Reset()      { *m = DisconnectRequest{} }
-func (*DisconnectRequest) ProtoMessage() {}
+func (m *DisconnectRequest) Reset()         { *m = DisconnectRequest{} }
+func (m *DisconnectRequest) String() string { return proto.CompactTextString(m) }
+func (*DisconnectRequest) ProtoMessage()    {}
 func (*DisconnectRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{7}
 }
@@ -594,8 +598,9 @@ type DisconnectResponse struct {
 	Status map[string]*DisconnectResponse_StatusMessage `protobuf:"bytes,1,rep,name=status,proto3" json:"status,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
-func (m *DisconnectResponse) Reset()      { *m = DisconnectResponse{} }
-func (*DisconnectResponse) ProtoMessage() {}
+func (m *DisconnectResponse) Reset()         { *m = DisconnectResponse{} }
+func (m *DisconnectResponse) String() string { return proto.CompactTextString(m) }
+func (*DisconnectResponse) ProtoMessage()    {}
 func (*DisconnectResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{8}
 }
@@ -641,8 +646,9 @@ type DisconnectResponse_StatusMessage struct {
 	Reason string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 }
 
-func (m *DisconnectResponse_StatusMessage) Reset()      { *m = DisconnectResponse_StatusMessage{} }
-func (*DisconnectResponse_StatusMessage) ProtoMessage() {}
+func (m *DisconnectResponse_StatusMessage) Reset()         { *m = DisconnectResponse_StatusMessage{} }
+func (m *DisconnectResponse_StatusMessage) String() string { return proto.CompactTextString(m) }
+func (*DisconnectResponse_StatusMessage) ProtoMessage()    {}
 func (*DisconnectResponse_StatusMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{8, 1}
 }
@@ -693,8 +699,9 @@ type EnableExtrasRequest struct {
 	ExtrasFeature EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
 }
 
-func (m *EnableExtrasRequest) Reset()      { *m = EnableExtrasRequest{} }
-func (*EnableExtrasRequest) ProtoMessage() {}
+func (m *EnableExtrasRequest) Reset()         { *m = EnableExtrasRequest{} }
+func (m *EnableExtrasRequest) String() string { return proto.CompactTextString(m) }
+func (*EnableExtrasRequest) ProtoMessage()    {}
 func (*EnableExtrasRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{9}
 }
@@ -738,8 +745,9 @@ type DisableExtrasRequest struct {
 	ExtrasFeature EXTRASTYPE `protobuf:"varint,1,opt,name=extrasFeature,proto3,enum=pb.EXTRASTYPE" json:"extrasFeature,omitempty"`
 }
 
-func (m *DisableExtrasRequest) Reset()      { *m = DisableExtrasRequest{} }
-func (*DisableExtrasRequest) ProtoMessage() {}
+func (m *DisableExtrasRequest) Reset()         { *m = DisableExtrasRequest{} }
+func (m *DisableExtrasRequest) String() string { return proto.CompactTextString(m) }
+func (*DisableExtrasRequest) ProtoMessage()    {}
 func (*DisableExtrasRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0c843d59d2d938e7, []int{10}
 }
@@ -799,1052 +807,61 @@ func init() {
 func init() { proto.RegisterFile("node.proto", fileDescriptor_0c843d59d2d938e7) }
 
 var fileDescriptor_0c843d59d2d938e7 = []byte{
-	// 911 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0x4f, 0x6f, 0xe3, 0x44,
-	0x14, 0xf7, 0x38, 0xcd, 0xbf, 0xe7, 0xa6, 0x98, 0xd9, 0x50, 0xac, 0x1c, 0xac, 0xc8, 0x5a, 0xa1,
-	0xa8, 0xa2, 0xe9, 0x2a, 0x54, 0x68, 0x55, 0x81, 0xa0, 0x4d, 0x5c, 0x14, 0x6d, 0x36, 0x35, 0x4e,
-	0x16, 0xe8, 0x09, 0x39, 0xc9, 0x6c, 0x88, 0x70, 0x3c, 0xc6, 0x33, 0x5e, 0xe8, 0x8d, 0x8f, 0x00,
-	0x47, 0xbe, 0xc1, 0x7e, 0x04, 0x3e, 0x02, 0xc7, 0x3d, 0xf6, 0xb8, 0x4d, 0xbf, 0x00, 0x47, 0x2e,
-	0x20, 0xe4, 0xb1, 0x9d, 0xda, 0xdb, 0x14, 0x2a, 0xc4, 0x6d, 0xde, 0x6f, 0x7e, 0xef, 0xcd, 0x7b,
-	0xbf, 0xf7, 0xde, 0x00, 0x78, 0x74, 0x46, 0xda, 0x7e, 0x40, 0x39, 0xc5, 0xb2, 0x3f, 0x69, 0x40,
-	0xc8, 0x17, 0x6e, 0x6c, 0x37, 0xf6, 0xe7, 0x0b, 0xfe, 0x4d, 0x38, 0x69, 0x4f, 0xe9, 0xf2, 0x60,
-	0x4e, 0xe7, 0xf4, 0x40, 0xc0, 0x93, 0xf0, 0xb9, 0xb0, 0x84, 0x21, 0x4e, 0x31, 0xdd, 0xb8, 0x94,
-	0x01, 0xac, 0x8e, 0x65, 0x93, 0xef, 0x42, 0xc2, 0x38, 0x7e, 0x04, 0x4a, 0x10, 0x1f, 0xc7, 0x17,
-	0x3e, 0xd1, 0x50, 0x13, 0xb5, 0x76, 0x3a, 0x3b, 0x6d, 0x7f, 0xd2, 0x8e, 0x48, 0xe6, 0xe7, 0xe3,
-	0x73, 0xcb, 0xb4, 0xb3, 0x14, 0xac, 0x42, 0xc1, 0x71, 0x5d, 0x4d, 0x6e, 0xa2, 0x56, 0xc5, 0x8e,
-	0x8e, 0x58, 0x83, 0xf2, 0x0b, 0x12, 0x4c, 0x28, 0x23, 0x5a, 0x41, 0xa0, 0xa9, 0x89, 0x0d, 0xd8,
-	0x16, 0xaf, 0x4e, 0xa9, 0x3b, 0x74, 0x96, 0x44, 0xdb, 0x6a, 0xa2, 0x56, 0xd5, 0xce, 0x61, 0xf8,
-	0x21, 0xd4, 0xdc, 0x05, 0xe3, 0xc4, 0x3b, 0x9e, 0xcd, 0x02, 0xc2, 0x98, 0x56, 0x14, 0xa4, 0x3c,
-	0x18, 0xb1, 0xb8, 0x13, 0xcc, 0x09, 0x4f, 0x59, 0xa5, 0x98, 0x95, 0x03, 0x23, 0x56, 0x40, 0x96,
-	0x94, 0x93, 0x94, 0x55, 0x8e, 0x59, 0x39, 0x10, 0x77, 0xa0, 0xee, 0xb8, 0x2e, 0xfd, 0xbe, 0x1b,
-	0x32, 0x4e, 0x97, 0x56, 0x92, 0x0c, 0xd3, 0x2a, 0x22, 0xf9, 0x8d, 0x77, 0x51, 0x25, 0x01, 0xf1,
-	0x69, 0xc0, 0x2d, 0x42, 0x82, 0x7e, 0x4f, 0xab, 0x0a, 0x6e, 0x0e, 0x33, 0x5e, 0x22, 0x50, 0x84,
-	0xb4, 0xcc, 0xa7, 0x1e, 0x23, 0xff, 0x41, 0xdb, 0x3a, 0x14, 0x3d, 0x67, 0x49, 0x98, 0x26, 0x37,
-	0x0b, 0xad, 0xaa, 0x1d, 0x1b, 0xb8, 0x09, 0xca, 0x94, 0x7a, 0x1e, 0xeb, 0xba, 0x94, 0x91, 0x99,
-	0xd0, 0xb8, 0x68, 0x67, 0x21, 0x7c, 0x00, 0x0a, 0xe3, 0x01, 0x71, 0x96, 0x7d, 0xef, 0x39, 0x65,
-	0xda, 0x56, 0xb3, 0xd0, 0x52, 0x3a, 0xb5, 0xe4, 0xa5, 0x01, 0x8b, 0x50, 0x3b, 0xcb, 0x30, 0x7e,
-	0x46, 0x50, 0x5d, 0x5f, 0xdd, 0x6a, 0x13, 0xba, 0x4f, 0x9b, 0xe4, 0x7b, 0xb5, 0xa9, 0xb0, 0xa9,
-	0x4d, 0x75, 0x28, 0xba, 0x74, 0xea, 0xb8, 0x62, 0x1e, 0x2a, 0x76, 0x6c, 0x18, 0xef, 0x83, 0xfa,
-	0x19, 0x11, 0x5a, 0xb2, 0xb5, 0x84, 0x1a, 0x94, 0x7d, 0x21, 0x2e, 0xd3, 0x90, 0x90, 0x24, 0x35,
-	0x8d, 0x47, 0xb0, 0xd3, 0xa5, 0x9e, 0x47, 0xa6, 0x3c, 0x1d, 0x65, 0x1d, 0x60, 0x19, 0xba, 0x7c,
-	0x11, 0xbd, 0x92, 0xd2, 0x33, 0x88, 0xd1, 0x06, 0xdc, 0x67, 0x89, 0x0f, 0x99, 0xa5, 0x5e, 0x77,
-	0xbf, 0xf0, 0x0b, 0x82, 0x07, 0x39, 0x87, 0x24, 0xa7, 0x1e, 0x54, 0xa7, 0x29, 0x28, 0x7c, 0x94,
-	0xce, 0x7b, 0x91, 0xd4, 0x1b, 0xb8, 0xed, 0x35, 0x62, 0x7a, 0x3c, 0xb8, 0xb0, 0x6f, 0x1c, 0x1b,
-	0x1f, 0xad, 0xf3, 0x4f, 0x2e, 0xa3, 0xc5, 0xfa, 0x96, 0x5c, 0x24, 0xe2, 0x47, 0xc7, 0x48, 0xa7,
-	0x17, 0x8e, 0x1b, 0x92, 0x64, 0xd9, 0x62, 0xe3, 0x48, 0x7e, 0x8c, 0x8c, 0x7d, 0x78, 0xbb, 0xb7,
-	0x60, 0xd3, 0xbc, 0x00, 0x77, 0x97, 0xf2, 0x17, 0x02, 0x9c, 0xe5, 0x27, 0x95, 0x1c, 0x41, 0x89,
-	0x71, 0x87, 0x87, 0x2c, 0x29, 0xc3, 0x88, 0xca, 0xb8, 0xcd, 0x6b, 0x8f, 0x04, 0x29, 0x2e, 0x21,
-	0xf1, 0x68, 0x7c, 0x0d, 0x4a, 0x06, 0xde, 0x90, 0xfc, 0x51, 0x36, 0x79, 0xa5, 0xf3, 0xf0, 0x1f,
-	0x63, 0x3f, 0x25, 0x8c, 0x39, 0x73, 0x92, 0x29, 0xb1, 0xf1, 0x04, 0x6a, 0xb9, 0xbb, 0x68, 0x4a,
-	0x67, 0x6b, 0x7f, 0x21, 0xbd, 0x58, 0xc1, 0x2c, 0x86, 0x77, 0xa1, 0x14, 0x10, 0x87, 0x51, 0x2f,
-	0x19, 0xcf, 0xc4, 0x32, 0x9e, 0xc0, 0x03, 0xd3, 0x73, 0x26, 0x2e, 0x31, 0x7f, 0xe0, 0x81, 0xc3,
-	0x52, 0xc5, 0x0e, 0xa1, 0x46, 0x04, 0x70, 0x4a, 0x1c, 0x1e, 0x06, 0xb9, 0x1d, 0x35, 0xbf, 0x1a,
-	0xdb, 0xc7, 0x23, 0xb1, 0xa3, 0x79, 0x92, 0x31, 0x80, 0x7a, 0x6f, 0xc1, 0xfe, 0xa7, 0x68, 0x7b,
-	0x8f, 0xe3, 0xff, 0x38, 0xfe, 0x0e, 0x70, 0x15, 0x8a, 0xdd, 0xc1, 0xd9, 0xc8, 0x54, 0x25, 0xac,
-	0x40, 0xf9, 0xf4, 0xcc, 0xfe, 0xf2, 0xd8, 0xee, 0xa9, 0x08, 0x03, 0x94, 0x06, 0xfd, 0xd1, 0xd8,
-	0x1c, 0xaa, 0x32, 0x2e, 0x81, 0x3c, 0x18, 0xa9, 0x85, 0xbd, 0x4f, 0x00, 0x6e, 0xc2, 0xe2, 0x6d,
-	0xa8, 0xf4, 0x7b, 0xe6, 0x70, 0xdc, 0x3f, 0x3d, 0x57, 0xa5, 0x88, 0x6f, 0x3d, 0x3b, 0x19, 0x3d,
-	0x3b, 0x51, 0x11, 0xae, 0x41, 0xb5, 0xd7, 0x1f, 0x75, 0xcf, 0xbe, 0x30, 0xed, 0x73, 0x55, 0xc6,
-	0x15, 0xd8, 0x7a, 0xda, 0x1b, 0x8e, 0xd4, 0x42, 0xe7, 0x4f, 0x19, 0xca, 0x43, 0x3a, 0x23, 0xc7,
-	0x56, 0x1f, 0xef, 0x43, 0x25, 0xdd, 0x3e, 0x5c, 0x15, 0x19, 0x2f, 0x7d, 0x7e, 0xd1, 0xa8, 0x47,
-	0xc7, 0x37, 0xd7, 0xd2, 0x90, 0xf0, 0x1e, 0x94, 0x93, 0xf1, 0xc5, 0x38, 0xa2, 0xe4, 0x77, 0xb1,
-	0x71, 0x13, 0xc1, 0x90, 0xf0, 0xc7, 0x00, 0x37, 0x8d, 0xc7, 0xef, 0xbc, 0x39, 0x08, 0xb1, 0xc7,
-	0xee, 0xe6, 0xf9, 0x30, 0x24, 0xfc, 0x29, 0x28, 0x99, 0xd5, 0xc2, 0xbb, 0xb7, 0x76, 0x2d, 0x0e,
-	0xf0, 0xee, 0x1d, 0x3b, 0x68, 0x48, 0xf8, 0x10, 0xb6, 0xb3, 0xdd, 0xc7, 0x82, 0xba, 0x61, 0x1e,
-	0xf2, 0x69, 0x7f, 0x08, 0xb5, 0x5c, 0x9b, 0xb1, 0x96, 0xa4, 0xf8, 0x2f, 0x7e, 0x2d, 0x28, 0x58,
-	0x1d, 0x0b, 0xaf, 0x3f, 0xfa, 0x84, 0xf3, 0xd6, 0xda, 0x4e, 0xf3, 0x3a, 0x39, 0xbc, 0xbc, 0xd2,
-	0xa5, 0xd7, 0x57, 0x3a, 0xfa, 0xfd, 0x4a, 0x47, 0x7f, 0x5c, 0xe9, 0xe8, 0xc7, 0x95, 0x8e, 0x5e,
-	0xae, 0x74, 0xf4, 0xeb, 0x4a, 0x47, 0xbf, 0xad, 0x74, 0xf4, 0x6a, 0xa5, 0xa3, 0xd7, 0x2b, 0x1d,
-	0xfd, 0x74, 0xad, 0x4b, 0xaf, 0xae, 0x75, 0xe9, 0xf2, 0x5a, 0x97, 0x26, 0x25, 0xf1, 0x2f, 0x7f,
-	0xf0, 0x77, 0x00, 0x00, 0x00, 0xff, 0xff, 0xc4, 0x38, 0x4e, 0x2c, 0x15, 0x08, 0x00, 0x00,
-}
-
-func (this *P2PRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*P2PRequest)
-	if !ok {
-		that2, ok := that.(P2PRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *P2PRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *P2PRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *P2PRequest but is not nil && this == nil")
-	}
-	if this.RequestType != that1.RequestType {
-		return fmt.Errorf("RequestType this(%v) Not Equal that(%v)", this.RequestType, that1.RequestType)
-	}
-	if this.All != that1.All {
-		return fmt.Errorf("All this(%v) Not Equal that(%v)", this.All, that1.All)
-	}
-	if this.Verbose != that1.Verbose {
-		return fmt.Errorf("Verbose this(%v) Not Equal that(%v)", this.Verbose, that1.Verbose)
-	}
-	if this.ProtocolName != that1.ProtocolName {
-		return fmt.Errorf("ProtocolName this(%v) Not Equal that(%v)", this.ProtocolName, that1.ProtocolName)
-	}
-	if this.ListenAddress != that1.ListenAddress {
-		return fmt.Errorf("ListenAddress this(%v) Not Equal that(%v)", this.ListenAddress, that1.ListenAddress)
-	}
-	if this.TargetAddress != that1.TargetAddress {
-		return fmt.Errorf("TargetAddress this(%v) Not Equal that(%v)", this.TargetAddress, that1.TargetAddress)
-	}
-	if this.RemoteAddress != that1.RemoteAddress {
-		return fmt.Errorf("RemoteAddress this(%v) Not Equal that(%v)", this.RemoteAddress, that1.RemoteAddress)
-	}
-	if this.AllowCustomProtocols != that1.AllowCustomProtocols {
-		return fmt.Errorf("AllowCustomProtocols this(%v) Not Equal that(%v)", this.AllowCustomProtocols, that1.AllowCustomProtocols)
-	}
-	if this.ReportPeerID != that1.ReportPeerID {
-		return fmt.Errorf("ReportPeerID this(%v) Not Equal that(%v)", this.ReportPeerID, that1.ReportPeerID)
-	}
-	return nil
-}
-func (this *P2PRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*P2PRequest)
-	if !ok {
-		that2, ok := that.(P2PRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.RequestType != that1.RequestType {
-		return false
-	}
-	if this.All != that1.All {
-		return false
-	}
-	if this.Verbose != that1.Verbose {
-		return false
-	}
-	if this.ProtocolName != that1.ProtocolName {
-		return false
-	}
-	if this.ListenAddress != that1.ListenAddress {
-		return false
-	}
-	if this.TargetAddress != that1.TargetAddress {
-		return false
-	}
-	if this.RemoteAddress != that1.RemoteAddress {
-		return false
-	}
-	if this.AllowCustomProtocols != that1.AllowCustomProtocols {
-		return false
-	}
-	if this.ReportPeerID != that1.ReportPeerID {
-		return false
-	}
-	return true
-}
-func (this *P2PResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*P2PResponse)
-	if !ok {
-		that2, ok := that.(P2PResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *P2PResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *P2PResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *P2PResponse but is not nil && this == nil")
-	}
-	if this.RequestType != that1.RequestType {
-		return fmt.Errorf("RequestType this(%v) Not Equal that(%v)", this.RequestType, that1.RequestType)
-	}
-	if len(this.Names) != len(that1.Names) {
-		return fmt.Errorf("Names this(%v) Not Equal that(%v)", len(this.Names), len(that1.Names))
-	}
-	for i := range this.Names {
-		if this.Names[i] != that1.Names[i] {
-			return fmt.Errorf("Names this[%v](%v) Not Equal that[%v](%v)", i, this.Names[i], i, that1.Names[i])
-		}
-	}
-	if this.ConnsClosed != that1.ConnsClosed {
-		return fmt.Errorf("ConnsClosed this(%v) Not Equal that(%v)", this.ConnsClosed, that1.ConnsClosed)
-	}
-	if len(this.StreamInfos) != len(that1.StreamInfos) {
-		return fmt.Errorf("StreamInfos this(%v) Not Equal that(%v)", len(this.StreamInfos), len(that1.StreamInfos))
-	}
-	for i := range this.StreamInfos {
-		if !this.StreamInfos[i].Equal(that1.StreamInfos[i]) {
-			return fmt.Errorf("StreamInfos this[%v](%v) Not Equal that[%v](%v)", i, this.StreamInfos[i], i, that1.StreamInfos[i])
-		}
-	}
-	return nil
-}
-func (this *P2PResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*P2PResponse)
-	if !ok {
-		that2, ok := that.(P2PResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.RequestType != that1.RequestType {
-		return false
-	}
-	if len(this.Names) != len(that1.Names) {
-		return false
-	}
-	for i := range this.Names {
-		if this.Names[i] != that1.Names[i] {
-			return false
-		}
-	}
-	if this.ConnsClosed != that1.ConnsClosed {
-		return false
-	}
-	if len(this.StreamInfos) != len(that1.StreamInfos) {
-		return false
-	}
-	for i := range this.StreamInfos {
-		if !this.StreamInfos[i].Equal(that1.StreamInfos[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *P2PLsInfo) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*P2PLsInfo)
-	if !ok {
-		that2, ok := that.(P2PLsInfo)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *P2PLsInfo")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *P2PLsInfo but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *P2PLsInfo but is not nil && this == nil")
-	}
-	if this.ProtocolName != that1.ProtocolName {
-		return fmt.Errorf("ProtocolName this(%v) Not Equal that(%v)", this.ProtocolName, that1.ProtocolName)
-	}
-	if this.ListenAddress != that1.ListenAddress {
-		return fmt.Errorf("ListenAddress this(%v) Not Equal that(%v)", this.ListenAddress, that1.ListenAddress)
-	}
-	if this.TargetAddress != that1.TargetAddress {
-		return fmt.Errorf("TargetAddress this(%v) Not Equal that(%v)", this.TargetAddress, that1.TargetAddress)
-	}
-	if this.Local != that1.Local {
-		return fmt.Errorf("Local this(%v) Not Equal that(%v)", this.Local, that1.Local)
-	}
-	return nil
-}
-func (this *P2PLsInfo) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*P2PLsInfo)
-	if !ok {
-		that2, ok := that.(P2PLsInfo)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.ProtocolName != that1.ProtocolName {
-		return false
-	}
-	if this.ListenAddress != that1.ListenAddress {
-		return false
-	}
-	if this.TargetAddress != that1.TargetAddress {
-		return false
-	}
-	if this.Local != that1.Local {
-		return false
-	}
-	return true
-}
-func (this *GetPeersResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*GetPeersResponse)
-	if !ok {
-		that2, ok := that.(GetPeersResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *GetPeersResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *GetPeersResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *GetPeersResponse but is not nil && this == nil")
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return fmt.Errorf("PeerIDs this(%v) Not Equal that(%v)", len(this.PeerIDs), len(that1.PeerIDs))
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
-		}
-	}
-	return nil
-}
-func (this *GetPeersResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*GetPeersResponse)
-	if !ok {
-		that2, ok := that.(GetPeersResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return false
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *ConnectRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*ConnectRequest)
-	if !ok {
-		that2, ok := that.(ConnectRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *ConnectRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *ConnectRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *ConnectRequest but is not nil && this == nil")
-	}
-	if len(this.MultiAddrs) != len(that1.MultiAddrs) {
-		return fmt.Errorf("MultiAddrs this(%v) Not Equal that(%v)", len(this.MultiAddrs), len(that1.MultiAddrs))
-	}
-	for i := range this.MultiAddrs {
-		if this.MultiAddrs[i] != that1.MultiAddrs[i] {
-			return fmt.Errorf("MultiAddrs this[%v](%v) Not Equal that[%v](%v)", i, this.MultiAddrs[i], i, that1.MultiAddrs[i])
-		}
-	}
-	return nil
-}
-func (this *ConnectRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*ConnectRequest)
-	if !ok {
-		that2, ok := that.(ConnectRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.MultiAddrs) != len(that1.MultiAddrs) {
-		return false
-	}
-	for i := range this.MultiAddrs {
-		if this.MultiAddrs[i] != that1.MultiAddrs[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *IsConnectedRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*IsConnectedRequest)
-	if !ok {
-		that2, ok := that.(IsConnectedRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *IsConnectedRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *IsConnectedRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *IsConnectedRequest but is not nil && this == nil")
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return fmt.Errorf("PeerIDs this(%v) Not Equal that(%v)", len(this.PeerIDs), len(that1.PeerIDs))
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
-		}
-	}
-	return nil
-}
-func (this *IsConnectedRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*IsConnectedRequest)
-	if !ok {
-		that2, ok := that.(IsConnectedRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return false
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *IsConnectedResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*IsConnectedResponse)
-	if !ok {
-		that2, ok := that.(IsConnectedResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *IsConnectedResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *IsConnectedResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *IsConnectedResponse but is not nil && this == nil")
-	}
-	if len(this.Connected) != len(that1.Connected) {
-		return fmt.Errorf("Connected this(%v) Not Equal that(%v)", len(this.Connected), len(that1.Connected))
-	}
-	for i := range this.Connected {
-		if this.Connected[i] != that1.Connected[i] {
-			return fmt.Errorf("Connected this[%v](%v) Not Equal that[%v](%v)", i, this.Connected[i], i, that1.Connected[i])
-		}
-	}
-	return nil
-}
-func (this *IsConnectedResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*IsConnectedResponse)
-	if !ok {
-		that2, ok := that.(IsConnectedResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Connected) != len(that1.Connected) {
-		return false
-	}
-	for i := range this.Connected {
-		if this.Connected[i] != that1.Connected[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *DisconnectRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DisconnectRequest)
-	if !ok {
-		that2, ok := that.(DisconnectRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DisconnectRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DisconnectRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DisconnectRequest but is not nil && this == nil")
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return fmt.Errorf("PeerIDs this(%v) Not Equal that(%v)", len(this.PeerIDs), len(that1.PeerIDs))
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return fmt.Errorf("PeerIDs this[%v](%v) Not Equal that[%v](%v)", i, this.PeerIDs[i], i, that1.PeerIDs[i])
-		}
-	}
-	return nil
-}
-func (this *DisconnectRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DisconnectRequest)
-	if !ok {
-		that2, ok := that.(DisconnectRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.PeerIDs) != len(that1.PeerIDs) {
-		return false
-	}
-	for i := range this.PeerIDs {
-		if this.PeerIDs[i] != that1.PeerIDs[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *DisconnectResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DisconnectResponse)
-	if !ok {
-		that2, ok := that.(DisconnectResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DisconnectResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DisconnectResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DisconnectResponse but is not nil && this == nil")
-	}
-	if len(this.Status) != len(that1.Status) {
-		return fmt.Errorf("Status this(%v) Not Equal that(%v)", len(this.Status), len(that1.Status))
-	}
-	for i := range this.Status {
-		if !this.Status[i].Equal(that1.Status[i]) {
-			return fmt.Errorf("Status this[%v](%v) Not Equal that[%v](%v)", i, this.Status[i], i, that1.Status[i])
-		}
-	}
-	return nil
-}
-func (this *DisconnectResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DisconnectResponse)
-	if !ok {
-		that2, ok := that.(DisconnectResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if len(this.Status) != len(that1.Status) {
-		return false
-	}
-	for i := range this.Status {
-		if !this.Status[i].Equal(that1.Status[i]) {
-			return false
-		}
-	}
-	return true
-}
-func (this *DisconnectResponse_StatusMessage) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DisconnectResponse_StatusMessage)
-	if !ok {
-		that2, ok := that.(DisconnectResponse_StatusMessage)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DisconnectResponse_StatusMessage")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DisconnectResponse_StatusMessage but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DisconnectResponse_StatusMessage but is not nil && this == nil")
-	}
-	if this.Disconnected != that1.Disconnected {
-		return fmt.Errorf("Disconnected this(%v) Not Equal that(%v)", this.Disconnected, that1.Disconnected)
-	}
-	if this.Reason != that1.Reason {
-		return fmt.Errorf("Reason this(%v) Not Equal that(%v)", this.Reason, that1.Reason)
-	}
-	return nil
-}
-func (this *DisconnectResponse_StatusMessage) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DisconnectResponse_StatusMessage)
-	if !ok {
-		that2, ok := that.(DisconnectResponse_StatusMessage)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Disconnected != that1.Disconnected {
-		return false
-	}
-	if this.Reason != that1.Reason {
-		return false
-	}
-	return true
-}
-func (this *EnableExtrasRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*EnableExtrasRequest)
-	if !ok {
-		that2, ok := that.(EnableExtrasRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *EnableExtrasRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *EnableExtrasRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *EnableExtrasRequest but is not nil && this == nil")
-	}
-	if this.ExtrasFeature != that1.ExtrasFeature {
-		return fmt.Errorf("ExtrasFeature this(%v) Not Equal that(%v)", this.ExtrasFeature, that1.ExtrasFeature)
-	}
-	return nil
-}
-func (this *EnableExtrasRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*EnableExtrasRequest)
-	if !ok {
-		that2, ok := that.(EnableExtrasRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.ExtrasFeature != that1.ExtrasFeature {
-		return false
-	}
-	return true
-}
-func (this *DisableExtrasRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*DisableExtrasRequest)
-	if !ok {
-		that2, ok := that.(DisableExtrasRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *DisableExtrasRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *DisableExtrasRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *DisableExtrasRequest but is not nil && this == nil")
-	}
-	if this.ExtrasFeature != that1.ExtrasFeature {
-		return fmt.Errorf("ExtrasFeature this(%v) Not Equal that(%v)", this.ExtrasFeature, that1.ExtrasFeature)
-	}
-	return nil
-}
-func (this *DisableExtrasRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*DisableExtrasRequest)
-	if !ok {
-		that2, ok := that.(DisableExtrasRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.ExtrasFeature != that1.ExtrasFeature {
-		return false
-	}
-	return true
-}
-func (this *P2PRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 13)
-	s = append(s, "&pb.P2PRequest{")
-	s = append(s, "RequestType: "+fmt.Sprintf("%#v", this.RequestType)+",\n")
-	s = append(s, "All: "+fmt.Sprintf("%#v", this.All)+",\n")
-	s = append(s, "Verbose: "+fmt.Sprintf("%#v", this.Verbose)+",\n")
-	s = append(s, "ProtocolName: "+fmt.Sprintf("%#v", this.ProtocolName)+",\n")
-	s = append(s, "ListenAddress: "+fmt.Sprintf("%#v", this.ListenAddress)+",\n")
-	s = append(s, "TargetAddress: "+fmt.Sprintf("%#v", this.TargetAddress)+",\n")
-	s = append(s, "RemoteAddress: "+fmt.Sprintf("%#v", this.RemoteAddress)+",\n")
-	s = append(s, "AllowCustomProtocols: "+fmt.Sprintf("%#v", this.AllowCustomProtocols)+",\n")
-	s = append(s, "ReportPeerID: "+fmt.Sprintf("%#v", this.ReportPeerID)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *P2PResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.P2PResponse{")
-	s = append(s, "RequestType: "+fmt.Sprintf("%#v", this.RequestType)+",\n")
-	s = append(s, "Names: "+fmt.Sprintf("%#v", this.Names)+",\n")
-	s = append(s, "ConnsClosed: "+fmt.Sprintf("%#v", this.ConnsClosed)+",\n")
-	if this.StreamInfos != nil {
-		s = append(s, "StreamInfos: "+fmt.Sprintf("%#v", this.StreamInfos)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *P2PLsInfo) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 8)
-	s = append(s, "&pb.P2PLsInfo{")
-	s = append(s, "ProtocolName: "+fmt.Sprintf("%#v", this.ProtocolName)+",\n")
-	s = append(s, "ListenAddress: "+fmt.Sprintf("%#v", this.ListenAddress)+",\n")
-	s = append(s, "TargetAddress: "+fmt.Sprintf("%#v", this.TargetAddress)+",\n")
-	s = append(s, "Local: "+fmt.Sprintf("%#v", this.Local)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *GetPeersResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.GetPeersResponse{")
-	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *ConnectRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.ConnectRequest{")
-	s = append(s, "MultiAddrs: "+fmt.Sprintf("%#v", this.MultiAddrs)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *IsConnectedRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.IsConnectedRequest{")
-	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *IsConnectedResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.IsConnectedResponse{")
-	keysForConnected := make([]string, 0, len(this.Connected))
-	for k := range this.Connected {
-		keysForConnected = append(keysForConnected, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForConnected)
-	mapStringForConnected := "map[string]bool{"
-	for _, k := range keysForConnected {
-		mapStringForConnected += fmt.Sprintf("%#v: %#v,", k, this.Connected[k])
-	}
-	mapStringForConnected += "}"
-	if this.Connected != nil {
-		s = append(s, "Connected: "+mapStringForConnected+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *DisconnectRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.DisconnectRequest{")
-	s = append(s, "PeerIDs: "+fmt.Sprintf("%#v", this.PeerIDs)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *DisconnectResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.DisconnectResponse{")
-	keysForStatus := make([]string, 0, len(this.Status))
-	for k := range this.Status {
-		keysForStatus = append(keysForStatus, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStatus)
-	mapStringForStatus := "map[string]*DisconnectResponse_StatusMessage{"
-	for _, k := range keysForStatus {
-		mapStringForStatus += fmt.Sprintf("%#v: %#v,", k, this.Status[k])
-	}
-	mapStringForStatus += "}"
-	if this.Status != nil {
-		s = append(s, "Status: "+mapStringForStatus+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *DisconnectResponse_StatusMessage) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.DisconnectResponse_StatusMessage{")
-	s = append(s, "Disconnected: "+fmt.Sprintf("%#v", this.Disconnected)+",\n")
-	s = append(s, "Reason: "+fmt.Sprintf("%#v", this.Reason)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *EnableExtrasRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.EnableExtrasRequest{")
-	s = append(s, "ExtrasFeature: "+fmt.Sprintf("%#v", this.ExtrasFeature)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *DisableExtrasRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 5)
-	s = append(s, "&pb.DisableExtrasRequest{")
-	s = append(s, "ExtrasFeature: "+fmt.Sprintf("%#v", this.ExtrasFeature)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringNode(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	// 853 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0x5f, 0x6f, 0xe3, 0x44,
+	0x10, 0xf7, 0x3a, 0xcd, 0xbf, 0x71, 0x53, 0xcc, 0x5c, 0x28, 0x56, 0x1e, 0xa2, 0xc8, 0x3a, 0xa1,
+	0xa8, 0xe2, 0xc2, 0x29, 0x9c, 0xd0, 0xa9, 0x02, 0x41, 0x9b, 0xb8, 0x28, 0xba, 0x5c, 0x6a, 0x9c,
+	0x1c, 0xd0, 0x27, 0xe4, 0x24, 0xcb, 0x29, 0xc2, 0xf1, 0x1a, 0xef, 0xe6, 0xa0, 0xdf, 0x02, 0x1e,
+	0xf9, 0x06, 0x7c, 0x14, 0x1e, 0xef, 0xf1, 0x1e, 0x51, 0xfb, 0x39, 0x40, 0x68, 0xd7, 0x76, 0x6a,
+	0x5f, 0x53, 0x38, 0xa1, 0x7b, 0xdb, 0xf9, 0xed, 0x6f, 0x66, 0x67, 0x7e, 0x33, 0xb3, 0x00, 0x21,
+	0x5b, 0xd2, 0x5e, 0x14, 0x33, 0xc1, 0x50, 0x8f, 0xe6, 0x2d, 0xd8, 0x88, 0x55, 0x90, 0xd8, 0xf6,
+	0x2b, 0x1d, 0xc0, 0xed, 0xbb, 0x1e, 0xfd, 0x71, 0x43, 0xb9, 0xc0, 0x87, 0x60, 0xc4, 0xc9, 0x71,
+	0x76, 0x19, 0x51, 0x8b, 0x74, 0x48, 0xf7, 0xa0, 0x7f, 0xd0, 0x8b, 0xe6, 0x3d, 0x49, 0x72, 0xbe,
+	0x9a, 0x5d, 0xb8, 0x8e, 0x97, 0xa7, 0xa0, 0x09, 0x25, 0x3f, 0x08, 0x2c, 0xbd, 0x43, 0xba, 0x35,
+	0x4f, 0x1e, 0xd1, 0x82, 0xea, 0x0b, 0x1a, 0xcf, 0x19, 0xa7, 0x56, 0x49, 0xa1, 0x99, 0x89, 0x36,
+	0xec, 0xab, 0x57, 0x17, 0x2c, 0x98, 0xf8, 0x6b, 0x6a, 0xed, 0x75, 0x48, 0xb7, 0xee, 0x15, 0x30,
+	0xbc, 0x0f, 0x8d, 0x60, 0xc5, 0x05, 0x0d, 0x4f, 0x96, 0xcb, 0x98, 0x72, 0x6e, 0x95, 0x15, 0xa9,
+	0x08, 0x4a, 0x96, 0xf0, 0xe3, 0xe7, 0x54, 0x64, 0xac, 0x4a, 0xc2, 0x2a, 0x80, 0x92, 0x15, 0xd3,
+	0x35, 0x13, 0x34, 0x63, 0x55, 0x13, 0x56, 0x01, 0xc4, 0x3e, 0x34, 0xfd, 0x20, 0x60, 0x3f, 0x0d,
+	0x36, 0x5c, 0xb0, 0xb5, 0x9b, 0x26, 0xc3, 0xad, 0x9a, 0x4a, 0x7e, 0xe7, 0x9d, 0xac, 0x24, 0xa6,
+	0x11, 0x8b, 0x85, 0x4b, 0x69, 0x3c, 0x1a, 0x5a, 0x75, 0xc5, 0x2d, 0x60, 0xf6, 0xef, 0x04, 0x0c,
+	0x25, 0x2d, 0x8f, 0x58, 0xc8, 0xe9, 0xff, 0xd0, 0xb6, 0x09, 0xe5, 0xd0, 0x5f, 0x53, 0x6e, 0xe9,
+	0x9d, 0x52, 0xb7, 0xee, 0x25, 0x06, 0x76, 0xc0, 0x58, 0xb0, 0x30, 0xe4, 0x83, 0x80, 0x71, 0xba,
+	0x54, 0x1a, 0x97, 0xbd, 0x3c, 0x84, 0x1f, 0x81, 0xc1, 0x45, 0x4c, 0xfd, 0xf5, 0x28, 0xfc, 0x9e,
+	0x71, 0x6b, 0xaf, 0x53, 0xea, 0x1a, 0xfd, 0x46, 0xfa, 0xd2, 0x98, 0x4b, 0xd4, 0xcb, 0x33, 0xec,
+	0x5f, 0x09, 0xd4, 0xb7, 0x57, 0xb7, 0xda, 0x44, 0xde, 0xa4, 0x4d, 0xfa, 0x1b, 0xb5, 0xa9, 0xb4,
+	0xab, 0x4d, 0x4d, 0x28, 0x07, 0x6c, 0xe1, 0x07, 0x6a, 0x1e, 0x6a, 0x5e, 0x62, 0xd8, 0x1f, 0x82,
+	0xf9, 0x25, 0x55, 0x5a, 0xf2, 0xad, 0x84, 0x16, 0x54, 0x23, 0x25, 0x2e, 0xb7, 0x88, 0x92, 0x24,
+	0x33, 0xed, 0x87, 0x70, 0x30, 0x60, 0x61, 0x48, 0x17, 0x22, 0x1b, 0xe5, 0x36, 0xc0, 0x7a, 0x13,
+	0x88, 0x95, 0x7c, 0x25, 0xa3, 0xe7, 0x10, 0xbb, 0x07, 0x38, 0xe2, 0xa9, 0x0f, 0x5d, 0x66, 0x5e,
+	0x77, 0xbf, 0xf0, 0x1b, 0x81, 0x7b, 0x05, 0x87, 0x34, 0xa7, 0x21, 0xd4, 0x17, 0x19, 0xa8, 0x7c,
+	0x8c, 0xfe, 0x07, 0x52, 0xea, 0x1d, 0xdc, 0xde, 0x16, 0x71, 0x42, 0x11, 0x5f, 0x7a, 0x37, 0x8e,
+	0xad, 0x4f, 0xb7, 0xf9, 0xa7, 0x97, 0x72, 0xb1, 0x7e, 0xa0, 0x97, 0xa9, 0xf8, 0xf2, 0x28, 0x75,
+	0x7a, 0xe1, 0x07, 0x1b, 0x9a, 0x2e, 0x5b, 0x62, 0x1c, 0xeb, 0x8f, 0x89, 0xfd, 0x00, 0xde, 0x1d,
+	0xae, 0xf8, 0xa2, 0x28, 0xc0, 0xdd, 0xa5, 0xfc, 0x4d, 0x00, 0xf3, 0xfc, 0xb4, 0x92, 0x63, 0xa8,
+	0x70, 0xe1, 0x8b, 0x0d, 0x4f, 0xcb, 0xb0, 0x65, 0x19, 0xb7, 0x79, 0xbd, 0xa9, 0x22, 0x25, 0x25,
+	0xa4, 0x1e, 0xad, 0xef, 0xc0, 0xc8, 0xc1, 0x3b, 0x92, 0x3f, 0xce, 0x27, 0x6f, 0xf4, 0xef, 0xff,
+	0x6b, 0xec, 0xa7, 0x94, 0x73, 0xff, 0x39, 0xcd, 0x95, 0xd8, 0x7a, 0x02, 0x8d, 0xc2, 0x9d, 0x9c,
+	0xd2, 0xe5, 0xd6, 0x5f, 0x49, 0xaf, 0x56, 0x30, 0x8f, 0xe1, 0x21, 0x54, 0x62, 0xea, 0x73, 0x16,
+	0xa6, 0xe3, 0x99, 0x5a, 0xf6, 0x13, 0xb8, 0xe7, 0x84, 0xfe, 0x3c, 0xa0, 0xce, 0xcf, 0x22, 0xf6,
+	0x79, 0xa6, 0xd8, 0x23, 0x68, 0x50, 0x05, 0x9c, 0x51, 0x5f, 0x6c, 0xe2, 0xc2, 0x8e, 0x3a, 0xdf,
+	0xce, 0xbc, 0x93, 0xa9, 0xda, 0xd1, 0x22, 0xc9, 0x1e, 0x43, 0x73, 0xb8, 0xe2, 0x6f, 0x29, 0xda,
+	0xd1, 0xe3, 0xe4, 0x3f, 0x4e, 0xbe, 0x03, 0xac, 0x43, 0x79, 0x30, 0x3e, 0x9f, 0x3a, 0xa6, 0x86,
+	0x06, 0x54, 0xcf, 0xce, 0xbd, 0x6f, 0x4e, 0xbc, 0xa1, 0x49, 0x10, 0xa0, 0x32, 0x1e, 0x4d, 0x67,
+	0xce, 0xc4, 0xd4, 0xb1, 0x02, 0xfa, 0x78, 0x6a, 0x96, 0x8e, 0x3e, 0x07, 0xb8, 0x09, 0x8b, 0xfb,
+	0x50, 0x1b, 0x0d, 0x9d, 0xc9, 0x6c, 0x74, 0x76, 0x61, 0x6a, 0x92, 0xef, 0x3e, 0x3b, 0x9d, 0x3e,
+	0x3b, 0x35, 0x09, 0x36, 0xa0, 0x3e, 0x1c, 0x4d, 0x07, 0xe7, 0x5f, 0x3b, 0xde, 0x85, 0xa9, 0x63,
+	0x0d, 0xf6, 0x9e, 0x0e, 0x27, 0x53, 0xb3, 0xd4, 0xff, 0x4b, 0x87, 0xea, 0x84, 0x2d, 0xe9, 0x89,
+	0x3b, 0xc2, 0x07, 0x50, 0xcb, 0xb6, 0x0f, 0xeb, 0x2a, 0xe3, 0x75, 0x24, 0x2e, 0x5b, 0x4d, 0x79,
+	0x7c, 0x7d, 0x2d, 0x6d, 0x0d, 0x8f, 0xa0, 0x9a, 0x8e, 0x2f, 0xa2, 0xa4, 0x14, 0x77, 0xb1, 0x75,
+	0x13, 0xc1, 0xd6, 0xf0, 0x33, 0x80, 0x9b, 0xc6, 0xe3, 0x7b, 0xaf, 0x0f, 0x42, 0xe2, 0x71, 0xb8,
+	0x7b, 0x3e, 0x6c, 0x0d, 0xbf, 0x00, 0x23, 0xb7, 0x5a, 0x78, 0x78, 0x6b, 0xd7, 0x92, 0x00, 0xef,
+	0xdf, 0xb1, 0x83, 0xb6, 0x86, 0x8f, 0x60, 0x3f, 0xdf, 0x7d, 0x54, 0xd4, 0x1d, 0xf3, 0x50, 0x4c,
+	0xfb, 0x13, 0x68, 0x14, 0xda, 0x8c, 0x56, 0x9a, 0xe2, 0x7f, 0xf8, 0x75, 0xa1, 0xe4, 0xf6, 0x5d,
+	0xdc, 0x7e, 0xf4, 0x29, 0xe7, 0x9d, 0xad, 0x9d, 0xe5, 0x75, 0x6a, 0xfd, 0x71, 0xd5, 0x26, 0x2f,
+	0xaf, 0xda, 0xe4, 0xcf, 0xab, 0x36, 0xf9, 0xe5, 0xba, 0xad, 0xbd, 0xbc, 0x6e, 0x6b, 0xaf, 0xae,
+	0xdb, 0xda, 0xbc, 0xa2, 0xfe, 0xde, 0x8f, 0xff, 0x09, 0x00, 0x00, 0xff, 0xff, 0xfe, 0xf8, 0x52,
+	0x0d, 0xca, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -2696,231 +1713,6 @@ func encodeVarintNode(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedP2PRequest(r randyNode, easy bool) *P2PRequest {
-	this := &P2PRequest{}
-	this.RequestType = P2PREQTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
-	this.All = bool(bool(r.Intn(2) == 0))
-	this.Verbose = bool(bool(r.Intn(2) == 0))
-	this.ProtocolName = string(randStringNode(r))
-	this.ListenAddress = string(randStringNode(r))
-	this.TargetAddress = string(randStringNode(r))
-	this.RemoteAddress = string(randStringNode(r))
-	this.AllowCustomProtocols = bool(bool(r.Intn(2) == 0))
-	this.ReportPeerID = bool(bool(r.Intn(2) == 0))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedP2PResponse(r randyNode, easy bool) *P2PResponse {
-	this := &P2PResponse{}
-	this.RequestType = P2PREQTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
-	v1 := r.Intn(10)
-	this.Names = make([]string, v1)
-	for i := 0; i < v1; i++ {
-		this.Names[i] = string(randStringNode(r))
-	}
-	this.ConnsClosed = int32(r.Int31())
-	if r.Intn(2) == 0 {
-		this.ConnsClosed *= -1
-	}
-	if r.Intn(5) != 0 {
-		v2 := r.Intn(5)
-		this.StreamInfos = make([]*P2PLsInfo, v2)
-		for i := 0; i < v2; i++ {
-			this.StreamInfos[i] = NewPopulatedP2PLsInfo(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedP2PLsInfo(r randyNode, easy bool) *P2PLsInfo {
-	this := &P2PLsInfo{}
-	this.ProtocolName = string(randStringNode(r))
-	this.ListenAddress = string(randStringNode(r))
-	this.TargetAddress = string(randStringNode(r))
-	this.Local = bool(bool(r.Intn(2) == 0))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedGetPeersResponse(r randyNode, easy bool) *GetPeersResponse {
-	this := &GetPeersResponse{}
-	v3 := r.Intn(10)
-	this.PeerIDs = make([]string, v3)
-	for i := 0; i < v3; i++ {
-		this.PeerIDs[i] = string(randStringNode(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedConnectRequest(r randyNode, easy bool) *ConnectRequest {
-	this := &ConnectRequest{}
-	v4 := r.Intn(10)
-	this.MultiAddrs = make([]string, v4)
-	for i := 0; i < v4; i++ {
-		this.MultiAddrs[i] = string(randStringNode(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedIsConnectedRequest(r randyNode, easy bool) *IsConnectedRequest {
-	this := &IsConnectedRequest{}
-	v5 := r.Intn(10)
-	this.PeerIDs = make([]string, v5)
-	for i := 0; i < v5; i++ {
-		this.PeerIDs[i] = string(randStringNode(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedIsConnectedResponse(r randyNode, easy bool) *IsConnectedResponse {
-	this := &IsConnectedResponse{}
-	if r.Intn(5) != 0 {
-		v6 := r.Intn(10)
-		this.Connected = make(map[string]bool)
-		for i := 0; i < v6; i++ {
-			v7 := randStringNode(r)
-			this.Connected[v7] = bool(bool(r.Intn(2) == 0))
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedDisconnectRequest(r randyNode, easy bool) *DisconnectRequest {
-	this := &DisconnectRequest{}
-	v8 := r.Intn(10)
-	this.PeerIDs = make([]string, v8)
-	for i := 0; i < v8; i++ {
-		this.PeerIDs[i] = string(randStringNode(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedDisconnectResponse(r randyNode, easy bool) *DisconnectResponse {
-	this := &DisconnectResponse{}
-	if r.Intn(5) != 0 {
-		v9 := r.Intn(10)
-		this.Status = make(map[string]*DisconnectResponse_StatusMessage)
-		for i := 0; i < v9; i++ {
-			this.Status[randStringNode(r)] = NewPopulatedDisconnectResponse_StatusMessage(r, easy)
-		}
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedDisconnectResponse_StatusMessage(r randyNode, easy bool) *DisconnectResponse_StatusMessage {
-	this := &DisconnectResponse_StatusMessage{}
-	this.Disconnected = bool(bool(r.Intn(2) == 0))
-	this.Reason = string(randStringNode(r))
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedEnableExtrasRequest(r randyNode, easy bool) *EnableExtrasRequest {
-	this := &EnableExtrasRequest{}
-	this.ExtrasFeature = EXTRASTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedDisableExtrasRequest(r randyNode, easy bool) *DisableExtrasRequest {
-	this := &DisableExtrasRequest{}
-	this.ExtrasFeature = EXTRASTYPE([]int32{0, 1, 2, 3}[r.Intn(4)])
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyNode interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneNode(r randyNode) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringNode(r randyNode) string {
-	v10 := r.Intn(100)
-	tmps := make([]rune, v10)
-	for i := 0; i < v10; i++ {
-		tmps[i] = randUTF8RuneNode(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedNode(r randyNode, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldNode(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldNode(dAtA []byte, r randyNode, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		v11 := r.Int63()
-		if r.Intn(2) == 0 {
-			v11 *= -1
-		}
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(v11))
-	case 1:
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateNode(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateNode(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
 func (m *P2PRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -3156,174 +1948,6 @@ func sovNode(x uint64) (n int) {
 }
 func sozNode(x uint64) (n int) {
 	return sovNode(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *P2PRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&P2PRequest{`,
-		`RequestType:` + fmt.Sprintf("%v", this.RequestType) + `,`,
-		`All:` + fmt.Sprintf("%v", this.All) + `,`,
-		`Verbose:` + fmt.Sprintf("%v", this.Verbose) + `,`,
-		`ProtocolName:` + fmt.Sprintf("%v", this.ProtocolName) + `,`,
-		`ListenAddress:` + fmt.Sprintf("%v", this.ListenAddress) + `,`,
-		`TargetAddress:` + fmt.Sprintf("%v", this.TargetAddress) + `,`,
-		`RemoteAddress:` + fmt.Sprintf("%v", this.RemoteAddress) + `,`,
-		`AllowCustomProtocols:` + fmt.Sprintf("%v", this.AllowCustomProtocols) + `,`,
-		`ReportPeerID:` + fmt.Sprintf("%v", this.ReportPeerID) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *P2PResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	repeatedStringForStreamInfos := "[]*P2PLsInfo{"
-	for _, f := range this.StreamInfos {
-		repeatedStringForStreamInfos += strings.Replace(f.String(), "P2PLsInfo", "P2PLsInfo", 1) + ","
-	}
-	repeatedStringForStreamInfos += "}"
-	s := strings.Join([]string{`&P2PResponse{`,
-		`RequestType:` + fmt.Sprintf("%v", this.RequestType) + `,`,
-		`Names:` + fmt.Sprintf("%v", this.Names) + `,`,
-		`ConnsClosed:` + fmt.Sprintf("%v", this.ConnsClosed) + `,`,
-		`StreamInfos:` + repeatedStringForStreamInfos + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *P2PLsInfo) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&P2PLsInfo{`,
-		`ProtocolName:` + fmt.Sprintf("%v", this.ProtocolName) + `,`,
-		`ListenAddress:` + fmt.Sprintf("%v", this.ListenAddress) + `,`,
-		`TargetAddress:` + fmt.Sprintf("%v", this.TargetAddress) + `,`,
-		`Local:` + fmt.Sprintf("%v", this.Local) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *GetPeersResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&GetPeersResponse{`,
-		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *ConnectRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&ConnectRequest{`,
-		`MultiAddrs:` + fmt.Sprintf("%v", this.MultiAddrs) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *IsConnectedRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&IsConnectedRequest{`,
-		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *IsConnectedResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForConnected := make([]string, 0, len(this.Connected))
-	for k := range this.Connected {
-		keysForConnected = append(keysForConnected, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForConnected)
-	mapStringForConnected := "map[string]bool{"
-	for _, k := range keysForConnected {
-		mapStringForConnected += fmt.Sprintf("%v: %v,", k, this.Connected[k])
-	}
-	mapStringForConnected += "}"
-	s := strings.Join([]string{`&IsConnectedResponse{`,
-		`Connected:` + mapStringForConnected + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DisconnectRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DisconnectRequest{`,
-		`PeerIDs:` + fmt.Sprintf("%v", this.PeerIDs) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DisconnectResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	keysForStatus := make([]string, 0, len(this.Status))
-	for k := range this.Status {
-		keysForStatus = append(keysForStatus, k)
-	}
-	github_com_gogo_protobuf_sortkeys.Strings(keysForStatus)
-	mapStringForStatus := "map[string]*DisconnectResponse_StatusMessage{"
-	for _, k := range keysForStatus {
-		mapStringForStatus += fmt.Sprintf("%v: %v,", k, this.Status[k])
-	}
-	mapStringForStatus += "}"
-	s := strings.Join([]string{`&DisconnectResponse{`,
-		`Status:` + mapStringForStatus + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DisconnectResponse_StatusMessage) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DisconnectResponse_StatusMessage{`,
-		`Disconnected:` + fmt.Sprintf("%v", this.Disconnected) + `,`,
-		`Reason:` + fmt.Sprintf("%v", this.Reason) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *EnableExtrasRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&EnableExtrasRequest{`,
-		`ExtrasFeature:` + fmt.Sprintf("%v", this.ExtrasFeature) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *DisableExtrasRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&DisableExtrasRequest{`,
-		`ExtrasFeature:` + fmt.Sprintf("%v", this.ExtrasFeature) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringNode(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
 }
 func (m *P2PRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)

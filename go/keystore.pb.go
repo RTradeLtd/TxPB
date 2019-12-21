@@ -4,16 +4,12 @@
 package pb
 
 import (
-	bytes "bytes"
 	context "context"
 	fmt "fmt"
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	reflect "reflect"
-	strings "strings"
 
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -41,8 +37,9 @@ type KeystoreRequest struct {
 	PrivateKey []byte `protobuf:"bytes,2,opt,name=privateKey,proto3" json:"privateKey,omitempty"`
 }
 
-func (m *KeystoreRequest) Reset()      { *m = KeystoreRequest{} }
-func (*KeystoreRequest) ProtoMessage() {}
+func (m *KeystoreRequest) Reset()         { *m = KeystoreRequest{} }
+func (m *KeystoreRequest) String() string { return proto.CompactTextString(m) }
+func (*KeystoreRequest) ProtoMessage()    {}
 func (*KeystoreRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ac3dafe49d0dc795, []int{0}
 }
@@ -100,8 +97,9 @@ type KeystoreResponse struct {
 	KeyNames []string `protobuf:"bytes,3,rep,name=keyNames,proto3" json:"keyNames,omitempty"`
 }
 
-func (m *KeystoreResponse) Reset()      { *m = KeystoreResponse{} }
-func (*KeystoreResponse) ProtoMessage() {}
+func (m *KeystoreResponse) Reset()         { *m = KeystoreResponse{} }
+func (m *KeystoreResponse) String() string { return proto.CompactTextString(m) }
+func (*KeystoreResponse) ProtoMessage()    {}
 func (*KeystoreResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ac3dafe49d0dc795, []int{1}
 }
@@ -161,195 +159,23 @@ func init() {
 func init() { proto.RegisterFile("keystore.proto", fileDescriptor_ac3dafe49d0dc795) }
 
 var fileDescriptor_ac3dafe49d0dc795 = []byte{
-	// 309 bytes of a gzipped FileDescriptorProto
+	// 249 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x4e, 0xad, 0x2c,
-	0x2e, 0xc9, 0x2f, 0x4a, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x92, 0xd2,
-	0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7,
-	0x07, 0x4b, 0x25, 0x95, 0xa6, 0x81, 0x79, 0x60, 0x0e, 0x98, 0x05, 0xd1, 0xa2, 0xe4, 0xca, 0xc5,
-	0xef, 0x0d, 0x35, 0x24, 0x28, 0xb5, 0xb0, 0x34, 0xb5, 0xb8, 0x44, 0x48, 0x88, 0x8b, 0x25, 0x2f,
-	0x31, 0x37, 0x55, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33, 0x08, 0xcc, 0x16, 0x92, 0xe3, 0xe2, 0x2a,
-	0x28, 0xca, 0x2c, 0x4b, 0x2c, 0x49, 0xf5, 0x4e, 0xad, 0x94, 0x60, 0x52, 0x60, 0xd4, 0xe0, 0x09,
-	0x42, 0x12, 0x51, 0x4a, 0xe3, 0x12, 0x40, 0x18, 0x53, 0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x2a, 0x24,
-	0xc6, 0xc5, 0x56, 0x5c, 0x92, 0x58, 0x52, 0x5a, 0x0c, 0x35, 0x09, 0xca, 0x23, 0x64, 0x96, 0x90,
-	0x14, 0x17, 0x47, 0x76, 0x6a, 0xa5, 0x5f, 0x62, 0x6e, 0x6a, 0xb1, 0x04, 0xb3, 0x02, 0xb3, 0x06,
-	0x67, 0x10, 0x9c, 0x6f, 0xb4, 0x97, 0x89, 0x8b, 0x1b, 0x66, 0x91, 0x63, 0x80, 0xa7, 0x90, 0x15,
-	0x82, 0xeb, 0x91, 0x58, 0x2c, 0x24, 0xac, 0x57, 0x90, 0xa4, 0x87, 0xe6, 0x1f, 0x29, 0x11, 0x54,
-	0x41, 0x88, 0xeb, 0x94, 0x18, 0x90, 0xf5, 0xba, 0xa7, 0x96, 0x90, 0xad, 0x37, 0xa0, 0x94, 0x44,
-	0xbd, 0xb6, 0x5c, 0x7c, 0x30, 0x51, 0x97, 0xd4, 0x9c, 0xd4, 0x92, 0x54, 0xd2, 0xb4, 0x5b, 0x73,
-	0xf1, 0xc0, 0x44, 0x7d, 0x32, 0x8b, 0x49, 0xb3, 0xdb, 0xc9, 0xe4, 0xc6, 0x43, 0x39, 0x86, 0x07,
-	0x0f, 0xe5, 0x18, 0x3f, 0x3c, 0x94, 0x63, 0xfc, 0xf1, 0x50, 0x8e, 0xb1, 0xe1, 0x91, 0x1c, 0xe3,
-	0x8a, 0x47, 0x72, 0x8c, 0x3b, 0x1e, 0xc9, 0x31, 0x9e, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c,
-	0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1,
-	0x1c, 0x43, 0x12, 0x1b, 0x38, 0xad, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x23, 0xa1, 0x86,
-	0x8f, 0x70, 0x02, 0x00, 0x00,
-}
-
-func (this *KeystoreRequest) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*KeystoreRequest)
-	if !ok {
-		that2, ok := that.(KeystoreRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *KeystoreRequest")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *KeystoreRequest but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *KeystoreRequest but is not nil && this == nil")
-	}
-	if this.Name != that1.Name {
-		return fmt.Errorf("Name this(%v) Not Equal that(%v)", this.Name, that1.Name)
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return fmt.Errorf("PrivateKey this(%v) Not Equal that(%v)", this.PrivateKey, that1.PrivateKey)
-	}
-	return nil
-}
-func (this *KeystoreRequest) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*KeystoreRequest)
-	if !ok {
-		that2, ok := that.(KeystoreRequest)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Name != that1.Name {
-		return false
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return false
-	}
-	return true
-}
-func (this *KeystoreResponse) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*KeystoreResponse)
-	if !ok {
-		that2, ok := that.(KeystoreResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *KeystoreResponse")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *KeystoreResponse but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *KeystoreResponse but is not nil && this == nil")
-	}
-	if this.Status != that1.Status {
-		return fmt.Errorf("Status this(%v) Not Equal that(%v)", this.Status, that1.Status)
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return fmt.Errorf("PrivateKey this(%v) Not Equal that(%v)", this.PrivateKey, that1.PrivateKey)
-	}
-	if len(this.KeyNames) != len(that1.KeyNames) {
-		return fmt.Errorf("KeyNames this(%v) Not Equal that(%v)", len(this.KeyNames), len(that1.KeyNames))
-	}
-	for i := range this.KeyNames {
-		if this.KeyNames[i] != that1.KeyNames[i] {
-			return fmt.Errorf("KeyNames this[%v](%v) Not Equal that[%v](%v)", i, this.KeyNames[i], i, that1.KeyNames[i])
-		}
-	}
-	return nil
-}
-func (this *KeystoreResponse) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*KeystoreResponse)
-	if !ok {
-		that2, ok := that.(KeystoreResponse)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Status != that1.Status {
-		return false
-	}
-	if !bytes.Equal(this.PrivateKey, that1.PrivateKey) {
-		return false
-	}
-	if len(this.KeyNames) != len(that1.KeyNames) {
-		return false
-	}
-	for i := range this.KeyNames {
-		if this.KeyNames[i] != that1.KeyNames[i] {
-			return false
-		}
-	}
-	return true
-}
-func (this *KeystoreRequest) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&pb.KeystoreRequest{")
-	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
-	s = append(s, "PrivateKey: "+fmt.Sprintf("%#v", this.PrivateKey)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func (this *KeystoreResponse) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 7)
-	s = append(s, "&pb.KeystoreResponse{")
-	s = append(s, "Status: "+fmt.Sprintf("%#v", this.Status)+",\n")
-	s = append(s, "PrivateKey: "+fmt.Sprintf("%#v", this.PrivateKey)+",\n")
-	s = append(s, "KeyNames: "+fmt.Sprintf("%#v", this.KeyNames)+",\n")
-	s = append(s, "}")
-	return strings.Join(s, "")
-}
-func valueToGoStringKeystore(v interface{}, typ string) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+	0x2e, 0xc9, 0x2f, 0x4a, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x2a, 0x48, 0x52, 0x72,
+	0xe5, 0xe2, 0xf7, 0x86, 0x8a, 0x06, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x08, 0x09, 0x71, 0xb1,
+	0xe4, 0x25, 0xe6, 0xa6, 0x4a, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0x81, 0xd9, 0x42, 0x72, 0x5c,
+	0x5c, 0x05, 0x45, 0x99, 0x65, 0x89, 0x25, 0xa9, 0xde, 0xa9, 0x95, 0x12, 0x4c, 0x0a, 0x8c, 0x1a,
+	0x3c, 0x41, 0x48, 0x22, 0x4a, 0x69, 0x5c, 0x02, 0x08, 0x63, 0x8a, 0x0b, 0xf2, 0xf3, 0x8a, 0x53,
+	0x85, 0xc4, 0xb8, 0xd8, 0x8a, 0x4b, 0x12, 0x4b, 0x4a, 0x8b, 0xa1, 0x26, 0x41, 0x79, 0x84, 0xcc,
+	0x12, 0x92, 0xe2, 0xe2, 0xc8, 0x4e, 0xad, 0xf4, 0x4b, 0xcc, 0x4d, 0x2d, 0x96, 0x60, 0x56, 0x60,
+	0xd6, 0xe0, 0x0c, 0x82, 0xf3, 0x8d, 0xf6, 0x32, 0x71, 0x71, 0xc3, 0x2c, 0x72, 0x0c, 0xf0, 0x14,
+	0xb2, 0x42, 0x70, 0x3d, 0x12, 0x8b, 0x85, 0x84, 0xf5, 0x0a, 0x92, 0xf4, 0xd0, 0xfc, 0x23, 0x25,
+	0x82, 0x2a, 0x08, 0x71, 0x9d, 0x12, 0x03, 0xb2, 0x5e, 0xf7, 0xd4, 0x12, 0xb2, 0xf5, 0x06, 0x94,
+	0x92, 0xa8, 0xd7, 0x96, 0x8b, 0x0f, 0x26, 0xea, 0x92, 0x9a, 0x93, 0x5a, 0x92, 0x4a, 0x9a, 0x76,
+	0x6b, 0x2e, 0x1e, 0x98, 0xa8, 0x4f, 0x66, 0x31, 0x69, 0x76, 0x3b, 0x49, 0x9c, 0x78, 0x24, 0xc7,
+	0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c,
+	0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x12, 0x1b, 0x38, 0x4d, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff,
+	0xff, 0x44, 0xd9, 0x67, 0x69, 0x25, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -680,109 +506,6 @@ func encodeVarintKeystore(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func NewPopulatedKeystoreRequest(r randyKeystore, easy bool) *KeystoreRequest {
-	this := &KeystoreRequest{}
-	this.Name = string(randStringKeystore(r))
-	v1 := r.Intn(100)
-	this.PrivateKey = make([]byte, v1)
-	for i := 0; i < v1; i++ {
-		this.PrivateKey[i] = byte(r.Intn(256))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-func NewPopulatedKeystoreResponse(r randyKeystore, easy bool) *KeystoreResponse {
-	this := &KeystoreResponse{}
-	this.Status = string(randStringKeystore(r))
-	v2 := r.Intn(100)
-	this.PrivateKey = make([]byte, v2)
-	for i := 0; i < v2; i++ {
-		this.PrivateKey[i] = byte(r.Intn(256))
-	}
-	v3 := r.Intn(10)
-	this.KeyNames = make([]string, v3)
-	for i := 0; i < v3; i++ {
-		this.KeyNames[i] = string(randStringKeystore(r))
-	}
-	if !easy && r.Intn(10) != 0 {
-	}
-	return this
-}
-
-type randyKeystore interface {
-	Float32() float32
-	Float64() float64
-	Int63() int64
-	Int31() int32
-	Uint32() uint32
-	Intn(n int) int
-}
-
-func randUTF8RuneKeystore(r randyKeystore) rune {
-	ru := r.Intn(62)
-	if ru < 10 {
-		return rune(ru + 48)
-	} else if ru < 36 {
-		return rune(ru + 55)
-	}
-	return rune(ru + 61)
-}
-func randStringKeystore(r randyKeystore) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
-		tmps[i] = randUTF8RuneKeystore(r)
-	}
-	return string(tmps)
-}
-func randUnrecognizedKeystore(r randyKeystore, maxFieldNumber int) (dAtA []byte) {
-	l := r.Intn(5)
-	for i := 0; i < l; i++ {
-		wire := r.Intn(4)
-		if wire == 3 {
-			wire = 5
-		}
-		fieldNumber := maxFieldNumber + r.Intn(100)
-		dAtA = randFieldKeystore(dAtA, r, fieldNumber, wire)
-	}
-	return dAtA
-}
-func randFieldKeystore(dAtA []byte, r randyKeystore, fieldNumber int, wire int) []byte {
-	key := uint32(fieldNumber)<<3 | uint32(wire)
-	switch wire {
-	case 0:
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(key))
-		v5 := r.Int63()
-		if r.Intn(2) == 0 {
-			v5 *= -1
-		}
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(v5))
-	case 1:
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	case 2:
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(key))
-		ll := r.Intn(100)
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(ll))
-		for j := 0; j < ll; j++ {
-			dAtA = append(dAtA, byte(r.Intn(256)))
-		}
-	default:
-		dAtA = encodeVarintPopulateKeystore(dAtA, uint64(key))
-		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
-	}
-	return dAtA
-}
-func encodeVarintPopulateKeystore(dAtA []byte, v uint64) []byte {
-	for v >= 1<<7 {
-		dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))
-		v >>= 7
-	}
-	dAtA = append(dAtA, uint8(v))
-	return dAtA
-}
 func (m *KeystoreRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -828,37 +551,6 @@ func sovKeystore(x uint64) (n int) {
 }
 func sozKeystore(x uint64) (n int) {
 	return sovKeystore(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (this *KeystoreRequest) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&KeystoreRequest{`,
-		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`PrivateKey:` + fmt.Sprintf("%v", this.PrivateKey) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func (this *KeystoreResponse) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&KeystoreResponse{`,
-		`Status:` + fmt.Sprintf("%v", this.Status) + `,`,
-		`PrivateKey:` + fmt.Sprintf("%v", this.PrivateKey) + `,`,
-		`KeyNames:` + fmt.Sprintf("%v", this.KeyNames) + `,`,
-		`}`,
-	}, "")
-	return s
-}
-func valueToStringKeystore(v interface{}) string {
-	rv := reflect.ValueOf(v)
-	if rv.IsNil() {
-		return "nil"
-	}
-	pv := reflect.Indirect(rv).Interface()
-	return fmt.Sprintf("*%v", pv)
 }
 func (m *KeystoreRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)

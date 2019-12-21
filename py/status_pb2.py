@@ -15,17 +15,16 @@ _sym_db = _symbol_database.Default()
 
 
 import util_pb2 as util__pb2
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='status.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\x0cstatus.proto\x12\x02pb\x1a\nutil.proto\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"\"\n\x0fVersionResponse\x12\x0f\n\x07version\x18\x01 \x01(\t\"=\n\x0eStatusResponse\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x1d\n\x06status\x18\x02 \x01(\x0e\x32\r.pb.APISTATUS*I\n\tAPISTATUS\x12\n\n\x06ONLINE\x10\x00\x12\x0b\n\x07PURGING\x10\x01\x12\x18\n\x14\x44\x45GRADED_PERFORMANCE\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x32\x63\n\tStatusAPI\x12+\n\x07Version\x12\t.pb.Empty\x1a\x13.pb.VersionResponse\"\x00\x12)\n\x06Status\x12\t.pb.Empty\x1a\x12.pb.StatusResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
+  serialized_options=None,
+  serialized_pb=_b('\n\x0cstatus.proto\x12\x02pb\x1a\nutil.proto\"\"\n\x0fVersionResponse\x12\x0f\n\x07version\x18\x01 \x01(\t\"=\n\x0eStatusResponse\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x1d\n\x06status\x18\x02 \x01(\x0e\x32\r.pb.APISTATUS*I\n\tAPISTATUS\x12\n\n\x06ONLINE\x10\x00\x12\x0b\n\x07PURGING\x10\x01\x12\x18\n\x14\x44\x45GRADED_PERFORMANCE\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x32\x63\n\tStatusAPI\x12+\n\x07Version\x12\t.pb.Empty\x1a\x13.pb.VersionResponse\"\x00\x12)\n\x06Status\x12\t.pb.Empty\x1a\x12.pb.StatusResponse\"\x00\x62\x06proto3')
   ,
-  dependencies=[util__pb2.DESCRIPTOR,github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  dependencies=[util__pb2.DESCRIPTOR,])
 
 _APISTATUS = _descriptor.EnumDescriptor(
   name='APISTATUS',
@@ -52,8 +51,8 @@ _APISTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=178,
-  serialized_end=251,
+  serialized_start=131,
+  serialized_end=204,
 )
 _sym_db.RegisterEnumDescriptor(_APISTATUS)
 
@@ -91,8 +90,8 @@ _VERSIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=79,
-  serialized_end=113,
+  serialized_start=32,
+  serialized_end=66,
 )
 
 
@@ -129,8 +128,8 @@ _STATUSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=115,
-  serialized_end=176,
+  serialized_start=68,
+  serialized_end=129,
 )
 
 _STATUSRESPONSE.fields_by_name['status'].enum_type = _APISTATUS
@@ -154,7 +153,6 @@ StatusResponse = _reflection.GeneratedProtocolMessageType('StatusResponse', (_me
 _sym_db.RegisterMessage(StatusResponse)
 
 
-DESCRIPTOR._options = None
 
 _STATUSAPI = _descriptor.ServiceDescriptor(
   name='StatusAPI',
@@ -162,8 +160,8 @@ _STATUSAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=253,
-  serialized_end=352,
+  serialized_start=206,
+  serialized_end=305,
   methods=[
   _descriptor.MethodDescriptor(
     name='Version',

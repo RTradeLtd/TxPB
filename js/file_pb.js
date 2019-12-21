@@ -14,8 +14,6 @@ var global = Function('return this')();
 
 var util_pb = require('./util_pb.js');
 goog.object.extend(proto, util_pb);
-var github_com_gogo_protobuf_gogoproto_gogo_pb = require('./github.com/gogo/protobuf/gogoproto/gogo_pb.js');
-goog.object.extend(proto, github_com_gogo_protobuf_gogoproto_gogo_pb);
 goog.exportSymbol('proto.pb.Blob', null, global);
 goog.exportSymbol('proto.pb.DownloadRequest', null, global);
 goog.exportSymbol('proto.pb.DownloadResponse', null, global);

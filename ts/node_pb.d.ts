@@ -3,7 +3,6 @@
 
 import * as jspb from "google-protobuf";
 import * as util_pb from "./util_pb";
-import * as github_com_gogo_protobuf_gogoproto_gogo_pb from "./github.com/gogo/protobuf/gogoproto/gogo_pb";
 
 export class P2PRequest extends jspb.Message {
   getRequesttype(): P2PREQTYPEMap[keyof P2PREQTYPEMap];

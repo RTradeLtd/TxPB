@@ -13,17 +13,15 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='keystore.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"H\n\x10KeystoreResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t2\xbd\x02\n\x0bKeystoreAPI\x12:\n\x0bKeystoreHas\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystoreGet\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystorePut\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12=\n\x0eKeystoreDelete\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12;\n\x0cKeystoreList\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
-  ,
-  dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  serialized_options=None,
+  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"H\n\x10KeystoreResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t2\xbd\x02\n\x0bKeystoreAPI\x12:\n\x0bKeystoreHas\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystoreGet\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystorePut\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12=\n\x0eKeystoreDelete\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12;\n\x0cKeystoreList\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
+)
 
 
 
@@ -61,8 +59,8 @@ _KEYSTOREREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=69,
-  serialized_end=120,
+  serialized_start=22,
+  serialized_end=73,
 )
 
 
@@ -106,8 +104,8 @@ _KEYSTORERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=122,
-  serialized_end=194,
+  serialized_start=75,
+  serialized_end=147,
 )
 
 DESCRIPTOR.message_types_by_name['KeystoreRequest'] = _KEYSTOREREQUEST
@@ -129,7 +127,6 @@ KeystoreResponse = _reflection.GeneratedProtocolMessageType('KeystoreResponse', 
 _sym_db.RegisterMessage(KeystoreResponse)
 
 
-DESCRIPTOR._options = None
 
 _KEYSTOREAPI = _descriptor.ServiceDescriptor(
   name='KeystoreAPI',
@@ -137,8 +134,8 @@ _KEYSTOREAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=197,
-  serialized_end=514,
+  serialized_start=150,
+  serialized_end=467,
   methods=[
   _descriptor.MethodDescriptor(
     name='KeystoreHas',
