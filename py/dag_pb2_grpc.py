@@ -5,9 +5,7 @@ import dag_pb2 as dag__pb2
 
 
 class DagAPIStub(object):
-  """provides protocol buffer definitions for interactin with IPLD objects
-
-  DagAPI provides a gRPC API for manipulating IPLD objects
+  """DagAPI provides a gRPC API for manipulating IPLD objects
   """
 
   def __init__(self, channel):
@@ -44,9 +42,7 @@ class DagAPIStub(object):
 
 
 class DagAPIServicer(object):
-  """provides protocol buffer definitions for interactin with IPLD objects
-
-  DagAPI provides a gRPC API for manipulating IPLD objects
+  """DagAPI provides a gRPC API for manipulating IPLD objects
   """
 
   def DagPut(self, request, context):

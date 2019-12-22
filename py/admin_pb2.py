@@ -14,17 +14,15 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from github.com.gogo.protobuf.gogoproto import gogo_pb2 as github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='admin.proto',
   package='pb',
   syntax='proto3',
-  serialized_options=_b('\360\341\036\001\250\342\036\001\340\341\036\001\330\341\036\000\200\342\036\001\370\341\036\001\270\342\036\001\310\342\036\001\340\342\036\001\320\342\036\001'),
-  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\x1a-github.com/gogo/protobuf/gogoproto/gogo.proto\"a\n\x11\x42lockstoreRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\x1e\n\x07reqType\x18\x02 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x03 \x01(\x0e\x32\r.pb.BSREQOPTS\"/\n\x12\x42lockstoreResponse\x12\x19\n\x06\x62locks\x18\x01 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\".\n\x0fRefCountRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\"m\n\x10RefCountResponse\x12,\n\x04\x63ids\x18\x01 \x03(\x0b\x32\x1e.pb.RefCountResponse.CidsEntry\x1a+\n\tCidsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*5\n\tGCREQTYPE\x12\x0c\n\x08GC_START\x10\x00\x12\x0b\n\x07GC_STOP\x10\x01\x12\r\n\tGC_STATUS\x10\x02*/\n\nREFREQTYPE\x12\x11\n\rREF_GET_COUNT\x10\x00\x12\x0e\n\nREF_DELETE\x10\x01*\x1b\n\nREFREQOPTS\x12\r\n\tREF_FORCE\x10\x00\x32\xbb\x01\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x12\x37\n\x08RefCount\x12\x13.pb.RefCountRequest\x1a\x14.pb.RefCountResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x42(\xf0\xe1\x1e\x01\xa8\xe2\x1e\x01\xe0\xe1\x1e\x01\xd8\xe1\x1e\x00\x80\xe2\x1e\x01\xf8\xe1\x1e\x01\xb8\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\x62\x06proto3')
-  ,
-  dependencies=[github_dot_com_dot_gogo_dot_protobuf_dot_gogoproto_dot_gogo__pb2.DESCRIPTOR,])
+  serialized_options=None,
+  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\"a\n\x11\x42lockstoreRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\x1e\n\x07reqType\x18\x02 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x03 \x01(\x0e\x32\r.pb.BSREQOPTS\"/\n\x12\x42lockstoreResponse\x12\x19\n\x06\x62locks\x18\x01 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\".\n\x0fRefCountRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\"m\n\x10RefCountResponse\x12,\n\x04\x63ids\x18\x01 \x03(\x0b\x32\x1e.pb.RefCountResponse.CidsEntry\x1a+\n\tCidsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*5\n\tGCREQTYPE\x12\x0c\n\x08GC_START\x10\x00\x12\x0b\n\x07GC_STOP\x10\x01\x12\r\n\tGC_STATUS\x10\x02*/\n\nREFREQTYPE\x12\x11\n\rREF_GET_COUNT\x10\x00\x12\x0e\n\nREF_DELETE\x10\x01*\x1b\n\nREFREQOPTS\x12\r\n\tREF_FORCE\x10\x00\x32\xbb\x01\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x12\x37\n\x08RefCount\x12\x13.pb.RefCountRequest\x1a\x14.pb.RefCountResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x62\x06proto3')
+)
 
 _BSREQTYPE = _descriptor.EnumDescriptor(
   name='BSREQTYPE',
@@ -55,8 +53,8 @@ _BSREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=493,
-  serialized_end=577,
+  serialized_start=446,
+  serialized_end=530,
 )
 _sym_db.RegisterEnumDescriptor(_BSREQTYPE)
 
@@ -78,8 +76,8 @@ _BSREQOPTS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=579,
-  serialized_end=617,
+  serialized_start=532,
+  serialized_end=570,
 )
 _sym_db.RegisterEnumDescriptor(_BSREQOPTS)
 
@@ -105,8 +103,8 @@ _GCREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=619,
-  serialized_end=672,
+  serialized_start=572,
+  serialized_end=625,
 )
 _sym_db.RegisterEnumDescriptor(_GCREQTYPE)
 
@@ -128,8 +126,8 @@ _REFREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=674,
-  serialized_end=721,
+  serialized_start=627,
+  serialized_end=674,
 )
 _sym_db.RegisterEnumDescriptor(_REFREQTYPE)
 
@@ -147,8 +145,8 @@ _REFREQOPTS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=723,
-  serialized_end=750,
+  serialized_start=676,
+  serialized_end=703,
 )
 _sym_db.RegisterEnumDescriptor(_REFREQOPTS)
 
@@ -209,8 +207,8 @@ _BLOCKSTOREREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=66,
-  serialized_end=163,
+  serialized_start=19,
+  serialized_end=116,
 )
 
 
@@ -240,8 +238,8 @@ _BLOCKSTORERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=165,
-  serialized_end=212,
+  serialized_start=118,
+  serialized_end=165,
 )
 
 
@@ -278,8 +276,8 @@ _BLOCK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=214,
-  serialized_end=248,
+  serialized_start=167,
+  serialized_end=201,
 )
 
 
@@ -309,8 +307,8 @@ _MANAGEGCREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=250,
-  serialized_end=296,
+  serialized_start=203,
+  serialized_end=249,
 )
 
 
@@ -340,8 +338,8 @@ _MANAGEGCRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=298,
-  serialized_end=332,
+  serialized_start=251,
+  serialized_end=285,
 )
 
 
@@ -378,8 +376,8 @@ _REFCOUNTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=334,
-  serialized_end=380,
+  serialized_start=287,
+  serialized_end=333,
 )
 
 
@@ -416,8 +414,8 @@ _REFCOUNTRESPONSE_CIDSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=448,
-  serialized_end=491,
+  serialized_start=401,
+  serialized_end=444,
 )
 
 _REFCOUNTRESPONSE = _descriptor.Descriptor(
@@ -446,8 +444,8 @@ _REFCOUNTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=382,
-  serialized_end=491,
+  serialized_start=335,
+  serialized_end=444,
 )
 
 _BLOCKSTOREREQUEST.fields_by_name['reqType'].enum_type = _BSREQTYPE
@@ -528,7 +526,6 @@ _sym_db.RegisterMessage(RefCountResponse)
 _sym_db.RegisterMessage(RefCountResponse.CidsEntry)
 
 
-DESCRIPTOR._options = None
 _REFCOUNTRESPONSE_CIDSENTRY._options = None
 
 _ADMINAPI = _descriptor.ServiceDescriptor(
@@ -537,8 +534,8 @@ _ADMINAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=753,
-  serialized_end=940,
+  serialized_start=706,
+  serialized_end=893,
   methods=[
   _descriptor.MethodDescriptor(
     name='ManageGC',
