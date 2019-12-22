@@ -38,6 +38,9 @@ install:
 	go get -u github.com/gogo/protobuf/gogoproto
 	go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 	npm install -g ts-protoc-gen
+	npm install -g grpc
+	npm install -g @grpc/proto-loader
+	npm install -g grpc-tools
 	python3 -m pip install grpcio-tools
 	bash .script/protoc-js.sh
 	bash .script/protoc-java.sh
@@ -60,18 +63,23 @@ gen-dag:
 		pb/dag.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (dag)
+	# generate typescript bindings (dag)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		pb/dag.proto
-
+	# generate javascript bindings (dag)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
+		pb/dag.proto
 	# generate java bindings (dag)
 	protoc \
 		-I=pb \
@@ -97,16 +105,22 @@ gen-file:
 		pb/file.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js  and typescript bindings (file)
+	# generate typescript bindings (file)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/file.proto
+	# generate javascript bindings (file)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/file.proto
 	# generate java bindings (file)
 	protoc \
@@ -132,16 +146,22 @@ gen-util:
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
 		pb/util.proto \
 		--python_out=py
-	# generate js and typescript bindings (util)
+	# generate typescript bindings (util)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/util.proto
+	# generate javascript bindings (util)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/util.proto
 	# generate java bindings (util)
 	protoc \
@@ -168,16 +188,22 @@ gen-node:
 		pb/node.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (node)
+	# generate typescript bindings (node)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/node.proto
+	# generate javascript bindings (dag)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/node.proto
 	# generate java bindings (node)
 	protoc \
@@ -204,16 +230,22 @@ gen-status:
 		pb/status.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (status)
+	# generate typescript bindings (status)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/status.proto
+	# generate javascript bindings (dag)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/status.proto
 	# generate java bindings (status)
 	protoc \
@@ -240,16 +272,22 @@ gen-pubsub:
 		pb/pubsub.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (pubsub)
+	# generate typescript bindings (pubsub)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/pubsub.proto
+	# generate javascript bindings (pubsub)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/pubsub.proto
 	# generate java bindings (pubsub)
 	protoc \
@@ -276,16 +314,22 @@ gen-admin:
 		pb/admin.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (admin)
+	# generate typescript bindings (admin)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/admin.proto
+	# generate javascript bindings (dag)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/admin.proto
 	# generate java bindings (admin)
 	protoc \
@@ -312,16 +356,21 @@ gen-namesys:
 		pb/namesys.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and typescript bindings (namesys)
+	# generate typescript bindings (namesys)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
+		pb/namesys.proto
+	# generate javascript bindings (namesys)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
 		pb/namesys.proto
 	# generate java bindings (namesys)
 	protoc \
@@ -348,17 +397,23 @@ gen-keystore:
 		pb/keystore.proto \
 		--python_out=py \
 		--grpc_python_out=py
-	# generate js and tyepscript bindings (keystore)
+	# generate tyepscript bindings (keystore)
 	protoc \
 		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 		-I=pb \
 		-I=${GOPATH}/src \
 		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
-		--js_out=import_style=commonjs,binary:js \
 		--ts_out=service=grpc-web:ts \
-		--plugin=protoc-gen-grpc-web=build/protoc-gen-grpc-web \
-		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:js \
 		keystore.proto
+	# generate javascript bindings (keystore)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		-I=${GOPATH}/src/github.com/gogo/protobuf/protobuf \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
+		pb/keystore.proto
 	# generate java bindings (keystore)
 	protoc \
 		-I=pb \
