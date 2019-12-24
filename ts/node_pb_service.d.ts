@@ -14,48 +14,21 @@ type NodeAPIGetPeers = {
   readonly responseType: typeof node_pb.GetPeersResponse;
 };
 
-type NodeAPIConnect = {
+type NodeAPIConnectionManagement = {
   readonly methodName: string;
   readonly service: typeof NodeAPI;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof node_pb.ConnectRequest;
-  readonly responseType: typeof util_pb.Empty;
+  readonly requestType: typeof node_pb.ConnectionManagementRequest;
+  readonly responseType: typeof node_pb.ConnectionManagementResponse;
 };
 
-type NodeAPIDisconnect = {
+type NodeAPIExtras = {
   readonly methodName: string;
   readonly service: typeof NodeAPI;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof node_pb.DisconnectRequest;
-  readonly responseType: typeof node_pb.DisconnectResponse;
-};
-
-type NodeAPIIsConnected = {
-  readonly methodName: string;
-  readonly service: typeof NodeAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof node_pb.IsConnectedRequest;
-  readonly responseType: typeof node_pb.IsConnectedResponse;
-};
-
-type NodeAPIEnableExtras = {
-  readonly methodName: string;
-  readonly service: typeof NodeAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof node_pb.EnableExtrasRequest;
-  readonly responseType: typeof util_pb.Empty;
-};
-
-type NodeAPIDisableExtras = {
-  readonly methodName: string;
-  readonly service: typeof NodeAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof node_pb.DisableExtrasRequest;
+  readonly requestType: typeof node_pb.ExtrasRequest;
   readonly responseType: typeof util_pb.Empty;
 };
 
@@ -71,11 +44,8 @@ type NodeAPIP2P = {
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly GetPeers: NodeAPIGetPeers;
-  static readonly Connect: NodeAPIConnect;
-  static readonly Disconnect: NodeAPIDisconnect;
-  static readonly IsConnected: NodeAPIIsConnected;
-  static readonly EnableExtras: NodeAPIEnableExtras;
-  static readonly DisableExtras: NodeAPIDisableExtras;
+  static readonly ConnectionManagement: NodeAPIConnectionManagement;
+  static readonly Extras: NodeAPIExtras;
   static readonly P2P: NodeAPIP2P;
 }
 
@@ -120,49 +90,22 @@ export class NodeAPIClient {
     requestMessage: util_pb.Empty,
     callback: (error: ServiceError|null, responseMessage: node_pb.GetPeersResponse|null) => void
   ): UnaryResponse;
-  connect(
-    requestMessage: node_pb.ConnectRequest,
+  connectionManagement(
+    requestMessage: node_pb.ConnectionManagementRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: node_pb.ConnectionManagementResponse|null) => void
+  ): UnaryResponse;
+  connectionManagement(
+    requestMessage: node_pb.ConnectionManagementRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.ConnectionManagementResponse|null) => void
+  ): UnaryResponse;
+  extras(
+    requestMessage: node_pb.ExtrasRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
   ): UnaryResponse;
-  connect(
-    requestMessage: node_pb.ConnectRequest,
-    callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
-  ): UnaryResponse;
-  disconnect(
-    requestMessage: node_pb.DisconnectRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: node_pb.DisconnectResponse|null) => void
-  ): UnaryResponse;
-  disconnect(
-    requestMessage: node_pb.DisconnectRequest,
-    callback: (error: ServiceError|null, responseMessage: node_pb.DisconnectResponse|null) => void
-  ): UnaryResponse;
-  isConnected(
-    requestMessage: node_pb.IsConnectedRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: node_pb.IsConnectedResponse|null) => void
-  ): UnaryResponse;
-  isConnected(
-    requestMessage: node_pb.IsConnectedRequest,
-    callback: (error: ServiceError|null, responseMessage: node_pb.IsConnectedResponse|null) => void
-  ): UnaryResponse;
-  enableExtras(
-    requestMessage: node_pb.EnableExtrasRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
-  ): UnaryResponse;
-  enableExtras(
-    requestMessage: node_pb.EnableExtrasRequest,
-    callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
-  ): UnaryResponse;
-  disableExtras(
-    requestMessage: node_pb.DisableExtrasRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
-  ): UnaryResponse;
-  disableExtras(
-    requestMessage: node_pb.DisableExtrasRequest,
+  extras(
+    requestMessage: node_pb.ExtrasRequest,
     callback: (error: ServiceError|null, responseMessage: util_pb.Empty|null) => void
   ): UnaryResponse;
   p2P(

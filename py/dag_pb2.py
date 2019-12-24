@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\tdag.proto\x12\x02pb\"\x80\x02\n\nDagRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x03 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x04 \x01(\t\x12\x10\n\x08hashFunc\x18\x05 \x01(\t\x12\x12\n\ncidVersion\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12(\n\x05links\x18\x08 \x03(\x0b\x32\x19.pb.DagRequest.LinksEntry\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"p\n\x0b\x44\x61gResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0e\n\x06hashes\x18\x02 \x03(\t\x12\x0f\n\x07rawData\x18\x03 \x01(\x0c\x12\x1b\n\x05links\x18\x04 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c*J\n\nDAGREQTYPE\x12\x07\n\x03PUT\x10\x00\x12\x07\n\x03GET\x10\x01\x12\x0c\n\x08NEW_LINK\x10\x02\x12\r\n\tADD_LINKS\x10\x03\x12\r\n\tGET_LINKS\x10\x04\x32\x64\n\x06\x44\x61gAPI\x12(\n\x03\x44\x61g\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse\"\x00\x12\x30\n\tDagStream\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\tdag.proto\x12\x02pb\"\x80\x02\n\nDagRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x03 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x04 \x01(\t\x12\x10\n\x08hashFunc\x18\x05 \x01(\t\x12\x12\n\ncidVersion\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12(\n\x05links\x18\x08 \x03(\x0b\x32\x19.pb.DagRequest.LinksEntry\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"p\n\x0b\x44\x61gResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0e\n\x06hashes\x18\x02 \x03(\t\x12\x0f\n\x07rawData\x18\x03 \x01(\x0c\x12\x1b\n\x05links\x18\x04 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c*^\n\nDAGREQTYPE\x12\x0b\n\x07\x44\x41G_PUT\x10\x00\x12\x0b\n\x07\x44\x41G_GET\x10\x01\x12\x10\n\x0c\x44\x41G_NEW_LINK\x10\x02\x12\x11\n\rDAG_ADD_LINKS\x10\x03\x12\x11\n\rDAG_GET_LINKS\x10\x04\x32\x64\n\x06\x44\x61gAPI\x12(\n\x03\x44\x61g\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse\"\x00\x12\x30\n\tDagStream\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse(\x01\x30\x01\x62\x06proto3')
 )
 
 _DAGREQTYPE = _descriptor.EnumDescriptor(
@@ -31,39 +31,39 @@ _DAGREQTYPE = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='PUT', index=0, number=0,
+      name='DAG_PUT', index=0, number=0,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='GET', index=1, number=1,
+      name='DAG_GET', index=1, number=1,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='NEW_LINK', index=2, number=2,
+      name='DAG_NEW_LINK', index=2, number=2,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ADD_LINKS', index=3, number=3,
+      name='DAG_ADD_LINKS', index=3, number=3,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='GET_LINKS', index=4, number=4,
+      name='DAG_GET_LINKS', index=4, number=4,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=499,
-  serialized_end=573,
+  serialized_end=593,
 )
 _sym_db.RegisterEnumDescriptor(_DAGREQTYPE)
 
 DAGREQTYPE = enum_type_wrapper.EnumTypeWrapper(_DAGREQTYPE)
-PUT = 0
-GET = 1
-NEW_LINK = 2
-ADD_LINKS = 3
-GET_LINKS = 4
+DAG_PUT = 0
+DAG_GET = 1
+DAG_NEW_LINK = 2
+DAG_ADD_LINKS = 3
+DAG_GET_LINKS = 4
 
 
 
@@ -376,8 +376,8 @@ _DAGAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=575,
-  serialized_end=675,
+  serialized_start=595,
+  serialized_end=695,
   methods=[
   _descriptor.MethodDescriptor(
     name='Dag',

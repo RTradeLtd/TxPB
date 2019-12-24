@@ -1193,11 +1193,11 @@ proto.pb.IPLDNode.prototype.setData = function(value) {
  * @enum {number}
  */
 proto.pb.DAGREQTYPE = {
-  PUT: 0,
-  GET: 1,
-  NEW_LINK: 2,
-  ADD_LINKS: 3,
-  GET_LINKS: 4
+  DAG_PUT: 0,
+  DAG_GET: 1,
+  DAG_NEW_LINK: 2,
+  DAG_ADD_LINKS: 3,
+  DAG_GET_LINKS: 4
 };
 
 goog.object.extend(exports, proto.pb);

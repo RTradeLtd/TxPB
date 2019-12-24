@@ -20,48 +20,21 @@ NodeAPI.GetPeers = {
   responseType: node_pb.GetPeersResponse
 };
 
-NodeAPI.Connect = {
-  methodName: "Connect",
+NodeAPI.ConnectionManagement = {
+  methodName: "ConnectionManagement",
   service: NodeAPI,
   requestStream: false,
   responseStream: false,
-  requestType: node_pb.ConnectRequest,
-  responseType: util_pb.Empty
+  requestType: node_pb.ConnectionManagementRequest,
+  responseType: node_pb.ConnectionManagementResponse
 };
 
-NodeAPI.Disconnect = {
-  methodName: "Disconnect",
+NodeAPI.Extras = {
+  methodName: "Extras",
   service: NodeAPI,
   requestStream: false,
   responseStream: false,
-  requestType: node_pb.DisconnectRequest,
-  responseType: node_pb.DisconnectResponse
-};
-
-NodeAPI.IsConnected = {
-  methodName: "IsConnected",
-  service: NodeAPI,
-  requestStream: false,
-  responseStream: false,
-  requestType: node_pb.IsConnectedRequest,
-  responseType: node_pb.IsConnectedResponse
-};
-
-NodeAPI.EnableExtras = {
-  methodName: "EnableExtras",
-  service: NodeAPI,
-  requestStream: false,
-  responseStream: false,
-  requestType: node_pb.EnableExtrasRequest,
-  responseType: util_pb.Empty
-};
-
-NodeAPI.DisableExtras = {
-  methodName: "DisableExtras",
-  service: NodeAPI,
-  requestStream: false,
-  responseStream: false,
-  requestType: node_pb.DisableExtrasRequest,
+  requestType: node_pb.ExtrasRequest,
   responseType: util_pb.Empty
 };
 
@@ -112,11 +85,11 @@ NodeAPIClient.prototype.getPeers = function getPeers(requestMessage, metadata, c
   };
 };
 
-NodeAPIClient.prototype.connect = function connect(requestMessage, metadata, callback) {
+NodeAPIClient.prototype.connectionManagement = function connectionManagement(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(NodeAPI.Connect, {
+  var client = grpc.unary(NodeAPI.ConnectionManagement, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -143,104 +116,11 @@ NodeAPIClient.prototype.connect = function connect(requestMessage, metadata, cal
   };
 };
 
-NodeAPIClient.prototype.disconnect = function disconnect(requestMessage, metadata, callback) {
+NodeAPIClient.prototype.extras = function extras(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(NodeAPI.Disconnect, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-NodeAPIClient.prototype.isConnected = function isConnected(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(NodeAPI.IsConnected, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-NodeAPIClient.prototype.enableExtras = function enableExtras(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(NodeAPI.EnableExtras, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
-NodeAPIClient.prototype.disableExtras = function disableExtras(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(NodeAPI.DisableExtras, {
+  var client = grpc.unary(NodeAPI.Extras, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

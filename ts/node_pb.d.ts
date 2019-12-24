@@ -146,107 +146,57 @@ export namespace GetPeersResponse {
   }
 }
 
-export class ConnectRequest extends jspb.Message {
+export class ConnectionManagementRequest extends jspb.Message {
+  getRequesttype(): CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap];
+  setRequesttype(value: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap]): void;
+
   clearMultiaddrsList(): void;
   getMultiaddrsList(): Array<string>;
   setMultiaddrsList(value: Array<string>): void;
   addMultiaddrs(value: string, index?: number): string;
 
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ConnectRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: ConnectRequest): ConnectRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: ConnectRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ConnectRequest;
-  static deserializeBinaryFromReader(message: ConnectRequest, reader: jspb.BinaryReader): ConnectRequest;
-}
-
-export namespace ConnectRequest {
-  export type AsObject = {
-    multiaddrsList: Array<string>,
-  }
-}
-
-export class IsConnectedRequest extends jspb.Message {
   clearPeeridsList(): void;
   getPeeridsList(): Array<string>;
   setPeeridsList(value: Array<string>): void;
   addPeerids(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): IsConnectedRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: IsConnectedRequest): IsConnectedRequest.AsObject;
+  toObject(includeInstance?: boolean): ConnectionManagementRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ConnectionManagementRequest): ConnectionManagementRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: IsConnectedRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): IsConnectedRequest;
-  static deserializeBinaryFromReader(message: IsConnectedRequest, reader: jspb.BinaryReader): IsConnectedRequest;
+  static serializeBinaryToWriter(message: ConnectionManagementRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConnectionManagementRequest;
+  static deserializeBinaryFromReader(message: ConnectionManagementRequest, reader: jspb.BinaryReader): ConnectionManagementRequest;
 }
 
-export namespace IsConnectedRequest {
+export namespace ConnectionManagementRequest {
   export type AsObject = {
+    requesttype: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap],
+    multiaddrsList: Array<string>,
     peeridsList: Array<string>,
   }
 }
 
-export class IsConnectedResponse extends jspb.Message {
+export class ConnectionManagementResponse extends jspb.Message {
   getConnectedMap(): jspb.Map<string, boolean>;
   clearConnectedMap(): void;
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): IsConnectedResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: IsConnectedResponse): IsConnectedResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: IsConnectedResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): IsConnectedResponse;
-  static deserializeBinaryFromReader(message: IsConnectedResponse, reader: jspb.BinaryReader): IsConnectedResponse;
-}
-
-export namespace IsConnectedResponse {
-  export type AsObject = {
-    connectedMap: Array<[string, boolean]>,
-  }
-}
-
-export class DisconnectRequest extends jspb.Message {
-  clearPeeridsList(): void;
-  getPeeridsList(): Array<string>;
-  setPeeridsList(value: Array<string>): void;
-  addPeerids(value: string, index?: number): string;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DisconnectRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: DisconnectRequest): DisconnectRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DisconnectRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DisconnectRequest;
-  static deserializeBinaryFromReader(message: DisconnectRequest, reader: jspb.BinaryReader): DisconnectRequest;
-}
-
-export namespace DisconnectRequest {
-  export type AsObject = {
-    peeridsList: Array<string>,
-  }
-}
-
-export class DisconnectResponse extends jspb.Message {
-  getStatusMap(): jspb.Map<string, DisconnectResponse.StatusMessage>;
+  getStatusMap(): jspb.Map<string, ConnectionManagementResponse.StatusMessage>;
   clearStatusMap(): void;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DisconnectResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: DisconnectResponse): DisconnectResponse.AsObject;
+  toObject(includeInstance?: boolean): ConnectionManagementResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ConnectionManagementResponse): ConnectionManagementResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DisconnectResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DisconnectResponse;
-  static deserializeBinaryFromReader(message: DisconnectResponse, reader: jspb.BinaryReader): DisconnectResponse;
+  static serializeBinaryToWriter(message: ConnectionManagementResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConnectionManagementResponse;
+  static deserializeBinaryFromReader(message: ConnectionManagementResponse, reader: jspb.BinaryReader): ConnectionManagementResponse;
 }
 
-export namespace DisconnectResponse {
+export namespace ConnectionManagementResponse {
   export type AsObject = {
-    statusMap: Array<[string, DisconnectResponse.StatusMessage.AsObject]>,
+    connectedMap: Array<[string, boolean]>,
+    statusMap: Array<[string, ConnectionManagementResponse.StatusMessage.AsObject]>,
   }
 
   export class StatusMessage extends jspb.Message {
@@ -274,42 +224,26 @@ export namespace DisconnectResponse {
   }
 }
 
-export class EnableExtrasRequest extends jspb.Message {
+export class ExtrasRequest extends jspb.Message {
+  getRequesttype(): EXTRASREQTYPEMap[keyof EXTRASREQTYPEMap];
+  setRequesttype(value: EXTRASREQTYPEMap[keyof EXTRASREQTYPEMap]): void;
+
   getExtrasfeature(): EXTRASTYPEMap[keyof EXTRASTYPEMap];
   setExtrasfeature(value: EXTRASTYPEMap[keyof EXTRASTYPEMap]): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): EnableExtrasRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: EnableExtrasRequest): EnableExtrasRequest.AsObject;
+  toObject(includeInstance?: boolean): ExtrasRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ExtrasRequest): ExtrasRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: EnableExtrasRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): EnableExtrasRequest;
-  static deserializeBinaryFromReader(message: EnableExtrasRequest, reader: jspb.BinaryReader): EnableExtrasRequest;
+  static serializeBinaryToWriter(message: ExtrasRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ExtrasRequest;
+  static deserializeBinaryFromReader(message: ExtrasRequest, reader: jspb.BinaryReader): ExtrasRequest;
 }
 
-export namespace EnableExtrasRequest {
+export namespace ExtrasRequest {
   export type AsObject = {
-    extrasfeature: EXTRASTYPEMap[keyof EXTRASTYPEMap],
-  }
-}
-
-export class DisableExtrasRequest extends jspb.Message {
-  getExtrasfeature(): EXTRASTYPEMap[keyof EXTRASTYPEMap];
-  setExtrasfeature(value: EXTRASTYPEMap[keyof EXTRASTYPEMap]): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DisableExtrasRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: DisableExtrasRequest): DisableExtrasRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DisableExtrasRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DisableExtrasRequest;
-  static deserializeBinaryFromReader(message: DisableExtrasRequest, reader: jspb.BinaryReader): DisableExtrasRequest;
-}
-
-export namespace DisableExtrasRequest {
-  export type AsObject = {
+    requesttype: EXTRASREQTYPEMap[keyof EXTRASREQTYPEMap],
     extrasfeature: EXTRASTYPEMap[keyof EXTRASTYPEMap],
   }
 }
@@ -322,6 +256,21 @@ export interface P2PREQTYPEMap {
 }
 
 export const P2PREQTYPE: P2PREQTYPEMap;
+
+export interface CONNMGMTREQTYPEMap {
+  CM_CONNECT: 0;
+  CM_DISCONNECT: 1;
+  CM_STATUS: 2;
+}
+
+export const CONNMGMTREQTYPE: CONNMGMTREQTYPEMap;
+
+export interface EXTRASREQTYPEMap {
+  EX_ENABLE: 0;
+  EX_DISABLE: 1;
+}
+
+export const EXTRASREQTYPE: EXTRASREQTYPEMap;
 
 export interface EXTRASTYPEMap {
   IDENTIFY: 0;

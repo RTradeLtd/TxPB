@@ -6,16 +6,8 @@ import "util.proto";
 service NodeAPI {
     // GetPeers returns a message containing a slice of current peers in our peerstore
     rpc GetPeers(Empty) returns (GetPeersResponse) { };
-    // Connect is used to connect to remote libp2p peers
-    rpc Connect(ConnectRequest) returns (Empty) { };
-    // Disconnect is used to disconnect remote libp2p peer connections
-    rpc Disconnect(DisconnectRequest) returns (DisconnectResponse) { };
-    // IsConnected is used to check if we are connected with a given peer
-    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { };
-    // EnableExtras is used to enable a particular extras feature
-    rpc EnableExtras(EnableExtrasRequest) returns (Empty) { };
-    // DisableExtras is used to disable a particular extras feature
-    rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
+    rpc ConnectionManagement(ConnectionManagementRequest) returns (ConnectionManagementResponse) { };
+    rpc Extras(ExtrasRequest) returns (Empty) { };
     // P2P allows control of generalized p2p streams for tcp/udp based protocol.
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
     // except using libp2p as the transport layer, and and tcp/udp port.
@@ -86,34 +78,23 @@ message GetPeersResponse {
     repeated string peerIDs = 1;
 }
 
-// ConnectRequest is used to connect to libp2p peers
-message ConnectRequest {
-    // a slice of all multiaddrs we want to connect to
-    repeated string multiAddrs = 1;
+
+enum CONNMGMTREQTYPE {
+    CM_CONNECT = 0;
+    CM_DISCONNECT = 1;
+    CM_STATUS = 2;
 }
 
-// IsConnectedRequest is used check whether or not we are currently peered with these peers
-message IsConnectedRequest {
-    // a slice of the peer IDs to examine
-    repeated string peerIDs = 1;
+message ConnectionManagementRequest {
+    CONNMGMTREQTYPE requestType = 1;
+    repeated string multiAddrs = 2;
+    repeated string peerIDs = 3;
 }
 
-// IsConnectedResponse is a response to an IsConnectedRequest request
-message IsConnectedResponse {
-    // a map of the peer ID and a boolean indicating if we are connected with them
-    map<string, bool> connected = 1;
-}
-
-// DisconnectRequest is used to disconnect a connection to a libp2p peer
-message DisconnectRequest {
-    // a slice of the peer IDs to disconnect from
-    repeated string peerIDs = 1;
-}
-
-// DisconnectResponse is a response to a disconnect request
-message DisconnectResponse {
+message ConnectionManagementResponse {
+    map<string, bool> connected = 2;
     // a map of the peer id, and a custom message indicating success, or why there was a failure
-    map<string, StatusMessage> status = 1;
+    map<string, StatusMessage> status = 3;
     // StatusMessage is used to contain the status information about a particular disconnection attempt
     message StatusMessage {
         // indicate whether or not we actually disconnected
@@ -121,6 +102,11 @@ message DisconnectResponse {
         // if disconnected is false, the reason why it is false
         string reason = 2;
     }
+}
+
+enum EXTRASREQTYPE {
+    EX_ENABLE = 0;
+    EX_DISABLE = 1;
 }
 
 // EXTRASTYPE denotes a particular extras type
@@ -135,14 +121,7 @@ enum EXTRASTYPE {
     MDNS = 3;
 }
 
-// EnableExtrasRequest is used to enable a particular extras feature
-message EnableExtrasRequest {
-    // extrasFeature denotes the particular extras functionality to enable
-    EXTRASTYPE extrasFeature = 1;
-}
-
-// DisableExtrasRequest is used to disable a particular extras feature
-message DisableExtrasRequest {
-    // extrasFeature denotes the particular extras functionality to disable
-    EXTRASTYPE extrasFeature = 1;
+message ExtrasRequest {
+    EXTRASREQTYPE requestType = 1;
+    EXTRASTYPE extrasFeature = 2;
 }

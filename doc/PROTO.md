@@ -69,21 +69,19 @@
   
 
 - [node.proto](#node.proto)
-    - [ConnectRequest](#pb.ConnectRequest)
-    - [DisableExtrasRequest](#pb.DisableExtrasRequest)
-    - [DisconnectRequest](#pb.DisconnectRequest)
-    - [DisconnectResponse](#pb.DisconnectResponse)
-    - [DisconnectResponse.StatusEntry](#pb.DisconnectResponse.StatusEntry)
-    - [DisconnectResponse.StatusMessage](#pb.DisconnectResponse.StatusMessage)
-    - [EnableExtrasRequest](#pb.EnableExtrasRequest)
+    - [ConnectionManagementRequest](#pb.ConnectionManagementRequest)
+    - [ConnectionManagementResponse](#pb.ConnectionManagementResponse)
+    - [ConnectionManagementResponse.ConnectedEntry](#pb.ConnectionManagementResponse.ConnectedEntry)
+    - [ConnectionManagementResponse.StatusEntry](#pb.ConnectionManagementResponse.StatusEntry)
+    - [ConnectionManagementResponse.StatusMessage](#pb.ConnectionManagementResponse.StatusMessage)
+    - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
-    - [IsConnectedRequest](#pb.IsConnectedRequest)
-    - [IsConnectedResponse](#pb.IsConnectedResponse)
-    - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
   
+    - [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE)
+    - [EXTRASREQTYPE](#pb.EXTRASREQTYPE)
     - [EXTRASTYPE](#pb.EXTRASTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
   
@@ -448,11 +446,11 @@ An IPFS MerkleDAG Node
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PUT | 0 |  |
-| GET | 1 |  |
-| NEW_LINK | 2 |  |
-| ADD_LINKS | 3 |  |
-| GET_LINKS | 4 |  |
+| DAG_PUT | 0 |  |
+| DAG_GET | 1 |  |
+| DAG_NEW_LINK | 2 |  |
+| DAG_ADD_LINKS | 3 |  |
+| DAG_GET_LINKS | 4 |  |
 
 
  
@@ -744,85 +742,74 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectRequest"></a>
+<a name="pb.ConnectionManagementRequest"></a>
 
-### ConnectRequest
-ConnectRequest is used to connect to libp2p peers
+### ConnectionManagementRequest
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| multiAddrs | [string](#string) | repeated | a slice of all multiaddrs we want to connect to |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  |  |
+| multiAddrs | [string](#string) | repeated |  |
+| peerIDs | [string](#string) | repeated |  |
 
 
 
 
 
 
-<a name="pb.DisableExtrasRequest"></a>
+<a name="pb.ConnectionManagementResponse"></a>
 
-### DisableExtrasRequest
-DisableExtrasRequest is used to disable a particular extras feature
+### ConnectionManagementResponse
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | extrasFeature denotes the particular extras functionality to disable |
+| connected | [ConnectionManagementResponse.ConnectedEntry](#pb.ConnectionManagementResponse.ConnectedEntry) | repeated |  |
+| status | [ConnectionManagementResponse.StatusEntry](#pb.ConnectionManagementResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
 
 
 
 
 
 
-<a name="pb.DisconnectRequest"></a>
+<a name="pb.ConnectionManagementResponse.ConnectedEntry"></a>
 
-### DisconnectRequest
-DisconnectRequest is used to disconnect a connection to a libp2p peer
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| peerIDs | [string](#string) | repeated | a slice of the peer IDs to disconnect from |
-
-
-
-
-
-
-<a name="pb.DisconnectResponse"></a>
-
-### DisconnectResponse
-DisconnectResponse is a response to a disconnect request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| status | [DisconnectResponse.StatusEntry](#pb.DisconnectResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
-
-
-
-
-
-
-<a name="pb.DisconnectResponse.StatusEntry"></a>
-
-### DisconnectResponse.StatusEntry
+### ConnectionManagementResponse.ConnectedEntry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [DisconnectResponse.StatusMessage](#pb.DisconnectResponse.StatusMessage) |  |  |
+| value | [bool](#bool) |  |  |
 
 
 
 
 
 
-<a name="pb.DisconnectResponse.StatusMessage"></a>
+<a name="pb.ConnectionManagementResponse.StatusEntry"></a>
 
-### DisconnectResponse.StatusMessage
+### ConnectionManagementResponse.StatusEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [ConnectionManagementResponse.StatusMessage](#pb.ConnectionManagementResponse.StatusMessage) |  |  |
+
+
+
+
+
+
+<a name="pb.ConnectionManagementResponse.StatusMessage"></a>
+
+### ConnectionManagementResponse.StatusMessage
 StatusMessage is used to contain the status information about a particular disconnection attempt
 
 
@@ -836,15 +823,16 @@ StatusMessage is used to contain the status information about a particular disco
 
 
 
-<a name="pb.EnableExtrasRequest"></a>
+<a name="pb.ExtrasRequest"></a>
 
-### EnableExtrasRequest
-EnableExtrasRequest is used to enable a particular extras feature
+### ExtrasRequest
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | extrasFeature denotes the particular extras functionality to enable |
+| requestType | [EXTRASREQTYPE](#pb.EXTRASREQTYPE) |  |  |
+| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  |  |
 
 
 
@@ -860,52 +848,6 @@ GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | peerIDs | [string](#string) | repeated | a slice of peer IDs |
-
-
-
-
-
-
-<a name="pb.IsConnectedRequest"></a>
-
-### IsConnectedRequest
-IsConnectedRequest is used check whether or not we are currently peered with these peers
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| peerIDs | [string](#string) | repeated | a slice of the peer IDs to examine |
-
-
-
-
-
-
-<a name="pb.IsConnectedResponse"></a>
-
-### IsConnectedResponse
-IsConnectedResponse is a response to an IsConnectedRequest request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| connected | [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry) | repeated | a map of the peer ID and a boolean indicating if we are connected with them |
-
-
-
-
-
-
-<a name="pb.IsConnectedResponse.ConnectedEntry"></a>
-
-### IsConnectedResponse.ConnectedEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [bool](#bool) |  |  |
 
 
 
@@ -973,6 +915,31 @@ P2PResponse is a response message sent in response to a P2PRequest message
  
 
 
+<a name="pb.CONNMGMTREQTYPE"></a>
+
+### CONNMGMTREQTYPE
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CM_CONNECT | 0 |  |
+| CM_DISCONNECT | 1 |  |
+| CM_STATUS | 2 |  |
+
+
+
+<a name="pb.EXTRASREQTYPE"></a>
+
+### EXTRASREQTYPE
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EX_ENABLE | 0 |  |
+| EX_DISABLE | 1 |  |
+
+
+
 <a name="pb.EXTRASTYPE"></a>
 
 ### EXTRASTYPE
@@ -1013,11 +980,8 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetPeers | [Empty](#pb.Empty) | [GetPeersResponse](#pb.GetPeersResponse) | GetPeers returns a message containing a slice of current peers in our peerstore |
-| Connect | [ConnectRequest](#pb.ConnectRequest) | [Empty](#pb.Empty) | Connect is used to connect to remote libp2p peers |
-| Disconnect | [DisconnectRequest](#pb.DisconnectRequest) | [DisconnectResponse](#pb.DisconnectResponse) | Disconnect is used to disconnect remote libp2p peer connections |
-| IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
-| EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
-| DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+| ConnectionManagement | [ConnectionManagementRequest](#pb.ConnectionManagementRequest) | [ConnectionManagementResponse](#pb.ConnectionManagementResponse) |  |
+| Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) |  |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 
  
