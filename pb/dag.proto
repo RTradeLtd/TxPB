@@ -1,91 +1,45 @@
 syntax = "proto3";
 package pb;
 
-// DagAPI provides a gRPC API for manipulating IPLD objects
+
 service DagAPI {
-    // DagPut is used to store arbitrary bytes as a custom IPLD object
-    rpc DagPut(DagPutRequest) returns (DagPutResponse) { };
-    // DagGet is used to request the raw ipld node data for an IPLD object
-    rpc DagGet(DagGetRequest) returns (DagGetResponse) { };
-    // NewIPLDNode is used to create a new IPFS MerkleDAG node.
-    // This is the same type as in github.com/ipfs/go-ipld-format.Node
-    rpc NewIPLDNode(NewIPLDNodeRequest) returns (DagPutResponse) { };
-    // AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
-    rpc AddLinksToNode(AddLinksRequest) returns (DagPutResponse) { };
-    // GetLinks is used to request all the links for a given object
-    rpc GetLinks(GetLinksRequest) returns (GetLinksResponse) { };
+    // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+    rpc Dag(DagRequest) returns (DagResponse) { };
+    // DagStream is like Dag but with bidirectional streams
+    rpc DagStream(stream DagRequest) returns (stream DagResponse);
 }
 
-// DagPutResponse contains the hashes of ipld nodes generated
-// by the dag put request
-message DagPutResponse {
-    // an array of hashes (cids) of the root ipld nod
-    repeated string hashes = 1;
+enum DAGREQTYPE {
+    PUT = 0;
+    GET = 1;
+    NEW_LINK = 2;
+    ADD_LINKS = 3;
+    GET_LINKS = 4;
 }
-// DagPut allows us to store arbitrary bytes as a custom IPLD object
-message DagPutRequest {
+
+message DagRequest {
+    DAGREQTYPE requestType = 1;
     // data that we will be storing
-    bytes data = 1;
-    // the object encoding type (raw, cbor, protobuf, etc...)
-    string objectEncoding = 2;
-    // the serialization format (raw, cbor, protobuf, etc...)
-    string serializationFormat = 3;
-    // the hash function to to use (sha2-256, sha3-512, etc...)
-    string hashFunc = 4;
-    // the cid version to use (0, 1)
-    int64 cidVersion = 5;
-}
-
-// DagGetRequest is used to retrieve the raw data
-// of an ipld dag node for the specified hash. This can
-// then be used by libraries like go-ipld-format to
-// decoded into a dag object on the client side using 
-// merkledag.DecodeProtobuf and passing in the returned bytes
-message DagGetRequest {
-    // the hash of the ipld node to get
-    string hash = 1;
-}
-
-// DagGetResponse is a response to DagGetRequest
-// that returns the raw data of the matching ipld node
-message DagGetResponse {
-    // the raw data of the ipld node
-    bytes rawData = 1;
-}
-
-// NewIPLDNodeRequest is used to create a new ipld node
-message NewIPLDNodeRequest {
-    // links are optional hashes to include as links of the node
-    // the name is used as the key, while the value of the key is used as the hash
-    map<string, string> links = 1;
-    // data to store as part of the data field
     bytes data = 2;
+    // the object encoding type (raw, cbor, protobuf, etc...)
+    string objectEncoding = 3;
+    // the serialization format (raw, cbor, protobuf, etc...)
+    string serializationFormat = 4;
     // the hash function to to use (sha2-256, sha3-512, etc...)
-    string hashFunc = 3;
-}
-
-// AddLinksRequest is used to add links to an existing ipld node
-message AddLinksRequest {
+    string hashFunc = 5;
+    // the cid version to use (0, 1)
+    int64 cidVersion = 6;
+    string hash = 7;
     // links are optional hashes to include as links of the node
     // the name is used as the key, while the value of the key is used as the hash
-    map<string, string> links = 1;
-    // the hash of the node we want to add lin skto
-    string hash = 2;
-    // the hash function to to use (sha2-256, sha3-512, etc...)
-    string hashFunc = 3;
+    map<string, string> links = 8;
 }
 
-// GetLinksRequest is used to return all the links associated with a particular hash
-message GetLinksRequest {
-    // the hash to request links for
-    string hash = 1;
-}
-
-// GetLinksResponse returns all the links for the 
-// associated hash that was requested
-message GetLinksResponse {
-    // each of the links referenced by the requested hash
-    repeated IPLDLink links = 1;
+message DagResponse {
+    DAGREQTYPE requestType = 1;
+    repeated string hashes = 2;
+    bytes rawData = 3;
+    repeated IPLDLink links = 4;
 }
 
 // An IPFS MerkleDAG Link

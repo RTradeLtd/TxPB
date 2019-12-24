@@ -27,79 +27,70 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// DagPutResponse contains the hashes of ipld nodes generated
-// by the dag put request
-type DagPutResponse struct {
-	// an array of hashes (cids) of the root ipld nod
-	Hashes []string `protobuf:"bytes,1,rep,name=hashes,proto3" json:"hashes,omitempty"`
+type DAGREQTYPE int32
+
+const (
+	DAGREQTYPE_PUT       DAGREQTYPE = 0
+	DAGREQTYPE_GET       DAGREQTYPE = 1
+	DAGREQTYPE_NEW_LINK  DAGREQTYPE = 2
+	DAGREQTYPE_ADD_LINKS DAGREQTYPE = 3
+	DAGREQTYPE_GET_LINKS DAGREQTYPE = 4
+)
+
+var DAGREQTYPE_name = map[int32]string{
+	0: "PUT",
+	1: "GET",
+	2: "NEW_LINK",
+	3: "ADD_LINKS",
+	4: "GET_LINKS",
 }
 
-func (m *DagPutResponse) Reset()         { *m = DagPutResponse{} }
-func (m *DagPutResponse) String() string { return proto.CompactTextString(m) }
-func (*DagPutResponse) ProtoMessage()    {}
-func (*DagPutResponse) Descriptor() ([]byte, []int) {
+var DAGREQTYPE_value = map[string]int32{
+	"PUT":       0,
+	"GET":       1,
+	"NEW_LINK":  2,
+	"ADD_LINKS": 3,
+	"GET_LINKS": 4,
+}
+
+func (x DAGREQTYPE) String() string {
+	return proto.EnumName(DAGREQTYPE_name, int32(x))
+}
+
+func (DAGREQTYPE) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_228b96b95413374c, []int{0}
 }
-func (m *DagPutResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DagPutResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DagPutResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DagPutResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagPutResponse.Merge(m, src)
-}
-func (m *DagPutResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *DagPutResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagPutResponse.DiscardUnknown(m)
-}
 
-var xxx_messageInfo_DagPutResponse proto.InternalMessageInfo
-
-func (m *DagPutResponse) GetHashes() []string {
-	if m != nil {
-		return m.Hashes
-	}
-	return nil
-}
-
-// DagPut allows us to store arbitrary bytes as a custom IPLD object
-type DagPutRequest struct {
+type DagRequest struct {
+	RequestType DAGREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.DAGREQTYPE" json:"requestType,omitempty"`
 	// data that we will be storing
-	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	// the object encoding type (raw, cbor, protobuf, etc...)
-	ObjectEncoding string `protobuf:"bytes,2,opt,name=objectEncoding,proto3" json:"objectEncoding,omitempty"`
+	ObjectEncoding string `protobuf:"bytes,3,opt,name=objectEncoding,proto3" json:"objectEncoding,omitempty"`
 	// the serialization format (raw, cbor, protobuf, etc...)
-	SerializationFormat string `protobuf:"bytes,3,opt,name=serializationFormat,proto3" json:"serializationFormat,omitempty"`
+	SerializationFormat string `protobuf:"bytes,4,opt,name=serializationFormat,proto3" json:"serializationFormat,omitempty"`
 	// the hash function to to use (sha2-256, sha3-512, etc...)
-	HashFunc string `protobuf:"bytes,4,opt,name=hashFunc,proto3" json:"hashFunc,omitempty"`
+	HashFunc string `protobuf:"bytes,5,opt,name=hashFunc,proto3" json:"hashFunc,omitempty"`
 	// the cid version to use (0, 1)
-	CidVersion int64 `protobuf:"varint,5,opt,name=cidVersion,proto3" json:"cidVersion,omitempty"`
+	CidVersion int64  `protobuf:"varint,6,opt,name=cidVersion,proto3" json:"cidVersion,omitempty"`
+	Hash       string `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
+	// links are optional hashes to include as links of the node
+	// the name is used as the key, while the value of the key is used as the hash
+	Links map[string]string `protobuf:"bytes,8,rep,name=links,proto3" json:"links,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
-func (m *DagPutRequest) Reset()         { *m = DagPutRequest{} }
-func (m *DagPutRequest) String() string { return proto.CompactTextString(m) }
-func (*DagPutRequest) ProtoMessage()    {}
-func (*DagPutRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{1}
+func (m *DagRequest) Reset()         { *m = DagRequest{} }
+func (m *DagRequest) String() string { return proto.CompactTextString(m) }
+func (*DagRequest) ProtoMessage()    {}
+func (*DagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_228b96b95413374c, []int{0}
 }
-func (m *DagPutRequest) XXX_Unmarshal(b []byte) error {
+func (m *DagRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *DagPutRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_DagPutRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DagRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -109,122 +100,93 @@ func (m *DagPutRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (m *DagPutRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagPutRequest.Merge(m, src)
+func (m *DagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DagRequest.Merge(m, src)
 }
-func (m *DagPutRequest) XXX_Size() int {
+func (m *DagRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *DagPutRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagPutRequest.DiscardUnknown(m)
+func (m *DagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DagRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DagPutRequest proto.InternalMessageInfo
+var xxx_messageInfo_DagRequest proto.InternalMessageInfo
 
-func (m *DagPutRequest) GetData() []byte {
+func (m *DagRequest) GetRequestType() DAGREQTYPE {
+	if m != nil {
+		return m.RequestType
+	}
+	return DAGREQTYPE_PUT
+}
+
+func (m *DagRequest) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-func (m *DagPutRequest) GetObjectEncoding() string {
+func (m *DagRequest) GetObjectEncoding() string {
 	if m != nil {
 		return m.ObjectEncoding
 	}
 	return ""
 }
 
-func (m *DagPutRequest) GetSerializationFormat() string {
+func (m *DagRequest) GetSerializationFormat() string {
 	if m != nil {
 		return m.SerializationFormat
 	}
 	return ""
 }
 
-func (m *DagPutRequest) GetHashFunc() string {
+func (m *DagRequest) GetHashFunc() string {
 	if m != nil {
 		return m.HashFunc
 	}
 	return ""
 }
 
-func (m *DagPutRequest) GetCidVersion() int64 {
+func (m *DagRequest) GetCidVersion() int64 {
 	if m != nil {
 		return m.CidVersion
 	}
 	return 0
 }
 
-// DagGetRequest is used to retrieve the raw data
-// of an ipld dag node for the specified hash. This can
-// then be used by libraries like go-ipld-format to
-// decoded into a dag object on the client side using
-// merkledag.DecodeProtobuf and passing in the returned bytes
-type DagGetRequest struct {
-	// the hash of the ipld node to get
-	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-}
-
-func (m *DagGetRequest) Reset()         { *m = DagGetRequest{} }
-func (m *DagGetRequest) String() string { return proto.CompactTextString(m) }
-func (*DagGetRequest) ProtoMessage()    {}
-func (*DagGetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{2}
-}
-func (m *DagGetRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *DagGetRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_DagGetRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *DagGetRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagGetRequest.Merge(m, src)
-}
-func (m *DagGetRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *DagGetRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagGetRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_DagGetRequest proto.InternalMessageInfo
-
-func (m *DagGetRequest) GetHash() string {
+func (m *DagRequest) GetHash() string {
 	if m != nil {
 		return m.Hash
 	}
 	return ""
 }
 
-// DagGetResponse is a response to DagGetRequest
-// that returns the raw data of the matching ipld node
-type DagGetResponse struct {
-	// the raw data of the ipld node
-	RawData []byte `protobuf:"bytes,1,opt,name=rawData,proto3" json:"rawData,omitempty"`
+func (m *DagRequest) GetLinks() map[string]string {
+	if m != nil {
+		return m.Links
+	}
+	return nil
 }
 
-func (m *DagGetResponse) Reset()         { *m = DagGetResponse{} }
-func (m *DagGetResponse) String() string { return proto.CompactTextString(m) }
-func (*DagGetResponse) ProtoMessage()    {}
-func (*DagGetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{3}
+type DagResponse struct {
+	RequestType DAGREQTYPE  `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.DAGREQTYPE" json:"requestType,omitempty"`
+	Hashes      []string    `protobuf:"bytes,2,rep,name=hashes,proto3" json:"hashes,omitempty"`
+	RawData     []byte      `protobuf:"bytes,3,opt,name=rawData,proto3" json:"rawData,omitempty"`
+	Links       []*IPLDLink `protobuf:"bytes,4,rep,name=links,proto3" json:"links,omitempty"`
 }
-func (m *DagGetResponse) XXX_Unmarshal(b []byte) error {
+
+func (m *DagResponse) Reset()         { *m = DagResponse{} }
+func (m *DagResponse) String() string { return proto.CompactTextString(m) }
+func (*DagResponse) ProtoMessage()    {}
+func (*DagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_228b96b95413374c, []int{1}
+}
+func (m *DagResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *DagGetResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_DagGetResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DagResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -234,242 +196,40 @@ func (m *DagGetResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (m *DagGetResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DagGetResponse.Merge(m, src)
+func (m *DagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DagResponse.Merge(m, src)
 }
-func (m *DagGetResponse) XXX_Size() int {
+func (m *DagResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *DagGetResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_DagGetResponse.DiscardUnknown(m)
+func (m *DagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DagResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DagGetResponse proto.InternalMessageInfo
+var xxx_messageInfo_DagResponse proto.InternalMessageInfo
 
-func (m *DagGetResponse) GetRawData() []byte {
+func (m *DagResponse) GetRequestType() DAGREQTYPE {
+	if m != nil {
+		return m.RequestType
+	}
+	return DAGREQTYPE_PUT
+}
+
+func (m *DagResponse) GetHashes() []string {
+	if m != nil {
+		return m.Hashes
+	}
+	return nil
+}
+
+func (m *DagResponse) GetRawData() []byte {
 	if m != nil {
 		return m.RawData
 	}
 	return nil
 }
 
-// NewIPLDNodeRequest is used to create a new ipld node
-type NewIPLDNodeRequest struct {
-	// links are optional hashes to include as links of the node
-	// the name is used as the key, while the value of the key is used as the hash
-	Links map[string]string `protobuf:"bytes,1,rep,name=links,proto3" json:"links,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// data to store as part of the data field
-	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	// the hash function to to use (sha2-256, sha3-512, etc...)
-	HashFunc string `protobuf:"bytes,3,opt,name=hashFunc,proto3" json:"hashFunc,omitempty"`
-}
-
-func (m *NewIPLDNodeRequest) Reset()         { *m = NewIPLDNodeRequest{} }
-func (m *NewIPLDNodeRequest) String() string { return proto.CompactTextString(m) }
-func (*NewIPLDNodeRequest) ProtoMessage()    {}
-func (*NewIPLDNodeRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{4}
-}
-func (m *NewIPLDNodeRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *NewIPLDNodeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_NewIPLDNodeRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *NewIPLDNodeRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NewIPLDNodeRequest.Merge(m, src)
-}
-func (m *NewIPLDNodeRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *NewIPLDNodeRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_NewIPLDNodeRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_NewIPLDNodeRequest proto.InternalMessageInfo
-
-func (m *NewIPLDNodeRequest) GetLinks() map[string]string {
-	if m != nil {
-		return m.Links
-	}
-	return nil
-}
-
-func (m *NewIPLDNodeRequest) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-func (m *NewIPLDNodeRequest) GetHashFunc() string {
-	if m != nil {
-		return m.HashFunc
-	}
-	return ""
-}
-
-// AddLinksRequest is used to add links to an existing ipld node
-type AddLinksRequest struct {
-	// links are optional hashes to include as links of the node
-	// the name is used as the key, while the value of the key is used as the hash
-	Links map[string]string `protobuf:"bytes,1,rep,name=links,proto3" json:"links,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// the hash of the node we want to add lin skto
-	Hash string `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
-	// the hash function to to use (sha2-256, sha3-512, etc...)
-	HashFunc string `protobuf:"bytes,3,opt,name=hashFunc,proto3" json:"hashFunc,omitempty"`
-}
-
-func (m *AddLinksRequest) Reset()         { *m = AddLinksRequest{} }
-func (m *AddLinksRequest) String() string { return proto.CompactTextString(m) }
-func (*AddLinksRequest) ProtoMessage()    {}
-func (*AddLinksRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{5}
-}
-func (m *AddLinksRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *AddLinksRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_AddLinksRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *AddLinksRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AddLinksRequest.Merge(m, src)
-}
-func (m *AddLinksRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *AddLinksRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_AddLinksRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AddLinksRequest proto.InternalMessageInfo
-
-func (m *AddLinksRequest) GetLinks() map[string]string {
-	if m != nil {
-		return m.Links
-	}
-	return nil
-}
-
-func (m *AddLinksRequest) GetHash() string {
-	if m != nil {
-		return m.Hash
-	}
-	return ""
-}
-
-func (m *AddLinksRequest) GetHashFunc() string {
-	if m != nil {
-		return m.HashFunc
-	}
-	return ""
-}
-
-// GetLinksRequest is used to return all the links associated with a particular hash
-type GetLinksRequest struct {
-	// the hash to request links for
-	Hash string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-}
-
-func (m *GetLinksRequest) Reset()         { *m = GetLinksRequest{} }
-func (m *GetLinksRequest) String() string { return proto.CompactTextString(m) }
-func (*GetLinksRequest) ProtoMessage()    {}
-func (*GetLinksRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{6}
-}
-func (m *GetLinksRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetLinksRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetLinksRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetLinksRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetLinksRequest.Merge(m, src)
-}
-func (m *GetLinksRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetLinksRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetLinksRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetLinksRequest proto.InternalMessageInfo
-
-func (m *GetLinksRequest) GetHash() string {
-	if m != nil {
-		return m.Hash
-	}
-	return ""
-}
-
-// GetLinksResponse returns all the links for the
-// associated hash that was requested
-type GetLinksResponse struct {
-	// each of the links referenced by the requested hash
-	Links []*IPLDLink `protobuf:"bytes,1,rep,name=links,proto3" json:"links,omitempty"`
-}
-
-func (m *GetLinksResponse) Reset()         { *m = GetLinksResponse{} }
-func (m *GetLinksResponse) String() string { return proto.CompactTextString(m) }
-func (*GetLinksResponse) ProtoMessage()    {}
-func (*GetLinksResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{7}
-}
-func (m *GetLinksResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *GetLinksResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_GetLinksResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *GetLinksResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetLinksResponse.Merge(m, src)
-}
-func (m *GetLinksResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *GetLinksResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetLinksResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetLinksResponse proto.InternalMessageInfo
-
-func (m *GetLinksResponse) GetLinks() []*IPLDLink {
+func (m *DagResponse) GetLinks() []*IPLDLink {
 	if m != nil {
 		return m.Links
 	}
@@ -490,7 +250,7 @@ func (m *IPLDLink) Reset()         { *m = IPLDLink{} }
 func (m *IPLDLink) String() string { return proto.CompactTextString(m) }
 func (*IPLDLink) ProtoMessage()    {}
 func (*IPLDLink) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{8}
+	return fileDescriptor_228b96b95413374c, []int{2}
 }
 func (m *IPLDLink) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -552,7 +312,7 @@ func (m *IPLDNode) Reset()         { *m = IPLDNode{} }
 func (m *IPLDNode) String() string { return proto.CompactTextString(m) }
 func (*IPLDNode) ProtoMessage()    {}
 func (*IPLDNode) Descriptor() ([]byte, []int) {
-	return fileDescriptor_228b96b95413374c, []int{9}
+	return fileDescriptor_228b96b95413374c, []int{3}
 }
 func (m *IPLDNode) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -596,16 +356,10 @@ func (m *IPLDNode) GetData() []byte {
 }
 
 func init() {
-	proto.RegisterType((*DagPutResponse)(nil), "pb.DagPutResponse")
-	proto.RegisterType((*DagPutRequest)(nil), "pb.DagPutRequest")
-	proto.RegisterType((*DagGetRequest)(nil), "pb.DagGetRequest")
-	proto.RegisterType((*DagGetResponse)(nil), "pb.DagGetResponse")
-	proto.RegisterType((*NewIPLDNodeRequest)(nil), "pb.NewIPLDNodeRequest")
-	proto.RegisterMapType((map[string]string)(nil), "pb.NewIPLDNodeRequest.LinksEntry")
-	proto.RegisterType((*AddLinksRequest)(nil), "pb.AddLinksRequest")
-	proto.RegisterMapType((map[string]string)(nil), "pb.AddLinksRequest.LinksEntry")
-	proto.RegisterType((*GetLinksRequest)(nil), "pb.GetLinksRequest")
-	proto.RegisterType((*GetLinksResponse)(nil), "pb.GetLinksResponse")
+	proto.RegisterEnum("pb.DAGREQTYPE", DAGREQTYPE_name, DAGREQTYPE_value)
+	proto.RegisterType((*DagRequest)(nil), "pb.DagRequest")
+	proto.RegisterMapType((map[string]string)(nil), "pb.DagRequest.LinksEntry")
+	proto.RegisterType((*DagResponse)(nil), "pb.DagResponse")
 	proto.RegisterType((*IPLDLink)(nil), "pb.IPLDLink")
 	proto.RegisterType((*IPLDNode)(nil), "pb.IPLDNode")
 }
@@ -613,41 +367,39 @@ func init() {
 func init() { proto.RegisterFile("dag.proto", fileDescriptor_228b96b95413374c) }
 
 var fileDescriptor_228b96b95413374c = []byte{
-	// 543 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x54, 0x41, 0x6e, 0xd3, 0x40,
-	0x14, 0xcd, 0xd8, 0x49, 0x48, 0x7e, 0x43, 0x5a, 0xa6, 0x55, 0x65, 0x65, 0x61, 0x85, 0x41, 0x20,
-	0x8b, 0x45, 0x04, 0x05, 0xd1, 0x8a, 0xae, 0x5a, 0xa5, 0x89, 0x2a, 0x55, 0x55, 0x64, 0x21, 0xf6,
-	0x93, 0x78, 0x94, 0x9a, 0xa6, 0x9e, 0x60, 0x8f, 0xa9, 0xda, 0x53, 0x70, 0x05, 0x8e, 0xc0, 0x0a,
-	0x71, 0x03, 0x96, 0x5d, 0xb2, 0x44, 0xc9, 0x45, 0xd0, 0x8c, 0x3d, 0xb1, 0x1d, 0x9c, 0x25, 0xbb,
-	0x3f, 0x3f, 0xef, 0xcd, 0xbc, 0xf7, 0xfe, 0x77, 0xa0, 0xe9, 0xd1, 0x69, 0x6f, 0x1e, 0x72, 0xc1,
-	0xb1, 0x31, 0x1f, 0x13, 0x07, 0xda, 0x7d, 0x3a, 0x1d, 0xc5, 0xc2, 0x65, 0xd1, 0x9c, 0x07, 0x11,
-	0xc3, 0xfb, 0x50, 0xbf, 0xa2, 0xd1, 0x15, 0x8b, 0x2c, 0xd4, 0x35, 0x9d, 0xa6, 0x9b, 0x9e, 0xc8,
-	0x4f, 0x04, 0x8f, 0x35, 0xf4, 0x73, 0xcc, 0x22, 0x81, 0x31, 0x54, 0x3d, 0x2a, 0xa8, 0x85, 0xba,
-	0xc8, 0x69, 0xb9, 0xaa, 0xc6, 0x2f, 0xa0, 0xcd, 0xc7, 0x9f, 0xd8, 0x44, 0x9c, 0x05, 0x13, 0xee,
-	0xf9, 0xc1, 0xd4, 0x32, 0xba, 0xc8, 0x69, 0xba, 0x6b, 0x5d, 0xfc, 0x0a, 0x76, 0x23, 0x16, 0xfa,
-	0x74, 0xe6, 0xdf, 0x53, 0xe1, 0xf3, 0x60, 0xc0, 0xc3, 0x1b, 0x2a, 0x2c, 0x53, 0x81, 0xcb, 0x7e,
-	0xc2, 0x1d, 0x68, 0x48, 0x25, 0x83, 0x38, 0x98, 0x58, 0x55, 0x05, 0x5b, 0x9d, 0xb1, 0x0d, 0x30,
-	0xf1, 0xbd, 0x8f, 0x2c, 0x8c, 0x7c, 0x1e, 0x58, 0xb5, 0x2e, 0x72, 0x4c, 0x37, 0xd7, 0x21, 0xcf,
-	0x94, 0xf4, 0x21, 0xcb, 0x4b, 0x97, 0x64, 0x25, 0xbd, 0xe9, 0xaa, 0x9a, 0xbc, 0x54, 0x51, 0x28,
-	0x50, 0x1a, 0x85, 0x05, 0x8f, 0x42, 0x7a, 0xdb, 0xcf, 0x3c, 0xea, 0x23, 0xf9, 0x81, 0x00, 0x5f,
-	0xb2, 0xdb, 0xf3, 0xd1, 0x45, 0xff, 0x92, 0x7b, 0x4c, 0x5f, 0x7b, 0x08, 0xb5, 0x99, 0x1f, 0x5c,
-	0x27, 0xd1, 0x6d, 0x1d, 0x3c, 0xed, 0xcd, 0xc7, 0xbd, 0x7f, 0x61, 0xbd, 0x0b, 0x89, 0x39, 0x0b,
-	0x44, 0x78, 0xe7, 0x26, 0xf8, 0x55, 0x94, 0x46, 0x2e, 0xca, 0xbc, 0x61, 0xb3, 0x68, 0xb8, 0x73,
-	0x04, 0x90, 0x5d, 0x82, 0x77, 0xc0, 0xbc, 0x66, 0x77, 0xa9, 0x19, 0x59, 0xe2, 0x3d, 0xa8, 0x7d,
-	0xa1, 0xb3, 0x98, 0xa5, 0xe9, 0x27, 0x87, 0xf7, 0xc6, 0x11, 0x22, 0xdf, 0x11, 0x6c, 0x9f, 0x78,
-	0x9e, 0x62, 0x6b, 0xd9, 0x6f, 0x8b, 0xb2, 0x6d, 0x29, 0x7b, 0x0d, 0x53, 0xae, 0x59, 0x65, 0x68,
-	0x64, 0x19, 0xfe, 0x27, 0xcd, 0xcf, 0x61, 0x7b, 0xc8, 0x44, 0x41, 0x72, 0xd9, 0x00, 0xdf, 0xc1,
-	0x4e, 0x06, 0x4b, 0x47, 0x48, 0x8a, 0xd6, 0x5a, 0xd2, 0x9a, 0x1c, 0x87, 0x44, 0xa5, 0x46, 0xc8,
-	0x00, 0x1a, 0xba, 0x55, 0xb8, 0xb7, 0x95, 0x9a, 0xc2, 0x50, 0x0d, 0xe8, 0x8d, 0xd6, 0xa5, 0x6a,
-	0xd9, 0x8b, 0xfc, 0x7b, 0xa6, 0x4c, 0x56, 0x5d, 0x55, 0x93, 0xd3, 0xe4, 0x1e, 0x39, 0xe9, 0xec,
-	0x5d, 0x63, 0xe3, 0xbb, 0x65, 0xdf, 0xcf, 0xc1, 0x37, 0x03, 0xea, 0x7d, 0x3a, 0x3d, 0x19, 0x9d,
-	0xe3, 0xd7, 0xaa, 0x1a, 0xc5, 0x02, 0x3f, 0x91, 0xec, 0xc2, 0xb7, 0xd7, 0xc1, 0xf9, 0x56, 0xe2,
-	0x95, 0x54, 0x52, 0xca, 0x90, 0x65, 0x94, 0x6c, 0xe7, 0x57, 0x94, 0xdc, 0x86, 0x93, 0x0a, 0x3e,
-	0x86, 0xad, 0xdc, 0x86, 0xe2, 0xfd, 0xf2, 0x95, 0xdd, 0xf0, 0xde, 0x31, 0xb4, 0xf5, 0x9e, 0x7c,
-	0xe0, 0x8a, 0xbf, 0x5b, 0xb2, 0x3b, 0x1b, 0xc8, 0x87, 0xd0, 0xd0, 0xe3, 0x4a, 0x68, 0x6b, 0x33,
-	0xee, 0xec, 0x15, 0x9b, 0x9a, 0x78, 0x6a, 0xfd, 0x5a, 0xd8, 0xe8, 0x61, 0x61, 0xa3, 0x3f, 0x0b,
-	0x1b, 0x7d, 0x5d, 0xda, 0x95, 0x87, 0xa5, 0x5d, 0xf9, 0xbd, 0xb4, 0x2b, 0xe3, 0xba, 0xfa, 0x63,
-	0x7b, 0xf3, 0x37, 0x00, 0x00, 0xff, 0xff, 0x40, 0x11, 0x3b, 0xf0, 0xe5, 0x04, 0x00, 0x00,
+	// 509 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x53, 0x4d, 0xaf, 0xd2, 0x40,
+	0x14, 0x65, 0xda, 0xf2, 0xd1, 0x0b, 0x22, 0x19, 0x8d, 0x19, 0x59, 0x34, 0x4d, 0x17, 0xa6, 0x71,
+	0x81, 0x04, 0x37, 0x2f, 0xee, 0x78, 0x69, 0x21, 0x28, 0x21, 0x38, 0xaf, 0x6a, 0x5c, 0x99, 0x81,
+	0x4e, 0xfa, 0xea, 0x83, 0xb6, 0xb6, 0x45, 0xc3, 0xfb, 0x15, 0x6e, 0xfc, 0x4f, 0x2e, 0xdf, 0xd2,
+	0xa5, 0x81, 0x85, 0x7f, 0xc3, 0xcc, 0x14, 0xca, 0xd3, 0x68, 0x4c, 0xdc, 0x9d, 0x73, 0xe7, 0xf4,
+	0xde, 0x39, 0xe7, 0x4e, 0x41, 0xf7, 0x59, 0xd0, 0x4b, 0xd2, 0x38, 0x8f, 0xb1, 0x92, 0x2c, 0xac,
+	0x1f, 0x0a, 0x80, 0xc3, 0x02, 0xca, 0x3f, 0x6c, 0x78, 0x96, 0xe3, 0x3e, 0x34, 0xd3, 0x02, 0x7a,
+	0xdb, 0x84, 0x13, 0x64, 0x22, 0xbb, 0x3d, 0x68, 0xf7, 0x92, 0x45, 0xcf, 0x19, 0x8e, 0xa9, 0xfb,
+	0xd2, 0x7b, 0x3b, 0x77, 0xe9, 0x6d, 0x09, 0xc6, 0xa0, 0xf9, 0x2c, 0x67, 0x44, 0x31, 0x91, 0xdd,
+	0xa2, 0x12, 0xe3, 0x47, 0xd0, 0x8e, 0x17, 0xef, 0xf9, 0x32, 0x77, 0xa3, 0x65, 0xec, 0x87, 0x51,
+	0x40, 0x54, 0x13, 0xd9, 0x3a, 0xfd, 0xad, 0x8a, 0xfb, 0x70, 0x2f, 0xe3, 0x69, 0xc8, 0x56, 0xe1,
+	0x35, 0xcb, 0xc3, 0x38, 0x1a, 0xc5, 0xe9, 0x9a, 0xe5, 0x44, 0x93, 0xe2, 0x3f, 0x1d, 0xe1, 0x2e,
+	0x34, 0x2e, 0x59, 0x76, 0x39, 0xda, 0x44, 0x4b, 0x52, 0x95, 0xb2, 0x92, 0x63, 0x03, 0x60, 0x19,
+	0xfa, 0xaf, 0x79, 0x9a, 0x85, 0x71, 0x44, 0x6a, 0x26, 0xb2, 0x55, 0x7a, 0xab, 0x22, 0x6e, 0x2a,
+	0xb4, 0xa4, 0x2e, 0xbf, 0x93, 0x18, 0x3f, 0x81, 0xea, 0x2a, 0x8c, 0xae, 0x32, 0xd2, 0x30, 0x55,
+	0xbb, 0x39, 0x78, 0x28, 0x9d, 0x96, 0x71, 0xf4, 0xa6, 0xe2, 0xcc, 0x8d, 0xf2, 0x74, 0x4b, 0x0b,
+	0x5d, 0xf7, 0x0c, 0xe0, 0x54, 0xc4, 0x1d, 0x50, 0xaf, 0xf8, 0x56, 0xc6, 0xa4, 0x53, 0x01, 0xf1,
+	0x7d, 0xa8, 0x7e, 0x64, 0xab, 0x0d, 0x97, 0x79, 0xe8, 0xb4, 0x20, 0xcf, 0x94, 0x33, 0x64, 0x7d,
+	0x41, 0xd0, 0x94, 0xad, 0xb3, 0x24, 0x8e, 0x32, 0xfe, 0x1f, 0x51, 0x3f, 0x80, 0x9a, 0xb8, 0x34,
+	0xcf, 0x88, 0x62, 0xaa, 0xb6, 0x4e, 0x0f, 0x0c, 0x13, 0xa8, 0xa7, 0xec, 0x93, 0x23, 0xb6, 0xa0,
+	0xca, 0x2d, 0x1c, 0x29, 0xb6, 0x8e, 0xf6, 0x34, 0x69, 0xaf, 0x25, 0xba, 0x4f, 0xe6, 0x53, 0x47,
+	0x58, 0x38, 0x38, 0xb2, 0x46, 0xd0, 0x38, 0x96, 0xca, 0x88, 0x50, 0xb1, 0x4c, 0x19, 0x11, 0x06,
+	0x2d, 0x62, 0xeb, 0xa3, 0x21, 0x89, 0x45, 0x2d, 0x0b, 0xaf, 0xb9, 0x1c, 0xa7, 0x51, 0x89, 0xad,
+	0xf3, 0xa2, 0xcf, 0x2c, 0xf6, 0xf9, 0x69, 0xae, 0xf2, 0xd7, 0xb9, 0xe5, 0xc3, 0x41, 0xa7, 0x87,
+	0xf3, 0xf8, 0x39, 0xc0, 0xc9, 0x3c, 0xae, 0x83, 0x3a, 0x7f, 0xe5, 0x75, 0x2a, 0x02, 0x8c, 0x5d,
+	0xaf, 0x83, 0x70, 0x0b, 0x1a, 0x33, 0xf7, 0xcd, 0xbb, 0xe9, 0x64, 0xf6, 0xa2, 0xa3, 0xe0, 0x3b,
+	0xa0, 0x0f, 0x1d, 0x47, 0xb2, 0x8b, 0x8e, 0x2a, 0xe8, 0xd8, 0xf5, 0x0e, 0x54, 0x1b, 0xf8, 0x50,
+	0x73, 0x58, 0x30, 0x9c, 0x4f, 0xb0, 0x0d, 0xaa, 0xc3, 0x02, 0xdc, 0xfe, 0x75, 0xb9, 0xdd, 0xbb,
+	0x25, 0x2f, 0x36, 0x62, 0x55, 0x70, 0x1f, 0x74, 0x87, 0x05, 0x17, 0x79, 0xca, 0xd9, 0xfa, 0x9f,
+	0x7a, 0x1b, 0xf5, 0xd1, 0x39, 0xf9, 0xba, 0x33, 0xd0, 0xcd, 0xce, 0x40, 0xdf, 0x77, 0x06, 0xfa,
+	0xbc, 0x37, 0x2a, 0x37, 0x7b, 0xa3, 0xf2, 0x6d, 0x6f, 0x54, 0x16, 0x35, 0xf9, 0x93, 0x3d, 0xfd,
+	0x19, 0x00, 0x00, 0xff, 0xff, 0x90, 0x7b, 0x92, 0xc0, 0x71, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -662,17 +414,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DagAPIClient interface {
-	// DagPut is used to store arbitrary bytes as a custom IPLD object
-	DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
-	// DagGet is used to request the raw ipld node data for an IPLD object
-	DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*DagGetResponse, error)
-	// NewIPLDNode is used to create a new IPFS MerkleDAG node.
-	// This is the same type as in github.com/ipfs/go-ipld-format.Node
-	NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
-	// AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
-	AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*DagPutResponse, error)
-	// GetLinks is used to request all the links for a given object
-	GetLinks(ctx context.Context, in *GetLinksRequest, opts ...grpc.CallOption) (*GetLinksResponse, error)
+	// Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+	Dag(ctx context.Context, in *DagRequest, opts ...grpc.CallOption) (*DagResponse, error)
+	// DagStream is like Dag but with bidirectional streams
+	DagStream(ctx context.Context, opts ...grpc.CallOption) (DagAPI_DagStreamClient, error)
 }
 
 type dagAPIClient struct {
@@ -683,178 +428,111 @@ func NewDagAPIClient(cc *grpc.ClientConn) DagAPIClient {
 	return &dagAPIClient{cc}
 }
 
-func (c *dagAPIClient) DagPut(ctx context.Context, in *DagPutRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
-	err := c.cc.Invoke(ctx, "/pb.DagAPI/DagPut", in, out, opts...)
+func (c *dagAPIClient) Dag(ctx context.Context, in *DagRequest, opts ...grpc.CallOption) (*DagResponse, error) {
+	out := new(DagResponse)
+	err := c.cc.Invoke(ctx, "/pb.DagAPI/Dag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dagAPIClient) DagGet(ctx context.Context, in *DagGetRequest, opts ...grpc.CallOption) (*DagGetResponse, error) {
-	out := new(DagGetResponse)
-	err := c.cc.Invoke(ctx, "/pb.DagAPI/DagGet", in, out, opts...)
+func (c *dagAPIClient) DagStream(ctx context.Context, opts ...grpc.CallOption) (DagAPI_DagStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DagAPI_serviceDesc.Streams[0], "/pb.DagAPI/DagStream", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &dagAPIDagStreamClient{stream}
+	return x, nil
 }
 
-func (c *dagAPIClient) NewIPLDNode(ctx context.Context, in *NewIPLDNodeRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
-	err := c.cc.Invoke(ctx, "/pb.DagAPI/NewIPLDNode", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
+type DagAPI_DagStreamClient interface {
+	Send(*DagRequest) error
+	Recv() (*DagResponse, error)
+	grpc.ClientStream
 }
 
-func (c *dagAPIClient) AddLinksToNode(ctx context.Context, in *AddLinksRequest, opts ...grpc.CallOption) (*DagPutResponse, error) {
-	out := new(DagPutResponse)
-	err := c.cc.Invoke(ctx, "/pb.DagAPI/AddLinksToNode", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
+type dagAPIDagStreamClient struct {
+	grpc.ClientStream
 }
 
-func (c *dagAPIClient) GetLinks(ctx context.Context, in *GetLinksRequest, opts ...grpc.CallOption) (*GetLinksResponse, error) {
-	out := new(GetLinksResponse)
-	err := c.cc.Invoke(ctx, "/pb.DagAPI/GetLinks", in, out, opts...)
-	if err != nil {
+func (x *dagAPIDagStreamClient) Send(m *DagRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *dagAPIDagStreamClient) Recv() (*DagResponse, error) {
+	m := new(DagResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
-	return out, nil
+	return m, nil
 }
 
 // DagAPIServer is the server API for DagAPI service.
 type DagAPIServer interface {
-	// DagPut is used to store arbitrary bytes as a custom IPLD object
-	DagPut(context.Context, *DagPutRequest) (*DagPutResponse, error)
-	// DagGet is used to request the raw ipld node data for an IPLD object
-	DagGet(context.Context, *DagGetRequest) (*DagGetResponse, error)
-	// NewIPLDNode is used to create a new IPFS MerkleDAG node.
-	// This is the same type as in github.com/ipfs/go-ipld-format.Node
-	NewIPLDNode(context.Context, *NewIPLDNodeRequest) (*DagPutResponse, error)
-	// AddLinksToNode is used to add links to an existing IPFS MerkleDAG node
-	AddLinksToNode(context.Context, *AddLinksRequest) (*DagPutResponse, error)
-	// GetLinks is used to request all the links for a given object
-	GetLinks(context.Context, *GetLinksRequest) (*GetLinksResponse, error)
+	// Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+	Dag(context.Context, *DagRequest) (*DagResponse, error)
+	// DagStream is like Dag but with bidirectional streams
+	DagStream(DagAPI_DagStreamServer) error
 }
 
 // UnimplementedDagAPIServer can be embedded to have forward compatible implementations.
 type UnimplementedDagAPIServer struct {
 }
 
-func (*UnimplementedDagAPIServer) DagPut(ctx context.Context, req *DagPutRequest) (*DagPutResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DagPut not implemented")
+func (*UnimplementedDagAPIServer) Dag(ctx context.Context, req *DagRequest) (*DagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Dag not implemented")
 }
-func (*UnimplementedDagAPIServer) DagGet(ctx context.Context, req *DagGetRequest) (*DagGetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DagGet not implemented")
-}
-func (*UnimplementedDagAPIServer) NewIPLDNode(ctx context.Context, req *NewIPLDNodeRequest) (*DagPutResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NewIPLDNode not implemented")
-}
-func (*UnimplementedDagAPIServer) AddLinksToNode(ctx context.Context, req *AddLinksRequest) (*DagPutResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddLinksToNode not implemented")
-}
-func (*UnimplementedDagAPIServer) GetLinks(ctx context.Context, req *GetLinksRequest) (*GetLinksResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetLinks not implemented")
+func (*UnimplementedDagAPIServer) DagStream(srv DagAPI_DagStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method DagStream not implemented")
 }
 
 func RegisterDagAPIServer(s *grpc.Server, srv DagAPIServer) {
 	s.RegisterService(&_DagAPI_serviceDesc, srv)
 }
 
-func _DagAPI_DagPut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DagPutRequest)
+func _DagAPI_Dag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DagAPIServer).DagPut(ctx, in)
+		return srv.(DagAPIServer).Dag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.DagAPI/DagPut",
+		FullMethod: "/pb.DagAPI/Dag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DagAPIServer).DagPut(ctx, req.(*DagPutRequest))
+		return srv.(DagAPIServer).Dag(ctx, req.(*DagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DagAPI_DagGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DagGetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DagAPIServer).DagGet(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.DagAPI/DagGet",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DagAPIServer).DagGet(ctx, req.(*DagGetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+func _DagAPI_DagStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(DagAPIServer).DagStream(&dagAPIDagStreamServer{stream})
 }
 
-func _DagAPI_NewIPLDNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewIPLDNodeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DagAPIServer).NewIPLDNode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.DagAPI/NewIPLDNode",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DagAPIServer).NewIPLDNode(ctx, req.(*NewIPLDNodeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+type DagAPI_DagStreamServer interface {
+	Send(*DagResponse) error
+	Recv() (*DagRequest, error)
+	grpc.ServerStream
 }
 
-func _DagAPI_AddLinksToNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddLinksRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DagAPIServer).AddLinksToNode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.DagAPI/AddLinksToNode",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DagAPIServer).AddLinksToNode(ctx, req.(*AddLinksRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+type dagAPIDagStreamServer struct {
+	grpc.ServerStream
 }
 
-func _DagAPI_GetLinks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLinksRequest)
-	if err := dec(in); err != nil {
+func (x *dagAPIDagStreamServer) Send(m *DagResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *dagAPIDagStreamServer) Recv() (*DagRequest, error) {
+	m := new(DagRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
-	if interceptor == nil {
-		return srv.(DagAPIServer).GetLinks(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.DagAPI/GetLinks",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DagAPIServer).GetLinks(ctx, req.(*GetLinksRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return m, nil
 }
 
 var _DagAPI_serviceDesc = grpc.ServiceDesc{
@@ -862,31 +540,22 @@ var _DagAPI_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*DagAPIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "DagPut",
-			Handler:    _DagAPI_DagPut_Handler,
-		},
-		{
-			MethodName: "DagGet",
-			Handler:    _DagAPI_DagGet_Handler,
-		},
-		{
-			MethodName: "NewIPLDNode",
-			Handler:    _DagAPI_NewIPLDNode_Handler,
-		},
-		{
-			MethodName: "AddLinksToNode",
-			Handler:    _DagAPI_AddLinksToNode_Handler,
-		},
-		{
-			MethodName: "GetLinks",
-			Handler:    _DagAPI_GetLinks_Handler,
+			MethodName: "Dag",
+			Handler:    _DagAPI_Dag_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "DagStream",
+			Handler:       _DagAPI_DagStream_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "dag.proto",
 }
 
-func (m *DagPutResponse) Marshal() (dAtA []byte, err error) {
+func (m *DagRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -896,169 +565,66 @@ func (m *DagPutResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *DagPutResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *DagRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *DagPutResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DagRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Hashes) > 0 {
-		for iNdEx := len(m.Hashes) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.Hashes[iNdEx])
-			copy(dAtA[i:], m.Hashes[iNdEx])
-			i = encodeVarintDag(dAtA, i, uint64(len(m.Hashes[iNdEx])))
+	if len(m.Links) > 0 {
+		for k := range m.Links {
+			v := m.Links[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintDag(dAtA, i, uint64(len(v)))
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDag(dAtA, i, uint64(len(k)))
 			i--
 			dAtA[i] = 0xa
+			i = encodeVarintDag(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x42
 		}
 	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DagPutRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
+	if len(m.Hash) > 0 {
+		i -= len(m.Hash)
+		copy(dAtA[i:], m.Hash)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
+		i--
+		dAtA[i] = 0x3a
 	}
-	return dAtA[:n], nil
-}
-
-func (m *DagPutRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DagPutRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
 	if m.CidVersion != 0 {
 		i = encodeVarintDag(dAtA, i, uint64(m.CidVersion))
 		i--
-		dAtA[i] = 0x28
+		dAtA[i] = 0x30
 	}
 	if len(m.HashFunc) > 0 {
 		i -= len(m.HashFunc)
 		copy(dAtA[i:], m.HashFunc)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x2a
 	}
 	if len(m.SerializationFormat) > 0 {
 		i -= len(m.SerializationFormat)
 		copy(dAtA[i:], m.SerializationFormat)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.SerializationFormat)))
 		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 	}
 	if len(m.ObjectEncoding) > 0 {
 		i -= len(m.ObjectEncoding)
 		copy(dAtA[i:], m.ObjectEncoding)
 		i = encodeVarintDag(dAtA, i, uint64(len(m.ObjectEncoding)))
 		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Data) > 0 {
-		i -= len(m.Data)
-		copy(dAtA[i:], m.Data)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Data)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DagGetRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DagGetRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DagGetRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Hash) > 0 {
-		i -= len(m.Hash)
-		copy(dAtA[i:], m.Hash)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *DagGetResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *DagGetResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *DagGetResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.RawData) > 0 {
-		i -= len(m.RawData)
-		copy(dAtA[i:], m.RawData)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.RawData)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *NewIPLDNodeRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *NewIPLDNodeRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *NewIPLDNodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.HashFunc) > 0 {
-		i -= len(m.HashFunc)
-		copy(dAtA[i:], m.HashFunc)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
-		i--
 		dAtA[i] = 0x1a
 	}
 	if len(m.Data) > 0 {
@@ -1068,29 +634,15 @@ func (m *NewIPLDNodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.Links) > 0 {
-		for k := range m.Links {
-			v := m.Links[k]
-			baseI := i
-			i -= len(v)
-			copy(dAtA[i:], v)
-			i = encodeVarintDag(dAtA, i, uint64(len(v)))
-			i--
-			dAtA[i] = 0x12
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintDag(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintDag(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0xa
-		}
+	if m.RequestType != 0 {
+		i = encodeVarintDag(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *AddLinksRequest) Marshal() (dAtA []byte, err error) {
+func (m *DagResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1100,98 +652,12 @@ func (m *AddLinksRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *AddLinksRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *DagResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *AddLinksRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.HashFunc) > 0 {
-		i -= len(m.HashFunc)
-		copy(dAtA[i:], m.HashFunc)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.HashFunc)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.Hash) > 0 {
-		i -= len(m.Hash)
-		copy(dAtA[i:], m.Hash)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Links) > 0 {
-		for k := range m.Links {
-			v := m.Links[k]
-			baseI := i
-			i -= len(v)
-			copy(dAtA[i:], v)
-			i = encodeVarintDag(dAtA, i, uint64(len(v)))
-			i--
-			dAtA[i] = 0x12
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = encodeVarintDag(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = encodeVarintDag(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetLinksRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetLinksRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetLinksRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Hash) > 0 {
-		i -= len(m.Hash)
-		copy(dAtA[i:], m.Hash)
-		i = encodeVarintDag(dAtA, i, uint64(len(m.Hash)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *GetLinksResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *GetLinksResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *GetLinksResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DagResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1207,8 +673,29 @@ func (m *GetLinksResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 				i = encodeVarintDag(dAtA, i, uint64(size))
 			}
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x22
 		}
+	}
+	if len(m.RawData) > 0 {
+		i -= len(m.RawData)
+		copy(dAtA[i:], m.RawData)
+		i = encodeVarintDag(dAtA, i, uint64(len(m.RawData)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Hashes) > 0 {
+		for iNdEx := len(m.Hashes) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Hashes[iNdEx])
+			copy(dAtA[i:], m.Hashes[iNdEx])
+			i = encodeVarintDag(dAtA, i, uint64(len(m.Hashes[iNdEx])))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if m.RequestType != 0 {
+		i = encodeVarintDag(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -1310,27 +797,15 @@ func encodeVarintDag(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *DagPutResponse) Size() (n int) {
+func (m *DagRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.Hashes) > 0 {
-		for _, s := range m.Hashes {
-			l = len(s)
-			n += 1 + l + sovDag(uint64(l))
-		}
+	if m.RequestType != 0 {
+		n += 1 + sovDag(uint64(m.RequestType))
 	}
-	return n
-}
-
-func (m *DagPutRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
 	l = len(m.Data)
 	if l > 0 {
 		n += 1 + l + sovDag(uint64(l))
@@ -1350,104 +825,40 @@ func (m *DagPutRequest) Size() (n int) {
 	if m.CidVersion != 0 {
 		n += 1 + sovDag(uint64(m.CidVersion))
 	}
-	return n
-}
-
-func (m *DagGetRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
 	l = len(m.Hash)
 	if l > 0 {
 		n += 1 + l + sovDag(uint64(l))
 	}
+	if len(m.Links) > 0 {
+		for k, v := range m.Links {
+			_ = k
+			_ = v
+			mapEntrySize := 1 + len(k) + sovDag(uint64(len(k))) + 1 + len(v) + sovDag(uint64(len(v)))
+			n += mapEntrySize + 1 + sovDag(uint64(mapEntrySize))
+		}
+	}
 	return n
 }
 
-func (m *DagGetResponse) Size() (n int) {
+func (m *DagResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
+	if m.RequestType != 0 {
+		n += 1 + sovDag(uint64(m.RequestType))
+	}
+	if len(m.Hashes) > 0 {
+		for _, s := range m.Hashes {
+			l = len(s)
+			n += 1 + l + sovDag(uint64(l))
+		}
+	}
 	l = len(m.RawData)
 	if l > 0 {
 		n += 1 + l + sovDag(uint64(l))
 	}
-	return n
-}
-
-func (m *NewIPLDNodeRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.Links) > 0 {
-		for k, v := range m.Links {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovDag(uint64(len(k))) + 1 + len(v) + sovDag(uint64(len(v)))
-			n += mapEntrySize + 1 + sovDag(uint64(mapEntrySize))
-		}
-	}
-	l = len(m.Data)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	l = len(m.HashFunc)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	return n
-}
-
-func (m *AddLinksRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.Links) > 0 {
-		for k, v := range m.Links {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + sovDag(uint64(len(k))) + 1 + len(v) + sovDag(uint64(len(v)))
-			n += mapEntrySize + 1 + sovDag(uint64(mapEntrySize))
-		}
-	}
-	l = len(m.Hash)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	l = len(m.HashFunc)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	return n
-}
-
-func (m *GetLinksRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Hash)
-	if l > 0 {
-		n += 1 + l + sovDag(uint64(l))
-	}
-	return n
-}
-
-func (m *GetLinksResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
 	if len(m.Links) > 0 {
 		for _, e := range m.Links {
 			l = e.Size()
@@ -1502,7 +913,7 @@ func sovDag(x uint64) (n int) {
 func sozDag(x uint64) (n int) {
 	return sovDag(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *DagPutResponse) Unmarshal(dAtA []byte) error {
+func (m *DagRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1525,17 +936,17 @@ func (m *DagPutResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: DagPutResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: DagRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagPutResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DagRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hashes", wireType)
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
 			}
-			var stringLen uint64
+			m.RequestType = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDag
@@ -1545,78 +956,12 @@ func (m *DagPutResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.RequestType |= DAGREQTYPE(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hashes = append(m.Hashes, string(dAtA[iNdEx:postIndex]))
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DagPutRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagPutRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
 			}
@@ -1650,7 +995,7 @@ func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 				m.Data = []byte{}
 			}
 			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ObjectEncoding", wireType)
 			}
@@ -1682,7 +1027,7 @@ func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.ObjectEncoding = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SerializationFormat", wireType)
 			}
@@ -1714,7 +1059,7 @@ func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.SerializationFormat = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field HashFunc", wireType)
 			}
@@ -1746,7 +1091,7 @@ func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.HashFunc = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 5:
+		case 6:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CidVersion", wireType)
 			}
@@ -1765,60 +1110,7 @@ func (m *DagPutRequest) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *DagGetRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: DagGetRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagGetRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
+		case 7:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Hash", wireType)
 			}
@@ -1850,6 +1142,133 @@ func (m *DagGetRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.Hash = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Links", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDag
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthDag
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDag
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Links == nil {
+				m.Links = make(map[string]string)
+			}
+			var mapkey string
+			var mapvalue string
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowDag
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					var stringLenmapkey uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowDag
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapkey |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapkey := int(stringLenmapkey)
+					if intStringLenmapkey < 0 {
+						return ErrInvalidLengthDag
+					}
+					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthDag
+					}
+					if postStringIndexmapkey > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
+					iNdEx = postStringIndexmapkey
+				} else if fieldNum == 2 {
+					var stringLenmapvalue uint64
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowDag
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						stringLenmapvalue |= uint64(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					intStringLenmapvalue := int(stringLenmapvalue)
+					if intStringLenmapvalue < 0 {
+						return ErrInvalidLengthDag
+					}
+					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
+					if postStringIndexmapvalue < 0 {
+						return ErrInvalidLengthDag
+					}
+					if postStringIndexmapvalue > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
+					iNdEx = postStringIndexmapvalue
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipDag(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthDag
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.Links[mapkey] = mapvalue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDag(dAtA[iNdEx:])
@@ -1874,7 +1293,7 @@ func (m *DagGetRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *DagGetResponse) Unmarshal(dAtA []byte) error {
+func (m *DagResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1897,13 +1316,64 @@ func (m *DagGetResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: DagGetResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: DagResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DagGetResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DagResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
+			}
+			m.RequestType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDag
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RequestType |= DAGREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Hashes", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDag
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDag
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDag
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Hashes = append(m.Hashes, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field RawData", wireType)
 			}
@@ -1937,635 +1407,7 @@ func (m *DagGetResponse) Unmarshal(dAtA []byte) error {
 				m.RawData = []byte{}
 			}
 			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *NewIPLDNodeRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: NewIPLDNodeRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: NewIPLDNodeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Links", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Links == nil {
-				m.Links = make(map[string]string)
-			}
-			var mapkey string
-			var mapvalue string
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowDag
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowDag
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthDag
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthDag
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var stringLenmapvalue uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowDag
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapvalue := int(stringLenmapvalue)
-					if intStringLenmapvalue < 0 {
-						return ErrInvalidLengthDag
-					}
-					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-					if postStringIndexmapvalue < 0 {
-						return ErrInvalidLengthDag
-					}
-					if postStringIndexmapvalue > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
-					iNdEx = postStringIndexmapvalue
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipDag(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthDag
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
-			}
-			m.Links[mapkey] = mapvalue
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
-			if m.Data == nil {
-				m.Data = []byte{}
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HashFunc", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HashFunc = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *AddLinksRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: AddLinksRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: AddLinksRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Links", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Links == nil {
-				m.Links = make(map[string]string)
-			}
-			var mapkey string
-			var mapvalue string
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowDag
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowDag
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return ErrInvalidLengthDag
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return ErrInvalidLengthDag
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var stringLenmapvalue uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowDag
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapvalue := int(stringLenmapvalue)
-					if intStringLenmapvalue < 0 {
-						return ErrInvalidLengthDag
-					}
-					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-					if postStringIndexmapvalue < 0 {
-						return ErrInvalidLengthDag
-					}
-					if postStringIndexmapvalue > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
-					iNdEx = postStringIndexmapvalue
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := skipDag(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if skippy < 0 {
-						return ErrInvalidLengthDag
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
-			}
-			m.Links[mapkey] = mapvalue
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hash", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hash = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HashFunc", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HashFunc = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetLinksRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: GetLinksRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetLinksRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hash", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDag
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDag
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDag
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hash = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDag(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDag
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *GetLinksResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDag
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: GetLinksResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetLinksResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Links", wireType)
 			}

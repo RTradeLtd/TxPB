@@ -24,19 +24,13 @@
   
 
 - [dag.proto](#dag.proto)
-    - [AddLinksRequest](#pb.AddLinksRequest)
-    - [AddLinksRequest.LinksEntry](#pb.AddLinksRequest.LinksEntry)
-    - [DagGetRequest](#pb.DagGetRequest)
-    - [DagGetResponse](#pb.DagGetResponse)
-    - [DagPutRequest](#pb.DagPutRequest)
-    - [DagPutResponse](#pb.DagPutResponse)
-    - [GetLinksRequest](#pb.GetLinksRequest)
-    - [GetLinksResponse](#pb.GetLinksResponse)
+    - [DagRequest](#pb.DagRequest)
+    - [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry)
+    - [DagResponse](#pb.DagResponse)
     - [IPLDLink](#pb.IPLDLink)
     - [IPLDNode](#pb.IPLDNode)
-    - [NewIPLDNodeRequest](#pb.NewIPLDNodeRequest)
-    - [NewIPLDNodeRequest.LinksEntry](#pb.NewIPLDNodeRequest.LinksEntry)
   
+    - [DAGREQTYPE](#pb.DAGREQTYPE)
   
   
     - [DagAPI](#pb.DagAPI)
@@ -88,17 +82,24 @@
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
+  
+    - [EXTRASTYPE](#pb.EXTRASTYPE)
+    - [P2PREQTYPE](#pb.P2PREQTYPE)
+  
+  
+    - [NodeAPI](#pb.NodeAPI)
+  
+
+- [pubsub.proto](#pubsub.proto)
     - [PubSubMessage](#pb.PubSubMessage)
     - [PubSubPeer](#pb.PubSubPeer)
     - [PubSubRequest](#pb.PubSubRequest)
     - [PubSubResponse](#pb.PubSubResponse)
   
-    - [EXTRASTYPE](#pb.EXTRASTYPE)
-    - [P2PREQTYPE](#pb.P2PREQTYPE)
     - [PSREQTYPE](#pb.PSREQTYPE)
   
   
-    - [NodeAPI](#pb.NodeAPI)
+    - [PubSubAPI](#pb.PubSubAPI)
   
 
 - [status.proto](#status.proto)
@@ -348,26 +349,31 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 
 
 
-<a name="pb.AddLinksRequest"></a>
+<a name="pb.DagRequest"></a>
 
-### AddLinksRequest
-AddLinksRequest is used to add links to an existing ipld node
+### DagRequest
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| links | [AddLinksRequest.LinksEntry](#pb.AddLinksRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
-| hash | [string](#string) |  | the hash of the node we want to add lin skto |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  |  |
+| data | [bytes](#bytes) |  | data that we will be storing |
+| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) |
+| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) |
 | hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
+| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) |
+| hash | [string](#string) |  |  |
+| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
 
 
 
 
 
 
-<a name="pb.AddLinksRequest.LinksEntry"></a>
+<a name="pb.DagRequest.LinksEntry"></a>
 
-### AddLinksRequest.LinksEntry
+### DagRequest.LinksEntry
 
 
 
@@ -381,101 +387,18 @@ AddLinksRequest is used to add links to an existing ipld node
 
 
 
-<a name="pb.DagGetRequest"></a>
+<a name="pb.DagResponse"></a>
 
-### DagGetRequest
-DagGetRequest is used to retrieve the raw data
-of an ipld dag node for the specified hash. This can
-then be used by libraries like go-ipld-format to
-decoded into a dag object on the client side using 
-merkledag.DecodeProtobuf and passing in the returned bytes
+### DagResponse
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hash | [string](#string) |  | the hash of the ipld node to get |
-
-
-
-
-
-
-<a name="pb.DagGetResponse"></a>
-
-### DagGetResponse
-DagGetResponse is a response to DagGetRequest
-that returns the raw data of the matching ipld node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| rawData | [bytes](#bytes) |  | the raw data of the ipld node |
-
-
-
-
-
-
-<a name="pb.DagPutRequest"></a>
-
-### DagPutRequest
-DagPut allows us to store arbitrary bytes as a custom IPLD object
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| data | [bytes](#bytes) |  | data that we will be storing |
-| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) |
-| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) |
-
-
-
-
-
-
-<a name="pb.DagPutResponse"></a>
-
-### DagPutResponse
-DagPutResponse contains the hashes of ipld nodes generated
-by the dag put request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hashes | [string](#string) | repeated | an array of hashes (cids) of the root ipld nod |
-
-
-
-
-
-
-<a name="pb.GetLinksRequest"></a>
-
-### GetLinksRequest
-GetLinksRequest is used to return all the links associated with a particular hash
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hash | [string](#string) |  | the hash to request links for |
-
-
-
-
-
-
-<a name="pb.GetLinksResponse"></a>
-
-### GetLinksResponse
-GetLinksResponse returns all the links for the 
-associated hash that was requested
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [IPLDLink](#pb.IPLDLink) | repeated | each of the links referenced by the requested hash |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  |  |
+| hashes | [string](#string) | repeated |  |
+| rawData | [bytes](#bytes) |  |  |
+| links | [IPLDLink](#pb.IPLDLink) | repeated |  |
 
 
 
@@ -514,40 +437,22 @@ An IPFS MerkleDAG Node
 
 
 
-
-<a name="pb.NewIPLDNodeRequest"></a>
-
-### NewIPLDNodeRequest
-NewIPLDNodeRequest is used to create a new ipld node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [NewIPLDNodeRequest.LinksEntry](#pb.NewIPLDNodeRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
-| data | [bytes](#bytes) |  | data to store as part of the data field |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-
-
-
-
-
-
-<a name="pb.NewIPLDNodeRequest.LinksEntry"></a>
-
-### NewIPLDNodeRequest.LinksEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
  
+
+
+<a name="pb.DAGREQTYPE"></a>
+
+### DAGREQTYPE
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| PUT | 0 |  |
+| GET | 1 |  |
+| NEW_LINK | 2 |  |
+| ADD_LINKS | 3 |  |
+| GET_LINKS | 4 |  |
+
 
  
 
@@ -557,15 +462,12 @@ NewIPLDNodeRequest is used to create a new ipld node
 <a name="pb.DagAPI"></a>
 
 ### DagAPI
-DagAPI provides a gRPC API for manipulating IPLD objects
+
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| DagPut | [DagPutRequest](#pb.DagPutRequest) | [DagPutResponse](#pb.DagPutResponse) | DagPut is used to store arbitrary bytes as a custom IPLD object |
-| DagGet | [DagGetRequest](#pb.DagGetRequest) | [DagGetResponse](#pb.DagGetResponse) | DagGet is used to request the raw ipld node data for an IPLD object |
-| NewIPLDNode | [NewIPLDNodeRequest](#pb.NewIPLDNodeRequest) | [DagPutResponse](#pb.DagPutResponse) | NewIPLDNode is used to create a new IPFS MerkleDAG node. This is the same type as in github.com/ipfs/go-ipld-format.Node |
-| AddLinksToNode | [AddLinksRequest](#pb.AddLinksRequest) | [DagPutResponse](#pb.DagPutResponse) | AddLinksToNode is used to add links to an existing IPFS MerkleDAG node |
-| GetLinks | [GetLinksRequest](#pb.GetLinksRequest) | [GetLinksResponse](#pb.GetLinksResponse) | GetLinks is used to request all the links for a given object |
+| Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
+| DagStream | [DagRequest](#pb.DagRequest) stream | [DagResponse](#pb.DagResponse) stream | DagStream is like Dag but with bidirectional streams |
 
  
 
@@ -1056,6 +958,66 @@ P2PResponse is a response message sent in response to a P2PRequest message
 
 
 
+ 
+
+
+<a name="pb.EXTRASTYPE"></a>
+
+### EXTRASTYPE
+EXTRASTYPE denotes a particular extras type
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| IDENTIFY | 0 | IDENTIFY is the identify service |
+| PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
+| DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
+| MDNS | 3 | MDNS is used to discover libp2p hosts over mdns |
+
+
+
+<a name="pb.P2PREQTYPE"></a>
+
+### P2PREQTYPE
+P2PREQTYPE denotes the particular type of request being used in the p2p rpc
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CLOSE | 0 | equivalent of ipfs p2p close |
+| FORWARD | 1 | equivalent of ipfs p2p forward |
+| LISTEN | 2 | equivalent of ipfs p2p listen |
+| LS | 3 | equivalent of ipfs p2p ls |
+
+
+ 
+
+ 
+
+
+<a name="pb.NodeAPI"></a>
+
+### NodeAPI
+NodeAPI provide an API to control the underlying custom ipfs node
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetPeers | [Empty](#pb.Empty) | [GetPeersResponse](#pb.GetPeersResponse) | GetPeers returns a message containing a slice of current peers in our peerstore |
+| Connect | [ConnectRequest](#pb.ConnectRequest) | [Empty](#pb.Empty) | Connect is used to connect to remote libp2p peers |
+| Disconnect | [DisconnectRequest](#pb.DisconnectRequest) | [DisconnectResponse](#pb.DisconnectResponse) | Disconnect is used to disconnect remote libp2p peer connections |
+| IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
+| EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
+| DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+| P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
+
+ 
+
+
+
+<a name="pubsub.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## pubsub.proto
+
+
 
 <a name="pb.PubSubMessage"></a>
 
@@ -1133,34 +1095,6 @@ P2PResponse is a response message sent in response to a P2PRequest message
  
 
 
-<a name="pb.EXTRASTYPE"></a>
-
-### EXTRASTYPE
-EXTRASTYPE denotes a particular extras type
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| IDENTIFY | 0 | IDENTIFY is the identify service |
-| PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
-| DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
-| MDNS | 3 | MDNS is used to discover libp2p hosts over mdns |
-
-
-
-<a name="pb.P2PREQTYPE"></a>
-
-### P2PREQTYPE
-P2PREQTYPE denotes the particular type of request being used in the p2p rpc
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CLOSE | 0 | equivalent of ipfs p2p close |
-| FORWARD | 1 | equivalent of ipfs p2p forward |
-| LISTEN | 2 | equivalent of ipfs p2p listen |
-| LS | 3 | equivalent of ipfs p2p ls |
-
-
-
 <a name="pb.PSREQTYPE"></a>
 
 ### PSREQTYPE
@@ -1179,20 +1113,13 @@ P2PREQTYPE denotes the particular type of request being used in the p2p rpc
  
 
 
-<a name="pb.NodeAPI"></a>
+<a name="pb.PubSubAPI"></a>
 
-### NodeAPI
-NodeAPI provide an API to control the underlying custom ipfs node
+### PubSubAPI
+
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetPeers | [Empty](#pb.Empty) | [GetPeersResponse](#pb.GetPeersResponse) | GetPeers returns a message containing a slice of current peers in our peerstore |
-| Connect | [ConnectRequest](#pb.ConnectRequest) | [Empty](#pb.Empty) | Connect is used to connect to remote libp2p peers |
-| Disconnect | [DisconnectRequest](#pb.DisconnectRequest) | [DisconnectResponse](#pb.DisconnectResponse) | Disconnect is used to disconnect remote libp2p peer connections |
-| IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
-| EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
-| DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
-| P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 | PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions |
 
  

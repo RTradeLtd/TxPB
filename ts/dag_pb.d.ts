@@ -3,29 +3,10 @@
 
 import * as jspb from "google-protobuf";
 
-export class DagPutResponse extends jspb.Message {
-  clearHashesList(): void;
-  getHashesList(): Array<string>;
-  setHashesList(value: Array<string>): void;
-  addHashes(value: string, index?: number): string;
+export class DagRequest extends jspb.Message {
+  getRequesttype(): DAGREQTYPEMap[keyof DAGREQTYPEMap];
+  setRequesttype(value: DAGREQTYPEMap[keyof DAGREQTYPEMap]): void;
 
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DagPutResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: DagPutResponse): DagPutResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DagPutResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DagPutResponse;
-  static deserializeBinaryFromReader(message: DagPutResponse, reader: jspb.BinaryReader): DagPutResponse;
-}
-
-export namespace DagPutResponse {
-  export type AsObject = {
-    hashesList: Array<string>,
-  }
-}
-
-export class DagPutRequest extends jspb.Message {
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
@@ -43,162 +24,68 @@ export class DagPutRequest extends jspb.Message {
   getCidversion(): number;
   setCidversion(value: number): void;
 
+  getHash(): string;
+  setHash(value: string): void;
+
+  getLinksMap(): jspb.Map<string, string>;
+  clearLinksMap(): void;
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DagPutRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: DagPutRequest): DagPutRequest.AsObject;
+  toObject(includeInstance?: boolean): DagRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DagRequest): DagRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DagPutRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DagPutRequest;
-  static deserializeBinaryFromReader(message: DagPutRequest, reader: jspb.BinaryReader): DagPutRequest;
+  static serializeBinaryToWriter(message: DagRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DagRequest;
+  static deserializeBinaryFromReader(message: DagRequest, reader: jspb.BinaryReader): DagRequest;
 }
 
-export namespace DagPutRequest {
+export namespace DagRequest {
   export type AsObject = {
+    requesttype: DAGREQTYPEMap[keyof DAGREQTYPEMap],
     data: Uint8Array | string,
     objectencoding: string,
     serializationformat: string,
     hashfunc: string,
     cidversion: number,
-  }
-}
-
-export class DagGetRequest extends jspb.Message {
-  getHash(): string;
-  setHash(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DagGetRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: DagGetRequest): DagGetRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DagGetRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DagGetRequest;
-  static deserializeBinaryFromReader(message: DagGetRequest, reader: jspb.BinaryReader): DagGetRequest;
-}
-
-export namespace DagGetRequest {
-  export type AsObject = {
     hash: string,
+    linksMap: Array<[string, string]>,
   }
 }
 
-export class DagGetResponse extends jspb.Message {
+export class DagResponse extends jspb.Message {
+  getRequesttype(): DAGREQTYPEMap[keyof DAGREQTYPEMap];
+  setRequesttype(value: DAGREQTYPEMap[keyof DAGREQTYPEMap]): void;
+
+  clearHashesList(): void;
+  getHashesList(): Array<string>;
+  setHashesList(value: Array<string>): void;
+  addHashes(value: string, index?: number): string;
+
   getRawdata(): Uint8Array | string;
   getRawdata_asU8(): Uint8Array;
   getRawdata_asB64(): string;
   setRawdata(value: Uint8Array | string): void;
 
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DagGetResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: DagGetResponse): DagGetResponse.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DagGetResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DagGetResponse;
-  static deserializeBinaryFromReader(message: DagGetResponse, reader: jspb.BinaryReader): DagGetResponse;
-}
-
-export namespace DagGetResponse {
-  export type AsObject = {
-    rawdata: Uint8Array | string,
-  }
-}
-
-export class NewIPLDNodeRequest extends jspb.Message {
-  getLinksMap(): jspb.Map<string, string>;
-  clearLinksMap(): void;
-  getData(): Uint8Array | string;
-  getData_asU8(): Uint8Array;
-  getData_asB64(): string;
-  setData(value: Uint8Array | string): void;
-
-  getHashfunc(): string;
-  setHashfunc(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): NewIPLDNodeRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: NewIPLDNodeRequest): NewIPLDNodeRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: NewIPLDNodeRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): NewIPLDNodeRequest;
-  static deserializeBinaryFromReader(message: NewIPLDNodeRequest, reader: jspb.BinaryReader): NewIPLDNodeRequest;
-}
-
-export namespace NewIPLDNodeRequest {
-  export type AsObject = {
-    linksMap: Array<[string, string]>,
-    data: Uint8Array | string,
-    hashfunc: string,
-  }
-}
-
-export class AddLinksRequest extends jspb.Message {
-  getLinksMap(): jspb.Map<string, string>;
-  clearLinksMap(): void;
-  getHash(): string;
-  setHash(value: string): void;
-
-  getHashfunc(): string;
-  setHashfunc(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): AddLinksRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: AddLinksRequest): AddLinksRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: AddLinksRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): AddLinksRequest;
-  static deserializeBinaryFromReader(message: AddLinksRequest, reader: jspb.BinaryReader): AddLinksRequest;
-}
-
-export namespace AddLinksRequest {
-  export type AsObject = {
-    linksMap: Array<[string, string]>,
-    hash: string,
-    hashfunc: string,
-  }
-}
-
-export class GetLinksRequest extends jspb.Message {
-  getHash(): string;
-  setHash(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetLinksRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetLinksRequest): GetLinksRequest.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetLinksRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetLinksRequest;
-  static deserializeBinaryFromReader(message: GetLinksRequest, reader: jspb.BinaryReader): GetLinksRequest;
-}
-
-export namespace GetLinksRequest {
-  export type AsObject = {
-    hash: string,
-  }
-}
-
-export class GetLinksResponse extends jspb.Message {
   clearLinksList(): void;
   getLinksList(): Array<IPLDLink>;
   setLinksList(value: Array<IPLDLink>): void;
   addLinks(value?: IPLDLink, index?: number): IPLDLink;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetLinksResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetLinksResponse): GetLinksResponse.AsObject;
+  toObject(includeInstance?: boolean): DagResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: DagResponse): DagResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetLinksResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetLinksResponse;
-  static deserializeBinaryFromReader(message: GetLinksResponse, reader: jspb.BinaryReader): GetLinksResponse;
+  static serializeBinaryToWriter(message: DagResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DagResponse;
+  static deserializeBinaryFromReader(message: DagResponse, reader: jspb.BinaryReader): DagResponse;
 }
 
-export namespace GetLinksResponse {
+export namespace DagResponse {
   export type AsObject = {
+    requesttype: DAGREQTYPEMap[keyof DAGREQTYPEMap],
+    hashesList: Array<string>,
+    rawdata: Uint8Array | string,
     linksList: Array<IPLDLink.AsObject>,
   }
 }
@@ -260,4 +147,14 @@ export namespace IPLDNode {
     data: Uint8Array | string,
   }
 }
+
+export interface DAGREQTYPEMap {
+  PUT: 0;
+  GET: 1;
+  NEW_LINK: 2;
+  ADD_LINKS: 3;
+  GET_LINKS: 4;
+}
+
+export const DAGREQTYPE: DAGREQTYPEMap;
 

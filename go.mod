@@ -1,4 +1,4 @@
-module github.com/RTradeLtd/TxPB/v2
+module github.com/RTradeLtd/TxPB/v3
 
 go 1.13
 

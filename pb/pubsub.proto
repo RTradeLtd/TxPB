@@ -1,0 +1,50 @@
+syntax = "proto3";
+package pb;
+
+service PubSubAPI {
+    // PubSub allows controlling libp2p pubsub topics and subscriptions
+    rpc PubSub(stream PubSubRequest) returns (stream PubSubResponse) { };
+}
+
+enum PSREQTYPE {
+    GET_TOPICS = 0;
+    LIST_PEERS = 1;
+    SUBSCRIBE = 2;
+    PUBLISH = 3;
+}
+
+message PubSubRequest {
+    PSREQTYPE requestType = 1;
+    repeated PubSubPeer peers = 2;
+    repeated string topics = 3;
+    string topic = 4;
+    bytes data = 5;
+    bool advertise = 6;
+    bool discover = 7;
+}
+
+message PubSubResponse {
+    PSREQTYPE requestType = 1;
+    PubSubMessage message = 2;
+    repeated string names = 3;
+}
+
+message PubSubMessage {
+    // who this message is from
+    bytes from = 1;
+    // the data of this message
+    bytes data = 2;
+    // the sequence number of this message
+    bytes seqno = 3;
+    // the topic IDs this message is sent to
+    repeated string topicIDs = 4;
+    // the signature of the sender
+    bytes signature = 5;
+    // the key of the sender
+    bytes key = 6;
+}
+
+message PubSubPeer {
+    string topic = 1;
+    string peerID = 2;
+}
