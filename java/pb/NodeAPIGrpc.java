@@ -30,38 +30,6 @@ public final class NodeAPIGrpc {
   public static final String SERVICE_NAME = "pb.NodeAPI";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Node.GetPeersResponse> getGetPeersMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetPeers",
-      requestType = pb.Util.Empty.class,
-      responseType = pb.Node.GetPeersResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Node.GetPeersResponse> getGetPeersMethod() {
-    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Node.GetPeersResponse> getGetPeersMethod;
-    if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
-          NodeAPIGrpc.getGetPeersMethod = getGetPeersMethod = 
-              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Node.GetPeersResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "GetPeers"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Util.Empty.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.GetPeersResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("GetPeers"))
-                  .build();
-          }
-        }
-     }
-     return getGetPeersMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<pb.Node.ConnectionManagementRequest,
       pb.Node.ConnectionManagementResponse> getConnectionManagementMethod;
 
@@ -189,16 +157,6 @@ public final class NodeAPIGrpc {
   public static abstract class NodeAPIImplBase implements io.grpc.BindableService {
 
     /**
-     * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
-     * </pre>
-     */
-    public void getPeers(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetPeersMethod(), responseObserver);
-    }
-
-    /**
      */
     public void connectionManagement(pb.Node.ConnectionManagementRequest request,
         io.grpc.stub.StreamObserver<pb.Node.ConnectionManagementResponse> responseObserver) {
@@ -226,13 +184,6 @@ public final class NodeAPIGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
-          .addMethod(
-            getGetPeersMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Util.Empty,
-                pb.Node.GetPeersResponse>(
-                  this, METHODID_GET_PEERS)))
           .addMethod(
             getConnectionManagementMethod(),
             asyncUnaryCall(
@@ -277,17 +228,6 @@ public final class NodeAPIGrpc {
     protected NodeAPIStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new NodeAPIStub(channel, callOptions);
-    }
-
-    /**
-     * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
-     * </pre>
-     */
-    public void getPeers(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetPeersMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -342,16 +282,6 @@ public final class NodeAPIGrpc {
     }
 
     /**
-     * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
-     * </pre>
-     */
-    public pb.Node.GetPeersResponse getPeers(pb.Util.Empty request) {
-      return blockingUnaryCall(
-          getChannel(), getGetPeersMethod(), getCallOptions(), request);
-    }
-
-    /**
      */
     public pb.Node.ConnectionManagementResponse connectionManagement(pb.Node.ConnectionManagementRequest request) {
       return blockingUnaryCall(
@@ -400,17 +330,6 @@ public final class NodeAPIGrpc {
     }
 
     /**
-     * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.GetPeersResponse> getPeers(
-        pb.Util.Empty request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetPeersMethod(), getCallOptions()), request);
-    }
-
-    /**
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Node.ConnectionManagementResponse> connectionManagement(
         pb.Node.ConnectionManagementRequest request) {
@@ -440,10 +359,9 @@ public final class NodeAPIGrpc {
     }
   }
 
-  private static final int METHODID_GET_PEERS = 0;
-  private static final int METHODID_CONNECTION_MANAGEMENT = 1;
-  private static final int METHODID_EXTRAS = 2;
-  private static final int METHODID_P2P = 3;
+  private static final int METHODID_CONNECTION_MANAGEMENT = 0;
+  private static final int METHODID_EXTRAS = 1;
+  private static final int METHODID_P2P = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -462,10 +380,6 @@ public final class NodeAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_PEERS:
-          serviceImpl.getPeers((pb.Util.Empty) request,
-              (io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse>) responseObserver);
-          break;
         case METHODID_CONNECTION_MANAGEMENT:
           serviceImpl.connectionManagement((pb.Node.ConnectionManagementRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.ConnectionManagementResponse>) responseObserver);
@@ -539,7 +453,6 @@ public final class NodeAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new NodeAPIFileDescriptorSupplier())
-              .addMethod(getGetPeersMethod())
               .addMethod(getConnectionManagementMethod())
               .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())

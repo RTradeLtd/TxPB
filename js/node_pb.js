@@ -142,7 +142,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.pb.ConnectionManagementResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.pb.ConnectionManagementResponse.repeatedFields_, null);
 };
 goog.inherits(proto.pb.ConnectionManagementResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -1445,6 +1445,13 @@ proto.pb.ConnectionManagementRequest.prototype.clearPeeridsList = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.pb.ConnectionManagementResponse.repeatedFields_ = [4];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -1476,8 +1483,10 @@ proto.pb.ConnectionManagementResponse.prototype.toObject = function(opt_includeI
  */
 proto.pb.ConnectionManagementResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     connectedMap: (f = msg.getConnectedMap()) ? f.toObject(includeInstance, undefined) : [],
-    statusMap: (f = msg.getStatusMap()) ? f.toObject(includeInstance, proto.pb.ConnectionManagementResponse.StatusMessage.toObject) : []
+    statusMap: (f = msg.getStatusMap()) ? f.toObject(includeInstance, proto.pb.ConnectionManagementResponse.StatusMessage.toObject) : [],
+    peeridsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1514,6 +1523,10 @@ proto.pb.ConnectionManagementResponse.deserializeBinaryFromReader = function(msg
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {!proto.pb.CONNMGMTREQTYPE} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
     case 2:
       var value = msg.getConnectedMap();
       reader.readMessage(value, function(message, reader) {
@@ -1525,6 +1538,10 @@ proto.pb.ConnectionManagementResponse.deserializeBinaryFromReader = function(msg
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.pb.ConnectionManagementResponse.StatusMessage.deserializeBinaryFromReader, "", new proto.pb.ConnectionManagementResponse.StatusMessage());
          });
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addPeerids(value);
       break;
     default:
       reader.skipField();
@@ -1555,6 +1572,13 @@ proto.pb.ConnectionManagementResponse.prototype.serializeBinary = function() {
  */
 proto.pb.ConnectionManagementResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getConnectedMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(2, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeBool);
@@ -1562,6 +1586,13 @@ proto.pb.ConnectionManagementResponse.serializeBinaryToWriter = function(message
   f = message.getStatusMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.pb.ConnectionManagementResponse.StatusMessage.serializeBinaryToWriter);
+  }
+  f = message.getPeeridsList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      4,
+      f
+    );
   }
 };
 
@@ -1727,6 +1758,24 @@ proto.pb.ConnectionManagementResponse.StatusMessage.prototype.setReason = functi
 
 
 /**
+ * optional CONNMGMTREQTYPE requestType = 1;
+ * @return {!proto.pb.CONNMGMTREQTYPE}
+ */
+proto.pb.ConnectionManagementResponse.prototype.getRequesttype = function() {
+  return /** @type {!proto.pb.CONNMGMTREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.pb.CONNMGMTREQTYPE} value
+ * @return {!proto.pb.ConnectionManagementResponse} returns this
+ */
+proto.pb.ConnectionManagementResponse.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
  * map<string, bool> connected = 2;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
@@ -1768,6 +1817,43 @@ proto.pb.ConnectionManagementResponse.prototype.getStatusMap = function(opt_noLa
 proto.pb.ConnectionManagementResponse.prototype.clearStatusMap = function() {
   this.getStatusMap().clear();
   return this;};
+
+
+/**
+ * repeated string peerIDs = 4;
+ * @return {!Array<string>}
+ */
+proto.pb.ConnectionManagementResponse.prototype.getPeeridsList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 4));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.pb.ConnectionManagementResponse} returns this
+ */
+proto.pb.ConnectionManagementResponse.prototype.setPeeridsList = function(value) {
+  return jspb.Message.setField(this, 4, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.pb.ConnectionManagementResponse} returns this
+ */
+proto.pb.ConnectionManagementResponse.prototype.addPeerids = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.pb.ConnectionManagementResponse} returns this
+ */
+proto.pb.ConnectionManagementResponse.prototype.clearPeeridsList = function() {
+  return this.setPeeridsList([]);
+};
 
 
 
@@ -1946,7 +2032,8 @@ proto.pb.P2PREQTYPE = {
 proto.pb.CONNMGMTREQTYPE = {
   CM_CONNECT: 0,
   CM_DISCONNECT: 1,
-  CM_STATUS: 2
+  CM_STATUS: 2,
+  CM_GET_PEERS: 3
 };
 
 /**

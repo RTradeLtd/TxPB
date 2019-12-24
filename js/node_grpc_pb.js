@@ -49,17 +49,6 @@ function deserialize_pb_ExtrasRequest(buffer_arg) {
   return node_pb.ExtrasRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_GetPeersResponse(arg) {
-  if (!(arg instanceof node_pb.GetPeersResponse)) {
-    throw new Error('Expected argument of type pb.GetPeersResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_GetPeersResponse(buffer_arg) {
-  return node_pb.GetPeersResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_pb_P2PRequest(arg) {
   if (!(arg instanceof node_pb.P2PRequest)) {
     throw new Error('Expected argument of type pb.P2PRequest');
@@ -85,18 +74,6 @@ function deserialize_pb_P2PResponse(buffer_arg) {
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
-  // GetPeers returns a message containing a slice of current peers in our peerstore
-  getPeers: {
-    path: '/pb.NodeAPI/GetPeers',
-    requestStream: false,
-    responseStream: false,
-    requestType: util_pb.Empty,
-    responseType: node_pb.GetPeersResponse,
-    requestSerialize: serialize_pb_Empty,
-    requestDeserialize: deserialize_pb_Empty,
-    responseSerialize: serialize_pb_GetPeersResponse,
-    responseDeserialize: deserialize_pb_GetPeersResponse,
-  },
   connectionManagement: {
     path: '/pb.NodeAPI/ConnectionManagement',
     requestStream: false,

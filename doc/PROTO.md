@@ -767,8 +767,10 @@ NameSysAPI provides a generic name resolution API
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  |  |
 | connected | [ConnectionManagementResponse.ConnectedEntry](#pb.ConnectionManagementResponse.ConnectedEntry) | repeated |  |
 | status | [ConnectionManagementResponse.StatusEntry](#pb.ConnectionManagementResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
+| peerIDs | [string](#string) | repeated |  |
 
 
 
@@ -925,6 +927,7 @@ P2PResponse is a response message sent in response to a P2PRequest message
 | CM_CONNECT | 0 |  |
 | CM_DISCONNECT | 1 |  |
 | CM_STATUS | 2 |  |
+| CM_GET_PEERS | 3 |  |
 
 
 
@@ -979,7 +982,6 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetPeers | [Empty](#pb.Empty) | [GetPeersResponse](#pb.GetPeersResponse) | GetPeers returns a message containing a slice of current peers in our peerstore |
 | ConnectionManagement | [ConnectionManagementRequest](#pb.ConnectionManagementRequest) | [ConnectionManagementResponse](#pb.ConnectionManagementResponse) |  |
 | Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) |  |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |

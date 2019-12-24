@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"l\n\x1b\x43onnectionManagementRequest\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x12\n\nmultiAddrs\x18\x02 \x03(\t\x12\x0f\n\x07peerIDs\x18\x03 \x03(\t\"\xe8\x02\n\x1c\x43onnectionManagementResponse\x12\x42\n\tconnected\x18\x02 \x03(\x0b\x32/.pb.ConnectionManagementResponse.ConnectedEntry\x12<\n\x06status\x18\x03 \x03(\x0b\x32,.pb.ConnectionManagementResponse.StatusEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a]\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12=\n\x05value\x18\x02 \x01(\x0b\x32..pb.ConnectionManagementResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"^\n\rExtrasRequest\x12&\n\x0brequestType\x18\x01 \x01(\x0e\x32\x11.pb.EXTRASREQTYPE\x12%\n\rextrasFeature\x18\x02 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*C\n\x0f\x43ONNMGMTREQTYPE\x12\x0e\n\nCM_CONNECT\x10\x00\x12\x11\n\rCM_DISCONNECT\x10\x01\x12\r\n\tCM_STATUS\x10\x02*.\n\rEXTRASREQTYPE\x12\r\n\tEX_ENABLE\x10\x00\x12\x0e\n\nEX_DISABLE\x10\x01*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03\x32\xe9\x01\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12[\n\x14\x43onnectionManagement\x12\x1f.pb.ConnectionManagementRequest\x1a .pb.ConnectionManagementResponse\"\x00\x12(\n\x06\x45xtras\x12\x11.pb.ExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"l\n\x1b\x43onnectionManagementRequest\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x12\n\nmultiAddrs\x18\x02 \x03(\t\x12\x0f\n\x07peerIDs\x18\x03 \x03(\t\"\xa3\x03\n\x1c\x43onnectionManagementResponse\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x42\n\tconnected\x18\x02 \x03(\x0b\x32/.pb.ConnectionManagementResponse.ConnectedEntry\x12<\n\x06status\x18\x03 \x03(\x0b\x32,.pb.ConnectionManagementResponse.StatusEntry\x12\x0f\n\x07peerIDs\x18\x04 \x03(\t\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a]\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12=\n\x05value\x18\x02 \x01(\x0b\x32..pb.ConnectionManagementResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"^\n\rExtrasRequest\x12&\n\x0brequestType\x18\x01 \x01(\x0e\x32\x11.pb.EXTRASREQTYPE\x12%\n\rextrasFeature\x18\x02 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*U\n\x0f\x43ONNMGMTREQTYPE\x12\x0e\n\nCM_CONNECT\x10\x00\x12\x11\n\rCM_DISCONNECT\x10\x01\x12\r\n\tCM_STATUS\x10\x02\x12\x10\n\x0c\x43M_GET_PEERS\x10\x03*.\n\rEXTRASREQTYPE\x12\r\n\tEX_ENABLE\x10\x00\x12\x0e\n\nEX_DISABLE\x10\x01*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03\x32\xba\x01\n\x07NodeAPI\x12[\n\x14\x43onnectionManagement\x12\x1f.pb.ConnectionManagementRequest\x1a .pb.ConnectionManagementResponse\"\x00\x12(\n\x06\x45xtras\x12\x11.pb.ExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,])
 
@@ -51,8 +51,8 @@ _P2PREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1081,
-  serialized_end=1137,
+  serialized_start=1140,
+  serialized_end=1196,
 )
 _sym_db.RegisterEnumDescriptor(_P2PREQTYPE)
 
@@ -75,11 +75,15 @@ _CONNMGMTREQTYPE = _descriptor.EnumDescriptor(
       name='CM_STATUS', index=2, number=2,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CM_GET_PEERS', index=3, number=3,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1139,
-  serialized_end=1206,
+  serialized_start=1198,
+  serialized_end=1283,
 )
 _sym_db.RegisterEnumDescriptor(_CONNMGMTREQTYPE)
 
@@ -101,8 +105,8 @@ _EXTRASREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1208,
-  serialized_end=1254,
+  serialized_start=1285,
+  serialized_end=1331,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASREQTYPE)
 
@@ -132,8 +136,8 @@ _EXTRASTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1256,
-  serialized_end=1319,
+  serialized_start=1333,
+  serialized_end=1396,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
 
@@ -145,6 +149,7 @@ LS = 3
 CM_CONNECT = 0
 CM_DISCONNECT = 1
 CM_STATUS = 2
+CM_GET_PEERS = 3
 EX_ENABLE = 0
 EX_DISABLE = 1
 IDENTIFY = 0
@@ -454,8 +459,8 @@ _CONNECTIONMANAGEMENTRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=785,
-  serialized_end=833,
+  serialized_start=844,
+  serialized_end=892,
 )
 
 _CONNECTIONMANAGEMENTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
@@ -491,8 +496,8 @@ _CONNECTIONMANAGEMENTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=835,
-  serialized_end=928,
+  serialized_start=894,
+  serialized_end=987,
 )
 
 _CONNECTIONMANAGEMENTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
@@ -528,8 +533,8 @@ _CONNECTIONMANAGEMENTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=930,
-  serialized_end=983,
+  serialized_start=989,
+  serialized_end=1042,
 )
 
 _CONNECTIONMANAGEMENTRESPONSE = _descriptor.Descriptor(
@@ -540,15 +545,29 @@ _CONNECTIONMANAGEMENTRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='connected', full_name='pb.ConnectionManagementResponse.connected', index=0,
+      name='requestType', full_name='pb.ConnectionManagementResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='connected', full_name='pb.ConnectionManagementResponse.connected', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='status', full_name='pb.ConnectionManagementResponse.status', index=1,
+      name='status', full_name='pb.ConnectionManagementResponse.status', index=2,
       number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='peerIDs', full_name='pb.ConnectionManagementResponse.peerIDs', index=3,
+      number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -566,7 +585,7 @@ _CONNECTIONMANAGEMENTRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=623,
-  serialized_end=983,
+  serialized_end=1042,
 )
 
 
@@ -603,8 +622,8 @@ _EXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=985,
-  serialized_end=1079,
+  serialized_start=1044,
+  serialized_end=1138,
 )
 
 _P2PREQUEST.fields_by_name['requestType'].enum_type = _P2PREQTYPE
@@ -615,6 +634,7 @@ _CONNECTIONMANAGEMENTRESPONSE_CONNECTEDENTRY.containing_type = _CONNECTIONMANAGE
 _CONNECTIONMANAGEMENTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _CONNECTIONMANAGEMENTRESPONSE_STATUSMESSAGE
 _CONNECTIONMANAGEMENTRESPONSE_STATUSENTRY.containing_type = _CONNECTIONMANAGEMENTRESPONSE
 _CONNECTIONMANAGEMENTRESPONSE_STATUSMESSAGE.containing_type = _CONNECTIONMANAGEMENTRESPONSE
+_CONNECTIONMANAGEMENTRESPONSE.fields_by_name['requestType'].enum_type = _CONNMGMTREQTYPE
 _CONNECTIONMANAGEMENTRESPONSE.fields_by_name['connected'].message_type = _CONNECTIONMANAGEMENTRESPONSE_CONNECTEDENTRY
 _CONNECTIONMANAGEMENTRESPONSE.fields_by_name['status'].message_type = _CONNECTIONMANAGEMENTRESPONSE_STATUSENTRY
 _EXTRASREQUEST.fields_by_name['requestType'].enum_type = _EXTRASREQTYPE
@@ -715,22 +735,13 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1322,
-  serialized_end=1555,
+  serialized_start=1399,
+  serialized_end=1585,
   methods=[
-  _descriptor.MethodDescriptor(
-    name='GetPeers',
-    full_name='pb.NodeAPI.GetPeers',
-    index=0,
-    containing_service=None,
-    input_type=util__pb2._EMPTY,
-    output_type=_GETPEERSRESPONSE,
-    serialized_options=None,
-  ),
   _descriptor.MethodDescriptor(
     name='ConnectionManagement',
     full_name='pb.NodeAPI.ConnectionManagement',
-    index=1,
+    index=0,
     containing_service=None,
     input_type=_CONNECTIONMANAGEMENTREQUEST,
     output_type=_CONNECTIONMANAGEMENTRESPONSE,
@@ -739,7 +750,7 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Extras',
     full_name='pb.NodeAPI.Extras',
-    index=2,
+    index=1,
     containing_service=None,
     input_type=_EXTRASREQUEST,
     output_type=util__pb2._EMPTY,
@@ -748,7 +759,7 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='P2P',
     full_name='pb.NodeAPI.P2P',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_P2PREQUEST,
     output_type=_P2PRESPONSE,

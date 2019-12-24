@@ -5,15 +5,6 @@ import * as node_pb from "./node_pb";
 import * as util_pb from "./util_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type NodeAPIGetPeers = {
-  readonly methodName: string;
-  readonly service: typeof NodeAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof util_pb.Empty;
-  readonly responseType: typeof node_pb.GetPeersResponse;
-};
-
 type NodeAPIConnectionManagement = {
   readonly methodName: string;
   readonly service: typeof NodeAPI;
@@ -43,7 +34,6 @@ type NodeAPIP2P = {
 
 export class NodeAPI {
   static readonly serviceName: string;
-  static readonly GetPeers: NodeAPIGetPeers;
   static readonly ConnectionManagement: NodeAPIConnectionManagement;
   static readonly Extras: NodeAPIExtras;
   static readonly P2P: NodeAPIP2P;
@@ -81,15 +71,6 @@ export class NodeAPIClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  getPeers(
-    requestMessage: util_pb.Empty,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: node_pb.GetPeersResponse|null) => void
-  ): UnaryResponse;
-  getPeers(
-    requestMessage: util_pb.Empty,
-    callback: (error: ServiceError|null, responseMessage: node_pb.GetPeersResponse|null) => void
-  ): UnaryResponse;
   connectionManagement(
     requestMessage: node_pb.ConnectionManagementRequest,
     metadata: grpc.Metadata,

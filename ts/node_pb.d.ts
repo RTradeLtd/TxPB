@@ -179,10 +179,18 @@ export namespace ConnectionManagementRequest {
 }
 
 export class ConnectionManagementResponse extends jspb.Message {
+  getRequesttype(): CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap];
+  setRequesttype(value: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap]): void;
+
   getConnectedMap(): jspb.Map<string, boolean>;
   clearConnectedMap(): void;
   getStatusMap(): jspb.Map<string, ConnectionManagementResponse.StatusMessage>;
   clearStatusMap(): void;
+  clearPeeridsList(): void;
+  getPeeridsList(): Array<string>;
+  setPeeridsList(value: Array<string>): void;
+  addPeerids(value: string, index?: number): string;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ConnectionManagementResponse.AsObject;
   static toObject(includeInstance: boolean, msg: ConnectionManagementResponse): ConnectionManagementResponse.AsObject;
@@ -195,8 +203,10 @@ export class ConnectionManagementResponse extends jspb.Message {
 
 export namespace ConnectionManagementResponse {
   export type AsObject = {
+    requesttype: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap],
     connectedMap: Array<[string, boolean]>,
     statusMap: Array<[string, ConnectionManagementResponse.StatusMessage.AsObject]>,
+    peeridsList: Array<string>,
   }
 
   export class StatusMessage extends jspb.Message {
@@ -261,6 +271,7 @@ export interface CONNMGMTREQTYPEMap {
   CM_CONNECT: 0;
   CM_DISCONNECT: 1;
   CM_STATUS: 2;
+  CM_GET_PEERS: 3;
 }
 
 export const CONNMGMTREQTYPE: CONNMGMTREQTYPEMap;

@@ -15,11 +15,6 @@ class NodeAPIStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.GetPeers = channel.unary_unary(
-        '/pb.NodeAPI/GetPeers',
-        request_serializer=util__pb2.Empty.SerializeToString,
-        response_deserializer=node__pb2.GetPeersResponse.FromString,
-        )
     self.ConnectionManagement = channel.unary_unary(
         '/pb.NodeAPI/ConnectionManagement',
         request_serializer=node__pb2.ConnectionManagementRequest.SerializeToString,
@@ -40,13 +35,6 @@ class NodeAPIStub(object):
 class NodeAPIServicer(object):
   """NodeAPI provide an API to control the underlying custom ipfs node
   """
-
-  def GetPeers(self, request, context):
-    """GetPeers returns a message containing a slice of current peers in our peerstore
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
 
   def ConnectionManagement(self, request, context):
     # missing associated documentation comment in .proto file
@@ -74,11 +62,6 @@ class NodeAPIServicer(object):
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'GetPeers': grpc.unary_unary_rpc_method_handler(
-          servicer.GetPeers,
-          request_deserializer=util__pb2.Empty.FromString,
-          response_serializer=node__pb2.GetPeersResponse.SerializeToString,
-      ),
       'ConnectionManagement': grpc.unary_unary_rpc_method_handler(
           servicer.ConnectionManagement,
           request_deserializer=node__pb2.ConnectionManagementRequest.FromString,
