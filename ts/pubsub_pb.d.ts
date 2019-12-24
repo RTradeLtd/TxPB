@@ -162,10 +162,10 @@ export namespace PubSubPeer {
 }
 
 export interface PSREQTYPEMap {
-  GET_TOPICS: 0;
-  LIST_PEERS: 1;
-  SUBSCRIBE: 2;
-  PUBLISH: 3;
+  PS_GET_TOPICS: 0;
+  PS_LIST_PEERS: 1;
+  PS_SUBSCRIBE: 2;
+  PS_PUBLISH: 3;
 }
 
 export const PSREQTYPE: PSREQTYPEMap;

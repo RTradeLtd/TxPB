@@ -52,6 +52,7 @@
     - [KeystoreRequest](#pb.KeystoreRequest)
     - [KeystoreResponse](#pb.KeystoreResponse)
   
+    - [KSREQTYPE](#pb.KSREQTYPE)
   
   
     - [KeystoreAPI](#pb.KeystoreAPI)
@@ -623,6 +624,21 @@ KeystoreResponse is a responsed to any keystore API request
 
  
 
+
+<a name="pb.KSREQTYPE"></a>
+
+### KSREQTYPE
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| KS_HAS | 0 |  |
+| KS_GET | 1 |  |
+| KS_PUT | 2 |  |
+| KS_DELETE | 3 |  |
+| KS_LIST | 4 |  |
+
+
  
 
  
@@ -635,11 +651,7 @@ KeystoreAPI provides a keystore management API
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| KeystoreHas | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreHas is used to check if we have the key in our store |
-| KeystoreGet | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreGet is used to return a key from our store |
-| KeystorePut | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystorePut is used to store a key in our store |
-| KeystoreDelete | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreDelete is used to remove a key from our store |
-| KeystoreList | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreList is used to returns all keyIDs of keys in our store |
+| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) |  |
 
  
 
@@ -1102,10 +1114,10 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| GET_TOPICS | 0 |  |
-| LIST_PEERS | 1 |  |
-| SUBSCRIBE | 2 |  |
-| PUBLISH | 3 |  |
+| PS_GET_TOPICS | 0 |  |
+| PS_LIST_PEERS | 1 |  |
+| PS_SUBSCRIBE | 2 |  |
+| PS_PUBLISH | 3 |  |
 
 
  

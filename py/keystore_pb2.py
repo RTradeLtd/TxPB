@@ -4,6 +4,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -20,9 +21,49 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"H\n\x10KeystoreResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t2\xbd\x02\n\x0bKeystoreAPI\x12:\n\x0bKeystoreHas\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystoreGet\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12:\n\x0bKeystorePut\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12=\n\x0eKeystoreDelete\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12;\n\x0cKeystoreList\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"H\n\x10KeystoreResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t*K\n\tKSREQTYPE\x12\n\n\x06KS_HAS\x10\x00\x12\n\n\x06KS_GET\x10\x01\x12\n\n\x06KS_PUT\x10\x02\x12\r\n\tKS_DELETE\x10\x03\x12\x0b\n\x07KS_LIST\x10\x04\x32\x46\n\x0bKeystoreAPI\x12\x37\n\x08Keystore\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
 )
 
+_KSREQTYPE = _descriptor.EnumDescriptor(
+  name='KSREQTYPE',
+  full_name='pb.KSREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='KS_HAS', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_GET', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_PUT', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_DELETE', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_LIST', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=149,
+  serialized_end=224,
+)
+_sym_db.RegisterEnumDescriptor(_KSREQTYPE)
+
+KSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_KSREQTYPE)
+KS_HAS = 0
+KS_GET = 1
+KS_PUT = 2
+KS_DELETE = 3
+KS_LIST = 4
 
 
 
@@ -110,6 +151,7 @@ _KEYSTORERESPONSE = _descriptor.Descriptor(
 
 DESCRIPTOR.message_types_by_name['KeystoreRequest'] = _KEYSTOREREQUEST
 DESCRIPTOR.message_types_by_name['KeystoreResponse'] = _KEYSTORERESPONSE
+DESCRIPTOR.enum_types_by_name['KSREQTYPE'] = _KSREQTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeystoreRequest = _reflection.GeneratedProtocolMessageType('KeystoreRequest', (_message.Message,), {
@@ -134,49 +176,13 @@ _KEYSTOREAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=150,
-  serialized_end=467,
+  serialized_start=226,
+  serialized_end=296,
   methods=[
   _descriptor.MethodDescriptor(
-    name='KeystoreHas',
-    full_name='pb.KeystoreAPI.KeystoreHas',
+    name='Keystore',
+    full_name='pb.KeystoreAPI.Keystore',
     index=0,
-    containing_service=None,
-    input_type=_KEYSTOREREQUEST,
-    output_type=_KEYSTORERESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeystoreGet',
-    full_name='pb.KeystoreAPI.KeystoreGet',
-    index=1,
-    containing_service=None,
-    input_type=_KEYSTOREREQUEST,
-    output_type=_KEYSTORERESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeystorePut',
-    full_name='pb.KeystoreAPI.KeystorePut',
-    index=2,
-    containing_service=None,
-    input_type=_KEYSTOREREQUEST,
-    output_type=_KEYSTORERESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeystoreDelete',
-    full_name='pb.KeystoreAPI.KeystoreDelete',
-    index=3,
-    containing_service=None,
-    input_type=_KEYSTOREREQUEST,
-    output_type=_KEYSTORERESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeystoreList',
-    full_name='pb.KeystoreAPI.KeystoreList',
-    index=4,
     containing_service=None,
     input_type=_KEYSTOREREQUEST,
     output_type=_KEYSTORERESPONSE,

@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\"\xa4\x01\n\rPubSubRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\x1d\n\x05peers\x18\x02 \x03(\x0b\x32\x0e.pb.PubSubPeer\x12\x0e\n\x06topics\x18\x03 \x03(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\x11\n\tadvertise\x18\x06 \x01(\x08\x12\x10\n\x08\x64iscover\x18\x07 \x01(\x08\"g\n\x0ePubSubResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\"\n\x07message\x18\x02 \x01(\x0b\x32\x11.pb.PubSubMessage\x12\r\n\x05names\x18\x03 \x03(\t\"l\n\rPubSubMessage\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\"+\n\nPubSubPeer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t*G\n\tPSREQTYPE\x12\x0e\n\nGET_TOPICS\x10\x00\x12\x0e\n\nLIST_PEERS\x10\x01\x12\r\n\tSUBSCRIBE\x10\x02\x12\x0b\n\x07PUBLISH\x10\x03\x32\x42\n\tPubSubAPI\x12\x35\n\x06PubSub\x12\x11.pb.PubSubRequest\x1a\x12.pb.PubSubResponse\"\x00(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\"\xa4\x01\n\rPubSubRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\x1d\n\x05peers\x18\x02 \x03(\x0b\x32\x0e.pb.PubSubPeer\x12\x0e\n\x06topics\x18\x03 \x03(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\x11\n\tadvertise\x18\x06 \x01(\x08\x12\x10\n\x08\x64iscover\x18\x07 \x01(\x08\"g\n\x0ePubSubResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\"\n\x07message\x18\x02 \x01(\x0b\x32\x11.pb.PubSubMessage\x12\r\n\x05names\x18\x03 \x03(\t\"l\n\rPubSubMessage\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\"+\n\nPubSubPeer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t*S\n\tPSREQTYPE\x12\x11\n\rPS_GET_TOPICS\x10\x00\x12\x11\n\rPS_LIST_PEERS\x10\x01\x12\x10\n\x0cPS_SUBSCRIBE\x10\x02\x12\x0e\n\nPS_PUBLISH\x10\x03\x32\x42\n\tPubSubAPI\x12\x35\n\x06PubSub\x12\x11.pb.PubSubRequest\x1a\x12.pb.PubSubResponse\"\x00(\x01\x30\x01\x62\x06proto3')
 )
 
 _PSREQTYPE = _descriptor.EnumDescriptor(
@@ -31,34 +31,34 @@ _PSREQTYPE = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='GET_TOPICS', index=0, number=0,
+      name='PS_GET_TOPICS', index=0, number=0,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LIST_PEERS', index=1, number=1,
+      name='PS_LIST_PEERS', index=1, number=1,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SUBSCRIBE', index=2, number=2,
+      name='PS_SUBSCRIBE', index=2, number=2,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PUBLISH', index=3, number=3,
+      name='PS_PUBLISH', index=3, number=3,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=447,
-  serialized_end=518,
+  serialized_end=530,
 )
 _sym_db.RegisterEnumDescriptor(_PSREQTYPE)
 
 PSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_PSREQTYPE)
-GET_TOPICS = 0
-LIST_PEERS = 1
-SUBSCRIBE = 2
-PUBLISH = 3
+PS_GET_TOPICS = 0
+PS_LIST_PEERS = 1
+PS_SUBSCRIBE = 2
+PS_PUBLISH = 3
 
 
 
@@ -330,8 +330,8 @@ _PUBSUBAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=520,
-  serialized_end=586,
+  serialized_start=532,
+  serialized_end=598,
   methods=[
   _descriptor.MethodDescriptor(
     name='PubSub',

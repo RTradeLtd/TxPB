@@ -4,43 +4,7 @@
 import * as keystore_pb from "./keystore_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type KeystoreAPIKeystoreHas = {
-  readonly methodName: string;
-  readonly service: typeof KeystoreAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof keystore_pb.KeystoreRequest;
-  readonly responseType: typeof keystore_pb.KeystoreResponse;
-};
-
-type KeystoreAPIKeystoreGet = {
-  readonly methodName: string;
-  readonly service: typeof KeystoreAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof keystore_pb.KeystoreRequest;
-  readonly responseType: typeof keystore_pb.KeystoreResponse;
-};
-
-type KeystoreAPIKeystorePut = {
-  readonly methodName: string;
-  readonly service: typeof KeystoreAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof keystore_pb.KeystoreRequest;
-  readonly responseType: typeof keystore_pb.KeystoreResponse;
-};
-
-type KeystoreAPIKeystoreDelete = {
-  readonly methodName: string;
-  readonly service: typeof KeystoreAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof keystore_pb.KeystoreRequest;
-  readonly responseType: typeof keystore_pb.KeystoreResponse;
-};
-
-type KeystoreAPIKeystoreList = {
+type KeystoreAPIKeystore = {
   readonly methodName: string;
   readonly service: typeof KeystoreAPI;
   readonly requestStream: false;
@@ -51,11 +15,7 @@ type KeystoreAPIKeystoreList = {
 
 export class KeystoreAPI {
   static readonly serviceName: string;
-  static readonly KeystoreHas: KeystoreAPIKeystoreHas;
-  static readonly KeystoreGet: KeystoreAPIKeystoreGet;
-  static readonly KeystorePut: KeystoreAPIKeystorePut;
-  static readonly KeystoreDelete: KeystoreAPIKeystoreDelete;
-  static readonly KeystoreList: KeystoreAPIKeystoreList;
+  static readonly Keystore: KeystoreAPIKeystore;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -90,48 +50,12 @@ export class KeystoreAPIClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  keystoreHas(
+  keystore(
     requestMessage: keystore_pb.KeystoreRequest,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
   ): UnaryResponse;
-  keystoreHas(
-    requestMessage: keystore_pb.KeystoreRequest,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreGet(
-    requestMessage: keystore_pb.KeystoreRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreGet(
-    requestMessage: keystore_pb.KeystoreRequest,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystorePut(
-    requestMessage: keystore_pb.KeystoreRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystorePut(
-    requestMessage: keystore_pb.KeystoreRequest,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreDelete(
-    requestMessage: keystore_pb.KeystoreRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreDelete(
-    requestMessage: keystore_pb.KeystoreRequest,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreList(
-    requestMessage: keystore_pb.KeystoreRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
-  ): UnaryResponse;
-  keystoreList(
+  keystore(
     requestMessage: keystore_pb.KeystoreRequest,
     callback: (error: ServiceError|null, responseMessage: keystore_pb.KeystoreResponse|null) => void
   ): UnaryResponse;

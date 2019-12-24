@@ -12,6 +12,7 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+goog.exportSymbol('proto.pb.KSREQTYPE', null, global);
 goog.exportSymbol('proto.pb.KeystoreRequest', null, global);
 goog.exportSymbol('proto.pb.KeystoreResponse', null, global);
 /**
@@ -479,5 +480,16 @@ proto.pb.KeystoreResponse.prototype.clearKeynamesList = function() {
   return this.setKeynamesList([]);
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.pb.KSREQTYPE = {
+  KS_HAS: 0,
+  KS_GET: 1,
+  KS_PUT: 2,
+  KS_DELETE: 3,
+  KS_LIST: 4
+};
 
 goog.object.extend(exports, proto.pb);

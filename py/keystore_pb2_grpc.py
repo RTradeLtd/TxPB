@@ -14,28 +14,8 @@ class KeystoreAPIStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.KeystoreHas = channel.unary_unary(
-        '/pb.KeystoreAPI/KeystoreHas',
-        request_serializer=keystore__pb2.KeystoreRequest.SerializeToString,
-        response_deserializer=keystore__pb2.KeystoreResponse.FromString,
-        )
-    self.KeystoreGet = channel.unary_unary(
-        '/pb.KeystoreAPI/KeystoreGet',
-        request_serializer=keystore__pb2.KeystoreRequest.SerializeToString,
-        response_deserializer=keystore__pb2.KeystoreResponse.FromString,
-        )
-    self.KeystorePut = channel.unary_unary(
-        '/pb.KeystoreAPI/KeystorePut',
-        request_serializer=keystore__pb2.KeystoreRequest.SerializeToString,
-        response_deserializer=keystore__pb2.KeystoreResponse.FromString,
-        )
-    self.KeystoreDelete = channel.unary_unary(
-        '/pb.KeystoreAPI/KeystoreDelete',
-        request_serializer=keystore__pb2.KeystoreRequest.SerializeToString,
-        response_deserializer=keystore__pb2.KeystoreResponse.FromString,
-        )
-    self.KeystoreList = channel.unary_unary(
-        '/pb.KeystoreAPI/KeystoreList',
+    self.Keystore = channel.unary_unary(
+        '/pb.KeystoreAPI/Keystore',
         request_serializer=keystore__pb2.KeystoreRequest.SerializeToString,
         response_deserializer=keystore__pb2.KeystoreResponse.FromString,
         )
@@ -45,37 +25,9 @@ class KeystoreAPIServicer(object):
   """KeystoreAPI provides a keystore management API
   """
 
-  def KeystoreHas(self, request, context):
-    """KeystoreHas is used to check if we have the key in our store
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def KeystoreGet(self, request, context):
-    """KeystoreGet is used to return a key from our store
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def KeystorePut(self, request, context):
-    """KeystorePut is used to store a key in our store
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def KeystoreDelete(self, request, context):
-    """KeystoreDelete is used to remove a key from our store
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def KeystoreList(self, request, context):
-    """KeystoreList is used to returns all keyIDs of keys in our store
-    """
+  def Keystore(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -83,28 +35,8 @@ class KeystoreAPIServicer(object):
 
 def add_KeystoreAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'KeystoreHas': grpc.unary_unary_rpc_method_handler(
-          servicer.KeystoreHas,
-          request_deserializer=keystore__pb2.KeystoreRequest.FromString,
-          response_serializer=keystore__pb2.KeystoreResponse.SerializeToString,
-      ),
-      'KeystoreGet': grpc.unary_unary_rpc_method_handler(
-          servicer.KeystoreGet,
-          request_deserializer=keystore__pb2.KeystoreRequest.FromString,
-          response_serializer=keystore__pb2.KeystoreResponse.SerializeToString,
-      ),
-      'KeystorePut': grpc.unary_unary_rpc_method_handler(
-          servicer.KeystorePut,
-          request_deserializer=keystore__pb2.KeystoreRequest.FromString,
-          response_serializer=keystore__pb2.KeystoreResponse.SerializeToString,
-      ),
-      'KeystoreDelete': grpc.unary_unary_rpc_method_handler(
-          servicer.KeystoreDelete,
-          request_deserializer=keystore__pb2.KeystoreRequest.FromString,
-          response_serializer=keystore__pb2.KeystoreResponse.SerializeToString,
-      ),
-      'KeystoreList': grpc.unary_unary_rpc_method_handler(
-          servicer.KeystoreList,
+      'Keystore': grpc.unary_unary_rpc_method_handler(
+          servicer.Keystore,
           request_deserializer=keystore__pb2.KeystoreRequest.FromString,
           response_serializer=keystore__pb2.KeystoreResponse.SerializeToString,
       ),

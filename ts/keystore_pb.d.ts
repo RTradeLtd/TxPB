@@ -61,3 +61,13 @@ export namespace KeystoreResponse {
   }
 }
 
+export interface KSREQTYPEMap {
+  KS_HAS: 0;
+  KS_GET: 1;
+  KS_PUT: 2;
+  KS_DELETE: 3;
+  KS_LIST: 4;
+}
+
+export const KSREQTYPE: KSREQTYPEMap;
+
