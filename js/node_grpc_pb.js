@@ -5,26 +5,26 @@ var grpc = require('grpc');
 var node_pb = require('./node_pb.js');
 var util_pb = require('./util_pb.js');
 
-function serialize_pb_ConnectionManagementRequest(arg) {
-  if (!(arg instanceof node_pb.ConnectionManagementRequest)) {
-    throw new Error('Expected argument of type pb.ConnectionManagementRequest');
+function serialize_pb_ConnMgmtRequest(arg) {
+  if (!(arg instanceof node_pb.ConnMgmtRequest)) {
+    throw new Error('Expected argument of type pb.ConnMgmtRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_ConnectionManagementRequest(buffer_arg) {
-  return node_pb.ConnectionManagementRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_ConnMgmtRequest(buffer_arg) {
+  return node_pb.ConnMgmtRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_ConnectionManagementResponse(arg) {
-  if (!(arg instanceof node_pb.ConnectionManagementResponse)) {
-    throw new Error('Expected argument of type pb.ConnectionManagementResponse');
+function serialize_pb_ConnMgmtResponse(arg) {
+  if (!(arg instanceof node_pb.ConnMgmtResponse)) {
+    throw new Error('Expected argument of type pb.ConnMgmtResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_ConnectionManagementResponse(buffer_arg) {
-  return node_pb.ConnectionManagementResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_ConnMgmtResponse(buffer_arg) {
+  return node_pb.ConnMgmtResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_Empty(arg) {
@@ -74,16 +74,16 @@ function deserialize_pb_P2PResponse(buffer_arg) {
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
-  connectionManagement: {
-    path: '/pb.NodeAPI/ConnectionManagement',
+  connMgmt: {
+    path: '/pb.NodeAPI/ConnMgmt',
     requestStream: false,
     responseStream: false,
-    requestType: node_pb.ConnectionManagementRequest,
-    responseType: node_pb.ConnectionManagementResponse,
-    requestSerialize: serialize_pb_ConnectionManagementRequest,
-    requestDeserialize: deserialize_pb_ConnectionManagementRequest,
-    responseSerialize: serialize_pb_ConnectionManagementResponse,
-    responseDeserialize: deserialize_pb_ConnectionManagementResponse,
+    requestType: node_pb.ConnMgmtRequest,
+    responseType: node_pb.ConnMgmtResponse,
+    requestSerialize: serialize_pb_ConnMgmtRequest,
+    requestDeserialize: deserialize_pb_ConnMgmtRequest,
+    responseSerialize: serialize_pb_ConnMgmtResponse,
+    responseDeserialize: deserialize_pb_ConnMgmtResponse,
   },
   extras: {
     path: '/pb.NodeAPI/Extras',

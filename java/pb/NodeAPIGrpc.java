@@ -30,36 +30,36 @@ public final class NodeAPIGrpc {
   public static final String SERVICE_NAME = "pb.NodeAPI";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<pb.Node.ConnectionManagementRequest,
-      pb.Node.ConnectionManagementResponse> getConnectionManagementMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest,
+      pb.Node.ConnMgmtResponse> getConnMgmtMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "ConnectionManagement",
-      requestType = pb.Node.ConnectionManagementRequest.class,
-      responseType = pb.Node.ConnectionManagementResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "ConnMgmt",
+      requestType = pb.Node.ConnMgmtRequest.class,
+      responseType = pb.Node.ConnMgmtResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.ConnectionManagementRequest,
-      pb.Node.ConnectionManagementResponse> getConnectionManagementMethod() {
-    io.grpc.MethodDescriptor<pb.Node.ConnectionManagementRequest, pb.Node.ConnectionManagementResponse> getConnectionManagementMethod;
-    if ((getConnectionManagementMethod = NodeAPIGrpc.getConnectionManagementMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest,
+      pb.Node.ConnMgmtResponse> getConnMgmtMethod() {
+    io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest, pb.Node.ConnMgmtResponse> getConnMgmtMethod;
+    if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
-        if ((getConnectionManagementMethod = NodeAPIGrpc.getConnectionManagementMethod) == null) {
-          NodeAPIGrpc.getConnectionManagementMethod = getConnectionManagementMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.ConnectionManagementRequest, pb.Node.ConnectionManagementResponse>newBuilder()
+        if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
+          NodeAPIGrpc.getConnMgmtMethod = getConnMgmtMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.ConnMgmtRequest, pb.Node.ConnMgmtResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "ConnectionManagement"))
+                  "pb.NodeAPI", "ConnMgmt"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.ConnectionManagementRequest.getDefaultInstance()))
+                  pb.Node.ConnMgmtRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.ConnectionManagementResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("ConnectionManagement"))
+                  pb.Node.ConnMgmtResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("ConnMgmt"))
                   .build();
           }
         }
      }
-     return getConnectionManagementMethod;
+     return getConnMgmtMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.ExtrasRequest,
@@ -158,9 +158,9 @@ public final class NodeAPIGrpc {
 
     /**
      */
-    public void connectionManagement(pb.Node.ConnectionManagementRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.ConnectionManagementResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getConnectionManagementMethod(), responseObserver);
+    public void connMgmt(pb.Node.ConnMgmtRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getConnMgmtMethod(), responseObserver);
     }
 
     /**
@@ -185,12 +185,12 @@ public final class NodeAPIGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getConnectionManagementMethod(),
+            getConnMgmtMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Node.ConnectionManagementRequest,
-                pb.Node.ConnectionManagementResponse>(
-                  this, METHODID_CONNECTION_MANAGEMENT)))
+                pb.Node.ConnMgmtRequest,
+                pb.Node.ConnMgmtResponse>(
+                  this, METHODID_CONN_MGMT)))
           .addMethod(
             getExtrasMethod(),
             asyncUnaryCall(
@@ -232,10 +232,10 @@ public final class NodeAPIGrpc {
 
     /**
      */
-    public void connectionManagement(pb.Node.ConnectionManagementRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.ConnectionManagementResponse> responseObserver) {
+    public void connMgmt(pb.Node.ConnMgmtRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getConnectionManagementMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getConnMgmtMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -283,9 +283,9 @@ public final class NodeAPIGrpc {
 
     /**
      */
-    public pb.Node.ConnectionManagementResponse connectionManagement(pb.Node.ConnectionManagementRequest request) {
+    public pb.Node.ConnMgmtResponse connMgmt(pb.Node.ConnMgmtRequest request) {
       return blockingUnaryCall(
-          getChannel(), getConnectionManagementMethod(), getCallOptions(), request);
+          getChannel(), getConnMgmtMethod(), getCallOptions(), request);
     }
 
     /**
@@ -331,10 +331,10 @@ public final class NodeAPIGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.ConnectionManagementResponse> connectionManagement(
-        pb.Node.ConnectionManagementRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.ConnMgmtResponse> connMgmt(
+        pb.Node.ConnMgmtRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getConnectionManagementMethod(), getCallOptions()), request);
+          getChannel().newCall(getConnMgmtMethod(), getCallOptions()), request);
     }
 
     /**
@@ -359,7 +359,7 @@ public final class NodeAPIGrpc {
     }
   }
 
-  private static final int METHODID_CONNECTION_MANAGEMENT = 0;
+  private static final int METHODID_CONN_MGMT = 0;
   private static final int METHODID_EXTRAS = 1;
   private static final int METHODID_P2P = 2;
 
@@ -380,9 +380,9 @@ public final class NodeAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CONNECTION_MANAGEMENT:
-          serviceImpl.connectionManagement((pb.Node.ConnectionManagementRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Node.ConnectionManagementResponse>) responseObserver);
+        case METHODID_CONN_MGMT:
+          serviceImpl.connMgmt((pb.Node.ConnMgmtRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse>) responseObserver);
           break;
         case METHODID_EXTRAS:
           serviceImpl.extras((pb.Node.ExtrasRequest) request,
@@ -453,7 +453,7 @@ public final class NodeAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new NodeAPIFileDescriptorSupplier())
-              .addMethod(getConnectionManagementMethod())
+              .addMethod(getConnMgmtMethod())
               .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())
               .build();

@@ -15,10 +15,10 @@ class NodeAPIStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.ConnectionManagement = channel.unary_unary(
-        '/pb.NodeAPI/ConnectionManagement',
-        request_serializer=node__pb2.ConnectionManagementRequest.SerializeToString,
-        response_deserializer=node__pb2.ConnectionManagementResponse.FromString,
+    self.ConnMgmt = channel.unary_unary(
+        '/pb.NodeAPI/ConnMgmt',
+        request_serializer=node__pb2.ConnMgmtRequest.SerializeToString,
+        response_deserializer=node__pb2.ConnMgmtResponse.FromString,
         )
     self.Extras = channel.unary_unary(
         '/pb.NodeAPI/Extras',
@@ -36,7 +36,7 @@ class NodeAPIServicer(object):
   """NodeAPI provide an API to control the underlying custom ipfs node
   """
 
-  def ConnectionManagement(self, request, context):
+  def ConnMgmt(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -62,10 +62,10 @@ class NodeAPIServicer(object):
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'ConnectionManagement': grpc.unary_unary_rpc_method_handler(
-          servicer.ConnectionManagement,
-          request_deserializer=node__pb2.ConnectionManagementRequest.FromString,
-          response_serializer=node__pb2.ConnectionManagementResponse.SerializeToString,
+      'ConnMgmt': grpc.unary_unary_rpc_method_handler(
+          servicer.ConnMgmt,
+          request_deserializer=node__pb2.ConnMgmtRequest.FromString,
+          response_serializer=node__pb2.ConnMgmtResponse.SerializeToString,
       ),
       'Extras': grpc.unary_unary_rpc_method_handler(
           servicer.Extras,

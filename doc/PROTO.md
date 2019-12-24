@@ -69,11 +69,11 @@
   
 
 - [node.proto](#node.proto)
-    - [ConnectionManagementRequest](#pb.ConnectionManagementRequest)
-    - [ConnectionManagementResponse](#pb.ConnectionManagementResponse)
-    - [ConnectionManagementResponse.ConnectedEntry](#pb.ConnectionManagementResponse.ConnectedEntry)
-    - [ConnectionManagementResponse.StatusEntry](#pb.ConnectionManagementResponse.StatusEntry)
-    - [ConnectionManagementResponse.StatusMessage](#pb.ConnectionManagementResponse.StatusMessage)
+    - [ConnMgmtRequest](#pb.ConnMgmtRequest)
+    - [ConnMgmtResponse](#pb.ConnMgmtResponse)
+    - [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry)
+    - [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry)
+    - [ConnMgmtResponse.StatusMessage](#pb.ConnMgmtResponse.StatusMessage)
     - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
     - [P2PLsInfo](#pb.P2PLsInfo)
@@ -742,9 +742,9 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectionManagementRequest"></a>
+<a name="pb.ConnMgmtRequest"></a>
 
-### ConnectionManagementRequest
+### ConnMgmtRequest
 
 
 
@@ -759,17 +759,17 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectionManagementResponse"></a>
+<a name="pb.ConnMgmtResponse"></a>
 
-### ConnectionManagementResponse
+### ConnMgmtResponse
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  |  |
-| connected | [ConnectionManagementResponse.ConnectedEntry](#pb.ConnectionManagementResponse.ConnectedEntry) | repeated |  |
-| status | [ConnectionManagementResponse.StatusEntry](#pb.ConnectionManagementResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
+| connected | [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry) | repeated |  |
+| status | [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
 | peerIDs | [string](#string) | repeated |  |
 
 
@@ -777,9 +777,9 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectionManagementResponse.ConnectedEntry"></a>
+<a name="pb.ConnMgmtResponse.ConnectedEntry"></a>
 
-### ConnectionManagementResponse.ConnectedEntry
+### ConnMgmtResponse.ConnectedEntry
 
 
 
@@ -793,25 +793,25 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectionManagementResponse.StatusEntry"></a>
+<a name="pb.ConnMgmtResponse.StatusEntry"></a>
 
-### ConnectionManagementResponse.StatusEntry
+### ConnMgmtResponse.StatusEntry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [ConnectionManagementResponse.StatusMessage](#pb.ConnectionManagementResponse.StatusMessage) |  |  |
+| value | [ConnMgmtResponse.StatusMessage](#pb.ConnMgmtResponse.StatusMessage) |  |  |
 
 
 
 
 
 
-<a name="pb.ConnectionManagementResponse.StatusMessage"></a>
+<a name="pb.ConnMgmtResponse.StatusMessage"></a>
 
-### ConnectionManagementResponse.StatusMessage
+### ConnMgmtResponse.StatusMessage
 StatusMessage is used to contain the status information about a particular disconnection attempt
 
 
@@ -982,7 +982,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| ConnectionManagement | [ConnectionManagementRequest](#pb.ConnectionManagementRequest) | [ConnectionManagementResponse](#pb.ConnectionManagementResponse) |  |
+| ConnMgmt | [ConnMgmtRequest](#pb.ConnMgmtRequest) | [ConnMgmtResponse](#pb.ConnMgmtResponse) |  |
 | Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) |  |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 

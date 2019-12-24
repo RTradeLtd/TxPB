@@ -11,13 +11,13 @@ var NodeAPI = (function () {
   return NodeAPI;
 }());
 
-NodeAPI.ConnectionManagement = {
-  methodName: "ConnectionManagement",
+NodeAPI.ConnMgmt = {
+  methodName: "ConnMgmt",
   service: NodeAPI,
   requestStream: false,
   responseStream: false,
-  requestType: node_pb.ConnectionManagementRequest,
-  responseType: node_pb.ConnectionManagementResponse
+  requestType: node_pb.ConnMgmtRequest,
+  responseType: node_pb.ConnMgmtResponse
 };
 
 NodeAPI.Extras = {
@@ -45,11 +45,11 @@ function NodeAPIClient(serviceHost, options) {
   this.options = options || {};
 }
 
-NodeAPIClient.prototype.connectionManagement = function connectionManagement(requestMessage, metadata, callback) {
+NodeAPIClient.prototype.connMgmt = function connMgmt(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(NodeAPI.ConnectionManagement, {
+  var client = grpc.unary(NodeAPI.ConnMgmt, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

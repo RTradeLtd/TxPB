@@ -146,7 +146,7 @@ export namespace GetPeersResponse {
   }
 }
 
-export class ConnectionManagementRequest extends jspb.Message {
+export class ConnMgmtRequest extends jspb.Message {
   getRequesttype(): CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap];
   setRequesttype(value: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap]): void;
 
@@ -161,16 +161,16 @@ export class ConnectionManagementRequest extends jspb.Message {
   addPeerids(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ConnectionManagementRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: ConnectionManagementRequest): ConnectionManagementRequest.AsObject;
+  toObject(includeInstance?: boolean): ConnMgmtRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ConnMgmtRequest): ConnMgmtRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: ConnectionManagementRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ConnectionManagementRequest;
-  static deserializeBinaryFromReader(message: ConnectionManagementRequest, reader: jspb.BinaryReader): ConnectionManagementRequest;
+  static serializeBinaryToWriter(message: ConnMgmtRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConnMgmtRequest;
+  static deserializeBinaryFromReader(message: ConnMgmtRequest, reader: jspb.BinaryReader): ConnMgmtRequest;
 }
 
-export namespace ConnectionManagementRequest {
+export namespace ConnMgmtRequest {
   export type AsObject = {
     requesttype: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap],
     multiaddrsList: Array<string>,
@@ -178,13 +178,13 @@ export namespace ConnectionManagementRequest {
   }
 }
 
-export class ConnectionManagementResponse extends jspb.Message {
+export class ConnMgmtResponse extends jspb.Message {
   getRequesttype(): CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap];
   setRequesttype(value: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap]): void;
 
   getConnectedMap(): jspb.Map<string, boolean>;
   clearConnectedMap(): void;
-  getStatusMap(): jspb.Map<string, ConnectionManagementResponse.StatusMessage>;
+  getStatusMap(): jspb.Map<string, ConnMgmtResponse.StatusMessage>;
   clearStatusMap(): void;
   clearPeeridsList(): void;
   getPeeridsList(): Array<string>;
@@ -192,20 +192,20 @@ export class ConnectionManagementResponse extends jspb.Message {
   addPeerids(value: string, index?: number): string;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ConnectionManagementResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: ConnectionManagementResponse): ConnectionManagementResponse.AsObject;
+  toObject(includeInstance?: boolean): ConnMgmtResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ConnMgmtResponse): ConnMgmtResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: ConnectionManagementResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ConnectionManagementResponse;
-  static deserializeBinaryFromReader(message: ConnectionManagementResponse, reader: jspb.BinaryReader): ConnectionManagementResponse;
+  static serializeBinaryToWriter(message: ConnMgmtResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConnMgmtResponse;
+  static deserializeBinaryFromReader(message: ConnMgmtResponse, reader: jspb.BinaryReader): ConnMgmtResponse;
 }
 
-export namespace ConnectionManagementResponse {
+export namespace ConnMgmtResponse {
   export type AsObject = {
     requesttype: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap],
     connectedMap: Array<[string, boolean]>,
-    statusMap: Array<[string, ConnectionManagementResponse.StatusMessage.AsObject]>,
+    statusMap: Array<[string, ConnMgmtResponse.StatusMessage.AsObject]>,
     peeridsList: Array<string>,
   }
 

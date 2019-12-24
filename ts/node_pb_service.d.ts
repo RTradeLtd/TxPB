@@ -5,13 +5,13 @@ import * as node_pb from "./node_pb";
 import * as util_pb from "./util_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type NodeAPIConnectionManagement = {
+type NodeAPIConnMgmt = {
   readonly methodName: string;
   readonly service: typeof NodeAPI;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof node_pb.ConnectionManagementRequest;
-  readonly responseType: typeof node_pb.ConnectionManagementResponse;
+  readonly requestType: typeof node_pb.ConnMgmtRequest;
+  readonly responseType: typeof node_pb.ConnMgmtResponse;
 };
 
 type NodeAPIExtras = {
@@ -34,7 +34,7 @@ type NodeAPIP2P = {
 
 export class NodeAPI {
   static readonly serviceName: string;
-  static readonly ConnectionManagement: NodeAPIConnectionManagement;
+  static readonly ConnMgmt: NodeAPIConnMgmt;
   static readonly Extras: NodeAPIExtras;
   static readonly P2P: NodeAPIP2P;
 }
@@ -71,14 +71,14 @@ export class NodeAPIClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  connectionManagement(
-    requestMessage: node_pb.ConnectionManagementRequest,
+  connMgmt(
+    requestMessage: node_pb.ConnMgmtRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: node_pb.ConnectionManagementResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: node_pb.ConnMgmtResponse|null) => void
   ): UnaryResponse;
-  connectionManagement(
-    requestMessage: node_pb.ConnectionManagementRequest,
-    callback: (error: ServiceError|null, responseMessage: node_pb.ConnectionManagementResponse|null) => void
+  connMgmt(
+    requestMessage: node_pb.ConnMgmtRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.ConnMgmtResponse|null) => void
   ): UnaryResponse;
   extras(
     requestMessage: node_pb.ExtrasRequest,

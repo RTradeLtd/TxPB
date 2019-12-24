@@ -4,7 +4,7 @@ import "util.proto";
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 service NodeAPI {
-    rpc ConnectionManagement(ConnectionManagementRequest) returns (ConnectionManagementResponse) { };
+    rpc ConnMgmt(ConnMgmtRequest) returns (ConnMgmtResponse) { };
     rpc Extras(ExtrasRequest) returns (Empty) { };
     // P2P allows control of generalized p2p streams for tcp/udp based protocol.
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
@@ -84,13 +84,13 @@ enum CONNMGMTREQTYPE {
     CM_GET_PEERS = 3;
 }
 
-message ConnectionManagementRequest {
+message ConnMgmtRequest {
     CONNMGMTREQTYPE requestType = 1;
     repeated string multiAddrs = 2;
     repeated string peerIDs = 3;
 }
 
-message ConnectionManagementResponse {
+message ConnMgmtResponse {
     CONNMGMTREQTYPE requestType = 1;
     map<string, bool> connected = 2;
     // a map of the peer id, and a custom message indicating success, or why there was a failure
