@@ -68,6 +68,15 @@ type NodeAPIP2P = {
   readonly responseType: typeof node_pb.P2PResponse;
 };
 
+type NodeAPIPubSub = {
+  readonly methodName: string;
+  readonly service: typeof NodeAPI;
+  readonly requestStream: true;
+  readonly responseStream: true;
+  readonly requestType: typeof node_pb.PubSubRequest;
+  readonly responseType: typeof node_pb.PubSubResponse;
+};
+
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly GetPeers: NodeAPIGetPeers;
@@ -77,6 +86,7 @@ export class NodeAPI {
   static readonly EnableExtras: NodeAPIEnableExtras;
   static readonly DisableExtras: NodeAPIDisableExtras;
   static readonly P2P: NodeAPIP2P;
+  static readonly PubSub: NodeAPIPubSub;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -174,5 +184,6 @@ export class NodeAPIClient {
     requestMessage: node_pb.P2PRequest,
     callback: (error: ServiceError|null, responseMessage: node_pb.P2PResponse|null) => void
   ): UnaryResponse;
+  pubSub(metadata?: grpc.Metadata): BidirectionalStream<node_pb.PubSubRequest, node_pb.PubSubResponse>;
 }
 

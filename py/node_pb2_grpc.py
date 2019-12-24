@@ -50,6 +50,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.P2PRequest.SerializeToString,
         response_deserializer=node__pb2.P2PResponse.FromString,
         )
+    self.PubSub = channel.stream_stream(
+        '/pb.NodeAPI/PubSub',
+        request_serializer=node__pb2.PubSubRequest.SerializeToString,
+        response_deserializer=node__pb2.PubSubResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -107,6 +112,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PubSub(self, request_iterator, context):
+    """PubSub allows controlling libp2p pubsub topics and subscriptions
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -144,6 +156,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.P2P,
           request_deserializer=node__pb2.P2PRequest.FromString,
           response_serializer=node__pb2.P2PResponse.SerializeToString,
+      ),
+      'PubSub': grpc.stream_stream_rpc_method_handler(
+          servicer.PubSub,
+          request_deserializer=node__pb2.PubSubRequest.FromString,
+          response_serializer=node__pb2.PubSubResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

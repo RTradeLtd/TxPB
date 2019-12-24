@@ -126,6 +126,28 @@ function deserialize_pb_P2PResponse(buffer_arg) {
   return node_pb.P2PResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_PubSubRequest(arg) {
+  if (!(arg instanceof node_pb.PubSubRequest)) {
+    throw new Error('Expected argument of type pb.PubSubRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PubSubRequest(buffer_arg) {
+  return node_pb.PubSubRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_PubSubResponse(arg) {
+  if (!(arg instanceof node_pb.PubSubResponse)) {
+    throw new Error('Expected argument of type pb.PubSubResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PubSubResponse(buffer_arg) {
+  return node_pb.PubSubResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
@@ -214,6 +236,18 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_P2PRequest,
     responseSerialize: serialize_pb_P2PResponse,
     responseDeserialize: deserialize_pb_P2PResponse,
+  },
+  // PubSub allows controlling libp2p pubsub topics and subscriptions
+  pubSub: {
+    path: '/pb.NodeAPI/PubSub',
+    requestStream: true,
+    responseStream: true,
+    requestType: node_pb.PubSubRequest,
+    responseType: node_pb.PubSubResponse,
+    requestSerialize: serialize_pb_PubSubRequest,
+    requestDeserialize: deserialize_pb_PubSubRequest,
+    responseSerialize: serialize_pb_PubSubResponse,
+    responseDeserialize: deserialize_pb_PubSubResponse,
   },
 };
 

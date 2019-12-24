@@ -88,26 +88,17 @@
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
+    - [PubSubMessage](#pb.PubSubMessage)
+    - [PubSubPeer](#pb.PubSubPeer)
+    - [PubSubRequest](#pb.PubSubRequest)
+    - [PubSubResponse](#pb.PubSubResponse)
   
     - [EXTRASTYPE](#pb.EXTRASTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
+    - [PSREQTYPE](#pb.PSREQTYPE)
   
   
     - [NodeAPI](#pb.NodeAPI)
-  
-
-- [pubsub.proto](#pubsub.proto)
-    - [PubSubListPeersRequest](#pb.PubSubListPeersRequest)
-    - [PubSubListPeersResponse](#pb.PubSubListPeersResponse)
-    - [PubSubListPeersResponse.Peer](#pb.PubSubListPeersResponse.Peer)
-    - [PubSubMessageResponse](#pb.PubSubMessageResponse)
-    - [PubSubPublishRequest](#pb.PubSubPublishRequest)
-    - [PubSubSubscribeRequest](#pb.PubSubSubscribeRequest)
-    - [PubSubTopicsResponse](#pb.PubSubTopicsResponse)
-  
-  
-  
-    - [PubSubAPI](#pb.PubSubAPI)
   
 
 - [status.proto](#status.proto)
@@ -1065,6 +1056,80 @@ P2PResponse is a response message sent in response to a P2PRequest message
 
 
 
+
+<a name="pb.PubSubMessage"></a>
+
+### PubSubMessage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| from | [bytes](#bytes) |  | who this message is from |
+| data | [bytes](#bytes) |  | the data of this message |
+| seqno | [bytes](#bytes) |  | the sequence number of this message |
+| topicIDs | [string](#string) | repeated | the topic IDs this message is sent to |
+| signature | [bytes](#bytes) |  | the signature of the sender |
+| key | [bytes](#bytes) |  | the key of the sender |
+
+
+
+
+
+
+<a name="pb.PubSubPeer"></a>
+
+### PubSubPeer
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| topic | [string](#string) |  |  |
+| peerID | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.PubSubRequest"></a>
+
+### PubSubRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  |  |
+| peers | [PubSubPeer](#pb.PubSubPeer) | repeated |  |
+| topics | [string](#string) | repeated |  |
+| topic | [string](#string) |  |  |
+| data | [bytes](#bytes) |  |  |
+| advertise | [bool](#bool) |  |  |
+| discover | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="pb.PubSubResponse"></a>
+
+### PubSubResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  |  |
+| message | [PubSubMessage](#pb.PubSubMessage) |  |  |
+| names | [string](#string) | repeated |  |
+
+
+
+
+
  
 
 
@@ -1095,6 +1160,20 @@ P2PREQTYPE denotes the particular type of request being used in the p2p rpc
 | LS | 3 | equivalent of ipfs p2p ls |
 
 
+
+<a name="pb.PSREQTYPE"></a>
+
+### PSREQTYPE
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| GET_TOPICS | 0 |  |
+| LIST_PEERS | 1 |  |
+| SUBSCRIBE | 2 |  |
+| PUBLISH | 3 |  |
+
+
  
 
  
@@ -1114,153 +1193,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
 | DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
-
- 
-
-
-
-<a name="pubsub.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## pubsub.proto
-
-
-
-<a name="pb.PubSubListPeersRequest"></a>
-
-### PubSubListPeersRequest
-PubSubListPeersRequest is used to return a list of
-peers that are subscribed to the given topic(s)
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topics | [string](#string) | repeated | the topics for which we should list peers for |
-
-
-
-
-
-
-<a name="pb.PubSubListPeersResponse"></a>
-
-### PubSubListPeersResponse
-PubSubListPeersResponse is a response to a ListPeersRequest
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| peers | [PubSubListPeersResponse.Peer](#pb.PubSubListPeersResponse.Peer) | repeated |  |
-
-
-
-
-
-
-<a name="pb.PubSubListPeersResponse.Peer"></a>
-
-### PubSubListPeersResponse.Peer
-peer is a single peer
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | topic is the topic this peer is a part of |
-| peerID | [string](#string) |  | lists the peerid for this peer |
-
-
-
-
-
-
-<a name="pb.PubSubMessageResponse"></a>
-
-### PubSubMessageResponse
-PubSubMessageResposne is a received pubsub message
-sent as a response to a subscription rpc call
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| from | [bytes](#bytes) |  | who this message is from |
-| data | [bytes](#bytes) |  | the data of this message |
-| seqno | [bytes](#bytes) |  | the sequence number of this message |
-| topicIDs | [string](#string) | repeated | the topic IDs this message is sent to |
-| signature | [bytes](#bytes) |  | the signature of the sender |
-| key | [bytes](#bytes) |  | the key of the sender |
-
-
-
-
-
-
-<a name="pb.PubSubPublishRequest"></a>
-
-### PubSubPublishRequest
-PubSubPublishRequest is a message used to publish data to a topic
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | the topic we are publishing too |
-| data | [bytes](#bytes) |  | the data we are publishing |
-| advertise | [bool](#bool) |  | whether or not we should engage in advertise operations |
-
-
-
-
-
-
-<a name="pb.PubSubSubscribeRequest"></a>
-
-### PubSubSubscribeRequest
-PubSubSubscribeRequest is used to initiate a subscription
-to a given pubsub topic and stream received messages
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | the topic we should subscribe to |
-| discover | [bool](#bool) |  | indicates whether the server should perform service discover for peers on the same topic |
-
-
-
-
-
-
-<a name="pb.PubSubTopicsResponse"></a>
-
-### PubSubTopicsResponse
-PubSubTopics is a response that returns
-the names of all known topics
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| names | [string](#string) | repeated | the names of topics |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="pb.PubSubAPI"></a>
-
-### PubSubAPI
-PubSubAPI provides a gRPC API for a libp2p pubsub instance
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| PubSubGetTopics | [Empty](#pb.Empty) | [PubSubTopicsResponse](#pb.PubSubTopicsResponse) | PubSubGetTopics is used to return a list of all known topics the pubsub instance is subscribed to. |
-| PubSubListPeers | [PubSubListPeersRequest](#pb.PubSubListPeersRequest) | [PubSubListPeersResponse](#pb.PubSubListPeersResponse) | PubSubListPeers is used to return a list of peers subscribed to a given topic or topics. |
-| PubSubSubscribe | [PubSubSubscribeRequest](#pb.PubSubSubscribeRequest) | [PubSubMessageResponse](#pb.PubSubMessageResponse) stream | PubSubSubscribe is used to subscribe to a topic and receive messages Server will stream the messages received on the topic specified during the initial subscription call, and send each message back to the client as it is received. |
-| PubSubPublish | [PubSubPublishRequest](#pb.PubSubPublishRequest) stream | [Empty](#pb.Empty) | PubSubPublish is used to send a stream of messages to a pubsub topic. |
+| PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions |
 
  
 

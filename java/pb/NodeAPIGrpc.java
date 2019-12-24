@@ -254,6 +254,38 @@ public final class NodeAPIGrpc {
      return getP2PMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.PubSubRequest,
+      pb.Node.PubSubResponse> getPubSubMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PubSub",
+      requestType = pb.Node.PubSubRequest.class,
+      responseType = pb.Node.PubSubResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<pb.Node.PubSubRequest,
+      pb.Node.PubSubResponse> getPubSubMethod() {
+    io.grpc.MethodDescriptor<pb.Node.PubSubRequest, pb.Node.PubSubResponse> getPubSubMethod;
+    if ((getPubSubMethod = NodeAPIGrpc.getPubSubMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getPubSubMethod = NodeAPIGrpc.getPubSubMethod) == null) {
+          NodeAPIGrpc.getPubSubMethod = getPubSubMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.PubSubRequest, pb.Node.PubSubResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "PubSub"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PubSubRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PubSubResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("PubSub"))
+                  .build();
+          }
+        }
+     }
+     return getPubSubMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -356,6 +388,16 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getP2PMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * PubSub allows controlling libp2p pubsub topics and subscriptions
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.Node.PubSubRequest> pubSub(
+        io.grpc.stub.StreamObserver<pb.Node.PubSubResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getPubSubMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -407,6 +449,13 @@ public final class NodeAPIGrpc {
                 pb.Node.P2PRequest,
                 pb.Node.P2PResponse>(
                   this, METHODID_P2P)))
+          .addMethod(
+            getPubSubMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                pb.Node.PubSubRequest,
+                pb.Node.PubSubResponse>(
+                  this, METHODID_PUB_SUB)))
           .build();
     }
   }
@@ -509,6 +558,17 @@ public final class NodeAPIGrpc {
         io.grpc.stub.StreamObserver<pb.Node.P2PResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getP2PMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * PubSub allows controlling libp2p pubsub topics and subscriptions
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.Node.PubSubRequest> pubSub(
+        io.grpc.stub.StreamObserver<pb.Node.PubSubResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getPubSubMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -714,6 +774,7 @@ public final class NodeAPIGrpc {
   private static final int METHODID_ENABLE_EXTRAS = 4;
   private static final int METHODID_DISABLE_EXTRAS = 5;
   private static final int METHODID_P2P = 6;
+  private static final int METHODID_PUB_SUB = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -770,6 +831,9 @@ public final class NodeAPIGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_PUB_SUB:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.pubSub(
+              (io.grpc.stub.StreamObserver<pb.Node.PubSubResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -828,6 +892,7 @@ public final class NodeAPIGrpc {
               .addMethod(getEnableExtrasMethod())
               .addMethod(getDisableExtrasMethod())
               .addMethod(getP2PMethod())
+              .addMethod(getPubSubMethod())
               .build();
         }
       }

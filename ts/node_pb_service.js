@@ -74,6 +74,15 @@ NodeAPI.P2P = {
   responseType: node_pb.P2PResponse
 };
 
+NodeAPI.PubSub = {
+  methodName: "PubSub",
+  service: NodeAPI,
+  requestStream: true,
+  responseStream: true,
+  requestType: node_pb.PubSubRequest,
+  responseType: node_pb.PubSubResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -293,6 +302,51 @@ NodeAPIClient.prototype.p2P = function p2P(requestMessage, metadata, callback) {
   return {
     cancel: function () {
       callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.pubSub = function pubSub(metadata) {
+  var listeners = {
+    data: [],
+    end: [],
+    status: []
+  };
+  var client = grpc.client(NodeAPI.PubSub, {
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport
+  });
+  client.onEnd(function (status, statusMessage, trailers) {
+    listeners.status.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners.end.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners = null;
+  });
+  client.onMessage(function (message) {
+    listeners.data.forEach(function (handler) {
+      handler(message);
+    })
+  });
+  client.start(metadata);
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    write: function (requestMessage) {
+      client.send(requestMessage);
+      return this;
+    },
+    end: function () {
+      client.finishSend();
+    },
+    cancel: function () {
+      listeners = null;
       client.close();
     }
   };
