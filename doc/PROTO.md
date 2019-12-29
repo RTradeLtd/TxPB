@@ -73,7 +73,7 @@
     - [ConnMgmtResponse](#pb.ConnMgmtResponse)
     - [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry)
     - [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry)
-    - [ConnMgmtResponse.StatusMessage](#pb.ConnMgmtResponse.StatusMessage)
+    - [ConnMgmtStatus](#pb.ConnMgmtStatus)
     - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
     - [P2PLsInfo](#pb.P2PLsInfo)
@@ -753,9 +753,9 @@ NameSysAPI provides a generic name resolution API
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  |  |
-| multiAddrs | [string](#string) | repeated |  |
-| peerIDs | [string](#string) | repeated |  |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  | indicates the particular connection management request being performed |
+| multiAddrs | [string](#string) | repeated | a list of multiaddrs sent by: CM_CONNECT |
+| peerIDs | [string](#string) | repeated | a list of peer IDs sent by: CM_DISCONNECT, CM_STATUS, CM_GET_PEERS |
 
 
 
@@ -770,7 +770,7 @@ NameSysAPI provides a generic name resolution API
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  |  |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  | indicates the particular connection management request being performed |
 | connected | [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry) | repeated |  |
 | status | [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
 | peerIDs | [string](#string) | repeated |  |
@@ -805,17 +805,17 @@ NameSysAPI provides a generic name resolution API
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [ConnMgmtResponse.StatusMessage](#pb.ConnMgmtResponse.StatusMessage) |  |  |
+| value | [ConnMgmtStatus](#pb.ConnMgmtStatus) |  |  |
 
 
 
 
 
 
-<a name="pb.ConnMgmtResponse.StatusMessage"></a>
+<a name="pb.ConnMgmtStatus"></a>
 
-### ConnMgmtResponse.StatusMessage
-StatusMessage is used to contain the status information about a particular disconnection attempt
+### ConnMgmtStatus
+Contains status information about a particular disconnect attempt
 
 
 | Field | Type | Label | Description |
@@ -836,8 +836,8 @@ StatusMessage is used to contain the status information about a particular disco
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [EXTRASREQTYPE](#pb.EXTRASREQTYPE) |  |  |
-| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  |  |
+| requestType | [EXTRASREQTYPE](#pb.EXTRASREQTYPE) |  | indicates the request being performed |
+| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | indicates the extras feature this request applies to |
 
 
 
@@ -923,26 +923,26 @@ P2PResponse is a response message sent in response to a P2PRequest message
 <a name="pb.CONNMGMTREQTYPE"></a>
 
 ### CONNMGMTREQTYPE
-
+CONNMGMTREQTYPE indicates the particular ConnMgmt request being performed
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| CM_CONNECT | 0 |  |
-| CM_DISCONNECT | 1 |  |
-| CM_STATUS | 2 |  |
-| CM_GET_PEERS | 3 |  |
+| CM_CONNECT | 0 | CM_CONNECT is used to connect to a libp2p peer |
+| CM_DISCONNECT | 1 | CM_DISCONNECT is used to disconnect from a libp2p peer |
+| CM_STATUS | 2 | CM_STATUS is used to return status information about libp2p peer connections useful for determining whether or not we are connected to someone |
+| CM_GET_PEERS | 3 | CM_GET_PEERS is used to return all known peers |
 
 
 
 <a name="pb.EXTRASREQTYPE"></a>
 
 ### EXTRASREQTYPE
-
+EXTRASREQTYPE indicates the particular Extras request being performed
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EX_ENABLE | 0 |  |
-| EX_DISABLE | 1 |  |
+| EX_ENABLE | 0 | EX_ENABLE is used to enable a particular node extras feature |
+| EX_DISABLE | 1 | EX_DISABLE is used to disable a particular node extras feature |
 
 
 
@@ -985,8 +985,8 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| ConnMgmt | [ConnMgmtRequest](#pb.ConnMgmtRequest) | [ConnMgmtResponse](#pb.ConnMgmtResponse) |  |
-| Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) |  |
+| ConnMgmt | [ConnMgmtRequest](#pb.ConnMgmtRequest) | [ConnMgmtResponse](#pb.ConnMgmtResponse) | ConnMgmt provides control over libp2p connections |
+| Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) | Extras provide control over node extras capabilities |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 
  

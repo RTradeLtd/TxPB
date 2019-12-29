@@ -157,6 +157,9 @@ public final class NodeAPIGrpc {
   public static abstract class NodeAPIImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     * ConnMgmt provides control over libp2p connections
+     * </pre>
      */
     public void connMgmt(pb.Node.ConnMgmtRequest request,
         io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
@@ -164,6 +167,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * Extras provide control over node extras capabilities
+     * </pre>
      */
     public void extras(pb.Node.ExtrasRequest request,
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
@@ -231,6 +237,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * ConnMgmt provides control over libp2p connections
+     * </pre>
      */
     public void connMgmt(pb.Node.ConnMgmtRequest request,
         io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
@@ -239,6 +248,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * Extras provide control over node extras capabilities
+     * </pre>
      */
     public void extras(pb.Node.ExtrasRequest request,
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
@@ -282,6 +294,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * ConnMgmt provides control over libp2p connections
+     * </pre>
      */
     public pb.Node.ConnMgmtResponse connMgmt(pb.Node.ConnMgmtRequest request) {
       return blockingUnaryCall(
@@ -289,6 +304,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * Extras provide control over node extras capabilities
+     * </pre>
      */
     public pb.Util.Empty extras(pb.Node.ExtrasRequest request) {
       return blockingUnaryCall(
@@ -330,6 +348,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * ConnMgmt provides control over libp2p connections
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Node.ConnMgmtResponse> connMgmt(
         pb.Node.ConnMgmtRequest request) {
@@ -338,6 +359,9 @@ public final class NodeAPIGrpc {
     }
 
     /**
+     * <pre>
+     * Extras provide control over node extras capabilities
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> extras(
         pb.Node.ExtrasRequest request) {

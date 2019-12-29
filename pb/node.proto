@@ -4,7 +4,9 @@ import "util.proto";
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 service NodeAPI {
+    // ConnMgmt provides control over libp2p connections
     rpc ConnMgmt(ConnMgmtRequest) returns (ConnMgmtResponse) { };
+    // Extras provide control over node extras capabilities
     rpc Extras(ExtrasRequest) returns (Empty) { };
     // P2P allows control of generalized p2p streams for tcp/udp based protocol.
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
@@ -77,36 +79,52 @@ message GetPeersResponse {
 }
 
 
+// CONNMGMTREQTYPE indicates the particular ConnMgmt request being performed
 enum CONNMGMTREQTYPE {
+    // CM_CONNECT is used to connect to a libp2p peer
     CM_CONNECT = 0;
+    // CM_DISCONNECT is used to disconnect from a libp2p peer
     CM_DISCONNECT = 1;
+    // CM_STATUS is used to return status information about libp2p peer connections
+    // useful for determining whether or not we are connected to someone
     CM_STATUS = 2;
+    //CM_GET_PEERS is used to return all known peers
     CM_GET_PEERS = 3;
 }
 
 message ConnMgmtRequest {
+    // indicates the particular connection management request being performed
     CONNMGMTREQTYPE requestType = 1;
+    // a list of multiaddrs
+    // sent by: CM_CONNECT
     repeated string multiAddrs = 2;
+    // a list of peer IDs
+    // sent by: CM_DISCONNECT, CM_STATUS, CM_GET_PEERS
     repeated string peerIDs = 3;
 }
 
 message ConnMgmtResponse {
+    // indicates the particular connection management request being performed
     CONNMGMTREQTYPE requestType = 1;
     map<string, bool> connected = 2;
     // a map of the peer id, and a custom message indicating success, or why there was a failure
-    map<string, StatusMessage> status = 3;
+    map<string, ConnMgmtStatus> status = 3;
     repeated string peerIDs = 4;
-    // StatusMessage is used to contain the status information about a particular disconnection attempt
-    message StatusMessage {
-        // indicate whether or not we actually disconnected
-        bool disconnected = 1;
-        // if disconnected is false, the reason why it is false
-        string reason = 2;
-    }
 }
 
+// Contains status information about a particular disconnect attempt
+message ConnMgmtStatus {
+    // indicate whether or not we actually disconnected
+    bool disconnected = 1;
+    // if disconnected is false, the reason why it is false
+    string reason = 2;
+}
+
+// EXTRASREQTYPE indicates the particular Extras request being performed
 enum EXTRASREQTYPE {
+    // EX_ENABLE is used to enable a particular node extras feature
     EX_ENABLE = 0;
+    // EX_DISABLE is used to disable a particular node extras feature
     EX_DISABLE = 1;
 }
 
@@ -123,6 +141,8 @@ enum EXTRASTYPE {
 }
 
 message ExtrasRequest {
+    // indicates the request being performed
     EXTRASREQTYPE requestType = 1;
+    // indicates the extras feature this request applies to
     EXTRASTYPE extrasFeature = 2;
 }

@@ -37,15 +37,15 @@ class NodeAPIServicer(object):
   """
 
   def ConnMgmt(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """ConnMgmt provides control over libp2p connections
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def Extras(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """Extras provide control over node extras capabilities
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')

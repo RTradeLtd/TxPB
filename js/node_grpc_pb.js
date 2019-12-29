@@ -74,6 +74,7 @@ function deserialize_pb_P2PResponse(buffer_arg) {
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
+  // ConnMgmt provides control over libp2p connections
   connMgmt: {
     path: '/pb.NodeAPI/ConnMgmt',
     requestStream: false,
@@ -85,6 +86,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseSerialize: serialize_pb_ConnMgmtResponse,
     responseDeserialize: deserialize_pb_ConnMgmtResponse,
   },
+  // Extras provide control over node extras capabilities
   extras: {
     path: '/pb.NodeAPI/Extras',
     requestStream: false,

@@ -184,7 +184,7 @@ export class ConnMgmtResponse extends jspb.Message {
 
   getConnectedMap(): jspb.Map<string, boolean>;
   clearConnectedMap(): void;
-  getStatusMap(): jspb.Map<string, ConnMgmtResponse.StatusMessage>;
+  getStatusMap(): jspb.Map<string, ConnMgmtStatus>;
   clearStatusMap(): void;
   clearPeeridsList(): void;
   getPeeridsList(): Array<string>;
@@ -205,32 +205,32 @@ export namespace ConnMgmtResponse {
   export type AsObject = {
     requesttype: CONNMGMTREQTYPEMap[keyof CONNMGMTREQTYPEMap],
     connectedMap: Array<[string, boolean]>,
-    statusMap: Array<[string, ConnMgmtResponse.StatusMessage.AsObject]>,
+    statusMap: Array<[string, ConnMgmtStatus.AsObject]>,
     peeridsList: Array<string>,
   }
+}
 
-  export class StatusMessage extends jspb.Message {
-    getDisconnected(): boolean;
-    setDisconnected(value: boolean): void;
+export class ConnMgmtStatus extends jspb.Message {
+  getDisconnected(): boolean;
+  setDisconnected(value: boolean): void;
 
-    getReason(): string;
-    setReason(value: string): void;
+  getReason(): string;
+  setReason(value: string): void;
 
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): StatusMessage.AsObject;
-    static toObject(includeInstance: boolean, msg: StatusMessage): StatusMessage.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: StatusMessage, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): StatusMessage;
-    static deserializeBinaryFromReader(message: StatusMessage, reader: jspb.BinaryReader): StatusMessage;
-  }
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ConnMgmtStatus.AsObject;
+  static toObject(includeInstance: boolean, msg: ConnMgmtStatus): ConnMgmtStatus.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ConnMgmtStatus, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ConnMgmtStatus;
+  static deserializeBinaryFromReader(message: ConnMgmtStatus, reader: jspb.BinaryReader): ConnMgmtStatus;
+}
 
-  export namespace StatusMessage {
-    export type AsObject = {
-      disconnected: boolean,
-      reason: string,
-    }
+export namespace ConnMgmtStatus {
+  export type AsObject = {
+    disconnected: boolean,
+    reason: string,
   }
 }
 
