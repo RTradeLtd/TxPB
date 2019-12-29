@@ -222,7 +222,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * Blockstore allows low-level management of the underlying blockstore
      * </pre>
      */
     public void blockstore(pb.Node.BlockstoreRequest request,
@@ -322,7 +322,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * Blockstore allows low-level management of the underlying blockstore
      * </pre>
      */
     public void blockstore(pb.Node.BlockstoreRequest request,
@@ -387,7 +387,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * Blockstore allows low-level management of the underlying blockstore
      * </pre>
      */
     public pb.Node.BlockstoreResponse blockstore(pb.Node.BlockstoreRequest request) {
@@ -454,7 +454,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * Blockstore allows low-level management of the underlying blockstore
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Node.BlockstoreResponse> blockstore(

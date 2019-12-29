@@ -1063,7 +1063,7 @@ type NodeAPIClient interface {
 	// By using this RPC, we can tunnel traffic similar to ssh tunneling
 	// except using libp2p as the transport layer, and and tcp/udp port.
 	P2P(ctx context.Context, in *P2PRequest, opts ...grpc.CallOption) (*P2PResponse, error)
-	// Blockstore allows management of the blockstore, and optionally, the counted store
+	// Blockstore allows low-level management of the underlying blockstore
 	Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error)
 }
 
@@ -1121,7 +1121,7 @@ type NodeAPIServer interface {
 	// By using this RPC, we can tunnel traffic similar to ssh tunneling
 	// except using libp2p as the transport layer, and and tcp/udp port.
 	P2P(context.Context, *P2PRequest) (*P2PResponse, error)
-	// Blockstore allows management of the blockstore, and optionally, the counted store
+	// Blockstore allows low-level management of the underlying blockstore
 	Blockstore(context.Context, *BlockstoreRequest) (*BlockstoreResponse, error)
 }
 

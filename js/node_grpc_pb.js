@@ -134,7 +134,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseSerialize: serialize_pb_P2PResponse,
     responseDeserialize: deserialize_pb_P2PResponse,
   },
-  // Blockstore allows management of the blockstore, and optionally, the counted store
+  // Blockstore allows low-level management of the underlying blockstore
   blockstore: {
     path: '/pb.NodeAPI/Blockstore',
     requestStream: false,

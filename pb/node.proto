@@ -12,7 +12,7 @@ service NodeAPI {
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
     // except using libp2p as the transport layer, and and tcp/udp port.
     rpc P2P(P2PRequest) returns (P2PResponse) { };
-    // Blockstore allows management of the blockstore, and optionally, the counted store
+    // Blockstore allows low-level management of the underlying blockstore
     rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
 }
 
