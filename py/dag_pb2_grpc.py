@@ -5,8 +5,10 @@ import dag_pb2 as dag__pb2
 
 
 class DagAPIStub(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """DagAPI provides an IPLD object manipulation API and is capable of manipulating
+  arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+  to the go-ipfs `ipfs dag` subset of commands.
+  """
 
   def __init__(self, channel):
     """Constructor.
@@ -27,8 +29,10 @@ class DagAPIStub(object):
 
 
 class DagAPIServicer(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """DagAPI provides an IPLD object manipulation API and is capable of manipulating
+  arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+  to the go-ipfs `ipfs dag` subset of commands.
+  """
 
   def Dag(self, request, context):
     """Dag is a unidirectional rpc allowing manipulation of low-level ipld objects

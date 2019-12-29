@@ -461,7 +461,9 @@ DAGREQTYPE indicates the particular DagAPI request being performed
 <a name="pb.DagAPI"></a>
 
 ### DagAPI
-
+DagAPI provides an IPLD object manipulation API and is capable of manipulating
+arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+to the go-ipfs `ipfs dag` subset of commands.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -591,13 +593,13 @@ FileAPI provides a gRPC api to upload/download files as UnixFS objects
 <a name="pb.KeystoreRequest"></a>
 
 ### KeystoreRequest
-KeystoreRequest is a message used in any keystore API request
+Used to submit a request to Keystore RPC
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | name of the key the request is for applicable to: has, get, put, delete |
-| privateKey | [bytes](#bytes) |  | the actual private key applicable to: put |
+| name | [string](#string) |  | name of the key the request is for sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE |
+| privateKey | [bytes](#bytes) |  | the actual private key bytes sent by: KS_PUT |
 
 
 
@@ -607,14 +609,14 @@ KeystoreRequest is a message used in any keystore API request
 <a name="pb.KeystoreResponse"></a>
 
 ### KeystoreResponse
-KeystoreResponse is a responsed to any keystore API request
+Used in response to a Keystore RPC
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [string](#string) |  | a generic status message returned by Has requests, and may or may not be returned by other requests |
-| privateKey | [bytes](#bytes) |  | the actual private key returned by Get requests |
-| keyNames | [string](#string) | repeated | names of keys returned by a List request |
+| privateKey | [bytes](#bytes) |  | the private key bytes sent by: KS_GET |
+| keyNames | [string](#string) | repeated | contains all known key names sent by: KS_LIST |
+| has | [bool](#bool) |  | indicates if we have the key in our keystore sent by: KS_HAS |
 
 
 
@@ -626,15 +628,15 @@ KeystoreResponse is a responsed to any keystore API request
 <a name="pb.KSREQTYPE"></a>
 
 ### KSREQTYPE
-
+KSREQTYPE indicates the particular KeystoreAPI request being performed
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| KS_HAS | 0 |  |
-| KS_GET | 1 |  |
-| KS_PUT | 2 |  |
-| KS_DELETE | 3 |  |
-| KS_LIST | 4 |  |
+| KS_HAS | 0 | KS_HAS is used to check if the key exists in our keystore |
+| KS_GET | 1 | KS_GET is used to retrieve private key bytes from our keystore |
+| KS_PUT | 2 | KS_PUT is used to store private key bytes in our keystore |
+| KS_DELETE | 3 | KS_DELETE is used to delete private keys from our keystore |
+| KS_LIST | 4 | KS_LIST is used to list all keys in our keystore by their name |
 
 
  
@@ -645,11 +647,12 @@ KeystoreResponse is a responsed to any keystore API request
 <a name="pb.KeystoreAPI"></a>
 
 ### KeystoreAPI
-KeystoreAPI provides a keystore management API
+KeystoreAPI provides a keystore management API, and is equivalent
+to the go-ipfs `ipfs key` subset of commands.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) |  |
+| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | Keystore is a unidirectional RPC allowing management of ipfs keystores |
 
  
 

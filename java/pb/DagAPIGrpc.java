@@ -16,6 +16,11 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ * DagAPI provides an IPLD object manipulation API and is capable of manipulating
+ * arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+ * to the go-ipfs `ipfs dag` subset of commands.
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.19.0)",
@@ -115,6 +120,11 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides an IPLD object manipulation API and is capable of manipulating
+   * arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+   * to the go-ipfs `ipfs dag` subset of commands.
+   * </pre>
    */
   public static abstract class DagAPIImplBase implements io.grpc.BindableService {
 
@@ -159,6 +169,11 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides an IPLD object manipulation API and is capable of manipulating
+   * arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+   * to the go-ipfs `ipfs dag` subset of commands.
+   * </pre>
    */
   public static final class DagAPIStub extends io.grpc.stub.AbstractStub<DagAPIStub> {
     private DagAPIStub(io.grpc.Channel channel) {
@@ -200,6 +215,11 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides an IPLD object manipulation API and is capable of manipulating
+   * arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+   * to the go-ipfs `ipfs dag` subset of commands.
+   * </pre>
    */
   public static final class DagAPIBlockingStub extends io.grpc.stub.AbstractStub<DagAPIBlockingStub> {
     private DagAPIBlockingStub(io.grpc.Channel channel) {
@@ -229,6 +249,11 @@ public final class DagAPIGrpc {
   }
 
   /**
+   * <pre>
+   * DagAPI provides an IPLD object manipulation API and is capable of manipulating
+   * arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+   * to the go-ipfs `ipfs dag` subset of commands.
+   * </pre>
    */
   public static final class DagAPIFutureStub extends io.grpc.stub.AbstractStub<DagAPIFutureStub> {
     private DagAPIFutureStub(io.grpc.Channel channel) {

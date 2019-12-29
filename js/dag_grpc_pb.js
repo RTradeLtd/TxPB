@@ -27,6 +27,9 @@ function deserialize_pb_DagResponse(buffer_arg) {
 }
 
 
+// DagAPI provides an IPLD object manipulation API and is capable of manipulating
+// arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
+// to the go-ipfs `ipfs dag` subset of commands.
 var DagAPIService = exports.DagAPIService = {
   // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
   dag: {

@@ -5,7 +5,8 @@ import keystore_pb2 as keystore__pb2
 
 
 class KeystoreAPIStub(object):
-  """KeystoreAPI provides a keystore management API
+  """KeystoreAPI provides a keystore management API, and is equivalent
+  to the go-ipfs `ipfs key` subset of commands.
   """
 
   def __init__(self, channel):
@@ -22,12 +23,13 @@ class KeystoreAPIStub(object):
 
 
 class KeystoreAPIServicer(object):
-  """KeystoreAPI provides a keystore management API
+  """KeystoreAPI provides a keystore management API, and is equivalent
+  to the go-ipfs `ipfs key` subset of commands.
   """
 
   def Keystore(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """Keystore is a unidirectional RPC allowing management of ipfs keystores
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')

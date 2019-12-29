@@ -27,8 +27,10 @@ function deserialize_pb_KeystoreResponse(buffer_arg) {
 }
 
 
-// KeystoreAPI provides a keystore management API
+// KeystoreAPI provides a keystore management API, and is equivalent
+// to the go-ipfs `ipfs key` subset of commands.
 var KeystoreAPIService = exports.KeystoreAPIService = {
+  // Keystore is a unidirectional RPC allowing management of ipfs keystores
   keystore: {
     path: '/pb.KeystoreAPI/Keystore',
     requestStream: false,

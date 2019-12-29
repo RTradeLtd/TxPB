@@ -30,9 +30,6 @@ export namespace KeystoreRequest {
 }
 
 export class KeystoreResponse extends jspb.Message {
-  getStatus(): string;
-  setStatus(value: string): void;
-
   getPrivatekey(): Uint8Array | string;
   getPrivatekey_asU8(): Uint8Array;
   getPrivatekey_asB64(): string;
@@ -42,6 +39,9 @@ export class KeystoreResponse extends jspb.Message {
   getKeynamesList(): Array<string>;
   setKeynamesList(value: Array<string>): void;
   addKeynames(value: string, index?: number): string;
+
+  getHas(): boolean;
+  setHas(value: boolean): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): KeystoreResponse.AsObject;
@@ -55,9 +55,9 @@ export class KeystoreResponse extends jspb.Message {
 
 export namespace KeystoreResponse {
   export type AsObject = {
-    status: string,
     privatekey: Uint8Array | string,
     keynamesList: Array<string>,
+    has: boolean,
   }
 }
 

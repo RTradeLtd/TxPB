@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"H\n\x10KeystoreResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t*K\n\tKSREQTYPE\x12\n\n\x06KS_HAS\x10\x00\x12\n\n\x06KS_GET\x10\x01\x12\n\n\x06KS_PUT\x10\x02\x12\r\n\tKS_DELETE\x10\x03\x12\x0b\n\x07KS_LIST\x10\x04\x32\x46\n\x0bKeystoreAPI\x12\x37\n\x08Keystore\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0ekeystore.proto\x12\x02pb\"3\n\x0fKeystoreRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\"E\n\x10KeystoreResponse\x12\x12\n\nprivateKey\x18\x01 \x01(\x0c\x12\x10\n\x08keyNames\x18\x02 \x03(\t\x12\x0b\n\x03has\x18\x03 \x01(\x08*K\n\tKSREQTYPE\x12\n\n\x06KS_HAS\x10\x00\x12\n\n\x06KS_GET\x10\x01\x12\n\n\x06KS_PUT\x10\x02\x12\r\n\tKS_DELETE\x10\x03\x12\x0b\n\x07KS_LIST\x10\x04\x32\x46\n\x0bKeystoreAPI\x12\x37\n\x08Keystore\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
 )
 
 _KSREQTYPE = _descriptor.EnumDescriptor(
@@ -53,8 +53,8 @@ _KSREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=149,
-  serialized_end=224,
+  serialized_start=146,
+  serialized_end=221,
 )
 _sym_db.RegisterEnumDescriptor(_KSREQTYPE)
 
@@ -113,23 +113,23 @@ _KEYSTORERESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='status', full_name='pb.KeystoreResponse.status', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='privateKey', full_name='pb.KeystoreResponse.privateKey', index=1,
-      number=2, type=12, cpp_type=9, label=1,
+      name='privateKey', full_name='pb.KeystoreResponse.privateKey', index=0,
+      number=1, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyNames', full_name='pb.KeystoreResponse.keyNames', index=2,
-      number=3, type=9, cpp_type=9, label=3,
+      name='keyNames', full_name='pb.KeystoreResponse.keyNames', index=1,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='has', full_name='pb.KeystoreResponse.has', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -146,7 +146,7 @@ _KEYSTORERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=75,
-  serialized_end=147,
+  serialized_end=144,
 )
 
 DESCRIPTOR.message_types_by_name['KeystoreRequest'] = _KEYSTOREREQUEST
@@ -176,8 +176,8 @@ _KEYSTOREAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=226,
-  serialized_end=296,
+  serialized_start=223,
+  serialized_end=293,
   methods=[
   _descriptor.MethodDescriptor(
     name='Keystore',

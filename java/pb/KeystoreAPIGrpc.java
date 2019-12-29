@@ -17,7 +17,8 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
- * KeystoreAPI provides a keystore management API
+ * KeystoreAPI provides a keystore management API, and is equivalent
+ * to the go-ipfs `ipfs key` subset of commands.
  * </pre>
  */
 @javax.annotation.Generated(
@@ -87,12 +88,16 @@ public final class KeystoreAPIGrpc {
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static abstract class KeystoreAPIImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
      */
     public void keystore(pb.Keystore.KeystoreRequest request,
         io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
@@ -114,7 +119,8 @@ public final class KeystoreAPIGrpc {
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIStub extends io.grpc.stub.AbstractStub<KeystoreAPIStub> {
@@ -134,6 +140,9 @@ public final class KeystoreAPIGrpc {
     }
 
     /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
      */
     public void keystore(pb.Keystore.KeystoreRequest request,
         io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
@@ -144,7 +153,8 @@ public final class KeystoreAPIGrpc {
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIBlockingStub extends io.grpc.stub.AbstractStub<KeystoreAPIBlockingStub> {
@@ -164,6 +174,9 @@ public final class KeystoreAPIGrpc {
     }
 
     /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
      */
     public pb.Keystore.KeystoreResponse keystore(pb.Keystore.KeystoreRequest request) {
       return blockingUnaryCall(
@@ -173,7 +186,8 @@ public final class KeystoreAPIGrpc {
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIFutureStub extends io.grpc.stub.AbstractStub<KeystoreAPIFutureStub> {
@@ -193,6 +207,9 @@ public final class KeystoreAPIGrpc {
     }
 
     /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystore(
         pb.Keystore.KeystoreRequest request) {
