@@ -25,13 +25,11 @@ message ManageGCRequest {
     GCREQTYPE type = 1;
 }
 
-
 // ManageGCResponse is a message used as a response to gc control requests
 message ManageGCResponse {
     // status contains a status message
     string status = 1;
 }
-
 
 // REFREQTYPE is used to indicate the type of ref count request being made
 enum REFREQTYPE {
