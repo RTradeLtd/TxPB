@@ -126,6 +126,38 @@ public final class NodeAPIGrpc {
      return getP2PMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Blockstore",
+      requestType = pb.Node.BlockstoreRequest.class,
+      responseType = pb.Node.BlockstoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreMethod() {
+    io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse> getBlockstoreMethod;
+    if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
+          NodeAPIGrpc.getBlockstoreMethod = getBlockstoreMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Blockstore"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Blockstore"))
+                  .build();
+          }
+        }
+     }
+     return getBlockstoreMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -188,6 +220,16 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getP2PMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public void blockstore(pb.Node.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getBlockstoreMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -211,6 +253,13 @@ public final class NodeAPIGrpc {
                 pb.Node.P2PRequest,
                 pb.Node.P2PResponse>(
                   this, METHODID_P2P)))
+          .addMethod(
+            getBlockstoreMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.BlockstoreRequest,
+                pb.Node.BlockstoreResponse>(
+                  this, METHODID_BLOCKSTORE)))
           .build();
     }
   }
@@ -270,6 +319,17 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getP2PMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public void blockstore(pb.Node.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -323,6 +383,16 @@ public final class NodeAPIGrpc {
     public pb.Node.P2PResponse p2P(pb.Node.P2PRequest request) {
       return blockingUnaryCall(
           getChannel(), getP2PMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public pb.Node.BlockstoreResponse blockstore(pb.Node.BlockstoreRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getBlockstoreMethod(), getCallOptions(), request);
     }
   }
 
@@ -381,11 +451,23 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getP2PMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Blockstore allows management of the blockstore, and optionally, the counted store
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.BlockstoreResponse> blockstore(
+        pb.Node.BlockstoreRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CONN_MGMT = 0;
   private static final int METHODID_EXTRAS = 1;
   private static final int METHODID_P2P = 2;
+  private static final int METHODID_BLOCKSTORE = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -415,6 +497,10 @@ public final class NodeAPIGrpc {
         case METHODID_P2P:
           serviceImpl.p2P((pb.Node.P2PRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.P2PResponse>) responseObserver);
+          break;
+        case METHODID_BLOCKSTORE:
+          serviceImpl.blockstore((pb.Node.BlockstoreRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -480,6 +566,7 @@ public final class NodeAPIGrpc {
               .addMethod(getConnMgmtMethod())
               .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())
+              .addMethod(getBlockstoreMethod())
               .build();
         }
       }

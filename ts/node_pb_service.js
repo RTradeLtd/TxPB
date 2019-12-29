@@ -38,6 +38,15 @@ NodeAPI.P2P = {
   responseType: node_pb.P2PResponse
 };
 
+NodeAPI.Blockstore = {
+  methodName: "Blockstore",
+  service: NodeAPI,
+  requestStream: false,
+  responseStream: false,
+  requestType: node_pb.BlockstoreRequest,
+  responseType: node_pb.BlockstoreResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -112,6 +121,37 @@ NodeAPIClient.prototype.p2P = function p2P(requestMessage, metadata, callback) {
     callback = arguments[1];
   }
   var client = grpc.unary(NodeAPI.P2P, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.blockstore = function blockstore(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(NodeAPI.Blockstore, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

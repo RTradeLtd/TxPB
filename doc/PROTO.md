@@ -4,17 +4,12 @@
 ## Table of Contents
 
 - [admin.proto](#admin.proto)
-    - [Block](#pb.Block)
-    - [BlockstoreRequest](#pb.BlockstoreRequest)
-    - [BlockstoreResponse](#pb.BlockstoreResponse)
     - [ManageGCRequest](#pb.ManageGCRequest)
     - [ManageGCResponse](#pb.ManageGCResponse)
     - [RefCountRequest](#pb.RefCountRequest)
     - [RefCountResponse](#pb.RefCountResponse)
     - [RefCountResponse.CidsEntry](#pb.RefCountResponse.CidsEntry)
   
-    - [BSREQOPTS](#pb.BSREQOPTS)
-    - [BSREQTYPE](#pb.BSREQTYPE)
     - [GCREQTYPE](#pb.GCREQTYPE)
     - [REFREQOPTS](#pb.REFREQOPTS)
     - [REFREQTYPE](#pb.REFREQTYPE)
@@ -69,6 +64,9 @@
   
 
 - [node.proto](#node.proto)
+    - [Block](#pb.Block)
+    - [BlockstoreRequest](#pb.BlockstoreRequest)
+    - [BlockstoreResponse](#pb.BlockstoreResponse)
     - [ConnMgmtRequest](#pb.ConnMgmtRequest)
     - [ConnMgmtResponse](#pb.ConnMgmtResponse)
     - [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry)
@@ -80,6 +78,8 @@
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
   
+    - [BSREQOPTS](#pb.BSREQOPTS)
+    - [BSREQTYPE](#pb.BSREQTYPE)
     - [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE)
     - [EXTRASREQTYPE](#pb.EXTRASREQTYPE)
     - [EXTRASTYPE](#pb.EXTRASTYPE)
@@ -127,54 +127,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## admin.proto
-
-
-
-<a name="pb.Block"></a>
-
-### Block
-Block is a single block of ipfs data
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| cid | [string](#string) |  | cid is the identifier of the block |
-| data | [bytes](#bytes) |  | data is the actual contnets of this block |
-
-
-
-
-
-
-<a name="pb.BlockstoreRequest"></a>
-
-### BlockstoreRequest
-BlockstoreRequest is a message used to control blockstores
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| cids | [string](#string) | repeated | cids holds at least 1 cid, to hold 0 is considered an error |
-| reqType | [BSREQTYPE](#pb.BSREQTYPE) |  | reqType is used to indicate the particular request being mande |
-| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) |  | reqOpts is an optional parameter that can be used for fine-tuned request control |
-
-
-
-
-
-
-<a name="pb.BlockstoreResponse"></a>
-
-### BlockstoreResponse
-BlockstoreResponse is a response to a BlockstoreqRequest
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| blocks | [Block](#pb.Block) | repeated |  |
-
-
-
 
 
 
@@ -259,33 +211,6 @@ gathered by a RefCount rpc call.
  
 
 
-<a name="pb.BSREQOPTS"></a>
-
-### BSREQOPTS
-BSREQOPTS are options for blockstore requests
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| DEFAULT | 0 | DEFAULT indicates to use the default settings |
-| BS_FORCE | 1 | BS_FORCE indicates to force the request regardless of any possible issues |
-
-
-
-<a name="pb.BSREQTYPE"></a>
-
-### BSREQTYPE
-BSREQTYPE is a particular blockstore request type
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| BS_DELETE | 0 | BS_DELETE is used to delete a block from the store |
-| BS_PUT | 1 | BS_PUT is used to put a single block in the store |
-| BS_PUT_MANY | 2 | BS_PUT_MANY is used to put many blocks in the store |
-| BS_GET | 3 | BS_GET is used to get a block from the store |
-| BS_GET_MANY | 4 | BS_GET_MANY is used to get many blocks from the store |
-
-
-
 <a name="pb.GCREQTYPE"></a>
 
 ### GCREQTYPE
@@ -335,7 +260,6 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 | ----------- | ------------ | ------------- | ------------|
 | ManageGC | [ManageGCRequest](#pb.ManageGCRequest) | [ManageGCResponse](#pb.ManageGCResponse) | ManageGC is used to manage TemporalX&#39;s garbage collection process |
 | RefCount | [RefCountRequest](#pb.RefCountRequest) | [RefCountResponse](#pb.RefCountResponse) | RefCount is used to analyze the counter store and pull reference count information |
-| Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows management of the blockstore, and optionally, the counted store |
 
  
 
@@ -745,6 +669,54 @@ NameSysAPI provides a generic name resolution API
 
 
 
+<a name="pb.Block"></a>
+
+### Block
+Block is a single block of ipfs data
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cid | [string](#string) |  | cid is the identifier of the block |
+| data | [bytes](#bytes) |  | data is the actual contnets of this block |
+
+
+
+
+
+
+<a name="pb.BlockstoreRequest"></a>
+
+### BlockstoreRequest
+BlockstoreRequest is a message used to control blockstores
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cids | [string](#string) | repeated | cids holds at least 1 cid, to hold 0 is considered an error |
+| reqType | [BSREQTYPE](#pb.BSREQTYPE) |  | reqType is used to indicate the particular request being mande |
+| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) |  | reqOpts is an optional parameter that can be used for fine-tuned request control |
+
+
+
+
+
+
+<a name="pb.BlockstoreResponse"></a>
+
+### BlockstoreResponse
+BlockstoreResponse is a response to a BlockstoreqRequest
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| blocks | [Block](#pb.Block) | repeated |  |
+
+
+
+
+
+
 <a name="pb.ConnMgmtRequest"></a>
 
 ### ConnMgmtRequest
@@ -920,6 +892,33 @@ P2PResponse is a response message sent in response to a P2PRequest message
  
 
 
+<a name="pb.BSREQOPTS"></a>
+
+### BSREQOPTS
+BSREQOPTS are options for blockstore requests
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DEFAULT | 0 | DEFAULT indicates to use the default settings |
+| BS_FORCE | 1 | BS_FORCE indicates to force the request regardless of any possible issues |
+
+
+
+<a name="pb.BSREQTYPE"></a>
+
+### BSREQTYPE
+BSREQTYPE is a particular blockstore request type
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| BS_DELETE | 0 | BS_DELETE is used to delete a block from the store |
+| BS_PUT | 1 | BS_PUT is used to put a single block in the store |
+| BS_PUT_MANY | 2 | BS_PUT_MANY is used to put many blocks in the store |
+| BS_GET | 3 | BS_GET is used to get a block from the store |
+| BS_GET_MANY | 4 | BS_GET_MANY is used to get many blocks from the store |
+
+
+
 <a name="pb.CONNMGMTREQTYPE"></a>
 
 ### CONNMGMTREQTYPE
@@ -988,6 +987,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | ConnMgmt | [ConnMgmtRequest](#pb.ConnMgmtRequest) | [ConnMgmtResponse](#pb.ConnMgmtResponse) | ConnMgmt provides control over libp2p connections |
 | Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) | Extras provide control over node extras capabilities |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
+| Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows management of the blockstore, and optionally, the counted store |
 
  
 

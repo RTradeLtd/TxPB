@@ -21,67 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\"a\n\x11\x42lockstoreRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\x1e\n\x07reqType\x18\x02 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x03 \x01(\x0e\x32\r.pb.BSREQOPTS\"/\n\x12\x42lockstoreResponse\x12\x19\n\x06\x62locks\x18\x01 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\".\n\x0fRefCountRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\"m\n\x10RefCountResponse\x12,\n\x04\x63ids\x18\x01 \x03(\x0b\x32\x1e.pb.RefCountResponse.CidsEntry\x1a+\n\tCidsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*5\n\tGCREQTYPE\x12\x0c\n\x08GC_START\x10\x00\x12\x0b\n\x07GC_STOP\x10\x01\x12\r\n\tGC_STATUS\x10\x02*/\n\nREFREQTYPE\x12\x11\n\rREF_GET_COUNT\x10\x00\x12\x0e\n\nREF_DELETE\x10\x01*\x1b\n\nREFREQOPTS\x12\r\n\tREF_FORCE\x10\x00\x32\xbb\x01\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x12\x37\n\x08RefCount\x12\x13.pb.RefCountRequest\x1a\x14.pb.RefCountResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0b\x61\x64min.proto\x12\x02pb\".\n\x0fManageGCRequest\x12\x1b\n\x04type\x18\x01 \x01(\x0e\x32\r.pb.GCREQTYPE\"\"\n\x10ManageGCResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\".\n\x0fRefCountRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\"m\n\x10RefCountResponse\x12,\n\x04\x63ids\x18\x01 \x03(\x0b\x32\x1e.pb.RefCountResponse.CidsEntry\x1a+\n\tCidsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01*5\n\tGCREQTYPE\x12\x0c\n\x08GC_START\x10\x00\x12\x0b\n\x07GC_STOP\x10\x01\x12\r\n\tGC_STATUS\x10\x02*/\n\nREFREQTYPE\x12\x11\n\rREF_GET_COUNT\x10\x00\x12\x0e\n\nREF_DELETE\x10\x01*\x1b\n\nREFREQOPTS\x12\r\n\tREF_FORCE\x10\x00\x32|\n\x08\x41\x64minAPI\x12\x37\n\x08ManageGC\x12\x13.pb.ManageGCRequest\x1a\x14.pb.ManageGCResponse\"\x00\x12\x37\n\x08RefCount\x12\x13.pb.RefCountRequest\x1a\x14.pb.RefCountResponse\"\x00\x62\x06proto3')
 )
 
-_BSREQTYPE = _descriptor.EnumDescriptor(
-  name='BSREQTYPE',
-  full_name='pb.BSREQTYPE',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='BS_DELETE', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BS_PUT', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BS_PUT_MANY', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BS_GET', index=3, number=3,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BS_GET_MANY', index=4, number=4,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=446,
-  serialized_end=530,
-)
-_sym_db.RegisterEnumDescriptor(_BSREQTYPE)
-
-BSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_BSREQTYPE)
-_BSREQOPTS = _descriptor.EnumDescriptor(
-  name='BSREQOPTS',
-  full_name='pb.BSREQOPTS',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DEFAULT', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BS_FORCE', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=532,
-  serialized_end=570,
-)
-_sym_db.RegisterEnumDescriptor(_BSREQOPTS)
-
-BSREQOPTS = enum_type_wrapper.EnumTypeWrapper(_BSREQOPTS)
 _GCREQTYPE = _descriptor.EnumDescriptor(
   name='GCREQTYPE',
   full_name='pb.GCREQTYPE',
@@ -103,8 +45,8 @@ _GCREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=572,
-  serialized_end=625,
+  serialized_start=262,
+  serialized_end=315,
 )
 _sym_db.RegisterEnumDescriptor(_GCREQTYPE)
 
@@ -126,8 +68,8 @@ _REFREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=627,
-  serialized_end=674,
+  serialized_start=317,
+  serialized_end=364,
 )
 _sym_db.RegisterEnumDescriptor(_REFREQTYPE)
 
@@ -145,19 +87,12 @@ _REFREQOPTS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=676,
-  serialized_end=703,
+  serialized_start=366,
+  serialized_end=393,
 )
 _sym_db.RegisterEnumDescriptor(_REFREQOPTS)
 
 REFREQOPTS = enum_type_wrapper.EnumTypeWrapper(_REFREQOPTS)
-BS_DELETE = 0
-BS_PUT = 1
-BS_PUT_MANY = 2
-BS_GET = 3
-BS_GET_MANY = 4
-DEFAULT = 0
-BS_FORCE = 1
 GC_START = 0
 GC_STOP = 1
 GC_STATUS = 2
@@ -165,120 +100,6 @@ REF_GET_COUNT = 0
 REF_DELETE = 1
 REF_FORCE = 0
 
-
-
-_BLOCKSTOREREQUEST = _descriptor.Descriptor(
-  name='BlockstoreRequest',
-  full_name='pb.BlockstoreRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cids', full_name='pb.BlockstoreRequest.cids', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='reqType', full_name='pb.BlockstoreRequest.reqType', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='reqOpts', full_name='pb.BlockstoreRequest.reqOpts', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=19,
-  serialized_end=116,
-)
-
-
-_BLOCKSTORERESPONSE = _descriptor.Descriptor(
-  name='BlockstoreResponse',
-  full_name='pb.BlockstoreResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='blocks', full_name='pb.BlockstoreResponse.blocks', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=118,
-  serialized_end=165,
-)
-
-
-_BLOCK = _descriptor.Descriptor(
-  name='Block',
-  full_name='pb.Block',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cid', full_name='pb.Block.cid', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='pb.Block.data', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=167,
-  serialized_end=201,
-)
 
 
 _MANAGEGCREQUEST = _descriptor.Descriptor(
@@ -307,8 +128,8 @@ _MANAGEGCREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=203,
-  serialized_end=249,
+  serialized_start=19,
+  serialized_end=65,
 )
 
 
@@ -338,8 +159,8 @@ _MANAGEGCRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=251,
-  serialized_end=285,
+  serialized_start=67,
+  serialized_end=101,
 )
 
 
@@ -376,8 +197,8 @@ _REFCOUNTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=287,
-  serialized_end=333,
+  serialized_start=103,
+  serialized_end=149,
 )
 
 
@@ -414,8 +235,8 @@ _REFCOUNTRESPONSE_CIDSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=401,
-  serialized_end=444,
+  serialized_start=217,
+  serialized_end=260,
 )
 
 _REFCOUNTRESPONSE = _descriptor.Descriptor(
@@ -444,50 +265,21 @@ _REFCOUNTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=335,
-  serialized_end=444,
+  serialized_start=151,
+  serialized_end=260,
 )
 
-_BLOCKSTOREREQUEST.fields_by_name['reqType'].enum_type = _BSREQTYPE
-_BLOCKSTOREREQUEST.fields_by_name['reqOpts'].enum_type = _BSREQOPTS
-_BLOCKSTORERESPONSE.fields_by_name['blocks'].message_type = _BLOCK
 _MANAGEGCREQUEST.fields_by_name['type'].enum_type = _GCREQTYPE
 _REFCOUNTRESPONSE_CIDSENTRY.containing_type = _REFCOUNTRESPONSE
 _REFCOUNTRESPONSE.fields_by_name['cids'].message_type = _REFCOUNTRESPONSE_CIDSENTRY
-DESCRIPTOR.message_types_by_name['BlockstoreRequest'] = _BLOCKSTOREREQUEST
-DESCRIPTOR.message_types_by_name['BlockstoreResponse'] = _BLOCKSTORERESPONSE
-DESCRIPTOR.message_types_by_name['Block'] = _BLOCK
 DESCRIPTOR.message_types_by_name['ManageGCRequest'] = _MANAGEGCREQUEST
 DESCRIPTOR.message_types_by_name['ManageGCResponse'] = _MANAGEGCRESPONSE
 DESCRIPTOR.message_types_by_name['RefCountRequest'] = _REFCOUNTREQUEST
 DESCRIPTOR.message_types_by_name['RefCountResponse'] = _REFCOUNTRESPONSE
-DESCRIPTOR.enum_types_by_name['BSREQTYPE'] = _BSREQTYPE
-DESCRIPTOR.enum_types_by_name['BSREQOPTS'] = _BSREQOPTS
 DESCRIPTOR.enum_types_by_name['GCREQTYPE'] = _GCREQTYPE
 DESCRIPTOR.enum_types_by_name['REFREQTYPE'] = _REFREQTYPE
 DESCRIPTOR.enum_types_by_name['REFREQOPTS'] = _REFREQOPTS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-BlockstoreRequest = _reflection.GeneratedProtocolMessageType('BlockstoreRequest', (_message.Message,), {
-  'DESCRIPTOR' : _BLOCKSTOREREQUEST,
-  '__module__' : 'admin_pb2'
-  # @@protoc_insertion_point(class_scope:pb.BlockstoreRequest)
-  })
-_sym_db.RegisterMessage(BlockstoreRequest)
-
-BlockstoreResponse = _reflection.GeneratedProtocolMessageType('BlockstoreResponse', (_message.Message,), {
-  'DESCRIPTOR' : _BLOCKSTORERESPONSE,
-  '__module__' : 'admin_pb2'
-  # @@protoc_insertion_point(class_scope:pb.BlockstoreResponse)
-  })
-_sym_db.RegisterMessage(BlockstoreResponse)
-
-Block = _reflection.GeneratedProtocolMessageType('Block', (_message.Message,), {
-  'DESCRIPTOR' : _BLOCK,
-  '__module__' : 'admin_pb2'
-  # @@protoc_insertion_point(class_scope:pb.Block)
-  })
-_sym_db.RegisterMessage(Block)
 
 ManageGCRequest = _reflection.GeneratedProtocolMessageType('ManageGCRequest', (_message.Message,), {
   'DESCRIPTOR' : _MANAGEGCREQUEST,
@@ -534,8 +326,8 @@ _ADMINAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=706,
-  serialized_end=893,
+  serialized_start=395,
+  serialized_end=519,
   methods=[
   _descriptor.MethodDescriptor(
     name='ManageGC',
@@ -553,15 +345,6 @@ _ADMINAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_REFCOUNTREQUEST,
     output_type=_REFCOUNTRESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Blockstore',
-    full_name='pb.AdminAPI.Blockstore',
-    index=2,
-    containing_service=None,
-    input_type=_BLOCKSTOREREQUEST,
-    output_type=_BLOCKSTORERESPONSE,
     serialized_options=None,
   ),
 ])

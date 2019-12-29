@@ -32,11 +32,21 @@ type NodeAPIP2P = {
   readonly responseType: typeof node_pb.P2PResponse;
 };
 
+type NodeAPIBlockstore = {
+  readonly methodName: string;
+  readonly service: typeof NodeAPI;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof node_pb.BlockstoreRequest;
+  readonly responseType: typeof node_pb.BlockstoreResponse;
+};
+
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly ConnMgmt: NodeAPIConnMgmt;
   static readonly Extras: NodeAPIExtras;
   static readonly P2P: NodeAPIP2P;
+  static readonly Blockstore: NodeAPIBlockstore;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -97,6 +107,15 @@ export class NodeAPIClient {
   p2P(
     requestMessage: node_pb.P2PRequest,
     callback: (error: ServiceError|null, responseMessage: node_pb.P2PResponse|null) => void
+  ): UnaryResponse;
+  blockstore(
+    requestMessage: node_pb.BlockstoreRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: node_pb.BlockstoreResponse|null) => void
+  ): UnaryResponse;
+  blockstore(
+    requestMessage: node_pb.BlockstoreRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.BlockstoreResponse|null) => void
   ): UnaryResponse;
 }
 

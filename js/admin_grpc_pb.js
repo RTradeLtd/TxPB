@@ -4,28 +4,6 @@
 var grpc = require('grpc');
 var admin_pb = require('./admin_pb.js');
 
-function serialize_pb_BlockstoreRequest(arg) {
-  if (!(arg instanceof admin_pb.BlockstoreRequest)) {
-    throw new Error('Expected argument of type pb.BlockstoreRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_BlockstoreRequest(buffer_arg) {
-  return admin_pb.BlockstoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_pb_BlockstoreResponse(arg) {
-  if (!(arg instanceof admin_pb.BlockstoreResponse)) {
-    throw new Error('Expected argument of type pb.BlockstoreResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_BlockstoreResponse(buffer_arg) {
-  return admin_pb.BlockstoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_pb_ManageGCRequest(arg) {
   if (!(arg instanceof admin_pb.ManageGCRequest)) {
     throw new Error('Expected argument of type pb.ManageGCRequest');
@@ -96,18 +74,6 @@ var AdminAPIService = exports.AdminAPIService = {
     requestDeserialize: deserialize_pb_RefCountRequest,
     responseSerialize: serialize_pb_RefCountResponse,
     responseDeserialize: deserialize_pb_RefCountResponse,
-  },
-  // Blockstore allows management of the blockstore, and optionally, the counted store
-  blockstore: {
-    path: '/pb.AdminAPI/Blockstore',
-    requestStream: false,
-    responseStream: false,
-    requestType: admin_pb.BlockstoreRequest,
-    responseType: admin_pb.BlockstoreResponse,
-    requestSerialize: serialize_pb_BlockstoreRequest,
-    requestDeserialize: deserialize_pb_BlockstoreRequest,
-    responseSerialize: serialize_pb_BlockstoreResponse,
-    responseDeserialize: deserialize_pb_BlockstoreResponse,
   },
 };
 

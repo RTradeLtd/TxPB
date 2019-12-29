@@ -30,6 +30,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.P2PRequest.SerializeToString,
         response_deserializer=node__pb2.P2PResponse.FromString,
         )
+    self.Blockstore = channel.unary_unary(
+        '/pb.NodeAPI/Blockstore',
+        request_serializer=node__pb2.BlockstoreRequest.SerializeToString,
+        response_deserializer=node__pb2.BlockstoreResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -59,6 +64,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Blockstore(self, request, context):
+    """Blockstore allows management of the blockstore, and optionally, the counted store
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -76,6 +88,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.P2P,
           request_deserializer=node__pb2.P2PRequest.FromString,
           response_serializer=node__pb2.P2PResponse.SerializeToString,
+      ),
+      'Blockstore': grpc.unary_unary_rpc_method_handler(
+          servicer.Blockstore,
+          request_deserializer=node__pb2.BlockstoreRequest.FromString,
+          response_serializer=node__pb2.BlockstoreResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

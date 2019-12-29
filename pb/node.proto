@@ -12,6 +12,8 @@ service NodeAPI {
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
     // except using libp2p as the transport layer, and and tcp/udp port.
     rpc P2P(P2PRequest) returns (P2PResponse) { };
+    // Blockstore allows management of the blockstore, and optionally, the counted store
+    rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
 }
 
 // P2PREQTYPE denotes the particular type of request being used in the p2p rpc
@@ -143,4 +145,50 @@ message ExtrasRequest {
     EXTRASREQTYPE requestType = 1;
     // indicates the extras feature this request applies to
     EXTRASTYPE extrasFeature = 2;
+}
+
+
+// BSREQTYPE is a particular blockstore request type
+enum BSREQTYPE {
+    // BS_DELETE is used to delete a block from the store
+    BS_DELETE = 0;
+    // BS_PUT is used to put a single block in the store
+    BS_PUT = 1;
+    // BS_PUT_MANY is used to put many blocks in the store
+    BS_PUT_MANY = 2;
+    // BS_GET is used to get a block from the store
+    BS_GET = 3;
+    // BS_GET_MANY is used to get many blocks from the store
+    BS_GET_MANY = 4;
+}
+
+// BSREQOPTS are options for blockstore requests
+enum BSREQOPTS {
+    // DEFAULT indicates to use the default settings
+    DEFAULT = 0;
+    // BS_FORCE indicates to force the request regardless of any possible issues
+    BS_FORCE = 1;
+}
+
+// BlockstoreRequest is a message used to control blockstores
+message BlockstoreRequest {
+    // cids holds at least 1 cid, to hold 0 is considered an error
+    repeated string cids = 1;
+    // reqType is used to indicate the particular request being mande
+    BSREQTYPE reqType = 2;
+    // reqOpts is an optional parameter that can be used for fine-tuned request control
+    BSREQOPTS reqOpts = 3;
+}
+
+// BlockstoreResponse is a response to a BlockstoreqRequest
+message BlockstoreResponse {
+    repeated Block blocks = 1;
+}
+
+// Block is a single block of ipfs data
+message Block {
+    // cid is the identifier of the block
+    string cid = 1;
+    // data is the actual contnets of this block
+    bytes data = 2;
 }

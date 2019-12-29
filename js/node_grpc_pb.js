@@ -5,6 +5,28 @@ var grpc = require('grpc');
 var node_pb = require('./node_pb.js');
 var util_pb = require('./util_pb.js');
 
+function serialize_pb_BlockstoreRequest(arg) {
+  if (!(arg instanceof node_pb.BlockstoreRequest)) {
+    throw new Error('Expected argument of type pb.BlockstoreRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_BlockstoreRequest(buffer_arg) {
+  return node_pb.BlockstoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_BlockstoreResponse(arg) {
+  if (!(arg instanceof node_pb.BlockstoreResponse)) {
+    throw new Error('Expected argument of type pb.BlockstoreResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_BlockstoreResponse(buffer_arg) {
+  return node_pb.BlockstoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ConnMgmtRequest(arg) {
   if (!(arg instanceof node_pb.ConnMgmtRequest)) {
     throw new Error('Expected argument of type pb.ConnMgmtRequest');
@@ -111,6 +133,18 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_P2PRequest,
     responseSerialize: serialize_pb_P2PResponse,
     responseDeserialize: deserialize_pb_P2PResponse,
+  },
+  // Blockstore allows management of the blockstore, and optionally, the counted store
+  blockstore: {
+    path: '/pb.NodeAPI/Blockstore',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.BlockstoreRequest,
+    responseType: node_pb.BlockstoreResponse,
+    requestSerialize: serialize_pb_BlockstoreRequest,
+    requestDeserialize: deserialize_pb_BlockstoreRequest,
+    responseSerialize: serialize_pb_BlockstoreResponse,
+    responseDeserialize: deserialize_pb_BlockstoreResponse,
   },
 };
 
