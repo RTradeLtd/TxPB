@@ -7,29 +7,15 @@ export class PubSubRequest extends jspb.Message {
   getRequesttype(): PSREQTYPEMap[keyof PSREQTYPEMap];
   setRequesttype(value: PSREQTYPEMap[keyof PSREQTYPEMap]): void;
 
-  clearPeersList(): void;
-  getPeersList(): Array<PubSubPeer>;
-  setPeersList(value: Array<PubSubPeer>): void;
-  addPeers(value?: PubSubPeer, index?: number): PubSubPeer;
-
   clearTopicsList(): void;
   getTopicsList(): Array<string>;
   setTopicsList(value: Array<string>): void;
   addTopics(value: string, index?: number): string;
 
-  getTopic(): string;
-  setTopic(value: string): void;
-
   getData(): Uint8Array | string;
   getData_asU8(): Uint8Array;
   getData_asB64(): string;
   setData(value: Uint8Array | string): void;
-
-  getAdvertise(): boolean;
-  setAdvertise(value: boolean): void;
-
-  getDiscover(): boolean;
-  setDiscover(value: boolean): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PubSubRequest.AsObject;
@@ -44,12 +30,8 @@ export class PubSubRequest extends jspb.Message {
 export namespace PubSubRequest {
   export type AsObject = {
     requesttype: PSREQTYPEMap[keyof PSREQTYPEMap],
-    peersList: Array<PubSubPeer.AsObject>,
     topicsList: Array<string>,
-    topic: string,
     data: Uint8Array | string,
-    advertise: boolean,
-    discover: boolean,
   }
 }
 
@@ -57,15 +39,20 @@ export class PubSubResponse extends jspb.Message {
   getRequesttype(): PSREQTYPEMap[keyof PSREQTYPEMap];
   setRequesttype(value: PSREQTYPEMap[keyof PSREQTYPEMap]): void;
 
-  hasMessage(): boolean;
-  clearMessage(): void;
-  getMessage(): PubSubMessage | undefined;
-  setMessage(value?: PubSubMessage): void;
+  clearMessageList(): void;
+  getMessageList(): Array<PubSubMessage>;
+  setMessageList(value: Array<PubSubMessage>): void;
+  addMessage(value?: PubSubMessage, index?: number): PubSubMessage;
 
   clearNamesList(): void;
   getNamesList(): Array<string>;
   setNamesList(value: Array<string>): void;
   addNames(value: string, index?: number): string;
+
+  clearPeersList(): void;
+  getPeersList(): Array<PubSubPeer>;
+  setPeersList(value: Array<PubSubPeer>): void;
+  addPeers(value?: PubSubPeer, index?: number): PubSubPeer;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PubSubResponse.AsObject;
@@ -80,8 +67,9 @@ export class PubSubResponse extends jspb.Message {
 export namespace PubSubResponse {
   export type AsObject = {
     requesttype: PSREQTYPEMap[keyof PSREQTYPEMap],
-    message?: PubSubMessage.AsObject,
+    messageList: Array<PubSubMessage.AsObject>,
     namesList: Array<string>,
+    peersList: Array<PubSubPeer.AsObject>,
   }
 }
 

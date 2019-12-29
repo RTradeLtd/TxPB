@@ -5,8 +5,9 @@ import pubsub_pb2 as pubsub__pb2
 
 
 class PubSubAPIStub(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+  `ipfs pubsub` subset of commands.
+  """
 
   def __init__(self, channel):
     """Constructor.
@@ -22,11 +23,13 @@ class PubSubAPIStub(object):
 
 
 class PubSubAPIServicer(object):
-  # missing associated documentation comment in .proto file
-  pass
+  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+  `ipfs pubsub` subset of commands.
+  """
 
   def PubSub(self, request_iterator, context):
-    """PubSub allows controlling libp2p pubsub topics and subscriptions
+    """PubSub allows controlling libp2p pubsub topics and subscriptions using
+    a bidirectional streaming API
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

@@ -16,6 +16,10 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ * PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+ * `ipfs pubsub` subset of commands.
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.19.0)",
@@ -83,12 +87,17 @@ public final class PubSubAPIGrpc {
   }
 
   /**
+   * <pre>
+   * PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+   * `ipfs pubsub` subset of commands.
+   * </pre>
    */
   public static abstract class PubSubAPIImplBase implements io.grpc.BindableService {
 
     /**
      * <pre>
-     * PubSub allows controlling libp2p pubsub topics and subscriptions
+     * PubSub allows controlling libp2p pubsub topics and subscriptions using
+     * a bidirectional streaming API
      * </pre>
      */
     public io.grpc.stub.StreamObserver<pb.Pubsub.PubSubRequest> pubSub(
@@ -110,6 +119,10 @@ public final class PubSubAPIGrpc {
   }
 
   /**
+   * <pre>
+   * PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+   * `ipfs pubsub` subset of commands.
+   * </pre>
    */
   public static final class PubSubAPIStub extends io.grpc.stub.AbstractStub<PubSubAPIStub> {
     private PubSubAPIStub(io.grpc.Channel channel) {
@@ -129,7 +142,8 @@ public final class PubSubAPIGrpc {
 
     /**
      * <pre>
-     * PubSub allows controlling libp2p pubsub topics and subscriptions
+     * PubSub allows controlling libp2p pubsub topics and subscriptions using
+     * a bidirectional streaming API
      * </pre>
      */
     public io.grpc.stub.StreamObserver<pb.Pubsub.PubSubRequest> pubSub(
@@ -140,6 +154,10 @@ public final class PubSubAPIGrpc {
   }
 
   /**
+   * <pre>
+   * PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+   * `ipfs pubsub` subset of commands.
+   * </pre>
    */
   public static final class PubSubAPIBlockingStub extends io.grpc.stub.AbstractStub<PubSubAPIBlockingStub> {
     private PubSubAPIBlockingStub(io.grpc.Channel channel) {
@@ -159,6 +177,10 @@ public final class PubSubAPIGrpc {
   }
 
   /**
+   * <pre>
+   * PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+   * `ipfs pubsub` subset of commands.
+   * </pre>
    */
   public static final class PubSubAPIFutureStub extends io.grpc.stub.AbstractStub<PubSubAPIFutureStub> {
     private PubSubAPIFutureStub(io.grpc.Channel channel) {

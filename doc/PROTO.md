@@ -1023,13 +1023,13 @@ NodeAPI provide an API to control the underlying custom ipfs node
 <a name="pb.PubSubPeer"></a>
 
 ### PubSubPeer
-
+represents an individual pubsub peer
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  |  |
-| peerID | [string](#string) |  |  |
+| topic | [string](#string) |  | the topic this peer belongs to |
+| peerID | [string](#string) |  | the id of this peer |
 
 
 
@@ -1044,13 +1044,9 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  |  |
-| peers | [PubSubPeer](#pb.PubSubPeer) | repeated |  |
-| topics | [string](#string) | repeated |  |
-| topic | [string](#string) |  |  |
-| data | [bytes](#bytes) |  |  |
-| advertise | [bool](#bool) |  |  |
-| discover | [bool](#bool) |  |  |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  | indicates the particular PubSubAPI request being performed |
+| topics | [string](#string) | repeated | topics to request peers from, or publish data to sent by: PS_LIST_PEERS, PS_SUBSCRIBE, PS_PUBLISH |
+| data | [bytes](#bytes) |  | data to sent to topics sent by: PS_PUBLISH |
 
 
 
@@ -1065,9 +1061,10 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  |  |
-| message | [PubSubMessage](#pb.PubSubMessage) |  |  |
-| names | [string](#string) | repeated |  |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  | indicates the particular PubSubAPI request being performed |
+| message | [PubSubMessage](#pb.PubSubMessage) | repeated | messages we have received from a topic sent by: PS_SUBSCRIBE |
+| names | [string](#string) | repeated | topic names sent by: PS_GET_TOPICS |
+| peers | [PubSubPeer](#pb.PubSubPeer) | repeated | pubsub peers sent by: PS_LIST_PEERS |
 
 
 
@@ -1079,14 +1076,14 @@ NodeAPI provide an API to control the underlying custom ipfs node
 <a name="pb.PSREQTYPE"></a>
 
 ### PSREQTYPE
-
+PSREQTYPE indicates the particular PubSubAPI request being performed
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PS_GET_TOPICS | 0 |  |
-| PS_LIST_PEERS | 1 |  |
-| PS_SUBSCRIBE | 2 |  |
-| PS_PUBLISH | 3 |  |
+| PS_GET_TOPICS | 0 | PS_GET_TOPICS is used to return a list of subscribed pubsub topics |
+| PS_LIST_PEERS | 1 | PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to |
+| PS_SUBSCRIBE | 2 | PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic |
+| PS_PUBLISH | 3 | PS_PUBLISH is used to publisbh a message to a pubsub topic |
 
 
  
@@ -1097,11 +1094,12 @@ NodeAPI provide an API to control the underlying custom ipfs node
 <a name="pb.PubSubAPI"></a>
 
 ### PubSubAPI
-
+PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+`ipfs pubsub` subset of commands.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions |
+| PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions using a bidirectional streaming API |
 
  
 

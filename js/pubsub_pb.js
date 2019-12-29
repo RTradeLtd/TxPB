@@ -107,7 +107,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.PubSubRequest.repeatedFields_ = [2,3];
+proto.pb.PubSubRequest.repeatedFields_ = [2];
 
 
 
@@ -141,13 +141,8 @@ proto.pb.PubSubRequest.prototype.toObject = function(opt_includeInstance) {
 proto.pb.PubSubRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    peersList: jspb.Message.toObjectList(msg.getPeersList(),
-    proto.pb.PubSubPeer.toObject, includeInstance),
-    topicsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    topic: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    data: msg.getData_asB64(),
-    advertise: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    discover: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
+    topicsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    data: msg.getData_asB64()
   };
 
   if (includeInstance) {
@@ -189,29 +184,12 @@ proto.pb.PubSubRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setRequesttype(value);
       break;
     case 2:
-      var value = new proto.pb.PubSubPeer;
-      reader.readMessage(value,proto.pb.PubSubPeer.deserializeBinaryFromReader);
-      msg.addPeers(value);
-      break;
-    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.addTopics(value);
       break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTopic(value);
-      break;
-    case 5:
+    case 3:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setData(value);
-      break;
-    case 6:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setAdvertise(value);
-      break;
-    case 7:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setDiscover(value);
       break;
     default:
       reader.skipField();
@@ -249,46 +227,17 @@ proto.pb.PubSubRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPeersList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      proto.pb.PubSubPeer.serializeBinaryToWriter
-    );
-  }
   f = message.getTopicsList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      3,
-      f
-    );
-  }
-  f = message.getTopic();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
+      2,
       f
     );
   }
   f = message.getData_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      5,
-      f
-    );
-  }
-  f = message.getAdvertise();
-  if (f) {
-    writer.writeBool(
-      6,
-      f
-    );
-  }
-  f = message.getDiscover();
-  if (f) {
-    writer.writeBool(
-      7,
+      3,
       f
     );
   }
@@ -314,49 +263,11 @@ proto.pb.PubSubRequest.prototype.setRequesttype = function(value) {
 
 
 /**
- * repeated PubSubPeer peers = 2;
- * @return {!Array<!proto.pb.PubSubPeer>}
- */
-proto.pb.PubSubRequest.prototype.getPeersList = function() {
-  return /** @type{!Array<!proto.pb.PubSubPeer>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.pb.PubSubPeer, 2));
-};
-
-
-/**
- * @param {!Array<!proto.pb.PubSubPeer>} value
- * @return {!proto.pb.PubSubRequest} returns this
-*/
-proto.pb.PubSubRequest.prototype.setPeersList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-/**
- * @param {!proto.pb.PubSubPeer=} opt_value
- * @param {number=} opt_index
- * @return {!proto.pb.PubSubPeer}
- */
-proto.pb.PubSubRequest.prototype.addPeers = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.pb.PubSubPeer, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.pb.PubSubRequest} returns this
- */
-proto.pb.PubSubRequest.prototype.clearPeersList = function() {
-  return this.setPeersList([]);
-};
-
-
-/**
- * repeated string topics = 3;
+ * repeated string topics = 2;
  * @return {!Array<string>}
  */
 proto.pb.PubSubRequest.prototype.getTopicsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
@@ -365,7 +276,7 @@ proto.pb.PubSubRequest.prototype.getTopicsList = function() {
  * @return {!proto.pb.PubSubRequest} returns this
  */
 proto.pb.PubSubRequest.prototype.setTopicsList = function(value) {
-  return jspb.Message.setField(this, 3, value || []);
+  return jspb.Message.setField(this, 2, value || []);
 };
 
 
@@ -375,7 +286,7 @@ proto.pb.PubSubRequest.prototype.setTopicsList = function(value) {
  * @return {!proto.pb.PubSubRequest} returns this
  */
 proto.pb.PubSubRequest.prototype.addTopics = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 
@@ -389,34 +300,16 @@ proto.pb.PubSubRequest.prototype.clearTopicsList = function() {
 
 
 /**
- * optional string topic = 4;
- * @return {string}
- */
-proto.pb.PubSubRequest.prototype.getTopic = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.pb.PubSubRequest} returns this
- */
-proto.pb.PubSubRequest.prototype.setTopic = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
-};
-
-
-/**
- * optional bytes data = 5;
+ * optional bytes data = 3;
  * @return {!(string|Uint8Array)}
  */
 proto.pb.PubSubRequest.prototype.getData = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * optional bytes data = 5;
+ * optional bytes data = 3;
  * This is a type-conversion wrapper around `getData()`
  * @return {string}
  */
@@ -427,7 +320,7 @@ proto.pb.PubSubRequest.prototype.getData_asB64 = function() {
 
 
 /**
- * optional bytes data = 5;
+ * optional bytes data = 3;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getData()`
@@ -444,43 +337,7 @@ proto.pb.PubSubRequest.prototype.getData_asU8 = function() {
  * @return {!proto.pb.PubSubRequest} returns this
  */
 proto.pb.PubSubRequest.prototype.setData = function(value) {
-  return jspb.Message.setProto3BytesField(this, 5, value);
-};
-
-
-/**
- * optional bool advertise = 6;
- * @return {boolean}
- */
-proto.pb.PubSubRequest.prototype.getAdvertise = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.pb.PubSubRequest} returns this
- */
-proto.pb.PubSubRequest.prototype.setAdvertise = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 6, value);
-};
-
-
-/**
- * optional bool discover = 7;
- * @return {boolean}
- */
-proto.pb.PubSubRequest.prototype.getDiscover = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.pb.PubSubRequest} returns this
- */
-proto.pb.PubSubRequest.prototype.setDiscover = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 7, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -490,7 +347,7 @@ proto.pb.PubSubRequest.prototype.setDiscover = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.PubSubResponse.repeatedFields_ = [3];
+proto.pb.PubSubResponse.repeatedFields_ = [2,3,4];
 
 
 
@@ -524,8 +381,11 @@ proto.pb.PubSubResponse.prototype.toObject = function(opt_includeInstance) {
 proto.pb.PubSubResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: (f = msg.getMessage()) && proto.pb.PubSubMessage.toObject(includeInstance, f),
-    namesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+    messageList: jspb.Message.toObjectList(msg.getMessageList(),
+    proto.pb.PubSubMessage.toObject, includeInstance),
+    namesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    peersList: jspb.Message.toObjectList(msg.getPeersList(),
+    proto.pb.PubSubPeer.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -569,11 +429,16 @@ proto.pb.PubSubResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 2:
       var value = new proto.pb.PubSubMessage;
       reader.readMessage(value,proto.pb.PubSubMessage.deserializeBinaryFromReader);
-      msg.setMessage(value);
+      msg.addMessage(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.addNames(value);
+      break;
+    case 4:
+      var value = new proto.pb.PubSubPeer;
+      reader.readMessage(value,proto.pb.PubSubPeer.deserializeBinaryFromReader);
+      msg.addPeers(value);
       break;
     default:
       reader.skipField();
@@ -611,9 +476,9 @@ proto.pb.PubSubResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getMessage();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getMessageList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       2,
       f,
       proto.pb.PubSubMessage.serializeBinaryToWriter
@@ -624,6 +489,14 @@ proto.pb.PubSubResponse.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedString(
       3,
       f
+    );
+  }
+  f = message.getPeersList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.pb.PubSubPeer.serializeBinaryToWriter
     );
   }
 };
@@ -648,39 +521,40 @@ proto.pb.PubSubResponse.prototype.setRequesttype = function(value) {
 
 
 /**
- * optional PubSubMessage message = 2;
- * @return {?proto.pb.PubSubMessage}
+ * repeated PubSubMessage message = 2;
+ * @return {!Array<!proto.pb.PubSubMessage>}
  */
-proto.pb.PubSubResponse.prototype.getMessage = function() {
-  return /** @type{?proto.pb.PubSubMessage} */ (
-    jspb.Message.getWrapperField(this, proto.pb.PubSubMessage, 2));
+proto.pb.PubSubResponse.prototype.getMessageList = function() {
+  return /** @type{!Array<!proto.pb.PubSubMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.pb.PubSubMessage, 2));
 };
 
 
 /**
- * @param {?proto.pb.PubSubMessage|undefined} value
+ * @param {!Array<!proto.pb.PubSubMessage>} value
  * @return {!proto.pb.PubSubResponse} returns this
 */
-proto.pb.PubSubResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+proto.pb.PubSubResponse.prototype.setMessageList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.pb.PubSubMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.pb.PubSubMessage}
+ */
+proto.pb.PubSubResponse.prototype.addMessage = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.pb.PubSubMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.pb.PubSubResponse} returns this
  */
-proto.pb.PubSubResponse.prototype.clearMessage = function() {
-  return this.setMessage(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.pb.PubSubResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.pb.PubSubResponse.prototype.clearMessageList = function() {
+  return this.setMessageList([]);
 };
 
 
@@ -718,6 +592,44 @@ proto.pb.PubSubResponse.prototype.addNames = function(value, opt_index) {
  */
 proto.pb.PubSubResponse.prototype.clearNamesList = function() {
   return this.setNamesList([]);
+};
+
+
+/**
+ * repeated PubSubPeer peers = 4;
+ * @return {!Array<!proto.pb.PubSubPeer>}
+ */
+proto.pb.PubSubResponse.prototype.getPeersList = function() {
+  return /** @type{!Array<!proto.pb.PubSubPeer>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.pb.PubSubPeer, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.pb.PubSubPeer>} value
+ * @return {!proto.pb.PubSubResponse} returns this
+*/
+proto.pb.PubSubResponse.prototype.setPeersList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.pb.PubSubPeer=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.pb.PubSubPeer}
+ */
+proto.pb.PubSubResponse.prototype.addPeers = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.pb.PubSubPeer, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.pb.PubSubResponse} returns this
+ */
+proto.pb.PubSubResponse.prototype.clearPeersList = function() {
+  return this.setPeersList([]);
 };
 
 

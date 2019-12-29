@@ -27,8 +27,11 @@ function deserialize_pb_PubSubResponse(buffer_arg) {
 }
 
 
+// PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+// `ipfs pubsub` subset of commands.
 var PubSubAPIService = exports.PubSubAPIService = {
-  // PubSub allows controlling libp2p pubsub topics and subscriptions
+  // PubSub allows controlling libp2p pubsub topics and subscriptions using
+  // a bidirectional streaming API
   pubSub: {
     path: '/pb.PubSubAPI/PubSub',
     requestStream: true,

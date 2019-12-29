@@ -1,32 +1,49 @@
 syntax = "proto3";
 package pb;
 
+// PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+// `ipfs pubsub` subset of commands.
 service PubSubAPI {
-    // PubSub allows controlling libp2p pubsub topics and subscriptions
+    // PubSub allows controlling libp2p pubsub topics and subscriptions using
+    // a bidirectional streaming API
     rpc PubSub(stream PubSubRequest) returns (stream PubSubResponse) { };
 }
 
+// PSREQTYPE indicates the particular PubSubAPI request being performed
 enum PSREQTYPE {
+    // PS_GET_TOPICS is used to return a list of subscribed pubsub topics
     PS_GET_TOPICS = 0;
+    // PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to
     PS_LIST_PEERS = 1;
+    // PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic
     PS_SUBSCRIBE = 2;
+    // PS_PUBLISH is used to publisbh a message to a pubsub topic
     PS_PUBLISH = 3;
 }
 
 message PubSubRequest {
+    // indicates the particular PubSubAPI request being performed
     PSREQTYPE requestType = 1;
-    repeated PubSubPeer peers = 2;
-    repeated string topics = 3;
-    string topic = 4;
-    bytes data = 5;
-    bool advertise = 6;
-    bool discover = 7;
+    // topics to request peers from, or publish data to
+    // sent by: PS_LIST_PEERS, PS_SUBSCRIBE, PS_PUBLISH
+    repeated string topics = 2;
+    // data to sent to topics
+    // sent by: PS_PUBLISH
+    bytes data = 3;
 }
 
 message PubSubResponse {
+    // indicates the particular PubSubAPI request being performed
     PSREQTYPE requestType = 1;
-    PubSubMessage message = 2;
+    // messages we have received from a topic
+    // sent by: PS_SUBSCRIBE
+    repeated PubSubMessage message = 2;
+    // topic names
+    // sent by: PS_GET_TOPICS
     repeated string names = 3;
+    // pubsub peers
+    // sent by: PS_LIST_PEERS
+    repeated PubSubPeer peers = 4;
 }
 
 message PubSubMessage {
@@ -44,7 +61,10 @@ message PubSubMessage {
     bytes key = 6;
 }
 
+// represents an individual pubsub peer
 message PubSubPeer {
+    // the topic this peer belongs to
     string topic = 1;
+    // the id of this peer
     string peerID = 2;
 }

@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\"\xa4\x01\n\rPubSubRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\x1d\n\x05peers\x18\x02 \x03(\x0b\x32\x0e.pb.PubSubPeer\x12\x0e\n\x06topics\x18\x03 \x03(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\x11\n\tadvertise\x18\x06 \x01(\x08\x12\x10\n\x08\x64iscover\x18\x07 \x01(\x08\"g\n\x0ePubSubResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\"\n\x07message\x18\x02 \x01(\x0b\x32\x11.pb.PubSubMessage\x12\r\n\x05names\x18\x03 \x03(\t\"l\n\rPubSubMessage\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\"+\n\nPubSubPeer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t*S\n\tPSREQTYPE\x12\x11\n\rPS_GET_TOPICS\x10\x00\x12\x11\n\rPS_LIST_PEERS\x10\x01\x12\x10\n\x0cPS_SUBSCRIBE\x10\x02\x12\x0e\n\nPS_PUBLISH\x10\x03\x32\x42\n\tPubSubAPI\x12\x35\n\x06PubSub\x12\x11.pb.PubSubRequest\x1a\x12.pb.PubSubResponse\"\x00(\x01\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0cpubsub.proto\x12\x02pb\"Q\n\rPubSubRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\x0e\n\x06topics\x18\x02 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"\x86\x01\n\x0ePubSubResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.PSREQTYPE\x12\"\n\x07message\x18\x02 \x03(\x0b\x32\x11.pb.PubSubMessage\x12\r\n\x05names\x18\x03 \x03(\t\x12\x1d\n\x05peers\x18\x04 \x03(\x0b\x32\x0e.pb.PubSubPeer\"l\n\rPubSubMessage\x12\x0c\n\x04\x66rom\x18\x01 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05seqno\x18\x03 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x04 \x03(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x0c\"+\n\nPubSubPeer\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0e\n\x06peerID\x18\x02 \x01(\t*S\n\tPSREQTYPE\x12\x11\n\rPS_GET_TOPICS\x10\x00\x12\x11\n\rPS_LIST_PEERS\x10\x01\x12\x10\n\x0cPS_SUBSCRIBE\x10\x02\x12\x0e\n\nPS_PUBLISH\x10\x03\x32\x42\n\tPubSubAPI\x12\x35\n\x06PubSub\x12\x11.pb.PubSubRequest\x1a\x12.pb.PubSubResponse\"\x00(\x01\x30\x01\x62\x06proto3')
 )
 
 _PSREQTYPE = _descriptor.EnumDescriptor(
@@ -49,8 +49,8 @@ _PSREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=447,
-  serialized_end=530,
+  serialized_start=395,
+  serialized_end=478,
 )
 _sym_db.RegisterEnumDescriptor(_PSREQTYPE)
 
@@ -77,44 +77,16 @@ _PUBSUBREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='peers', full_name='pb.PubSubRequest.peers', index=1,
-      number=2, type=11, cpp_type=10, label=3,
+      name='topics', full_name='pb.PubSubRequest.topics', index=1,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='topics', full_name='pb.PubSubRequest.topics', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='topic', full_name='pb.PubSubRequest.topic', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='pb.PubSubRequest.data', index=4,
-      number=5, type=12, cpp_type=9, label=1,
+      name='data', full_name='pb.PubSubRequest.data', index=2,
+      number=3, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='advertise', full_name='pb.PubSubRequest.advertise', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='discover', full_name='pb.PubSubRequest.discover', index=6,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -130,8 +102,8 @@ _PUBSUBREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21,
-  serialized_end=185,
+  serialized_start=20,
+  serialized_end=101,
 )
 
 
@@ -151,14 +123,21 @@ _PUBSUBRESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='message', full_name='pb.PubSubResponse.message', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='names', full_name='pb.PubSubResponse.names', index=2,
       number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='peers', full_name='pb.PubSubResponse.peers', index=3,
+      number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -175,8 +154,8 @@ _PUBSUBRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=187,
-  serialized_end=290,
+  serialized_start=104,
+  serialized_end=238,
 )
 
 
@@ -241,8 +220,8 @@ _PUBSUBMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=292,
-  serialized_end=400,
+  serialized_start=240,
+  serialized_end=348,
 )
 
 
@@ -279,14 +258,14 @@ _PUBSUBPEER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=402,
-  serialized_end=445,
+  serialized_start=350,
+  serialized_end=393,
 )
 
 _PUBSUBREQUEST.fields_by_name['requestType'].enum_type = _PSREQTYPE
-_PUBSUBREQUEST.fields_by_name['peers'].message_type = _PUBSUBPEER
 _PUBSUBRESPONSE.fields_by_name['requestType'].enum_type = _PSREQTYPE
 _PUBSUBRESPONSE.fields_by_name['message'].message_type = _PUBSUBMESSAGE
+_PUBSUBRESPONSE.fields_by_name['peers'].message_type = _PUBSUBPEER
 DESCRIPTOR.message_types_by_name['PubSubRequest'] = _PUBSUBREQUEST
 DESCRIPTOR.message_types_by_name['PubSubResponse'] = _PUBSUBRESPONSE
 DESCRIPTOR.message_types_by_name['PubSubMessage'] = _PUBSUBMESSAGE
@@ -330,8 +309,8 @@ _PUBSUBAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=532,
-  serialized_end=598,
+  serialized_start=480,
+  serialized_end=546,
   methods=[
   _descriptor.MethodDescriptor(
     name='PubSub',
