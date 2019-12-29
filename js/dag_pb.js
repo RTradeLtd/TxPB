@@ -1195,7 +1195,7 @@ proto.pb.IPLDNode.prototype.setData = function(value) {
 proto.pb.DAGREQTYPE = {
   DAG_PUT: 0,
   DAG_GET: 1,
-  DAG_NEW_LINK: 2,
+  DAG_NEW_NODE: 2,
   DAG_ADD_LINKS: 3,
   DAG_GET_LINKS: 4
 };

@@ -351,19 +351,19 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 <a name="pb.DagRequest"></a>
 
 ### DagRequest
-
+Used to submit a request to Dag or DagStream RPCs
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  |  |
-| data | [bytes](#bytes) |  | data that we will be storing |
-| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) |
-| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) |
-| hash | [string](#string) |  |  |
-| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| data | [bytes](#bytes) |  | data that we will be storing sent by: DAG_PUT, DAG_NEW_NODE |
+| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS |
+| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) sent by: DAG_PUT, DAG_NEW_NODE |
+| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS |
+| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
 
 
 
@@ -389,15 +389,15 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 <a name="pb.DagResponse"></a>
 
 ### DagResponse
-
+Used in response to a Dag or DagStream RPC
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  |  |
-| hashes | [string](#string) | repeated |  |
-| rawData | [bytes](#bytes) |  |  |
-| links | [IPLDLink](#pb.IPLDLink) | repeated |  |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| hashes | [string](#string) | repeated | returns the hashes of newly generated IPLD objects sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS |
+| rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
+| links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
 
 
 
@@ -442,15 +442,15 @@ An IPFS MerkleDAG Node
 <a name="pb.DAGREQTYPE"></a>
 
 ### DAGREQTYPE
-
+DAGREQTYPE indicates the particular DagAPI request being performed
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| DAG_PUT | 0 |  |
-| DAG_GET | 1 |  |
-| DAG_NEW_LINK | 2 |  |
-| DAG_ADD_LINKS | 3 |  |
-| DAG_GET_LINKS | 4 |  |
+| DAG_PUT | 0 | DAG_PUT is used to add new IPLD objects |
+| DAG_GET | 1 | DAG_GET is used to retrieve IPLD object data |
+| DAG_NEW_NODE | 2 | DAG_NEW_NODE is used to create a new IPLD node object |
+| DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
+| DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
 
 
  
