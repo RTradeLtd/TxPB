@@ -16,8 +16,6 @@ service NodeAPI {
     rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
     // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
     rpc Dag(DagRequest) returns (DagResponse) { };
-    // DagStream is like Dag but with bidirectional streams
-    rpc DagStream(stream DagRequest) returns (stream DagResponse);
 }
 
 // P2PREQTYPE denotes the particular type of request being used in the p2p rpc

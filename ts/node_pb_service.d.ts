@@ -50,15 +50,6 @@ type NodeAPIDag = {
   readonly responseType: typeof node_pb.DagResponse;
 };
 
-type NodeAPIDagStream = {
-  readonly methodName: string;
-  readonly service: typeof NodeAPI;
-  readonly requestStream: true;
-  readonly responseStream: true;
-  readonly requestType: typeof node_pb.DagRequest;
-  readonly responseType: typeof node_pb.DagResponse;
-};
-
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly ConnMgmt: NodeAPIConnMgmt;
@@ -66,7 +57,6 @@ export class NodeAPI {
   static readonly P2P: NodeAPIP2P;
   static readonly Blockstore: NodeAPIBlockstore;
   static readonly Dag: NodeAPIDag;
-  static readonly DagStream: NodeAPIDagStream;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -146,6 +136,5 @@ export class NodeAPIClient {
     requestMessage: node_pb.DagRequest,
     callback: (error: ServiceError|null, responseMessage: node_pb.DagResponse|null) => void
   ): UnaryResponse;
-  dagStream(metadata?: grpc.Metadata): BidirectionalStream<node_pb.DagRequest, node_pb.DagResponse>;
 }
 

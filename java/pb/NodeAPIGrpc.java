@@ -190,38 +190,6 @@ public final class NodeAPIGrpc {
      return getDagMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Node.DagRequest,
-      pb.Node.DagResponse> getDagStreamMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "DagStream",
-      requestType = pb.Node.DagRequest.class,
-      responseType = pb.Node.DagResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<pb.Node.DagRequest,
-      pb.Node.DagResponse> getDagStreamMethod() {
-    io.grpc.MethodDescriptor<pb.Node.DagRequest, pb.Node.DagResponse> getDagStreamMethod;
-    if ((getDagStreamMethod = NodeAPIGrpc.getDagStreamMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getDagStreamMethod = NodeAPIGrpc.getDagStreamMethod) == null) {
-          NodeAPIGrpc.getDagStreamMethod = getDagStreamMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.DagRequest, pb.Node.DagResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "DagStream"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.DagRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.DagResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("DagStream"))
-                  .build();
-          }
-        }
-     }
-     return getDagStreamMethod;
-  }
-
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -304,16 +272,6 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getDagMethod(), responseObserver);
     }
 
-    /**
-     * <pre>
-     * DagStream is like Dag but with bidirectional streams
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<pb.Node.DagRequest> dagStream(
-        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getDagStreamMethod(), responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -351,13 +309,6 @@ public final class NodeAPIGrpc {
                 pb.Node.DagRequest,
                 pb.Node.DagResponse>(
                   this, METHODID_DAG)))
-          .addMethod(
-            getDagStreamMethod(),
-            asyncBidiStreamingCall(
-              new MethodHandlers<
-                pb.Node.DagRequest,
-                pb.Node.DagResponse>(
-                  this, METHODID_DAG_STREAM)))
           .build();
     }
   }
@@ -438,17 +389,6 @@ public final class NodeAPIGrpc {
         io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getDagMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * DagStream is like Dag but with bidirectional streams
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<pb.Node.DagRequest> dagStream(
-        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getDagStreamMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -610,7 +550,6 @@ public final class NodeAPIGrpc {
   private static final int METHODID_P2P = 2;
   private static final int METHODID_BLOCKSTORE = 3;
   private static final int METHODID_DAG = 4;
-  private static final int METHODID_DAG_STREAM = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -659,9 +598,6 @@ public final class NodeAPIGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_DAG_STREAM:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.dagStream(
-              (io.grpc.stub.StreamObserver<pb.Node.DagResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -718,7 +654,6 @@ public final class NodeAPIGrpc {
               .addMethod(getP2PMethod())
               .addMethod(getBlockstoreMethod())
               .addMethod(getDagMethod())
-              .addMethod(getDagStreamMethod())
               .build();
         }
       }
