@@ -93,6 +93,28 @@ function deserialize_pb_ExtrasRequest(buffer_arg) {
   return node_pb.ExtrasRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_KeystoreRequest(arg) {
+  if (!(arg instanceof node_pb.KeystoreRequest)) {
+    throw new Error('Expected argument of type pb.KeystoreRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_KeystoreRequest(buffer_arg) {
+  return node_pb.KeystoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_KeystoreResponse(arg) {
+  if (!(arg instanceof node_pb.KeystoreResponse)) {
+    throw new Error('Expected argument of type pb.KeystoreResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_KeystoreResponse(buffer_arg) {
+  return node_pb.KeystoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_P2PRequest(arg) {
   if (!(arg instanceof node_pb.P2PRequest)) {
     throw new Error('Expected argument of type pb.P2PRequest');
@@ -179,6 +201,18 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_DagRequest,
     responseSerialize: serialize_pb_DagResponse,
     responseDeserialize: deserialize_pb_DagResponse,
+  },
+  // Keystore is a unidirectional RPC allowing management of ipfs keystores
+  keystore: {
+    path: '/pb.NodeAPI/Keystore',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.KeystoreRequest,
+    responseType: node_pb.KeystoreResponse,
+    requestSerialize: serialize_pb_KeystoreRequest,
+    requestDeserialize: deserialize_pb_KeystoreRequest,
+    responseSerialize: serialize_pb_KeystoreResponse,
+    responseDeserialize: deserialize_pb_KeystoreResponse,
   },
 };
 

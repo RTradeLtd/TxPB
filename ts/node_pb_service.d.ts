@@ -50,6 +50,15 @@ type NodeAPIDag = {
   readonly responseType: typeof node_pb.DagResponse;
 };
 
+type NodeAPIKeystore = {
+  readonly methodName: string;
+  readonly service: typeof NodeAPI;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof node_pb.KeystoreRequest;
+  readonly responseType: typeof node_pb.KeystoreResponse;
+};
+
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly ConnMgmt: NodeAPIConnMgmt;
@@ -57,6 +66,7 @@ export class NodeAPI {
   static readonly P2P: NodeAPIP2P;
   static readonly Blockstore: NodeAPIBlockstore;
   static readonly Dag: NodeAPIDag;
+  static readonly Keystore: NodeAPIKeystore;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -135,6 +145,15 @@ export class NodeAPIClient {
   dag(
     requestMessage: node_pb.DagRequest,
     callback: (error: ServiceError|null, responseMessage: node_pb.DagResponse|null) => void
+  ): UnaryResponse;
+  keystore(
+    requestMessage: node_pb.KeystoreRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: node_pb.KeystoreResponse|null) => void
+  ): UnaryResponse;
+  keystore(
+    requestMessage: node_pb.KeystoreRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.KeystoreResponse|null) => void
   ): UnaryResponse;
 }
 

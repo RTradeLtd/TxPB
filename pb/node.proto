@@ -16,6 +16,8 @@ service NodeAPI {
     rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
     // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
     rpc Dag(DagRequest) returns (DagResponse) { };
+    //Keystore is a unidirectional RPC allowing management of ipfs keystores
+    rpc Keystore(KeystoreRequest) returns (KeystoreResponse) { };
 }
 
 // P2PREQTYPE denotes the particular type of request being used in the p2p rpc
@@ -286,4 +288,45 @@ message IPLDNode {
     repeated IPLDLink links = 2;
     // opaque user data
     bytes data = 1;
-  }
+}
+
+// KSREQTYPE indicates the particular KeystoreAPI request being performed
+enum KSREQTYPE {
+    // KS_HAS is used to check if the key exists in our keystore
+    KS_HAS = 0;
+    // KS_GET is used to retrieve private key bytes from our keystore
+    KS_GET = 1;
+    // KS_PUT is used to store private key bytes in our keystore
+    KS_PUT = 2;
+    // KS_DELETE is used to delete private keys from our keystore
+    KS_DELETE = 3;
+    // KS_LIST is used to list all keys in our keystore by their name
+    KS_LIST = 4;
+}
+
+// Used to submit a request to Keystore RPC
+message KeystoreRequest {
+    // indicates the request type being performed
+    KSREQTYPE requestType = 1;
+    // name of the key the request is for
+    // sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE
+    string name = 2;
+    // the actual private key bytes
+    // sent by: KS_PUT
+    bytes privateKey = 3;
+}
+
+// Used in response to a Keystore RPC
+message KeystoreResponse {
+    // indicates the request type being performed
+    KSREQTYPE requestType = 1;
+    // the private key bytes
+    // sent by: KS_GET
+    bytes privateKey = 2;
+    // contains all known key names
+    // sent by: KS_LIST
+    repeated string keyNames = 3;
+    // indicates if we have the key in our keystore
+    // sent by: KS_HAS
+    bool has = 4;
+}

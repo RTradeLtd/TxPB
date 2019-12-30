@@ -30,16 +30,6 @@
     - [FileAPI](#pb.FileAPI)
   
 
-- [keystore.proto](#keystore.proto)
-    - [KeystoreRequest](#pb.KeystoreRequest)
-    - [KeystoreResponse](#pb.KeystoreResponse)
-  
-    - [KSREQTYPE](#pb.KSREQTYPE)
-  
-  
-    - [KeystoreAPI](#pb.KeystoreAPI)
-  
-
 - [namesys.proto](#namesys.proto)
     - [NameSysPublishRequest](#pb.NameSysPublishRequest)
     - [NameSysResolveRequest](#pb.NameSysResolveRequest)
@@ -66,6 +56,8 @@
     - [GetPeersResponse](#pb.GetPeersResponse)
     - [IPLDLink](#pb.IPLDLink)
     - [IPLDNode](#pb.IPLDNode)
+    - [KeystoreRequest](#pb.KeystoreRequest)
+    - [KeystoreResponse](#pb.KeystoreResponse)
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
@@ -76,6 +68,7 @@
     - [DAGREQTYPE](#pb.DAGREQTYPE)
     - [EXTRASREQTYPE](#pb.EXTRASREQTYPE)
     - [EXTRASTYPE](#pb.EXTRASTYPE)
+    - [KSREQTYPE](#pb.KSREQTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
   
   
@@ -362,83 +355,6 @@ FileAPI provides a gRPC api to upload/download files as UnixFS objects
 | ----------- | ------------ | ------------- | ------------|
 | UploadFile | [UploadRequest](#pb.UploadRequest) stream | [PutResponse](#pb.PutResponse) | UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add) |
 | DownloadFile | [DownloadRequest](#pb.DownloadRequest) | [DownloadResponse](#pb.DownloadResponse) stream | DownloadFile allows downloading a UnixFS object (equivalent to ipfs get) |
-
- 
-
-
-
-<a name="keystore.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## keystore.proto
-
-
-
-<a name="pb.KeystoreRequest"></a>
-
-### KeystoreRequest
-Used to submit a request to Keystore RPC
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
-| name | [string](#string) |  | name of the key the request is for sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE |
-| privateKey | [bytes](#bytes) |  | the actual private key bytes sent by: KS_PUT |
-
-
-
-
-
-
-<a name="pb.KeystoreResponse"></a>
-
-### KeystoreResponse
-Used in response to a Keystore RPC
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
-| privateKey | [bytes](#bytes) |  | the private key bytes sent by: KS_GET |
-| keyNames | [string](#string) | repeated | contains all known key names sent by: KS_LIST |
-| has | [bool](#bool) |  | indicates if we have the key in our keystore sent by: KS_HAS |
-
-
-
-
-
- 
-
-
-<a name="pb.KSREQTYPE"></a>
-
-### KSREQTYPE
-KSREQTYPE indicates the particular KeystoreAPI request being performed
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| KS_HAS | 0 | KS_HAS is used to check if the key exists in our keystore |
-| KS_GET | 1 | KS_GET is used to retrieve private key bytes from our keystore |
-| KS_PUT | 2 | KS_PUT is used to store private key bytes in our keystore |
-| KS_DELETE | 3 | KS_DELETE is used to delete private keys from our keystore |
-| KS_LIST | 4 | KS_LIST is used to list all keys in our keystore by their name |
-
-
- 
-
- 
-
-
-<a name="pb.KeystoreAPI"></a>
-
-### KeystoreAPI
-KeystoreAPI provides a keystore management API, and is equivalent
-to the go-ipfs `ipfs key` subset of commands.
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | Keystore is a unidirectional RPC allowing management of ipfs keystores |
 
  
 
@@ -786,6 +702,41 @@ An IPFS MerkleDAG Node
 
 
 
+<a name="pb.KeystoreRequest"></a>
+
+### KeystoreRequest
+Used to submit a request to Keystore RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
+| name | [string](#string) |  | name of the key the request is for sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE |
+| privateKey | [bytes](#bytes) |  | the actual private key bytes sent by: KS_PUT |
+
+
+
+
+
+
+<a name="pb.KeystoreResponse"></a>
+
+### KeystoreResponse
+Used in response to a Keystore RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
+| privateKey | [bytes](#bytes) |  | the private key bytes sent by: KS_GET |
+| keyNames | [string](#string) | repeated | contains all known key names sent by: KS_LIST |
+| has | [bool](#bool) |  | indicates if we have the key in our keystore sent by: KS_HAS |
+
+
+
+
+
+
 <a name="pb.P2PLsInfo"></a>
 
 ### P2PLsInfo
@@ -929,6 +880,21 @@ EXTRASTYPE denotes a particular extras type
 
 
 
+<a name="pb.KSREQTYPE"></a>
+
+### KSREQTYPE
+KSREQTYPE indicates the particular KeystoreAPI request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| KS_HAS | 0 | KS_HAS is used to check if the key exists in our keystore |
+| KS_GET | 1 | KS_GET is used to retrieve private key bytes from our keystore |
+| KS_PUT | 2 | KS_PUT is used to store private key bytes in our keystore |
+| KS_DELETE | 3 | KS_DELETE is used to delete private keys from our keystore |
+| KS_LIST | 4 | KS_LIST is used to list all keys in our keystore by their name |
+
+
+
 <a name="pb.P2PREQTYPE"></a>
 
 ### P2PREQTYPE
@@ -959,6 +925,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 | Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows low-level management of the underlying blockstore |
 | Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
+| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | Keystore is a unidirectional RPC allowing management of ipfs keystores |
 
  
 

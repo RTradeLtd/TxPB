@@ -40,6 +40,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.DagRequest.SerializeToString,
         response_deserializer=node__pb2.DagResponse.FromString,
         )
+    self.Keystore = channel.unary_unary(
+        '/pb.NodeAPI/Keystore',
+        request_serializer=node__pb2.KeystoreRequest.SerializeToString,
+        response_deserializer=node__pb2.KeystoreResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -83,6 +88,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Keystore(self, request, context):
+    """Keystore is a unidirectional RPC allowing management of ipfs keystores
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -110,6 +122,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.Dag,
           request_deserializer=node__pb2.DagRequest.FromString,
           response_serializer=node__pb2.DagResponse.SerializeToString,
+      ),
+      'Keystore': grpc.unary_unary_rpc_method_handler(
+          servicer.Keystore,
+          request_deserializer=node__pb2.KeystoreRequest.FromString,
+          response_serializer=node__pb2.KeystoreResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"`\n\x0f\x43onnMgmtRequest\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x12\n\nmultiAddrs\x18\x02 \x03(\t\x12\x0f\n\x07peerIDs\x18\x03 \x03(\t\"\xac\x02\n\x10\x43onnMgmtResponse\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x36\n\tconnected\x18\x02 \x03(\x0b\x32#.pb.ConnMgmtResponse.ConnectedEntry\x12\x30\n\x06status\x18\x03 \x03(\x0b\x32 .pb.ConnMgmtResponse.StatusEntry\x12\x0f\n\x07peerIDs\x18\x04 \x03(\t\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a\x41\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.pb.ConnMgmtStatus:\x02\x38\x01\"6\n\x0e\x43onnMgmtStatus\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"^\n\rExtrasRequest\x12&\n\x0brequestType\x18\x01 \x01(\x0e\x32\x11.pb.EXTRASREQTYPE\x12%\n\rextrasFeature\x18\x02 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"\x99\x01\n\x11\x42lockstoreRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x02 \x03(\x0e\x32\r.pb.BSREQOPTS\x12\x0c\n\x04\x63ids\x18\x03 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x04 \x03(\x0c\x12\x12\n\ncidVersion\x18\x05 \x01(\t\x12\x10\n\x08hashFunc\x18\x07 \x01(\t\"S\n\x12\x42lockstoreResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x19\n\x06\x62locks\x18\x02 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x80\x02\n\nDagRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x03 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x04 \x01(\t\x12\x10\n\x08hashFunc\x18\x05 \x01(\t\x12\x12\n\ncidVersion\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12(\n\x05links\x18\x08 \x03(\x0b\x32\x19.pb.DagRequest.LinksEntry\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"p\n\x0b\x44\x61gResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0e\n\x06hashes\x18\x02 \x03(\t\x12\x0f\n\x07rawData\x18\x03 \x01(\x0c\x12\x1b\n\x05links\x18\x04 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*U\n\x0f\x43ONNMGMTREQTYPE\x12\x0e\n\nCM_CONNECT\x10\x00\x12\x11\n\rCM_DISCONNECT\x10\x01\x12\r\n\tCM_STATUS\x10\x02\x12\x10\n\x0c\x43M_GET_PEERS\x10\x03*.\n\rEXTRASREQTYPE\x12\r\n\tEX_ENABLE\x10\x00\x12\x0e\n\nEX_DISABLE\x10\x01*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*^\n\nDAGREQTYPE\x12\x0b\n\x07\x44\x41G_PUT\x10\x00\x12\x0b\n\x07\x44\x41G_GET\x10\x01\x12\x10\n\x0c\x44\x41G_NEW_NODE\x10\x02\x12\x11\n\rDAG_ADD_LINKS\x10\x03\x12\x11\n\rDAG_GET_LINKS\x10\x04\x32\xff\x01\n\x07NodeAPI\x12\x37\n\x08\x43onnMgmt\x12\x13.pb.ConnMgmtRequest\x1a\x14.pb.ConnMgmtResponse\"\x00\x12(\n\x06\x45xtras\x12\x11.pb.ExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x12(\n\x03\x44\x61g\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"`\n\x0f\x43onnMgmtRequest\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x12\n\nmultiAddrs\x18\x02 \x03(\t\x12\x0f\n\x07peerIDs\x18\x03 \x03(\t\"\xac\x02\n\x10\x43onnMgmtResponse\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x36\n\tconnected\x18\x02 \x03(\x0b\x32#.pb.ConnMgmtResponse.ConnectedEntry\x12\x30\n\x06status\x18\x03 \x03(\x0b\x32 .pb.ConnMgmtResponse.StatusEntry\x12\x0f\n\x07peerIDs\x18\x04 \x03(\t\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a\x41\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.pb.ConnMgmtStatus:\x02\x38\x01\"6\n\x0e\x43onnMgmtStatus\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"^\n\rExtrasRequest\x12&\n\x0brequestType\x18\x01 \x01(\x0e\x32\x11.pb.EXTRASREQTYPE\x12%\n\rextrasFeature\x18\x02 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"\x99\x01\n\x11\x42lockstoreRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x02 \x03(\x0e\x32\r.pb.BSREQOPTS\x12\x0c\n\x04\x63ids\x18\x03 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x04 \x03(\x0c\x12\x12\n\ncidVersion\x18\x05 \x01(\t\x12\x10\n\x08hashFunc\x18\x07 \x01(\t\"S\n\x12\x42lockstoreResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x19\n\x06\x62locks\x18\x02 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x80\x02\n\nDagRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x03 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x04 \x01(\t\x12\x10\n\x08hashFunc\x18\x05 \x01(\t\x12\x12\n\ncidVersion\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12(\n\x05links\x18\x08 \x03(\x0b\x32\x19.pb.DagRequest.LinksEntry\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"p\n\x0b\x44\x61gResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0e\n\x06hashes\x18\x02 \x03(\t\x12\x0f\n\x07rawData\x18\x03 \x01(\x0c\x12\x1b\n\x05links\x18\x04 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\"W\n\x0fKeystoreRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.KSREQTYPE\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\nprivateKey\x18\x03 \x01(\x0c\"i\n\x10KeystoreResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.KSREQTYPE\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t\x12\x0b\n\x03has\x18\x04 \x01(\x08*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*U\n\x0f\x43ONNMGMTREQTYPE\x12\x0e\n\nCM_CONNECT\x10\x00\x12\x11\n\rCM_DISCONNECT\x10\x01\x12\r\n\tCM_STATUS\x10\x02\x12\x10\n\x0c\x43M_GET_PEERS\x10\x03*.\n\rEXTRASREQTYPE\x12\r\n\tEX_ENABLE\x10\x00\x12\x0e\n\nEX_DISABLE\x10\x01*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*^\n\nDAGREQTYPE\x12\x0b\n\x07\x44\x41G_PUT\x10\x00\x12\x0b\n\x07\x44\x41G_GET\x10\x01\x12\x10\n\x0c\x44\x41G_NEW_NODE\x10\x02\x12\x11\n\rDAG_ADD_LINKS\x10\x03\x12\x11\n\rDAG_GET_LINKS\x10\x04*K\n\tKSREQTYPE\x12\n\n\x06KS_HAS\x10\x00\x12\n\n\x06KS_GET\x10\x01\x12\n\n\x06KS_PUT\x10\x02\x12\r\n\tKS_DELETE\x10\x03\x12\x0b\n\x07KS_LIST\x10\x04\x32\xb8\x02\n\x07NodeAPI\x12\x37\n\x08\x43onnMgmt\x12\x13.pb.ConnMgmtRequest\x1a\x14.pb.ConnMgmtResponse\"\x00\x12(\n\x06\x45xtras\x12\x11.pb.ExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x12(\n\x03\x44\x61g\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse\"\x00\x12\x37\n\x08Keystore\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,])
 
@@ -51,8 +51,8 @@ _P2PREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1824,
-  serialized_end=1880,
+  serialized_start=2020,
+  serialized_end=2076,
 )
 _sym_db.RegisterEnumDescriptor(_P2PREQTYPE)
 
@@ -82,8 +82,8 @@ _CONNMGMTREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1882,
-  serialized_end=1967,
+  serialized_start=2078,
+  serialized_end=2163,
 )
 _sym_db.RegisterEnumDescriptor(_CONNMGMTREQTYPE)
 
@@ -105,8 +105,8 @@ _EXTRASREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1969,
-  serialized_end=2015,
+  serialized_start=2165,
+  serialized_end=2211,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASREQTYPE)
 
@@ -136,8 +136,8 @@ _EXTRASTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2017,
-  serialized_end=2080,
+  serialized_start=2213,
+  serialized_end=2276,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
 
@@ -171,8 +171,8 @@ _BSREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2082,
-  serialized_end=2166,
+  serialized_start=2278,
+  serialized_end=2362,
 )
 _sym_db.RegisterEnumDescriptor(_BSREQTYPE)
 
@@ -194,8 +194,8 @@ _BSREQOPTS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2168,
-  serialized_end=2206,
+  serialized_start=2364,
+  serialized_end=2402,
 )
 _sym_db.RegisterEnumDescriptor(_BSREQOPTS)
 
@@ -229,12 +229,47 @@ _DAGREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2208,
-  serialized_end=2302,
+  serialized_start=2404,
+  serialized_end=2498,
 )
 _sym_db.RegisterEnumDescriptor(_DAGREQTYPE)
 
 DAGREQTYPE = enum_type_wrapper.EnumTypeWrapper(_DAGREQTYPE)
+_KSREQTYPE = _descriptor.EnumDescriptor(
+  name='KSREQTYPE',
+  full_name='pb.KSREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='KS_HAS', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_GET', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_PUT', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_DELETE', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_LIST', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2500,
+  serialized_end=2575,
+)
+_sym_db.RegisterEnumDescriptor(_KSREQTYPE)
+
+KSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_KSREQTYPE)
 CLOSE = 0
 FORWARD = 1
 LISTEN = 2
@@ -261,6 +296,11 @@ DAG_GET = 1
 DAG_NEW_NODE = 2
 DAG_ADD_LINKS = 3
 DAG_GET_LINKS = 4
+KS_HAS = 0
+KS_GET = 1
+KS_PUT = 2
+KS_DELETE = 3
+KS_LIST = 4
 
 
 
@@ -1126,6 +1166,103 @@ _IPLDNODE = _descriptor.Descriptor(
   serialized_end=1822,
 )
 
+
+_KEYSTOREREQUEST = _descriptor.Descriptor(
+  name='KeystoreRequest',
+  full_name='pb.KeystoreRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.KeystoreRequest.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='pb.KeystoreRequest.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='privateKey', full_name='pb.KeystoreRequest.privateKey', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1824,
+  serialized_end=1911,
+)
+
+
+_KEYSTORERESPONSE = _descriptor.Descriptor(
+  name='KeystoreResponse',
+  full_name='pb.KeystoreResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.KeystoreResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='privateKey', full_name='pb.KeystoreResponse.privateKey', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='keyNames', full_name='pb.KeystoreResponse.keyNames', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='has', full_name='pb.KeystoreResponse.has', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1913,
+  serialized_end=2018,
+)
+
 _P2PREQUEST.fields_by_name['requestType'].enum_type = _P2PREQTYPE
 _P2PRESPONSE.fields_by_name['requestType'].enum_type = _P2PREQTYPE
 _P2PRESPONSE.fields_by_name['streamInfos'].message_type = _P2PLSINFO
@@ -1148,6 +1285,8 @@ _DAGREQUEST.fields_by_name['links'].message_type = _DAGREQUEST_LINKSENTRY
 _DAGRESPONSE.fields_by_name['requestType'].enum_type = _DAGREQTYPE
 _DAGRESPONSE.fields_by_name['links'].message_type = _IPLDLINK
 _IPLDNODE.fields_by_name['links'].message_type = _IPLDLINK
+_KEYSTOREREQUEST.fields_by_name['requestType'].enum_type = _KSREQTYPE
+_KEYSTORERESPONSE.fields_by_name['requestType'].enum_type = _KSREQTYPE
 DESCRIPTOR.message_types_by_name['P2PRequest'] = _P2PREQUEST
 DESCRIPTOR.message_types_by_name['P2PResponse'] = _P2PRESPONSE
 DESCRIPTOR.message_types_by_name['P2PLsInfo'] = _P2PLSINFO
@@ -1163,6 +1302,8 @@ DESCRIPTOR.message_types_by_name['DagRequest'] = _DAGREQUEST
 DESCRIPTOR.message_types_by_name['DagResponse'] = _DAGRESPONSE
 DESCRIPTOR.message_types_by_name['IPLDLink'] = _IPLDLINK
 DESCRIPTOR.message_types_by_name['IPLDNode'] = _IPLDNODE
+DESCRIPTOR.message_types_by_name['KeystoreRequest'] = _KEYSTOREREQUEST
+DESCRIPTOR.message_types_by_name['KeystoreResponse'] = _KEYSTORERESPONSE
 DESCRIPTOR.enum_types_by_name['P2PREQTYPE'] = _P2PREQTYPE
 DESCRIPTOR.enum_types_by_name['CONNMGMTREQTYPE'] = _CONNMGMTREQTYPE
 DESCRIPTOR.enum_types_by_name['EXTRASREQTYPE'] = _EXTRASREQTYPE
@@ -1170,6 +1311,7 @@ DESCRIPTOR.enum_types_by_name['EXTRASTYPE'] = _EXTRASTYPE
 DESCRIPTOR.enum_types_by_name['BSREQTYPE'] = _BSREQTYPE
 DESCRIPTOR.enum_types_by_name['BSREQOPTS'] = _BSREQOPTS
 DESCRIPTOR.enum_types_by_name['DAGREQTYPE'] = _DAGREQTYPE
+DESCRIPTOR.enum_types_by_name['KSREQTYPE'] = _KSREQTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 P2PRequest = _reflection.GeneratedProtocolMessageType('P2PRequest', (_message.Message,), {
@@ -1301,6 +1443,20 @@ IPLDNode = _reflection.GeneratedProtocolMessageType('IPLDNode', (_message.Messag
   })
 _sym_db.RegisterMessage(IPLDNode)
 
+KeystoreRequest = _reflection.GeneratedProtocolMessageType('KeystoreRequest', (_message.Message,), {
+  'DESCRIPTOR' : _KEYSTOREREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.KeystoreRequest)
+  })
+_sym_db.RegisterMessage(KeystoreRequest)
+
+KeystoreResponse = _reflection.GeneratedProtocolMessageType('KeystoreResponse', (_message.Message,), {
+  'DESCRIPTOR' : _KEYSTORERESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.KeystoreResponse)
+  })
+_sym_db.RegisterMessage(KeystoreResponse)
+
 
 _CONNMGMTRESPONSE_CONNECTEDENTRY._options = None
 _CONNMGMTRESPONSE_STATUSENTRY._options = None
@@ -1312,8 +1468,8 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=2305,
-  serialized_end=2560,
+  serialized_start=2578,
+  serialized_end=2890,
   methods=[
   _descriptor.MethodDescriptor(
     name='ConnMgmt',
@@ -1358,6 +1514,15 @@ _NODEAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_DAGREQUEST,
     output_type=_DAGRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Keystore',
+    full_name='pb.NodeAPI.Keystore',
+    index=5,
+    containing_service=None,
+    input_type=_KEYSTOREREQUEST,
+    output_type=_KEYSTORERESPONSE,
     serialized_options=None,
   ),
 ])

@@ -56,6 +56,15 @@ NodeAPI.Dag = {
   responseType: node_pb.DagResponse
 };
 
+NodeAPI.Keystore = {
+  methodName: "Keystore",
+  service: NodeAPI,
+  requestStream: false,
+  responseStream: false,
+  requestType: node_pb.KeystoreRequest,
+  responseType: node_pb.KeystoreResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -192,6 +201,37 @@ NodeAPIClient.prototype.dag = function dag(requestMessage, metadata, callback) {
     callback = arguments[1];
   }
   var client = grpc.unary(NodeAPI.Dag, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.keystore = function keystore(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(NodeAPI.Keystore, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
