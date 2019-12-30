@@ -4,6 +4,9 @@
 import * as jspb from "google-protobuf";
 
 export class KeystoreRequest extends jspb.Message {
+  getRequesttype(): KSREQTYPEMap[keyof KSREQTYPEMap];
+  setRequesttype(value: KSREQTYPEMap[keyof KSREQTYPEMap]): void;
+
   getName(): string;
   setName(value: string): void;
 
@@ -24,12 +27,16 @@ export class KeystoreRequest extends jspb.Message {
 
 export namespace KeystoreRequest {
   export type AsObject = {
+    requesttype: KSREQTYPEMap[keyof KSREQTYPEMap],
     name: string,
     privatekey: Uint8Array | string,
   }
 }
 
 export class KeystoreResponse extends jspb.Message {
+  getRequesttype(): KSREQTYPEMap[keyof KSREQTYPEMap];
+  setRequesttype(value: KSREQTYPEMap[keyof KSREQTYPEMap]): void;
+
   getPrivatekey(): Uint8Array | string;
   getPrivatekey_asU8(): Uint8Array;
   getPrivatekey_asB64(): string;
@@ -55,6 +62,7 @@ export class KeystoreResponse extends jspb.Message {
 
 export namespace KeystoreResponse {
   export type AsObject = {
+    requesttype: KSREQTYPEMap[keyof KSREQTYPEMap],
     privatekey: Uint8Array | string,
     keynamesList: Array<string>,
     has: boolean,

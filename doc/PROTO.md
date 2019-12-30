@@ -522,6 +522,7 @@ Used to submit a request to Keystore RPC
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
 | name | [string](#string) |  | name of the key the request is for sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE |
 | privateKey | [bytes](#bytes) |  | the actual private key bytes sent by: KS_PUT |
 
@@ -538,6 +539,7 @@ Used in response to a Keystore RPC
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
 | privateKey | [bytes](#bytes) |  | the private key bytes sent by: KS_GET |
 | keyNames | [string](#string) | repeated | contains all known key names sent by: KS_LIST |
 | has | [bool](#bool) |  | indicates if we have the key in our keystore sent by: KS_HAS |

@@ -89,7 +89,8 @@ proto.pb.KeystoreRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.KeystoreRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     privatekey: msg.getPrivatekey_asB64()
   };
 
@@ -128,10 +129,14 @@ proto.pb.KeystoreRequest.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.pb.KSREQTYPE} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPrivatekey(value);
       break;
@@ -164,17 +169,24 @@ proto.pb.KeystoreRequest.prototype.serializeBinary = function() {
  */
 proto.pb.KeystoreRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getName();
   if (f.length > 0) {
     writer.writeString(
-      1,
+      2,
       f
     );
   }
   f = message.getPrivatekey_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      2,
+      3,
       f
     );
   }
@@ -182,11 +194,29 @@ proto.pb.KeystoreRequest.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string name = 1;
+ * optional KSREQTYPE requestType = 1;
+ * @return {!proto.pb.KSREQTYPE}
+ */
+proto.pb.KeystoreRequest.prototype.getRequesttype = function() {
+  return /** @type {!proto.pb.KSREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.pb.KSREQTYPE} value
+ * @return {!proto.pb.KeystoreRequest} returns this
+ */
+proto.pb.KeystoreRequest.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * optional string name = 2;
  * @return {string}
  */
 proto.pb.KeystoreRequest.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -195,21 +225,21 @@ proto.pb.KeystoreRequest.prototype.getName = function() {
  * @return {!proto.pb.KeystoreRequest} returns this
  */
 proto.pb.KeystoreRequest.prototype.setName = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional bytes privateKey = 2;
+ * optional bytes privateKey = 3;
  * @return {!(string|Uint8Array)}
  */
 proto.pb.KeystoreRequest.prototype.getPrivatekey = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * optional bytes privateKey = 2;
+ * optional bytes privateKey = 3;
  * This is a type-conversion wrapper around `getPrivatekey()`
  * @return {string}
  */
@@ -220,7 +250,7 @@ proto.pb.KeystoreRequest.prototype.getPrivatekey_asB64 = function() {
 
 
 /**
- * optional bytes privateKey = 2;
+ * optional bytes privateKey = 3;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getPrivatekey()`
@@ -237,7 +267,7 @@ proto.pb.KeystoreRequest.prototype.getPrivatekey_asU8 = function() {
  * @return {!proto.pb.KeystoreRequest} returns this
  */
 proto.pb.KeystoreRequest.prototype.setPrivatekey = function(value) {
-  return jspb.Message.setProto3BytesField(this, 2, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -247,7 +277,7 @@ proto.pb.KeystoreRequest.prototype.setPrivatekey = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.KeystoreResponse.repeatedFields_ = [2];
+proto.pb.KeystoreResponse.repeatedFields_ = [3];
 
 
 
@@ -280,9 +310,10 @@ proto.pb.KeystoreResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.KeystoreResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     privatekey: msg.getPrivatekey_asB64(),
-    keynamesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    has: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    keynamesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    has: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -320,14 +351,18 @@ proto.pb.KeystoreResponse.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.pb.KSREQTYPE} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
+    case 2:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPrivatekey(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.addKeynames(value);
       break;
-    case 3:
+    case 4:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setHas(value);
       break;
@@ -360,24 +395,31 @@ proto.pb.KeystoreResponse.prototype.serializeBinary = function() {
  */
 proto.pb.KeystoreResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getPrivatekey_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      1,
+      2,
       f
     );
   }
   f = message.getKeynamesList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      2,
+      3,
       f
     );
   }
   f = message.getHas();
   if (f) {
     writer.writeBool(
-      3,
+      4,
       f
     );
   }
@@ -385,16 +427,34 @@ proto.pb.KeystoreResponse.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional bytes privateKey = 1;
- * @return {!(string|Uint8Array)}
+ * optional KSREQTYPE requestType = 1;
+ * @return {!proto.pb.KSREQTYPE}
  */
-proto.pb.KeystoreResponse.prototype.getPrivatekey = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.pb.KeystoreResponse.prototype.getRequesttype = function() {
+  return /** @type {!proto.pb.KSREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * optional bytes privateKey = 1;
+ * @param {!proto.pb.KSREQTYPE} value
+ * @return {!proto.pb.KeystoreResponse} returns this
+ */
+proto.pb.KeystoreResponse.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * optional bytes privateKey = 2;
+ * @return {!(string|Uint8Array)}
+ */
+proto.pb.KeystoreResponse.prototype.getPrivatekey = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes privateKey = 2;
  * This is a type-conversion wrapper around `getPrivatekey()`
  * @return {string}
  */
@@ -405,7 +465,7 @@ proto.pb.KeystoreResponse.prototype.getPrivatekey_asB64 = function() {
 
 
 /**
- * optional bytes privateKey = 1;
+ * optional bytes privateKey = 2;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getPrivatekey()`
@@ -422,16 +482,16 @@ proto.pb.KeystoreResponse.prototype.getPrivatekey_asU8 = function() {
  * @return {!proto.pb.KeystoreResponse} returns this
  */
 proto.pb.KeystoreResponse.prototype.setPrivatekey = function(value) {
-  return jspb.Message.setProto3BytesField(this, 1, value);
+  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
 /**
- * repeated string keyNames = 2;
+ * repeated string keyNames = 3;
  * @return {!Array<string>}
  */
 proto.pb.KeystoreResponse.prototype.getKeynamesList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
@@ -440,7 +500,7 @@ proto.pb.KeystoreResponse.prototype.getKeynamesList = function() {
  * @return {!proto.pb.KeystoreResponse} returns this
  */
 proto.pb.KeystoreResponse.prototype.setKeynamesList = function(value) {
-  return jspb.Message.setField(this, 2, value || []);
+  return jspb.Message.setField(this, 3, value || []);
 };
 
 
@@ -450,7 +510,7 @@ proto.pb.KeystoreResponse.prototype.setKeynamesList = function(value) {
  * @return {!proto.pb.KeystoreResponse} returns this
  */
 proto.pb.KeystoreResponse.prototype.addKeynames = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
@@ -464,11 +524,11 @@ proto.pb.KeystoreResponse.prototype.clearKeynamesList = function() {
 
 
 /**
- * optional bool has = 3;
+ * optional bool has = 4;
  * @return {boolean}
  */
 proto.pb.KeystoreResponse.prototype.getHas = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
 };
 
 
@@ -477,7 +537,7 @@ proto.pb.KeystoreResponse.prototype.getHas = function() {
  * @return {!proto.pb.KeystoreResponse} returns this
  */
 proto.pb.KeystoreResponse.prototype.setHas = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 3, value);
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
