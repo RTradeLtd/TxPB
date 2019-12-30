@@ -2179,7 +2179,7 @@ proto.pb.ExtrasRequest.prototype.setExtrasfeature = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.BlockstoreRequest.repeatedFields_ = [1];
+proto.pb.BlockstoreRequest.repeatedFields_ = [2,3,4];
 
 
 
@@ -2212,9 +2212,10 @@ proto.pb.BlockstoreRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.BlockstoreRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    cidsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    reqtype: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    reqopts: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    reqoptsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    cidsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    dataList: msg.getDataList_asB64()
   };
 
   if (includeInstance) {
@@ -2252,16 +2253,20 @@ proto.pb.BlockstoreRequest.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.pb.BSREQTYPE} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
+    case 2:
+      var value = /** @type {!Array<!proto.pb.BSREQOPTS>} */ (reader.readPackedEnum());
+      msg.setReqoptsList(value);
+      break;
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.addCids(value);
       break;
-    case 2:
-      var value = /** @type {!proto.pb.BSREQTYPE} */ (reader.readEnum());
-      msg.setReqtype(value);
-      break;
-    case 3:
-      var value = /** @type {!proto.pb.BSREQOPTS} */ (reader.readEnum());
-      msg.setReqopts(value);
+    case 4:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.addData(value);
       break;
     default:
       reader.skipField();
@@ -2292,24 +2297,31 @@ proto.pb.BlockstoreRequest.prototype.serializeBinary = function() {
  */
 proto.pb.BlockstoreRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCidsList();
-  if (f.length > 0) {
-    writer.writeRepeatedString(
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
   }
-  f = message.getReqtype();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  f = message.getReqoptsList();
+  if (f.length > 0) {
+    writer.writePackedEnum(
       2,
       f
     );
   }
-  f = message.getReqopts();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  f = message.getCidsList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
       3,
+      f
+    );
+  }
+  f = message.getDataList_asU8();
+  if (f.length > 0) {
+    writer.writeRepeatedBytes(
+      4,
       f
     );
   }
@@ -2317,11 +2329,66 @@ proto.pb.BlockstoreRequest.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * repeated string cids = 1;
+ * optional BSREQTYPE requestType = 1;
+ * @return {!proto.pb.BSREQTYPE}
+ */
+proto.pb.BlockstoreRequest.prototype.getRequesttype = function() {
+  return /** @type {!proto.pb.BSREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.pb.BSREQTYPE} value
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * repeated BSREQOPTS reqOpts = 2;
+ * @return {!Array<!proto.pb.BSREQOPTS>}
+ */
+proto.pb.BlockstoreRequest.prototype.getReqoptsList = function() {
+  return /** @type {!Array<!proto.pb.BSREQOPTS>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.pb.BSREQOPTS>} value
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.setReqoptsList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {!proto.pb.BSREQOPTS} value
+ * @param {number=} opt_index
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.addReqopts = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.clearReqoptsList = function() {
+  return this.setReqoptsList([]);
+};
+
+
+/**
+ * repeated string cids = 3;
  * @return {!Array<string>}
  */
 proto.pb.BlockstoreRequest.prototype.getCidsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
@@ -2330,7 +2397,7 @@ proto.pb.BlockstoreRequest.prototype.getCidsList = function() {
  * @return {!proto.pb.BlockstoreRequest} returns this
  */
 proto.pb.BlockstoreRequest.prototype.setCidsList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
+  return jspb.Message.setField(this, 3, value || []);
 };
 
 
@@ -2340,7 +2407,7 @@ proto.pb.BlockstoreRequest.prototype.setCidsList = function(value) {
  * @return {!proto.pb.BlockstoreRequest} returns this
  */
 proto.pb.BlockstoreRequest.prototype.addCids = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
@@ -2354,38 +2421,63 @@ proto.pb.BlockstoreRequest.prototype.clearCidsList = function() {
 
 
 /**
- * optional BSREQTYPE reqType = 2;
- * @return {!proto.pb.BSREQTYPE}
+ * repeated bytes data = 4;
+ * @return {!(Array<!Uint8Array>|Array<string>)}
  */
-proto.pb.BlockstoreRequest.prototype.getReqtype = function() {
-  return /** @type {!proto.pb.BSREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.pb.BlockstoreRequest.prototype.getDataList = function() {
+  return /** @type {!(Array<!Uint8Array>|Array<string>)} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * @param {!proto.pb.BSREQTYPE} value
+ * repeated bytes data = 4;
+ * This is a type-conversion wrapper around `getDataList()`
+ * @return {!Array<string>}
+ */
+proto.pb.BlockstoreRequest.prototype.getDataList_asB64 = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.bytesListAsB64(
+      this.getDataList()));
+};
+
+
+/**
+ * repeated bytes data = 4;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getDataList()`
+ * @return {!Array<!Uint8Array>}
+ */
+proto.pb.BlockstoreRequest.prototype.getDataList_asU8 = function() {
+  return /** @type {!Array<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
+      this.getDataList()));
+};
+
+
+/**
+ * @param {!(Array<!Uint8Array>|Array<string>)} value
  * @return {!proto.pb.BlockstoreRequest} returns this
  */
-proto.pb.BlockstoreRequest.prototype.setReqtype = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+proto.pb.BlockstoreRequest.prototype.setDataList = function(value) {
+  return jspb.Message.setField(this, 4, value || []);
 };
 
 
 /**
- * optional BSREQOPTS reqOpts = 3;
- * @return {!proto.pb.BSREQOPTS}
- */
-proto.pb.BlockstoreRequest.prototype.getReqopts = function() {
-  return /** @type {!proto.pb.BSREQOPTS} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {!proto.pb.BSREQOPTS} value
+ * @param {!(string|Uint8Array)} value
+ * @param {number=} opt_index
  * @return {!proto.pb.BlockstoreRequest} returns this
  */
-proto.pb.BlockstoreRequest.prototype.setReqopts = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+proto.pb.BlockstoreRequest.prototype.addData = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.clearDataList = function() {
+  return this.setDataList([]);
 };
 
 
@@ -2395,7 +2487,7 @@ proto.pb.BlockstoreRequest.prototype.setReqopts = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.BlockstoreResponse.repeatedFields_ = [1];
+proto.pb.BlockstoreResponse.repeatedFields_ = [2];
 
 
 
@@ -2428,6 +2520,7 @@ proto.pb.BlockstoreResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.BlockstoreResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     blocksList: jspb.Message.toObjectList(msg.getBlocksList(),
     proto.pb.Block.toObject, includeInstance)
   };
@@ -2467,6 +2560,10 @@ proto.pb.BlockstoreResponse.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.pb.BSREQTYPE} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
+    case 2:
       var value = new proto.pb.Block;
       reader.readMessage(value,proto.pb.Block.deserializeBinaryFromReader);
       msg.addBlocks(value);
@@ -2500,10 +2597,17 @@ proto.pb.BlockstoreResponse.prototype.serializeBinary = function() {
  */
 proto.pb.BlockstoreResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getBlocksList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      1,
+      2,
       f,
       proto.pb.Block.serializeBinaryToWriter
     );
@@ -2512,12 +2616,30 @@ proto.pb.BlockstoreResponse.serializeBinaryToWriter = function(message, writer) 
 
 
 /**
- * repeated Block blocks = 1;
+ * optional BSREQTYPE requestType = 1;
+ * @return {!proto.pb.BSREQTYPE}
+ */
+proto.pb.BlockstoreResponse.prototype.getRequesttype = function() {
+  return /** @type {!proto.pb.BSREQTYPE} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.pb.BSREQTYPE} value
+ * @return {!proto.pb.BlockstoreResponse} returns this
+ */
+proto.pb.BlockstoreResponse.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * repeated Block blocks = 2;
  * @return {!Array<!proto.pb.Block>}
  */
 proto.pb.BlockstoreResponse.prototype.getBlocksList = function() {
   return /** @type{!Array<!proto.pb.Block>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.pb.Block, 1));
+    jspb.Message.getRepeatedWrapperField(this, proto.pb.Block, 2));
 };
 
 
@@ -2526,7 +2648,7 @@ proto.pb.BlockstoreResponse.prototype.getBlocksList = function() {
  * @return {!proto.pb.BlockstoreResponse} returns this
 */
 proto.pb.BlockstoreResponse.prototype.setBlocksList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -2536,7 +2658,7 @@ proto.pb.BlockstoreResponse.prototype.setBlocksList = function(value) {
  * @return {!proto.pb.Block}
  */
 proto.pb.BlockstoreResponse.prototype.addBlocks = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.pb.Block, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.pb.Block, opt_index);
 };
 
 

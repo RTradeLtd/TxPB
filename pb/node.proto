@@ -174,24 +174,35 @@ enum BSREQOPTS {
 
 // BlockstoreRequest is a message used to control blockstores
 message BlockstoreRequest {
-    // cids holds at least 1 cid, to hold 0 is considered an error
-    repeated string cids = 1;
-    // reqType is used to indicate the particular request being mande
-    BSREQTYPE reqType = 2;
-    // reqOpts is an optional parameter that can be used for fine-tuned request control
-    BSREQOPTS reqOpts = 3;
+    //  indicates the particular request type being made
+    BSREQTYPE requestType = 1;
+    // optional request settings
+    repeated BSREQOPTS reqOpts = 2;
+    // cids of blocks
+    // sent by: BS_DELETE, BS_GET, BS_GET_MANY
+    repeated string cids = 3;
+    // the data we are putting
+    // sent by: BS_PUT, BS_PUT_MANY
+    repeated bytes data = 4;
 }
 
 // BlockstoreResponse is a response to a BlockstoreqRequest
 message BlockstoreResponse {
-    repeated Block blocks = 1;
+    // indicates the particular request type being made
+    BSREQTYPE requestType = 1;
+    // a copy of blocks from the blockstore
+    // sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY
+    // in the case of BS_PUT, and BS_PUT_MANY requests
+    // the data field will be empty as this is only populated
+    // by get requests
+    repeated Block blocks = 2;
 }
 
-// Block is a single block of ipfs data
 message Block {
     // cid is the identifier of the block
     string cid = 1;
     // data is the actual contnets of this block
+    // 
     bytes data = 2;
 }
 

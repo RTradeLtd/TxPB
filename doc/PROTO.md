@@ -534,7 +534,7 @@ NameSysAPI provides a generic name resolution API
 <a name="pb.Block"></a>
 
 ### Block
-Block is a single block of ipfs data
+
 
 
 | Field | Type | Label | Description |
@@ -555,9 +555,10 @@ BlockstoreRequest is a message used to control blockstores
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| cids | [string](#string) | repeated | cids holds at least 1 cid, to hold 0 is considered an error |
-| reqType | [BSREQTYPE](#pb.BSREQTYPE) |  | reqType is used to indicate the particular request being mande |
-| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) |  | reqOpts is an optional parameter that can be used for fine-tuned request control |
+| requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
+| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) | repeated | optional request settings |
+| cids | [string](#string) | repeated | cids of blocks sent by: BS_DELETE, BS_GET, BS_GET_MANY |
+| data | [bytes](#bytes) | repeated | the data we are putting sent by: BS_PUT, BS_PUT_MANY |
 
 
 
@@ -572,7 +573,8 @@ BlockstoreResponse is a response to a BlockstoreqRequest
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| blocks | [Block](#pb.Block) | repeated |  |
+| requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
+| blocks | [Block](#pb.Block) | repeated | a copy of blocks from the blockstore sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY in the case of BS_PUT, and BS_PUT_MANY requests the data field will be empty as this is only populated by get requests |
 
 
 

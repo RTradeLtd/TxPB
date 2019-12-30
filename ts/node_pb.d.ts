@@ -259,16 +259,25 @@ export namespace ExtrasRequest {
 }
 
 export class BlockstoreRequest extends jspb.Message {
+  getRequesttype(): BSREQTYPEMap[keyof BSREQTYPEMap];
+  setRequesttype(value: BSREQTYPEMap[keyof BSREQTYPEMap]): void;
+
+  clearReqoptsList(): void;
+  getReqoptsList(): Array<BSREQOPTSMap[keyof BSREQOPTSMap]>;
+  setReqoptsList(value: Array<BSREQOPTSMap[keyof BSREQOPTSMap]>): void;
+  addReqopts(value: BSREQOPTSMap[keyof BSREQOPTSMap], index?: number): BSREQOPTSMap[keyof BSREQOPTSMap];
+
   clearCidsList(): void;
   getCidsList(): Array<string>;
   setCidsList(value: Array<string>): void;
   addCids(value: string, index?: number): string;
 
-  getReqtype(): BSREQTYPEMap[keyof BSREQTYPEMap];
-  setReqtype(value: BSREQTYPEMap[keyof BSREQTYPEMap]): void;
-
-  getReqopts(): BSREQOPTSMap[keyof BSREQOPTSMap];
-  setReqopts(value: BSREQOPTSMap[keyof BSREQOPTSMap]): void;
+  clearDataList(): void;
+  getDataList(): Array<Uint8Array | string>;
+  getDataList_asU8(): Array<Uint8Array>;
+  getDataList_asB64(): Array<string>;
+  setDataList(value: Array<Uint8Array | string>): void;
+  addData(value: Uint8Array | string, index?: number): Uint8Array | string;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockstoreRequest.AsObject;
@@ -282,13 +291,17 @@ export class BlockstoreRequest extends jspb.Message {
 
 export namespace BlockstoreRequest {
   export type AsObject = {
+    requesttype: BSREQTYPEMap[keyof BSREQTYPEMap],
+    reqoptsList: Array<BSREQOPTSMap[keyof BSREQOPTSMap]>,
     cidsList: Array<string>,
-    reqtype: BSREQTYPEMap[keyof BSREQTYPEMap],
-    reqopts: BSREQOPTSMap[keyof BSREQOPTSMap],
+    dataList: Array<Uint8Array | string>,
   }
 }
 
 export class BlockstoreResponse extends jspb.Message {
+  getRequesttype(): BSREQTYPEMap[keyof BSREQTYPEMap];
+  setRequesttype(value: BSREQTYPEMap[keyof BSREQTYPEMap]): void;
+
   clearBlocksList(): void;
   getBlocksList(): Array<Block>;
   setBlocksList(value: Array<Block>): void;
@@ -306,6 +319,7 @@ export class BlockstoreResponse extends jspb.Message {
 
 export namespace BlockstoreResponse {
   export type AsObject = {
+    requesttype: BSREQTYPEMap[keyof BSREQTYPEMap],
     blocksList: Array<Block.AsObject>,
   }
 }
