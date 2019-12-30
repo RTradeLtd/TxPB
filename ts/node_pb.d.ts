@@ -569,6 +569,50 @@ export namespace KeystoreResponse {
   }
 }
 
+export class PersistRequest extends jspb.Message {
+  clearCidsList(): void;
+  getCidsList(): Array<string>;
+  setCidsList(value: Array<string>): void;
+  addCids(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): PersistRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: PersistRequest): PersistRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: PersistRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PersistRequest;
+  static deserializeBinaryFromReader(message: PersistRequest, reader: jspb.BinaryReader): PersistRequest;
+}
+
+export namespace PersistRequest {
+  export type AsObject = {
+    cidsList: Array<string>,
+  }
+}
+
+export class PersistResponse extends jspb.Message {
+  getStatusMap(): jspb.Map<string, boolean>;
+  clearStatusMap(): void;
+  getErrorsMap(): jspb.Map<string, string>;
+  clearErrorsMap(): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): PersistResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: PersistResponse): PersistResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: PersistResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PersistResponse;
+  static deserializeBinaryFromReader(message: PersistResponse, reader: jspb.BinaryReader): PersistResponse;
+}
+
+export namespace PersistResponse {
+  export type AsObject = {
+    statusMap: Array<[string, boolean]>,
+    errorsMap: Array<[string, string]>,
+  }
+}
+
 export interface P2PREQTYPEMap {
   CLOSE: 0;
   FORWARD: 1;

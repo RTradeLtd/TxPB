@@ -59,6 +59,15 @@ type NodeAPIKeystore = {
   readonly responseType: typeof node_pb.KeystoreResponse;
 };
 
+type NodeAPIPersist = {
+  readonly methodName: string;
+  readonly service: typeof NodeAPI;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof node_pb.PersistRequest;
+  readonly responseType: typeof node_pb.PersistResponse;
+};
+
 export class NodeAPI {
   static readonly serviceName: string;
   static readonly ConnMgmt: NodeAPIConnMgmt;
@@ -67,6 +76,7 @@ export class NodeAPI {
   static readonly Blockstore: NodeAPIBlockstore;
   static readonly Dag: NodeAPIDag;
   static readonly Keystore: NodeAPIKeystore;
+  static readonly Persist: NodeAPIPersist;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -154,6 +164,15 @@ export class NodeAPIClient {
   keystore(
     requestMessage: node_pb.KeystoreRequest,
     callback: (error: ServiceError|null, responseMessage: node_pb.KeystoreResponse|null) => void
+  ): UnaryResponse;
+  persist(
+    requestMessage: node_pb.PersistRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: node_pb.PersistResponse|null) => void
+  ): UnaryResponse;
+  persist(
+    requestMessage: node_pb.PersistRequest,
+    callback: (error: ServiceError|null, responseMessage: node_pb.PersistResponse|null) => void
   ): UnaryResponse;
 }
 

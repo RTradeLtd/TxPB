@@ -18,6 +18,8 @@ service NodeAPI {
     rpc Dag(DagRequest) returns (DagResponse) { };
     //Keystore is a unidirectional RPC allowing management of ipfs keystores
     rpc Keystore(KeystoreRequest) returns (KeystoreResponse) { };
+    // Persist is used to retrieve data from the network and make it available locally
+    rpc Persist(PersistRequest) returns (PersistResponse) { };
 }
 
 // P2PREQTYPE denotes the particular type of request being used in the p2p rpc
@@ -329,4 +331,16 @@ message KeystoreResponse {
     // indicates if we have the key in our keystore
     // sent by: KS_HAS
     bool has = 4;
+}
+
+message PersistRequest {
+    // cids to persist locally
+    repeated string cids = 1;
+}
+
+message PersistResponse {
+    // key = cid, value = whether or not it was persisted
+    map<string, bool> status = 1;
+    // key = cid, value = error if not persisted
+    map<string, string> errors = 2;
 }

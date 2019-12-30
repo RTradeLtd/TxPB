@@ -137,6 +137,28 @@ function deserialize_pb_P2PResponse(buffer_arg) {
   return node_pb.P2PResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_PersistRequest(arg) {
+  if (!(arg instanceof node_pb.PersistRequest)) {
+    throw new Error('Expected argument of type pb.PersistRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PersistRequest(buffer_arg) {
+  return node_pb.PersistRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_PersistResponse(arg) {
+  if (!(arg instanceof node_pb.PersistResponse)) {
+    throw new Error('Expected argument of type pb.PersistResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PersistResponse(buffer_arg) {
+  return node_pb.PersistResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
@@ -213,6 +235,18 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_KeystoreRequest,
     responseSerialize: serialize_pb_KeystoreResponse,
     responseDeserialize: deserialize_pb_KeystoreResponse,
+  },
+  // Persist is used to retrieve data from the network and make it available locally
+  persist: {
+    path: '/pb.NodeAPI/Persist',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.PersistRequest,
+    responseType: node_pb.PersistResponse,
+    requestSerialize: serialize_pb_PersistRequest,
+    requestDeserialize: deserialize_pb_PersistRequest,
+    responseSerialize: serialize_pb_PersistResponse,
+    responseDeserialize: deserialize_pb_PersistResponse,
   },
 };
 

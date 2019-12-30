@@ -61,6 +61,10 @@
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
+    - [PersistRequest](#pb.PersistRequest)
+    - [PersistResponse](#pb.PersistResponse)
+    - [PersistResponse.ErrorsEntry](#pb.PersistResponse.ErrorsEntry)
+    - [PersistResponse.StatusEntry](#pb.PersistResponse.StatusEntry)
   
     - [BSREQOPTS](#pb.BSREQOPTS)
     - [BSREQTYPE](#pb.BSREQTYPE)
@@ -795,6 +799,69 @@ P2PResponse is a response message sent in response to a P2PRequest message
 
 
 
+
+<a name="pb.PersistRequest"></a>
+
+### PersistRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cids | [string](#string) | repeated | cids to persist locally |
+
+
+
+
+
+
+<a name="pb.PersistResponse"></a>
+
+### PersistResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [PersistResponse.StatusEntry](#pb.PersistResponse.StatusEntry) | repeated | key = cid, value = whether or not it was persisted |
+| errors | [PersistResponse.ErrorsEntry](#pb.PersistResponse.ErrorsEntry) | repeated | key = cid, value = error if not persisted |
+
+
+
+
+
+
+<a name="pb.PersistResponse.ErrorsEntry"></a>
+
+### PersistResponse.ErrorsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.PersistResponse.StatusEntry"></a>
+
+### PersistResponse.StatusEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [bool](#bool) |  |  |
+
+
+
+
+
  
 
 
@@ -926,6 +993,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows low-level management of the underlying blockstore |
 | Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
 | Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | Keystore is a unidirectional RPC allowing management of ipfs keystores |
+| Persist | [PersistRequest](#pb.PersistRequest) | [PersistResponse](#pb.PersistResponse) | Persist is used to retrieve data from the network and make it available locally |
 
  
 

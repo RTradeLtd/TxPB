@@ -45,6 +45,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.KeystoreRequest.SerializeToString,
         response_deserializer=node__pb2.KeystoreResponse.FromString,
         )
+    self.Persist = channel.unary_unary(
+        '/pb.NodeAPI/Persist',
+        request_serializer=node__pb2.PersistRequest.SerializeToString,
+        response_deserializer=node__pb2.PersistResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -95,6 +100,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Persist(self, request, context):
+    """Persist is used to retrieve data from the network and make it available locally
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -127,6 +139,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.Keystore,
           request_deserializer=node__pb2.KeystoreRequest.FromString,
           response_serializer=node__pb2.KeystoreResponse.SerializeToString,
+      ),
+      'Persist': grpc.unary_unary_rpc_method_handler(
+          servicer.Persist,
+          request_deserializer=node__pb2.PersistRequest.FromString,
+          response_serializer=node__pb2.PersistResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

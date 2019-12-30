@@ -222,6 +222,38 @@ public final class NodeAPIGrpc {
      return getKeystoreMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.PersistRequest,
+      pb.Node.PersistResponse> getPersistMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Persist",
+      requestType = pb.Node.PersistRequest.class,
+      responseType = pb.Node.PersistResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.PersistRequest,
+      pb.Node.PersistResponse> getPersistMethod() {
+    io.grpc.MethodDescriptor<pb.Node.PersistRequest, pb.Node.PersistResponse> getPersistMethod;
+    if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
+          NodeAPIGrpc.getPersistMethod = getPersistMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.PersistRequest, pb.Node.PersistResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Persist"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PersistRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PersistResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Persist"))
+                  .build();
+          }
+        }
+     }
+     return getPersistMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -314,6 +346,16 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getKeystoreMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public void persist(pb.Node.PersistRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.PersistResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getPersistMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -358,6 +400,13 @@ public final class NodeAPIGrpc {
                 pb.Node.KeystoreRequest,
                 pb.Node.KeystoreResponse>(
                   this, METHODID_KEYSTORE)))
+          .addMethod(
+            getPersistMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.PersistRequest,
+                pb.Node.PersistResponse>(
+                  this, METHODID_PERSIST)))
           .build();
     }
   }
@@ -450,6 +499,17 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getKeystoreMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public void persist(pb.Node.PersistRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.PersistResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getPersistMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -533,6 +593,16 @@ public final class NodeAPIGrpc {
     public pb.Node.KeystoreResponse keystore(pb.Node.KeystoreRequest request) {
       return blockingUnaryCall(
           getChannel(), getKeystoreMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public pb.Node.PersistResponse persist(pb.Node.PersistRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getPersistMethod(), getCallOptions(), request);
     }
   }
 
@@ -624,6 +694,17 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getKeystoreMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.PersistResponse> persist(
+        pb.Node.PersistRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getPersistMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CONN_MGMT = 0;
@@ -632,6 +713,7 @@ public final class NodeAPIGrpc {
   private static final int METHODID_BLOCKSTORE = 3;
   private static final int METHODID_DAG = 4;
   private static final int METHODID_KEYSTORE = 5;
+  private static final int METHODID_PERSIST = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -673,6 +755,10 @@ public final class NodeAPIGrpc {
         case METHODID_KEYSTORE:
           serviceImpl.keystore((pb.Node.KeystoreRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.KeystoreResponse>) responseObserver);
+          break;
+        case METHODID_PERSIST:
+          serviceImpl.persist((pb.Node.PersistRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.PersistResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -741,6 +827,7 @@ public final class NodeAPIGrpc {
               .addMethod(getBlockstoreMethod())
               .addMethod(getDagMethod())
               .addMethod(getKeystoreMethod())
+              .addMethod(getPersistMethod())
               .build();
         }
       }

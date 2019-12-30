@@ -65,6 +65,15 @@ NodeAPI.Keystore = {
   responseType: node_pb.KeystoreResponse
 };
 
+NodeAPI.Persist = {
+  methodName: "Persist",
+  service: NodeAPI,
+  requestStream: false,
+  responseStream: false,
+  requestType: node_pb.PersistRequest,
+  responseType: node_pb.PersistResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -232,6 +241,37 @@ NodeAPIClient.prototype.keystore = function keystore(requestMessage, metadata, c
     callback = arguments[1];
   }
   var client = grpc.unary(NodeAPI.Keystore, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.persist = function persist(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(NodeAPI.Persist, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
