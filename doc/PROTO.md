@@ -1030,7 +1030,7 @@ represents an individual pubsub peer
 | ----- | ---- | ----- | ----------- |
 | requestType | [PSREQTYPE](#pb.PSREQTYPE) |  | indicates the particular PubSubAPI request being performed |
 | message | [PubSubMessage](#pb.PubSubMessage) | repeated | messages we have received from a topic sent by: PS_SUBSCRIBE |
-| names | [string](#string) | repeated | topic names sent by: PS_GET_TOPICS |
+| topics | [string](#string) | repeated | topic names sent by: PS_GET_TOPICS |
 | peers | [PubSubPeer](#pb.PubSubPeer) | repeated | pubsub peers sent by: PS_LIST_PEERS |
 
 

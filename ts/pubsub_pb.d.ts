@@ -44,10 +44,10 @@ export class PubSubResponse extends jspb.Message {
   setMessageList(value: Array<PubSubMessage>): void;
   addMessage(value?: PubSubMessage, index?: number): PubSubMessage;
 
-  clearNamesList(): void;
-  getNamesList(): Array<string>;
-  setNamesList(value: Array<string>): void;
-  addNames(value: string, index?: number): string;
+  clearTopicsList(): void;
+  getTopicsList(): Array<string>;
+  setTopicsList(value: Array<string>): void;
+  addTopics(value: string, index?: number): string;
 
   clearPeersList(): void;
   getPeersList(): Array<PubSubPeer>;
@@ -68,7 +68,7 @@ export namespace PubSubResponse {
   export type AsObject = {
     requesttype: PSREQTYPEMap[keyof PSREQTYPEMap],
     messageList: Array<PubSubMessage.AsObject>,
-    namesList: Array<string>,
+    topicsList: Array<string>,
     peersList: Array<PubSubPeer.AsObject>,
   }
 }

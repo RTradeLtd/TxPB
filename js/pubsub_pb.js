@@ -383,7 +383,7 @@ proto.pb.PubSubResponse.toObject = function(includeInstance, msg) {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     messageList: jspb.Message.toObjectList(msg.getMessageList(),
     proto.pb.PubSubMessage.toObject, includeInstance),
-    namesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    topicsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     peersList: jspb.Message.toObjectList(msg.getPeersList(),
     proto.pb.PubSubPeer.toObject, includeInstance)
   };
@@ -433,7 +433,7 @@ proto.pb.PubSubResponse.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addNames(value);
+      msg.addTopics(value);
       break;
     case 4:
       var value = new proto.pb.PubSubPeer;
@@ -484,7 +484,7 @@ proto.pb.PubSubResponse.serializeBinaryToWriter = function(message, writer) {
       proto.pb.PubSubMessage.serializeBinaryToWriter
     );
   }
-  f = message.getNamesList();
+  f = message.getTopicsList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
@@ -559,10 +559,10 @@ proto.pb.PubSubResponse.prototype.clearMessageList = function() {
 
 
 /**
- * repeated string names = 3;
+ * repeated string topics = 3;
  * @return {!Array<string>}
  */
-proto.pb.PubSubResponse.prototype.getNamesList = function() {
+proto.pb.PubSubResponse.prototype.getTopicsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
@@ -571,7 +571,7 @@ proto.pb.PubSubResponse.prototype.getNamesList = function() {
  * @param {!Array<string>} value
  * @return {!proto.pb.PubSubResponse} returns this
  */
-proto.pb.PubSubResponse.prototype.setNamesList = function(value) {
+proto.pb.PubSubResponse.prototype.setTopicsList = function(value) {
   return jspb.Message.setField(this, 3, value || []);
 };
 
@@ -581,7 +581,7 @@ proto.pb.PubSubResponse.prototype.setNamesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.pb.PubSubResponse} returns this
  */
-proto.pb.PubSubResponse.prototype.addNames = function(value, opt_index) {
+proto.pb.PubSubResponse.prototype.addTopics = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
@@ -590,8 +590,8 @@ proto.pb.PubSubResponse.prototype.addNames = function(value, opt_index) {
  * Clears the list making it empty but non-null.
  * @return {!proto.pb.PubSubResponse} returns this
  */
-proto.pb.PubSubResponse.prototype.clearNamesList = function() {
-  return this.setNamesList([]);
+proto.pb.PubSubResponse.prototype.clearTopicsList = function() {
+  return this.setTopicsList([]);
 };
 
 

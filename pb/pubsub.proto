@@ -40,7 +40,7 @@ message PubSubResponse {
     repeated PubSubMessage message = 2;
     // topic names
     // sent by: PS_GET_TOPICS
-    repeated string names = 3;
+    repeated string topics = 3;
     // pubsub peers
     // sent by: PS_LIST_PEERS
     repeated PubSubPeer peers = 4;
