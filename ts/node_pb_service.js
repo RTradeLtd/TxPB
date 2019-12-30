@@ -56,6 +56,15 @@ NodeAPI.Dag = {
   responseType: node_pb.DagResponse
 };
 
+NodeAPI.DagStream = {
+  methodName: "DagStream",
+  service: NodeAPI,
+  requestStream: true,
+  responseStream: true,
+  requestType: node_pb.DagRequest,
+  responseType: node_pb.DagResponse
+};
+
 exports.NodeAPI = NodeAPI;
 
 function NodeAPIClient(serviceHost, options) {
@@ -213,6 +222,51 @@ NodeAPIClient.prototype.dag = function dag(requestMessage, metadata, callback) {
   return {
     cancel: function () {
       callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.dagStream = function dagStream(metadata) {
+  var listeners = {
+    data: [],
+    end: [],
+    status: []
+  };
+  var client = grpc.client(NodeAPI.DagStream, {
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport
+  });
+  client.onEnd(function (status, statusMessage, trailers) {
+    listeners.status.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners.end.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners = null;
+  });
+  client.onMessage(function (message) {
+    listeners.data.forEach(function (handler) {
+      handler(message);
+    })
+  });
+  client.start(metadata);
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    write: function (requestMessage) {
+      client.send(requestMessage);
+      return this;
+    },
+    end: function () {
+      client.finishSend();
+    },
+    cancel: function () {
+      listeners = null;
       client.close();
     }
   };

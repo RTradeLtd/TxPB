@@ -180,6 +180,18 @@ var NodeAPIService = exports.NodeAPIService = {
     responseSerialize: serialize_pb_DagResponse,
     responseDeserialize: deserialize_pb_DagResponse,
   },
+  // DagStream is like Dag but with bidirectional streams
+  dagStream: {
+    path: '/pb.NodeAPI/DagStream',
+    requestStream: true,
+    responseStream: true,
+    requestType: node_pb.DagRequest,
+    responseType: node_pb.DagResponse,
+    requestSerialize: serialize_pb_DagRequest,
+    requestDeserialize: deserialize_pb_DagRequest,
+    responseSerialize: serialize_pb_DagResponse,
+    responseDeserialize: deserialize_pb_DagResponse,
+  },
 };
 
 exports.NodeAPIClient = grpc.makeGenericClientConstructor(NodeAPIService);

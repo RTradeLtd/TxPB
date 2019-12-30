@@ -40,6 +40,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.DagRequest.SerializeToString,
         response_deserializer=node__pb2.DagResponse.FromString,
         )
+    self.DagStream = channel.stream_stream(
+        '/pb.NodeAPI/DagStream',
+        request_serializer=node__pb2.DagRequest.SerializeToString,
+        response_deserializer=node__pb2.DagResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -83,6 +88,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def DagStream(self, request_iterator, context):
+    """DagStream is like Dag but with bidirectional streams
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -108,6 +120,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
       ),
       'Dag': grpc.unary_unary_rpc_method_handler(
           servicer.Dag,
+          request_deserializer=node__pb2.DagRequest.FromString,
+          response_serializer=node__pb2.DagResponse.SerializeToString,
+      ),
+      'DagStream': grpc.stream_stream_rpc_method_handler(
+          servicer.DagStream,
           request_deserializer=node__pb2.DagRequest.FromString,
           response_serializer=node__pb2.DagResponse.SerializeToString,
       ),
