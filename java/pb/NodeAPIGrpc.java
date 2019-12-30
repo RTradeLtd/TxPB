@@ -158,6 +158,38 @@ public final class NodeAPIGrpc {
      return getBlockstoreMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.DagRequest,
+      pb.Node.DagResponse> getDagMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Dag",
+      requestType = pb.Node.DagRequest.class,
+      responseType = pb.Node.DagResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.DagRequest,
+      pb.Node.DagResponse> getDagMethod() {
+    io.grpc.MethodDescriptor<pb.Node.DagRequest, pb.Node.DagResponse> getDagMethod;
+    if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
+          NodeAPIGrpc.getDagMethod = getDagMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.DagRequest, pb.Node.DagResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Dag"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DagRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DagResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Dag"))
+                  .build();
+          }
+        }
+     }
+     return getDagMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -230,6 +262,16 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getBlockstoreMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public void dag(pb.Node.DagRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getDagMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -260,6 +302,13 @@ public final class NodeAPIGrpc {
                 pb.Node.BlockstoreRequest,
                 pb.Node.BlockstoreResponse>(
                   this, METHODID_BLOCKSTORE)))
+          .addMethod(
+            getDagMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.DagRequest,
+                pb.Node.DagResponse>(
+                  this, METHODID_DAG)))
           .build();
     }
   }
@@ -330,6 +379,17 @@ public final class NodeAPIGrpc {
       asyncUnaryCall(
           getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public void dag(pb.Node.DagRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDagMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -393,6 +453,16 @@ public final class NodeAPIGrpc {
     public pb.Node.BlockstoreResponse blockstore(pb.Node.BlockstoreRequest request) {
       return blockingUnaryCall(
           getChannel(), getBlockstoreMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public pb.Node.DagResponse dag(pb.Node.DagRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDagMethod(), getCallOptions(), request);
     }
   }
 
@@ -462,12 +532,24 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.DagResponse> dag(
+        pb.Node.DagRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDagMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CONN_MGMT = 0;
   private static final int METHODID_EXTRAS = 1;
   private static final int METHODID_P2P = 2;
   private static final int METHODID_BLOCKSTORE = 3;
+  private static final int METHODID_DAG = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -501,6 +583,10 @@ public final class NodeAPIGrpc {
         case METHODID_BLOCKSTORE:
           serviceImpl.blockstore((pb.Node.BlockstoreRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse>) responseObserver);
+          break;
+        case METHODID_DAG:
+          serviceImpl.dag((pb.Node.DagRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.DagResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -567,6 +653,7 @@ public final class NodeAPIGrpc {
               .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())
               .addMethod(getBlockstoreMethod())
+              .addMethod(getDagMethod())
               .build();
         }
       }

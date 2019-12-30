@@ -49,6 +49,28 @@ function deserialize_pb_ConnMgmtResponse(buffer_arg) {
   return node_pb.ConnMgmtResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_DagRequest(arg) {
+  if (!(arg instanceof node_pb.DagRequest)) {
+    throw new Error('Expected argument of type pb.DagRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_DagRequest(buffer_arg) {
+  return node_pb.DagRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_DagResponse(arg) {
+  if (!(arg instanceof node_pb.DagResponse)) {
+    throw new Error('Expected argument of type pb.DagResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_DagResponse(buffer_arg) {
+  return node_pb.DagResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_Empty(arg) {
   if (!(arg instanceof util_pb.Empty)) {
     throw new Error('Expected argument of type pb.Empty');
@@ -145,6 +167,18 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_BlockstoreRequest,
     responseSerialize: serialize_pb_BlockstoreResponse,
     responseDeserialize: deserialize_pb_BlockstoreResponse,
+  },
+  // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+  dag: {
+    path: '/pb.NodeAPI/Dag',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.DagRequest,
+    responseType: node_pb.DagResponse,
+    requestSerialize: serialize_pb_DagRequest,
+    requestDeserialize: deserialize_pb_DagRequest,
+    responseSerialize: serialize_pb_DagResponse,
+    responseDeserialize: deserialize_pb_DagResponse,
   },
 };
 

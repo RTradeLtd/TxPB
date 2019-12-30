@@ -18,19 +18,6 @@
     - [AdminAPI](#pb.AdminAPI)
   
 
-- [dag.proto](#dag.proto)
-    - [DagRequest](#pb.DagRequest)
-    - [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry)
-    - [DagResponse](#pb.DagResponse)
-    - [IPLDLink](#pb.IPLDLink)
-    - [IPLDNode](#pb.IPLDNode)
-  
-    - [DAGREQTYPE](#pb.DAGREQTYPE)
-  
-  
-    - [DagAPI](#pb.DagAPI)
-  
-
 - [file.proto](#file.proto)
     - [Blob](#pb.Blob)
     - [DownloadRequest](#pb.DownloadRequest)
@@ -72,8 +59,13 @@
     - [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry)
     - [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry)
     - [ConnMgmtStatus](#pb.ConnMgmtStatus)
+    - [DagRequest](#pb.DagRequest)
+    - [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry)
+    - [DagResponse](#pb.DagResponse)
     - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
+    - [IPLDLink](#pb.IPLDLink)
+    - [IPLDNode](#pb.IPLDNode)
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
@@ -81,6 +73,7 @@
     - [BSREQOPTS](#pb.BSREQOPTS)
     - [BSREQTYPE](#pb.BSREQTYPE)
     - [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE)
+    - [DAGREQTYPE](#pb.DAGREQTYPE)
     - [EXTRASREQTYPE](#pb.EXTRASREQTYPE)
     - [EXTRASTYPE](#pb.EXTRASTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
@@ -260,139 +253,6 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 | ----------- | ------------ | ------------- | ------------|
 | ManageGC | [ManageGCRequest](#pb.ManageGCRequest) | [ManageGCResponse](#pb.ManageGCResponse) | ManageGC is used to manage TemporalX&#39;s garbage collection process |
 | RefCount | [RefCountRequest](#pb.RefCountRequest) | [RefCountResponse](#pb.RefCountResponse) | RefCount is used to analyze the counter store and pull reference count information |
-
- 
-
-
-
-<a name="dag.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## dag.proto
-
-
-
-<a name="pb.DagRequest"></a>
-
-### DagRequest
-Used to submit a request to Dag or DagStream RPCs
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
-| data | [bytes](#bytes) |  | data that we will be storing sent by: DAG_PUT, DAG_NEW_NODE |
-| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
-| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS |
-| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) sent by: DAG_PUT, DAG_NEW_NODE |
-| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS |
-| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
-
-
-
-
-
-
-<a name="pb.DagRequest.LinksEntry"></a>
-
-### DagRequest.LinksEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="pb.DagResponse"></a>
-
-### DagResponse
-Used in response to a Dag or DagStream RPC
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
-| hashes | [string](#string) | repeated | returns the hashes of newly generated IPLD objects sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS |
-| rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
-| links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
-
-
-
-
-
-
-<a name="pb.IPLDLink"></a>
-
-### IPLDLink
-An IPFS MerkleDAG Link
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hash | [bytes](#bytes) |  | multihash of the target object |
-| name | [string](#string) |  | utf string name. should be unique per object |
-| size | [uint64](#uint64) |  | cumulative size of target object |
-
-
-
-
-
-
-<a name="pb.IPLDNode"></a>
-
-### IPLDNode
-An IPFS MerkleDAG Node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [IPLDLink](#pb.IPLDLink) | repeated | refs to other objects |
-| data | [bytes](#bytes) |  | opaque user data |
-
-
-
-
-
- 
-
-
-<a name="pb.DAGREQTYPE"></a>
-
-### DAGREQTYPE
-DAGREQTYPE indicates the particular DagAPI request being performed
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| DAG_PUT | 0 | DAG_PUT is used to add new IPLD objects |
-| DAG_GET | 1 | DAG_GET is used to retrieve IPLD object data |
-| DAG_NEW_NODE | 2 | DAG_NEW_NODE is used to create a new IPLD node object |
-| DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
-| DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
-
-
- 
-
- 
-
-
-<a name="pb.DagAPI"></a>
-
-### DagAPI
-DagAPI provides an IPLD object manipulation API and is capable of manipulating
-arbitrary IPLD objects, as well as traditional MerkleDAG objects. It is equivalent
-to the go-ipfs `ipfs dag` subset of commands.
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
-| DagStream | [DagRequest](#pb.DagRequest) stream | [DagResponse](#pb.DagResponse) stream | DagStream is like Dag but with bidirectional streams |
 
  
 
@@ -802,6 +662,62 @@ Contains status information about a particular disconnect attempt
 
 
 
+<a name="pb.DagRequest"></a>
+
+### DagRequest
+Used to submit a request to Dag or DagStream RPCs
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| data | [bytes](#bytes) |  | data that we will be storing sent by: DAG_PUT, DAG_NEW_NODE |
+| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS |
+| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) sent by: DAG_PUT, DAG_NEW_NODE |
+| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS |
+| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
+
+
+
+
+
+
+<a name="pb.DagRequest.LinksEntry"></a>
+
+### DagRequest.LinksEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.DagResponse"></a>
+
+### DagResponse
+Used in response to a Dag or DagStream RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| hashes | [string](#string) | repeated | returns the hashes of newly generated IPLD objects sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS |
+| rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
+| links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
+
+
+
+
+
+
 <a name="pb.ExtrasRequest"></a>
 
 ### ExtrasRequest
@@ -827,6 +743,39 @@ GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | peerIDs | [string](#string) | repeated | a slice of peer IDs |
+
+
+
+
+
+
+<a name="pb.IPLDLink"></a>
+
+### IPLDLink
+An IPFS MerkleDAG Link
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hash | [bytes](#bytes) |  | multihash of the target object |
+| name | [string](#string) |  | utf string name. should be unique per object |
+| size | [uint64](#uint64) |  | cumulative size of target object |
+
+
+
+
+
+
+<a name="pb.IPLDNode"></a>
+
+### IPLDNode
+An IPFS MerkleDAG Node
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| links | [IPLDLink](#pb.IPLDLink) | repeated | refs to other objects |
+| data | [bytes](#bytes) |  | opaque user data |
 
 
 
@@ -935,6 +884,21 @@ CONNMGMTREQTYPE indicates the particular ConnMgmt request being performed
 
 
 
+<a name="pb.DAGREQTYPE"></a>
+
+### DAGREQTYPE
+DAGREQTYPE indicates the particular DagAPI request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DAG_PUT | 0 | DAG_PUT is used to add new IPLD objects |
+| DAG_GET | 1 | DAG_GET is used to retrieve IPLD object data |
+| DAG_NEW_NODE | 2 | DAG_NEW_NODE is used to create a new IPLD node object |
+| DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
+| DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
+
+
+
 <a name="pb.EXTRASREQTYPE"></a>
 
 ### EXTRASREQTYPE
@@ -990,6 +954,7 @@ NodeAPI provide an API to control the underlying custom ipfs node
 | Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) | Extras provide control over node extras capabilities |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
 | Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows low-level management of the underlying blockstore |
+| Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
 
  
 

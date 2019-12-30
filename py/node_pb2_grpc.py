@@ -35,6 +35,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.BlockstoreRequest.SerializeToString,
         response_deserializer=node__pb2.BlockstoreResponse.FromString,
         )
+    self.Dag = channel.unary_unary(
+        '/pb.NodeAPI/Dag',
+        request_serializer=node__pb2.DagRequest.SerializeToString,
+        response_deserializer=node__pb2.DagResponse.FromString,
+        )
 
 
 class NodeAPIServicer(object):
@@ -71,6 +76,13 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Dag(self, request, context):
+    """Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_NodeAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -93,6 +105,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
           servicer.Blockstore,
           request_deserializer=node__pb2.BlockstoreRequest.FromString,
           response_serializer=node__pb2.BlockstoreResponse.SerializeToString,
+      ),
+      'Dag': grpc.unary_unary_rpc_method_handler(
+          servicer.Dag,
+          request_deserializer=node__pb2.DagRequest.FromString,
+          response_serializer=node__pb2.DagResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
