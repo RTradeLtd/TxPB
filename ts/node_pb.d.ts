@@ -279,6 +279,12 @@ export class BlockstoreRequest extends jspb.Message {
   setDataList(value: Array<Uint8Array | string>): void;
   addData(value: Uint8Array | string, index?: number): Uint8Array | string;
 
+  getCidversion(): string;
+  setCidversion(value: string): void;
+
+  getHashfunc(): string;
+  setHashfunc(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockstoreRequest.AsObject;
   static toObject(includeInstance: boolean, msg: BlockstoreRequest): BlockstoreRequest.AsObject;
@@ -295,6 +301,8 @@ export namespace BlockstoreRequest {
     reqoptsList: Array<BSREQOPTSMap[keyof BSREQOPTSMap]>,
     cidsList: Array<string>,
     dataList: Array<Uint8Array | string>,
+    cidversion: string,
+    hashfunc: string,
   }
 }
 

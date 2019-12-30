@@ -184,6 +184,12 @@ message BlockstoreRequest {
     // the data we are putting
     // sent by: BS_PUT, BS_PUT_MANY
     repeated bytes data = 4;
+    // the cid version to use when constructing blocks, default is v1
+    // sent by: BS_PUT, BS_PUT_MANY
+    string cidVersion = 5;
+    // the hash function to use when constructing blocks, default is sha2-256
+    // sent by: BS_PUT, BS_PUT_MANY
+    string hashFunc = 7;
 }
 
 // BlockstoreResponse is a response to a BlockstoreqRequest

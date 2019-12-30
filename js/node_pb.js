@@ -2215,7 +2215,9 @@ proto.pb.BlockstoreRequest.toObject = function(includeInstance, msg) {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     reqoptsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
     cidsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    dataList: msg.getDataList_asB64()
+    dataList: msg.getDataList_asB64(),
+    cidversion: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    hashfunc: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -2267,6 +2269,14 @@ proto.pb.BlockstoreRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.addData(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCidversion(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setHashfunc(value);
       break;
     default:
       reader.skipField();
@@ -2322,6 +2332,20 @@ proto.pb.BlockstoreRequest.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeRepeatedBytes(
       4,
+      f
+    );
+  }
+  f = message.getCidversion();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getHashfunc();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -2478,6 +2502,42 @@ proto.pb.BlockstoreRequest.prototype.addData = function(value, opt_index) {
  */
 proto.pb.BlockstoreRequest.prototype.clearDataList = function() {
   return this.setDataList([]);
+};
+
+
+/**
+ * optional string cidVersion = 5;
+ * @return {string}
+ */
+proto.pb.BlockstoreRequest.prototype.getCidversion = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.setCidversion = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string hashFunc = 7;
+ * @return {string}
+ */
+proto.pb.BlockstoreRequest.prototype.getHashfunc = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.BlockstoreRequest} returns this
+ */
+proto.pb.BlockstoreRequest.prototype.setHashfunc = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

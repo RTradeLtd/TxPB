@@ -559,6 +559,8 @@ BlockstoreRequest is a message used to control blockstores
 | reqOpts | [BSREQOPTS](#pb.BSREQOPTS) | repeated | optional request settings |
 | cids | [string](#string) | repeated | cids of blocks sent by: BS_DELETE, BS_GET, BS_GET_MANY |
 | data | [bytes](#bytes) | repeated | the data we are putting sent by: BS_PUT, BS_PUT_MANY |
+| cidVersion | [string](#string) |  | the cid version to use when constructing blocks, default is v1 sent by: BS_PUT, BS_PUT_MANY |
+| hashFunc | [string](#string) |  | the hash function to use when constructing blocks, default is sha2-256 sent by: BS_PUT, BS_PUT_MANY |
 
 
 
