@@ -16,7 +16,7 @@ service NodeAPI {
     rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
     // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
     rpc Dag(DagRequest) returns (DagResponse) { };
-    //Keystore is a unidirectional RPC allowing management of ipfs keystores
+    // Keystore is a unidirectional RPC allowing management of ipfs keystores
     rpc Keystore(KeystoreRequest) returns (KeystoreResponse) { };
     // Persist is used to retrieve data from the network and make it available locally
     rpc Persist(PersistRequest) returns (PersistResponse) { };
@@ -211,8 +211,7 @@ message BlockstoreResponse {
 message Block {
     // cid is the identifier of the block
     string cid = 1;
-    // data is the actual contnets of this block
-    // 
+    // data is the actual contents of the block
     bytes data = 2;
 }
 
