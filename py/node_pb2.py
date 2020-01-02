@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"$\n\x0e\x43onnectRequest\x12\x12\n\nmultiAddrs\x18\x01 \x03(\t\"%\n\x12IsConnectedRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\x82\x01\n\x13IsConnectedResponse\x12\x39\n\tconnected\x18\x01 \x03(\x0b\x32&.pb.IsConnectedResponse.ConnectedEntry\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"$\n\x11\x44isconnectRequest\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"\xd4\x01\n\x12\x44isconnectResponse\x12\x32\n\x06status\x18\x01 \x03(\x0b\x32\".pb.DisconnectResponse.StatusEntry\x1aS\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.pb.DisconnectResponse.StatusMessage:\x02\x38\x01\x1a\x35\n\rStatusMessage\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"<\n\x13\x45nableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"=\n\x14\x44isableExtrasRequest\x12%\n\rextrasFeature\x18\x01 \x01(\x0e\x32\x0e.pb.EXTRASTYPE*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03\x32\xfd\x02\n\x07NodeAPI\x12-\n\x08GetPeers\x12\t.pb.Empty\x1a\x14.pb.GetPeersResponse\"\x00\x12*\n\x07\x43onnect\x12\x12.pb.ConnectRequest\x1a\t.pb.Empty\"\x00\x12=\n\nDisconnect\x12\x15.pb.DisconnectRequest\x1a\x16.pb.DisconnectResponse\"\x00\x12@\n\x0bIsConnected\x12\x16.pb.IsConnectedRequest\x1a\x17.pb.IsConnectedResponse\"\x00\x12\x34\n\x0c\x45nableExtras\x12\x17.pb.EnableExtrasRequest\x1a\t.pb.Empty\"\x00\x12\x36\n\rDisableExtras\x12\x18.pb.DisableExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\nnode.proto\x12\x02pb\x1a\nutil.proto\"\xde\x01\n\nP2PRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\x0b\n\x03\x61ll\x18\x02 \x01(\x08\x12\x0f\n\x07verbose\x18\x03 \x01(\x08\x12\x14\n\x0cprotocolName\x18\x04 \x01(\t\x12\x15\n\rlistenAddress\x18\x05 \x01(\t\x12\x15\n\rtargetAddress\x18\x06 \x01(\t\x12\x15\n\rremoteAddress\x18\x07 \x01(\t\x12\x1c\n\x14\x61llowCustomProtocols\x18\x08 \x01(\x08\x12\x14\n\x0creportPeerID\x18\t \x01(\x08\"z\n\x0bP2PResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.P2PREQTYPE\x12\r\n\x05names\x18\x02 \x03(\t\x12\x13\n\x0b\x63onnsClosed\x18\x03 \x01(\x05\x12\"\n\x0bstreamInfos\x18\x04 \x03(\x0b\x32\r.pb.P2PLsInfo\"^\n\tP2PLsInfo\x12\x14\n\x0cprotocolName\x18\x01 \x01(\t\x12\x15\n\rlistenAddress\x18\x02 \x01(\t\x12\x15\n\rtargetAddress\x18\x03 \x01(\t\x12\r\n\x05local\x18\x04 \x01(\x08\"#\n\x10GetPeersResponse\x12\x0f\n\x07peerIDs\x18\x01 \x03(\t\"`\n\x0f\x43onnMgmtRequest\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x12\n\nmultiAddrs\x18\x02 \x03(\t\x12\x0f\n\x07peerIDs\x18\x03 \x03(\t\"\xac\x02\n\x10\x43onnMgmtResponse\x12(\n\x0brequestType\x18\x01 \x01(\x0e\x32\x13.pb.CONNMGMTREQTYPE\x12\x36\n\tconnected\x18\x02 \x03(\x0b\x32#.pb.ConnMgmtResponse.ConnectedEntry\x12\x30\n\x06status\x18\x03 \x03(\x0b\x32 .pb.ConnMgmtResponse.StatusEntry\x12\x0f\n\x07peerIDs\x18\x04 \x03(\t\x1a\x30\n\x0e\x43onnectedEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a\x41\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.pb.ConnMgmtStatus:\x02\x38\x01\"6\n\x0e\x43onnMgmtStatus\x12\x14\n\x0c\x64isconnected\x18\x01 \x01(\x08\x12\x0e\n\x06reason\x18\x02 \x01(\t\"^\n\rExtrasRequest\x12&\n\x0brequestType\x18\x01 \x01(\x0e\x32\x11.pb.EXTRASREQTYPE\x12%\n\rextrasFeature\x18\x02 \x01(\x0e\x32\x0e.pb.EXTRASTYPE\"\x99\x01\n\x11\x42lockstoreRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x1e\n\x07reqOpts\x18\x02 \x03(\x0e\x32\r.pb.BSREQOPTS\x12\x0c\n\x04\x63ids\x18\x03 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x04 \x03(\x0c\x12\x12\n\ncidVersion\x18\x05 \x01(\t\x12\x10\n\x08hashFunc\x18\x07 \x01(\t\"S\n\x12\x42lockstoreResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.BSREQTYPE\x12\x19\n\x06\x62locks\x18\x02 \x03(\x0b\x32\t.pb.Block\"\"\n\x05\x42lock\x12\x0b\n\x03\x63id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x80\x02\n\nDagRequest\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\x16\n\x0eobjectEncoding\x18\x03 \x01(\t\x12\x1b\n\x13serializationFormat\x18\x04 \x01(\t\x12\x10\n\x08hashFunc\x18\x05 \x01(\t\x12\x12\n\ncidVersion\x18\x06 \x01(\x03\x12\x0c\n\x04hash\x18\x07 \x01(\t\x12(\n\x05links\x18\x08 \x03(\x0b\x32\x19.pb.DagRequest.LinksEntry\x1a,\n\nLinksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"p\n\x0b\x44\x61gResponse\x12#\n\x0brequestType\x18\x01 \x01(\x0e\x32\x0e.pb.DAGREQTYPE\x12\x0e\n\x06hashes\x18\x02 \x03(\t\x12\x0f\n\x07rawData\x18\x03 \x01(\x0c\x12\x1b\n\x05links\x18\x04 \x03(\x0b\x32\x0c.pb.IPLDLink\"4\n\x08IPLDLink\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x04\"5\n\x08IPLDNode\x12\x1b\n\x05links\x18\x02 \x03(\x0b\x32\x0c.pb.IPLDLink\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\"W\n\x0fKeystoreRequest\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.KSREQTYPE\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\nprivateKey\x18\x03 \x01(\x0c\"i\n\x10KeystoreResponse\x12\"\n\x0brequestType\x18\x01 \x01(\x0e\x32\r.pb.KSREQTYPE\x12\x12\n\nprivateKey\x18\x02 \x01(\x0c\x12\x10\n\x08keyNames\x18\x03 \x03(\t\x12\x0b\n\x03has\x18\x04 \x01(\x08\"\x1e\n\x0ePersistRequest\x12\x0c\n\x04\x63ids\x18\x01 \x03(\t\"\xd1\x01\n\x0fPersistResponse\x12/\n\x06status\x18\x01 \x03(\x0b\x32\x1f.pb.PersistResponse.StatusEntry\x12/\n\x06\x65rrors\x18\x02 \x03(\x0b\x32\x1f.pb.PersistResponse.ErrorsEntry\x1a-\n\x0bStatusEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\x1a-\n\x0b\x45rrorsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01*8\n\nP2PREQTYPE\x12\t\n\x05\x43LOSE\x10\x00\x12\x0b\n\x07\x46ORWARD\x10\x01\x12\n\n\x06LISTEN\x10\x02\x12\x06\n\x02LS\x10\x03*U\n\x0f\x43ONNMGMTREQTYPE\x12\x0e\n\nCM_CONNECT\x10\x00\x12\x11\n\rCM_DISCONNECT\x10\x01\x12\r\n\tCM_STATUS\x10\x02\x12\x10\n\x0c\x43M_GET_PEERS\x10\x03*.\n\rEXTRASREQTYPE\x12\r\n\tEX_ENABLE\x10\x00\x12\x0e\n\nEX_DISABLE\x10\x01*?\n\nEXTRASTYPE\x12\x0c\n\x08IDENTIFY\x10\x00\x12\n\n\x06PUBSUB\x10\x01\x12\r\n\tDISCOVERY\x10\x02\x12\x08\n\x04MDNS\x10\x03*T\n\tBSREQTYPE\x12\r\n\tBS_DELETE\x10\x00\x12\n\n\x06\x42S_PUT\x10\x01\x12\x0f\n\x0b\x42S_PUT_MANY\x10\x02\x12\n\n\x06\x42S_GET\x10\x03\x12\x0f\n\x0b\x42S_GET_MANY\x10\x04*&\n\tBSREQOPTS\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0c\n\x08\x42S_FORCE\x10\x01*^\n\nDAGREQTYPE\x12\x0b\n\x07\x44\x41G_PUT\x10\x00\x12\x0b\n\x07\x44\x41G_GET\x10\x01\x12\x10\n\x0c\x44\x41G_NEW_NODE\x10\x02\x12\x11\n\rDAG_ADD_LINKS\x10\x03\x12\x11\n\rDAG_GET_LINKS\x10\x04*K\n\tKSREQTYPE\x12\n\n\x06KS_HAS\x10\x00\x12\n\n\x06KS_GET\x10\x01\x12\n\n\x06KS_PUT\x10\x02\x12\r\n\tKS_DELETE\x10\x03\x12\x0b\n\x07KS_LIST\x10\x04\x32\xee\x02\n\x07NodeAPI\x12\x37\n\x08\x43onnMgmt\x12\x13.pb.ConnMgmtRequest\x1a\x14.pb.ConnMgmtResponse\"\x00\x12(\n\x06\x45xtras\x12\x11.pb.ExtrasRequest\x1a\t.pb.Empty\"\x00\x12(\n\x03P2P\x12\x0e.pb.P2PRequest\x1a\x0f.pb.P2PResponse\"\x00\x12=\n\nBlockstore\x12\x15.pb.BlockstoreRequest\x1a\x16.pb.BlockstoreResponse\"\x00\x12(\n\x03\x44\x61g\x12\x0e.pb.DagRequest\x1a\x0f.pb.DagResponse\"\x00\x12\x37\n\x08Keystore\x12\x13.pb.KeystoreRequest\x1a\x14.pb.KeystoreResponse\"\x00\x12\x34\n\x07Persist\x12\x12.pb.PersistRequest\x1a\x13.pb.PersistResponse\"\x00\x62\x06proto3')
   ,
   dependencies=[util__pb2.DESCRIPTOR,])
 
@@ -51,12 +51,66 @@ _P2PREQTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1100,
-  serialized_end=1156,
+  serialized_start=2264,
+  serialized_end=2320,
 )
 _sym_db.RegisterEnumDescriptor(_P2PREQTYPE)
 
 P2PREQTYPE = enum_type_wrapper.EnumTypeWrapper(_P2PREQTYPE)
+_CONNMGMTREQTYPE = _descriptor.EnumDescriptor(
+  name='CONNMGMTREQTYPE',
+  full_name='pb.CONNMGMTREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='CM_CONNECT', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CM_DISCONNECT', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CM_STATUS', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CM_GET_PEERS', index=3, number=3,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2322,
+  serialized_end=2407,
+)
+_sym_db.RegisterEnumDescriptor(_CONNMGMTREQTYPE)
+
+CONNMGMTREQTYPE = enum_type_wrapper.EnumTypeWrapper(_CONNMGMTREQTYPE)
+_EXTRASREQTYPE = _descriptor.EnumDescriptor(
+  name='EXTRASREQTYPE',
+  full_name='pb.EXTRASREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='EX_ENABLE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EX_DISABLE', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2409,
+  serialized_end=2455,
+)
+_sym_db.RegisterEnumDescriptor(_EXTRASREQTYPE)
+
+EXTRASREQTYPE = enum_type_wrapper.EnumTypeWrapper(_EXTRASREQTYPE)
 _EXTRASTYPE = _descriptor.EnumDescriptor(
   name='EXTRASTYPE',
   full_name='pb.EXTRASTYPE',
@@ -82,20 +136,171 @@ _EXTRASTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1158,
-  serialized_end=1221,
+  serialized_start=2457,
+  serialized_end=2520,
 )
 _sym_db.RegisterEnumDescriptor(_EXTRASTYPE)
 
 EXTRASTYPE = enum_type_wrapper.EnumTypeWrapper(_EXTRASTYPE)
+_BSREQTYPE = _descriptor.EnumDescriptor(
+  name='BSREQTYPE',
+  full_name='pb.BSREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='BS_DELETE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BS_PUT', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BS_PUT_MANY', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BS_GET', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BS_GET_MANY', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2522,
+  serialized_end=2606,
+)
+_sym_db.RegisterEnumDescriptor(_BSREQTYPE)
+
+BSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_BSREQTYPE)
+_BSREQOPTS = _descriptor.EnumDescriptor(
+  name='BSREQOPTS',
+  full_name='pb.BSREQOPTS',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='DEFAULT', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BS_FORCE', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2608,
+  serialized_end=2646,
+)
+_sym_db.RegisterEnumDescriptor(_BSREQOPTS)
+
+BSREQOPTS = enum_type_wrapper.EnumTypeWrapper(_BSREQOPTS)
+_DAGREQTYPE = _descriptor.EnumDescriptor(
+  name='DAGREQTYPE',
+  full_name='pb.DAGREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='DAG_PUT', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DAG_GET', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DAG_NEW_NODE', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DAG_ADD_LINKS', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DAG_GET_LINKS', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2648,
+  serialized_end=2742,
+)
+_sym_db.RegisterEnumDescriptor(_DAGREQTYPE)
+
+DAGREQTYPE = enum_type_wrapper.EnumTypeWrapper(_DAGREQTYPE)
+_KSREQTYPE = _descriptor.EnumDescriptor(
+  name='KSREQTYPE',
+  full_name='pb.KSREQTYPE',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='KS_HAS', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_GET', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_PUT', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_DELETE', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KS_LIST', index=4, number=4,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=2744,
+  serialized_end=2819,
+)
+_sym_db.RegisterEnumDescriptor(_KSREQTYPE)
+
+KSREQTYPE = enum_type_wrapper.EnumTypeWrapper(_KSREQTYPE)
 CLOSE = 0
 FORWARD = 1
 LISTEN = 2
 LS = 3
+CM_CONNECT = 0
+CM_DISCONNECT = 1
+CM_STATUS = 2
+CM_GET_PEERS = 3
+EX_ENABLE = 0
+EX_DISABLE = 1
 IDENTIFY = 0
 PUBSUB = 1
 DISCOVERY = 2
 MDNS = 3
+BS_DELETE = 0
+BS_PUT = 1
+BS_PUT_MANY = 2
+BS_GET = 3
+BS_GET_MANY = 4
+DEFAULT = 0
+BS_FORCE = 1
+DAG_PUT = 0
+DAG_GET = 1
+DAG_NEW_NODE = 2
+DAG_ADD_LINKS = 3
+DAG_GET_LINKS = 4
+KS_HAS = 0
+KS_GET = 1
+KS_PUT = 2
+KS_DELETE = 3
+KS_LIST = 4
 
 
 
@@ -321,16 +526,30 @@ _GETPEERSRESPONSE = _descriptor.Descriptor(
 )
 
 
-_CONNECTREQUEST = _descriptor.Descriptor(
-  name='ConnectRequest',
-  full_name='pb.ConnectRequest',
+_CONNMGMTREQUEST = _descriptor.Descriptor(
+  name='ConnMgmtRequest',
+  full_name='pb.ConnMgmtRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='multiAddrs', full_name='pb.ConnectRequest.multiAddrs', index=0,
-      number=1, type=9, cpp_type=9, label=3,
+      name='requestType', full_name='pb.ConnMgmtRequest.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='multiAddrs', full_name='pb.ConnMgmtRequest.multiAddrs', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='peerIDs', full_name='pb.ConnMgmtRequest.peerIDs', index=2,
+      number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -348,57 +567,26 @@ _CONNECTREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=512,
-  serialized_end=548,
+  serialized_end=608,
 )
 
 
-_ISCONNECTEDREQUEST = _descriptor.Descriptor(
-  name='IsConnectedRequest',
-  full_name='pb.IsConnectedRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='peerIDs', full_name='pb.IsConnectedRequest.peerIDs', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=550,
-  serialized_end=587,
-)
-
-
-_ISCONNECTEDRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
+_CONNMGMTRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
   name='ConnectedEntry',
-  full_name='pb.IsConnectedResponse.ConnectedEntry',
+  full_name='pb.ConnMgmtResponse.ConnectedEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='pb.IsConnectedResponse.ConnectedEntry.key', index=0,
+      name='key', full_name='pb.ConnMgmtResponse.ConnectedEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='pb.IsConnectedResponse.ConnectedEntry.value', index=1,
+      name='value', full_name='pb.ConnMgmtResponse.ConnectedEntry.value', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -416,88 +604,26 @@ _ISCONNECTEDRESPONSE_CONNECTEDENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=672,
-  serialized_end=720,
+  serialized_start=796,
+  serialized_end=844,
 )
 
-_ISCONNECTEDRESPONSE = _descriptor.Descriptor(
-  name='IsConnectedResponse',
-  full_name='pb.IsConnectedResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='connected', full_name='pb.IsConnectedResponse.connected', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[_ISCONNECTEDRESPONSE_CONNECTEDENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=590,
-  serialized_end=720,
-)
-
-
-_DISCONNECTREQUEST = _descriptor.Descriptor(
-  name='DisconnectRequest',
-  full_name='pb.DisconnectRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='peerIDs', full_name='pb.DisconnectRequest.peerIDs', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=722,
-  serialized_end=758,
-)
-
-
-_DISCONNECTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
+_CONNMGMTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
   name='StatusEntry',
-  full_name='pb.DisconnectResponse.StatusEntry',
+  full_name='pb.ConnMgmtResponse.StatusEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='pb.DisconnectResponse.StatusEntry.key', index=0,
+      name='key', full_name='pb.ConnMgmtResponse.StatusEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='pb.DisconnectResponse.StatusEntry.value', index=1,
+      name='value', full_name='pb.ConnMgmtResponse.StatusEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -515,26 +641,78 @@ _DISCONNECTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=835,
-  serialized_end=918,
+  serialized_start=846,
+  serialized_end=911,
 )
 
-_DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
-  name='StatusMessage',
-  full_name='pb.DisconnectResponse.StatusMessage',
+_CONNMGMTRESPONSE = _descriptor.Descriptor(
+  name='ConnMgmtResponse',
+  full_name='pb.ConnMgmtResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='disconnected', full_name='pb.DisconnectResponse.StatusMessage.disconnected', index=0,
+      name='requestType', full_name='pb.ConnMgmtResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='connected', full_name='pb.ConnMgmtResponse.connected', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='pb.ConnMgmtResponse.status', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='peerIDs', full_name='pb.ConnMgmtResponse.peerIDs', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CONNMGMTRESPONSE_CONNECTEDENTRY, _CONNMGMTRESPONSE_STATUSENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=611,
+  serialized_end=911,
+)
+
+
+_CONNMGMTSTATUS = _descriptor.Descriptor(
+  name='ConnMgmtStatus',
+  full_name='pb.ConnMgmtStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='disconnected', full_name='pb.ConnMgmtStatus.disconnected', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='reason', full_name='pb.DisconnectResponse.StatusMessage.reason', index=1,
+      name='reason', full_name='pb.ConnMgmtStatus.reason', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -552,20 +730,132 @@ _DISCONNECTRESPONSE_STATUSMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=920,
-  serialized_end=973,
+  serialized_start=913,
+  serialized_end=967,
 )
 
-_DISCONNECTRESPONSE = _descriptor.Descriptor(
-  name='DisconnectResponse',
-  full_name='pb.DisconnectResponse',
+
+_EXTRASREQUEST = _descriptor.Descriptor(
+  name='ExtrasRequest',
+  full_name='pb.ExtrasRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='status', full_name='pb.DisconnectResponse.status', index=0,
-      number=1, type=11, cpp_type=10, label=3,
+      name='requestType', full_name='pb.ExtrasRequest.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='extrasFeature', full_name='pb.ExtrasRequest.extrasFeature', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=969,
+  serialized_end=1063,
+)
+
+
+_BLOCKSTOREREQUEST = _descriptor.Descriptor(
+  name='BlockstoreRequest',
+  full_name='pb.BlockstoreRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.BlockstoreRequest.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='reqOpts', full_name='pb.BlockstoreRequest.reqOpts', index=1,
+      number=2, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cids', full_name='pb.BlockstoreRequest.cids', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='pb.BlockstoreRequest.data', index=3,
+      number=4, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cidVersion', full_name='pb.BlockstoreRequest.cidVersion', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hashFunc', full_name='pb.BlockstoreRequest.hashFunc', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1066,
+  serialized_end=1219,
+)
+
+
+_BLOCKSTORERESPONSE = _descriptor.Descriptor(
+  name='BlockstoreResponse',
+  full_name='pb.BlockstoreResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.BlockstoreResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='blocks', full_name='pb.BlockstoreResponse.blocks', index=1,
+      number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -573,7 +863,7 @@ _DISCONNECTRESPONSE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_DISCONNECTRESPONSE_STATUSENTRY, _DISCONNECTRESPONSE_STATUSMESSAGE, ],
+  nested_types=[],
   enum_types=[
   ],
   serialized_options=None,
@@ -582,21 +872,242 @@ _DISCONNECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=761,
-  serialized_end=973,
+  serialized_start=1221,
+  serialized_end=1304,
 )
 
 
-_ENABLEEXTRASREQUEST = _descriptor.Descriptor(
-  name='EnableExtrasRequest',
-  full_name='pb.EnableExtrasRequest',
+_BLOCK = _descriptor.Descriptor(
+  name='Block',
+  full_name='pb.Block',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='extrasFeature', full_name='pb.EnableExtrasRequest.extrasFeature', index=0,
+      name='cid', full_name='pb.Block.cid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='pb.Block.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1306,
+  serialized_end=1340,
+)
+
+
+_DAGREQUEST_LINKSENTRY = _descriptor.Descriptor(
+  name='LinksEntry',
+  full_name='pb.DagRequest.LinksEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.DagRequest.LinksEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.DagRequest.LinksEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1555,
+  serialized_end=1599,
+)
+
+_DAGREQUEST = _descriptor.Descriptor(
+  name='DagRequest',
+  full_name='pb.DagRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.DagRequest.requestType', index=0,
       number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='pb.DagRequest.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='objectEncoding', full_name='pb.DagRequest.objectEncoding', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='serializationFormat', full_name='pb.DagRequest.serializationFormat', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hashFunc', full_name='pb.DagRequest.hashFunc', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cidVersion', full_name='pb.DagRequest.cidVersion', index=5,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hash', full_name='pb.DagRequest.hash', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='links', full_name='pb.DagRequest.links', index=7,
+      number=8, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_DAGREQUEST_LINKSENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1343,
+  serialized_end=1599,
+)
+
+
+_DAGRESPONSE = _descriptor.Descriptor(
+  name='DagResponse',
+  full_name='pb.DagResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.DagResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hashes', full_name='pb.DagResponse.hashes', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='rawData', full_name='pb.DagResponse.rawData', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='links', full_name='pb.DagResponse.links', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1601,
+  serialized_end=1713,
+)
+
+
+_IPLDLINK = _descriptor.Descriptor(
+  name='IPLDLink',
+  full_name='pb.IPLDLink',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='hash', full_name='pb.IPLDLink.hash', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='pb.IPLDLink.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='size', full_name='pb.IPLDLink.size', index=2,
+      number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -613,22 +1124,29 @@ _ENABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=975,
-  serialized_end=1035,
+  serialized_start=1715,
+  serialized_end=1767,
 )
 
 
-_DISABLEEXTRASREQUEST = _descriptor.Descriptor(
-  name='DisableExtrasRequest',
-  full_name='pb.DisableExtrasRequest',
+_IPLDNODE = _descriptor.Descriptor(
+  name='IPLDNode',
+  full_name='pb.IPLDNode',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='extrasFeature', full_name='pb.DisableExtrasRequest.extrasFeature', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='links', full_name='pb.IPLDNode.links', index=0,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='pb.IPLDNode.data', index=1,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -644,34 +1162,305 @@ _DISABLEEXTRASREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1037,
-  serialized_end=1098,
+  serialized_start=1769,
+  serialized_end=1822,
+)
+
+
+_KEYSTOREREQUEST = _descriptor.Descriptor(
+  name='KeystoreRequest',
+  full_name='pb.KeystoreRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.KeystoreRequest.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='pb.KeystoreRequest.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='privateKey', full_name='pb.KeystoreRequest.privateKey', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1824,
+  serialized_end=1911,
+)
+
+
+_KEYSTORERESPONSE = _descriptor.Descriptor(
+  name='KeystoreResponse',
+  full_name='pb.KeystoreResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestType', full_name='pb.KeystoreResponse.requestType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='privateKey', full_name='pb.KeystoreResponse.privateKey', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='keyNames', full_name='pb.KeystoreResponse.keyNames', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='has', full_name='pb.KeystoreResponse.has', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1913,
+  serialized_end=2018,
+)
+
+
+_PERSISTREQUEST = _descriptor.Descriptor(
+  name='PersistRequest',
+  full_name='pb.PersistRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cids', full_name='pb.PersistRequest.cids', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2020,
+  serialized_end=2050,
+)
+
+
+_PERSISTRESPONSE_STATUSENTRY = _descriptor.Descriptor(
+  name='StatusEntry',
+  full_name='pb.PersistResponse.StatusEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.PersistResponse.StatusEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.PersistResponse.StatusEntry.value', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2170,
+  serialized_end=2215,
+)
+
+_PERSISTRESPONSE_ERRORSENTRY = _descriptor.Descriptor(
+  name='ErrorsEntry',
+  full_name='pb.PersistResponse.ErrorsEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.PersistResponse.ErrorsEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.PersistResponse.ErrorsEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=_b('8\001'),
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2217,
+  serialized_end=2262,
+)
+
+_PERSISTRESPONSE = _descriptor.Descriptor(
+  name='PersistResponse',
+  full_name='pb.PersistResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='pb.PersistResponse.status', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='errors', full_name='pb.PersistResponse.errors', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_PERSISTRESPONSE_STATUSENTRY, _PERSISTRESPONSE_ERRORSENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2053,
+  serialized_end=2262,
 )
 
 _P2PREQUEST.fields_by_name['requestType'].enum_type = _P2PREQTYPE
 _P2PRESPONSE.fields_by_name['requestType'].enum_type = _P2PREQTYPE
 _P2PRESPONSE.fields_by_name['streamInfos'].message_type = _P2PLSINFO
-_ISCONNECTEDRESPONSE_CONNECTEDENTRY.containing_type = _ISCONNECTEDRESPONSE
-_ISCONNECTEDRESPONSE.fields_by_name['connected'].message_type = _ISCONNECTEDRESPONSE_CONNECTEDENTRY
-_DISCONNECTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _DISCONNECTRESPONSE_STATUSMESSAGE
-_DISCONNECTRESPONSE_STATUSENTRY.containing_type = _DISCONNECTRESPONSE
-_DISCONNECTRESPONSE_STATUSMESSAGE.containing_type = _DISCONNECTRESPONSE
-_DISCONNECTRESPONSE.fields_by_name['status'].message_type = _DISCONNECTRESPONSE_STATUSENTRY
-_ENABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
-_DISABLEEXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
+_CONNMGMTREQUEST.fields_by_name['requestType'].enum_type = _CONNMGMTREQTYPE
+_CONNMGMTRESPONSE_CONNECTEDENTRY.containing_type = _CONNMGMTRESPONSE
+_CONNMGMTRESPONSE_STATUSENTRY.fields_by_name['value'].message_type = _CONNMGMTSTATUS
+_CONNMGMTRESPONSE_STATUSENTRY.containing_type = _CONNMGMTRESPONSE
+_CONNMGMTRESPONSE.fields_by_name['requestType'].enum_type = _CONNMGMTREQTYPE
+_CONNMGMTRESPONSE.fields_by_name['connected'].message_type = _CONNMGMTRESPONSE_CONNECTEDENTRY
+_CONNMGMTRESPONSE.fields_by_name['status'].message_type = _CONNMGMTRESPONSE_STATUSENTRY
+_EXTRASREQUEST.fields_by_name['requestType'].enum_type = _EXTRASREQTYPE
+_EXTRASREQUEST.fields_by_name['extrasFeature'].enum_type = _EXTRASTYPE
+_BLOCKSTOREREQUEST.fields_by_name['requestType'].enum_type = _BSREQTYPE
+_BLOCKSTOREREQUEST.fields_by_name['reqOpts'].enum_type = _BSREQOPTS
+_BLOCKSTORERESPONSE.fields_by_name['requestType'].enum_type = _BSREQTYPE
+_BLOCKSTORERESPONSE.fields_by_name['blocks'].message_type = _BLOCK
+_DAGREQUEST_LINKSENTRY.containing_type = _DAGREQUEST
+_DAGREQUEST.fields_by_name['requestType'].enum_type = _DAGREQTYPE
+_DAGREQUEST.fields_by_name['links'].message_type = _DAGREQUEST_LINKSENTRY
+_DAGRESPONSE.fields_by_name['requestType'].enum_type = _DAGREQTYPE
+_DAGRESPONSE.fields_by_name['links'].message_type = _IPLDLINK
+_IPLDNODE.fields_by_name['links'].message_type = _IPLDLINK
+_KEYSTOREREQUEST.fields_by_name['requestType'].enum_type = _KSREQTYPE
+_KEYSTORERESPONSE.fields_by_name['requestType'].enum_type = _KSREQTYPE
+_PERSISTRESPONSE_STATUSENTRY.containing_type = _PERSISTRESPONSE
+_PERSISTRESPONSE_ERRORSENTRY.containing_type = _PERSISTRESPONSE
+_PERSISTRESPONSE.fields_by_name['status'].message_type = _PERSISTRESPONSE_STATUSENTRY
+_PERSISTRESPONSE.fields_by_name['errors'].message_type = _PERSISTRESPONSE_ERRORSENTRY
 DESCRIPTOR.message_types_by_name['P2PRequest'] = _P2PREQUEST
 DESCRIPTOR.message_types_by_name['P2PResponse'] = _P2PRESPONSE
 DESCRIPTOR.message_types_by_name['P2PLsInfo'] = _P2PLSINFO
 DESCRIPTOR.message_types_by_name['GetPeersResponse'] = _GETPEERSRESPONSE
-DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
-DESCRIPTOR.message_types_by_name['IsConnectedRequest'] = _ISCONNECTEDREQUEST
-DESCRIPTOR.message_types_by_name['IsConnectedResponse'] = _ISCONNECTEDRESPONSE
-DESCRIPTOR.message_types_by_name['DisconnectRequest'] = _DISCONNECTREQUEST
-DESCRIPTOR.message_types_by_name['DisconnectResponse'] = _DISCONNECTRESPONSE
-DESCRIPTOR.message_types_by_name['EnableExtrasRequest'] = _ENABLEEXTRASREQUEST
-DESCRIPTOR.message_types_by_name['DisableExtrasRequest'] = _DISABLEEXTRASREQUEST
+DESCRIPTOR.message_types_by_name['ConnMgmtRequest'] = _CONNMGMTREQUEST
+DESCRIPTOR.message_types_by_name['ConnMgmtResponse'] = _CONNMGMTRESPONSE
+DESCRIPTOR.message_types_by_name['ConnMgmtStatus'] = _CONNMGMTSTATUS
+DESCRIPTOR.message_types_by_name['ExtrasRequest'] = _EXTRASREQUEST
+DESCRIPTOR.message_types_by_name['BlockstoreRequest'] = _BLOCKSTOREREQUEST
+DESCRIPTOR.message_types_by_name['BlockstoreResponse'] = _BLOCKSTORERESPONSE
+DESCRIPTOR.message_types_by_name['Block'] = _BLOCK
+DESCRIPTOR.message_types_by_name['DagRequest'] = _DAGREQUEST
+DESCRIPTOR.message_types_by_name['DagResponse'] = _DAGRESPONSE
+DESCRIPTOR.message_types_by_name['IPLDLink'] = _IPLDLINK
+DESCRIPTOR.message_types_by_name['IPLDNode'] = _IPLDNODE
+DESCRIPTOR.message_types_by_name['KeystoreRequest'] = _KEYSTOREREQUEST
+DESCRIPTOR.message_types_by_name['KeystoreResponse'] = _KEYSTORERESPONSE
+DESCRIPTOR.message_types_by_name['PersistRequest'] = _PERSISTREQUEST
+DESCRIPTOR.message_types_by_name['PersistResponse'] = _PERSISTRESPONSE
 DESCRIPTOR.enum_types_by_name['P2PREQTYPE'] = _P2PREQTYPE
+DESCRIPTOR.enum_types_by_name['CONNMGMTREQTYPE'] = _CONNMGMTREQTYPE
+DESCRIPTOR.enum_types_by_name['EXTRASREQTYPE'] = _EXTRASREQTYPE
 DESCRIPTOR.enum_types_by_name['EXTRASTYPE'] = _EXTRASTYPE
+DESCRIPTOR.enum_types_by_name['BSREQTYPE'] = _BSREQTYPE
+DESCRIPTOR.enum_types_by_name['BSREQOPTS'] = _BSREQOPTS
+DESCRIPTOR.enum_types_by_name['DAGREQTYPE'] = _DAGREQTYPE
+DESCRIPTOR.enum_types_by_name['KSREQTYPE'] = _KSREQTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 P2PRequest = _reflection.GeneratedProtocolMessageType('P2PRequest', (_message.Message,), {
@@ -702,82 +1491,157 @@ GetPeersResponse = _reflection.GeneratedProtocolMessageType('GetPeersResponse', 
   })
 _sym_db.RegisterMessage(GetPeersResponse)
 
-ConnectRequest = _reflection.GeneratedProtocolMessageType('ConnectRequest', (_message.Message,), {
-  'DESCRIPTOR' : _CONNECTREQUEST,
+ConnMgmtRequest = _reflection.GeneratedProtocolMessageType('ConnMgmtRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CONNMGMTREQUEST,
   '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.ConnectRequest)
+  # @@protoc_insertion_point(class_scope:pb.ConnMgmtRequest)
   })
-_sym_db.RegisterMessage(ConnectRequest)
+_sym_db.RegisterMessage(ConnMgmtRequest)
 
-IsConnectedRequest = _reflection.GeneratedProtocolMessageType('IsConnectedRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ISCONNECTEDREQUEST,
-  '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.IsConnectedRequest)
-  })
-_sym_db.RegisterMessage(IsConnectedRequest)
-
-IsConnectedResponse = _reflection.GeneratedProtocolMessageType('IsConnectedResponse', (_message.Message,), {
+ConnMgmtResponse = _reflection.GeneratedProtocolMessageType('ConnMgmtResponse', (_message.Message,), {
 
   'ConnectedEntry' : _reflection.GeneratedProtocolMessageType('ConnectedEntry', (_message.Message,), {
-    'DESCRIPTOR' : _ISCONNECTEDRESPONSE_CONNECTEDENTRY,
+    'DESCRIPTOR' : _CONNMGMTRESPONSE_CONNECTEDENTRY,
     '__module__' : 'node_pb2'
-    # @@protoc_insertion_point(class_scope:pb.IsConnectedResponse.ConnectedEntry)
+    # @@protoc_insertion_point(class_scope:pb.ConnMgmtResponse.ConnectedEntry)
     })
   ,
-  'DESCRIPTOR' : _ISCONNECTEDRESPONSE,
-  '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.IsConnectedResponse)
-  })
-_sym_db.RegisterMessage(IsConnectedResponse)
-_sym_db.RegisterMessage(IsConnectedResponse.ConnectedEntry)
-
-DisconnectRequest = _reflection.GeneratedProtocolMessageType('DisconnectRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DISCONNECTREQUEST,
-  '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.DisconnectRequest)
-  })
-_sym_db.RegisterMessage(DisconnectRequest)
-
-DisconnectResponse = _reflection.GeneratedProtocolMessageType('DisconnectResponse', (_message.Message,), {
 
   'StatusEntry' : _reflection.GeneratedProtocolMessageType('StatusEntry', (_message.Message,), {
-    'DESCRIPTOR' : _DISCONNECTRESPONSE_STATUSENTRY,
+    'DESCRIPTOR' : _CONNMGMTRESPONSE_STATUSENTRY,
     '__module__' : 'node_pb2'
-    # @@protoc_insertion_point(class_scope:pb.DisconnectResponse.StatusEntry)
+    # @@protoc_insertion_point(class_scope:pb.ConnMgmtResponse.StatusEntry)
+    })
+  ,
+  'DESCRIPTOR' : _CONNMGMTRESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.ConnMgmtResponse)
+  })
+_sym_db.RegisterMessage(ConnMgmtResponse)
+_sym_db.RegisterMessage(ConnMgmtResponse.ConnectedEntry)
+_sym_db.RegisterMessage(ConnMgmtResponse.StatusEntry)
+
+ConnMgmtStatus = _reflection.GeneratedProtocolMessageType('ConnMgmtStatus', (_message.Message,), {
+  'DESCRIPTOR' : _CONNMGMTSTATUS,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.ConnMgmtStatus)
+  })
+_sym_db.RegisterMessage(ConnMgmtStatus)
+
+ExtrasRequest = _reflection.GeneratedProtocolMessageType('ExtrasRequest', (_message.Message,), {
+  'DESCRIPTOR' : _EXTRASREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.ExtrasRequest)
+  })
+_sym_db.RegisterMessage(ExtrasRequest)
+
+BlockstoreRequest = _reflection.GeneratedProtocolMessageType('BlockstoreRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCKSTOREREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.BlockstoreRequest)
+  })
+_sym_db.RegisterMessage(BlockstoreRequest)
+
+BlockstoreResponse = _reflection.GeneratedProtocolMessageType('BlockstoreResponse', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCKSTORERESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.BlockstoreResponse)
+  })
+_sym_db.RegisterMessage(BlockstoreResponse)
+
+Block = _reflection.GeneratedProtocolMessageType('Block', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCK,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.Block)
+  })
+_sym_db.RegisterMessage(Block)
+
+DagRequest = _reflection.GeneratedProtocolMessageType('DagRequest', (_message.Message,), {
+
+  'LinksEntry' : _reflection.GeneratedProtocolMessageType('LinksEntry', (_message.Message,), {
+    'DESCRIPTOR' : _DAGREQUEST_LINKSENTRY,
+    '__module__' : 'node_pb2'
+    # @@protoc_insertion_point(class_scope:pb.DagRequest.LinksEntry)
+    })
+  ,
+  'DESCRIPTOR' : _DAGREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.DagRequest)
+  })
+_sym_db.RegisterMessage(DagRequest)
+_sym_db.RegisterMessage(DagRequest.LinksEntry)
+
+DagResponse = _reflection.GeneratedProtocolMessageType('DagResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DAGRESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.DagResponse)
+  })
+_sym_db.RegisterMessage(DagResponse)
+
+IPLDLink = _reflection.GeneratedProtocolMessageType('IPLDLink', (_message.Message,), {
+  'DESCRIPTOR' : _IPLDLINK,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.IPLDLink)
+  })
+_sym_db.RegisterMessage(IPLDLink)
+
+IPLDNode = _reflection.GeneratedProtocolMessageType('IPLDNode', (_message.Message,), {
+  'DESCRIPTOR' : _IPLDNODE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.IPLDNode)
+  })
+_sym_db.RegisterMessage(IPLDNode)
+
+KeystoreRequest = _reflection.GeneratedProtocolMessageType('KeystoreRequest', (_message.Message,), {
+  'DESCRIPTOR' : _KEYSTOREREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.KeystoreRequest)
+  })
+_sym_db.RegisterMessage(KeystoreRequest)
+
+KeystoreResponse = _reflection.GeneratedProtocolMessageType('KeystoreResponse', (_message.Message,), {
+  'DESCRIPTOR' : _KEYSTORERESPONSE,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.KeystoreResponse)
+  })
+_sym_db.RegisterMessage(KeystoreResponse)
+
+PersistRequest = _reflection.GeneratedProtocolMessageType('PersistRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PERSISTREQUEST,
+  '__module__' : 'node_pb2'
+  # @@protoc_insertion_point(class_scope:pb.PersistRequest)
+  })
+_sym_db.RegisterMessage(PersistRequest)
+
+PersistResponse = _reflection.GeneratedProtocolMessageType('PersistResponse', (_message.Message,), {
+
+  'StatusEntry' : _reflection.GeneratedProtocolMessageType('StatusEntry', (_message.Message,), {
+    'DESCRIPTOR' : _PERSISTRESPONSE_STATUSENTRY,
+    '__module__' : 'node_pb2'
+    # @@protoc_insertion_point(class_scope:pb.PersistResponse.StatusEntry)
     })
   ,
 
-  'StatusMessage' : _reflection.GeneratedProtocolMessageType('StatusMessage', (_message.Message,), {
-    'DESCRIPTOR' : _DISCONNECTRESPONSE_STATUSMESSAGE,
+  'ErrorsEntry' : _reflection.GeneratedProtocolMessageType('ErrorsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _PERSISTRESPONSE_ERRORSENTRY,
     '__module__' : 'node_pb2'
-    # @@protoc_insertion_point(class_scope:pb.DisconnectResponse.StatusMessage)
+    # @@protoc_insertion_point(class_scope:pb.PersistResponse.ErrorsEntry)
     })
   ,
-  'DESCRIPTOR' : _DISCONNECTRESPONSE,
+  'DESCRIPTOR' : _PERSISTRESPONSE,
   '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.DisconnectResponse)
+  # @@protoc_insertion_point(class_scope:pb.PersistResponse)
   })
-_sym_db.RegisterMessage(DisconnectResponse)
-_sym_db.RegisterMessage(DisconnectResponse.StatusEntry)
-_sym_db.RegisterMessage(DisconnectResponse.StatusMessage)
-
-EnableExtrasRequest = _reflection.GeneratedProtocolMessageType('EnableExtrasRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ENABLEEXTRASREQUEST,
-  '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.EnableExtrasRequest)
-  })
-_sym_db.RegisterMessage(EnableExtrasRequest)
-
-DisableExtrasRequest = _reflection.GeneratedProtocolMessageType('DisableExtrasRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DISABLEEXTRASREQUEST,
-  '__module__' : 'node_pb2'
-  # @@protoc_insertion_point(class_scope:pb.DisableExtrasRequest)
-  })
-_sym_db.RegisterMessage(DisableExtrasRequest)
+_sym_db.RegisterMessage(PersistResponse)
+_sym_db.RegisterMessage(PersistResponse.StatusEntry)
+_sym_db.RegisterMessage(PersistResponse.ErrorsEntry)
 
 
-_ISCONNECTEDRESPONSE_CONNECTEDENTRY._options = None
-_DISCONNECTRESPONSE_STATUSENTRY._options = None
+_CONNMGMTRESPONSE_CONNECTEDENTRY._options = None
+_CONNMGMTRESPONSE_STATUSENTRY._options = None
+_DAGREQUEST_LINKSENTRY._options = None
+_PERSISTRESPONSE_STATUSENTRY._options = None
+_PERSISTRESPONSE_ERRORSENTRY._options = None
 
 _NODEAPI = _descriptor.ServiceDescriptor(
   name='NodeAPI',
@@ -785,70 +1649,70 @@ _NODEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1224,
-  serialized_end=1605,
+  serialized_start=2822,
+  serialized_end=3188,
   methods=[
   _descriptor.MethodDescriptor(
-    name='GetPeers',
-    full_name='pb.NodeAPI.GetPeers',
+    name='ConnMgmt',
+    full_name='pb.NodeAPI.ConnMgmt',
     index=0,
     containing_service=None,
-    input_type=util__pb2._EMPTY,
-    output_type=_GETPEERSRESPONSE,
+    input_type=_CONNMGMTREQUEST,
+    output_type=_CONNMGMTRESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='Connect',
-    full_name='pb.NodeAPI.Connect',
+    name='Extras',
+    full_name='pb.NodeAPI.Extras',
     index=1,
     containing_service=None,
-    input_type=_CONNECTREQUEST,
-    output_type=util__pb2._EMPTY,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Disconnect',
-    full_name='pb.NodeAPI.Disconnect',
-    index=2,
-    containing_service=None,
-    input_type=_DISCONNECTREQUEST,
-    output_type=_DISCONNECTRESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='IsConnected',
-    full_name='pb.NodeAPI.IsConnected',
-    index=3,
-    containing_service=None,
-    input_type=_ISCONNECTEDREQUEST,
-    output_type=_ISCONNECTEDRESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='EnableExtras',
-    full_name='pb.NodeAPI.EnableExtras',
-    index=4,
-    containing_service=None,
-    input_type=_ENABLEEXTRASREQUEST,
-    output_type=util__pb2._EMPTY,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='DisableExtras',
-    full_name='pb.NodeAPI.DisableExtras',
-    index=5,
-    containing_service=None,
-    input_type=_DISABLEEXTRASREQUEST,
+    input_type=_EXTRASREQUEST,
     output_type=util__pb2._EMPTY,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='P2P',
     full_name='pb.NodeAPI.P2P',
-    index=6,
+    index=2,
     containing_service=None,
     input_type=_P2PREQUEST,
     output_type=_P2PRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Blockstore',
+    full_name='pb.NodeAPI.Blockstore',
+    index=3,
+    containing_service=None,
+    input_type=_BLOCKSTOREREQUEST,
+    output_type=_BLOCKSTORERESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Dag',
+    full_name='pb.NodeAPI.Dag',
+    index=4,
+    containing_service=None,
+    input_type=_DAGREQUEST,
+    output_type=_DAGRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Keystore',
+    full_name='pb.NodeAPI.Keystore',
+    index=5,
+    containing_service=None,
+    input_type=_KEYSTOREREQUEST,
+    output_type=_KEYSTORERESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Persist',
+    full_name='pb.NodeAPI.Persist',
+    index=6,
+    containing_service=None,
+    input_type=_PERSISTREQUEST,
+    output_type=_PERSISTRESPONSE,
     serialized_options=None,
   ),
 ])

@@ -27,26 +27,65 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// PubSubListPeersRequest is used to return a list of
-// peers that are subscribed to the given topic(s)
-type PubSubListPeersRequest struct {
-	// the topics for which we should
-	// list peers for
-	Topics []string `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
+// PSREQTYPE indicates the particular PubSubAPI request being performed
+type PSREQTYPE int32
+
+const (
+	// PS_GET_TOPICS is used to return a list of subscribed pubsub topics
+	PSREQTYPE_PS_GET_TOPICS PSREQTYPE = 0
+	// PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to
+	PSREQTYPE_PS_LIST_PEERS PSREQTYPE = 1
+	// PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic
+	PSREQTYPE_PS_SUBSCRIBE PSREQTYPE = 2
+	// PS_PUBLISH is used to publisbh a message to a pubsub topic
+	PSREQTYPE_PS_PUBLISH PSREQTYPE = 3
+)
+
+var PSREQTYPE_name = map[int32]string{
+	0: "PS_GET_TOPICS",
+	1: "PS_LIST_PEERS",
+	2: "PS_SUBSCRIBE",
+	3: "PS_PUBLISH",
 }
 
-func (m *PubSubListPeersRequest) Reset()         { *m = PubSubListPeersRequest{} }
-func (m *PubSubListPeersRequest) String() string { return proto.CompactTextString(m) }
-func (*PubSubListPeersRequest) ProtoMessage()    {}
-func (*PubSubListPeersRequest) Descriptor() ([]byte, []int) {
+var PSREQTYPE_value = map[string]int32{
+	"PS_GET_TOPICS": 0,
+	"PS_LIST_PEERS": 1,
+	"PS_SUBSCRIBE":  2,
+	"PS_PUBLISH":    3,
+}
+
+func (x PSREQTYPE) String() string {
+	return proto.EnumName(PSREQTYPE_name, int32(x))
+}
+
+func (PSREQTYPE) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_91df006b05e20cf7, []int{0}
 }
-func (m *PubSubListPeersRequest) XXX_Unmarshal(b []byte) error {
+
+type PubSubRequest struct {
+	// indicates the particular PubSubAPI request being performed
+	RequestType PSREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.PSREQTYPE" json:"requestType,omitempty"`
+	// topics to request peers from, or publish data to
+	// sent by: PS_LIST_PEERS, PS_SUBSCRIBE, PS_PUBLISH
+	Topics []string `protobuf:"bytes,2,rep,name=topics,proto3" json:"topics,omitempty"`
+	// data to sent to topics
+	// sent by: PS_PUBLISH
+	Data []byte `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (m *PubSubRequest) Reset()         { *m = PubSubRequest{} }
+func (m *PubSubRequest) String() string { return proto.CompactTextString(m) }
+func (*PubSubRequest) ProtoMessage()    {}
+func (*PubSubRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_91df006b05e20cf7, []int{0}
+}
+func (m *PubSubRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *PubSubListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_PubSubListPeersRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -56,211 +95,65 @@ func (m *PubSubListPeersRequest) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *PubSubListPeersRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubListPeersRequest.Merge(m, src)
+func (m *PubSubRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubRequest.Merge(m, src)
 }
-func (m *PubSubListPeersRequest) XXX_Size() int {
+func (m *PubSubRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *PubSubListPeersRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubListPeersRequest.DiscardUnknown(m)
+func (m *PubSubRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PubSubListPeersRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubRequest proto.InternalMessageInfo
 
-func (m *PubSubListPeersRequest) GetTopics() []string {
+func (m *PubSubRequest) GetRequestType() PSREQTYPE {
+	if m != nil {
+		return m.RequestType
+	}
+	return PSREQTYPE_PS_GET_TOPICS
+}
+
+func (m *PubSubRequest) GetTopics() []string {
 	if m != nil {
 		return m.Topics
 	}
 	return nil
 }
 
-// PubSubListPeersResponse is a response to a ListPeersRequest
-type PubSubListPeersResponse struct {
-	Peers []*PubSubListPeersResponse_Peer `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
-}
-
-func (m *PubSubListPeersResponse) Reset()         { *m = PubSubListPeersResponse{} }
-func (m *PubSubListPeersResponse) String() string { return proto.CompactTextString(m) }
-func (*PubSubListPeersResponse) ProtoMessage()    {}
-func (*PubSubListPeersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{1}
-}
-func (m *PubSubListPeersResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *PubSubListPeersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_PubSubListPeersResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *PubSubListPeersResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubListPeersResponse.Merge(m, src)
-}
-func (m *PubSubListPeersResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *PubSubListPeersResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubListPeersResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PubSubListPeersResponse proto.InternalMessageInfo
-
-func (m *PubSubListPeersResponse) GetPeers() []*PubSubListPeersResponse_Peer {
-	if m != nil {
-		return m.Peers
-	}
-	return nil
-}
-
-// peer is a single peer
-type PubSubListPeersResponse_Peer struct {
-	// topic is the topic this peer is a part of
-	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	// lists the peerid for this peer
-	PeerID string `protobuf:"bytes,2,opt,name=peerID,proto3" json:"peerID,omitempty"`
-}
-
-func (m *PubSubListPeersResponse_Peer) Reset()         { *m = PubSubListPeersResponse_Peer{} }
-func (m *PubSubListPeersResponse_Peer) String() string { return proto.CompactTextString(m) }
-func (*PubSubListPeersResponse_Peer) ProtoMessage()    {}
-func (*PubSubListPeersResponse_Peer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{1, 0}
-}
-func (m *PubSubListPeersResponse_Peer) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *PubSubListPeersResponse_Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_PubSubListPeersResponse_Peer.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *PubSubListPeersResponse_Peer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubListPeersResponse_Peer.Merge(m, src)
-}
-func (m *PubSubListPeersResponse_Peer) XXX_Size() int {
-	return m.Size()
-}
-func (m *PubSubListPeersResponse_Peer) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubListPeersResponse_Peer.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PubSubListPeersResponse_Peer proto.InternalMessageInfo
-
-func (m *PubSubListPeersResponse_Peer) GetTopic() string {
-	if m != nil {
-		return m.Topic
-	}
-	return ""
-}
-
-func (m *PubSubListPeersResponse_Peer) GetPeerID() string {
-	if m != nil {
-		return m.PeerID
-	}
-	return ""
-}
-
-// PubSubPublishRequest is a message used to publish data to a topic
-type PubSubPublishRequest struct {
-	// the topic we are publishing too
-	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	// the data we are publishing
-	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	// whether or not we should engage in advertise operations
-	Advertise bool `protobuf:"varint,3,opt,name=advertise,proto3" json:"advertise,omitempty"`
-}
-
-func (m *PubSubPublishRequest) Reset()         { *m = PubSubPublishRequest{} }
-func (m *PubSubPublishRequest) String() string { return proto.CompactTextString(m) }
-func (*PubSubPublishRequest) ProtoMessage()    {}
-func (*PubSubPublishRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{2}
-}
-func (m *PubSubPublishRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *PubSubPublishRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_PubSubPublishRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *PubSubPublishRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubPublishRequest.Merge(m, src)
-}
-func (m *PubSubPublishRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *PubSubPublishRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubPublishRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PubSubPublishRequest proto.InternalMessageInfo
-
-func (m *PubSubPublishRequest) GetTopic() string {
-	if m != nil {
-		return m.Topic
-	}
-	return ""
-}
-
-func (m *PubSubPublishRequest) GetData() []byte {
+func (m *PubSubRequest) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-func (m *PubSubPublishRequest) GetAdvertise() bool {
-	if m != nil {
-		return m.Advertise
-	}
-	return false
+type PubSubResponse struct {
+	// indicates the particular PubSubAPI request being performed
+	RequestType PSREQTYPE `protobuf:"varint,1,opt,name=requestType,proto3,enum=pb.PSREQTYPE" json:"requestType,omitempty"`
+	// messages we have received from a topic
+	// sent by: PS_SUBSCRIBE
+	Message []*PubSubMessage `protobuf:"bytes,2,rep,name=message,proto3" json:"message,omitempty"`
+	// topic names
+	// sent by: PS_GET_TOPICS
+	Topics []string `protobuf:"bytes,3,rep,name=topics,proto3" json:"topics,omitempty"`
+	// pubsub peers
+	// sent by: PS_LIST_PEERS
+	Peers []*PubSubPeer `protobuf:"bytes,4,rep,name=peers,proto3" json:"peers,omitempty"`
 }
 
-// PubSubSubscribeRequest is used to initiate a subscription
-// to a given pubsub topic and stream received messages
-type PubSubSubscribeRequest struct {
-	// the topic we should subscribe to
-	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
-	// indicates whether the server should
-	// perform service discover for peers on the same topic
-	Discover bool `protobuf:"varint,2,opt,name=discover,proto3" json:"discover,omitempty"`
+func (m *PubSubResponse) Reset()         { *m = PubSubResponse{} }
+func (m *PubSubResponse) String() string { return proto.CompactTextString(m) }
+func (*PubSubResponse) ProtoMessage()    {}
+func (*PubSubResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_91df006b05e20cf7, []int{1}
 }
-
-func (m *PubSubSubscribeRequest) Reset()         { *m = PubSubSubscribeRequest{} }
-func (m *PubSubSubscribeRequest) String() string { return proto.CompactTextString(m) }
-func (*PubSubSubscribeRequest) ProtoMessage()    {}
-func (*PubSubSubscribeRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{3}
-}
-func (m *PubSubSubscribeRequest) XXX_Unmarshal(b []byte) error {
+func (m *PubSubResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *PubSubSubscribeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_PubSubSubscribeRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -270,82 +163,47 @@ func (m *PubSubSubscribeRequest) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *PubSubSubscribeRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubSubscribeRequest.Merge(m, src)
+func (m *PubSubResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubResponse.Merge(m, src)
 }
-func (m *PubSubSubscribeRequest) XXX_Size() int {
+func (m *PubSubResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *PubSubSubscribeRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubSubscribeRequest.DiscardUnknown(m)
+func (m *PubSubResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PubSubSubscribeRequest proto.InternalMessageInfo
+var xxx_messageInfo_PubSubResponse proto.InternalMessageInfo
 
-func (m *PubSubSubscribeRequest) GetTopic() string {
+func (m *PubSubResponse) GetRequestType() PSREQTYPE {
 	if m != nil {
-		return m.Topic
+		return m.RequestType
 	}
-	return ""
+	return PSREQTYPE_PS_GET_TOPICS
 }
 
-func (m *PubSubSubscribeRequest) GetDiscover() bool {
+func (m *PubSubResponse) GetMessage() []*PubSubMessage {
 	if m != nil {
-		return m.Discover
-	}
-	return false
-}
-
-// PubSubTopics is a response that returns
-// the names of all known topics
-type PubSubTopicsResponse struct {
-	// the names of topics
-	Names []string `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
-}
-
-func (m *PubSubTopicsResponse) Reset()         { *m = PubSubTopicsResponse{} }
-func (m *PubSubTopicsResponse) String() string { return proto.CompactTextString(m) }
-func (*PubSubTopicsResponse) ProtoMessage()    {}
-func (*PubSubTopicsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{4}
-}
-func (m *PubSubTopicsResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *PubSubTopicsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_PubSubTopicsResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *PubSubTopicsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubTopicsResponse.Merge(m, src)
-}
-func (m *PubSubTopicsResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *PubSubTopicsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubTopicsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PubSubTopicsResponse proto.InternalMessageInfo
-
-func (m *PubSubTopicsResponse) GetNames() []string {
-	if m != nil {
-		return m.Names
+		return m.Message
 	}
 	return nil
 }
 
-// PubSubMessageResposne is a received pubsub message
-// sent as a response to a subscription rpc call
-type PubSubMessageResponse struct {
+func (m *PubSubResponse) GetTopics() []string {
+	if m != nil {
+		return m.Topics
+	}
+	return nil
+}
+
+func (m *PubSubResponse) GetPeers() []*PubSubPeer {
+	if m != nil {
+		return m.Peers
+	}
+	return nil
+}
+
+type PubSubMessage struct {
 	// who this message is from
 	From []byte `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
 	// the data of this message
@@ -360,18 +218,18 @@ type PubSubMessageResponse struct {
 	Key []byte `protobuf:"bytes,6,opt,name=key,proto3" json:"key,omitempty"`
 }
 
-func (m *PubSubMessageResponse) Reset()         { *m = PubSubMessageResponse{} }
-func (m *PubSubMessageResponse) String() string { return proto.CompactTextString(m) }
-func (*PubSubMessageResponse) ProtoMessage()    {}
-func (*PubSubMessageResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_91df006b05e20cf7, []int{5}
+func (m *PubSubMessage) Reset()         { *m = PubSubMessage{} }
+func (m *PubSubMessage) String() string { return proto.CompactTextString(m) }
+func (*PubSubMessage) ProtoMessage()    {}
+func (*PubSubMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_91df006b05e20cf7, []int{2}
 }
-func (m *PubSubMessageResponse) XXX_Unmarshal(b []byte) error {
+func (m *PubSubMessage) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *PubSubMessageResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *PubSubMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_PubSubMessageResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_PubSubMessage.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -381,103 +239,154 @@ func (m *PubSubMessageResponse) XXX_Marshal(b []byte, deterministic bool) ([]byt
 		return b[:n], nil
 	}
 }
-func (m *PubSubMessageResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PubSubMessageResponse.Merge(m, src)
+func (m *PubSubMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubMessage.Merge(m, src)
 }
-func (m *PubSubMessageResponse) XXX_Size() int {
+func (m *PubSubMessage) XXX_Size() int {
 	return m.Size()
 }
-func (m *PubSubMessageResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_PubSubMessageResponse.DiscardUnknown(m)
+func (m *PubSubMessage) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubMessage.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_PubSubMessageResponse proto.InternalMessageInfo
+var xxx_messageInfo_PubSubMessage proto.InternalMessageInfo
 
-func (m *PubSubMessageResponse) GetFrom() []byte {
+func (m *PubSubMessage) GetFrom() []byte {
 	if m != nil {
 		return m.From
 	}
 	return nil
 }
 
-func (m *PubSubMessageResponse) GetData() []byte {
+func (m *PubSubMessage) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-func (m *PubSubMessageResponse) GetSeqno() []byte {
+func (m *PubSubMessage) GetSeqno() []byte {
 	if m != nil {
 		return m.Seqno
 	}
 	return nil
 }
 
-func (m *PubSubMessageResponse) GetTopicIDs() []string {
+func (m *PubSubMessage) GetTopicIDs() []string {
 	if m != nil {
 		return m.TopicIDs
 	}
 	return nil
 }
 
-func (m *PubSubMessageResponse) GetSignature() []byte {
+func (m *PubSubMessage) GetSignature() []byte {
 	if m != nil {
 		return m.Signature
 	}
 	return nil
 }
 
-func (m *PubSubMessageResponse) GetKey() []byte {
+func (m *PubSubMessage) GetKey() []byte {
 	if m != nil {
 		return m.Key
 	}
 	return nil
 }
 
+// represents an individual pubsub peer
+type PubSubPeer struct {
+	// the topic this peer belongs to
+	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// the id of this peer
+	PeerID string `protobuf:"bytes,2,opt,name=peerID,proto3" json:"peerID,omitempty"`
+}
+
+func (m *PubSubPeer) Reset()         { *m = PubSubPeer{} }
+func (m *PubSubPeer) String() string { return proto.CompactTextString(m) }
+func (*PubSubPeer) ProtoMessage()    {}
+func (*PubSubPeer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_91df006b05e20cf7, []int{3}
+}
+func (m *PubSubPeer) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *PubSubPeer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_PubSubPeer.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *PubSubPeer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PubSubPeer.Merge(m, src)
+}
+func (m *PubSubPeer) XXX_Size() int {
+	return m.Size()
+}
+func (m *PubSubPeer) XXX_DiscardUnknown() {
+	xxx_messageInfo_PubSubPeer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PubSubPeer proto.InternalMessageInfo
+
+func (m *PubSubPeer) GetTopic() string {
+	if m != nil {
+		return m.Topic
+	}
+	return ""
+}
+
+func (m *PubSubPeer) GetPeerID() string {
+	if m != nil {
+		return m.PeerID
+	}
+	return ""
+}
+
 func init() {
-	proto.RegisterType((*PubSubListPeersRequest)(nil), "pb.PubSubListPeersRequest")
-	proto.RegisterType((*PubSubListPeersResponse)(nil), "pb.PubSubListPeersResponse")
-	proto.RegisterType((*PubSubListPeersResponse_Peer)(nil), "pb.PubSubListPeersResponse.Peer")
-	proto.RegisterType((*PubSubPublishRequest)(nil), "pb.PubSubPublishRequest")
-	proto.RegisterType((*PubSubSubscribeRequest)(nil), "pb.PubSubSubscribeRequest")
-	proto.RegisterType((*PubSubTopicsResponse)(nil), "pb.PubSubTopicsResponse")
-	proto.RegisterType((*PubSubMessageResponse)(nil), "pb.PubSubMessageResponse")
+	proto.RegisterEnum("pb.PSREQTYPE", PSREQTYPE_name, PSREQTYPE_value)
+	proto.RegisterType((*PubSubRequest)(nil), "pb.PubSubRequest")
+	proto.RegisterType((*PubSubResponse)(nil), "pb.PubSubResponse")
+	proto.RegisterType((*PubSubMessage)(nil), "pb.PubSubMessage")
+	proto.RegisterType((*PubSubPeer)(nil), "pb.PubSubPeer")
 }
 
 func init() { proto.RegisterFile("pubsub.proto", fileDescriptor_91df006b05e20cf7) }
 
 var fileDescriptor_91df006b05e20cf7 = []byte{
-	// 464 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x53, 0xcf, 0x6f, 0xd3, 0x30,
-	0x14, 0x8e, 0xdb, 0xa6, 0x6a, 0x1e, 0x45, 0x20, 0xab, 0x0c, 0x13, 0x50, 0x54, 0xf9, 0xd4, 0x03,
-	0xaa, 0xa6, 0x81, 0xd0, 0xae, 0xa0, 0x21, 0x54, 0x34, 0xa4, 0xca, 0xe3, 0x8c, 0x14, 0xb7, 0x66,
-	0x44, 0xac, 0x4d, 0x16, 0xdb, 0x93, 0xf6, 0x17, 0x70, 0xe5, 0xce, 0x89, 0xff, 0x86, 0xe3, 0x8e,
-	0x1c, 0x51, 0xfb, 0x8f, 0x20, 0x3f, 0x2f, 0x49, 0x3b, 0x4a, 0x6f, 0xfe, 0x5e, 0xde, 0xaf, 0xef,
-	0x7b, 0x5f, 0xa0, 0x5f, 0x58, 0xa9, 0xad, 0x1c, 0x17, 0x65, 0x6e, 0x72, 0xda, 0x2a, 0x64, 0x0c,
-	0xd6, 0x64, 0x17, 0x1e, 0xf3, 0x43, 0x38, 0x98, 0x5a, 0x79, 0x66, 0xe5, 0x69, 0xa6, 0xcd, 0x54,
-	0xa9, 0x52, 0x0b, 0x75, 0x69, 0x95, 0x36, 0xf4, 0x00, 0xba, 0x26, 0x2f, 0xb2, 0x99, 0x66, 0x64,
-	0xd8, 0x1e, 0x45, 0xe2, 0x16, 0xf1, 0x6f, 0x04, 0x1e, 0xff, 0x53, 0xa2, 0x8b, 0x7c, 0xa9, 0x15,
-	0x7d, 0x05, 0x61, 0xe1, 0x02, 0x58, 0x72, 0xef, 0x68, 0x38, 0x2e, 0xe4, 0xf8, 0x3f, 0xb9, 0x63,
-	0x87, 0x84, 0x4f, 0x8f, 0x5f, 0x42, 0xc7, 0x41, 0x3a, 0x80, 0x10, 0xa7, 0x30, 0x32, 0x24, 0xa3,
-	0x48, 0x78, 0xe0, 0x36, 0x71, 0x69, 0x93, 0x13, 0xd6, 0xc2, 0xf0, 0x2d, 0xe2, 0x9f, 0x60, 0xe0,
-	0x9b, 0x4f, 0xad, 0xbc, 0xc8, 0xf4, 0x97, 0x6a, 0xf3, 0xdd, 0x5d, 0x28, 0x74, 0xe6, 0xa9, 0x49,
-	0xb1, 0x47, 0x5f, 0xe0, 0x9b, 0x3e, 0x83, 0x28, 0x9d, 0x5f, 0xa9, 0xd2, 0x64, 0x5a, 0xb1, 0xf6,
-	0x90, 0x8c, 0x7a, 0xa2, 0x09, 0xf0, 0xf7, 0x95, 0x36, 0x67, 0x56, 0xea, 0x59, 0x99, 0x49, 0xb5,
-	0x7f, 0x42, 0x0c, 0xbd, 0x79, 0xa6, 0x67, 0xf9, 0x95, 0x2a, 0x71, 0x4a, 0x4f, 0xd4, 0x98, 0x3f,
-	0xaf, 0x76, 0xfd, 0x88, 0x2a, 0xd6, 0x8a, 0x0d, 0x20, 0x5c, 0xa6, 0x0b, 0x55, 0x89, 0xec, 0x01,
-	0xff, 0x49, 0xe0, 0x91, 0x4f, 0xff, 0xa0, 0xb4, 0x4e, 0xcf, 0x55, 0x9d, 0x4f, 0xa1, 0xf3, 0xb9,
-	0xcc, 0x17, 0x38, 0xb8, 0x2f, 0xf0, 0xbd, 0x93, 0xd9, 0x00, 0x42, 0xad, 0x2e, 0x97, 0x39, 0xb2,
-	0xea, 0x0b, 0x0f, 0xdc, 0x86, 0xb8, 0xea, 0xe4, 0x44, 0xb3, 0x0e, 0x0e, 0xac, 0xb1, 0xd3, 0x42,
-	0x67, 0xe7, 0xcb, 0xd4, 0xd8, 0x52, 0xb1, 0x10, 0xab, 0x9a, 0x00, 0x7d, 0x08, 0xed, 0xaf, 0xea,
-	0x9a, 0x75, 0x31, 0xee, 0x9e, 0x47, 0x3f, 0x5a, 0x10, 0xf9, 0x1d, 0x5f, 0x4f, 0x27, 0xf4, 0x18,
-	0x1e, 0x78, 0xf0, 0x4e, 0x19, 0x4f, 0x91, 0x46, 0xee, 0xfa, 0x6f, 0x17, 0x85, 0xb9, 0x8e, 0x59,
-	0x63, 0x84, 0x6d, 0xfe, 0x3c, 0xa0, 0xa7, 0x55, 0x65, 0x6d, 0x11, 0x1a, 0xef, 0xf4, 0x0d, 0x4a,
-	0x1f, 0x3f, 0xdd, 0xe3, 0xa9, 0xcd, 0x6e, 0xf5, 0xcd, 0x36, 0xbb, 0xdd, 0x3d, 0x64, 0xfc, 0xa4,
-	0xf9, 0x76, 0x47, 0x69, 0x1e, 0x1c, 0x12, 0x7a, 0x0c, 0xf7, 0xb7, 0x1c, 0x46, 0x37, 0x88, 0x6c,
-	0x9b, 0x2e, 0x6e, 0xd8, 0xf2, 0x60, 0x44, 0xde, 0xb0, 0x5f, 0xab, 0x84, 0xdc, 0xac, 0x12, 0xf2,
-	0x67, 0x95, 0x90, 0xef, 0xeb, 0x24, 0xb8, 0x59, 0x27, 0xc1, 0xef, 0x75, 0x12, 0xc8, 0x2e, 0xfe,
-	0x78, 0x2f, 0xfe, 0x06, 0x00, 0x00, 0xff, 0xff, 0x5e, 0x01, 0x83, 0x4d, 0x98, 0x03, 0x00, 0x00,
+	// 428 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x52, 0x4f, 0x6f, 0x94, 0x40,
+	0x14, 0x67, 0xa0, 0x8b, 0xf2, 0xca, 0x12, 0x3a, 0x31, 0x86, 0x34, 0x86, 0x6c, 0x88, 0x07, 0xa2,
+	0xc9, 0x6a, 0xd6, 0x78, 0xf1, 0x26, 0x2d, 0x51, 0x92, 0x1a, 0xc7, 0x19, 0x7a, 0xf0, 0x44, 0x40,
+	0xc7, 0xa6, 0xd1, 0x2e, 0x53, 0x06, 0x0e, 0xfd, 0x16, 0x5e, 0xfd, 0x0e, 0x7e, 0x10, 0x8f, 0x7b,
+	0xf4, 0x68, 0x76, 0xbf, 0x88, 0x61, 0x86, 0x5d, 0xf0, 0xe8, 0xed, 0xfd, 0xde, 0x3c, 0x7e, 0x7f,
+	0x1e, 0x0f, 0x5c, 0xd1, 0x55, 0xb2, 0xab, 0x96, 0xa2, 0xa9, 0xdb, 0x1a, 0x9b, 0xa2, 0x8a, 0xbe,
+	0xc1, 0x9c, 0x74, 0x15, 0xeb, 0x2a, 0xca, 0x6f, 0x3b, 0x2e, 0x5b, 0xfc, 0x0c, 0x8e, 0x1b, 0x5d,
+	0xe6, 0x77, 0x82, 0x07, 0x68, 0x81, 0x62, 0x6f, 0x35, 0x5f, 0x8a, 0x6a, 0x49, 0x18, 0x4d, 0x3f,
+	0xe4, 0x1f, 0x49, 0x4a, 0xa7, 0x13, 0xf8, 0x21, 0xd8, 0x6d, 0x2d, 0xae, 0x3f, 0xc9, 0xc0, 0x5c,
+	0x58, 0xb1, 0x43, 0x07, 0x84, 0x31, 0x1c, 0x7d, 0x2e, 0xdb, 0x32, 0xb0, 0x16, 0x28, 0x76, 0xa9,
+	0xaa, 0xa3, 0x9f, 0x08, 0xbc, 0xbd, 0x9c, 0x14, 0xf5, 0x5a, 0xf2, 0xff, 0xd7, 0x7b, 0x0a, 0xf7,
+	0x6e, 0xb8, 0x94, 0xe5, 0x15, 0x57, 0x82, 0xc7, 0xab, 0x13, 0x35, 0xac, 0x58, 0xdf, 0xe9, 0x07,
+	0xba, 0x9f, 0x98, 0x98, 0xb3, 0xfe, 0x31, 0xf7, 0x18, 0x66, 0x82, 0xf3, 0x46, 0x06, 0x47, 0x8a,
+	0xc2, 0x1b, 0x29, 0x08, 0xe7, 0x0d, 0xd5, 0x8f, 0xd1, 0x0f, 0xb4, 0xdf, 0xce, 0x40, 0xdc, 0x87,
+	0xfa, 0xd2, 0xd4, 0x37, 0xca, 0xa6, 0x4b, 0x55, 0x7d, 0x08, 0x6a, 0x8e, 0x41, 0xf1, 0x03, 0x98,
+	0x49, 0x7e, 0xbb, 0xae, 0x87, 0xf4, 0x1a, 0xe0, 0x53, 0xb8, 0xaf, 0xf4, 0xb3, 0x73, 0x2d, 0xec,
+	0xd0, 0x03, 0xc6, 0x8f, 0xc0, 0x91, 0xd7, 0x57, 0xeb, 0xb2, 0xed, 0x1a, 0x1e, 0xcc, 0xd4, 0x57,
+	0x63, 0x03, 0xfb, 0x60, 0x7d, 0xe5, 0x77, 0x81, 0xad, 0xfa, 0x7d, 0x19, 0xbd, 0x02, 0x18, 0x0d,
+	0xf7, 0x7a, 0x8a, 0x49, 0x19, 0x73, 0xa8, 0x06, 0x7d, 0xfa, 0x3e, 0x48, 0x76, 0xae, 0xbc, 0x39,
+	0x74, 0x40, 0x4f, 0x18, 0x38, 0x87, 0xe5, 0xe2, 0x13, 0x98, 0x13, 0x56, 0xbc, 0x49, 0xf3, 0x22,
+	0x7f, 0x4f, 0xb2, 0x33, 0xe6, 0x1b, 0x43, 0xeb, 0x22, 0x63, 0x79, 0x41, 0xd2, 0x94, 0x32, 0x1f,
+	0x61, 0x1f, 0x5c, 0xc2, 0x0a, 0x76, 0x99, 0xb0, 0x33, 0x9a, 0x25, 0xa9, 0x6f, 0x62, 0x0f, 0x80,
+	0xb0, 0x82, 0x5c, 0x26, 0x17, 0x19, 0x7b, 0xeb, 0x5b, 0xab, 0x04, 0x1c, 0x6d, 0xe8, 0x35, 0xc9,
+	0xf0, 0x4b, 0xb0, 0x35, 0xc0, 0x93, 0xbf, 0x33, 0x9c, 0xd8, 0x29, 0x9e, 0xb6, 0xf4, 0x19, 0x44,
+	0x46, 0x8c, 0x9e, 0xa3, 0x24, 0xf8, 0xb5, 0x0d, 0xd1, 0x66, 0x1b, 0xa2, 0x3f, 0xdb, 0x10, 0x7d,
+	0xdf, 0x85, 0xc6, 0x66, 0x17, 0x1a, 0xbf, 0x77, 0xa1, 0x51, 0xd9, 0xea, 0x64, 0x5f, 0xfc, 0x0d,
+	0x00, 0x00, 0xff, 0xff, 0x0e, 0xf3, 0x10, 0x35, 0xc2, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -492,19 +401,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PubSubAPIClient interface {
-	// PubSubGetTopics is used to return a list of all
-	// known topics the pubsub instance is subscribed to.
-	PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*PubSubTopicsResponse, error)
-	// PubSubListPeers is used to return a list of peers subscribed
-	// to a given topic or topics.
-	PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error)
-	// PubSubSubscribe is used to subscribe to a topic and receive messages
-	// Server will stream the messages received on the topic specified
-	// during the initial subscription call, and send each message
-	// back to the client as it is received.
-	PubSubSubscribe(ctx context.Context, in *PubSubSubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_PubSubSubscribeClient, error)
-	// PubSubPublish is used to send a stream of messages to a pubsub topic.
-	PubSubPublish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubPublishClient, error)
+	// PubSub allows controlling libp2p pubsub topics and subscriptions using
+	// a bidirectional streaming API
+	PubSub(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubClient, error)
 }
 
 type pubSubAPIClient struct {
@@ -515,84 +414,31 @@ func NewPubSubAPIClient(cc *grpc.ClientConn) PubSubAPIClient {
 	return &pubSubAPIClient{cc}
 }
 
-func (c *pubSubAPIClient) PubSubGetTopics(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*PubSubTopicsResponse, error) {
-	out := new(PubSubTopicsResponse)
-	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/PubSubGetTopics", in, out, opts...)
+func (c *pubSubAPIClient) PubSub(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[0], "/pb.PubSubAPI/PubSub", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
-}
-
-func (c *pubSubAPIClient) PubSubListPeers(ctx context.Context, in *PubSubListPeersRequest, opts ...grpc.CallOption) (*PubSubListPeersResponse, error) {
-	out := new(PubSubListPeersResponse)
-	err := c.cc.Invoke(ctx, "/pb.PubSubAPI/PubSubListPeers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pubSubAPIClient) PubSubSubscribe(ctx context.Context, in *PubSubSubscribeRequest, opts ...grpc.CallOption) (PubSubAPI_PubSubSubscribeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[0], "/pb.PubSubAPI/PubSubSubscribe", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &pubSubAPIPubSubSubscribeClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
+	x := &pubSubAPIPubSubClient{stream}
 	return x, nil
 }
 
-type PubSubAPI_PubSubSubscribeClient interface {
-	Recv() (*PubSubMessageResponse, error)
+type PubSubAPI_PubSubClient interface {
+	Send(*PubSubRequest) error
+	Recv() (*PubSubResponse, error)
 	grpc.ClientStream
 }
 
-type pubSubAPIPubSubSubscribeClient struct {
+type pubSubAPIPubSubClient struct {
 	grpc.ClientStream
 }
 
-func (x *pubSubAPIPubSubSubscribeClient) Recv() (*PubSubMessageResponse, error) {
-	m := new(PubSubMessageResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *pubSubAPIClient) PubSubPublish(ctx context.Context, opts ...grpc.CallOption) (PubSubAPI_PubSubPublishClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PubSubAPI_serviceDesc.Streams[1], "/pb.PubSubAPI/PubSubPublish", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &pubSubAPIPubSubPublishClient{stream}
-	return x, nil
-}
-
-type PubSubAPI_PubSubPublishClient interface {
-	Send(*PubSubPublishRequest) error
-	CloseAndRecv() (*Empty, error)
-	grpc.ClientStream
-}
-
-type pubSubAPIPubSubPublishClient struct {
-	grpc.ClientStream
-}
-
-func (x *pubSubAPIPubSubPublishClient) Send(m *PubSubPublishRequest) error {
+func (x *pubSubAPIPubSubClient) Send(m *PubSubRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *pubSubAPIPubSubPublishClient) CloseAndRecv() (*Empty, error) {
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	m := new(Empty)
+func (x *pubSubAPIPubSubClient) Recv() (*PubSubResponse, error) {
+	m := new(PubSubResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -601,119 +447,43 @@ func (x *pubSubAPIPubSubPublishClient) CloseAndRecv() (*Empty, error) {
 
 // PubSubAPIServer is the server API for PubSubAPI service.
 type PubSubAPIServer interface {
-	// PubSubGetTopics is used to return a list of all
-	// known topics the pubsub instance is subscribed to.
-	PubSubGetTopics(context.Context, *Empty) (*PubSubTopicsResponse, error)
-	// PubSubListPeers is used to return a list of peers subscribed
-	// to a given topic or topics.
-	PubSubListPeers(context.Context, *PubSubListPeersRequest) (*PubSubListPeersResponse, error)
-	// PubSubSubscribe is used to subscribe to a topic and receive messages
-	// Server will stream the messages received on the topic specified
-	// during the initial subscription call, and send each message
-	// back to the client as it is received.
-	PubSubSubscribe(*PubSubSubscribeRequest, PubSubAPI_PubSubSubscribeServer) error
-	// PubSubPublish is used to send a stream of messages to a pubsub topic.
-	PubSubPublish(PubSubAPI_PubSubPublishServer) error
+	// PubSub allows controlling libp2p pubsub topics and subscriptions using
+	// a bidirectional streaming API
+	PubSub(PubSubAPI_PubSubServer) error
 }
 
 // UnimplementedPubSubAPIServer can be embedded to have forward compatible implementations.
 type UnimplementedPubSubAPIServer struct {
 }
 
-func (*UnimplementedPubSubAPIServer) PubSubGetTopics(ctx context.Context, req *Empty) (*PubSubTopicsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PubSubGetTopics not implemented")
-}
-func (*UnimplementedPubSubAPIServer) PubSubListPeers(ctx context.Context, req *PubSubListPeersRequest) (*PubSubListPeersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PubSubListPeers not implemented")
-}
-func (*UnimplementedPubSubAPIServer) PubSubSubscribe(req *PubSubSubscribeRequest, srv PubSubAPI_PubSubSubscribeServer) error {
-	return status.Errorf(codes.Unimplemented, "method PubSubSubscribe not implemented")
-}
-func (*UnimplementedPubSubAPIServer) PubSubPublish(srv PubSubAPI_PubSubPublishServer) error {
-	return status.Errorf(codes.Unimplemented, "method PubSubPublish not implemented")
+func (*UnimplementedPubSubAPIServer) PubSub(srv PubSubAPI_PubSubServer) error {
+	return status.Errorf(codes.Unimplemented, "method PubSub not implemented")
 }
 
 func RegisterPubSubAPIServer(s *grpc.Server, srv PubSubAPIServer) {
 	s.RegisterService(&_PubSubAPI_serviceDesc, srv)
 }
 
-func _PubSubAPI_PubSubGetTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubSubAPIServer).PubSubGetTopics(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.PubSubAPI/PubSubGetTopics",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSubAPIServer).PubSubGetTopics(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
+func _PubSubAPI_PubSub_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PubSubAPIServer).PubSub(&pubSubAPIPubSubServer{stream})
 }
 
-func _PubSubAPI_PubSubListPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PubSubListPeersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubSubAPIServer).PubSubListPeers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.PubSubAPI/PubSubListPeers",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSubAPIServer).PubSubListPeers(ctx, req.(*PubSubListPeersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PubSubAPI_PubSubSubscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(PubSubSubscribeRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(PubSubAPIServer).PubSubSubscribe(m, &pubSubAPIPubSubSubscribeServer{stream})
-}
-
-type PubSubAPI_PubSubSubscribeServer interface {
-	Send(*PubSubMessageResponse) error
+type PubSubAPI_PubSubServer interface {
+	Send(*PubSubResponse) error
+	Recv() (*PubSubRequest, error)
 	grpc.ServerStream
 }
 
-type pubSubAPIPubSubSubscribeServer struct {
+type pubSubAPIPubSubServer struct {
 	grpc.ServerStream
 }
 
-func (x *pubSubAPIPubSubSubscribeServer) Send(m *PubSubMessageResponse) error {
+func (x *pubSubAPIPubSubServer) Send(m *PubSubResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _PubSubAPI_PubSubPublish_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PubSubAPIServer).PubSubPublish(&pubSubAPIPubSubPublishServer{stream})
-}
-
-type PubSubAPI_PubSubPublishServer interface {
-	SendAndClose(*Empty) error
-	Recv() (*PubSubPublishRequest, error)
-	grpc.ServerStream
-}
-
-type pubSubAPIPubSubPublishServer struct {
-	grpc.ServerStream
-}
-
-func (x *pubSubAPIPubSubPublishServer) SendAndClose(m *Empty) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *pubSubAPIPubSubPublishServer) Recv() (*PubSubPublishRequest, error) {
-	m := new(PubSubPublishRequest)
+func (x *pubSubAPIPubSubServer) Recv() (*PubSubRequest, error) {
+	m := new(PubSubRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -723,32 +493,19 @@ func (x *pubSubAPIPubSubPublishServer) Recv() (*PubSubPublishRequest, error) {
 var _PubSubAPI_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.PubSubAPI",
 	HandlerType: (*PubSubAPIServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "PubSubGetTopics",
-			Handler:    _PubSubAPI_PubSubGetTopics_Handler,
-		},
-		{
-			MethodName: "PubSubListPeers",
-			Handler:    _PubSubAPI_PubSubListPeers_Handler,
-		},
-	},
+	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "PubSubSubscribe",
-			Handler:       _PubSubAPI_PubSubSubscribe_Handler,
+			StreamName:    "PubSub",
+			Handler:       _PubSubAPI_PubSub_Handler,
 			ServerStreams: true,
-		},
-		{
-			StreamName:    "PubSubPublish",
-			Handler:       _PubSubAPI_PubSubPublish_Handler,
 			ClientStreams: true,
 		},
 	},
 	Metadata: "pubsub.proto",
 }
 
-func (m *PubSubListPeersRequest) Marshal() (dAtA []byte, err error) {
+func (m *PubSubRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -758,29 +515,41 @@ func (m *PubSubListPeersRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *PubSubListPeersRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *PubSubListPeersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if len(m.Data) > 0 {
+		i -= len(m.Data)
+		copy(dAtA[i:], m.Data)
+		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Data)))
+		i--
+		dAtA[i] = 0x1a
+	}
 	if len(m.Topics) > 0 {
 		for iNdEx := len(m.Topics) - 1; iNdEx >= 0; iNdEx-- {
 			i -= len(m.Topics[iNdEx])
 			copy(dAtA[i:], m.Topics[iNdEx])
 			i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topics[iNdEx])))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x12
 		}
+	}
+	if m.RequestType != 0 {
+		i = encodeVarintPubsub(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *PubSubListPeersResponse) Marshal() (dAtA []byte, err error) {
+func (m *PubSubResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -790,12 +559,12 @@ func (m *PubSubListPeersResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *PubSubListPeersResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *PubSubListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -811,169 +580,41 @@ func (m *PubSubListPeersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 				i = encodeVarintPubsub(dAtA, i, uint64(size))
 			}
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x22
 		}
 	}
-	return len(dAtA) - i, nil
-}
-
-func (m *PubSubListPeersResponse_Peer) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PubSubListPeersResponse_Peer) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *PubSubListPeersResponse_Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.PeerID) > 0 {
-		i -= len(m.PeerID)
-		copy(dAtA[i:], m.PeerID)
-		i = encodeVarintPubsub(dAtA, i, uint64(len(m.PeerID)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Topic) > 0 {
-		i -= len(m.Topic)
-		copy(dAtA[i:], m.Topic)
-		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topic)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *PubSubPublishRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PubSubPublishRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *PubSubPublishRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Advertise {
-		i--
-		if m.Advertise {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Data) > 0 {
-		i -= len(m.Data)
-		copy(dAtA[i:], m.Data)
-		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Data)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Topic) > 0 {
-		i -= len(m.Topic)
-		copy(dAtA[i:], m.Topic)
-		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topic)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *PubSubSubscribeRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PubSubSubscribeRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *PubSubSubscribeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Discover {
-		i--
-		if m.Discover {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x10
-	}
-	if len(m.Topic) > 0 {
-		i -= len(m.Topic)
-		copy(dAtA[i:], m.Topic)
-		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topic)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *PubSubTopicsResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *PubSubTopicsResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *PubSubTopicsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Names) > 0 {
-		for iNdEx := len(m.Names) - 1; iNdEx >= 0; iNdEx-- {
-			i -= len(m.Names[iNdEx])
-			copy(dAtA[i:], m.Names[iNdEx])
-			i = encodeVarintPubsub(dAtA, i, uint64(len(m.Names[iNdEx])))
+	if len(m.Topics) > 0 {
+		for iNdEx := len(m.Topics) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Topics[iNdEx])
+			copy(dAtA[i:], m.Topics[iNdEx])
+			i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topics[iNdEx])))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x1a
 		}
+	}
+	if len(m.Message) > 0 {
+		for iNdEx := len(m.Message) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Message[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintPubsub(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if m.RequestType != 0 {
+		i = encodeVarintPubsub(dAtA, i, uint64(m.RequestType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *PubSubMessageResponse) Marshal() (dAtA []byte, err error) {
+func (m *PubSubMessage) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -983,12 +624,12 @@ func (m *PubSubMessageResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *PubSubMessageResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *PubSubMessage) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *PubSubMessageResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *PubSubMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1040,6 +681,43 @@ func (m *PubSubMessageResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *PubSubPeer) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PubSubPeer) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *PubSubPeer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.PeerID) > 0 {
+		i -= len(m.PeerID)
+		copy(dAtA[i:], m.PeerID)
+		i = encodeVarintPubsub(dAtA, i, uint64(len(m.PeerID)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Topic) > 0 {
+		i -= len(m.Topic)
+		copy(dAtA[i:], m.Topic)
+		i = encodeVarintPubsub(dAtA, i, uint64(len(m.Topic)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintPubsub(dAtA []byte, offset int, v uint64) int {
 	offset -= sovPubsub(v)
 	base := offset
@@ -1051,27 +729,49 @@ func encodeVarintPubsub(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *PubSubListPeersRequest) Size() (n int) {
+func (m *PubSubRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
+	if m.RequestType != 0 {
+		n += 1 + sovPubsub(uint64(m.RequestType))
+	}
 	if len(m.Topics) > 0 {
 		for _, s := range m.Topics {
 			l = len(s)
 			n += 1 + l + sovPubsub(uint64(l))
 		}
 	}
+	l = len(m.Data)
+	if l > 0 {
+		n += 1 + l + sovPubsub(uint64(l))
+	}
 	return n
 }
 
-func (m *PubSubListPeersResponse) Size() (n int) {
+func (m *PubSubResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
+	if m.RequestType != 0 {
+		n += 1 + sovPubsub(uint64(m.RequestType))
+	}
+	if len(m.Message) > 0 {
+		for _, e := range m.Message {
+			l = e.Size()
+			n += 1 + l + sovPubsub(uint64(l))
+		}
+	}
+	if len(m.Topics) > 0 {
+		for _, s := range m.Topics {
+			l = len(s)
+			n += 1 + l + sovPubsub(uint64(l))
+		}
+	}
 	if len(m.Peers) > 0 {
 		for _, e := range m.Peers {
 			l = e.Size()
@@ -1081,75 +781,7 @@ func (m *PubSubListPeersResponse) Size() (n int) {
 	return n
 }
 
-func (m *PubSubListPeersResponse_Peer) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Topic)
-	if l > 0 {
-		n += 1 + l + sovPubsub(uint64(l))
-	}
-	l = len(m.PeerID)
-	if l > 0 {
-		n += 1 + l + sovPubsub(uint64(l))
-	}
-	return n
-}
-
-func (m *PubSubPublishRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Topic)
-	if l > 0 {
-		n += 1 + l + sovPubsub(uint64(l))
-	}
-	l = len(m.Data)
-	if l > 0 {
-		n += 1 + l + sovPubsub(uint64(l))
-	}
-	if m.Advertise {
-		n += 2
-	}
-	return n
-}
-
-func (m *PubSubSubscribeRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Topic)
-	if l > 0 {
-		n += 1 + l + sovPubsub(uint64(l))
-	}
-	if m.Discover {
-		n += 2
-	}
-	return n
-}
-
-func (m *PubSubTopicsResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.Names) > 0 {
-		for _, s := range m.Names {
-			l = len(s)
-			n += 1 + l + sovPubsub(uint64(l))
-		}
-	}
-	return n
-}
-
-func (m *PubSubMessageResponse) Size() (n int) {
+func (m *PubSubMessage) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1184,13 +816,30 @@ func (m *PubSubMessageResponse) Size() (n int) {
 	return n
 }
 
+func (m *PubSubPeer) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Topic)
+	if l > 0 {
+		n += 1 + l + sovPubsub(uint64(l))
+	}
+	l = len(m.PeerID)
+	if l > 0 {
+		n += 1 + l + sovPubsub(uint64(l))
+	}
+	return n
+}
+
 func sovPubsub(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozPubsub(x uint64) (n int) {
 	return sovPubsub(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1213,13 +862,32 @@ func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubListPeersRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubListPeersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
+			}
+			m.RequestType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPubsub
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RequestType |= PSREQTYPE(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Topics", wireType)
 			}
@@ -1251,296 +919,7 @@ func (m *PubSubListPeersRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.Topics = append(m.Topics, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipPubsub(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *PubSubListPeersResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowPubsub
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubListPeersResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubListPeersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Peers", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPubsub
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Peers = append(m.Peers, &PubSubListPeersResponse_Peer{})
-			if err := m.Peers[len(m.Peers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipPubsub(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *PubSubListPeersResponse_Peer) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowPubsub
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Peer: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Peer: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Topic", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPubsub
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Topic = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PeerID", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPubsub
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.PeerID = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipPubsub(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *PubSubPublishRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowPubsub
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubPublishRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubPublishRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Topic", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPubsub
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Topic = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
 			}
@@ -1574,26 +953,6 @@ func (m *PubSubPublishRequest) Unmarshal(dAtA []byte) error {
 				m.Data = []byte{}
 			}
 			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Advertise", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowPubsub
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Advertise = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPubsub(dAtA[iNdEx:])
@@ -1618,7 +977,7 @@ func (m *PubSubPublishRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *PubSubSubscribeRequest) Unmarshal(dAtA []byte) error {
+func (m *PubSubResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1641,17 +1000,17 @@ func (m *PubSubSubscribeRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubSubscribeRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubSubscribeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Topic", wireType)
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RequestType", wireType)
 			}
-			var stringLen uint64
+			m.RequestType = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowPubsub
@@ -1661,29 +1020,16 @@ func (m *PubSubSubscribeRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.RequestType |= PSREQTYPE(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Topic = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Discover", wireType)
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
 			}
-			var v int
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowPubsub
@@ -1693,68 +1039,29 @@ func (m *PubSubSubscribeRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= int(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Discover = bool(v != 0)
-		default:
-			iNdEx = preIndex
-			skippy, err := skipPubsub(dAtA[iNdEx:])
-			if err != nil {
+			if msglen < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Message = append(m.Message, &PubSubMessage{})
+			if err := m.Message[len(m.Message)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthPubsub
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *PubSubTopicsResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowPubsub
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubTopicsResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubTopicsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
+			iNdEx = postIndex
+		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Names", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Topics", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1782,7 +1089,41 @@ func (m *PubSubTopicsResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Names = append(m.Names, string(dAtA[iNdEx:postIndex]))
+			m.Topics = append(m.Topics, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Peers", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPubsub
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Peers = append(m.Peers, &PubSubPeer{})
+			if err := m.Peers[len(m.Peers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1808,7 +1149,7 @@ func (m *PubSubTopicsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *PubSubMessageResponse) Unmarshal(dAtA []byte) error {
+func (m *PubSubMessage) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1831,10 +1172,10 @@ func (m *PubSubMessageResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: PubSubMessageResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: PubSubMessage: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: PubSubMessageResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: PubSubMessage: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2038,6 +1379,123 @@ func (m *PubSubMessageResponse) Unmarshal(dAtA []byte) error {
 			if m.Key == nil {
 				m.Key = []byte{}
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPubsub(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *PubSubPeer) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPubsub
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PubSubPeer: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PubSubPeer: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Topic", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPubsub
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Topic = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PeerID", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPubsub
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPubsub
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PeerID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

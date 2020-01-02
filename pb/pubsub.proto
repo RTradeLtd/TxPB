@@ -1,77 +1,52 @@
 syntax = "proto3";
 package pb;
-import "util.proto";
 
-// PubSubAPI provides a gRPC API for a libp2p pubsub instance
+// PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+// `ipfs pubsub` subset of commands.
 service PubSubAPI {
-    // PubSubGetTopics is used to return a list of all
-    // known topics the pubsub instance is subscribed to.
-    rpc PubSubGetTopics(Empty) returns (PubSubTopicsResponse) { };
-
-    // PubSubListPeers is used to return a list of peers subscribed
-    // to a given topic or topics.
-    rpc PubSubListPeers(PubSubListPeersRequest) returns (PubSubListPeersResponse) { };
-
-    // PubSubSubscribe is used to subscribe to a topic and receive messages
-    // Server will stream the messages received on the topic specified 
-    // during the initial subscription call, and send each message
-    // back to the client as it is received. 
-    rpc PubSubSubscribe(PubSubSubscribeRequest) returns (stream PubSubMessageResponse) { };
-
-    // PubSubPublish is used to send a stream of messages to a pubsub topic.
-    rpc PubSubPublish(stream PubSubPublishRequest) returns (Empty) { };   
+    // PubSub allows controlling libp2p pubsub topics and subscriptions using
+    // a bidirectional streaming API
+    rpc PubSub(stream PubSubRequest) returns (stream PubSubResponse) { };
 }
 
-// PubSubListPeersRequest is used to return a list of
-// peers that are subscribed to the given topic(s)
-message PubSubListPeersRequest {
-    // the topics for which we should
-    // list peers for
-    repeated string topics = 1;
+// PSREQTYPE indicates the particular PubSubAPI request being performed
+enum PSREQTYPE {
+    // PS_GET_TOPICS is used to return a list of subscribed pubsub topics
+    PS_GET_TOPICS = 0;
+    // PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to
+    PS_LIST_PEERS = 1;
+    // PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic
+    PS_SUBSCRIBE = 2;
+    // PS_PUBLISH is used to publisbh a message to a pubsub topic
+    PS_PUBLISH = 3;
 }
 
-// PubSubListPeersResponse is a response to a ListPeersRequest
-message PubSubListPeersResponse {
-    // peer is a single peer
-    message Peer {
-        // topic is the topic this peer is a part of
-        string topic = 1;
-        // lists the peerid for this peer
-        string peerID = 2;
-    }
-    repeated Peer peers = 1;
+message PubSubRequest {
+    // indicates the particular PubSubAPI request being performed
+    PSREQTYPE requestType = 1;
+    // topics to request peers from, or publish data to
+    // sent by: PS_LIST_PEERS, PS_SUBSCRIBE, PS_PUBLISH
+    repeated string topics = 2;
+    // data to sent to topics
+    // sent by: PS_PUBLISH
+    bytes data = 3;
 }
 
-// PubSubPublishRequest is a message used to publish data to a topic
-message PubSubPublishRequest {
-    // the topic we are publishing too
-    string topic = 1;
-    // the data we are publishing
-    bytes  data  = 2;
-    // whether or not we should engage in advertise operations
-    bool   advertise = 3;
+message PubSubResponse {
+    // indicates the particular PubSubAPI request being performed
+    PSREQTYPE requestType = 1;
+    // messages we have received from a topic
+    // sent by: PS_SUBSCRIBE
+    repeated PubSubMessage message = 2;
+    // topic names
+    // sent by: PS_GET_TOPICS
+    repeated string topics = 3;
+    // pubsub peers
+    // sent by: PS_LIST_PEERS
+    repeated PubSubPeer peers = 4;
 }
 
-// PubSubSubscribeRequest is used to initiate a subscription
-// to a given pubsub topic and stream received messages
-message PubSubSubscribeRequest {
-    // the topic we should subscribe to
-    string topic = 1;
-    // indicates whether the server should 
-    // perform service discover for peers on the same topic
-    bool discover = 2;
-}
-
-// PubSubTopics is a response that returns
-// the names of all known topics
-message PubSubTopicsResponse {
-    // the names of topics
-    repeated string names = 1;
-}
-
-// PubSubMessageResposne is a received pubsub message
-// sent as a response to a subscription rpc call
-message PubSubMessageResponse {
+message PubSubMessage {
     // who this message is from
     bytes from = 1;
     // the data of this message
@@ -85,4 +60,11 @@ message PubSubMessageResponse {
     // the key of the sender
     bytes key = 6;
 }
-  
+
+// represents an individual pubsub peer
+message PubSubPeer {
+    // the topic this peer belongs to
+    string topic = 1;
+    // the id of this peer
+    string peerID = 2;
+}

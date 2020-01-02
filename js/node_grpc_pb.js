@@ -5,48 +5,70 @@ var grpc = require('grpc');
 var node_pb = require('./node_pb.js');
 var util_pb = require('./util_pb.js');
 
-function serialize_pb_ConnectRequest(arg) {
-  if (!(arg instanceof node_pb.ConnectRequest)) {
-    throw new Error('Expected argument of type pb.ConnectRequest');
+function serialize_pb_BlockstoreRequest(arg) {
+  if (!(arg instanceof node_pb.BlockstoreRequest)) {
+    throw new Error('Expected argument of type pb.BlockstoreRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_ConnectRequest(buffer_arg) {
-  return node_pb.ConnectRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_BlockstoreRequest(buffer_arg) {
+  return node_pb.BlockstoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_DisableExtrasRequest(arg) {
-  if (!(arg instanceof node_pb.DisableExtrasRequest)) {
-    throw new Error('Expected argument of type pb.DisableExtrasRequest');
+function serialize_pb_BlockstoreResponse(arg) {
+  if (!(arg instanceof node_pb.BlockstoreResponse)) {
+    throw new Error('Expected argument of type pb.BlockstoreResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_DisableExtrasRequest(buffer_arg) {
-  return node_pb.DisableExtrasRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_BlockstoreResponse(buffer_arg) {
+  return node_pb.BlockstoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_DisconnectRequest(arg) {
-  if (!(arg instanceof node_pb.DisconnectRequest)) {
-    throw new Error('Expected argument of type pb.DisconnectRequest');
+function serialize_pb_ConnMgmtRequest(arg) {
+  if (!(arg instanceof node_pb.ConnMgmtRequest)) {
+    throw new Error('Expected argument of type pb.ConnMgmtRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_DisconnectRequest(buffer_arg) {
-  return node_pb.DisconnectRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_ConnMgmtRequest(buffer_arg) {
+  return node_pb.ConnMgmtRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_DisconnectResponse(arg) {
-  if (!(arg instanceof node_pb.DisconnectResponse)) {
-    throw new Error('Expected argument of type pb.DisconnectResponse');
+function serialize_pb_ConnMgmtResponse(arg) {
+  if (!(arg instanceof node_pb.ConnMgmtResponse)) {
+    throw new Error('Expected argument of type pb.ConnMgmtResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_DisconnectResponse(buffer_arg) {
-  return node_pb.DisconnectResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_ConnMgmtResponse(buffer_arg) {
+  return node_pb.ConnMgmtResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_DagRequest(arg) {
+  if (!(arg instanceof node_pb.DagRequest)) {
+    throw new Error('Expected argument of type pb.DagRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_DagRequest(buffer_arg) {
+  return node_pb.DagRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_DagResponse(arg) {
+  if (!(arg instanceof node_pb.DagResponse)) {
+    throw new Error('Expected argument of type pb.DagResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_DagResponse(buffer_arg) {
+  return node_pb.DagResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_Empty(arg) {
@@ -60,48 +82,37 @@ function deserialize_pb_Empty(buffer_arg) {
   return util_pb.Empty.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_EnableExtrasRequest(arg) {
-  if (!(arg instanceof node_pb.EnableExtrasRequest)) {
-    throw new Error('Expected argument of type pb.EnableExtrasRequest');
+function serialize_pb_ExtrasRequest(arg) {
+  if (!(arg instanceof node_pb.ExtrasRequest)) {
+    throw new Error('Expected argument of type pb.ExtrasRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_EnableExtrasRequest(buffer_arg) {
-  return node_pb.EnableExtrasRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_ExtrasRequest(buffer_arg) {
+  return node_pb.ExtrasRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_GetPeersResponse(arg) {
-  if (!(arg instanceof node_pb.GetPeersResponse)) {
-    throw new Error('Expected argument of type pb.GetPeersResponse');
+function serialize_pb_KeystoreRequest(arg) {
+  if (!(arg instanceof node_pb.KeystoreRequest)) {
+    throw new Error('Expected argument of type pb.KeystoreRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_GetPeersResponse(buffer_arg) {
-  return node_pb.GetPeersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_KeystoreRequest(buffer_arg) {
+  return node_pb.KeystoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_IsConnectedRequest(arg) {
-  if (!(arg instanceof node_pb.IsConnectedRequest)) {
-    throw new Error('Expected argument of type pb.IsConnectedRequest');
+function serialize_pb_KeystoreResponse(arg) {
+  if (!(arg instanceof node_pb.KeystoreResponse)) {
+    throw new Error('Expected argument of type pb.KeystoreResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_pb_IsConnectedRequest(buffer_arg) {
-  return node_pb.IsConnectedRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_pb_IsConnectedResponse(arg) {
-  if (!(arg instanceof node_pb.IsConnectedResponse)) {
-    throw new Error('Expected argument of type pb.IsConnectedResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_IsConnectedResponse(buffer_arg) {
-  return node_pb.IsConnectedResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_KeystoreResponse(buffer_arg) {
+  return node_pb.KeystoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_P2PRequest(arg) {
@@ -126,78 +137,52 @@ function deserialize_pb_P2PResponse(buffer_arg) {
   return node_pb.P2PResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_PersistRequest(arg) {
+  if (!(arg instanceof node_pb.PersistRequest)) {
+    throw new Error('Expected argument of type pb.PersistRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PersistRequest(buffer_arg) {
+  return node_pb.PersistRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_PersistResponse(arg) {
+  if (!(arg instanceof node_pb.PersistResponse)) {
+    throw new Error('Expected argument of type pb.PersistResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_PersistResponse(buffer_arg) {
+  return node_pb.PersistResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
-  // GetPeers returns a message containing a slice of current peers in our peerstore
-  getPeers: {
-    path: '/pb.NodeAPI/GetPeers',
+  // ConnMgmt provides control over libp2p connections
+  connMgmt: {
+    path: '/pb.NodeAPI/ConnMgmt',
     requestStream: false,
     responseStream: false,
-    requestType: util_pb.Empty,
-    responseType: node_pb.GetPeersResponse,
-    requestSerialize: serialize_pb_Empty,
-    requestDeserialize: deserialize_pb_Empty,
-    responseSerialize: serialize_pb_GetPeersResponse,
-    responseDeserialize: deserialize_pb_GetPeersResponse,
+    requestType: node_pb.ConnMgmtRequest,
+    responseType: node_pb.ConnMgmtResponse,
+    requestSerialize: serialize_pb_ConnMgmtRequest,
+    requestDeserialize: deserialize_pb_ConnMgmtRequest,
+    responseSerialize: serialize_pb_ConnMgmtResponse,
+    responseDeserialize: deserialize_pb_ConnMgmtResponse,
   },
-  // Connect is used to connect to remote libp2p peers
-  connect: {
-    path: '/pb.NodeAPI/Connect',
+  // Extras provide control over node extras capabilities
+  extras: {
+    path: '/pb.NodeAPI/Extras',
     requestStream: false,
     responseStream: false,
-    requestType: node_pb.ConnectRequest,
+    requestType: node_pb.ExtrasRequest,
     responseType: util_pb.Empty,
-    requestSerialize: serialize_pb_ConnectRequest,
-    requestDeserialize: deserialize_pb_ConnectRequest,
-    responseSerialize: serialize_pb_Empty,
-    responseDeserialize: deserialize_pb_Empty,
-  },
-  // Disconnect is used to disconnect remote libp2p peer connections
-  disconnect: {
-    path: '/pb.NodeAPI/Disconnect',
-    requestStream: false,
-    responseStream: false,
-    requestType: node_pb.DisconnectRequest,
-    responseType: node_pb.DisconnectResponse,
-    requestSerialize: serialize_pb_DisconnectRequest,
-    requestDeserialize: deserialize_pb_DisconnectRequest,
-    responseSerialize: serialize_pb_DisconnectResponse,
-    responseDeserialize: deserialize_pb_DisconnectResponse,
-  },
-  // IsConnected is used to check if we are connected with a given peer
-  isConnected: {
-    path: '/pb.NodeAPI/IsConnected',
-    requestStream: false,
-    responseStream: false,
-    requestType: node_pb.IsConnectedRequest,
-    responseType: node_pb.IsConnectedResponse,
-    requestSerialize: serialize_pb_IsConnectedRequest,
-    requestDeserialize: deserialize_pb_IsConnectedRequest,
-    responseSerialize: serialize_pb_IsConnectedResponse,
-    responseDeserialize: deserialize_pb_IsConnectedResponse,
-  },
-  // EnableExtras is used to enable a particular extras feature
-  enableExtras: {
-    path: '/pb.NodeAPI/EnableExtras',
-    requestStream: false,
-    responseStream: false,
-    requestType: node_pb.EnableExtrasRequest,
-    responseType: util_pb.Empty,
-    requestSerialize: serialize_pb_EnableExtrasRequest,
-    requestDeserialize: deserialize_pb_EnableExtrasRequest,
-    responseSerialize: serialize_pb_Empty,
-    responseDeserialize: deserialize_pb_Empty,
-  },
-  // DisableExtras is used to disable a particular extras feature
-  disableExtras: {
-    path: '/pb.NodeAPI/DisableExtras',
-    requestStream: false,
-    responseStream: false,
-    requestType: node_pb.DisableExtrasRequest,
-    responseType: util_pb.Empty,
-    requestSerialize: serialize_pb_DisableExtrasRequest,
-    requestDeserialize: deserialize_pb_DisableExtrasRequest,
+    requestSerialize: serialize_pb_ExtrasRequest,
+    requestDeserialize: deserialize_pb_ExtrasRequest,
     responseSerialize: serialize_pb_Empty,
     responseDeserialize: deserialize_pb_Empty,
   },
@@ -214,6 +199,54 @@ var NodeAPIService = exports.NodeAPIService = {
     requestDeserialize: deserialize_pb_P2PRequest,
     responseSerialize: serialize_pb_P2PResponse,
     responseDeserialize: deserialize_pb_P2PResponse,
+  },
+  // Blockstore allows low-level management of the underlying blockstore
+  blockstore: {
+    path: '/pb.NodeAPI/Blockstore',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.BlockstoreRequest,
+    responseType: node_pb.BlockstoreResponse,
+    requestSerialize: serialize_pb_BlockstoreRequest,
+    requestDeserialize: deserialize_pb_BlockstoreRequest,
+    responseSerialize: serialize_pb_BlockstoreResponse,
+    responseDeserialize: deserialize_pb_BlockstoreResponse,
+  },
+  // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+  dag: {
+    path: '/pb.NodeAPI/Dag',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.DagRequest,
+    responseType: node_pb.DagResponse,
+    requestSerialize: serialize_pb_DagRequest,
+    requestDeserialize: deserialize_pb_DagRequest,
+    responseSerialize: serialize_pb_DagResponse,
+    responseDeserialize: deserialize_pb_DagResponse,
+  },
+  // Keystore is a unidirectional RPC allowing management of ipfs keystores
+  keystore: {
+    path: '/pb.NodeAPI/Keystore',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.KeystoreRequest,
+    responseType: node_pb.KeystoreResponse,
+    requestSerialize: serialize_pb_KeystoreRequest,
+    requestDeserialize: deserialize_pb_KeystoreRequest,
+    responseSerialize: serialize_pb_KeystoreResponse,
+    responseDeserialize: deserialize_pb_KeystoreResponse,
+  },
+  // Persist is used to retrieve data from the network and make it available locally
+  persist: {
+    path: '/pb.NodeAPI/Persist',
+    requestStream: false,
+    responseStream: false,
+    requestType: node_pb.PersistRequest,
+    responseType: node_pb.PersistResponse,
+    requestSerialize: serialize_pb_PersistRequest,
+    requestDeserialize: deserialize_pb_PersistRequest,
+    responseSerialize: serialize_pb_PersistResponse,
+    responseDeserialize: deserialize_pb_PersistResponse,
   },
 };
 

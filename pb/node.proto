@@ -4,22 +4,22 @@ import "util.proto";
 
 // NodeAPI provide an API to control the underlying custom ipfs node
 service NodeAPI {
-    // GetPeers returns a message containing a slice of current peers in our peerstore
-    rpc GetPeers(Empty) returns (GetPeersResponse) { };
-    // Connect is used to connect to remote libp2p peers
-    rpc Connect(ConnectRequest) returns (Empty) { };
-    // Disconnect is used to disconnect remote libp2p peer connections
-    rpc Disconnect(DisconnectRequest) returns (DisconnectResponse) { };
-    // IsConnected is used to check if we are connected with a given peer
-    rpc IsConnected(IsConnectedRequest) returns (IsConnectedResponse) { };
-    // EnableExtras is used to enable a particular extras feature
-    rpc EnableExtras(EnableExtrasRequest) returns (Empty) { };
-    // DisableExtras is used to disable a particular extras feature
-    rpc DisableExtras(DisableExtrasRequest) returns (Empty) { };
+    // ConnMgmt provides control over libp2p connections
+    rpc ConnMgmt(ConnMgmtRequest) returns (ConnMgmtResponse) { };
+    // Extras provide control over node extras capabilities
+    rpc Extras(ExtrasRequest) returns (Empty) { };
     // P2P allows control of generalized p2p streams for tcp/udp based protocol.
     // By using this RPC, we can tunnel traffic similar to ssh tunneling
     // except using libp2p as the transport layer, and and tcp/udp port.
     rpc P2P(P2PRequest) returns (P2PResponse) { };
+    // Blockstore allows low-level management of the underlying blockstore
+    rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
+    // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+    rpc Dag(DagRequest) returns (DagResponse) { };
+    // Keystore is a unidirectional RPC allowing management of ipfs keystores
+    rpc Keystore(KeystoreRequest) returns (KeystoreResponse) { };
+    // Persist is used to retrieve data from the network and make it available locally
+    rpc Persist(PersistRequest) returns (PersistResponse) { };
 }
 
 // P2PREQTYPE denotes the particular type of request being used in the p2p rpc
@@ -70,7 +70,6 @@ message P2PResponse {
     repeated P2PLsInfo streamInfos = 4;
 }
 
-
 // P2PLsInfo contains information about a single p2p stream
 message P2PLsInfo {
     string protocolName = 1;
@@ -86,41 +85,53 @@ message GetPeersResponse {
     repeated string peerIDs = 1;
 }
 
-// ConnectRequest is used to connect to libp2p peers
-message ConnectRequest {
-    // a slice of all multiaddrs we want to connect to
-    repeated string multiAddrs = 1;
+// CONNMGMTREQTYPE indicates the particular ConnMgmt request being performed
+enum CONNMGMTREQTYPE {
+    // CM_CONNECT is used to connect to a libp2p peer
+    CM_CONNECT = 0;
+    // CM_DISCONNECT is used to disconnect from a libp2p peer
+    CM_DISCONNECT = 1;
+    // CM_STATUS is used to return status information about libp2p peer connections
+    // useful for determining whether or not we are connected to someone
+    CM_STATUS = 2;
+    //CM_GET_PEERS is used to return all known peers
+    CM_GET_PEERS = 3;
 }
 
-// IsConnectedRequest is used check whether or not we are currently peered with these peers
-message IsConnectedRequest {
-    // a slice of the peer IDs to examine
-    repeated string peerIDs = 1;
+message ConnMgmtRequest {
+    // indicates the particular connection management request being performed
+    CONNMGMTREQTYPE requestType = 1;
+    // a list of multiaddrs
+    // sent by: CM_CONNECT
+    repeated string multiAddrs = 2;
+    // a list of peer IDs
+    // sent by: CM_DISCONNECT, CM_STATUS, CM_GET_PEERS
+    repeated string peerIDs = 3;
 }
 
-// IsConnectedResponse is a response to an IsConnectedRequest request
-message IsConnectedResponse {
-    // a map of the peer ID and a boolean indicating if we are connected with them
-    map<string, bool> connected = 1;
-}
-
-// DisconnectRequest is used to disconnect a connection to a libp2p peer
-message DisconnectRequest {
-    // a slice of the peer IDs to disconnect from
-    repeated string peerIDs = 1;
-}
-
-// DisconnectResponse is a response to a disconnect request
-message DisconnectResponse {
+message ConnMgmtResponse {
+    // indicates the particular connection management request being performed
+    CONNMGMTREQTYPE requestType = 1;
+    map<string, bool> connected = 2;
     // a map of the peer id, and a custom message indicating success, or why there was a failure
-    map<string, StatusMessage> status = 1;
-    // StatusMessage is used to contain the status information about a particular disconnection attempt
-    message StatusMessage {
-        // indicate whether or not we actually disconnected
-        bool disconnected = 1;
-        // if disconnected is false, the reason why it is false
-        string reason = 2;
-    }
+    map<string, ConnMgmtStatus> status = 3;
+    repeated string peerIDs = 4;
+}
+
+// Contains status information about a particular disconnect attempt
+message ConnMgmtStatus {
+    // indicate whether or not we actually disconnected
+    bool disconnected = 1;
+    // if disconnected is false, the reason why it is false
+    string reason = 2;
+}
+
+// EXTRASREQTYPE indicates the particular Extras request being performed
+enum EXTRASREQTYPE {
+    // EX_ENABLE is used to enable a particular node extras feature
+    EX_ENABLE = 0;
+    // EX_DISABLE is used to disable a particular node extras feature
+    EX_DISABLE = 1;
 }
 
 // EXTRASTYPE denotes a particular extras type
@@ -135,14 +146,200 @@ enum EXTRASTYPE {
     MDNS = 3;
 }
 
-// EnableExtrasRequest is used to enable a particular extras feature
-message EnableExtrasRequest {
-    // extrasFeature denotes the particular extras functionality to enable
-    EXTRASTYPE extrasFeature = 1;
+message ExtrasRequest {
+    // indicates the request being performed
+    EXTRASREQTYPE requestType = 1;
+    // indicates the extras feature this request applies to
+    EXTRASTYPE extrasFeature = 2;
 }
 
-// DisableExtrasRequest is used to disable a particular extras feature
-message DisableExtrasRequest {
-    // extrasFeature denotes the particular extras functionality to disable
-    EXTRASTYPE extrasFeature = 1;
+
+// BSREQTYPE is a particular blockstore request type
+enum BSREQTYPE {
+    // BS_DELETE is used to delete a block from the store
+    BS_DELETE = 0;
+    // BS_PUT is used to put a single block in the store
+    BS_PUT = 1;
+    // BS_PUT_MANY is used to put many blocks in the store
+    BS_PUT_MANY = 2;
+    // BS_GET is used to get a block from the store
+    BS_GET = 3;
+    // BS_GET_MANY is used to get many blocks from the store
+    BS_GET_MANY = 4;
+}
+
+// BSREQOPTS are options for blockstore requests
+enum BSREQOPTS {
+    // DEFAULT indicates to use the default settings
+    DEFAULT = 0;
+    // BS_FORCE indicates to force the request regardless of any possible issues
+    BS_FORCE = 1;
+}
+
+// BlockstoreRequest is a message used to control blockstores
+message BlockstoreRequest {
+    //  indicates the particular request type being made
+    BSREQTYPE requestType = 1;
+    // optional request settings
+    repeated BSREQOPTS reqOpts = 2;
+    // cids of blocks
+    // sent by: BS_DELETE, BS_GET, BS_GET_MANY
+    repeated string cids = 3;
+    // the data we are putting
+    // sent by: BS_PUT, BS_PUT_MANY
+    repeated bytes data = 4;
+    // the cid version to use when constructing blocks, default is v1
+    // sent by: BS_PUT, BS_PUT_MANY
+    string cidVersion = 5;
+    // the hash function to use when constructing blocks, default is sha2-256
+    // sent by: BS_PUT, BS_PUT_MANY
+    string hashFunc = 7;
+}
+
+// BlockstoreResponse is a response to a BlockstoreqRequest
+message BlockstoreResponse {
+    // indicates the particular request type being made
+    BSREQTYPE requestType = 1;
+    // a copy of blocks from the blockstore
+    // sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY
+    // in the case of BS_PUT, and BS_PUT_MANY requests
+    // the data field will be empty as this is only populated
+    // by get requests
+    repeated Block blocks = 2;
+}
+
+message Block {
+    // cid is the identifier of the block
+    string cid = 1;
+    // data is the actual contents of the block
+    bytes data = 2;
+}
+
+// DAGREQTYPE indicates the particular DagAPI request being performed
+enum DAGREQTYPE {
+    // DAG_PUT is used to add new IPLD objects
+    DAG_PUT = 0;
+    // DAG_GET is used to retrieve IPLD object data
+    DAG_GET = 1;
+    // DAG_NEW_NODE is used to create a new IPLD node object
+    DAG_NEW_NODE = 2;
+    // DAG_ADD_LINKS is used to add links to an IPLD node object
+    DAG_ADD_LINKS = 3;
+    // DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object
+    DAG_GET_LINKS = 4;
+}
+
+// Used to submit a request to Dag or DagStream RPCs
+message DagRequest {
+    // indicates the request being performed
+    // sent by: all request types
+    DAGREQTYPE requestType = 1;
+    // data that we will be storing
+    // sent by: DAG_PUT, DAG_NEW_NODE
+    bytes data = 2;
+    // the object encoding type (raw, cbor, protobuf, etc...)
+    // sent by: DAG_PUT
+    string objectEncoding = 3;
+    // the serialization format (raw, cbor, protobuf, etc...)
+    // sent by: DAG_PUT
+    string serializationFormat = 4;
+    // the hash function to to use (sha2-256, sha3-512, etc...)
+    // sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS
+    string hashFunc = 5;
+    // the cid version to use (0, 1)
+    // sent by: DAG_PUT, DAG_NEW_NODE
+    int64 cidVersion = 6;
+    // the hash of the object we are processing
+    // sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS
+    string hash = 7;
+    // indicates links and their names. key = name, value = link hash
+    // sent by: DAG_NEW_NODE, DAG_ADD_LINKS
+    map<string, string> links = 8;
+}
+
+// Used in response to a Dag or DagStream RPC
+message DagResponse {
+    // indicates the request being performed
+    // sent by: all request types
+    DAGREQTYPE requestType = 1;
+    // returns the hashes of newly generated IPLD objects
+    // sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS
+    repeated string hashes = 2;
+    // the actual data contained by the IPLD object
+    // sent by: DAG_GET
+    bytes rawData = 3;
+    // the links contained within an IPLD node object
+    // sent by: DAG_GET_LINKS
+    repeated IPLDLink links = 4;
+}
+
+// An IPFS MerkleDAG Link
+message IPLDLink {
+    // multihash of the target object
+    bytes hash = 1;
+    // utf string name. should be unique per object
+    string name = 2;
+    // cumulative size of target object
+    uint64 size = 3;
+}
+  
+// An IPFS MerkleDAG Node
+message IPLDNode {
+    // refs to other objects
+    repeated IPLDLink links = 2;
+    // opaque user data
+    bytes data = 1;
+}
+
+// KSREQTYPE indicates the particular KeystoreAPI request being performed
+enum KSREQTYPE {
+    // KS_HAS is used to check if the key exists in our keystore
+    KS_HAS = 0;
+    // KS_GET is used to retrieve private key bytes from our keystore
+    KS_GET = 1;
+    // KS_PUT is used to store private key bytes in our keystore
+    KS_PUT = 2;
+    // KS_DELETE is used to delete private keys from our keystore
+    KS_DELETE = 3;
+    // KS_LIST is used to list all keys in our keystore by their name
+    KS_LIST = 4;
+}
+
+// Used to submit a request to Keystore RPC
+message KeystoreRequest {
+    // indicates the request type being performed
+    KSREQTYPE requestType = 1;
+    // name of the key the request is for
+    // sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE
+    string name = 2;
+    // the actual private key bytes
+    // sent by: KS_PUT
+    bytes privateKey = 3;
+}
+
+// Used in response to a Keystore RPC
+message KeystoreResponse {
+    // indicates the request type being performed
+    KSREQTYPE requestType = 1;
+    // the private key bytes
+    // sent by: KS_GET
+    bytes privateKey = 2;
+    // contains all known key names
+    // sent by: KS_LIST
+    repeated string keyNames = 3;
+    // indicates if we have the key in our keystore
+    // sent by: KS_HAS
+    bool has = 4;
+}
+
+message PersistRequest {
+    // cids to persist locally
+    repeated string cids = 1;
+}
+
+message PersistResponse {
+    // key = cid, value = whether or not it was persisted
+    map<string, bool> status = 1;
+    // key = cid, value = error if not persisted
+    map<string, string> errors = 2;
 }

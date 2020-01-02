@@ -30,196 +30,68 @@ public final class NodeAPIGrpc {
   public static final String SERVICE_NAME = "pb.NodeAPI";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Node.GetPeersResponse> getGetPeersMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest,
+      pb.Node.ConnMgmtResponse> getConnMgmtMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetPeers",
-      requestType = pb.Util.Empty.class,
-      responseType = pb.Node.GetPeersResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "ConnMgmt",
+      requestType = pb.Node.ConnMgmtRequest.class,
+      responseType = pb.Node.ConnMgmtResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Util.Empty,
-      pb.Node.GetPeersResponse> getGetPeersMethod() {
-    io.grpc.MethodDescriptor<pb.Util.Empty, pb.Node.GetPeersResponse> getGetPeersMethod;
-    if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest,
+      pb.Node.ConnMgmtResponse> getConnMgmtMethod() {
+    io.grpc.MethodDescriptor<pb.Node.ConnMgmtRequest, pb.Node.ConnMgmtResponse> getConnMgmtMethod;
+    if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
-        if ((getGetPeersMethod = NodeAPIGrpc.getGetPeersMethod) == null) {
-          NodeAPIGrpc.getGetPeersMethod = getGetPeersMethod = 
-              io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Node.GetPeersResponse>newBuilder()
+        if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
+          NodeAPIGrpc.getConnMgmtMethod = getConnMgmtMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.ConnMgmtRequest, pb.Node.ConnMgmtResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "GetPeers"))
+                  "pb.NodeAPI", "ConnMgmt"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Util.Empty.getDefaultInstance()))
+                  pb.Node.ConnMgmtRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.GetPeersResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("GetPeers"))
+                  pb.Node.ConnMgmtResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("ConnMgmt"))
                   .build();
           }
         }
      }
-     return getGetPeersMethod;
+     return getConnMgmtMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<pb.Node.ConnectRequest,
-      pb.Util.Empty> getConnectMethod;
+  private static volatile io.grpc.MethodDescriptor<pb.Node.ExtrasRequest,
+      pb.Util.Empty> getExtrasMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Connect",
-      requestType = pb.Node.ConnectRequest.class,
+      fullMethodName = SERVICE_NAME + '/' + "Extras",
+      requestType = pb.Node.ExtrasRequest.class,
       responseType = pb.Util.Empty.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.ConnectRequest,
-      pb.Util.Empty> getConnectMethod() {
-    io.grpc.MethodDescriptor<pb.Node.ConnectRequest, pb.Util.Empty> getConnectMethod;
-    if ((getConnectMethod = NodeAPIGrpc.getConnectMethod) == null) {
+  public static io.grpc.MethodDescriptor<pb.Node.ExtrasRequest,
+      pb.Util.Empty> getExtrasMethod() {
+    io.grpc.MethodDescriptor<pb.Node.ExtrasRequest, pb.Util.Empty> getExtrasMethod;
+    if ((getExtrasMethod = NodeAPIGrpc.getExtrasMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
-        if ((getConnectMethod = NodeAPIGrpc.getConnectMethod) == null) {
-          NodeAPIGrpc.getConnectMethod = getConnectMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.ConnectRequest, pb.Util.Empty>newBuilder()
+        if ((getExtrasMethod = NodeAPIGrpc.getExtrasMethod) == null) {
+          NodeAPIGrpc.getExtrasMethod = getExtrasMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.ExtrasRequest, pb.Util.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Connect"))
+                  "pb.NodeAPI", "Extras"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.ConnectRequest.getDefaultInstance()))
+                  pb.Node.ExtrasRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Connect"))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Extras"))
                   .build();
           }
         }
      }
-     return getConnectMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Node.DisconnectRequest,
-      pb.Node.DisconnectResponse> getDisconnectMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "Disconnect",
-      requestType = pb.Node.DisconnectRequest.class,
-      responseType = pb.Node.DisconnectResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.DisconnectRequest,
-      pb.Node.DisconnectResponse> getDisconnectMethod() {
-    io.grpc.MethodDescriptor<pb.Node.DisconnectRequest, pb.Node.DisconnectResponse> getDisconnectMethod;
-    if ((getDisconnectMethod = NodeAPIGrpc.getDisconnectMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getDisconnectMethod = NodeAPIGrpc.getDisconnectMethod) == null) {
-          NodeAPIGrpc.getDisconnectMethod = getDisconnectMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.DisconnectRequest, pb.Node.DisconnectResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Disconnect"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.DisconnectRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.DisconnectResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Disconnect"))
-                  .build();
-          }
-        }
-     }
-     return getDisconnectMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Node.IsConnectedRequest,
-      pb.Node.IsConnectedResponse> getIsConnectedMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "IsConnected",
-      requestType = pb.Node.IsConnectedRequest.class,
-      responseType = pb.Node.IsConnectedResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.IsConnectedRequest,
-      pb.Node.IsConnectedResponse> getIsConnectedMethod() {
-    io.grpc.MethodDescriptor<pb.Node.IsConnectedRequest, pb.Node.IsConnectedResponse> getIsConnectedMethod;
-    if ((getIsConnectedMethod = NodeAPIGrpc.getIsConnectedMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getIsConnectedMethod = NodeAPIGrpc.getIsConnectedMethod) == null) {
-          NodeAPIGrpc.getIsConnectedMethod = getIsConnectedMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.IsConnectedRequest, pb.Node.IsConnectedResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "IsConnected"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.IsConnectedRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.IsConnectedResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("IsConnected"))
-                  .build();
-          }
-        }
-     }
-     return getIsConnectedMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest,
-      pb.Util.Empty> getEnableExtrasMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "EnableExtras",
-      requestType = pb.Node.EnableExtrasRequest.class,
-      responseType = pb.Util.Empty.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest,
-      pb.Util.Empty> getEnableExtrasMethod() {
-    io.grpc.MethodDescriptor<pb.Node.EnableExtrasRequest, pb.Util.Empty> getEnableExtrasMethod;
-    if ((getEnableExtrasMethod = NodeAPIGrpc.getEnableExtrasMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getEnableExtrasMethod = NodeAPIGrpc.getEnableExtrasMethod) == null) {
-          NodeAPIGrpc.getEnableExtrasMethod = getEnableExtrasMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.EnableExtrasRequest, pb.Util.Empty>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "EnableExtras"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.EnableExtrasRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("EnableExtras"))
-                  .build();
-          }
-        }
-     }
-     return getEnableExtrasMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest,
-      pb.Util.Empty> getDisableExtrasMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "DisableExtras",
-      requestType = pb.Node.DisableExtrasRequest.class,
-      responseType = pb.Util.Empty.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest,
-      pb.Util.Empty> getDisableExtrasMethod() {
-    io.grpc.MethodDescriptor<pb.Node.DisableExtrasRequest, pb.Util.Empty> getDisableExtrasMethod;
-    if ((getDisableExtrasMethod = NodeAPIGrpc.getDisableExtrasMethod) == null) {
-      synchronized (NodeAPIGrpc.class) {
-        if ((getDisableExtrasMethod = NodeAPIGrpc.getDisableExtrasMethod) == null) {
-          NodeAPIGrpc.getDisableExtrasMethod = getDisableExtrasMethod = 
-              io.grpc.MethodDescriptor.<pb.Node.DisableExtrasRequest, pb.Util.Empty>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "DisableExtras"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Node.DisableExtrasRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("DisableExtras"))
-                  .build();
-          }
-        }
-     }
-     return getDisableExtrasMethod;
+     return getExtrasMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.P2PRequest,
@@ -254,6 +126,134 @@ public final class NodeAPIGrpc {
      return getP2PMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Blockstore",
+      requestType = pb.Node.BlockstoreRequest.class,
+      responseType = pb.Node.BlockstoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreMethod() {
+    io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse> getBlockstoreMethod;
+    if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
+          NodeAPIGrpc.getBlockstoreMethod = getBlockstoreMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Blockstore"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Blockstore"))
+                  .build();
+          }
+        }
+     }
+     return getBlockstoreMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pb.Node.DagRequest,
+      pb.Node.DagResponse> getDagMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Dag",
+      requestType = pb.Node.DagRequest.class,
+      responseType = pb.Node.DagResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.DagRequest,
+      pb.Node.DagResponse> getDagMethod() {
+    io.grpc.MethodDescriptor<pb.Node.DagRequest, pb.Node.DagResponse> getDagMethod;
+    if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
+          NodeAPIGrpc.getDagMethod = getDagMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.DagRequest, pb.Node.DagResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Dag"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DagRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.DagResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Dag"))
+                  .build();
+          }
+        }
+     }
+     return getDagMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pb.Node.KeystoreRequest,
+      pb.Node.KeystoreResponse> getKeystoreMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Keystore",
+      requestType = pb.Node.KeystoreRequest.class,
+      responseType = pb.Node.KeystoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.KeystoreRequest,
+      pb.Node.KeystoreResponse> getKeystoreMethod() {
+    io.grpc.MethodDescriptor<pb.Node.KeystoreRequest, pb.Node.KeystoreResponse> getKeystoreMethod;
+    if ((getKeystoreMethod = NodeAPIGrpc.getKeystoreMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getKeystoreMethod = NodeAPIGrpc.getKeystoreMethod) == null) {
+          NodeAPIGrpc.getKeystoreMethod = getKeystoreMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.KeystoreRequest, pb.Node.KeystoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Keystore"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.KeystoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.KeystoreResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Keystore"))
+                  .build();
+          }
+        }
+     }
+     return getKeystoreMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<pb.Node.PersistRequest,
+      pb.Node.PersistResponse> getPersistMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Persist",
+      requestType = pb.Node.PersistRequest.class,
+      responseType = pb.Node.PersistResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<pb.Node.PersistRequest,
+      pb.Node.PersistResponse> getPersistMethod() {
+    io.grpc.MethodDescriptor<pb.Node.PersistRequest, pb.Node.PersistResponse> getPersistMethod;
+    if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
+          NodeAPIGrpc.getPersistMethod = getPersistMethod = 
+              io.grpc.MethodDescriptor.<pb.Node.PersistRequest, pb.Node.PersistResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "pb.NodeAPI", "Persist"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PersistRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.PersistResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Persist"))
+                  .build();
+          }
+        }
+     }
+     return getPersistMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -286,62 +286,22 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
+     * ConnMgmt provides control over libp2p connections
      * </pre>
      */
-    public void getPeers(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetPeersMethod(), responseObserver);
+    public void connMgmt(pb.Node.ConnMgmtRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getConnMgmtMethod(), responseObserver);
     }
 
     /**
      * <pre>
-     * Connect is used to connect to remote libp2p peers
+     * Extras provide control over node extras capabilities
      * </pre>
      */
-    public void connect(pb.Node.ConnectRequest request,
+    public void extras(pb.Node.ExtrasRequest request,
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      asyncUnimplementedUnaryCall(getConnectMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Disconnect is used to disconnect remote libp2p peer connections
-     * </pre>
-     */
-    public void disconnect(pb.Node.DisconnectRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getDisconnectMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * IsConnected is used to check if we are connected with a given peer
-     * </pre>
-     */
-    public void isConnected(pb.Node.IsConnectedRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.IsConnectedResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getIsConnectedMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * EnableExtras is used to enable a particular extras feature
-     * </pre>
-     */
-    public void enableExtras(pb.Node.EnableExtrasRequest request,
-        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      asyncUnimplementedUnaryCall(getEnableExtrasMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * DisableExtras is used to disable a particular extras feature
-     * </pre>
-     */
-    public void disableExtras(pb.Node.DisableExtrasRequest request,
-        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      asyncUnimplementedUnaryCall(getDisableExtrasMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getExtrasMethod(), responseObserver);
     }
 
     /**
@@ -356,50 +316,62 @@ public final class NodeAPIGrpc {
       asyncUnimplementedUnaryCall(getP2PMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Blockstore allows low-level management of the underlying blockstore
+     * </pre>
+     */
+    public void blockstore(pb.Node.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getBlockstoreMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public void dag(pb.Node.DagRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getDagMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
+     */
+    public void keystore(pb.Node.KeystoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.KeystoreResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getKeystoreMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public void persist(pb.Node.PersistRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.PersistResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getPersistMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getGetPeersMethod(),
+            getConnMgmtMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Util.Empty,
-                pb.Node.GetPeersResponse>(
-                  this, METHODID_GET_PEERS)))
+                pb.Node.ConnMgmtRequest,
+                pb.Node.ConnMgmtResponse>(
+                  this, METHODID_CONN_MGMT)))
           .addMethod(
-            getConnectMethod(),
+            getExtrasMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                pb.Node.ConnectRequest,
+                pb.Node.ExtrasRequest,
                 pb.Util.Empty>(
-                  this, METHODID_CONNECT)))
-          .addMethod(
-            getDisconnectMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Node.DisconnectRequest,
-                pb.Node.DisconnectResponse>(
-                  this, METHODID_DISCONNECT)))
-          .addMethod(
-            getIsConnectedMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Node.IsConnectedRequest,
-                pb.Node.IsConnectedResponse>(
-                  this, METHODID_IS_CONNECTED)))
-          .addMethod(
-            getEnableExtrasMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Node.EnableExtrasRequest,
-                pb.Util.Empty>(
-                  this, METHODID_ENABLE_EXTRAS)))
-          .addMethod(
-            getDisableExtrasMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Node.DisableExtrasRequest,
-                pb.Util.Empty>(
-                  this, METHODID_DISABLE_EXTRAS)))
+                  this, METHODID_EXTRAS)))
           .addMethod(
             getP2PMethod(),
             asyncUnaryCall(
@@ -407,6 +379,34 @@ public final class NodeAPIGrpc {
                 pb.Node.P2PRequest,
                 pb.Node.P2PResponse>(
                   this, METHODID_P2P)))
+          .addMethod(
+            getBlockstoreMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.BlockstoreRequest,
+                pb.Node.BlockstoreResponse>(
+                  this, METHODID_BLOCKSTORE)))
+          .addMethod(
+            getDagMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.DagRequest,
+                pb.Node.DagResponse>(
+                  this, METHODID_DAG)))
+          .addMethod(
+            getKeystoreMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.KeystoreRequest,
+                pb.Node.KeystoreResponse>(
+                  this, METHODID_KEYSTORE)))
+          .addMethod(
+            getPersistMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                pb.Node.PersistRequest,
+                pb.Node.PersistResponse>(
+                  this, METHODID_PERSIST)))
           .build();
     }
   }
@@ -434,68 +434,24 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
+     * ConnMgmt provides control over libp2p connections
      * </pre>
      */
-    public void getPeers(pb.Util.Empty request,
-        io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse> responseObserver) {
+    public void connMgmt(pb.Node.ConnMgmtRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getGetPeersMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getConnMgmtMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * Connect is used to connect to remote libp2p peers
+     * Extras provide control over node extras capabilities
      * </pre>
      */
-    public void connect(pb.Node.ConnectRequest request,
+    public void extras(pb.Node.ExtrasRequest request,
         io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getConnectMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Disconnect is used to disconnect remote libp2p peer connections
-     * </pre>
-     */
-    public void disconnect(pb.Node.DisconnectRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getDisconnectMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * IsConnected is used to check if we are connected with a given peer
-     * </pre>
-     */
-    public void isConnected(pb.Node.IsConnectedRequest request,
-        io.grpc.stub.StreamObserver<pb.Node.IsConnectedResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getIsConnectedMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * EnableExtras is used to enable a particular extras feature
-     * </pre>
-     */
-    public void enableExtras(pb.Node.EnableExtrasRequest request,
-        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getEnableExtrasMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * DisableExtras is used to disable a particular extras feature
-     * </pre>
-     */
-    public void disableExtras(pb.Node.DisableExtrasRequest request,
-        io.grpc.stub.StreamObserver<pb.Util.Empty> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getExtrasMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -509,6 +465,50 @@ public final class NodeAPIGrpc {
         io.grpc.stub.StreamObserver<pb.Node.P2PResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getP2PMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Blockstore allows low-level management of the underlying blockstore
+     * </pre>
+     */
+    public void blockstore(pb.Node.BlockstoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public void dag(pb.Node.DagRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.DagResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDagMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
+     */
+    public void keystore(pb.Node.KeystoreRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.KeystoreResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getKeystoreMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public void persist(pb.Node.PersistRequest request,
+        io.grpc.stub.StreamObserver<pb.Node.PersistResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getPersistMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -535,62 +535,22 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
+     * ConnMgmt provides control over libp2p connections
      * </pre>
      */
-    public pb.Node.GetPeersResponse getPeers(pb.Util.Empty request) {
+    public pb.Node.ConnMgmtResponse connMgmt(pb.Node.ConnMgmtRequest request) {
       return blockingUnaryCall(
-          getChannel(), getGetPeersMethod(), getCallOptions(), request);
+          getChannel(), getConnMgmtMethod(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * Connect is used to connect to remote libp2p peers
+     * Extras provide control over node extras capabilities
      * </pre>
      */
-    public pb.Util.Empty connect(pb.Node.ConnectRequest request) {
+    public pb.Util.Empty extras(pb.Node.ExtrasRequest request) {
       return blockingUnaryCall(
-          getChannel(), getConnectMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * Disconnect is used to disconnect remote libp2p peer connections
-     * </pre>
-     */
-    public pb.Node.DisconnectResponse disconnect(pb.Node.DisconnectRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getDisconnectMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * IsConnected is used to check if we are connected with a given peer
-     * </pre>
-     */
-    public pb.Node.IsConnectedResponse isConnected(pb.Node.IsConnectedRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getIsConnectedMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * EnableExtras is used to enable a particular extras feature
-     * </pre>
-     */
-    public pb.Util.Empty enableExtras(pb.Node.EnableExtrasRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getEnableExtrasMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * DisableExtras is used to disable a particular extras feature
-     * </pre>
-     */
-    public pb.Util.Empty disableExtras(pb.Node.DisableExtrasRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getDisableExtrasMethod(), getCallOptions(), request);
+          getChannel(), getExtrasMethod(), getCallOptions(), request);
     }
 
     /**
@@ -603,6 +563,46 @@ public final class NodeAPIGrpc {
     public pb.Node.P2PResponse p2P(pb.Node.P2PRequest request) {
       return blockingUnaryCall(
           getChannel(), getP2PMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Blockstore allows low-level management of the underlying blockstore
+     * </pre>
+     */
+    public pb.Node.BlockstoreResponse blockstore(pb.Node.BlockstoreRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getBlockstoreMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public pb.Node.DagResponse dag(pb.Node.DagRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDagMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
+     */
+    public pb.Node.KeystoreResponse keystore(pb.Node.KeystoreRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getKeystoreMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public pb.Node.PersistResponse persist(pb.Node.PersistRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getPersistMethod(), getCallOptions(), request);
     }
   }
 
@@ -629,68 +629,24 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     * GetPeers returns a message containing a slice of current peers in our peerstore
+     * ConnMgmt provides control over libp2p connections
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.GetPeersResponse> getPeers(
-        pb.Util.Empty request) {
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.ConnMgmtResponse> connMgmt(
+        pb.Node.ConnMgmtRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getGetPeersMethod(), getCallOptions()), request);
+          getChannel().newCall(getConnMgmtMethod(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * Connect is used to connect to remote libp2p peers
+     * Extras provide control over node extras capabilities
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> connect(
-        pb.Node.ConnectRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> extras(
+        pb.Node.ExtrasRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getConnectMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * Disconnect is used to disconnect remote libp2p peer connections
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.DisconnectResponse> disconnect(
-        pb.Node.DisconnectRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getDisconnectMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * IsConnected is used to check if we are connected with a given peer
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Node.IsConnectedResponse> isConnected(
-        pb.Node.IsConnectedRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getIsConnectedMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * EnableExtras is used to enable a particular extras feature
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> enableExtras(
-        pb.Node.EnableExtrasRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getEnableExtrasMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * DisableExtras is used to disable a particular extras feature
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Util.Empty> disableExtras(
-        pb.Node.DisableExtrasRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getDisableExtrasMethod(), getCallOptions()), request);
+          getChannel().newCall(getExtrasMethod(), getCallOptions()), request);
     }
 
     /**
@@ -705,15 +661,59 @@ public final class NodeAPIGrpc {
       return futureUnaryCall(
           getChannel().newCall(getP2PMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Blockstore allows low-level management of the underlying blockstore
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.BlockstoreResponse> blockstore(
+        pb.Node.BlockstoreRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.DagResponse> dag(
+        pb.Node.DagRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDagMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.KeystoreResponse> keystore(
+        pb.Node.KeystoreRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getKeystoreMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Persist is used to retrieve data from the network and make it available locally
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<pb.Node.PersistResponse> persist(
+        pb.Node.PersistRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getPersistMethod(), getCallOptions()), request);
+    }
   }
 
-  private static final int METHODID_GET_PEERS = 0;
-  private static final int METHODID_CONNECT = 1;
-  private static final int METHODID_DISCONNECT = 2;
-  private static final int METHODID_IS_CONNECTED = 3;
-  private static final int METHODID_ENABLE_EXTRAS = 4;
-  private static final int METHODID_DISABLE_EXTRAS = 5;
-  private static final int METHODID_P2P = 6;
+  private static final int METHODID_CONN_MGMT = 0;
+  private static final int METHODID_EXTRAS = 1;
+  private static final int METHODID_P2P = 2;
+  private static final int METHODID_BLOCKSTORE = 3;
+  private static final int METHODID_DAG = 4;
+  private static final int METHODID_KEYSTORE = 5;
+  private static final int METHODID_PERSIST = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -732,33 +732,33 @@ public final class NodeAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_PEERS:
-          serviceImpl.getPeers((pb.Util.Empty) request,
-              (io.grpc.stub.StreamObserver<pb.Node.GetPeersResponse>) responseObserver);
+        case METHODID_CONN_MGMT:
+          serviceImpl.connMgmt((pb.Node.ConnMgmtRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.ConnMgmtResponse>) responseObserver);
           break;
-        case METHODID_CONNECT:
-          serviceImpl.connect((pb.Node.ConnectRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
-          break;
-        case METHODID_DISCONNECT:
-          serviceImpl.disconnect((pb.Node.DisconnectRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Node.DisconnectResponse>) responseObserver);
-          break;
-        case METHODID_IS_CONNECTED:
-          serviceImpl.isConnected((pb.Node.IsConnectedRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Node.IsConnectedResponse>) responseObserver);
-          break;
-        case METHODID_ENABLE_EXTRAS:
-          serviceImpl.enableExtras((pb.Node.EnableExtrasRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
-          break;
-        case METHODID_DISABLE_EXTRAS:
-          serviceImpl.disableExtras((pb.Node.DisableExtrasRequest) request,
+        case METHODID_EXTRAS:
+          serviceImpl.extras((pb.Node.ExtrasRequest) request,
               (io.grpc.stub.StreamObserver<pb.Util.Empty>) responseObserver);
           break;
         case METHODID_P2P:
           serviceImpl.p2P((pb.Node.P2PRequest) request,
               (io.grpc.stub.StreamObserver<pb.Node.P2PResponse>) responseObserver);
+          break;
+        case METHODID_BLOCKSTORE:
+          serviceImpl.blockstore((pb.Node.BlockstoreRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse>) responseObserver);
+          break;
+        case METHODID_DAG:
+          serviceImpl.dag((pb.Node.DagRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.DagResponse>) responseObserver);
+          break;
+        case METHODID_KEYSTORE:
+          serviceImpl.keystore((pb.Node.KeystoreRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.KeystoreResponse>) responseObserver);
+          break;
+        case METHODID_PERSIST:
+          serviceImpl.persist((pb.Node.PersistRequest) request,
+              (io.grpc.stub.StreamObserver<pb.Node.PersistResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -821,13 +821,13 @@ public final class NodeAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new NodeAPIFileDescriptorSupplier())
-              .addMethod(getGetPeersMethod())
-              .addMethod(getConnectMethod())
-              .addMethod(getDisconnectMethod())
-              .addMethod(getIsConnectedMethod())
-              .addMethod(getEnableExtrasMethod())
-              .addMethod(getDisableExtrasMethod())
+              .addMethod(getConnMgmtMethod())
+              .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())
+              .addMethod(getBlockstoreMethod())
+              .addMethod(getDagMethod())
+              .addMethod(getKeystoreMethod())
+              .addMethod(getPersistMethod())
               .build();
         }
       }

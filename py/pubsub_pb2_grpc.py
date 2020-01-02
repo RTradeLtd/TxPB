@@ -2,11 +2,11 @@
 import grpc
 
 import pubsub_pb2 as pubsub__pb2
-import util_pb2 as util__pb2
 
 
 class PubSubAPIStub(object):
-  """PubSubAPI provides a gRPC API for a libp2p pubsub instance
+  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+  `ipfs pubsub` subset of commands.
   """
 
   def __init__(self, channel):
@@ -15,60 +15,21 @@ class PubSubAPIStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.PubSubGetTopics = channel.unary_unary(
-        '/pb.PubSubAPI/PubSubGetTopics',
-        request_serializer=util__pb2.Empty.SerializeToString,
-        response_deserializer=pubsub__pb2.PubSubTopicsResponse.FromString,
-        )
-    self.PubSubListPeers = channel.unary_unary(
-        '/pb.PubSubAPI/PubSubListPeers',
-        request_serializer=pubsub__pb2.PubSubListPeersRequest.SerializeToString,
-        response_deserializer=pubsub__pb2.PubSubListPeersResponse.FromString,
-        )
-    self.PubSubSubscribe = channel.unary_stream(
-        '/pb.PubSubAPI/PubSubSubscribe',
-        request_serializer=pubsub__pb2.PubSubSubscribeRequest.SerializeToString,
-        response_deserializer=pubsub__pb2.PubSubMessageResponse.FromString,
-        )
-    self.PubSubPublish = channel.stream_unary(
-        '/pb.PubSubAPI/PubSubPublish',
-        request_serializer=pubsub__pb2.PubSubPublishRequest.SerializeToString,
-        response_deserializer=util__pb2.Empty.FromString,
+    self.PubSub = channel.stream_stream(
+        '/pb.PubSubAPI/PubSub',
+        request_serializer=pubsub__pb2.PubSubRequest.SerializeToString,
+        response_deserializer=pubsub__pb2.PubSubResponse.FromString,
         )
 
 
 class PubSubAPIServicer(object):
-  """PubSubAPI provides a gRPC API for a libp2p pubsub instance
+  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+  `ipfs pubsub` subset of commands.
   """
 
-  def PubSubGetTopics(self, request, context):
-    """PubSubGetTopics is used to return a list of all
-    known topics the pubsub instance is subscribed to.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def PubSubListPeers(self, request, context):
-    """PubSubListPeers is used to return a list of peers subscribed
-    to a given topic or topics.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def PubSubSubscribe(self, request, context):
-    """PubSubSubscribe is used to subscribe to a topic and receive messages
-    Server will stream the messages received on the topic specified 
-    during the initial subscription call, and send each message
-    back to the client as it is received. 
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def PubSubPublish(self, request_iterator, context):
-    """PubSubPublish is used to send a stream of messages to a pubsub topic.
+  def PubSub(self, request_iterator, context):
+    """PubSub allows controlling libp2p pubsub topics and subscriptions using
+    a bidirectional streaming API
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -77,25 +38,10 @@ class PubSubAPIServicer(object):
 
 def add_PubSubAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'PubSubGetTopics': grpc.unary_unary_rpc_method_handler(
-          servicer.PubSubGetTopics,
-          request_deserializer=util__pb2.Empty.FromString,
-          response_serializer=pubsub__pb2.PubSubTopicsResponse.SerializeToString,
-      ),
-      'PubSubListPeers': grpc.unary_unary_rpc_method_handler(
-          servicer.PubSubListPeers,
-          request_deserializer=pubsub__pb2.PubSubListPeersRequest.FromString,
-          response_serializer=pubsub__pb2.PubSubListPeersResponse.SerializeToString,
-      ),
-      'PubSubSubscribe': grpc.unary_stream_rpc_method_handler(
-          servicer.PubSubSubscribe,
-          request_deserializer=pubsub__pb2.PubSubSubscribeRequest.FromString,
-          response_serializer=pubsub__pb2.PubSubMessageResponse.SerializeToString,
-      ),
-      'PubSubPublish': grpc.stream_unary_rpc_method_handler(
-          servicer.PubSubPublish,
-          request_deserializer=pubsub__pb2.PubSubPublishRequest.FromString,
-          response_serializer=util__pb2.Empty.SerializeToString,
+      'PubSub': grpc.stream_stream_rpc_method_handler(
+          servicer.PubSub,
+          request_deserializer=pubsub__pb2.PubSubRequest.FromString,
+          response_serializer=pubsub__pb2.PubSubResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

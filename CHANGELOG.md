@@ -2,6 +2,10 @@
 
 Tracks changes made in between releases
 
+# v3.0.0
+
+* API refactor [#36](https://github.com/RTradeLtd/TxPB/pull/36)
+
 # v1.1.0
 
 * Adds `P2PAPI`, akin to `ipfs p2p` [#26](https://github.com/RTradeLtd/TxPB/pull/26)

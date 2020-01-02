@@ -17,7 +17,8 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
- * KeystoreAPI provides a keystore management API
+ * KeystoreAPI provides a keystore management API, and is equivalent
+ * to the go-ipfs `ipfs key` subset of commands.
  * </pre>
  */
 @javax.annotation.Generated(
@@ -31,163 +32,35 @@ public final class KeystoreAPIGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreHasMethod;
+      pb.Keystore.KeystoreResponse> getKeystoreMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "KeystoreHas",
+      fullMethodName = SERVICE_NAME + '/' + "Keystore",
       requestType = pb.Keystore.KeystoreRequest.class,
       responseType = pb.Keystore.KeystoreResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreHasMethod() {
-    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystoreHasMethod;
-    if ((getKeystoreHasMethod = KeystoreAPIGrpc.getKeystoreHasMethod) == null) {
+      pb.Keystore.KeystoreResponse> getKeystoreMethod() {
+    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystoreMethod;
+    if ((getKeystoreMethod = KeystoreAPIGrpc.getKeystoreMethod) == null) {
       synchronized (KeystoreAPIGrpc.class) {
-        if ((getKeystoreHasMethod = KeystoreAPIGrpc.getKeystoreHasMethod) == null) {
-          KeystoreAPIGrpc.getKeystoreHasMethod = getKeystoreHasMethod = 
+        if ((getKeystoreMethod = KeystoreAPIGrpc.getKeystoreMethod) == null) {
+          KeystoreAPIGrpc.getKeystoreMethod = getKeystoreMethod = 
               io.grpc.MethodDescriptor.<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "pb.KeystoreAPI", "KeystoreHas"))
+                  "pb.KeystoreAPI", "Keystore"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Keystore.KeystoreRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Keystore.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("KeystoreHas"))
+                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("Keystore"))
                   .build();
           }
         }
      }
-     return getKeystoreHasMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreGetMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "KeystoreGet",
-      requestType = pb.Keystore.KeystoreRequest.class,
-      responseType = pb.Keystore.KeystoreResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreGetMethod() {
-    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystoreGetMethod;
-    if ((getKeystoreGetMethod = KeystoreAPIGrpc.getKeystoreGetMethod) == null) {
-      synchronized (KeystoreAPIGrpc.class) {
-        if ((getKeystoreGetMethod = KeystoreAPIGrpc.getKeystoreGetMethod) == null) {
-          KeystoreAPIGrpc.getKeystoreGetMethod = getKeystoreGetMethod = 
-              io.grpc.MethodDescriptor.<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.KeystoreAPI", "KeystoreGet"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("KeystoreGet"))
-                  .build();
-          }
-        }
-     }
-     return getKeystoreGetMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystorePutMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "KeystorePut",
-      requestType = pb.Keystore.KeystoreRequest.class,
-      responseType = pb.Keystore.KeystoreResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystorePutMethod() {
-    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystorePutMethod;
-    if ((getKeystorePutMethod = KeystoreAPIGrpc.getKeystorePutMethod) == null) {
-      synchronized (KeystoreAPIGrpc.class) {
-        if ((getKeystorePutMethod = KeystoreAPIGrpc.getKeystorePutMethod) == null) {
-          KeystoreAPIGrpc.getKeystorePutMethod = getKeystorePutMethod = 
-              io.grpc.MethodDescriptor.<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.KeystoreAPI", "KeystorePut"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("KeystorePut"))
-                  .build();
-          }
-        }
-     }
-     return getKeystorePutMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreDeleteMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "KeystoreDelete",
-      requestType = pb.Keystore.KeystoreRequest.class,
-      responseType = pb.Keystore.KeystoreResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreDeleteMethod() {
-    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystoreDeleteMethod;
-    if ((getKeystoreDeleteMethod = KeystoreAPIGrpc.getKeystoreDeleteMethod) == null) {
-      synchronized (KeystoreAPIGrpc.class) {
-        if ((getKeystoreDeleteMethod = KeystoreAPIGrpc.getKeystoreDeleteMethod) == null) {
-          KeystoreAPIGrpc.getKeystoreDeleteMethod = getKeystoreDeleteMethod = 
-              io.grpc.MethodDescriptor.<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.KeystoreAPI", "KeystoreDelete"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("KeystoreDelete"))
-                  .build();
-          }
-        }
-     }
-     return getKeystoreDeleteMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreListMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "KeystoreList",
-      requestType = pb.Keystore.KeystoreRequest.class,
-      responseType = pb.Keystore.KeystoreResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest,
-      pb.Keystore.KeystoreResponse> getKeystoreListMethod() {
-    io.grpc.MethodDescriptor<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse> getKeystoreListMethod;
-    if ((getKeystoreListMethod = KeystoreAPIGrpc.getKeystoreListMethod) == null) {
-      synchronized (KeystoreAPIGrpc.class) {
-        if ((getKeystoreListMethod = KeystoreAPIGrpc.getKeystoreListMethod) == null) {
-          KeystoreAPIGrpc.getKeystoreListMethod = getKeystoreListMethod = 
-              io.grpc.MethodDescriptor.<pb.Keystore.KeystoreRequest, pb.Keystore.KeystoreResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.KeystoreAPI", "KeystoreList"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  pb.Keystore.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new KeystoreAPIMethodDescriptorSupplier("KeystoreList"))
-                  .build();
-          }
-        }
-     }
-     return getKeystoreListMethod;
+     return getKeystoreMethod;
   }
 
   /**
@@ -215,105 +88,39 @@ public final class KeystoreAPIGrpc {
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static abstract class KeystoreAPIImplBase implements io.grpc.BindableService {
 
     /**
      * <pre>
-     * KeystoreHas is used to check if we have the key in our store
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
-    public void keystoreHas(pb.Keystore.KeystoreRequest request,
+    public void keystore(pb.Keystore.KeystoreRequest request,
         io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getKeystoreHasMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreGet is used to return a key from our store
-     * </pre>
-     */
-    public void keystoreGet(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getKeystoreGetMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystorePut is used to store a key in our store
-     * </pre>
-     */
-    public void keystorePut(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getKeystorePutMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreDelete is used to remove a key from our store
-     * </pre>
-     */
-    public void keystoreDelete(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getKeystoreDeleteMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreList is used to returns all keyIDs of keys in our store
-     * </pre>
-     */
-    public void keystoreList(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getKeystoreListMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getKeystoreMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getKeystoreHasMethod(),
+            getKeystoreMethod(),
             asyncUnaryCall(
               new MethodHandlers<
                 pb.Keystore.KeystoreRequest,
                 pb.Keystore.KeystoreResponse>(
-                  this, METHODID_KEYSTORE_HAS)))
-          .addMethod(
-            getKeystoreGetMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Keystore.KeystoreRequest,
-                pb.Keystore.KeystoreResponse>(
-                  this, METHODID_KEYSTORE_GET)))
-          .addMethod(
-            getKeystorePutMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Keystore.KeystoreRequest,
-                pb.Keystore.KeystoreResponse>(
-                  this, METHODID_KEYSTORE_PUT)))
-          .addMethod(
-            getKeystoreDeleteMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Keystore.KeystoreRequest,
-                pb.Keystore.KeystoreResponse>(
-                  this, METHODID_KEYSTORE_DELETE)))
-          .addMethod(
-            getKeystoreListMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                pb.Keystore.KeystoreRequest,
-                pb.Keystore.KeystoreResponse>(
-                  this, METHODID_KEYSTORE_LIST)))
+                  this, METHODID_KEYSTORE)))
           .build();
     }
   }
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIStub extends io.grpc.stub.AbstractStub<KeystoreAPIStub> {
@@ -334,63 +141,20 @@ public final class KeystoreAPIGrpc {
 
     /**
      * <pre>
-     * KeystoreHas is used to check if we have the key in our store
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
-    public void keystoreHas(pb.Keystore.KeystoreRequest request,
+    public void keystore(pb.Keystore.KeystoreRequest request,
         io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getKeystoreHasMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreGet is used to return a key from our store
-     * </pre>
-     */
-    public void keystoreGet(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getKeystoreGetMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystorePut is used to store a key in our store
-     * </pre>
-     */
-    public void keystorePut(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getKeystorePutMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreDelete is used to remove a key from our store
-     * </pre>
-     */
-    public void keystoreDelete(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getKeystoreDeleteMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * KeystoreList is used to returns all keyIDs of keys in our store
-     * </pre>
-     */
-    public void keystoreList(pb.Keystore.KeystoreRequest request,
-        io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getKeystoreListMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getKeystoreMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIBlockingStub extends io.grpc.stub.AbstractStub<KeystoreAPIBlockingStub> {
@@ -411,58 +175,19 @@ public final class KeystoreAPIGrpc {
 
     /**
      * <pre>
-     * KeystoreHas is used to check if we have the key in our store
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
-    public pb.Keystore.KeystoreResponse keystoreHas(pb.Keystore.KeystoreRequest request) {
+    public pb.Keystore.KeystoreResponse keystore(pb.Keystore.KeystoreRequest request) {
       return blockingUnaryCall(
-          getChannel(), getKeystoreHasMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreGet is used to return a key from our store
-     * </pre>
-     */
-    public pb.Keystore.KeystoreResponse keystoreGet(pb.Keystore.KeystoreRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getKeystoreGetMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * KeystorePut is used to store a key in our store
-     * </pre>
-     */
-    public pb.Keystore.KeystoreResponse keystorePut(pb.Keystore.KeystoreRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getKeystorePutMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreDelete is used to remove a key from our store
-     * </pre>
-     */
-    public pb.Keystore.KeystoreResponse keystoreDelete(pb.Keystore.KeystoreRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getKeystoreDeleteMethod(), getCallOptions(), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreList is used to returns all keyIDs of keys in our store
-     * </pre>
-     */
-    public pb.Keystore.KeystoreResponse keystoreList(pb.Keystore.KeystoreRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getKeystoreListMethod(), getCallOptions(), request);
+          getChannel(), getKeystoreMethod(), getCallOptions(), request);
     }
   }
 
   /**
    * <pre>
-   * KeystoreAPI provides a keystore management API
+   * KeystoreAPI provides a keystore management API, and is equivalent
+   * to the go-ipfs `ipfs key` subset of commands.
    * </pre>
    */
   public static final class KeystoreAPIFutureStub extends io.grpc.stub.AbstractStub<KeystoreAPIFutureStub> {
@@ -483,65 +208,17 @@ public final class KeystoreAPIGrpc {
 
     /**
      * <pre>
-     * KeystoreHas is used to check if we have the key in our store
+     *Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystoreHas(
+    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystore(
         pb.Keystore.KeystoreRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getKeystoreHasMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreGet is used to return a key from our store
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystoreGet(
-        pb.Keystore.KeystoreRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getKeystoreGetMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * KeystorePut is used to store a key in our store
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystorePut(
-        pb.Keystore.KeystoreRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getKeystorePutMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreDelete is used to remove a key from our store
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystoreDelete(
-        pb.Keystore.KeystoreRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getKeystoreDeleteMethod(), getCallOptions()), request);
-    }
-
-    /**
-     * <pre>
-     * KeystoreList is used to returns all keyIDs of keys in our store
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<pb.Keystore.KeystoreResponse> keystoreList(
-        pb.Keystore.KeystoreRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getKeystoreListMethod(), getCallOptions()), request);
+          getChannel().newCall(getKeystoreMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_KEYSTORE_HAS = 0;
-  private static final int METHODID_KEYSTORE_GET = 1;
-  private static final int METHODID_KEYSTORE_PUT = 2;
-  private static final int METHODID_KEYSTORE_DELETE = 3;
-  private static final int METHODID_KEYSTORE_LIST = 4;
+  private static final int METHODID_KEYSTORE = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -560,24 +237,8 @@ public final class KeystoreAPIGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_KEYSTORE_HAS:
-          serviceImpl.keystoreHas((pb.Keystore.KeystoreRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse>) responseObserver);
-          break;
-        case METHODID_KEYSTORE_GET:
-          serviceImpl.keystoreGet((pb.Keystore.KeystoreRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse>) responseObserver);
-          break;
-        case METHODID_KEYSTORE_PUT:
-          serviceImpl.keystorePut((pb.Keystore.KeystoreRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse>) responseObserver);
-          break;
-        case METHODID_KEYSTORE_DELETE:
-          serviceImpl.keystoreDelete((pb.Keystore.KeystoreRequest) request,
-              (io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse>) responseObserver);
-          break;
-        case METHODID_KEYSTORE_LIST:
-          serviceImpl.keystoreList((pb.Keystore.KeystoreRequest) request,
+        case METHODID_KEYSTORE:
+          serviceImpl.keystore((pb.Keystore.KeystoreRequest) request,
               (io.grpc.stub.StreamObserver<pb.Keystore.KeystoreResponse>) responseObserver);
           break;
         default:
@@ -641,11 +302,7 @@ public final class KeystoreAPIGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new KeystoreAPIFileDescriptorSupplier())
-              .addMethod(getKeystoreHasMethod())
-              .addMethod(getKeystoreGetMethod())
-              .addMethod(getKeystorePutMethod())
-              .addMethod(getKeystoreDeleteMethod())
-              .addMethod(getKeystoreListMethod())
+              .addMethod(getKeystoreMethod())
               .build();
         }
       }

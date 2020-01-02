@@ -4,42 +4,18 @@
 ## Table of Contents
 
 - [admin.proto](#admin.proto)
-    - [Block](#pb.Block)
-    - [BlockstoreRequest](#pb.BlockstoreRequest)
-    - [BlockstoreResponse](#pb.BlockstoreResponse)
     - [ManageGCRequest](#pb.ManageGCRequest)
     - [ManageGCResponse](#pb.ManageGCResponse)
     - [RefCountRequest](#pb.RefCountRequest)
     - [RefCountResponse](#pb.RefCountResponse)
     - [RefCountResponse.CidsEntry](#pb.RefCountResponse.CidsEntry)
   
-    - [BSREQOPTS](#pb.BSREQOPTS)
-    - [BSREQTYPE](#pb.BSREQTYPE)
     - [GCREQTYPE](#pb.GCREQTYPE)
     - [REFREQOPTS](#pb.REFREQOPTS)
     - [REFREQTYPE](#pb.REFREQTYPE)
   
   
     - [AdminAPI](#pb.AdminAPI)
-  
-
-- [dag.proto](#dag.proto)
-    - [AddLinksRequest](#pb.AddLinksRequest)
-    - [AddLinksRequest.LinksEntry](#pb.AddLinksRequest.LinksEntry)
-    - [DagGetRequest](#pb.DagGetRequest)
-    - [DagGetResponse](#pb.DagGetResponse)
-    - [DagPutRequest](#pb.DagPutRequest)
-    - [DagPutResponse](#pb.DagPutResponse)
-    - [GetLinksRequest](#pb.GetLinksRequest)
-    - [GetLinksResponse](#pb.GetLinksResponse)
-    - [IPLDLink](#pb.IPLDLink)
-    - [IPLDNode](#pb.IPLDNode)
-    - [NewIPLDNodeRequest](#pb.NewIPLDNodeRequest)
-    - [NewIPLDNodeRequest.LinksEntry](#pb.NewIPLDNodeRequest.LinksEntry)
-  
-  
-  
-    - [DagAPI](#pb.DagAPI)
   
 
 - [file.proto](#file.proto)
@@ -54,15 +30,6 @@
     - [FileAPI](#pb.FileAPI)
   
 
-- [keystore.proto](#keystore.proto)
-    - [KeystoreRequest](#pb.KeystoreRequest)
-    - [KeystoreResponse](#pb.KeystoreResponse)
-  
-  
-  
-    - [KeystoreAPI](#pb.KeystoreAPI)
-  
-
 - [namesys.proto](#namesys.proto)
     - [NameSysPublishRequest](#pb.NameSysPublishRequest)
     - [NameSysResolveRequest](#pb.NameSysResolveRequest)
@@ -74,22 +41,38 @@
   
 
 - [node.proto](#node.proto)
-    - [ConnectRequest](#pb.ConnectRequest)
-    - [DisableExtrasRequest](#pb.DisableExtrasRequest)
-    - [DisconnectRequest](#pb.DisconnectRequest)
-    - [DisconnectResponse](#pb.DisconnectResponse)
-    - [DisconnectResponse.StatusEntry](#pb.DisconnectResponse.StatusEntry)
-    - [DisconnectResponse.StatusMessage](#pb.DisconnectResponse.StatusMessage)
-    - [EnableExtrasRequest](#pb.EnableExtrasRequest)
+    - [Block](#pb.Block)
+    - [BlockstoreRequest](#pb.BlockstoreRequest)
+    - [BlockstoreResponse](#pb.BlockstoreResponse)
+    - [ConnMgmtRequest](#pb.ConnMgmtRequest)
+    - [ConnMgmtResponse](#pb.ConnMgmtResponse)
+    - [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry)
+    - [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry)
+    - [ConnMgmtStatus](#pb.ConnMgmtStatus)
+    - [DagRequest](#pb.DagRequest)
+    - [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry)
+    - [DagResponse](#pb.DagResponse)
+    - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
-    - [IsConnectedRequest](#pb.IsConnectedRequest)
-    - [IsConnectedResponse](#pb.IsConnectedResponse)
-    - [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry)
+    - [IPLDLink](#pb.IPLDLink)
+    - [IPLDNode](#pb.IPLDNode)
+    - [KeystoreRequest](#pb.KeystoreRequest)
+    - [KeystoreResponse](#pb.KeystoreResponse)
     - [P2PLsInfo](#pb.P2PLsInfo)
     - [P2PRequest](#pb.P2PRequest)
     - [P2PResponse](#pb.P2PResponse)
+    - [PersistRequest](#pb.PersistRequest)
+    - [PersistResponse](#pb.PersistResponse)
+    - [PersistResponse.ErrorsEntry](#pb.PersistResponse.ErrorsEntry)
+    - [PersistResponse.StatusEntry](#pb.PersistResponse.StatusEntry)
   
+    - [BSREQOPTS](#pb.BSREQOPTS)
+    - [BSREQTYPE](#pb.BSREQTYPE)
+    - [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE)
+    - [DAGREQTYPE](#pb.DAGREQTYPE)
+    - [EXTRASREQTYPE](#pb.EXTRASREQTYPE)
     - [EXTRASTYPE](#pb.EXTRASTYPE)
+    - [KSREQTYPE](#pb.KSREQTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
   
   
@@ -97,14 +80,12 @@
   
 
 - [pubsub.proto](#pubsub.proto)
-    - [PubSubListPeersRequest](#pb.PubSubListPeersRequest)
-    - [PubSubListPeersResponse](#pb.PubSubListPeersResponse)
-    - [PubSubListPeersResponse.Peer](#pb.PubSubListPeersResponse.Peer)
-    - [PubSubMessageResponse](#pb.PubSubMessageResponse)
-    - [PubSubPublishRequest](#pb.PubSubPublishRequest)
-    - [PubSubSubscribeRequest](#pb.PubSubSubscribeRequest)
-    - [PubSubTopicsResponse](#pb.PubSubTopicsResponse)
+    - [PubSubMessage](#pb.PubSubMessage)
+    - [PubSubPeer](#pb.PubSubPeer)
+    - [PubSubRequest](#pb.PubSubRequest)
+    - [PubSubResponse](#pb.PubSubResponse)
   
+    - [PSREQTYPE](#pb.PSREQTYPE)
   
   
     - [PubSubAPI](#pb.PubSubAPI)
@@ -136,54 +117,6 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## admin.proto
-
-
-
-<a name="pb.Block"></a>
-
-### Block
-Block is a single block of ipfs data
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| cid | [string](#string) |  | cid is the identifier of the block |
-| data | [bytes](#bytes) |  | data is the actual contnets of this block |
-
-
-
-
-
-
-<a name="pb.BlockstoreRequest"></a>
-
-### BlockstoreRequest
-BlockstoreRequest is a message used to control blockstores
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| cids | [string](#string) | repeated | cids holds at least 1 cid, to hold 0 is considered an error |
-| reqType | [BSREQTYPE](#pb.BSREQTYPE) |  | reqType is used to indicate the particular request being mande |
-| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) |  | reqOpts is an optional parameter that can be used for fine-tuned request control |
-
-
-
-
-
-
-<a name="pb.BlockstoreResponse"></a>
-
-### BlockstoreResponse
-BlockstoreResponse is a response to a BlockstoreqRequest
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| blocks | [Block](#pb.Block) | repeated |  |
-
-
-
 
 
 
@@ -268,33 +201,6 @@ gathered by a RefCount rpc call.
  
 
 
-<a name="pb.BSREQOPTS"></a>
-
-### BSREQOPTS
-BSREQOPTS are options for blockstore requests
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| DEFAULT | 0 | DEFAULT indicates to use the default settings |
-| BS_FORCE | 1 | BS_FORCE indicates to force the request regardless of any possible issues |
-
-
-
-<a name="pb.BSREQTYPE"></a>
-
-### BSREQTYPE
-BSREQTYPE is a particular blockstore request type
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| BS_DELETE | 0 | BS_DELETE is used to delete a block from the store |
-| BS_PUT | 1 | BS_PUT is used to put a single block in the store |
-| BS_PUT_MANY | 2 | BS_PUT_MANY is used to put many blocks in the store |
-| BS_GET | 3 | BS_GET is used to get a block from the store |
-| BS_GET_MANY | 4 | BS_GET_MANY is used to get many blocks from the store |
-
-
-
 <a name="pb.GCREQTYPE"></a>
 
 ### GCREQTYPE
@@ -344,237 +250,6 @@ AdminAPI facilitates administrative management of TemporalX via a localhost gRPC
 | ----------- | ------------ | ------------- | ------------|
 | ManageGC | [ManageGCRequest](#pb.ManageGCRequest) | [ManageGCResponse](#pb.ManageGCResponse) | ManageGC is used to manage TemporalX&#39;s garbage collection process |
 | RefCount | [RefCountRequest](#pb.RefCountRequest) | [RefCountResponse](#pb.RefCountResponse) | RefCount is used to analyze the counter store and pull reference count information |
-| Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows management of the blockstore, and optionally, the counted store |
-
- 
-
-
-
-<a name="dag.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## dag.proto
-
-
-
-<a name="pb.AddLinksRequest"></a>
-
-### AddLinksRequest
-AddLinksRequest is used to add links to an existing ipld node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [AddLinksRequest.LinksEntry](#pb.AddLinksRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
-| hash | [string](#string) |  | the hash of the node we want to add lin skto |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-
-
-
-
-
-
-<a name="pb.AddLinksRequest.LinksEntry"></a>
-
-### AddLinksRequest.LinksEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="pb.DagGetRequest"></a>
-
-### DagGetRequest
-DagGetRequest is used to retrieve the raw data
-of an ipld dag node for the specified hash. This can
-then be used by libraries like go-ipld-format to
-decoded into a dag object on the client side using 
-merkledag.DecodeProtobuf and passing in the returned bytes
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hash | [string](#string) |  | the hash of the ipld node to get |
-
-
-
-
-
-
-<a name="pb.DagGetResponse"></a>
-
-### DagGetResponse
-DagGetResponse is a response to DagGetRequest
-that returns the raw data of the matching ipld node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| rawData | [bytes](#bytes) |  | the raw data of the ipld node |
-
-
-
-
-
-
-<a name="pb.DagPutRequest"></a>
-
-### DagPutRequest
-DagPut allows us to store arbitrary bytes as a custom IPLD object
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| data | [bytes](#bytes) |  | data that we will be storing |
-| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) |
-| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) |
-
-
-
-
-
-
-<a name="pb.DagPutResponse"></a>
-
-### DagPutResponse
-DagPutResponse contains the hashes of ipld nodes generated
-by the dag put request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hashes | [string](#string) | repeated | an array of hashes (cids) of the root ipld nod |
-
-
-
-
-
-
-<a name="pb.GetLinksRequest"></a>
-
-### GetLinksRequest
-GetLinksRequest is used to return all the links associated with a particular hash
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hash | [string](#string) |  | the hash to request links for |
-
-
-
-
-
-
-<a name="pb.GetLinksResponse"></a>
-
-### GetLinksResponse
-GetLinksResponse returns all the links for the 
-associated hash that was requested
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [IPLDLink](#pb.IPLDLink) | repeated | each of the links referenced by the requested hash |
-
-
-
-
-
-
-<a name="pb.IPLDLink"></a>
-
-### IPLDLink
-An IPFS MerkleDAG Link
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hash | [bytes](#bytes) |  | multihash of the target object |
-| name | [string](#string) |  | utf string name. should be unique per object |
-| size | [uint64](#uint64) |  | cumulative size of target object |
-
-
-
-
-
-
-<a name="pb.IPLDNode"></a>
-
-### IPLDNode
-An IPFS MerkleDAG Node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [IPLDLink](#pb.IPLDLink) | repeated | refs to other objects |
-| data | [bytes](#bytes) |  | opaque user data |
-
-
-
-
-
-
-<a name="pb.NewIPLDNodeRequest"></a>
-
-### NewIPLDNodeRequest
-NewIPLDNodeRequest is used to create a new ipld node
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| links | [NewIPLDNodeRequest.LinksEntry](#pb.NewIPLDNodeRequest.LinksEntry) | repeated | links are optional hashes to include as links of the node the name is used as the key, while the value of the key is used as the hash |
-| data | [bytes](#bytes) |  | data to store as part of the data field |
-| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) |
-
-
-
-
-
-
-<a name="pb.NewIPLDNodeRequest.LinksEntry"></a>
-
-### NewIPLDNodeRequest.LinksEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="pb.DagAPI"></a>
-
-### DagAPI
-DagAPI provides a gRPC API for manipulating IPLD objects
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| DagPut | [DagPutRequest](#pb.DagPutRequest) | [DagPutResponse](#pb.DagPutResponse) | DagPut is used to store arbitrary bytes as a custom IPLD object |
-| DagGet | [DagGetRequest](#pb.DagGetRequest) | [DagGetResponse](#pb.DagGetResponse) | DagGet is used to request the raw ipld node data for an IPLD object |
-| NewIPLDNode | [NewIPLDNodeRequest](#pb.NewIPLDNodeRequest) | [DagPutResponse](#pb.DagPutResponse) | NewIPLDNode is used to create a new IPFS MerkleDAG node. This is the same type as in github.com/ipfs/go-ipld-format.Node |
-| AddLinksToNode | [AddLinksRequest](#pb.AddLinksRequest) | [DagPutResponse](#pb.DagPutResponse) | AddLinksToNode is used to add links to an existing IPFS MerkleDAG node |
-| GetLinks | [GetLinksRequest](#pb.GetLinksRequest) | [GetLinksResponse](#pb.GetLinksResponse) | GetLinks is used to request all the links for a given object |
 
  
 
@@ -689,69 +364,6 @@ FileAPI provides a gRPC api to upload/download files as UnixFS objects
 
 
 
-<a name="keystore.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## keystore.proto
-
-
-
-<a name="pb.KeystoreRequest"></a>
-
-### KeystoreRequest
-KeystoreRequest is a message used in any keystore API request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | name of the key the request is for applicable to: has, get, put, delete |
-| privateKey | [bytes](#bytes) |  | the actual private key applicable to: put |
-
-
-
-
-
-
-<a name="pb.KeystoreResponse"></a>
-
-### KeystoreResponse
-KeystoreResponse is a responsed to any keystore API request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| status | [string](#string) |  | a generic status message returned by Has requests, and may or may not be returned by other requests |
-| privateKey | [bytes](#bytes) |  | the actual private key returned by Get requests |
-| keyNames | [string](#string) | repeated | names of keys returned by a List request |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="pb.KeystoreAPI"></a>
-
-### KeystoreAPI
-KeystoreAPI provides a keystore management API
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| KeystoreHas | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreHas is used to check if we have the key in our store |
-| KeystoreGet | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreGet is used to return a key from our store |
-| KeystorePut | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystorePut is used to store a key in our store |
-| KeystoreDelete | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreDelete is used to remove a key from our store |
-| KeystoreList | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | KeystoreList is used to returns all keyIDs of keys in our store |
-
- 
-
-
-
 <a name="namesys.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -839,86 +451,129 @@ NameSysAPI provides a generic name resolution API
 
 
 
-<a name="pb.ConnectRequest"></a>
+<a name="pb.Block"></a>
 
-### ConnectRequest
-ConnectRequest is used to connect to libp2p peers
+### Block
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| multiAddrs | [string](#string) | repeated | a slice of all multiaddrs we want to connect to |
+| cid | [string](#string) |  | cid is the identifier of the block |
+| data | [bytes](#bytes) |  | data is the actual contnets of this block |
 
 
 
 
 
 
-<a name="pb.DisableExtrasRequest"></a>
+<a name="pb.BlockstoreRequest"></a>
 
-### DisableExtrasRequest
-DisableExtrasRequest is used to disable a particular extras feature
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | extrasFeature denotes the particular extras functionality to disable |
-
-
-
-
-
-
-<a name="pb.DisconnectRequest"></a>
-
-### DisconnectRequest
-DisconnectRequest is used to disconnect a connection to a libp2p peer
+### BlockstoreRequest
+BlockstoreRequest is a message used to control blockstores
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| peerIDs | [string](#string) | repeated | a slice of the peer IDs to disconnect from |
+| requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
+| reqOpts | [BSREQOPTS](#pb.BSREQOPTS) | repeated | optional request settings |
+| cids | [string](#string) | repeated | cids of blocks sent by: BS_DELETE, BS_GET, BS_GET_MANY |
+| data | [bytes](#bytes) | repeated | the data we are putting sent by: BS_PUT, BS_PUT_MANY |
+| cidVersion | [string](#string) |  | the cid version to use when constructing blocks, default is v1 sent by: BS_PUT, BS_PUT_MANY |
+| hashFunc | [string](#string) |  | the hash function to use when constructing blocks, default is sha2-256 sent by: BS_PUT, BS_PUT_MANY |
 
 
 
 
 
 
-<a name="pb.DisconnectResponse"></a>
+<a name="pb.BlockstoreResponse"></a>
 
-### DisconnectResponse
-DisconnectResponse is a response to a disconnect request
+### BlockstoreResponse
+BlockstoreResponse is a response to a BlockstoreqRequest
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [DisconnectResponse.StatusEntry](#pb.DisconnectResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
+| requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
+| blocks | [Block](#pb.Block) | repeated | a copy of blocks from the blockstore sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY in the case of BS_PUT, and BS_PUT_MANY requests the data field will be empty as this is only populated by get requests |
 
 
 
 
 
 
-<a name="pb.DisconnectResponse.StatusEntry"></a>
+<a name="pb.ConnMgmtRequest"></a>
 
-### DisconnectResponse.StatusEntry
+### ConnMgmtRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  | indicates the particular connection management request being performed |
+| multiAddrs | [string](#string) | repeated | a list of multiaddrs sent by: CM_CONNECT |
+| peerIDs | [string](#string) | repeated | a list of peer IDs sent by: CM_DISCONNECT, CM_STATUS, CM_GET_PEERS |
+
+
+
+
+
+
+<a name="pb.ConnMgmtResponse"></a>
+
+### ConnMgmtResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [CONNMGMTREQTYPE](#pb.CONNMGMTREQTYPE) |  | indicates the particular connection management request being performed |
+| connected | [ConnMgmtResponse.ConnectedEntry](#pb.ConnMgmtResponse.ConnectedEntry) | repeated |  |
+| status | [ConnMgmtResponse.StatusEntry](#pb.ConnMgmtResponse.StatusEntry) | repeated | a map of the peer id, and a custom message indicating success, or why there was a failure |
+| peerIDs | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="pb.ConnMgmtResponse.ConnectedEntry"></a>
+
+### ConnMgmtResponse.ConnectedEntry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [DisconnectResponse.StatusMessage](#pb.DisconnectResponse.StatusMessage) |  |  |
+| value | [bool](#bool) |  |  |
 
 
 
 
 
 
-<a name="pb.DisconnectResponse.StatusMessage"></a>
+<a name="pb.ConnMgmtResponse.StatusEntry"></a>
 
-### DisconnectResponse.StatusMessage
-StatusMessage is used to contain the status information about a particular disconnection attempt
+### ConnMgmtResponse.StatusEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [ConnMgmtStatus](#pb.ConnMgmtStatus) |  |  |
+
+
+
+
+
+
+<a name="pb.ConnMgmtStatus"></a>
+
+### ConnMgmtStatus
+Contains status information about a particular disconnect attempt
 
 
 | Field | Type | Label | Description |
@@ -931,15 +586,72 @@ StatusMessage is used to contain the status information about a particular disco
 
 
 
-<a name="pb.EnableExtrasRequest"></a>
+<a name="pb.DagRequest"></a>
 
-### EnableExtrasRequest
-EnableExtrasRequest is used to enable a particular extras feature
+### DagRequest
+Used to submit a request to Dag or DagStream RPCs
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | extrasFeature denotes the particular extras functionality to enable |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| data | [bytes](#bytes) |  | data that we will be storing sent by: DAG_PUT, DAG_NEW_NODE |
+| objectEncoding | [string](#string) |  | the object encoding type (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
+| hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS |
+| cidVersion | [int64](#int64) |  | the cid version to use (0, 1) sent by: DAG_PUT, DAG_NEW_NODE |
+| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS |
+| links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
+
+
+
+
+
+
+<a name="pb.DagRequest.LinksEntry"></a>
+
+### DagRequest.LinksEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.DagResponse"></a>
+
+### DagResponse
+Used in response to a Dag or DagStream RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [DAGREQTYPE](#pb.DAGREQTYPE) |  | indicates the request being performed sent by: all request types |
+| hashes | [string](#string) | repeated | returns the hashes of newly generated IPLD objects sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS |
+| rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
+| links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
+
+
+
+
+
+
+<a name="pb.ExtrasRequest"></a>
+
+### ExtrasRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [EXTRASREQTYPE](#pb.EXTRASREQTYPE) |  | indicates the request being performed |
+| extrasFeature | [EXTRASTYPE](#pb.EXTRASTYPE) |  | indicates the extras feature this request applies to |
 
 
 
@@ -961,46 +673,68 @@ GetPeersResponse is a response to GetPeers containing a slice of peer IDs
 
 
 
-<a name="pb.IsConnectedRequest"></a>
+<a name="pb.IPLDLink"></a>
 
-### IsConnectedRequest
-IsConnectedRequest is used check whether or not we are currently peered with these peers
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| peerIDs | [string](#string) | repeated | a slice of the peer IDs to examine |
-
-
-
-
-
-
-<a name="pb.IsConnectedResponse"></a>
-
-### IsConnectedResponse
-IsConnectedResponse is a response to an IsConnectedRequest request
+### IPLDLink
+An IPFS MerkleDAG Link
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| connected | [IsConnectedResponse.ConnectedEntry](#pb.IsConnectedResponse.ConnectedEntry) | repeated | a map of the peer ID and a boolean indicating if we are connected with them |
+| hash | [bytes](#bytes) |  | multihash of the target object |
+| name | [string](#string) |  | utf string name. should be unique per object |
+| size | [uint64](#uint64) |  | cumulative size of target object |
 
 
 
 
 
 
-<a name="pb.IsConnectedResponse.ConnectedEntry"></a>
+<a name="pb.IPLDNode"></a>
 
-### IsConnectedResponse.ConnectedEntry
-
+### IPLDNode
+An IPFS MerkleDAG Node
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [bool](#bool) |  |  |
+| links | [IPLDLink](#pb.IPLDLink) | repeated | refs to other objects |
+| data | [bytes](#bytes) |  | opaque user data |
+
+
+
+
+
+
+<a name="pb.KeystoreRequest"></a>
+
+### KeystoreRequest
+Used to submit a request to Keystore RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
+| name | [string](#string) |  | name of the key the request is for sent by: KS_HAS, KS_GET, KS_PUT, KS_DELETE |
+| privateKey | [bytes](#bytes) |  | the actual private key bytes sent by: KS_PUT |
+
+
+
+
+
+
+<a name="pb.KeystoreResponse"></a>
+
+### KeystoreResponse
+Used in response to a Keystore RPC
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [KSREQTYPE](#pb.KSREQTYPE) |  | indicates the request type being performed |
+| privateKey | [bytes](#bytes) |  | the private key bytes sent by: KS_GET |
+| keyNames | [string](#string) | repeated | contains all known key names sent by: KS_LIST |
+| has | [bool](#bool) |  | indicates if we have the key in our keystore sent by: KS_HAS |
 
 
 
@@ -1065,7 +799,138 @@ P2PResponse is a response message sent in response to a P2PRequest message
 
 
 
+
+<a name="pb.PersistRequest"></a>
+
+### PersistRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cids | [string](#string) | repeated | cids to persist locally |
+
+
+
+
+
+
+<a name="pb.PersistResponse"></a>
+
+### PersistResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [PersistResponse.StatusEntry](#pb.PersistResponse.StatusEntry) | repeated | key = cid, value = whether or not it was persisted |
+| errors | [PersistResponse.ErrorsEntry](#pb.PersistResponse.ErrorsEntry) | repeated | key = cid, value = error if not persisted |
+
+
+
+
+
+
+<a name="pb.PersistResponse.ErrorsEntry"></a>
+
+### PersistResponse.ErrorsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.PersistResponse.StatusEntry"></a>
+
+### PersistResponse.StatusEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [bool](#bool) |  |  |
+
+
+
+
+
  
+
+
+<a name="pb.BSREQOPTS"></a>
+
+### BSREQOPTS
+BSREQOPTS are options for blockstore requests
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DEFAULT | 0 | DEFAULT indicates to use the default settings |
+| BS_FORCE | 1 | BS_FORCE indicates to force the request regardless of any possible issues |
+
+
+
+<a name="pb.BSREQTYPE"></a>
+
+### BSREQTYPE
+BSREQTYPE is a particular blockstore request type
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| BS_DELETE | 0 | BS_DELETE is used to delete a block from the store |
+| BS_PUT | 1 | BS_PUT is used to put a single block in the store |
+| BS_PUT_MANY | 2 | BS_PUT_MANY is used to put many blocks in the store |
+| BS_GET | 3 | BS_GET is used to get a block from the store |
+| BS_GET_MANY | 4 | BS_GET_MANY is used to get many blocks from the store |
+
+
+
+<a name="pb.CONNMGMTREQTYPE"></a>
+
+### CONNMGMTREQTYPE
+CONNMGMTREQTYPE indicates the particular ConnMgmt request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CM_CONNECT | 0 | CM_CONNECT is used to connect to a libp2p peer |
+| CM_DISCONNECT | 1 | CM_DISCONNECT is used to disconnect from a libp2p peer |
+| CM_STATUS | 2 | CM_STATUS is used to return status information about libp2p peer connections useful for determining whether or not we are connected to someone |
+| CM_GET_PEERS | 3 | CM_GET_PEERS is used to return all known peers |
+
+
+
+<a name="pb.DAGREQTYPE"></a>
+
+### DAGREQTYPE
+DAGREQTYPE indicates the particular DagAPI request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DAG_PUT | 0 | DAG_PUT is used to add new IPLD objects |
+| DAG_GET | 1 | DAG_GET is used to retrieve IPLD object data |
+| DAG_NEW_NODE | 2 | DAG_NEW_NODE is used to create a new IPLD node object |
+| DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
+| DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
+
+
+
+<a name="pb.EXTRASREQTYPE"></a>
+
+### EXTRASREQTYPE
+EXTRASREQTYPE indicates the particular Extras request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EX_ENABLE | 0 | EX_ENABLE is used to enable a particular node extras feature |
+| EX_DISABLE | 1 | EX_DISABLE is used to disable a particular node extras feature |
+
 
 
 <a name="pb.EXTRASTYPE"></a>
@@ -1079,6 +944,21 @@ EXTRASTYPE denotes a particular extras type
 | PUBSUB | 1 | PUBSUB is the libp2p pubsub system |
 | DISCOVERY | 2 | DISCOVERY is a libp2p discovery service |
 | MDNS | 3 | MDNS is used to discover libp2p hosts over mdns |
+
+
+
+<a name="pb.KSREQTYPE"></a>
+
+### KSREQTYPE
+KSREQTYPE indicates the particular KeystoreAPI request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| KS_HAS | 0 | KS_HAS is used to check if the key exists in our keystore |
+| KS_GET | 1 | KS_GET is used to retrieve private key bytes from our keystore |
+| KS_PUT | 2 | KS_PUT is used to store private key bytes in our keystore |
+| KS_DELETE | 3 | KS_DELETE is used to delete private keys from our keystore |
+| KS_LIST | 4 | KS_LIST is used to list all keys in our keystore by their name |
 
 
 
@@ -1107,13 +987,13 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetPeers | [Empty](#pb.Empty) | [GetPeersResponse](#pb.GetPeersResponse) | GetPeers returns a message containing a slice of current peers in our peerstore |
-| Connect | [ConnectRequest](#pb.ConnectRequest) | [Empty](#pb.Empty) | Connect is used to connect to remote libp2p peers |
-| Disconnect | [DisconnectRequest](#pb.DisconnectRequest) | [DisconnectResponse](#pb.DisconnectResponse) | Disconnect is used to disconnect remote libp2p peer connections |
-| IsConnected | [IsConnectedRequest](#pb.IsConnectedRequest) | [IsConnectedResponse](#pb.IsConnectedResponse) | IsConnected is used to check if we are connected with a given peer |
-| EnableExtras | [EnableExtrasRequest](#pb.EnableExtrasRequest) | [Empty](#pb.Empty) | EnableExtras is used to enable a particular extras feature |
-| DisableExtras | [DisableExtrasRequest](#pb.DisableExtrasRequest) | [Empty](#pb.Empty) | DisableExtras is used to disable a particular extras feature |
+| ConnMgmt | [ConnMgmtRequest](#pb.ConnMgmtRequest) | [ConnMgmtResponse](#pb.ConnMgmtResponse) | ConnMgmt provides control over libp2p connections |
+| Extras | [ExtrasRequest](#pb.ExtrasRequest) | [Empty](#pb.Empty) | Extras provide control over node extras capabilities |
 | P2P | [P2PRequest](#pb.P2PRequest) | [P2PResponse](#pb.P2PResponse) | P2P allows control of generalized p2p streams for tcp/udp based protocol. By using this RPC, we can tunnel traffic similar to ssh tunneling except using libp2p as the transport layer, and and tcp/udp port. |
+| Blockstore | [BlockstoreRequest](#pb.BlockstoreRequest) | [BlockstoreResponse](#pb.BlockstoreResponse) | Blockstore allows low-level management of the underlying blockstore |
+| Dag | [DagRequest](#pb.DagRequest) | [DagResponse](#pb.DagResponse) | Dag is a unidirectional rpc allowing manipulation of low-level ipld objects |
+| Keystore | [KeystoreRequest](#pb.KeystoreRequest) | [KeystoreResponse](#pb.KeystoreResponse) | Keystore is a unidirectional RPC allowing management of ipfs keystores |
+| Persist | [PersistRequest](#pb.PersistRequest) | [PersistResponse](#pb.PersistResponse) | Persist is used to retrieve data from the network and make it available locally |
 
  
 
@@ -1126,58 +1006,10 @@ NodeAPI provide an API to control the underlying custom ipfs node
 
 
 
-<a name="pb.PubSubListPeersRequest"></a>
+<a name="pb.PubSubMessage"></a>
 
-### PubSubListPeersRequest
-PubSubListPeersRequest is used to return a list of
-peers that are subscribed to the given topic(s)
+### PubSubMessage
 
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topics | [string](#string) | repeated | the topics for which we should list peers for |
-
-
-
-
-
-
-<a name="pb.PubSubListPeersResponse"></a>
-
-### PubSubListPeersResponse
-PubSubListPeersResponse is a response to a ListPeersRequest
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| peers | [PubSubListPeersResponse.Peer](#pb.PubSubListPeersResponse.Peer) | repeated |  |
-
-
-
-
-
-
-<a name="pb.PubSubListPeersResponse.Peer"></a>
-
-### PubSubListPeersResponse.Peer
-peer is a single peer
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | topic is the topic this peer is a part of |
-| peerID | [string](#string) |  | lists the peerid for this peer |
-
-
-
-
-
-
-<a name="pb.PubSubMessageResponse"></a>
-
-### PubSubMessageResponse
-PubSubMessageResposne is a received pubsub message
-sent as a response to a subscription rpc call
 
 
 | Field | Type | Label | Description |
@@ -1194,56 +1026,71 @@ sent as a response to a subscription rpc call
 
 
 
-<a name="pb.PubSubPublishRequest"></a>
+<a name="pb.PubSubPeer"></a>
 
-### PubSubPublishRequest
-PubSubPublishRequest is a message used to publish data to a topic
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | the topic we are publishing too |
-| data | [bytes](#bytes) |  | the data we are publishing |
-| advertise | [bool](#bool) |  | whether or not we should engage in advertise operations |
-
-
-
-
-
-
-<a name="pb.PubSubSubscribeRequest"></a>
-
-### PubSubSubscribeRequest
-PubSubSubscribeRequest is used to initiate a subscription
-to a given pubsub topic and stream received messages
+### PubSubPeer
+represents an individual pubsub peer
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| topic | [string](#string) |  | the topic we should subscribe to |
-| discover | [bool](#bool) |  | indicates whether the server should perform service discover for peers on the same topic |
+| topic | [string](#string) |  | the topic this peer belongs to |
+| peerID | [string](#string) |  | the id of this peer |
 
 
 
 
 
 
-<a name="pb.PubSubTopicsResponse"></a>
+<a name="pb.PubSubRequest"></a>
 
-### PubSubTopicsResponse
-PubSubTopics is a response that returns
-the names of all known topics
+### PubSubRequest
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| names | [string](#string) | repeated | the names of topics |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  | indicates the particular PubSubAPI request being performed |
+| topics | [string](#string) | repeated | topics to request peers from, or publish data to sent by: PS_LIST_PEERS, PS_SUBSCRIBE, PS_PUBLISH |
+| data | [bytes](#bytes) |  | data to sent to topics sent by: PS_PUBLISH |
+
+
+
+
+
+
+<a name="pb.PubSubResponse"></a>
+
+### PubSubResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| requestType | [PSREQTYPE](#pb.PSREQTYPE) |  | indicates the particular PubSubAPI request being performed |
+| message | [PubSubMessage](#pb.PubSubMessage) | repeated | messages we have received from a topic sent by: PS_SUBSCRIBE |
+| topics | [string](#string) | repeated | topic names sent by: PS_GET_TOPICS |
+| peers | [PubSubPeer](#pb.PubSubPeer) | repeated | pubsub peers sent by: PS_LIST_PEERS |
 
 
 
 
 
  
+
+
+<a name="pb.PSREQTYPE"></a>
+
+### PSREQTYPE
+PSREQTYPE indicates the particular PubSubAPI request being performed
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| PS_GET_TOPICS | 0 | PS_GET_TOPICS is used to return a list of subscribed pubsub topics |
+| PS_LIST_PEERS | 1 | PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to |
+| PS_SUBSCRIBE | 2 | PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic |
+| PS_PUBLISH | 3 | PS_PUBLISH is used to publisbh a message to a pubsub topic |
+
 
  
 
@@ -1253,14 +1100,12 @@ the names of all known topics
 <a name="pb.PubSubAPI"></a>
 
 ### PubSubAPI
-PubSubAPI provides a gRPC API for a libp2p pubsub instance
+PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+`ipfs pubsub` subset of commands.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| PubSubGetTopics | [Empty](#pb.Empty) | [PubSubTopicsResponse](#pb.PubSubTopicsResponse) | PubSubGetTopics is used to return a list of all known topics the pubsub instance is subscribed to. |
-| PubSubListPeers | [PubSubListPeersRequest](#pb.PubSubListPeersRequest) | [PubSubListPeersResponse](#pb.PubSubListPeersResponse) | PubSubListPeers is used to return a list of peers subscribed to a given topic or topics. |
-| PubSubSubscribe | [PubSubSubscribeRequest](#pb.PubSubSubscribeRequest) | [PubSubMessageResponse](#pb.PubSubMessageResponse) stream | PubSubSubscribe is used to subscribe to a topic and receive messages Server will stream the messages received on the topic specified during the initial subscription call, and send each message back to the client as it is received. |
-| PubSubPublish | [PubSubPublishRequest](#pb.PubSubPublishRequest) stream | [Empty](#pb.Empty) | PubSubPublish is used to send a stream of messages to a pubsub topic. |
+| PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions using a bidirectional streaming API |
 
  
 

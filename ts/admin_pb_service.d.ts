@@ -22,20 +22,10 @@ type AdminAPIRefCount = {
   readonly responseType: typeof admin_pb.RefCountResponse;
 };
 
-type AdminAPIBlockstore = {
-  readonly methodName: string;
-  readonly service: typeof AdminAPI;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof admin_pb.BlockstoreRequest;
-  readonly responseType: typeof admin_pb.BlockstoreResponse;
-};
-
 export class AdminAPI {
   static readonly serviceName: string;
   static readonly ManageGC: AdminAPIManageGC;
   static readonly RefCount: AdminAPIRefCount;
-  static readonly Blockstore: AdminAPIBlockstore;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -87,15 +77,6 @@ export class AdminAPIClient {
   refCount(
     requestMessage: admin_pb.RefCountRequest,
     callback: (error: ServiceError|null, responseMessage: admin_pb.RefCountResponse|null) => void
-  ): UnaryResponse;
-  blockstore(
-    requestMessage: admin_pb.BlockstoreRequest,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: admin_pb.BlockstoreResponse|null) => void
-  ): UnaryResponse;
-  blockstore(
-    requestMessage: admin_pb.BlockstoreRequest,
-    callback: (error: ServiceError|null, responseMessage: admin_pb.BlockstoreResponse|null) => void
   ): UnaryResponse;
 }
 
