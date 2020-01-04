@@ -53,3 +53,59 @@ message Blob {
     // content is the actual binary data contained in this message
     bytes content = 1;
 }
+
+
+
+enum DIRREQTYPE {
+    START = 0;
+    FILE = 1;
+    // tell client to send next part
+    FILE_NEXT_PART = 2;
+    // indicates we are sending the next part of a file
+    FILE_PART_DATA = 3;
+    // indicates this is the last part of the file
+    FILE_PART_FINAL = 4;
+    NEXT = 5;
+    FINISHED = 6;
+    FINALIZED = 7;
+}
+message DirectoryUploadRequest {
+
+}
+
+
+/*
+sequenceDiagram
+Client->>Server: UploadDirectory
+Server->>Client: START(request type)
+loop File Uploads
+    Client->>Server: FILE (request type)
+    Server->>Client: NEXT (request type)
+end
+Client->>Server: FINISHED (request type)
+Server->>Client: FINALIZED (request type)
+sequenceDiagram
+Note over Client,Server: this starts the upload
+Client->>Server: UploadDirectory
+Server->>Client: START
+alt big file
+  Note over Client,Server: proces large files
+  loop upload
+      Client->>Server: FILE
+      loop process
+      Server->>Client: FILE_NEXT_PART
+      Client->>Server: FILE_PART_DATA
+      end
+      Client->>Server: FILE_FINAL_PART
+      Server->>Client: NEXT
+    end
+else small file
+  Note over Client,Server: proces large files
+  loop upload
+    Client->>Server: FILE
+    Server->>Client: NEXT
+  end
+end
+Client->>Server: FINISHED
+Server->>Client: FINALIZED
+*/
