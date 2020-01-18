@@ -160,6 +160,8 @@ node:
       # enable nat port mapping
       # useful if blocked by a residential connection
       natPortMap: "true"
+      # enables p2p stream capabilities, equivalent to ipfs p2p
+      enableP2PStreams: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -492,7 +494,10 @@ The `dht_options` section is used to provide optional control of kad dht we inst
 
 ### Host Options
 
-The `host_options` section is used to provide optional control of libp2p host configurations. It currently supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed. For documentation about the exact type of nat port mapping methods used please consult the [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat). 
+The `host_options` section is used to provide optional control of libp2p host configurations and supports the following configuration options:
+
+* `natPortMap` is used to enable nat port mapping capabilities through [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat)
+* `enableP2PStreams` is used to enabel "p2p streams" which is equivalent to the `ipfs p2p` command.
 
 ## Opts
 
