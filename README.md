@@ -14,7 +14,14 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Documentation
 
-We've got pretty extensive documentation located in the [doc](https://rtradeltd.github.io/TxPB/doc) folder, although the github pages version [here](https://rtradeltd.github.io/TxPB/) is much nicer to look at.
+* [Overview](https://rtradeltd.github.io/TxPB/doc)
+* [Getting Started](https://rtradeltd.github.io/TxPB/doc/GETTING_STARTED.md)
+* [Configuration File Documentation](https://rtradeltd.github.io/TxPB/doc/CONFIGURATION.md)
+* [Reference Counter Overview](https://rtradeltd.github.io/TxPB/doc/REFERENCE_COUNTER.md)
+* [License Key Overview](https://rtradeltd.github.io/TxPB/doc/LICENSE_OVERVIEW.md)
+* [Protocol Buffer Documentation](https://rtradeltd.github.io/TxPB/doc/PROTO.md)
+* [TemporalX HTTP Gateway](https://rtradeltd.github.io/TxPB/doc/GATEWAY.md)
+* [Benchmarks](https://rtradeltd.github.io/TxPB/doc/BENCHMARKS.md)
 
 # License
 
