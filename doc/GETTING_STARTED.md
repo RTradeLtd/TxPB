@@ -70,7 +70,7 @@ esac
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
-**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v1.0.0-rc4-3-g14ab982`**
+**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.1.1-3-gc8217ca`**
 
 ```
 NAME:
@@ -87,17 +87,19 @@ AUTHORS:
    George Xie <georgex@rtradetechnologies.com>
 
 COMMANDS:
+   admin    admin commands
    client   gRPC client subcommands
    config   configuration management tools
-   admin    admin commands
    server   run the gRPC api server
+   license  license management
    help, h  Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --bootstrap, --bp          bootstrap against public ipfs
+   --bootstrap, --bp          bootstrap against public ipfs (default: false)
    --config PATH, --cfg PATH  load the configuration file at PATH (default: "./config.yml")
-   --help, -h                 show help
-   --version, -v              print the version
+   --help, -h                 show help (default: false)
+   --version, -v              print the version (default: false)
+
 ```
 
 Global Options:
@@ -182,7 +184,7 @@ Additionally you can enable system profiling in the same way, however the path f
 
 ## Admin API
 
-Expose via `localhost:9999` we have an admin gRPC API that allows low-level management of TemporalX, in particular it allows blockstore management, and reference counting management. This API is only enabled when using the reference counted blockstore which is configured in the config file.
+Expose via `localhost:9999` we have an admin gRPC API that allows low-level management of TemporalX, in particular it allows managed the garbage collection of the reference counted blockstore.
 
 ## Logging
 
