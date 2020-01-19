@@ -5,8 +5,24 @@ proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen: gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-node gen-docs
+proto-gen: gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys 1gen-node gen-docs
 
+
+# builds the static website
+.PHONY: build-docs
+build-docs:
+	bundle exec jekyll build
+	
+# serve the docs locally, requires properly installing jekyll
+.PHONY: serve-docs
+serve-docs:
+	bundle exec jekyll serve
+
+# installs dependencies needed to serve docs locally
+.PHONY: install-docs
+install-docs:
+	gem install github-pages
+	bundle install
 
 # run standard go tooling for better readability
 .PHONY: tidy
