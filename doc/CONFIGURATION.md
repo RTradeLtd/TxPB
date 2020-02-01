@@ -74,6 +74,12 @@ node:
   - /ip4/0.0.0.0/tcp/4005
   # a hex encoded ed25519 private key
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  replication:
+    enabled: true
+    database_location: storage/replication/db.sqlite
+    grpc_port: 9094
+    white_list_location: storage/replication/publishers
+    replication_delay: 10m
   # configures the main datastore used for things like the dht, blockstore, etc...
   storage:
     # the type of datastore to use
@@ -90,6 +96,7 @@ node:
       fileLoadingMode: 2
       # enable/disable reference counted blockstore
       countedStore: true
+      counterMaxWorkers: 8
       # the key namespace used for the ref counter queue
       counterQueueNamespace: cqueuenamespace
       # the key namespace used for ref counter entries
@@ -153,6 +160,8 @@ node:
       # enable nat port mapping
       # useful if blocked by a residential connection
       natPortMap: "true"
+      # enables p2p stream capabilities, equivalent to ipfs p2p
+      enableP2PStreams: "true"
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -267,6 +276,8 @@ Configuration Options:
 The `node` section is used to configure the underlying libp2p, and ipfs subsystems used by TemporalX.
 
 <p align="left">
+  · <a href="#replication"><strong>Replication</strong></a>
+  <br>
   · <a href="#storage"><strong>Storage</strong></a>
   <br>
   · <a href="#peerstore"><strong>Peerstore</strong></a>
@@ -278,6 +289,30 @@ The `node` section is used to configure the underlying libp2p, and ipfs subsyste
   · <a href="#opts"><strong>Opts</strong></a> 
 </p>
 
+## Replication
+
+The `replication` section is used to configure the built-in replication protocol enabling groups of TemporalX node to replicate content between each other. Think IPFS Cluster, but extremely lightweight without complex consensus methods. The replication service uses an internal sqlite database to store replication state, and exposes a grpc port for communicating with other nodes. Server to server communication is secured by tls certificates derived from the nodes peer identity. 
+
+Example configuration:
+
+```yaml
+replication:
+  enabled: true
+  database_location: storage/replication/db.sqlite
+  grpc_port: 9094
+  white_list_location: storage/replication/publishers
+  replication_delay: 10m
+```
+
+A breakdown of replication configuration is as follows
+
+name                  | example            | explanation                                     |
+----------------------|--------------------|-------------------------------------------------|
+enabled               | true               | whether or not replication is enabled           |
+database_location     | vstorage/replication/db.sqlite | Location of the SQL database to keep track of replications. |
+grpc_port             | 9094                          | A dedicated TCP port for replication protocol. |
+white_list_location   | storage/replication/publishers | Location to a collection of peer public keys that are allowed to replicate on this server. The file format is raw protobuf as defined in github.com/libp2p/go-libp2p-core/crypto | 
+replication|delay | 10m | ReplicationDelay is the time between two replication runs. Uses golang time.Duration string types | 
 ## Storage
 
 The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` on top, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
@@ -320,6 +355,7 @@ LevelDB (reference counted)
     path: /temporalx/storage
     opts:
       countedStore: true
+      counterMaxWorkers: 8
       counterQueueNamespace: cqueuenamespace
       counterStoreNamespace: cstorenamespace
       counterStorePath: /temporalx/counterstore
@@ -333,6 +369,7 @@ countedStore          | true               | enables reference counted storage  
 counterQueueNamespace | counterqueuespace  | the key namespace for the counter queue         |
 counterStoreNamespace | counterstorespace  | the key namespace for the counter store         |
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
+counterMaxWorkers     | 10                 | the maximum number of concurrent reference counter operations (default 1) |
 
 ## Peerstore
 
@@ -457,7 +494,10 @@ The `dht_options` section is used to provide optional control of kad dht we inst
 
 ### Host Options
 
-The `host_options` section is used to provide optional control of libp2p host configurations. It currently supports one setting `natPortMap` which is used to enabled nat port mapping capabilities, and can be useful in situations where punching through NAT is needed. For documentation about the exact type of nat port mapping methods used please consult the [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat). 
+The `host_options` section is used to provide optional control of libp2p host configurations and supports the following configuration options:
+
+* `natPortMap` is used to enable nat port mapping capabilities through [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat)
+* `enableP2PStreams` is used to enabel "p2p streams" which is equivalent to the `ipfs p2p` command.
 
 ## Opts
 
@@ -465,10 +505,14 @@ The `opts` section is used to provide generalized configuration of TemporalX's I
 
 Configuration Options:
 
+* `idStore` is used to enable optimized handling of identity hashes by enabling the `IDStore`, at the cost of decreasesd performance for all other types of blocks
 * `blockstoreCaching` is used to enable a bloom+arc cache that sits on top of the blockstore, which can be used to improve query performance and reduce disk IO at the cost of increased memory consumption.
 * `lowPower` is used to enable preference for settings friendly to low power devices.
 * `pubsub` is used to enable the libp2p pubsub subsystem. It is disabled by default.
 * `namesys` is used to enable the libp2p name resolution subsystem which provdies support for resolving IPNS, ENS, DNSLink, and more. It is disabled by default.
+* `ipnsps`is used to enable IPNS PubSub transport/router (this reuqires enabling pubsub + namesys)
+* `discovery` is used to enable service discovery
+* `discoveryBackoff` is used to enable an advanced service discovery mechanism at the cost of increased resource consumption
 
 
 # Config File Templates

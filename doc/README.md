@@ -7,6 +7,7 @@ This folder contains all of our documentation including protocol buffer docs, co
 * [Getting Started](GETTING_STARTED.md)
 * [Configuration File Documentation](CONFIGURATION.md)
 * [Reference Counter Overview](REFERENCE_COUNTER.md)
+* [Replication Overview](REPLICATION.md)
 * [License Key Overview](LICENSE_OVERVIEW.md)
 * [Protocol Buffer Documentation](PROTO.md)
 * [TemporalX HTTP Gateway](GATEWAY.md)
