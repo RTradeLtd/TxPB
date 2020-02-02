@@ -20,24 +20,24 @@ Each server can be directly connected to by a network agent and have the followi
 To maintain a minimum number of reachable and active servers, an agent runs the following pseudocode:
 
 ``` pseudocode
-    // Part 1: Collect and retrieves the state of each server.
-    for each listed server {
-        if (not reachable){
-            ignore it
-        }else if (is active){
-            add server to list A
-        }else{
-            add server to list R
-        }
+// Part 1: Collect and retrieves the state of each server.
+for each listed server {
+    if (not reachable){
+        ignore it
+    }else if (is active){
+        add server to list A
+    }else{
+        add server to list R
     }
+}
 
-    // Part 2: Activate servers until Replication Factor is reached, or run out of reserves.
-    while (|A| < ReplicationFactor) and (|R| > 0){
-        R1, R = R[0], R[1:]
-        if (activate R1, and is successful){
-            add R1 to A
-        }
+// Part 2: Activate servers until Replication Factor is reached, or run out of reserves.
+while (|A| < ReplicationFactor) and (|R| > 0){
+    R1, R = R[0], R[1:]
+    if (activate R1, and is successful){
+        add R1 to A
     }
+}
 ```
 
 After initiation, all active servers periodically runs the above algorithm, therefor maintaining a self
