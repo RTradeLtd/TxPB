@@ -23,8 +23,8 @@ message NameSysResolveRequest {
     // before selecting the best record
     uint32 dhtRecordCount = 3;
     // the amount of time to wait
-    // for records to be fetched and verified
-    int32  dhtTimeout = 4; 
+    // values are time.Duration so 1s, 1h, 10h, etc.. are acceptable values
+    string  dhtTimeout = 4; 
 }
 
 // NameSysResolveRequest is an answer to a resolve request
@@ -41,11 +41,13 @@ message NameSysPublishRequest {
     bytes privateKey = 1;
     // the value of this record
     string value = 2;
-    // the eol for this publish, if 0 implies
-    // as NameSys::Publish call, if non 0 implies
+    // the eol for this publish, if empty string
+    // as NameSys::Publish call, if non empty string implies
     // a NameSys:PublishWithEOL call
-    int32  eol = 3;
+    // values are time.Duration so 1s, 1h, 10h, etc.. are acceptable val
+    string  eol = 3;
     // if set, allows us to override default
     // ttl value of ipns records
-    int32  ttl = 4;
+    // values are time.Duration so 1s, 1h, 10h, etc.. are acceptable val
+    string  ttl = 4;
 }
