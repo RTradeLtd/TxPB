@@ -1,0 +1,91 @@
+syntax = "proto3";
+package pb;
+
+// Replication message is a signable data structure to represent a replication scheme
+message Replication{
+    // Header must be "rtrade-replication v0..." for development stage, this is a required security header.
+    // - Avoid collision from other signed data.
+    // - Allow future versions to require different validation rules.
+    // Any signer must understand every header tag to sign documents.
+    string header = 1;
+    // CIDs is the list of contents to replicate.
+    // Please use helper functions GetCIDs and AddCIDs for this field
+    repeated bytes cids_bytes = 2;
+    // Servers list the candidate severs to replicate to, in the order of preference.
+    repeated ServerSource servers = 3;
+    // replication_factor is the number of replications desired.
+    int32 replication_factor = 4;
+    // refresh_interval_seconds is the *suggested* number of seconds to wait before checking 
+    // if a remote server is up. The first check should be random from 0 to refresh_interval_seconds.
+    // Each replicator can have it's own max_interval. A sensible default value should be used if it is 0.
+    int32 refresh_interval_seconds = 5;
+    // server_down_delay_seconds is the number of seconds to wait after a server is down before the 
+    // next reserved server is requested to be active. A sensible default value should be used if it is 0.
+    int32 server_down_delay_seconds = 6;
+}
+
+// ServerSource is a list of one or more servers.
+// TODO: add field to allow referring to a list of servers from another file.
+message ServerSource {
+    AddrInfo addr_info = 1;
+}
+
+// AddrInfo can be used to ID and locate a server (see also libp2p/go-libp2p-core/peer#AddrInfo)
+message AddrInfo {
+    // id_bytes is a libp2p peer identity. It is used to verity the Peer's public key.
+    // Please use helper functions GetID and SetID for this field
+    bytes id_bytes = 1;
+    // addrBytes are bytes of Multiaddr for locating this peer.
+    // Please use helper functions GetMultiAddrs, and SetMultiAddrs for this field.
+    repeated bytes addrs_bytes = 2;
+    // grpc port for replication protocol. will be optional once grpc is integrated into multistream.
+    int32 grpc_port = 3;
+}
+
+
+// The replicator provides replication services.
+service replicator {
+    // Add is used to add a replication to this server, changing it's status from reserved to active.
+    rpc Add (Subscription) returns (stream ReplicationStatus);
+    // Status returns an updating stream of the replication status on the server.
+    rpc Status (Subscription) returns (stream ReplicationStatus);
+    // GetSubscriptionUpdate returns the latest version of subscribed replication
+    rpc GetSubscriptionUpdate (Subscription) returns (SubscriptionUpdate);
+    // SubmitReplication is used by client agents to start replications, after they 
+    // have uploaded the files and retrieved the cid, and collected servers to replicate too.
+    rpc SubmitReplication (SignedSubscription) returns (stream ReplicationStatus);
+}
+
+message Subscription{
+    string topic = 1;
+    bytes author_id_bytes = 2;
+    //if true, remove this Subscription.
+    //For replicator.Add, deactive this replication.
+    //For replicator.WaitForUpdates, stop reporting updates.
+    bool remove = 3; 
+}
+
+message ReplicationStatus{
+    //ok report success for action submitted
+    bool ok = 1;
+    //is_active report if the replication is currently active on this server
+    bool is_active = 2;
+    //current_version is the highest version this replicator/server has locally.
+    int64 current_version = 3;
+    //target_version is the highest version this replicator/server knows about and can verify to exist.
+    int64 target_version = 4;
+}
+
+message SubscriptionUpdate{
+    //strictly increasing version number
+    int64 version = 1;
+    //replication file is in bytes for signing
+    bytes replication_bytes = 2;
+    //signature signs the Subscription and above data in length delimited form in the order topic|author|version|replication
+    bytes signature = 3;
+}
+
+message SignedSubscription{
+    Subscription sub_part = 1;
+    SubscriptionUpdate update_part = 2;
+}

@@ -320,6 +320,43 @@ gen-namesys:
   		--grpc-java_out=java \
 		pb/namesys.proto
 
+gen-replication:
+	# generate golang bindings (replication)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		pb/replication.proto \
+		--gogofaster_out=plugins=grpc:go
+	# generate python bindings (replication)
+	python3 -m grpc_tools.protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		pb/replication.proto \
+		--python_out=py \
+		--grpc_python_out=py
+	# generate typescript bindings (replication)
+	protoc \
+		--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--ts_out=service=grpc-web:ts \
+		pb/replication.proto
+	# generate javascript bindings (replication)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--js_out=import_style=commonjs,binary:js \
+		--grpc_out=js \
+		--plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
+		pb/replication.proto
+	# generate java bindings (replication)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
+  		--grpc-java_out=java \
+		pb/replication.proto
+
 gen-docs:
 		# generate documentation
 	protoc \
