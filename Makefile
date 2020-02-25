@@ -326,7 +326,7 @@ gen-replication:
 		-I=pb \
 		-I=${GOPATH}/src \
 		pb/replication.proto \
-		--gogofaster_out=plugins=grpc:go
+		--gogofast_out=plugins=grpc:go
 	# generate python bindings (replication)
 	python3 -m grpc_tools.protoc \
 		-I=pb \
