@@ -112,7 +112,7 @@ node:
     datastore:
       type: leveldb
       path: /temporalx/peerstore
-  # configure underyling keystore
+  # configure underlying keystore
   keystore:
     # the type of keystore to use
     # accepted values: krab, memory, filesystem
@@ -259,7 +259,7 @@ Configuration Options:
 
 The `gateway` section is used to configure the IPFS HTTP Gateway that TemporalX exposes. It has feature parity with `go-ipfs` to a certain extent, ignoring some of the `X-Ipfs-*` headers, while also supporting `/ipld` lookups. When encountering UnixFS directories, a slightly different "directory index" is displayed than what is shown when using `go-ipfs`.
 
-The gateway http server by default enables gzip "level 3" compression, and has a max processing limit of 1000 requests/second, and a 2 minute timeout for inactive connections. Eventually these will be configurable, but for now they are some sensible defualts. Additionally the gateway will error out when processing a request body 1GB or larger in size.
+The gateway http server by default enables gzip "level 3" compression, and has a max processing limit of 1000 requests/second, and a 2 minute timeout for inactive connections. Eventually these will be configurable, but for now they are some sensible defaults. Additionally the gateway will error out when processing a request body 1GB or larger in size.
 
 The gateway offers no write capabilities, and is strictly focused on read-only purposes. Planned features include an in-memory cache. 
 
