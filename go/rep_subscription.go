@@ -88,8 +88,7 @@ func (u *SubscriptionUpdate) GetReplication() (*Replication, error) {
 		return nil, status.Error(codes.Internal, "ReplicationBytes is nil for GetReplication")
 	}
 	var r Replication
-	err := r.Unmarshal(u.ReplicationBytes)
-	if err != nil {
+	if err := r.Unmarshal(u.ReplicationBytes); err != nil {
 		return nil, err
 	}
 	return &r, nil

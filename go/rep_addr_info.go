@@ -8,7 +8,7 @@ import (
 	"github.com/multiformats/go-multiaddr"
 )
 
-// HostInfo is an interface that we can build a AddrInfo from.
+// HostInfo is an interface that we can build an AddrInfo from.
 // It is a subset of libp2p/go-libp2p-core/host/#Host.
 type HostInfo interface {
 	ID() peer.ID
@@ -33,7 +33,7 @@ func NewAddrInfoFromHost(h HostInfo, gport int32) (*AddrInfo, error) {
 }
 
 // GetID returns the libp2p PeerID of AddrInfo,
-// unless any error is encountered during decoding.
+// unless an error is encountered during decoding.
 func (a *AddrInfo) GetID() (peer.ID, error) {
 	return peer.IDFromBytes(a.IdBytes)
 }
@@ -49,7 +49,7 @@ func (a *AddrInfo) SetID(id peer.ID) {
 
 // GetMultiAddrs returns the location addresses of AddrInfo as Multiaddres.
 // If Multiaddr contains an ID part, it must match ID in AddrInfo.
-// If any error is encountered during decoding, the first error is returned,
+// If any errors are encountered during decoding, the first error is returned,
 // and the returned Multiaddr will only contain good addresses.
 func (a *AddrInfo) GetMultiAddrs() ([]multiaddr.Multiaddr, error) {
 	ms := make([]multiaddr.Multiaddr, 0, len(a.AddrsBytes))
