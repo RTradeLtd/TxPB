@@ -47,7 +47,7 @@ func (a *AddrInfo) SetID(id peer.ID) {
 	a.IdBytes = bs
 }
 
-// GetMultiAddrs returns the location addresses of AddrInfo as Multiaddres.
+// GetMultiAddrs returns the location addresses of AddrInfo as a []Multiaddr.
 // If Multiaddr contains an ID part, it must match ID in AddrInfo.
 // If any errors are encountered during decoding, the first error is returned,
 // and the returned Multiaddr will only contain good addresses.
