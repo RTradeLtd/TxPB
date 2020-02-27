@@ -139,6 +139,9 @@ func (ss *SignedSubscription) Sign(key libcryto.PrivKey) error {
 	if err != nil && len(ss.GetSubPart().GetAuthorIdBytes()) != 0 {
 		return fmt.Errorf("invalid old AuthorID: %s", err)
 	}
+	if key == nil {
+		return errors.New("can not sign a subscription with a nil key")
+	}
 	signingAuthor, err := peer.IDFromPrivateKey(key)
 	if err != nil {
 		return err

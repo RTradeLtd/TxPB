@@ -7,6 +7,42 @@ import (
 	libcryto "github.com/libp2p/go-libp2p-core/crypto"
 )
 
+func TestNewSignedSubscription(t *testing.T) {
+	r := generateTestReplicationFile(t, 2, 2)
+	key := getMockHostKey(0).priv
+	type args struct {
+		topic   string
+		version int64
+		r       *Replication
+		key     libcryto.PrivKey
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{{"ok", args{"topic", 1, r, key}, false},
+		{"fail no replication file", args{"topic", 1, nil, key}, true},
+		{"fail no signing key", args{"topic", 1, r, nil}, true}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewSignedSubscription(tt.args.topic, tt.args.version, tt.args.r, tt.args.key)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("NewSignedSubscription() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if err != nil {
+				if got != nil {
+					t.Errorf("NewSignedSubscription() error = %v, but also received value %v", err, got)
+				}
+				return
+			}
+			if got.GetTopic() != tt.args.topic {
+				t.Errorf("unexpected topic: %v", got.GetTopic())
+			}
+		})
+	}
+}
+
 func TestSignedSubscription_Verify(t *testing.T) {
 	key1 := getMockHostKey(1)
 	key2 := getMockHostKey(2)

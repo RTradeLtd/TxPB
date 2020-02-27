@@ -60,6 +60,9 @@ func (r *Replication) Valid(strict bool) error {
 //
 // If strict, then unknown extensions are not allowed.
 func (r *Replication) GetHeaderString(strict bool) (string, error) {
+	if r == nil {
+		return "", fmt.Errorf(`can not get header from nil replication`)
+	}
 	if strict {
 		if r.Header != header {
 			return "", fmt.Errorf(`header "%s" does not match "%s"`, r.Header, header)
