@@ -100,7 +100,7 @@ func (r *Replication) GetCIDs() ([]cid.Cid, error) {
 func (r *Replication) AddCIDs(cids ...cid.Cid) error {
 	startLen := len(r.CidsBytes)
 	for _, c := range cids {
-		if _, err := cid.Cast(c.Bytes()); err != nil {
+		if _, err := cid.Cast(c.Bytes()); err != nil { // this "recasting" is to make sure we have a valid cid
 			r.CidsBytes = r.CidsBytes[:startLen] // don't add any cids if we return an error
 			return err
 		}
