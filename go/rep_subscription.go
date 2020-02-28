@@ -132,15 +132,15 @@ func (ss *SignedSubscription) RemoveSignature() {
 
 //Sign signs with the given private key
 func (ss *SignedSubscription) Sign(key libcryto.PrivKey) error {
+	if key == nil {
+		return errors.New("can not sign a subscription with a nil key")
+	}
 	if len(ss.GetUpdatePart().GetReplicationBytes()) == 0 {
 		return errors.New("can not sign a subscription for an empty replication")
 	}
 	oldAuthor, err := ss.GetAuthorID()
 	if err != nil && len(ss.GetSubPart().GetAuthorIdBytes()) != 0 {
 		return fmt.Errorf("invalid old AuthorID: %s", err)
-	}
-	if key == nil {
-		return errors.New("can not sign a subscription with a nil key")
 	}
 	signingAuthor, err := peer.IDFromPrivateKey(key)
 	if err != nil {
