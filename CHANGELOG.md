@@ -2,7 +2,7 @@
 
 Tracks changes made in between releases
 
-# v3.0.1
+# v3.1.0
 
 * Migrate replication protos out of `node` into `TxPB` [#45](https://github.com/RTradeLtd/TxPB/pull/45)
 * Change replication documentation to markdown format [#40](https://github.com/RTradeLtd/TxPB/pull/40)
