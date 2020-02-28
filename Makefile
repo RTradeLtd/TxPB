@@ -59,7 +59,6 @@ install:
 	npm install -g grpc-tools
 	python3 -m pip install grpcio-tools
 	bash .script/protoc-js.sh
-	# bash .script/protoc-java.sh
 
 # protocol buffer generation targets
 
