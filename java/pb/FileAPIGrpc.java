@@ -21,7 +21,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: file.proto")
 public final class FileAPIGrpc {
 
@@ -44,22 +44,21 @@ public final class FileAPIGrpc {
     if ((getUploadFileMethod = FileAPIGrpc.getUploadFileMethod) == null) {
       synchronized (FileAPIGrpc.class) {
         if ((getUploadFileMethod = FileAPIGrpc.getUploadFileMethod) == null) {
-          FileAPIGrpc.getUploadFileMethod = getUploadFileMethod = 
+          FileAPIGrpc.getUploadFileMethod = getUploadFileMethod =
               io.grpc.MethodDescriptor.<pb.File.UploadRequest, pb.Util.PutResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.FileAPI", "UploadFile"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UploadFile"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.File.UploadRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.PutResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new FileAPIMethodDescriptorSupplier("UploadFile"))
-                  .build();
-          }
+              .setSchemaDescriptor(new FileAPIMethodDescriptorSupplier("UploadFile"))
+              .build();
         }
-     }
-     return getUploadFileMethod;
+      }
+    }
+    return getUploadFileMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.File.DownloadRequest,
@@ -76,29 +75,35 @@ public final class FileAPIGrpc {
     if ((getDownloadFileMethod = FileAPIGrpc.getDownloadFileMethod) == null) {
       synchronized (FileAPIGrpc.class) {
         if ((getDownloadFileMethod = FileAPIGrpc.getDownloadFileMethod) == null) {
-          FileAPIGrpc.getDownloadFileMethod = getDownloadFileMethod = 
+          FileAPIGrpc.getDownloadFileMethod = getDownloadFileMethod =
               io.grpc.MethodDescriptor.<pb.File.DownloadRequest, pb.File.DownloadResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.FileAPI", "DownloadFile"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DownloadFile"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.File.DownloadRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.File.DownloadResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new FileAPIMethodDescriptorSupplier("DownloadFile"))
-                  .build();
-          }
+              .setSchemaDescriptor(new FileAPIMethodDescriptorSupplier("DownloadFile"))
+              .build();
         }
-     }
-     return getDownloadFileMethod;
+      }
+    }
+    return getDownloadFileMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static FileAPIStub newStub(io.grpc.Channel channel) {
-    return new FileAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<FileAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<FileAPIStub>() {
+        @java.lang.Override
+        public FileAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new FileAPIStub(channel, callOptions);
+        }
+      };
+    return FileAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -106,7 +111,14 @@ public final class FileAPIGrpc {
    */
   public static FileAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new FileAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<FileAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<FileAPIBlockingStub>() {
+        @java.lang.Override
+        public FileAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new FileAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return FileAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -114,7 +126,14 @@ public final class FileAPIGrpc {
    */
   public static FileAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new FileAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<FileAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<FileAPIFutureStub>() {
+        @java.lang.Override
+        public FileAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new FileAPIFutureStub(channel, callOptions);
+        }
+      };
+    return FileAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -169,19 +188,15 @@ public final class FileAPIGrpc {
    * FileAPI provides a gRPC api to upload/download files as UnixFS objects
    * </pre>
    */
-  public static final class FileAPIStub extends io.grpc.stub.AbstractStub<FileAPIStub> {
-    private FileAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private FileAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class FileAPIStub extends io.grpc.stub.AbstractAsyncStub<FileAPIStub> {
+    private FileAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected FileAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected FileAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new FileAPIStub(channel, callOptions);
     }
 
@@ -213,19 +228,15 @@ public final class FileAPIGrpc {
    * FileAPI provides a gRPC api to upload/download files as UnixFS objects
    * </pre>
    */
-  public static final class FileAPIBlockingStub extends io.grpc.stub.AbstractStub<FileAPIBlockingStub> {
-    private FileAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private FileAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class FileAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<FileAPIBlockingStub> {
+    private FileAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected FileAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected FileAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new FileAPIBlockingStub(channel, callOptions);
     }
 
@@ -246,19 +257,15 @@ public final class FileAPIGrpc {
    * FileAPI provides a gRPC api to upload/download files as UnixFS objects
    * </pre>
    */
-  public static final class FileAPIFutureStub extends io.grpc.stub.AbstractStub<FileAPIFutureStub> {
-    private FileAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private FileAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class FileAPIFutureStub extends io.grpc.stub.AbstractFutureStub<FileAPIFutureStub> {
+    private FileAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected FileAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected FileAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new FileAPIFutureStub(channel, callOptions);
     }
   }

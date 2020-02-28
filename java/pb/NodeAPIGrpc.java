@@ -21,7 +21,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: node.proto")
 public final class NodeAPIGrpc {
 
@@ -44,22 +44,21 @@ public final class NodeAPIGrpc {
     if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getConnMgmtMethod = NodeAPIGrpc.getConnMgmtMethod) == null) {
-          NodeAPIGrpc.getConnMgmtMethod = getConnMgmtMethod = 
+          NodeAPIGrpc.getConnMgmtMethod = getConnMgmtMethod =
               io.grpc.MethodDescriptor.<pb.Node.ConnMgmtRequest, pb.Node.ConnMgmtResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "ConnMgmt"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ConnMgmt"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.ConnMgmtRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.ConnMgmtResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("ConnMgmt"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("ConnMgmt"))
+              .build();
         }
-     }
-     return getConnMgmtMethod;
+      }
+    }
+    return getConnMgmtMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.ExtrasRequest,
@@ -76,22 +75,21 @@ public final class NodeAPIGrpc {
     if ((getExtrasMethod = NodeAPIGrpc.getExtrasMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getExtrasMethod = NodeAPIGrpc.getExtrasMethod) == null) {
-          NodeAPIGrpc.getExtrasMethod = getExtrasMethod = 
+          NodeAPIGrpc.getExtrasMethod = getExtrasMethod =
               io.grpc.MethodDescriptor.<pb.Node.ExtrasRequest, pb.Util.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Extras"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Extras"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.ExtrasRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Extras"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Extras"))
+              .build();
         }
-     }
-     return getExtrasMethod;
+      }
+    }
+    return getExtrasMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.P2PRequest,
@@ -108,22 +106,21 @@ public final class NodeAPIGrpc {
     if ((getP2PMethod = NodeAPIGrpc.getP2PMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getP2PMethod = NodeAPIGrpc.getP2PMethod) == null) {
-          NodeAPIGrpc.getP2PMethod = getP2PMethod = 
+          NodeAPIGrpc.getP2PMethod = getP2PMethod =
               io.grpc.MethodDescriptor.<pb.Node.P2PRequest, pb.Node.P2PResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "P2P"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "P2P"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.P2PRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.P2PResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("P2P"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("P2P"))
+              .build();
         }
-     }
-     return getP2PMethod;
+      }
+    }
+    return getP2PMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
@@ -140,22 +137,21 @@ public final class NodeAPIGrpc {
     if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getBlockstoreMethod = NodeAPIGrpc.getBlockstoreMethod) == null) {
-          NodeAPIGrpc.getBlockstoreMethod = getBlockstoreMethod = 
+          NodeAPIGrpc.getBlockstoreMethod = getBlockstoreMethod =
               io.grpc.MethodDescriptor.<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Blockstore"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Blockstore"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.BlockstoreRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.BlockstoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Blockstore"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Blockstore"))
+              .build();
         }
-     }
-     return getBlockstoreMethod;
+      }
+    }
+    return getBlockstoreMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.DagRequest,
@@ -172,22 +168,21 @@ public final class NodeAPIGrpc {
     if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getDagMethod = NodeAPIGrpc.getDagMethod) == null) {
-          NodeAPIGrpc.getDagMethod = getDagMethod = 
+          NodeAPIGrpc.getDagMethod = getDagMethod =
               io.grpc.MethodDescriptor.<pb.Node.DagRequest, pb.Node.DagResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Dag"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Dag"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.DagRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.DagResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Dag"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Dag"))
+              .build();
         }
-     }
-     return getDagMethod;
+      }
+    }
+    return getDagMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.KeystoreRequest,
@@ -204,22 +199,21 @@ public final class NodeAPIGrpc {
     if ((getKeystoreMethod = NodeAPIGrpc.getKeystoreMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getKeystoreMethod = NodeAPIGrpc.getKeystoreMethod) == null) {
-          NodeAPIGrpc.getKeystoreMethod = getKeystoreMethod = 
+          NodeAPIGrpc.getKeystoreMethod = getKeystoreMethod =
               io.grpc.MethodDescriptor.<pb.Node.KeystoreRequest, pb.Node.KeystoreResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Keystore"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Keystore"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.KeystoreRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.KeystoreResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Keystore"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Keystore"))
+              .build();
         }
-     }
-     return getKeystoreMethod;
+      }
+    }
+    return getKeystoreMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Node.PersistRequest,
@@ -236,29 +230,35 @@ public final class NodeAPIGrpc {
     if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
       synchronized (NodeAPIGrpc.class) {
         if ((getPersistMethod = NodeAPIGrpc.getPersistMethod) == null) {
-          NodeAPIGrpc.getPersistMethod = getPersistMethod = 
+          NodeAPIGrpc.getPersistMethod = getPersistMethod =
               io.grpc.MethodDescriptor.<pb.Node.PersistRequest, pb.Node.PersistResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NodeAPI", "Persist"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Persist"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.PersistRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Node.PersistResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Persist"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("Persist"))
+              .build();
         }
-     }
-     return getPersistMethod;
+      }
+    }
+    return getPersistMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static NodeAPIStub newStub(io.grpc.Channel channel) {
-    return new NodeAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NodeAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NodeAPIStub>() {
+        @java.lang.Override
+        public NodeAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NodeAPIStub(channel, callOptions);
+        }
+      };
+    return NodeAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -266,7 +266,14 @@ public final class NodeAPIGrpc {
    */
   public static NodeAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new NodeAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NodeAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NodeAPIBlockingStub>() {
+        @java.lang.Override
+        public NodeAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NodeAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return NodeAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -274,7 +281,14 @@ public final class NodeAPIGrpc {
    */
   public static NodeAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new NodeAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NodeAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NodeAPIFutureStub>() {
+        @java.lang.Override
+        public NodeAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NodeAPIFutureStub(channel, callOptions);
+        }
+      };
+    return NodeAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -338,7 +352,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
     public void keystore(pb.Node.KeystoreRequest request,
@@ -416,19 +430,15 @@ public final class NodeAPIGrpc {
    * NodeAPI provide an API to control the underlying custom ipfs node
    * </pre>
    */
-  public static final class NodeAPIStub extends io.grpc.stub.AbstractStub<NodeAPIStub> {
-    private NodeAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NodeAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NodeAPIStub extends io.grpc.stub.AbstractAsyncStub<NodeAPIStub> {
+    private NodeAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NodeAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NodeAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NodeAPIStub(channel, callOptions);
     }
 
@@ -491,7 +501,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
     public void keystore(pb.Node.KeystoreRequest request,
@@ -517,19 +527,15 @@ public final class NodeAPIGrpc {
    * NodeAPI provide an API to control the underlying custom ipfs node
    * </pre>
    */
-  public static final class NodeAPIBlockingStub extends io.grpc.stub.AbstractStub<NodeAPIBlockingStub> {
-    private NodeAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NodeAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NodeAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<NodeAPIBlockingStub> {
+    private NodeAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NodeAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NodeAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NodeAPIBlockingStub(channel, callOptions);
     }
 
@@ -587,7 +593,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
     public pb.Node.KeystoreResponse keystore(pb.Node.KeystoreRequest request) {
@@ -611,19 +617,15 @@ public final class NodeAPIGrpc {
    * NodeAPI provide an API to control the underlying custom ipfs node
    * </pre>
    */
-  public static final class NodeAPIFutureStub extends io.grpc.stub.AbstractStub<NodeAPIFutureStub> {
-    private NodeAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NodeAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NodeAPIFutureStub extends io.grpc.stub.AbstractFutureStub<NodeAPIFutureStub> {
+    private NodeAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NodeAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NodeAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NodeAPIFutureStub(channel, callOptions);
     }
 
@@ -686,7 +688,7 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
-     *Keystore is a unidirectional RPC allowing management of ipfs keystores
+     * Keystore is a unidirectional RPC allowing management of ipfs keystores
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<pb.Node.KeystoreResponse> keystore(

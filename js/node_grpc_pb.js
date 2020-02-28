@@ -163,7 +163,7 @@ function deserialize_pb_PersistResponse(buffer_arg) {
 // NodeAPI provide an API to control the underlying custom ipfs node
 var NodeAPIService = exports.NodeAPIService = {
   // ConnMgmt provides control over libp2p connections
-  connMgmt: {
+connMgmt: {
     path: '/pb.NodeAPI/ConnMgmt',
     requestStream: false,
     responseStream: false,
@@ -175,7 +175,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_ConnMgmtResponse,
   },
   // Extras provide control over node extras capabilities
-  extras: {
+extras: {
     path: '/pb.NodeAPI/Extras',
     requestStream: false,
     responseStream: false,
@@ -187,9 +187,9 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_Empty,
   },
   // P2P allows control of generalized p2p streams for tcp/udp based protocol.
-  // By using this RPC, we can tunnel traffic similar to ssh tunneling
-  // except using libp2p as the transport layer, and and tcp/udp port.
-  p2P: {
+// By using this RPC, we can tunnel traffic similar to ssh tunneling
+// except using libp2p as the transport layer, and and tcp/udp port.
+p2P: {
     path: '/pb.NodeAPI/P2P',
     requestStream: false,
     responseStream: false,
@@ -201,7 +201,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_P2PResponse,
   },
   // Blockstore allows low-level management of the underlying blockstore
-  blockstore: {
+blockstore: {
     path: '/pb.NodeAPI/Blockstore',
     requestStream: false,
     responseStream: false,
@@ -213,7 +213,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_BlockstoreResponse,
   },
   // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
-  dag: {
+dag: {
     path: '/pb.NodeAPI/Dag',
     requestStream: false,
     responseStream: false,
@@ -225,7 +225,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_DagResponse,
   },
   // Keystore is a unidirectional RPC allowing management of ipfs keystores
-  keystore: {
+keystore: {
     path: '/pb.NodeAPI/Keystore',
     requestStream: false,
     responseStream: false,
@@ -237,7 +237,7 @@ var NodeAPIService = exports.NodeAPIService = {
     responseDeserialize: deserialize_pb_KeystoreResponse,
   },
   // Persist is used to retrieve data from the network and make it available locally
-  persist: {
+persist: {
     path: '/pb.NodeAPI/Persist',
     requestStream: false,
     responseStream: false,

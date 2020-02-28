@@ -52,7 +52,7 @@ function deserialize_pb_RefCountResponse(buffer_arg) {
 // AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
 var AdminAPIService = exports.AdminAPIService = {
   // ManageGC is used to manage TemporalX's garbage collection process
-  manageGC: {
+manageGC: {
     path: '/pb.AdminAPI/ManageGC',
     requestStream: false,
     responseStream: false,
@@ -64,7 +64,7 @@ var AdminAPIService = exports.AdminAPIService = {
     responseDeserialize: deserialize_pb_ManageGCResponse,
   },
   // RefCount is used to analyze the counter store and pull reference count information
-  refCount: {
+refCount: {
     path: '/pb.AdminAPI/RefCount',
     requestStream: false,
     responseStream: false,

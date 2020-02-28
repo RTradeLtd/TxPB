@@ -91,6 +91,20 @@
     - [PubSubAPI](#pb.PubSubAPI)
   
 
+- [replication.proto](#replication.proto)
+    - [AddrInfo](#pb.AddrInfo)
+    - [Replication](#pb.Replication)
+    - [ReplicationStatus](#pb.ReplicationStatus)
+    - [ServerSource](#pb.ServerSource)
+    - [SignedSubscription](#pb.SignedSubscription)
+    - [Subscription](#pb.Subscription)
+    - [SubscriptionUpdate](#pb.SubscriptionUpdate)
+  
+  
+  
+    - [replicator](#pb.replicator)
+  
+
 - [status.proto](#status.proto)
     - [StatusResponse](#pb.StatusResponse)
     - [VersionResponse](#pb.VersionResponse)
@@ -460,7 +474,7 @@ NameSysAPI provides a generic name resolution API
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | cid | [string](#string) |  | cid is the identifier of the block |
-| data | [bytes](#bytes) |  | data is the actual contnets of this block |
+| data | [bytes](#bytes) |  | data is the actual contents of the block |
 
 
 
@@ -1106,6 +1120,156 @@ PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | PubSub | [PubSubRequest](#pb.PubSubRequest) stream | [PubSubResponse](#pb.PubSubResponse) stream | PubSub allows controlling libp2p pubsub topics and subscriptions using a bidirectional streaming API |
+
+ 
+
+
+
+<a name="replication.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## replication.proto
+
+
+
+<a name="pb.AddrInfo"></a>
+
+### AddrInfo
+AddrInfo can be used to ID and locate a server (see also libp2p/go-libp2p-core/peer#AddrInfo)
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id_bytes | [bytes](#bytes) |  | id_bytes is a libp2p peer identity. It is used to verity the Peer&#39;s public key. Please use helper functions GetID and SetID for this field |
+| addrs_bytes | [bytes](#bytes) | repeated | addrBytes are bytes of Multiaddr for locating this peer. Please use helper functions GetMultiAddrs, and SetMultiAddrs for this field. |
+| grpc_port | [int32](#int32) |  | grpc port for replication protocol. will be optional once grpc is integrated into multistream. |
+
+
+
+
+
+
+<a name="pb.Replication"></a>
+
+### Replication
+Replication message is a signable data structure to represent a replication scheme
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| header | [string](#string) |  | Header must be &#34;rtrade-replication v0...&#34; for development stage, this is a required security header. - Avoid collision from other signed data. - Allow future versions to require different validation rules. Any signer must understand every header tag to sign documents. |
+| cids_bytes | [bytes](#bytes) | repeated | CIDs is the list of contents to replicate. Please use helper functions GetCIDs and AddCIDs for this field |
+| servers | [ServerSource](#pb.ServerSource) | repeated | Servers list the candidate severs to replicate to, in the order of preference. |
+| replication_factor | [int32](#int32) |  | replication_factor is the number of replications desired. |
+| refresh_interval_seconds | [int32](#int32) |  | refresh_interval_seconds is the *suggested* number of seconds to wait before checking if a remote server is up. The first check should be random from 0 to refresh_interval_seconds. Each replicator can have it&#39;s own max_interval. A sensible default value should be used if it is 0. |
+| server_down_delay_seconds | [int32](#int32) |  | server_down_delay_seconds is the number of seconds to wait after a server is down before the next reserved server is requested to be active. A sensible default value should be used if it is 0. |
+
+
+
+
+
+
+<a name="pb.ReplicationStatus"></a>
+
+### ReplicationStatus
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ok | [bool](#bool) |  | ok report success for action submitted |
+| is_active | [bool](#bool) |  | is_active report if the replication is currently active on this server |
+| current_version | [int64](#int64) |  | current_version is the highest version this replicator/server has locally. |
+| target_version | [int64](#int64) |  | target_version is the highest version this replicator/server knows about and can verify to exist. |
+
+
+
+
+
+
+<a name="pb.ServerSource"></a>
+
+### ServerSource
+ServerSource is a list of one or more servers.
+TODO: add field to allow referring to a list of servers from another file.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| addr_info | [AddrInfo](#pb.AddrInfo) |  |  |
+
+
+
+
+
+
+<a name="pb.SignedSubscription"></a>
+
+### SignedSubscription
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_part | [Subscription](#pb.Subscription) |  |  |
+| update_part | [SubscriptionUpdate](#pb.SubscriptionUpdate) |  |  |
+
+
+
+
+
+
+<a name="pb.Subscription"></a>
+
+### Subscription
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| topic | [string](#string) |  |  |
+| author_id_bytes | [bytes](#bytes) |  |  |
+| remove | [bool](#bool) |  | if true, remove this Subscription. For replicator.Add, deactive this replication. For replicator.WaitForUpdates, stop reporting updates. |
+
+
+
+
+
+
+<a name="pb.SubscriptionUpdate"></a>
+
+### SubscriptionUpdate
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [int64](#int64) |  | strictly increasing version number |
+| replication_bytes | [bytes](#bytes) |  | replication file is in bytes for signing |
+| signature | [bytes](#bytes) |  | signature signs the Subscription and above data in length delimited form in the order topic|author|version|replication |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="pb.replicator"></a>
+
+### replicator
+The replicator provides replication services.
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Add | [Subscription](#pb.Subscription) | [ReplicationStatus](#pb.ReplicationStatus) stream | Add is used to add a replication to this server, changing it&#39;s status from reserved to active. |
+| Status | [Subscription](#pb.Subscription) | [ReplicationStatus](#pb.ReplicationStatus) stream | Status returns an updating stream of the replication status on the server. |
+| GetSubscriptionUpdate | [Subscription](#pb.Subscription) | [SubscriptionUpdate](#pb.SubscriptionUpdate) | GetSubscriptionUpdate returns the latest version of subscribed replication |
+| SubmitReplication | [SignedSubscription](#pb.SignedSubscription) | [ReplicationStatus](#pb.ReplicationStatus) stream | SubmitReplication is used by client agents to start replications, after they have uploaded the files and retrieved the cid, and collected servers to replicate too. |
 
  
 

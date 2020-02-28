@@ -21,7 +21,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: status.proto")
 public final class StatusAPIGrpc {
 
@@ -44,22 +44,21 @@ public final class StatusAPIGrpc {
     if ((getVersionMethod = StatusAPIGrpc.getVersionMethod) == null) {
       synchronized (StatusAPIGrpc.class) {
         if ((getVersionMethod = StatusAPIGrpc.getVersionMethod) == null) {
-          StatusAPIGrpc.getVersionMethod = getVersionMethod = 
+          StatusAPIGrpc.getVersionMethod = getVersionMethod =
               io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Status.VersionResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.StatusAPI", "Version"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Version"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Status.VersionResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new StatusAPIMethodDescriptorSupplier("Version"))
-                  .build();
-          }
+              .setSchemaDescriptor(new StatusAPIMethodDescriptorSupplier("Version"))
+              .build();
         }
-     }
-     return getVersionMethod;
+      }
+    }
+    return getVersionMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Util.Empty,
@@ -76,29 +75,35 @@ public final class StatusAPIGrpc {
     if ((getStatusMethod = StatusAPIGrpc.getStatusMethod) == null) {
       synchronized (StatusAPIGrpc.class) {
         if ((getStatusMethod = StatusAPIGrpc.getStatusMethod) == null) {
-          StatusAPIGrpc.getStatusMethod = getStatusMethod = 
+          StatusAPIGrpc.getStatusMethod = getStatusMethod =
               io.grpc.MethodDescriptor.<pb.Util.Empty, pb.Status.StatusResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.StatusAPI", "Status"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Status"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Status.StatusResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new StatusAPIMethodDescriptorSupplier("Status"))
-                  .build();
-          }
+              .setSchemaDescriptor(new StatusAPIMethodDescriptorSupplier("Status"))
+              .build();
         }
-     }
-     return getStatusMethod;
+      }
+    }
+    return getStatusMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static StatusAPIStub newStub(io.grpc.Channel channel) {
-    return new StatusAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<StatusAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StatusAPIStub>() {
+        @java.lang.Override
+        public StatusAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StatusAPIStub(channel, callOptions);
+        }
+      };
+    return StatusAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -106,7 +111,14 @@ public final class StatusAPIGrpc {
    */
   public static StatusAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new StatusAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<StatusAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StatusAPIBlockingStub>() {
+        @java.lang.Override
+        public StatusAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StatusAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return StatusAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -114,7 +126,14 @@ public final class StatusAPIGrpc {
    */
   public static StatusAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new StatusAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<StatusAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StatusAPIFutureStub>() {
+        @java.lang.Override
+        public StatusAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StatusAPIFutureStub(channel, callOptions);
+        }
+      };
+    return StatusAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -169,19 +188,15 @@ public final class StatusAPIGrpc {
    * provides utilities to retrieve api status information from
    * </pre>
    */
-  public static final class StatusAPIStub extends io.grpc.stub.AbstractStub<StatusAPIStub> {
-    private StatusAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private StatusAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class StatusAPIStub extends io.grpc.stub.AbstractAsyncStub<StatusAPIStub> {
+    private StatusAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatusAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected StatusAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new StatusAPIStub(channel, callOptions);
     }
 
@@ -213,19 +228,15 @@ public final class StatusAPIGrpc {
    * provides utilities to retrieve api status information from
    * </pre>
    */
-  public static final class StatusAPIBlockingStub extends io.grpc.stub.AbstractStub<StatusAPIBlockingStub> {
-    private StatusAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private StatusAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class StatusAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<StatusAPIBlockingStub> {
+    private StatusAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatusAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected StatusAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new StatusAPIBlockingStub(channel, callOptions);
     }
 
@@ -255,19 +266,15 @@ public final class StatusAPIGrpc {
    * provides utilities to retrieve api status information from
    * </pre>
    */
-  public static final class StatusAPIFutureStub extends io.grpc.stub.AbstractStub<StatusAPIFutureStub> {
-    private StatusAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private StatusAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class StatusAPIFutureStub extends io.grpc.stub.AbstractFutureStub<StatusAPIFutureStub> {
+    private StatusAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected StatusAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected StatusAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new StatusAPIFutureStub(channel, callOptions);
     }
 

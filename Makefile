@@ -5,7 +5,7 @@ proto: proto-gen tidy
 
 # -I are the import paths, because we're using some plugins, we need to import the gogo protobuf helpers
 .PHONY: proto-gen
-proto-gen: gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys 1gen-node gen-replication gen-docs
+proto-gen: gen-file gen-util gen-status gen-pubsub gen-admin gen-namesys gen-node gen-replication gen-docs
 
 
 # builds the static website
@@ -59,7 +59,7 @@ install:
 	npm install -g grpc-tools
 	python3 -m pip install grpcio-tools
 	bash .script/protoc-js.sh
-	bash .script/protoc-java.sh
+	# bash .script/protoc-java.sh
 
 # protocol buffer generation targets
 

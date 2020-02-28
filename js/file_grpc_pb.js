@@ -53,7 +53,7 @@ function deserialize_pb_UploadRequest(buffer_arg) {
 // FileAPI provides a gRPC api to upload/download files as UnixFS objects
 var FileAPIService = exports.FileAPIService = {
   // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
-  uploadFile: {
+uploadFile: {
     path: '/pb.FileAPI/UploadFile',
     requestStream: true,
     responseStream: false,
@@ -65,7 +65,7 @@ var FileAPIService = exports.FileAPIService = {
     responseDeserialize: deserialize_pb_PutResponse,
   },
   // DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)
-  downloadFile: {
+downloadFile: {
     path: '/pb.FileAPI/DownloadFile',
     requestStream: false,
     responseStream: true,
