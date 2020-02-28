@@ -92,7 +92,7 @@ func (a *AddrInfo) transportOnly(m multiaddr.Multiaddr) (multiaddr.Multiaddr, er
 	}
 	transport, id := peer.SplitAddr(m)
 	if transport == nil {
-		return nil, errors.New("addr in AddrInfo without transport")
+		return nil, errors.New("address in AddrInfo without transport")
 	}
 	if id != "" && id != aid {
 		return nil, fmt.Errorf("can not set address with a different ID %x != %x", []byte(id), a.IdBytes)
