@@ -1022,8 +1022,7 @@ func (m *BlockstoreResponse) GetBlocks() []*Block {
 type Block struct {
 	// cid is the identifier of the block
 	Cid string `protobuf:"bytes,1,opt,name=cid,proto3" json:"cid,omitempty"`
-	// data is the actual contnets of this block
-	//
+	// data is the actual contents of the block
 	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 }
 
@@ -1791,7 +1790,7 @@ type NodeAPIClient interface {
 	Blockstore(ctx context.Context, in *BlockstoreRequest, opts ...grpc.CallOption) (*BlockstoreResponse, error)
 	// Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
 	Dag(ctx context.Context, in *DagRequest, opts ...grpc.CallOption) (*DagResponse, error)
-	//Keystore is a unidirectional RPC allowing management of ipfs keystores
+	// Keystore is a unidirectional RPC allowing management of ipfs keystores
 	Keystore(ctx context.Context, in *KeystoreRequest, opts ...grpc.CallOption) (*KeystoreResponse, error)
 	// Persist is used to retrieve data from the network and make it available locally
 	Persist(ctx context.Context, in *PersistRequest, opts ...grpc.CallOption) (*PersistResponse, error)
@@ -1882,7 +1881,7 @@ type NodeAPIServer interface {
 	Blockstore(context.Context, *BlockstoreRequest) (*BlockstoreResponse, error)
 	// Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
 	Dag(context.Context, *DagRequest) (*DagResponse, error)
-	//Keystore is a unidirectional RPC allowing management of ipfs keystores
+	// Keystore is a unidirectional RPC allowing management of ipfs keystores
 	Keystore(context.Context, *KeystoreRequest) (*KeystoreResponse, error)
 	// Persist is used to retrieve data from the network and make it available locally
 	Persist(context.Context, *PersistRequest) (*PersistResponse, error)

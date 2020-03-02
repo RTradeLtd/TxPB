@@ -22,7 +22,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: pubsub.proto")
 public final class PubSubAPIGrpc {
 
@@ -45,29 +45,35 @@ public final class PubSubAPIGrpc {
     if ((getPubSubMethod = PubSubAPIGrpc.getPubSubMethod) == null) {
       synchronized (PubSubAPIGrpc.class) {
         if ((getPubSubMethod = PubSubAPIGrpc.getPubSubMethod) == null) {
-          PubSubAPIGrpc.getPubSubMethod = getPubSubMethod = 
+          PubSubAPIGrpc.getPubSubMethod = getPubSubMethod =
               io.grpc.MethodDescriptor.<pb.Pubsub.PubSubRequest, pb.Pubsub.PubSubResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.PubSubAPI", "PubSub"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PubSub"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Pubsub.PubSubRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Pubsub.PubSubResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSub"))
-                  .build();
-          }
+              .setSchemaDescriptor(new PubSubAPIMethodDescriptorSupplier("PubSub"))
+              .build();
         }
-     }
-     return getPubSubMethod;
+      }
+    }
+    return getPubSubMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static PubSubAPIStub newStub(io.grpc.Channel channel) {
-    return new PubSubAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<PubSubAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PubSubAPIStub>() {
+        @java.lang.Override
+        public PubSubAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PubSubAPIStub(channel, callOptions);
+        }
+      };
+    return PubSubAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -75,7 +81,14 @@ public final class PubSubAPIGrpc {
    */
   public static PubSubAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new PubSubAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<PubSubAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PubSubAPIBlockingStub>() {
+        @java.lang.Override
+        public PubSubAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PubSubAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return PubSubAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -83,7 +96,14 @@ public final class PubSubAPIGrpc {
    */
   public static PubSubAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new PubSubAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<PubSubAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PubSubAPIFutureStub>() {
+        @java.lang.Override
+        public PubSubAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PubSubAPIFutureStub(channel, callOptions);
+        }
+      };
+    return PubSubAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -124,19 +144,15 @@ public final class PubSubAPIGrpc {
    * `ipfs pubsub` subset of commands.
    * </pre>
    */
-  public static final class PubSubAPIStub extends io.grpc.stub.AbstractStub<PubSubAPIStub> {
-    private PubSubAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private PubSubAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class PubSubAPIStub extends io.grpc.stub.AbstractAsyncStub<PubSubAPIStub> {
+    private PubSubAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PubSubAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected PubSubAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new PubSubAPIStub(channel, callOptions);
     }
 
@@ -159,19 +175,15 @@ public final class PubSubAPIGrpc {
    * `ipfs pubsub` subset of commands.
    * </pre>
    */
-  public static final class PubSubAPIBlockingStub extends io.grpc.stub.AbstractStub<PubSubAPIBlockingStub> {
-    private PubSubAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private PubSubAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class PubSubAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<PubSubAPIBlockingStub> {
+    private PubSubAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PubSubAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected PubSubAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new PubSubAPIBlockingStub(channel, callOptions);
     }
   }
@@ -182,19 +194,15 @@ public final class PubSubAPIGrpc {
    * `ipfs pubsub` subset of commands.
    * </pre>
    */
-  public static final class PubSubAPIFutureStub extends io.grpc.stub.AbstractStub<PubSubAPIFutureStub> {
-    private PubSubAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private PubSubAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class PubSubAPIFutureStub extends io.grpc.stub.AbstractFutureStub<PubSubAPIFutureStub> {
+    private PubSubAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PubSubAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected PubSubAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new PubSubAPIFutureStub(channel, callOptions);
     }
   }

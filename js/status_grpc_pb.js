@@ -42,7 +42,7 @@ function deserialize_pb_VersionResponse(buffer_arg) {
 // provides utilities to retrieve api status information from
 var StatusAPIService = exports.StatusAPIService = {
   // Version is used to retrieve api version information
-  version: {
+version: {
     path: '/pb.StatusAPI/Version',
     requestStream: false,
     responseStream: false,
@@ -54,7 +54,7 @@ var StatusAPIService = exports.StatusAPIService = {
     responseDeserialize: deserialize_pb_VersionResponse,
   },
   // Status is used to retrieve api status information.
-  status: {
+status: {
     path: '/pb.StatusAPI/Status',
     requestStream: false,
     responseStream: false,
