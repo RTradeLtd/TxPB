@@ -21,7 +21,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: admin.proto")
 public final class AdminAPIGrpc {
 
@@ -44,22 +44,21 @@ public final class AdminAPIGrpc {
     if ((getManageGCMethod = AdminAPIGrpc.getManageGCMethod) == null) {
       synchronized (AdminAPIGrpc.class) {
         if ((getManageGCMethod = AdminAPIGrpc.getManageGCMethod) == null) {
-          AdminAPIGrpc.getManageGCMethod = getManageGCMethod = 
+          AdminAPIGrpc.getManageGCMethod = getManageGCMethod =
               io.grpc.MethodDescriptor.<pb.Admin.ManageGCRequest, pb.Admin.ManageGCResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.AdminAPI", "ManageGC"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ManageGC"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Admin.ManageGCRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Admin.ManageGCResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("ManageGC"))
-                  .build();
-          }
+              .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("ManageGC"))
+              .build();
         }
-     }
-     return getManageGCMethod;
+      }
+    }
+    return getManageGCMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Admin.RefCountRequest,
@@ -76,29 +75,35 @@ public final class AdminAPIGrpc {
     if ((getRefCountMethod = AdminAPIGrpc.getRefCountMethod) == null) {
       synchronized (AdminAPIGrpc.class) {
         if ((getRefCountMethod = AdminAPIGrpc.getRefCountMethod) == null) {
-          AdminAPIGrpc.getRefCountMethod = getRefCountMethod = 
+          AdminAPIGrpc.getRefCountMethod = getRefCountMethod =
               io.grpc.MethodDescriptor.<pb.Admin.RefCountRequest, pb.Admin.RefCountResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.AdminAPI", "RefCount"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RefCount"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Admin.RefCountRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Admin.RefCountResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("RefCount"))
-                  .build();
-          }
+              .setSchemaDescriptor(new AdminAPIMethodDescriptorSupplier("RefCount"))
+              .build();
         }
-     }
-     return getRefCountMethod;
+      }
+    }
+    return getRefCountMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static AdminAPIStub newStub(io.grpc.Channel channel) {
-    return new AdminAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<AdminAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<AdminAPIStub>() {
+        @java.lang.Override
+        public AdminAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new AdminAPIStub(channel, callOptions);
+        }
+      };
+    return AdminAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -106,7 +111,14 @@ public final class AdminAPIGrpc {
    */
   public static AdminAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new AdminAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<AdminAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<AdminAPIBlockingStub>() {
+        @java.lang.Override
+        public AdminAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new AdminAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return AdminAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -114,7 +126,14 @@ public final class AdminAPIGrpc {
    */
   public static AdminAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new AdminAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<AdminAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<AdminAPIFutureStub>() {
+        @java.lang.Override
+        public AdminAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new AdminAPIFutureStub(channel, callOptions);
+        }
+      };
+    return AdminAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -169,19 +188,15 @@ public final class AdminAPIGrpc {
    * AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
    * </pre>
    */
-  public static final class AdminAPIStub extends io.grpc.stub.AbstractStub<AdminAPIStub> {
-    private AdminAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private AdminAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class AdminAPIStub extends io.grpc.stub.AbstractAsyncStub<AdminAPIStub> {
+    private AdminAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AdminAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected AdminAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new AdminAPIStub(channel, callOptions);
     }
 
@@ -213,19 +228,15 @@ public final class AdminAPIGrpc {
    * AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
    * </pre>
    */
-  public static final class AdminAPIBlockingStub extends io.grpc.stub.AbstractStub<AdminAPIBlockingStub> {
-    private AdminAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private AdminAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class AdminAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<AdminAPIBlockingStub> {
+    private AdminAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AdminAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected AdminAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new AdminAPIBlockingStub(channel, callOptions);
     }
 
@@ -255,19 +266,15 @@ public final class AdminAPIGrpc {
    * AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
    * </pre>
    */
-  public static final class AdminAPIFutureStub extends io.grpc.stub.AbstractStub<AdminAPIFutureStub> {
-    private AdminAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private AdminAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class AdminAPIFutureStub extends io.grpc.stub.AbstractFutureStub<AdminAPIFutureStub> {
+    private AdminAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected AdminAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected AdminAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new AdminAPIFutureStub(channel, callOptions);
     }
 

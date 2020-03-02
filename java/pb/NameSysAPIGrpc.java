@@ -21,7 +21,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * </pre>
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.19.0)",
+    value = "by gRPC proto compiler (version 1.27.2)",
     comments = "Source: namesys.proto")
 public final class NameSysAPIGrpc {
 
@@ -44,22 +44,21 @@ public final class NameSysAPIGrpc {
     if ((getNameSysResolveMethod = NameSysAPIGrpc.getNameSysResolveMethod) == null) {
       synchronized (NameSysAPIGrpc.class) {
         if ((getNameSysResolveMethod = NameSysAPIGrpc.getNameSysResolveMethod) == null) {
-          NameSysAPIGrpc.getNameSysResolveMethod = getNameSysResolveMethod = 
+          NameSysAPIGrpc.getNameSysResolveMethod = getNameSysResolveMethod =
               io.grpc.MethodDescriptor.<pb.Namesys.NameSysResolveRequest, pb.Namesys.NameSysResolveResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NameSysAPI", "NameSysResolve"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NameSysResolve"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveResult.getDefaultInstance()))
-                  .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysResolve"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysResolve"))
+              .build();
         }
-     }
-     return getNameSysResolveMethod;
+      }
+    }
+    return getNameSysResolveMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Namesys.NameSysResolveRequest,
@@ -76,22 +75,21 @@ public final class NameSysAPIGrpc {
     if ((getNameSysResolveAsyncMethod = NameSysAPIGrpc.getNameSysResolveAsyncMethod) == null) {
       synchronized (NameSysAPIGrpc.class) {
         if ((getNameSysResolveAsyncMethod = NameSysAPIGrpc.getNameSysResolveAsyncMethod) == null) {
-          NameSysAPIGrpc.getNameSysResolveAsyncMethod = getNameSysResolveAsyncMethod = 
+          NameSysAPIGrpc.getNameSysResolveAsyncMethod = getNameSysResolveAsyncMethod =
               io.grpc.MethodDescriptor.<pb.Namesys.NameSysResolveRequest, pb.Namesys.NameSysResolveResult>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NameSysAPI", "NameSysResolveAsync"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NameSysResolveAsync"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysResolveResult.getDefaultInstance()))
-                  .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysResolveAsync"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysResolveAsync"))
+              .build();
         }
-     }
-     return getNameSysResolveAsyncMethod;
+      }
+    }
+    return getNameSysResolveAsyncMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<pb.Namesys.NameSysPublishRequest,
@@ -108,29 +106,35 @@ public final class NameSysAPIGrpc {
     if ((getNameSysPublishMethod = NameSysAPIGrpc.getNameSysPublishMethod) == null) {
       synchronized (NameSysAPIGrpc.class) {
         if ((getNameSysPublishMethod = NameSysAPIGrpc.getNameSysPublishMethod) == null) {
-          NameSysAPIGrpc.getNameSysPublishMethod = getNameSysPublishMethod = 
+          NameSysAPIGrpc.getNameSysPublishMethod = getNameSysPublishMethod =
               io.grpc.MethodDescriptor.<pb.Namesys.NameSysPublishRequest, pb.Util.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "pb.NameSysAPI", "NameSysPublish"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "NameSysPublish"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Namesys.NameSysPublishRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   pb.Util.Empty.getDefaultInstance()))
-                  .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysPublish"))
-                  .build();
-          }
+              .setSchemaDescriptor(new NameSysAPIMethodDescriptorSupplier("NameSysPublish"))
+              .build();
         }
-     }
-     return getNameSysPublishMethod;
+      }
+    }
+    return getNameSysPublishMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static NameSysAPIStub newStub(io.grpc.Channel channel) {
-    return new NameSysAPIStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NameSysAPIStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NameSysAPIStub>() {
+        @java.lang.Override
+        public NameSysAPIStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NameSysAPIStub(channel, callOptions);
+        }
+      };
+    return NameSysAPIStub.newStub(factory, channel);
   }
 
   /**
@@ -138,7 +142,14 @@ public final class NameSysAPIGrpc {
    */
   public static NameSysAPIBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new NameSysAPIBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NameSysAPIBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NameSysAPIBlockingStub>() {
+        @java.lang.Override
+        public NameSysAPIBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NameSysAPIBlockingStub(channel, callOptions);
+        }
+      };
+    return NameSysAPIBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -146,7 +157,14 @@ public final class NameSysAPIGrpc {
    */
   public static NameSysAPIFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new NameSysAPIFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<NameSysAPIFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<NameSysAPIFutureStub>() {
+        @java.lang.Override
+        public NameSysAPIFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new NameSysAPIFutureStub(channel, callOptions);
+        }
+      };
+    return NameSysAPIFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -219,19 +237,15 @@ public final class NameSysAPIGrpc {
    * NameSysAPI provides a generic name resolution API
    * </pre>
    */
-  public static final class NameSysAPIStub extends io.grpc.stub.AbstractStub<NameSysAPIStub> {
-    private NameSysAPIStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NameSysAPIStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NameSysAPIStub extends io.grpc.stub.AbstractAsyncStub<NameSysAPIStub> {
+    private NameSysAPIStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NameSysAPIStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NameSysAPIStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NameSysAPIStub(channel, callOptions);
     }
 
@@ -275,19 +289,15 @@ public final class NameSysAPIGrpc {
    * NameSysAPI provides a generic name resolution API
    * </pre>
    */
-  public static final class NameSysAPIBlockingStub extends io.grpc.stub.AbstractStub<NameSysAPIBlockingStub> {
-    private NameSysAPIBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NameSysAPIBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NameSysAPIBlockingStub extends io.grpc.stub.AbstractBlockingStub<NameSysAPIBlockingStub> {
+    private NameSysAPIBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NameSysAPIBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NameSysAPIBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NameSysAPIBlockingStub(channel, callOptions);
     }
 
@@ -329,19 +339,15 @@ public final class NameSysAPIGrpc {
    * NameSysAPI provides a generic name resolution API
    * </pre>
    */
-  public static final class NameSysAPIFutureStub extends io.grpc.stub.AbstractStub<NameSysAPIFutureStub> {
-    private NameSysAPIFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private NameSysAPIFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class NameSysAPIFutureStub extends io.grpc.stub.AbstractFutureStub<NameSysAPIFutureStub> {
+    private NameSysAPIFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected NameSysAPIFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected NameSysAPIFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new NameSysAPIFutureStub(channel, callOptions);
     }
 

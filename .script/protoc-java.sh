@@ -3,7 +3,7 @@
 # This script installs protoc-gen-grpc-java for the given platform (defaults to linux-x86_64).
 # See: https://search.maven.org/search?q=g:io.grpc%20a:protoc-gen-grpc-java
 
-VERSION=1.19.0
+VERSION=1.27.2
 PLATFORM=$1
 if [ -z "$1" ] ; then
   PLATFORM=linux-x86_64

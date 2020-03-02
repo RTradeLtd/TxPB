@@ -24,6 +24,20 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 * [TemporalX HTTP Gateway](./doc/GATEWAY.md)
 * [Benchmarks](./doc/BENCHMARKS.md)
 
+# Code Generation
+
+Before generating the code, you'll need to download quite a few generators. Before downloading the generators you'll need to have a valid installation of the following, please consult appropriate installation manuals as required:
+
+* Go 1.13+
+* NodeJS
+* NPM
+* Python3
+* Make
+
+Once you have all of this installed, you can then install the needed generators which will allow you to generate the gRPC client stubs. To do this run `make install`. This has to download quite a few packages so it might take some time to complete. The only thing this doesn't install is a java generator, to do that visit https://search.maven.org/search?q=g:io.grpc%20a:protoc-gen-grpc-java and download the one for your platform.
+
+After you've downloaded all generator tooling, you can generate the client stubs, and documentation with a single `make`.
+
 # License
 
 All code in this repository is licensed under `AGPL-3.0`, and all documentation is licensed under `MIT`. Documentation is anything that is a readme, or html file. Code is pretty much anything other than documentation such as javascript, java, golang, python, and `.proto` files.
