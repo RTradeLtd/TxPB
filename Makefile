@@ -1,4 +1,4 @@
-PROTOC_GEN_TS_PATH=${HOME}/.npm_modules/bin/protoc-gen-ts
+PROTOC_GEN_TS_PATH=${HOME}/npm_modules/bin/protoc-gen-ts
 
 .PHONY: proto
 proto: proto-gen tidy

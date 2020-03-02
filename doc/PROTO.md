@@ -285,6 +285,8 @@ Blob is a chunk of binary data
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | content | [bytes](#bytes) |  | content is the actual binary data contained in this message |
+| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range. If both is zero, the blobs streams contents of the file from start to finish. The unit of range is alway in bytes. Currently, DownloadResponse support blob range. |
+| rangeEnd | [uint64](#uint64) |  |  |
 
 
 
@@ -303,6 +305,8 @@ there may be some undefined behavior
 | ----- | ---- | ----- | ----------- |
 | hash | [string](#string) |  | hash is the ipfs hash/cid (content identifier) of the data to download |
 | chunkSize | [int32](#int32) |  | chunkSize specifies the size of chunks to be sent to the client it allows us to efficiently control incoming data amounts which is useful on machines with low-memory |
+| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range. If both is none zero, only data within range is requested. The unit of range is alway in bytes. If used, please check the returned range values in blobs to make sure this feature is supported. |
+| rangeEnd | [uint64](#uint64) |  |  |
 
 
 
