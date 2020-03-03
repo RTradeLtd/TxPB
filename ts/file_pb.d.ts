@@ -67,6 +67,12 @@ export class DownloadRequest extends jspb.Message {
   getChunksize(): number;
   setChunksize(value: number): void;
 
+  getRangestart(): number;
+  setRangestart(value: number): void;
+
+  getRangeend(): number;
+  setRangeend(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DownloadRequest.AsObject;
   static toObject(includeInstance: boolean, msg: DownloadRequest): DownloadRequest.AsObject;
@@ -81,6 +87,8 @@ export namespace DownloadRequest {
   export type AsObject = {
     hash: string,
     chunksize: number,
+    rangestart: number,
+    rangeend: number,
   }
 }
 
@@ -112,6 +120,12 @@ export class Blob extends jspb.Message {
   getContent_asB64(): string;
   setContent(value: Uint8Array | string): void;
 
+  getRangestart(): number;
+  setRangestart(value: number): void;
+
+  getRangeend(): number;
+  setRangeend(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Blob.AsObject;
   static toObject(includeInstance: boolean, msg: Blob): Blob.AsObject;
@@ -125,6 +139,8 @@ export class Blob extends jspb.Message {
 export namespace Blob {
   export type AsObject = {
     content: Uint8Array | string,
+    rangestart: number,
+    rangeend: number,
   }
 }
 

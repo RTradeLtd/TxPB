@@ -2,6 +2,10 @@
 
 Tracks changes made in between releases
 
+# v3.1.1
+
+* Enable backwards compatible range request downloads [#47](https://github.com/RTradeLtd/TxPB/pull/47)
+
 # v3.1.0
 
 * Migrate replication protos out of `node` into `TxPB` [#45](https://github.com/RTradeLtd/TxPB/pull/45)
