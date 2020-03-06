@@ -1,16 +1,15 @@
 # TxPB
 
-`TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.
+TxPB is the main public information repository for TemporalX. It includes all protocol buffers we use, along with their generated gRPC code in a variety of languages. Additionally there is documentation on some of the TemporalX subsystems, such as the reference counter, and licensing system. Additinoally the configuration file is fully documented, along with a small "getting started" tutorial. 
 
-We have pre-generated gRPC bindings for the following languages:
+Pre-generated gRPC and protocol buffer bindings exist for the following languages:
 
-* [golang](https://github.com/RTradeLtd/TxPB/tree/master/go)
-* [javascript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/js)
-* [typescript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/ts)
-* [java](https://github.com/RTradeLtd/TxPB/tree/master/java/pb)
-* [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
-
-If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
+* [C++](https://github.com/RTradeLtd/TxPB/tree/master/cpp)
+* [Golang](https://github.com/RTradeLtd/TxPB/tree/master/go)
+* [Java](https://github.com/RTradeLtd/TxPB/tree/master/java)
+* [JavaScript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/js)
+* [Python](https://github.com/RTradeLtd/TxPB/tree/master/py)
+* [TypeScript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/ts)
 
 # Documentation
 
@@ -26,17 +25,22 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 
 # Code Generation
 
-Before generating the code, you'll need to download quite a few generators. Before downloading the generators you'll need to have a valid installation of the following, please consult appropriate installation manuals as required:
+Code generation requires a number of dependencies installed, particularily an environment capable of building gRPC code for the following languages:
 
-* Go 1.13+
-* NodeJS
-* NPM
-* Python3
-* Make
+* C++
+* Golang
+* Java
+* JavaScript
+* Python
+* TypeScript
 
-Once you have all of this installed, you can then install the needed generators which will allow you to generate the gRPC client stubs. To do this run `make install`. This has to download quite a few packages so it might take some time to complete. The only thing this doesn't install is a java generator, to do that visit https://search.maven.org/search?q=g:io.grpc%20a:protoc-gen-grpc-java and download the one for your platform.
+To generate the code for all aforementioned languages, simply type `make`. Along with generating code, this will update the generated markdown documentation.
 
-After you've downloaded all generator tooling, you can generate the client stubs, and documentation with a single `make`.
+## Installing Generators (TODO)
+
+### Java
+
+To install the java generator, vist [search.maven.org](https://search.maven.org/search?q=g:io.grpc%20a:protoc-gen-grpc-java)
 
 # License
 
