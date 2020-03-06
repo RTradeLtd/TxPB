@@ -1,4 +1,5 @@
 PROTOC_GEN_TS_PATH=${HOME}/npm_modules/bin/protoc-gen-ts
+PROTOC_CPP_PLUGIN=$(shell which grpc_cpp_plugin)
 
 .PHONY: proto
 proto: proto-gen tidy
@@ -98,6 +99,14 @@ gen-file:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/file.proto
+	# generate cpp bindings
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
+		pb/file.proto
 
 gen-util:
 	# generate golang bindings (util)
@@ -133,6 +142,14 @@ gen-util:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/util.proto
+	# generate cpp bindings (file)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
 		pb/util.proto
 
 gen-node:
@@ -171,6 +188,14 @@ gen-node:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/node.proto
+	# generate cpp bindings (node)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
+		pb/node.proto
 
 gen-status:
 	# generate golang bindings (status)
@@ -207,6 +232,14 @@ gen-status:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/status.proto
+	# generate cpp bindings (status)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
 		pb/status.proto
 
 gen-pubsub:
@@ -245,6 +278,14 @@ gen-pubsub:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/pubsub.proto
+	# generate cpp bindings (pubsub)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
+		pb/pubsub.proto
 
 gen-admin:
 	# generate golang bindings (admin)
@@ -282,6 +323,14 @@ gen-admin:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/admin.proto
+	# generate cpp bindings (admin)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
+		pb/admin.proto
 
 gen-namesys:
 	# generate golang bindings (namesys)
@@ -317,6 +366,14 @@ gen-namesys:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/namesys.proto
+	# generate cpp bindings (namesys)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
 		pb/namesys.proto
 
 gen-replication:
@@ -355,7 +412,15 @@ gen-replication:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/replication.proto
-
+	# generate cpp bindings (replication)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--plugin=protoc-gen-grpc=${PROTOC_CPP_PLUGIN} \
+		--cpp_out=cpp \
+		--grpc_out=cpp \
+		pb/replication.proto
+		
 gen-docs:
 		# generate documentation
 	protoc \
