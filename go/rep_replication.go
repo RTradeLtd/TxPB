@@ -10,8 +10,8 @@ import (
 
 const header = "rtrade-replication v0"
 
-// New creates a new Replication file, with the correct header
-func New() *Replication {
+// NewReplication creates a new Replication file, with the correct header
+func NewReplication() *Replication {
 	return &Replication{
 		Header: header,
 	}
