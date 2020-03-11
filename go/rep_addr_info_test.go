@@ -123,7 +123,7 @@ func generateTestServerSources(count int) []*ServerSource {
 }
 
 func generateTestReplicationFile(t *testing.T, servers int, replicationFactor int32) *Replication {
-	r := New()
+	r := NewReplication()
 
 	id, err := cid.Decode("bafybeihykld7uyxzogax6vgyvag42y7464eywpf55gxi5qpoisibh3c5wa")
 	if err != nil {
