@@ -11,7 +11,7 @@ require (
 	github.com/multiformats/go-multiaddr v0.2.1
 	github.com/multiformats/go-multiaddr-net v0.1.3
 	go.uber.org/zap v1.14.0
-	golang.org/x/net v0.0.0-20191002035440-2ec189313ef0 // indirect
-	google.golang.org/genproto v0.0.0-20200228133532-8c2c7df3a383 // indirect
-	google.golang.org/grpc v1.27.0
+	golang.org/x/net v0.0.0-20200301022130-244492dfa37a // indirect
+	google.golang.org/genproto v0.0.0-20200312145019-da6875a35672 // indirect
+	google.golang.org/grpc v1.28.0
 )
