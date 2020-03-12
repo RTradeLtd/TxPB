@@ -6,12 +6,3 @@ coverage:
     project:
       default:
         threshold: 1
-  ignore:
-    - "pb"
-    - "testutils"
-    - "vendor"
-    - "cmd"
-    - "client"
-    - "gateway/bindata_assetfs.go"
-    - "gateway/cmd/p2p-gateway-demo"
-    - "assets"
