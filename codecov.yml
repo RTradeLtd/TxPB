@@ -1,0 +1,17 @@
+coverage:
+  precision: 2
+  round: up
+  range: "50...90"
+  status:
+    project:
+      default:
+        threshold: 1
+  ignore:
+    - "pb"
+    - "testutils"
+    - "vendor"
+    - "cmd"
+    - "client"
+    - "gateway/bindata_assetfs.go"
+    - "gateway/cmd/p2p-gateway-demo"
+    - "assets"
