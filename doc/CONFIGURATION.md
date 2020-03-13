@@ -150,6 +150,9 @@ node:
       # enables the quic transport
       # default is false
       quic: false
+      # enables the noisee security transport
+      # default is false
+      noise: false
     # enables modifying dht settings
     dht_options:
       # persistently store DHT information between reboots
@@ -487,6 +490,7 @@ Configuration Options:
 
 * `tls` is used to enable the [tls](https://github.com/libp2p/go-libp2p-tls) encrypted security transport, and will prefer tls transport security over secio transport security.
 * `quic` is used to enable the [quic](https://github.com/libp2p/go-libp2p-quic-transport) transport.
+* `noise` is used to enable the [noise](https://github.com/libp2p/go-libp2p-noise) security transport.
 
 ### DHT Options
 
