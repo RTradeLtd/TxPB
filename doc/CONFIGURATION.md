@@ -513,7 +513,7 @@ The `host_options` section is used to provide optional control of libp2p host co
 
 ### Swarm Key (Private Networks)
 
-The `swarm_key` configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`.
+The `swarm_key` configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`. If you want to force private libp2p communication, that is disable communication with libp2p hosts not using the same swarm key (or not using a swarm at all) set the environment variable `LIBP2P_FORCE_PNET` to `1` before launching TemporalX.
 
 ## Opts
 
