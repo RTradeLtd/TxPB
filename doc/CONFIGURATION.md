@@ -165,6 +165,10 @@ node:
       natPortMap: "true"
       # enables p2p stream capabilities, equivalent to ipfs p2p
       enableP2PStreams: "true"
+    # enables private libp2p swarm mode
+    # the value here will be used as the private network shared secret key
+    # default is empty string ("") which means use the public network
+    swarm_key: 6f0cf24809cda96d0d68b0fa8abdd64eccd1b4866262040cdc5afecba3418aad
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -455,7 +459,11 @@ The `libp2p` section is used to configure the libp2p host that we start up, and 
   <br>
   · <a href="#enabled-transports"><strong>Enabled Transports</strong></a>
   <br>
-  · <a href="#dht-options"><strong>DHT Options</strong></a> 
+  · <a href="#dht-options"><strong>DHT Options</strong></a>
+  <br>
+  · <a href="#host-options"><strong>Host Options</strong></a>
+  <br>
+  · <a href="#swarm-key-private-networks"><strong>Swarm Key (Private Networks)</strong></a> 
 </p>
 
 
@@ -502,6 +510,10 @@ The `host_options` section is used to provide optional control of libp2p host co
 
 * `natPortMap` is used to enable nat port mapping capabilities through [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat)
 * `enableP2PStreams` is used to enabel "p2p streams" which is equivalent to the `ipfs p2p` command.
+
+### Swarm Key (Private Networks)
+
+The `swarm_key` configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`.
 
 ## Opts
 
