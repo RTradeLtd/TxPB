@@ -6,3 +6,5 @@ coverage:
     project:
       default:
         threshold: 1
+  ignore:
+    - "**/*.pb.go"  # protobuf generated go files
