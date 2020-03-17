@@ -150,6 +150,9 @@ node:
       # enables the quic transport
       # default is false
       quic: false
+      # enables the noise security transport
+      # default is false
+      noise: false
     # enables modifying dht settings
     dht_options:
       # persistently store DHT information between reboots
@@ -162,6 +165,10 @@ node:
       natPortMap: "true"
       # enables p2p stream capabilities, equivalent to ipfs p2p
       enableP2PStreams: "true"
+    # enables private libp2p swarm mode with a 32 byte hex encoded key
+    # the value here will be used as the private network shared secret key
+    # default is empty string ("") which means use the public network
+    swarm_key: thisinotarealswarmtestkey
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -452,7 +459,11 @@ The `libp2p` section is used to configure the libp2p host that we start up, and 
   <br>
   · <a href="#enabled-transports"><strong>Enabled Transports</strong></a>
   <br>
-  · <a href="#dht-options"><strong>DHT Options</strong></a> 
+  · <a href="#dht-options"><strong>DHT Options</strong></a>
+  <br>
+  · <a href="#host-options"><strong>Host Options</strong></a>
+  <br>
+  · <a href="#swarm-key-private-networks"><strong>Swarm Key (Private Networks)</strong></a> 
 </p>
 
 
@@ -487,6 +498,7 @@ Configuration Options:
 
 * `tls` is used to enable the [tls](https://github.com/libp2p/go-libp2p-tls) encrypted security transport, and will prefer tls transport security over secio transport security.
 * `quic` is used to enable the [quic](https://github.com/libp2p/go-libp2p-quic-transport) transport.
+* `noise` is used to enable the [noise](https://github.com/libp2p/go-libp2p-noise) security transport.
 
 ### DHT Options
 
@@ -498,6 +510,10 @@ The `host_options` section is used to provide optional control of libp2p host co
 
 * `natPortMap` is used to enable nat port mapping capabilities through [go-libp2p-nat docs](https://github.com/libp2p/go-libp2p-nat)
 * `enableP2PStreams` is used to enabel "p2p streams" which is equivalent to the `ipfs p2p` command.
+
+### Swarm Key (Private Networks)
+
+The `swarm_key` is a configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a 32-byte hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`. If you want to force private libp2p communication, that is disable communication with libp2p hosts not using the same swarm key (or not using a swarm at all) set the environment variable `LIBP2P_FORCE_PNET` to `1` before launching TemporalX.
 
 ## Opts
 
