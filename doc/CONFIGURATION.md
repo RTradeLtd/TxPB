@@ -150,7 +150,7 @@ node:
       # enables the quic transport
       # default is false
       quic: false
-      # enables the noisee security transport
+      # enables the noise security transport
       # default is false
       noise: false
     # enables modifying dht settings
@@ -165,10 +165,10 @@ node:
       natPortMap: "true"
       # enables p2p stream capabilities, equivalent to ipfs p2p
       enableP2PStreams: "true"
-    # enables private libp2p swarm mode
+    # enables private libp2p swarm mode with a 32 byte hex encoded key
     # the value here will be used as the private network shared secret key
     # default is empty string ("") which means use the public network
-    swarm_key: 6f0cf24809cda96d0d68b0fa8abdd64eccd1b4866262040cdc5afecba3418aad
+    swarm_key: thisinotarealswarmtestkey
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
@@ -513,7 +513,7 @@ The `host_options` section is used to provide optional control of libp2p host co
 
 ### Swarm Key (Private Networks)
 
-The `swarm_key` configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`. If you want to force private libp2p communication, that is disable communication with libp2p hosts not using the same swarm key (or not using a swarm at all) set the environment variable `LIBP2P_FORCE_PNET` to `1` before launching TemporalX.
+The `swarm_key` is a configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a 32-byte hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`. If you want to force private libp2p communication, that is disable communication with libp2p hosts not using the same swarm key (or not using a swarm at all) set the environment variable `LIBP2P_FORCE_PNET` to `1` before launching TemporalX.
 
 ## Opts
 
