@@ -24,6 +24,10 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 * [TemporalX HTTP Gateway](./doc/GATEWAY.md)
 * [Benchmarks](./doc/BENCHMARKS.md)
 
+# Examples
+
+We have an ever growing library of examples that will help you get started with TemporalX. For all code examples see the `examples` folder.
+
 # Code Generation
 
 Before generating the code, you'll need to download quite a few generators. Before downloading the generators you'll need to have a valid installation of the following, please consult appropriate installation manuals as required:
