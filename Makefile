@@ -1,4 +1,4 @@
-PROTOC_GEN_TS_PATH=${HOME}/npm_modules/bin/protoc-gen-ts
+PROTOC_GEN_TS_PATH=${HOME}/.npm_modules/bin/protoc-gen-ts
 
 .PHONY: proto
 proto: proto-gen tidy
@@ -59,6 +59,8 @@ install:
 	npm install -g grpc-tools
 	python3 -m pip install grpcio-tools
 	bash .script/protoc-js.sh
+	cargo install protobuf-codegen
+	cargo install grpcio-compiler
 
 # protocol buffer generation targets
 
@@ -98,6 +100,14 @@ gen-file:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/file.proto
+    # generate rust bindings (file)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+		pb/file.proto
 
 gen-util:
 	# generate golang bindings (util)
@@ -134,6 +144,15 @@ gen-util:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/util.proto
+    # generate rust bindings (util)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+		pb/util.proto
+
 
 gen-node:
 	# generate golang bindings (node)
@@ -156,7 +175,7 @@ gen-node:
 		-I=${GOPATH}/src \
 		--ts_out=service=grpc-web:ts \
 		pb/node.proto
-	# generate javascript bindings (dag)
+	# generate javascript bindings (node)
 	protoc \
 		-I=pb \
 		-I=${GOPATH}/src \
@@ -171,6 +190,15 @@ gen-node:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/node.proto
+    # generate rust bindings (node)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+		pb/node.proto
+
 
 gen-status:
 	# generate golang bindings (status)
@@ -208,6 +236,15 @@ gen-status:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/status.proto
+    # generate rust bindings (status)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+		pb/status.proto
+
 
 gen-pubsub:
 	# generate golang bindings (pubsub)
@@ -244,6 +281,14 @@ gen-pubsub:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/pubsub.proto
+    # generate rust bindings (pubsub)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
 		pb/pubsub.proto
 
 gen-admin:
@@ -282,6 +327,14 @@ gen-admin:
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
 		pb/admin.proto
+    # generate rust bindings (admin)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
+		pb/admin.proto
 
 gen-namesys:
 	# generate golang bindings (namesys)
@@ -317,6 +370,14 @@ gen-namesys:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/namesys.proto
+    # generate rust bindings (namesys)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
 		pb/namesys.proto
 
 gen-replication:
@@ -354,6 +415,14 @@ gen-replication:
 		-I=${GOPATH}/src \
 		--plugin=protoc-gen-grpc-java=build/protoc-gen-grpc-java \
   		--grpc-java_out=java \
+		pb/replication.proto
+    # generate rust bindings (replication)
+	protoc \
+		-I=pb \
+		-I=${GOPATH}/src \
+		--rust_out=rs/src \
+		--grpc_out=rs/src \
+		--plugin=protoc-gen-grpc=`which grpc_rust_plugin` \
 		pb/replication.proto
 
 gen-docs:

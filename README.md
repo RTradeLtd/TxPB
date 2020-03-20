@@ -5,10 +5,12 @@
 We have pre-generated gRPC bindings for the following languages:
 
 * [golang](https://github.com/RTradeLtd/TxPB/tree/master/go)
-* [javascript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/js)
+* [javascript (nodejs)](https://github.com/RTradeLtd/TxPB/tree/master/js)
 * [typescript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/ts)
 * [java](https://github.com/RTradeLtd/TxPB/tree/master/java/pb)
 * [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
+* [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
+* [rust](https://github.com/RTradeLtd/TxPB/tree/master/rs/src)
 
 If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
 
