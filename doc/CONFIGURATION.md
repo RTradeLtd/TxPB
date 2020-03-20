@@ -319,7 +319,7 @@ enabled               | true               | whether or not replication is enabl
 database_location     | vstorage/replication/db.sqlite | Location of the SQL database to keep track of replications. |
 grpc_port             | 9094                          | A dedicated TCP port for replication protocol. |
 white_list_location   | storage/replication/publishers | Location to a collection of peer public keys that are allowed to replicate on this server. The file format is raw protobuf as defined in github.com/libp2p/go-libp2p-core/crypto | 
-replication|delay | 10m | ReplicationDelay is the time between two replication runs. Uses golang time.Duration string types | 
+replication_delay | 10m | ReplicationDelay is the time between two replication runs. Uses golang time.Duration string types | 
 ## Storage
 
 The `storage` section is used to configure the main storage layer of our node. It consists of a generic `datastore` with a `blockstore` on top, and is primarily used for storing our "data" (files, etc..). It also enables managing of blocks using a novel reference count system, as opposed to a pinning system.
