@@ -72,7 +72,7 @@ func getMockHostKey(m mockHostInfo) keyPair {
 
 	k, ok := mockHostMap[m]
 	if !ok {
-		priv, pub, err := libcryto.GenerateECDSAKeyPair(rand.New(rand.NewSource(int64(m)))) //generate keys determinately for testing.
+		priv, pub, err := libcryto.GenerateECDSAKeyPair(rand.New(rand.NewSource(int64(m)))) //generate keys deterministically for testing.
 		if err != nil {
 			panic(err)
 		}
