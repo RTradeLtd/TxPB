@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"io"
 
-	libcryto "github.com/libp2p/go-libp2p-core/crypto"
+	libcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 //NewSignedSubscription creates a fully signed SignedSubscription with the given private key
-func NewSignedSubscription(topic string, version int64, r *Replication, key libcryto.PrivKey) (*SignedSubscription, error) {
+func NewSignedSubscription(topic string, version int64, r *Replication, key libcrypto.PrivKey) (*SignedSubscription, error) {
 	ss := &SignedSubscription{}
 	ss.SetTopic(topic)
 	ss.SetVersion(version)
@@ -131,7 +131,7 @@ func (ss *SignedSubscription) RemoveSignature() {
 }
 
 //Sign signs with the given private key
-func (ss *SignedSubscription) Sign(key libcryto.PrivKey) error {
+func (ss *SignedSubscription) Sign(key libcrypto.PrivKey) error {
 	if key == nil {
 		return errors.New("can not sign a subscription with a nil key")
 	}
@@ -187,7 +187,7 @@ func (ss *SignedSubscription) verificationData(buf []byte) []byte {
 }
 
 //Verify verifies the SignedSubscription against the provided public key.
-func (ss *SignedSubscription) Verify(pubkey libcryto.PubKey, strict bool) error {
+func (ss *SignedSubscription) Verify(pubkey libcrypto.PubKey, strict bool) error {
 	if haveUnrecognized(ss) {
 		return errors.New("SignedSubscription contains unrecognized data")
 	}
