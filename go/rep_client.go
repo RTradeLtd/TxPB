@@ -8,7 +8,7 @@ import (
 	"time"
 
 	libp2ptls "github.com/RTradeLtd/go-libp2p-tls"
-	libcrypto "github.com/libp2p/go-libp2p-core/crypto"
+	libcryto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr-net"
@@ -21,7 +21,7 @@ import (
 type Close func() error
 
 //NewReplicatorClientConstructor is a convenient way to make a NewReplicatorClient
-func NewReplicatorClientConstructor(myPrivateKey libcrypto.PrivKey, server *AddrInfo, addPeer func(id peer.ID, ma multiaddr.Multiaddr), logger *zap.Logger) (ReplicatorClient, Close, error) {
+func NewReplicatorClientConstructor(myPrivateKey libcryto.PrivKey, server *AddrInfo, addPeer func(id peer.ID, ma multiaddr.Multiaddr), logger *zap.Logger) (ReplicatorClient, Close, error) {
 	p, err := NewSimpleConnectionProvider(myPrivateKey, addPeer, logger)
 	if err != nil {
 		return nil, nil, err
@@ -63,7 +63,7 @@ var _ GRPCConnectionProvider = &SimpleGRPCConnectionProvider{}
 type AddPeer func(id peer.ID, ma multiaddr.Multiaddr)
 
 //NewSimpleConnectionProvider creates a SimpleConnectionProvider
-func NewSimpleConnectionProvider(pk libcrypto.PrivKey, addPeer AddPeer, logger *zap.Logger) (*SimpleGRPCConnectionProvider, error) {
+func NewSimpleConnectionProvider(pk libcryto.PrivKey, addPeer AddPeer, logger *zap.Logger) (*SimpleGRPCConnectionProvider, error) {
 	tc, err := libp2ptls.NewIdentity(pk)
 	if err != nil {
 		return nil, err
