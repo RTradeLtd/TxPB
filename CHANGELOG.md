@@ -2,6 +2,13 @@
 
 Tracks changes made in between releases
 
+# v3.2.0
+
+* Add examples, and rust bindings [#52](https://github.com/RTradeLtd/TxPB/pull/52)
+* Noise protocol and private network doc changes [#51](https://github.com/RTradeLtd/TxPB/pull/51)
+* Replication client helpers [#50](https://github.com/RTradeLtd/TxPB/pull/50)
+* Replication naming changes [#49](https://github.com/RTradeLtd/TxPB/pull/49)
+
 # v3.1.1
 
 * Enable backwards compatible range request downloads [#47](https://github.com/RTradeLtd/TxPB/pull/47)
