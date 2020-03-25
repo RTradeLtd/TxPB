@@ -116,7 +116,7 @@ func (s *SimpleGRPCConnectionProvider) ConnectionToServer(a *AddrInfo) (*grpc.Cl
 			address = tcp.String()
 		} else {
 			//TODO: use libp2p port for grpc
-			return nil, errors.New("libp2p grpc transport not yet implemented")
+			return nil, errors.New("libp2p grpc transport not yet implemented, a dedicated grpc port is required.")
 		}
 		tlsConfig := s.tlsConfig.ReusableConfigForPeer(id)
 		opts := append(s.opts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
@@ -135,5 +135,5 @@ func (s *SimpleGRPCConnectionProvider) ConnectionToServer(a *AddrInfo) (*grpc.Cl
 		}
 		return cc, nil
 	}
-	return nil, fmt.Errorf("can not connect to: %v", a)
+	return nil, fmt.Errorf("can not connect to server after trying all addresses")
 }

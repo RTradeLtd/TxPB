@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	libcryto "github.com/libp2p/go-libp2p-core/crypto"
+	libcrypto "github.com/libp2p/go-libp2p-core/crypto"
 )
 
 func TestNewSignedSubscription(t *testing.T) {
@@ -14,7 +14,7 @@ func TestNewSignedSubscription(t *testing.T) {
 		topic   string
 		version int64
 		r       *Replication
-		key     libcryto.PrivKey
+		key     libcrypto.PrivKey
 	}
 	tests := []struct {
 		name    string
@@ -50,7 +50,7 @@ func TestSignedSubscription_Verify(t *testing.T) {
 	tests := []struct {
 		name      string
 		editer    func(ss *SignedSubscription)
-		verifyKey libcryto.PubKey
+		verifyKey libcrypto.PubKey
 		wantErr   bool
 		strictErr bool
 	}{

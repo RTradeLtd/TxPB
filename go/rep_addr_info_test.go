@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	libcryto "github.com/libp2p/go-libp2p-core/crypto"
+	libcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 )
@@ -55,8 +55,8 @@ func fatalOnError(t *testing.T, err error, msg ...interface{}) {
 }
 
 type keyPair struct {
-	priv libcryto.PrivKey
-	pub  libcryto.PubKey
+	priv libcrypto.PrivKey
+	pub  libcrypto.PubKey
 }
 
 var mockHostMap map[mockHostInfo]keyPair
@@ -72,7 +72,7 @@ func getMockHostKey(m mockHostInfo) keyPair {
 
 	k, ok := mockHostMap[m]
 	if !ok {
-		priv, pub, err := libcryto.GenerateECDSAKeyPair(rand.New(rand.NewSource(int64(m)))) //generate keys determinately for testing.
+		priv, pub, err := libcrypto.GenerateECDSAKeyPair(rand.New(rand.NewSource(int64(m)))) //generate keys deterministically for testing.
 		if err != nil {
 			panic(err)
 		}
