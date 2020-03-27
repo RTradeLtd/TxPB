@@ -479,6 +479,7 @@ NameSysAPI provides a generic name resolution API
 | ----- | ---- | ----- | ----------- |
 | cid | [string](#string) |  | cid is the identifier of the block |
 | data | [bytes](#bytes) |  | data is the actual contents of the block |
+| size | [int64](#int64) |  | size of the block, only filled out by BS_GET_STATS since if we just want stats, we dont want to retrieve all teh data. |
 
 
 
@@ -495,7 +496,7 @@ BlockstoreRequest is a message used to control blockstores
 | ----- | ---- | ----- | ----------- |
 | requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
 | reqOpts | [BSREQOPTS](#pb.BSREQOPTS) | repeated | optional request settings |
-| cids | [string](#string) | repeated | cids of blocks sent by: BS_DELETE, BS_GET, BS_GET_MANY |
+| cids | [string](#string) | repeated | cids of blocks sent by: BS_DELETE, BS_GET, BS_GET_MANY, BS_GET_STATS |
 | data | [bytes](#bytes) | repeated | the data we are putting sent by: BS_PUT, BS_PUT_MANY |
 | cidVersion | [string](#string) |  | the cid version to use when constructing blocks, default is v1 sent by: BS_PUT, BS_PUT_MANY |
 | hashFunc | [string](#string) |  | the hash function to use when constructing blocks, default is sha2-256 sent by: BS_PUT, BS_PUT_MANY |
@@ -514,7 +515,11 @@ BlockstoreResponse is a response to a BlockstoreqRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | requestType | [BSREQTYPE](#pb.BSREQTYPE) |  | indicates the particular request type being made |
-| blocks | [Block](#pb.Block) | repeated | a copy of blocks from the blockstore sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY in the case of BS_PUT, and BS_PUT_MANY requests the data field will be empty as this is only populated by get requests |
+| blocks | [Block](#pb.Block) | repeated | a copy of blocks from the blockstore sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY, BS_GET_STATS, BS_GET_ALL
+
+in the case of BS_PUT, and BS_PUT_MANY requests the data field will be empty as this is only populated by get requests
+
+in the case of BS_GET_STATS only the cid, and size params will be filled out, since we are just interested in the size |
 
 
 
@@ -908,6 +913,7 @@ BSREQTYPE is a particular blockstore request type
 | BS_GET | 3 | BS_GET is used to get a block from the store |
 | BS_GET_MANY | 4 | BS_GET_MANY is used to get many blocks from the store |
 | BS_GET_ALL | 5 | BS_GET_ALL is used to retrieve all blocks from the store It is the gRPC equivalent of Blockstore::AllKeysChan |
+| BS_GET_STATS | 6 | BS_GET_STATS is used to retrieve statistics about individual blocks |
 
 
 

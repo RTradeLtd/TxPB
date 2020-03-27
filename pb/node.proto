@@ -172,6 +172,8 @@ enum BSREQTYPE {
     // BS_GET_ALL is used to retrieve all blocks from the store
     // It is the gRPC equivalent of Blockstore::AllKeysChan
     BS_GET_ALL = 5;
+    // BS_GET_STATS is used to retrieve statistics about individual blocks
+    BS_GET_STATS = 6;
 }
 
 // BSREQOPTS are options for blockstore requests
@@ -189,7 +191,7 @@ message BlockstoreRequest {
     // optional request settings
     repeated BSREQOPTS reqOpts = 2;
     // cids of blocks
-    // sent by: BS_DELETE, BS_GET, BS_GET_MANY
+    // sent by: BS_DELETE, BS_GET, BS_GET_MANY, BS_GET_STATS
     repeated string cids = 3;
     // the data we are putting
     // sent by: BS_PUT, BS_PUT_MANY
@@ -207,10 +209,14 @@ message BlockstoreResponse {
     // indicates the particular request type being made
     BSREQTYPE requestType = 1;
     // a copy of blocks from the blockstore
-    // sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY
+    // sent by: BS_PUT, BS_PUT_MANY, BS_GET, BS_GET_MANY, BS_GET_STATS, BS_GET_ALL
+    //
     // in the case of BS_PUT, and BS_PUT_MANY requests
     // the data field will be empty as this is only populated
     // by get requests
+    //
+    // in the case of BS_GET_STATS only the cid, and size params
+    // will be filled out, since we are just interested in the size
     repeated Block blocks = 2;
 }
 
@@ -219,6 +225,10 @@ message Block {
     string cid = 1;
     // data is the actual contents of the block
     bytes data = 2;
+    // size of the block, only filled out by BS_GET_STATS
+    // since if we just want stats, we dont want to 
+    // retrieve all teh data.
+    int64 size = 3;
 }
 
 // DAGREQTYPE indicates the particular DagAPI request being performed

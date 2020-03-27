@@ -2468,7 +2468,8 @@ proto.pb.Block.prototype.toObject = function(opt_includeInstance) {
 proto.pb.Block.toObject = function(includeInstance, msg) {
   var f, obj = {
     cid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    data: msg.getData_asB64()
+    data: msg.getData_asB64(),
+    size: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -2513,6 +2514,10 @@ proto.pb.Block.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setData(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setSize(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2553,6 +2558,13 @@ proto.pb.Block.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeBytes(
       2,
+      f
+    );
+  }
+  f = message.getSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
       f
     );
   }
@@ -2610,6 +2622,21 @@ proto.pb.Block.prototype.getData_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.pb.Block.prototype.setData = function(value) {
   jspb.Message.setProto3BytesField(this, 2, value);
+};
+
+
+/**
+ * optional int64 size = 3;
+ * @return {number}
+ */
+proto.pb.Block.prototype.getSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.pb.Block.prototype.setSize = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -4569,7 +4596,8 @@ proto.pb.BSREQTYPE = {
   BS_PUT_MANY: 2,
   BS_GET: 3,
   BS_GET_MANY: 4,
-  BS_GET_ALL: 5
+  BS_GET_ALL: 5,
+  BS_GET_STATS: 6
 };
 
 /**
