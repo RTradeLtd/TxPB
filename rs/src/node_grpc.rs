@@ -46,6 +46,13 @@ const METHOD_NODE_API_BLOCKSTORE: ::grpcio::Method<super::node::BlockstoreReques
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
+const METHOD_NODE_API_BLOCKSTORE_STREAM: ::grpcio::Method<super::node::BlockstoreRequest, super::node::BlockstoreResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Duplex,
+    name: "/pb.NodeAPI/BlockstoreStream",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
 const METHOD_NODE_API_DAG: ::grpcio::Method<super::node::DagRequest, super::node::DagResponse> = ::grpcio::Method {
     ty: ::grpcio::MethodType::Unary,
     name: "/pb.NodeAPI/Dag",
@@ -143,6 +150,14 @@ impl NodeApiClient {
         self.blockstore_async_opt(req, ::grpcio::CallOption::default())
     }
 
+    pub fn blockstore_stream_opt(&self, opt: ::grpcio::CallOption) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::node::BlockstoreRequest>, ::grpcio::ClientDuplexReceiver<super::node::BlockstoreResponse>)> {
+        self.client.duplex_streaming(&METHOD_NODE_API_BLOCKSTORE_STREAM, opt)
+    }
+
+    pub fn blockstore_stream(&self) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::node::BlockstoreRequest>, ::grpcio::ClientDuplexReceiver<super::node::BlockstoreResponse>)> {
+        self.blockstore_stream_opt(::grpcio::CallOption::default())
+    }
+
     pub fn dag_opt(&self, req: &super::node::DagRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::node::DagResponse> {
         self.client.unary_call(&METHOD_NODE_API_DAG, req, opt)
     }
@@ -200,6 +215,7 @@ pub trait NodeApi {
     fn extras(&mut self, ctx: ::grpcio::RpcContext, req: super::node::ExtrasRequest, sink: ::grpcio::UnarySink<super::util::Empty>);
     fn p2_p(&mut self, ctx: ::grpcio::RpcContext, req: super::node::P2PRequest, sink: ::grpcio::UnarySink<super::node::P2PResponse>);
     fn blockstore(&mut self, ctx: ::grpcio::RpcContext, req: super::node::BlockstoreRequest, sink: ::grpcio::UnarySink<super::node::BlockstoreResponse>);
+    fn blockstore_stream(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::node::BlockstoreRequest>, sink: ::grpcio::DuplexSink<super::node::BlockstoreResponse>);
     fn dag(&mut self, ctx: ::grpcio::RpcContext, req: super::node::DagRequest, sink: ::grpcio::UnarySink<super::node::DagResponse>);
     fn keystore(&mut self, ctx: ::grpcio::RpcContext, req: super::node::KeystoreRequest, sink: ::grpcio::UnarySink<super::node::KeystoreResponse>);
     fn persist(&mut self, ctx: ::grpcio::RpcContext, req: super::node::PersistRequest, sink: ::grpcio::UnarySink<super::node::PersistResponse>);
@@ -222,6 +238,10 @@ pub fn create_node_api<S: NodeApi + Send + Clone + 'static>(s: S) -> ::grpcio::S
     let mut instance = s.clone();
     builder = builder.add_unary_handler(&METHOD_NODE_API_BLOCKSTORE, move |ctx, req, resp| {
         instance.blockstore(ctx, req, resp)
+    });
+    let mut instance = s.clone();
+    builder = builder.add_duplex_streaming_handler(&METHOD_NODE_API_BLOCKSTORE_STREAM, move |ctx, req, resp| {
+        instance.blockstore_stream(ctx, req, resp)
     });
     let mut instance = s.clone();
     builder = builder.add_unary_handler(&METHOD_NODE_API_DAG, move |ctx, req, resp| {

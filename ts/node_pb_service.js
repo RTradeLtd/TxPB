@@ -47,6 +47,15 @@ NodeAPI.Blockstore = {
   responseType: node_pb.BlockstoreResponse
 };
 
+NodeAPI.BlockstoreStream = {
+  methodName: "BlockstoreStream",
+  service: NodeAPI,
+  requestStream: true,
+  responseStream: true,
+  requestType: node_pb.BlockstoreRequest,
+  responseType: node_pb.BlockstoreResponse
+};
+
 NodeAPI.Dag = {
   methodName: "Dag",
   service: NodeAPI,
@@ -200,6 +209,51 @@ NodeAPIClient.prototype.blockstore = function blockstore(requestMessage, metadat
   return {
     cancel: function () {
       callback = null;
+      client.close();
+    }
+  };
+};
+
+NodeAPIClient.prototype.blockstoreStream = function blockstoreStream(metadata) {
+  var listeners = {
+    data: [],
+    end: [],
+    status: []
+  };
+  var client = grpc.client(NodeAPI.BlockstoreStream, {
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport
+  });
+  client.onEnd(function (status, statusMessage, trailers) {
+    listeners.status.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners.end.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners = null;
+  });
+  client.onMessage(function (message) {
+    listeners.data.forEach(function (handler) {
+      handler(message);
+    })
+  });
+  client.start(metadata);
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    write: function (requestMessage) {
+      client.send(requestMessage);
+      return this;
+    },
+    end: function () {
+      client.finishSend();
+    },
+    cancel: function () {
+      listeners = null;
       client.close();
     }
   };

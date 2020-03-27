@@ -14,6 +14,9 @@ service NodeAPI {
     rpc P2P(P2PRequest) returns (P2PResponse) { };
     // Blockstore allows low-level management of the underlying blockstore
     rpc Blockstore(BlockstoreRequest) returns (BlockstoreResponse) { };
+    // BlockstoreStream is akin to Blockstore, except streamable
+    // Once v4 is out, condense this + blockstore into a single call
+    rpc BlockstoreStream(stream BlockstoreRequest) returns (stream BlockstoreResponse) { };
     // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
     rpc Dag(DagRequest) returns (DagResponse) { };
     // Keystore is a unidirectional RPC allowing management of ipfs keystores
@@ -166,6 +169,9 @@ enum BSREQTYPE {
     BS_GET = 3;
     // BS_GET_MANY is used to get many blocks from the store
     BS_GET_MANY = 4;
+    // BS_GET_ALL is used to retrieve all blocks from the store
+    // It is the gRPC equivalent of Blockstore::AllKeysChan
+    BS_GET_ALL = 5;
 }
 
 // BSREQOPTS are options for blockstore requests
