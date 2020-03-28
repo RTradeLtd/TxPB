@@ -70,7 +70,7 @@ tex-cli rep check
 
 Sample Output:
 
-```
+```txt
 server 0: active true, target 3, current 3
 server 1: active true, target 3, current 2
 ```
@@ -81,6 +81,17 @@ Where `active` is a server that is actively replicating. The number of active se
 
 `current` is the highest version the server have replicated. If this number is lower than `target`, then this server is retrieving the listed cids.
 
+## YAML automation
+
+You can edit some fields of the `replication.yml` file from the cli for basic scripting capabilities.
+
+The cids and version field can be updated with the following example command:
+
+```bash
+tex-cli rep edit --remove-cid all --add-cid bafybeihykld7uyxzogax6vgyvag42y7464eywpf55gxi5qpoisibh3c5wa --increase-version
+```
+
+Where all existing cids are removed, a new one is added, and the version increased by one. The remove and add flags can be repeated to add or remove a list of cids.
 
 ## Common Error Conditions
 
