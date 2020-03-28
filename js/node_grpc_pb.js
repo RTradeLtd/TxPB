@@ -212,6 +212,19 @@ blockstore: {
     responseSerialize: serialize_pb_BlockstoreResponse,
     responseDeserialize: deserialize_pb_BlockstoreResponse,
   },
+  // BlockstoreStream is akin to Blockstore, except streamable
+// Once v4 is out, condense this + blockstore into a single call
+blockstoreStream: {
+    path: '/pb.NodeAPI/BlockstoreStream',
+    requestStream: true,
+    responseStream: true,
+    requestType: node_pb.BlockstoreRequest,
+    responseType: node_pb.BlockstoreResponse,
+    requestSerialize: serialize_pb_BlockstoreRequest,
+    requestDeserialize: deserialize_pb_BlockstoreRequest,
+    responseSerialize: serialize_pb_BlockstoreResponse,
+    responseDeserialize: deserialize_pb_BlockstoreResponse,
+  },
   // Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
 dag: {
     path: '/pb.NodeAPI/Dag',

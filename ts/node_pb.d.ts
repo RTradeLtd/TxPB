@@ -341,6 +341,9 @@ export class Block extends jspb.Message {
   getData_asB64(): string;
   setData(value: Uint8Array | string): void;
 
+  getSize(): number;
+  setSize(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Block.AsObject;
   static toObject(includeInstance: boolean, msg: Block): Block.AsObject;
@@ -355,6 +358,7 @@ export namespace Block {
   export type AsObject = {
     cid: string,
     data: Uint8Array | string,
+    size: number,
   }
 }
 
@@ -653,6 +657,8 @@ export interface BSREQTYPEMap {
   BS_PUT_MANY: 2;
   BS_GET: 3;
   BS_GET_MANY: 4;
+  BS_GET_ALL: 5;
+  BS_GET_STATS: 6;
 }
 
 export const BSREQTYPE: BSREQTYPEMap;

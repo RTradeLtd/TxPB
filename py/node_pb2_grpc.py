@@ -35,6 +35,11 @@ class NodeAPIStub(object):
         request_serializer=node__pb2.BlockstoreRequest.SerializeToString,
         response_deserializer=node__pb2.BlockstoreResponse.FromString,
         )
+    self.BlockstoreStream = channel.stream_stream(
+        '/pb.NodeAPI/BlockstoreStream',
+        request_serializer=node__pb2.BlockstoreRequest.SerializeToString,
+        response_deserializer=node__pb2.BlockstoreResponse.FromString,
+        )
     self.Dag = channel.unary_unary(
         '/pb.NodeAPI/Dag',
         request_serializer=node__pb2.DagRequest.SerializeToString,
@@ -86,6 +91,14 @@ class NodeAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def BlockstoreStream(self, request_iterator, context):
+    """BlockstoreStream is akin to Blockstore, except streamable
+    Once v4 is out, condense this + blockstore into a single call
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Dag(self, request, context):
     """Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
     """
@@ -127,6 +140,11 @@ def add_NodeAPIServicer_to_server(servicer, server):
       ),
       'Blockstore': grpc.unary_unary_rpc_method_handler(
           servicer.Blockstore,
+          request_deserializer=node__pb2.BlockstoreRequest.FromString,
+          response_serializer=node__pb2.BlockstoreResponse.SerializeToString,
+      ),
+      'BlockstoreStream': grpc.stream_stream_rpc_method_handler(
+          servicer.BlockstoreStream,
           request_deserializer=node__pb2.BlockstoreRequest.FromString,
           response_serializer=node__pb2.BlockstoreResponse.SerializeToString,
       ),

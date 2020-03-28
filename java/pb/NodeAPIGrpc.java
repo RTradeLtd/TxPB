@@ -154,6 +154,37 @@ public final class NodeAPIGrpc {
     return getBlockstoreMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreStreamMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "BlockstoreStream",
+      requestType = pb.Node.BlockstoreRequest.class,
+      responseType = pb.Node.BlockstoreResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest,
+      pb.Node.BlockstoreResponse> getBlockstoreStreamMethod() {
+    io.grpc.MethodDescriptor<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse> getBlockstoreStreamMethod;
+    if ((getBlockstoreStreamMethod = NodeAPIGrpc.getBlockstoreStreamMethod) == null) {
+      synchronized (NodeAPIGrpc.class) {
+        if ((getBlockstoreStreamMethod = NodeAPIGrpc.getBlockstoreStreamMethod) == null) {
+          NodeAPIGrpc.getBlockstoreStreamMethod = getBlockstoreStreamMethod =
+              io.grpc.MethodDescriptor.<pb.Node.BlockstoreRequest, pb.Node.BlockstoreResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "BlockstoreStream"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Node.BlockstoreResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new NodeAPIMethodDescriptorSupplier("BlockstoreStream"))
+              .build();
+        }
+      }
+    }
+    return getBlockstoreStreamMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<pb.Node.DagRequest,
       pb.Node.DagResponse> getDagMethod;
 
@@ -342,6 +373,17 @@ public final class NodeAPIGrpc {
 
     /**
      * <pre>
+     * BlockstoreStream is akin to Blockstore, except streamable
+     * Once v4 is out, condense this + blockstore into a single call
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.Node.BlockstoreRequest> blockstoreStream(
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getBlockstoreStreamMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
      * Dag is a unidirectional rpc allowing manipulation of low-level ipld objects
      * </pre>
      */
@@ -400,6 +442,13 @@ public final class NodeAPIGrpc {
                 pb.Node.BlockstoreRequest,
                 pb.Node.BlockstoreResponse>(
                   this, METHODID_BLOCKSTORE)))
+          .addMethod(
+            getBlockstoreStreamMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                pb.Node.BlockstoreRequest,
+                pb.Node.BlockstoreResponse>(
+                  this, METHODID_BLOCKSTORE_STREAM)))
           .addMethod(
             getDagMethod(),
             asyncUnaryCall(
@@ -486,6 +535,18 @@ public final class NodeAPIGrpc {
         io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getBlockstoreMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * BlockstoreStream is akin to Blockstore, except streamable
+     * Once v4 is out, condense this + blockstore into a single call
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.Node.BlockstoreRequest> blockstoreStream(
+        io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getBlockstoreStreamMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -716,6 +777,7 @@ public final class NodeAPIGrpc {
   private static final int METHODID_DAG = 4;
   private static final int METHODID_KEYSTORE = 5;
   private static final int METHODID_PERSIST = 6;
+  private static final int METHODID_BLOCKSTORE_STREAM = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -772,6 +834,9 @@ public final class NodeAPIGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_BLOCKSTORE_STREAM:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.blockstoreStream(
+              (io.grpc.stub.StreamObserver<pb.Node.BlockstoreResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -827,6 +892,7 @@ public final class NodeAPIGrpc {
               .addMethod(getExtrasMethod())
               .addMethod(getP2PMethod())
               .addMethod(getBlockstoreMethod())
+              .addMethod(getBlockstoreStreamMethod())
               .addMethod(getDagMethod())
               .addMethod(getKeystoreMethod())
               .addMethod(getPersistMethod())
