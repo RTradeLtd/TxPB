@@ -2,6 +2,11 @@
 
 Tracks changes made in between releases
 
+# v3.2.1
+
+* Replication doc cli, and typo fix [#53](https://github.com/RTradeLtd/TxPB/pull/53)
+* Add additional blockstore calls, enable a streaming version [#54](https://github.com/RTradeLtd/TxPB/pull/54)
+
 # v3.2.0
 
 * Add examples, and rust bindings [#52](https://github.com/RTradeLtd/TxPB/pull/52)
