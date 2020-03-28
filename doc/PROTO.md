@@ -479,7 +479,7 @@ NameSysAPI provides a generic name resolution API
 | ----- | ---- | ----- | ----------- |
 | cid | [string](#string) |  | cid is the identifier of the block |
 | data | [bytes](#bytes) |  | data is the actual contents of the block |
-| size | [int64](#int64) |  | size of the block, only filled out by BS_GET_STATS since if we just want stats, we dont want to retrieve all teh data. |
+| size | [int64](#int64) |  | size of the block, only filled out by BS_GET_STATS since if we just want stats, we dont want to retrieve all the data. |
 
 
 

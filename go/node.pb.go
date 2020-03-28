@@ -1039,7 +1039,7 @@ type Block struct {
 	Data []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	// size of the block, only filled out by BS_GET_STATS
 	// since if we just want stats, we dont want to
-	// retrieve all teh data.
+	// retrieve all the data.
 	Size_ int64 `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
 }
 
