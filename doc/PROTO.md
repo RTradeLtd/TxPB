@@ -20,6 +20,7 @@
 
 - [file.proto](#file.proto)
     - [Blob](#pb.Blob)
+    - [DirectoryUploadRequest](#pb.DirectoryUploadRequest)
     - [DownloadRequest](#pb.DownloadRequest)
     - [DownloadResponse](#pb.DownloadResponse)
     - [UploadOptions](#pb.UploadOptions)
@@ -293,6 +294,29 @@ Blob is a chunk of binary data
 
 
 
+<a name="pb.DirectoryUploadRequest"></a>
+
+### DirectoryUploadRequest
+DirectoryUploadRequest is used to create a UnixFS directory object.
+The exact process consists of initiating a stream for a directory uplaod request
+then simultaneously uploading files using the UploadFile call, and then sending
+messages into the stream indicating what hashes to add at what paths, 
+create a directory as an empty unixfs node. Subsequently
+the server side will then fetch the file referenced by hash
+via the dagservice, and then add that to the directory object.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| path | [string](#string) |  |  |
+| hash | [string](#string) |  |  |
+| isDir | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="pb.DownloadRequest"></a>
 
 ### DownloadRequest
@@ -377,6 +401,7 @@ FileAPI provides a gRPC api to upload/download files as UnixFS objects
 | ----------- | ------------ | ------------- | ------------|
 | UploadFile | [UploadRequest](#pb.UploadRequest) stream | [PutResponse](#pb.PutResponse) | UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add) |
 | DownloadFile | [DownloadRequest](#pb.DownloadRequest) | [DownloadResponse](#pb.DownloadResponse) stream | DownloadFile allows downloading a UnixFS object (equivalent to ipfs get) |
+| UploadDirectory | [DirectoryUploadRequest](#pb.DirectoryUploadRequest) stream | [PutResponse](#pb.PutResponse) | UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw` |
 
  
 

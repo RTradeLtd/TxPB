@@ -5,6 +5,17 @@ var grpc = require('grpc');
 var file_pb = require('./file_pb.js');
 var util_pb = require('./util_pb.js');
 
+function serialize_pb_DirectoryUploadRequest(arg) {
+  if (!(arg instanceof file_pb.DirectoryUploadRequest)) {
+    throw new Error('Expected argument of type pb.DirectoryUploadRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_DirectoryUploadRequest(buffer_arg) {
+  return file_pb.DirectoryUploadRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_DownloadRequest(arg) {
   if (!(arg instanceof file_pb.DownloadRequest)) {
     throw new Error('Expected argument of type pb.DownloadRequest');
@@ -75,6 +86,18 @@ downloadFile: {
     requestDeserialize: deserialize_pb_DownloadRequest,
     responseSerialize: serialize_pb_DownloadResponse,
     responseDeserialize: deserialize_pb_DownloadResponse,
+  },
+  // UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw`
+uploadDirectory: {
+    path: '/pb.FileAPI/UploadDirectory',
+    requestStream: true,
+    responseStream: false,
+    requestType: file_pb.DirectoryUploadRequest,
+    responseType: util_pb.PutResponse,
+    requestSerialize: serialize_pb_DirectoryUploadRequest,
+    requestDeserialize: deserialize_pb_DirectoryUploadRequest,
+    responseSerialize: serialize_pb_PutResponse,
+    responseDeserialize: deserialize_pb_PutResponse,
   },
 };
 

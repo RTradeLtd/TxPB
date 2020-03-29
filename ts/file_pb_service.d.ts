@@ -23,10 +23,20 @@ type FileAPIDownloadFile = {
   readonly responseType: typeof file_pb.DownloadResponse;
 };
 
+type FileAPIUploadDirectory = {
+  readonly methodName: string;
+  readonly service: typeof FileAPI;
+  readonly requestStream: true;
+  readonly responseStream: false;
+  readonly requestType: typeof file_pb.DirectoryUploadRequest;
+  readonly responseType: typeof util_pb.PutResponse;
+};
+
 export class FileAPI {
   static readonly serviceName: string;
   static readonly UploadFile: FileAPIUploadFile;
   static readonly DownloadFile: FileAPIDownloadFile;
+  static readonly UploadDirectory: FileAPIUploadDirectory;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -63,5 +73,6 @@ export class FileAPIClient {
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   uploadFile(metadata?: grpc.Metadata): RequestStream<file_pb.UploadRequest>;
   downloadFile(requestMessage: file_pb.DownloadRequest, metadata?: grpc.Metadata): ResponseStream<file_pb.DownloadResponse>;
+  uploadDirectory(metadata?: grpc.Metadata): RequestStream<file_pb.DirectoryUploadRequest>;
 }
 

@@ -8,8 +8,23 @@ service FileAPI {
     rpc UploadFile(stream UploadRequest) returns  (PutResponse) { };
     // DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)
     rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) { };
+    // UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw`
+    rpc UploadDirectory(stream DirectoryUploadRequest) returns (PutResponse) { };
 }
 
+
+// DirectoryUploadRequest is used to create a UnixFS directory object.
+// The exact process consists of initiating a stream for a directory uplaod request
+// then simultaneously uploading files using the UploadFile call, and then sending
+// messages into the stream indicating what hashes to add at what paths, 
+// create a directory as an empty unixfs node. Subsequently
+// the server side will then fetch the file referenced by hash
+// via the dagservice, and then add that to the directory object.
+message DirectoryUploadRequest {
+    string path = 1;
+    string hash = 2;
+    bool isDir = 3;
+}
 
 // UploadRequest is used to upload data as a UnixFS object
 message UploadRequest {

@@ -92,6 +92,37 @@ public final class FileAPIGrpc {
     return getDownloadFileMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<pb.File.DirectoryUploadRequest,
+      pb.Util.PutResponse> getUploadDirectoryMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UploadDirectory",
+      requestType = pb.File.DirectoryUploadRequest.class,
+      responseType = pb.Util.PutResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<pb.File.DirectoryUploadRequest,
+      pb.Util.PutResponse> getUploadDirectoryMethod() {
+    io.grpc.MethodDescriptor<pb.File.DirectoryUploadRequest, pb.Util.PutResponse> getUploadDirectoryMethod;
+    if ((getUploadDirectoryMethod = FileAPIGrpc.getUploadDirectoryMethod) == null) {
+      synchronized (FileAPIGrpc.class) {
+        if ((getUploadDirectoryMethod = FileAPIGrpc.getUploadDirectoryMethod) == null) {
+          FileAPIGrpc.getUploadDirectoryMethod = getUploadDirectoryMethod =
+              io.grpc.MethodDescriptor.<pb.File.DirectoryUploadRequest, pb.Util.PutResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UploadDirectory"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.File.DirectoryUploadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  pb.Util.PutResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new FileAPIMethodDescriptorSupplier("UploadDirectory"))
+              .build();
+        }
+      }
+    }
+    return getUploadDirectoryMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -163,6 +194,16 @@ public final class FileAPIGrpc {
       asyncUnimplementedUnaryCall(getDownloadFileMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw`
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.File.DirectoryUploadRequest> uploadDirectory(
+        io.grpc.stub.StreamObserver<pb.Util.PutResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getUploadDirectoryMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -179,6 +220,13 @@ public final class FileAPIGrpc {
                 pb.File.DownloadRequest,
                 pb.File.DownloadResponse>(
                   this, METHODID_DOWNLOAD_FILE)))
+          .addMethod(
+            getUploadDirectoryMethod(),
+            asyncClientStreamingCall(
+              new MethodHandlers<
+                pb.File.DirectoryUploadRequest,
+                pb.Util.PutResponse>(
+                  this, METHODID_UPLOAD_DIRECTORY)))
           .build();
     }
   }
@@ -220,6 +268,17 @@ public final class FileAPIGrpc {
         io.grpc.stub.StreamObserver<pb.File.DownloadResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getDownloadFileMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw`
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<pb.File.DirectoryUploadRequest> uploadDirectory(
+        io.grpc.stub.StreamObserver<pb.Util.PutResponse> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getUploadDirectoryMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -272,6 +331,7 @@ public final class FileAPIGrpc {
 
   private static final int METHODID_DOWNLOAD_FILE = 0;
   private static final int METHODID_UPLOAD_FILE = 1;
+  private static final int METHODID_UPLOAD_DIRECTORY = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -306,6 +366,9 @@ public final class FileAPIGrpc {
       switch (methodId) {
         case METHODID_UPLOAD_FILE:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.uploadFile(
+              (io.grpc.stub.StreamObserver<pb.Util.PutResponse>) responseObserver);
+        case METHODID_UPLOAD_DIRECTORY:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.uploadDirectory(
               (io.grpc.stub.StreamObserver<pb.Util.PutResponse>) responseObserver);
         default:
           throw new AssertionError();
@@ -360,6 +423,7 @@ public final class FileAPIGrpc {
               .setSchemaDescriptor(new FileAPIFileDescriptorSupplier())
               .addMethod(getUploadFileMethod())
               .addMethod(getDownloadFileMethod())
+              .addMethod(getUploadDirectoryMethod())
               .build();
         }
       }

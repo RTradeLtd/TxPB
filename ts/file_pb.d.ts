@@ -4,6 +4,34 @@
 import * as jspb from "google-protobuf";
 import * as util_pb from "./util_pb";
 
+export class DirectoryUploadRequest extends jspb.Message {
+  getPath(): string;
+  setPath(value: string): void;
+
+  getHash(): string;
+  setHash(value: string): void;
+
+  getIsdir(): boolean;
+  setIsdir(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DirectoryUploadRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DirectoryUploadRequest): DirectoryUploadRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DirectoryUploadRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DirectoryUploadRequest;
+  static deserializeBinaryFromReader(message: DirectoryUploadRequest, reader: jspb.BinaryReader): DirectoryUploadRequest;
+}
+
+export namespace DirectoryUploadRequest {
+  export type AsObject = {
+    path: string,
+    hash: string,
+    isdir: boolean,
+  }
+}
+
 export class UploadRequest extends jspb.Message {
   hasBlob(): boolean;
   clearBlob(): void;

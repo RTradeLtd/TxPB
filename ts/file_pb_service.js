@@ -29,6 +29,15 @@ FileAPI.DownloadFile = {
   responseType: file_pb.DownloadResponse
 };
 
+FileAPI.UploadDirectory = {
+  methodName: "UploadDirectory",
+  service: FileAPI,
+  requestStream: true,
+  responseStream: false,
+  requestType: file_pb.DirectoryUploadRequest,
+  responseType: util_pb.PutResponse
+};
+
 exports.FileAPI = FileAPI;
 
 function FileAPIClient(serviceHost, options) {
@@ -108,6 +117,47 @@ FileAPIClient.prototype.downloadFile = function downloadFile(requestMessage, met
     on: function (type, handler) {
       listeners[type].push(handler);
       return this;
+    },
+    cancel: function () {
+      listeners = null;
+      client.close();
+    }
+  };
+};
+
+FileAPIClient.prototype.uploadDirectory = function uploadDirectory(metadata) {
+  var listeners = {
+    end: [],
+    status: []
+  };
+  var client = grpc.client(FileAPI.UploadDirectory, {
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport
+  });
+  client.onEnd(function (status, statusMessage, trailers) {
+    listeners.status.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners.end.forEach(function (handler) {
+      handler({ code: status, details: statusMessage, metadata: trailers });
+    });
+    listeners = null;
+  });
+  return {
+    on: function (type, handler) {
+      listeners[type].push(handler);
+      return this;
+    },
+    write: function (requestMessage) {
+      if (!client.started) {
+        client.start(metadata);
+      }
+      client.send(requestMessage);
+      return this;
+    },
+    end: function () {
+      client.finishSend();
     },
     cancel: function () {
       listeners = null;

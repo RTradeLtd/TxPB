@@ -25,6 +25,11 @@ class FileAPIStub(object):
         request_serializer=file__pb2.DownloadRequest.SerializeToString,
         response_deserializer=file__pb2.DownloadResponse.FromString,
         )
+    self.UploadDirectory = channel.stream_unary(
+        '/pb.FileAPI/UploadDirectory',
+        request_serializer=file__pb2.DirectoryUploadRequest.SerializeToString,
+        response_deserializer=util__pb2.PutResponse.FromString,
+        )
 
 
 class FileAPIServicer(object):
@@ -45,6 +50,13 @@ class FileAPIServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def UploadDirectory(self, request_iterator, context):
+    """UploadDirectory is used to upload a directory to IPFS and is equivalent to `ipfs add -r` or `ipfs add -rw`
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_FileAPIServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -57,6 +69,11 @@ def add_FileAPIServicer_to_server(servicer, server):
           servicer.DownloadFile,
           request_deserializer=file__pb2.DownloadRequest.FromString,
           response_serializer=file__pb2.DownloadResponse.SerializeToString,
+      ),
+      'UploadDirectory': grpc.stream_unary_rpc_method_handler(
+          servicer.UploadDirectory,
+          request_deserializer=file__pb2.DirectoryUploadRequest.FromString,
+          response_serializer=util__pb2.PutResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
