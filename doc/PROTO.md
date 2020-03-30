@@ -761,7 +761,7 @@ it is a protocol buffer wrapper around ipld.NodeStat
 | blockSize | [int64](#int64) |  | size of the raw, encoded data |
 | linkSize | [int64](#int64) |  | size of the links segment |
 | cumulativeSize | [int64](#int64) |  | cumulative size of object and its references |
-| dataSize | [int64](#int64) |  |  |
+| dataSize | [int64](#int64) |  | size of the data segmetn |
 
 
 

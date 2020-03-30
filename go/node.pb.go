@@ -1316,7 +1316,8 @@ type IPLDStat struct {
 	LinkSize int64 `protobuf:"varint,3,opt,name=linkSize,proto3" json:"linkSize,omitempty"`
 	// cumulative size of object and its references
 	CumulativeSize int64 `protobuf:"varint,4,opt,name=cumulativeSize,proto3" json:"cumulativeSize,omitempty"`
-	DataSize       int64 `protobuf:"varint,5,opt,name=dataSize,proto3" json:"dataSize,omitempty"`
+	// size of the data segmetn
+	DataSize int64 `protobuf:"varint,5,opt,name=dataSize,proto3" json:"dataSize,omitempty"`
 }
 
 func (m *IPLDStat) Reset()         { *m = IPLDStat{} }
