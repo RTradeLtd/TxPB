@@ -465,6 +465,9 @@ export class IPLDStat extends jspb.Message {
   getCumulativesize(): number;
   setCumulativesize(value: number): void;
 
+  getDatasize(): number;
+  setDatasize(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): IPLDStat.AsObject;
   static toObject(includeInstance: boolean, msg: IPLDStat): IPLDStat.AsObject;
@@ -481,6 +484,7 @@ export namespace IPLDStat {
     blocksize: number,
     linksize: number,
     cumulativesize: number,
+    datasize: number,
   }
 }
 

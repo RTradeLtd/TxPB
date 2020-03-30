@@ -3364,7 +3364,8 @@ proto.pb.IPLDStat.toObject = function(includeInstance, msg) {
     numlinks: jspb.Message.getFieldWithDefault(msg, 1, 0),
     blocksize: jspb.Message.getFieldWithDefault(msg, 2, 0),
     linksize: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    cumulativesize: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    cumulativesize: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    datasize: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -3416,6 +3417,10 @@ proto.pb.IPLDStat.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCumulativesize(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setDatasize(value);
       break;
     default:
       reader.skipField();
@@ -3471,6 +3476,13 @@ proto.pb.IPLDStat.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeInt64(
       4,
+      f
+    );
+  }
+  f = message.getDatasize();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
       f
     );
   }
@@ -3534,6 +3546,21 @@ proto.pb.IPLDStat.prototype.getCumulativesize = function() {
 /** @param {number} value */
 proto.pb.IPLDStat.prototype.setCumulativesize = function(value) {
   jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int64 dataSize = 5;
+ * @return {number}
+ */
+proto.pb.IPLDStat.prototype.getDatasize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.pb.IPLDStat.prototype.setDatasize = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 

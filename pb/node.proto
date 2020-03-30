@@ -304,7 +304,8 @@ message IPLDStat {
     // size of the links segment
     int64 linkSize = 3;
     // cumulative size of object and its references
-	int64 cumulativeSize = 4;
+    int64 cumulativeSize = 4;
+    int64 dataSize = 5;
 }
 
 // An IPFS MerkleDAG Link
