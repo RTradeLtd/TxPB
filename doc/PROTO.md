@@ -52,10 +52,12 @@
     - [DagRequest](#pb.DagRequest)
     - [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry)
     - [DagResponse](#pb.DagResponse)
+    - [DagResponse.NodeStatsEntry](#pb.DagResponse.NodeStatsEntry)
     - [ExtrasRequest](#pb.ExtrasRequest)
     - [GetPeersResponse](#pb.GetPeersResponse)
     - [IPLDLink](#pb.IPLDLink)
     - [IPLDNode](#pb.IPLDNode)
+    - [IPLDStat](#pb.IPLDStat)
     - [KeystoreRequest](#pb.KeystoreRequest)
     - [KeystoreResponse](#pb.KeystoreResponse)
     - [P2PLsInfo](#pb.P2PLsInfo)
@@ -659,6 +661,23 @@ Used in response to a Dag or DagStream RPC
 | hashes | [string](#string) | repeated | returns the hashes of newly generated IPLD objects sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS, DAG_GET_LINKS |
 | rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
 | links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
+| nodeStats | [DagResponse.NodeStatsEntry](#pb.DagResponse.NodeStatsEntry) | repeated | maps ipld cids to a ipld.NodeStat object equivalent sent by: DAG_STAT |
+
+
+
+
+
+
+<a name="pb.DagResponse.NodeStatsEntry"></a>
+
+### DagResponse.NodeStatsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [IPLDStat](#pb.IPLDStat) |  |  |
 
 
 
@@ -723,6 +742,25 @@ An IPFS MerkleDAG Node
 | ----- | ---- | ----- | ----------- |
 | links | [IPLDLink](#pb.IPLDLink) | repeated | refs to other objects |
 | data | [bytes](#bytes) |  | opaque user data |
+
+
+
+
+
+
+<a name="pb.IPLDStat"></a>
+
+### IPLDStat
+IPLDStat is statistics about an individual dag node
+it is a protocol buffer wrapper around ipld.NodeStat
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| numLinks | [int64](#int64) |  | number of links in link table |
+| blockSize | [int64](#int64) |  | size of the raw, encoded data |
+| linkSize | [int64](#int64) |  | size of the links segment |
+| cumulativeSize | [int64](#int64) |  | cumulative size of object and its references |
 
 
 
@@ -943,6 +981,7 @@ DAGREQTYPE indicates the particular DagAPI request being performed
 | DAG_NEW_NODE | 2 | DAG_NEW_NODE is used to create a new IPLD node object |
 | DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
 | DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
+| DAG_STAT | 5 | DAG_STAT is used to retrieve ipld.NodeStats information |
 
 
 

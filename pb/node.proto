@@ -243,6 +243,8 @@ enum DAGREQTYPE {
     DAG_ADD_LINKS = 3;
     // DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object
     DAG_GET_LINKS = 4;
+    // DAG_STAT is used to retrieve ipld.NodeStats information
+    DAG_STAT = 5;
 }
 
 // Used to submit a request to Dag or DagStream RPCs
@@ -287,6 +289,22 @@ message DagResponse {
     // the links contained within an IPLD node object
     // sent by: DAG_GET_LINKS
     repeated IPLDLink links = 4;
+    // maps ipld cids to a ipld.NodeStat object equivalent
+    // sent by: DAG_STAT
+    map<string, IPLDStat> nodeStats = 5;
+}
+
+// IPLDStat is statistics about an individual dag node
+// it is a protocol buffer wrapper around ipld.NodeStat
+message IPLDStat {
+    // number of links in link table
+    int64 numLinks = 1;
+    // size of the raw, encoded data
+    int64 blockSize = 2;
+    // size of the links segment
+    int64 linkSize = 3;
+    // cumulative size of object and its references
+	int64 cumulativeSize = 4;
 }
 
 // An IPFS MerkleDAG Link
