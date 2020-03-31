@@ -2,6 +2,11 @@
 
 Tracks changes made in between releases
 
+# v3.2.2
+
+* Enable retrieving IPLD object stats [#56](https://github.com/RTradeLtd/TxPB/pull/56)
+* Add docs for replication cli edit command [#55](https://github.com/RTradeLtd/TxPB/pull/55)
+
 # v3.2.1
 
 * Replication doc cli, and typo fix [#53](https://github.com/RTradeLtd/TxPB/pull/53)
