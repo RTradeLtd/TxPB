@@ -305,7 +305,7 @@ message IPLDStat {
     int64 linkSize = 3;
     // cumulative size of object and its references
     int64 cumulativeSize = 4;
-    // size of the data segmetn
+    // size of the data segment
     int64 dataSize = 5;
 }
 
