@@ -430,6 +430,8 @@ export class DagResponse extends jspb.Message {
   setLinksList(value: Array<IPLDLink>): void;
   addLinks(value?: IPLDLink, index?: number): IPLDLink;
 
+  getNodestatsMap(): jspb.Map<string, IPLDStat>;
+  clearNodestatsMap(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DagResponse.AsObject;
   static toObject(includeInstance: boolean, msg: DagResponse): DagResponse.AsObject;
@@ -446,6 +448,43 @@ export namespace DagResponse {
     hashesList: Array<string>,
     rawdata: Uint8Array | string,
     linksList: Array<IPLDLink.AsObject>,
+    nodestatsMap: Array<[string, IPLDStat.AsObject]>,
+  }
+}
+
+export class IPLDStat extends jspb.Message {
+  getNumlinks(): number;
+  setNumlinks(value: number): void;
+
+  getBlocksize(): number;
+  setBlocksize(value: number): void;
+
+  getLinksize(): number;
+  setLinksize(value: number): void;
+
+  getCumulativesize(): number;
+  setCumulativesize(value: number): void;
+
+  getDatasize(): number;
+  setDatasize(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): IPLDStat.AsObject;
+  static toObject(includeInstance: boolean, msg: IPLDStat): IPLDStat.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: IPLDStat, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): IPLDStat;
+  static deserializeBinaryFromReader(message: IPLDStat, reader: jspb.BinaryReader): IPLDStat;
+}
+
+export namespace IPLDStat {
+  export type AsObject = {
+    numlinks: number,
+    blocksize: number,
+    linksize: number,
+    cumulativesize: number,
+    datasize: number,
   }
 }
 
@@ -676,6 +715,7 @@ export interface DAGREQTYPEMap {
   DAG_NEW_NODE: 2;
   DAG_ADD_LINKS: 3;
   DAG_GET_LINKS: 4;
+  DAG_STAT: 5;
 }
 
 export const DAGREQTYPE: DAGREQTYPEMap;
