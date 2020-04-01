@@ -20,6 +20,8 @@ servers:
   grpcport: 9094
   addresses:
   - /ip4/127.0.0.2/tcp/12345
+authorprivatekey: ""
+clientprivatekey: ""
 ```
 
 The default location of this file is `replication.yml`, you can change it with the `--yml` flag of the `tex-cli rep sign` command.
@@ -34,9 +36,15 @@ The default location of this file is `replication.yml`, you can change it with t
 
 `servers` is a list of protentional servers to replicate to. The number of servers must be equal or greater than redundancy. The servers are preferred by the order they appear in the list. To publish on a server, the author's public key must be whitelisted.
 
-## Providing the Private Key
+`authorprivatekey` is a optional setting allowing you to save the author's private key within the replication file. It is suggested to use a key store for better security. (Private keys are encoded using hex encoding the same way as the `node.private_key` in `config.yml`.)
 
-The private key is provided by the global config file given to `tex-cli`. You can generate this file by `tex-cli config gen`. By default, it will use the key in `node.private_key` in `config.yml`. Please keep it safe.
+`clientprivatekey` is a optional setting allowing you to use a permeant connection id for tls and libp2p protocols. This private key must not be the same as any servers that you want to connect to.
+
+## Providing the Author's Private Key Externally
+
+One way to provide the author's private key is by using the global config file given to `tex-cli`. You can generate this file by `tex-cli config gen`. By default, it will use the key in `node.private_key` in `config.yml`. Please keep it safe.
+
+You can also use the key store set in `config.yml` with the `--author` flag to use the named private key.
 
 ## Sign and Publish Replication Changes
 
