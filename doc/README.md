@@ -4,11 +4,13 @@ This folder contains all of our documentation including protocol buffer docs, co
 
 # Contents
 
-* [Getting Started](GETTING_STARTED.md)
-* [Configuration File Documentation](CONFIGURATION.md)
-* [Reference Counter Overview](REFERENCE_COUNTER.md)
-* [Replication Overview](REPLICATION.md)
-* [License Key Overview](LICENSE_OVERVIEW.md)
-* [Protocol Buffer Documentation](PROTO.md)
-* [TemporalX HTTP Gateway](GATEWAY.md)
 * [Benchmarks](BENCHMARKS.md)
+* [Configuration File Reference](CONFIGURATION.md)
+* [IPFS Gateway Overview](GATEWAY.md)
+* [Getting Started](GETTING_STARTED.md)
+* [Licensing System Overview](LICENSE_OVERVIEW.md)
+* [Protocol Buffer Documentation](PROTO.md)
+* [Reference Counter Overview](REFERENCE_COUNTER.md)
+* [Replication CLI Overview](REPLICATION_CLI.md)
+* [Replication Algorithm Overview](REPLICATION.md)
+* [Tracing Overview](TRACING.md)

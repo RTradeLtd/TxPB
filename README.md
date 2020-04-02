@@ -9,22 +9,19 @@ We have pre-generated gRPC bindings for the following languages:
 * [typescript (grpc-web)](https://github.com/RTradeLtd/TxPB/tree/master/ts)
 * [java](https://github.com/RTradeLtd/TxPB/tree/master/java/pb)
 * [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
-* [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
 * [rust](https://github.com/RTradeLtd/TxPB/tree/master/rs/src)
 
 If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
 
+# Client Libraries
+
+The following packages are client libraries that can be used to interact with TemporalX without needing to write any code, or writing less code than using gRPC directly:
+
+* [go-temporalx-sdk](https://github.com/RTradeLtd/go-temporalx-sdk)
+
 # Documentation
 
-* [Overview](./doc)
-* [Getting Started](./doc/GETTING_STARTED.md)
-* [Configuration File Documentation](./doc/CONFIGURATION.md)
-* [Reference Counter Overview](./doc/REFERENCE_COUNTER.md)
-* [Replication Overview](./doc/REPLICATION.md)
-* [License Key Overview](./doc/LICENSE_OVERVIEW.md)
-* [Protocol Buffer Documentation](./doc/PROTO.md)
-* [TemporalX HTTP Gateway](./doc/GATEWAY.md)
-* [Benchmarks](./doc/BENCHMARKS.md)
+For all documentation please consult the [docs folder](https://docsx.temporal.cloud/doc/)
 
 # Examples
 
