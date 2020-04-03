@@ -38,7 +38,7 @@ The default location of this file is `replication.yml`, you can change it with t
 
 `authorprivatekey` is a optional setting allowing you to save the author's private key within the replication file. It is suggested to use a key store for better security. (Private keys are encoded using hex encoding the same way as the `node.private_key` in `config.yml`.)
 
-`clientprivatekey` is a optional setting allowing you to use a permeant connection id for tls and libp2p protocols. This private key must not be the same as any servers that you want to connect to.
+`clientprivatekey` is a optional setting allowing you to use a permanent connection id for tls and libp2p protocols. This private key must not be the same as any servers that you want to connect to.
 
 ## Providing the Author's Private Key Externally
 
