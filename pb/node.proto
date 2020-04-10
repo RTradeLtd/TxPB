@@ -176,8 +176,10 @@ enum BSREQTYPE {
     BS_GET_STATS = 6;
     // BS_HAS is used to retrieve whether or not we have the block
     BS_HAS = 7;
-    // BS_HASH_ON_READ is used to toggle hash on read in the blockstore
-    BS_HASH_ON_READ = 8;
+    // BS_HASH_ON_READ_ENABLE is used to enable hash on read
+    BS_HASH_ON_READ_ENABLE = 8;
+    // BS_HASH_ON_READ_DISABLE is used to disable hash on read
+    BS_HASH_ON_READ_DISABLE = 9;
 }
 
 // BSREQOPTS are options for blockstore requests

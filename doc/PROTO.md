@@ -954,7 +954,8 @@ BSREQTYPE is a particular blockstore request type
 | BS_GET_ALL | 5 | BS_GET_ALL is used to retrieve all blocks from the store It is the gRPC equivalent of Blockstore::AllKeysChan |
 | BS_GET_STATS | 6 | BS_GET_STATS is used to retrieve statistics about individual blocks |
 | BS_HAS | 7 | BS_HAS is used to retrieve whether or not we have the block |
-| BS_HASH_ON_READ | 8 | BS_HASH_ON_READ is used to toggle hash on read in the blockstore |
+| BS_HASH_ON_READ_ENABLE | 8 | BS_HASH_ON_READ_ENABLE is used to enable hash on read |
+| BS_HASH_ON_READ_DISABLE | 9 | BS_HASH_ON_READ_DISABLE is used to disable hash on read |
 
 
 
