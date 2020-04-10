@@ -378,6 +378,8 @@ counterStoreNamespace | counterstorespace  | the key namespace for the counter s
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
 counterMaxWorkers     | 10                 | the maximum number of concurrent reference counter operations (default 1) |
 
+If you are using the referene counter, you will want to make sure you don't enable blockstore caching, otherwise you will not get totally accurate reference count information, as the cached blockstore will intercept the blockstore call before our reference counter intercepts the call. By "not totally accurate" we mean that you will lmost likely get a maximum reference count of 1. For more deatils on this please consult the reference counter information page.
+
 ## Peerstore
 
 The `peerstore` section is used to define configuration options for the libp2p peerstore, which is where records of all libp2p peers we encounter are stored. We currently have two supported types:
