@@ -10,4 +10,22 @@ Enable persistent DHT
 Enable datastore peerstore
 
 * By enabling datastore peerstore, you no longer have to store tens of thousands of peerIDs, records, and associated information in memory
- 
+* This will provide a noticeable slow-down to peerstore queries as you will need to fetch them from disk as opposed to in-memory
+
+Don't use queue based reference counter
+
+* The queue based reference requires multiple different components that increase memory consumption
+* If you insist on using the queue based reference counter, don't use more than 1 worker
+
+Filesystem keystore
+
+* Use the filesystem keystore which stores keys directly on disk, as opposed to the krab keystore which uses badger, and encrypts your keys, or the the in-memory keystore
+
+Main datastore
+
+* For the main datastore it is recommended that you use leveldb, as this is the most memory efficient datastore available
+* Alternatively you can use the badger datastore with `fileLoadingMode` set to `0`
+
+Low power mode
+
+* Enabel low power mode, as this will adjust internal configurations to prefer low-powered settings,
