@@ -68,7 +68,7 @@ func (d *DAGService) AddMany(ctx context.Context, ns []ipld.Node) error {
 	for _, n := range ns {
 		switch typed := n.(type) {
 		default:
-			return errors.Errorf("Can not add type: %T using dag client", n)
+			return errors.Errorf("Can not add type: %T using NodeAPIClient", n)
 		case *merkledag.ProtoNode:
 			data, err := typed.Marshal()
 			if err != nil {
