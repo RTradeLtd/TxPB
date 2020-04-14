@@ -7,6 +7,7 @@ Tracks changes made in between releases
 * gRPC based DAGService [#69](https://github.com/RTradeLtd/TxPB/pull/69)
 * Replication CLI updates [#58](https://github.com/RTradeLtd/TxPB/pull/58)
 * Documentation updates [#67](https://github.com/RTradeLtd/TxPB/pull/67)
+* Update Blockstore RPC Calls [#64](https://github.com/RTradeLtd/TxPB/pull/64)
 
 # v3.2.2
 
