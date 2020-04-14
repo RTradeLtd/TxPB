@@ -13,3 +13,21 @@ In order to permanently remove blocks that have a reference count of 0, you must
 When using the reference counter, if you want truly accurate results, it is advisable that you do not enable blockstore caching which requires explicit configuration to be enabled. Because the cached blockstore sits ontop of the reference counter blockstore, it will intercept the calls before our reference counter does. This means that more often than not, the calls won't bubble down through to our reference counted blockstore if the caching layer has the block. The effecct of this is that unless you get a cache miss, the maximum reference count will only ever be 1. 
 
 Realistically a cached blockstore won't really reduce a lot of overhead, because the overhead of TemporalX is already so low, that you will get marginal performance gains. If you really want caching, it is advisable that you use datastore level caching through something like our badger datastore, which uses version 2 of the badger codebase, which has extensive caching features. This will ensure that you get the benefits of caching, while getting totally accurate reference count information.
+
+# How Much Blocking Is There
+
+There's only a few situations in which our blockstore wrapper is blocking across all functionality, and we try to isolate what gets blocked as much as possible.
+
+
+| Action | Mutex Lock Type | What Gets Blocked |
+|--------|-----------------|-------------------|
+| Put, Get, GetSize, PutMany, DeleteBlock | Blockstore read lock | Nothing |
+| Reference count operations | Counter write lock | Other reference count operations |
+| Garbage Collection | Blockstore write lock + Counter write lock | Everything |
+| Blockstore close | Blockstore write lock + Counter write lock | Everything
+
+Essentially the only time there is  total blockstore lock preventing any calls is during garbage collection and shutdown. The act of reference counting is non-blocking to the blockstore in general, but it is blocking to other reference counting operations. Because of our design, we're able to enable a consistent impact to performance due to reference counting operations, and during our benchmarks there was about a 2% -> 5% performance impact regardless of how much data is stored in the blockstore itself. This is a pretty negligible impact considering that the pinning system used by go-ipfs gets exponentially worse in performance the more data you store.
+
+The biggest performance sink hole in this is the garbage collection process, not the reference counting process. In and of itself garbage collection is pretty quick with our reference counter as we just need to read key->value pairs without any graph traversal, however  depending on how much data you are garbage collecting at any one momment, the biggest impact on the performance will be your disk speeds.
+
+Thankfully due to our multi-datastore configuration capabilities, if you are in an environment where performance is of extreme importance, you can place this metadata store on an NVMe SSD, or regular SSD drive and this will mitigate a large portion of the garbage collection overhead.
