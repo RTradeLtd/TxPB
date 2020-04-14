@@ -1,0 +1,5 @@
+# gRPC Based Blockstore
+
+The [`Blockstore`](https://github.com/ipfs/go-ipfs-blockstore/blob/master/blockstore.go#L35) interface is a thin wrapper around the `Datastore` interface that abstracts the bridge between IPFS CID's, and the underlying datastores which provide the key-value storage for on-disk storing of IPFS data. As with the `DAGService` interface, the `Blockstore` is widely used across any projects that want to use IPFS, and is perhaps more widely used of an interface than the `DAGService` interface is.
+
+By using the [`RemoteBlockstore`](https://github.com/RTradeLtd/go-ipfs-blockstore/pull/7) module, you can swap out internals of a variety of projects in the IPFS ecosystem to not have to run a blockstore locally, and instead deffer all blockstore functionality to a remote TemporalX node

@@ -25,7 +25,8 @@ This folder contains all of our documentation including protocol buffer docs, co
 * [Reference Counter](REFERENCE_COUNTER.md)
 * [Replication Algorithm Overview](REPLICATION.md)
 * [IPFS Gateway](GATEWAY.md)
-
+* [gRPC Based DAGService](GRPC_DAG_SERVICE.md)
+* [gRPC Based Blockstore](GRPC_BLOCKSTORE.md)
 
 # Tutorials
 
