@@ -698,6 +698,9 @@ export interface BSREQTYPEMap {
   BS_GET_MANY: 4;
   BS_GET_ALL: 5;
   BS_GET_STATS: 6;
+  BS_HAS: 7;
+  BS_HASH_ON_READ_ENABLE: 8;
+  BS_HASH_ON_READ_DISABLE: 9;
 }
 
 export const BSREQTYPE: BSREQTYPEMap;
