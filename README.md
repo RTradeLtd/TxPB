@@ -1,6 +1,6 @@
 <h1 align="center"> TxPB </h1>
 <p align="center">
-  · <a href="#client-libraries"><strong>Client Libraries</strong></a> · <a href="#documentation"><strong>Documentation</strong></a> · <a href="#examples"><strong>Examples</strong></a> · <a href="#faq"><strong>FAQ</strong></a> · <a href="#license"><strong>License</strong></a>
+  <a href="#client-libraries"><strong>Client Libraries</strong></a> · <a href="#documentation"><strong>Documentation</strong></a> · <a href="#examples"><strong>Examples</strong></a> · <a href="#faq"><strong>FAQ</strong></a> · <a href="#license"><strong>License</strong></a>
 </p>
 
 `TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.
