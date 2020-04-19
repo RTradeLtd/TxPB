@@ -13,7 +13,7 @@ func GetXAPIAddress(t *testing.T) string {
 	return "xapi.temporal.cloud:9090"
 }
 
-// GetXAPISecure returns whether or not to use a secure connection
-func GetXAPISecure(t *testing.T) bool {
-	return os.Getenv("TEST_XAPI_SECURE") == "true"
+// GetXAPIInsecure returns whether or not to use a secure connection
+func GetXAPIInsecure(t *testing.T) bool {
+	return os.Getenv("TEST_XAPI_SECURE") != "true"
 }

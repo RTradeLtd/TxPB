@@ -18,13 +18,13 @@ func TestGetXAPIAddress(t *testing.T) {
 }
 
 func TestXAPISecure(t *testing.T) {
-	if GetXAPISecure(t) {
-		t.Fatal("should be false")
+	if !GetXAPIInsecure(t) {
+		t.Fatal("should be true")
 	}
 	if err := os.Setenv("TEST_XAPI_SECURE", "true"); err != nil {
 		t.Fatal(err)
 	}
-	if !GetXAPISecure(t) {
-		t.Fatal("should be true")
+	if GetXAPIInsecure(t) {
+		t.Fatal("should be false")
 	}
 }
