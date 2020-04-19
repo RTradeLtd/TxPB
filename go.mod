@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/RTradeLtd/go-libp2p-tls v0.2.3
+	github.com/RTradeLtd/go-temporalx-sdk v1.1.1
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.3.5 // indirect
 	github.com/ipfs/go-block-format v0.0.2
@@ -23,5 +24,4 @@ require (
 	golang.org/x/tools v0.0.0-20200413015812-1f08ef6002a8 // indirect
 	google.golang.org/genproto v0.0.0-20200413115906-b5235f65be36 // indirect
 	google.golang.org/grpc v1.28.1
-	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
