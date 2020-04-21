@@ -1,3 +1,12 @@
 {
-  "signedContributors": []
+  "signedContributors": [
+    {
+      "name": "bonedaddy",
+      "id": 17089485,
+      "comment_id": 617352054,
+      "created_at": "2020-04-21T18:58:24Z",
+      "repoId": 196796457,
+      "pullRequestNo": 80
+    }
+  ]
 }
