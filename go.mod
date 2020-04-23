@@ -6,6 +6,7 @@ require (
 	github.com/RTradeLtd/go-libp2p-tls v0.2.3
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.3.5 // indirect
+	github.com/google/go-cmp v0.3.1 // indirect
 	github.com/ipfs/go-block-format v0.0.2
 	github.com/ipfs/go-cid v0.0.5
 	github.com/ipfs/go-datastore v0.4.4 // indirect
