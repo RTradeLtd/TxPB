@@ -5,6 +5,8 @@ TemporalX configuration is done through a yaml file, while the command line tool
 ## Table Of Contents
 
 <p align="left">
+  <a href="#warnings"><strong>Warnings</strong></a>
+  <br>
   · <a href="#configuration-file-reference"><strong>Configuration File Reference</strong></a>
   <br>
   · <a href="#temporalx"><strong>TemporalX Configuration</strong></a>
@@ -15,6 +17,10 @@ TemporalX configuration is done through a yaml file, while the command line tool
   <br>
   · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
 </p>
+
+# Warnings
+
+The only warning when it comes to TemporalX configuration is not using the pebble datastore. While it works in most situations, if the `Datastore::Query` function is called in particular ways, namely by the datastore backed peerstore, panics can and will happen. Pebble is an experimental datastore, that should only be used for testing, but if you're feeling risky and want to use it in production or dev, only use it for the main storage layer.
 
 # Configuration File Reference
 
