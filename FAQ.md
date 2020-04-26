@@ -6,7 +6,7 @@ TemporalX is not a fork of go-ipfs in any capacity, nor does it inherit any depe
 
 ## What Dependencies Are Forked From Upstream
 
-The current list is as follows, but note that over time we will continue to fork upstream libraries
+The current list is as follows, but note that over time we will continue to fork upstream libraries.
 
 * `go-libp2p-kad-dht`
 * `go-libp2p-kbucket`
@@ -18,7 +18,10 @@ The current list is as follows, but note that over time we will continue to fork
 * `go-libp2p-routing-helpers`
 * `go-libp2p-record`
 * `go-ipfs-blockstore`
-
+* `go-ipfs-provider`
+* `go-libp2p-connmgr`
+* `go-libp2p-tls`
+* `go-ws-transport`
 
 ## Is TemporalX Compatible With The Rest Of The IPFS Network
 
@@ -51,3 +54,8 @@ In all cases we have feature parity with non-experimental go-ipfs features. This
 ## Does TemporalX Support Private Networks
 
 Yes
+
+
+## Why Was TemporalX Created And We Didn't Just Improve Go-IPFS
+
+When we first approached the idea of TemporalX, we initially tried forking the go-ipfs codebase and the ipfs-cluster codebase. However this effort was quickly abandoned, namely because the go-ipfs codebase is massive, several years old, and has to appease a much larger audience, with a wide variety of needs, some of which aren't what we, and what the target audience of TemporalX needs. TemporalX was created to provide enterprise grade IPFS performance, in a stable and robust package that is easy to maintain. By starting from scratch, we were able to build from a clean slate, and be able to think outside the box when it comes to how an IPFS node should be have in production environments.
