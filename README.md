@@ -1,4 +1,7 @@
-# TxPB
+<h1 align="center"> TxPB </h1>
+<p align="center">
+  <a href="#client-libraries"><strong>Client Libraries</strong></a> · <a href="#documentation"><strong>Documentation</strong></a> · <a href="#examples"><strong>Examples</strong></a> · <a href="#faq"><strong>FAQ</strong></a> · <a href="#license"><strong>License</strong></a>
+</p>
 
 `TxPB` is the main source of information for using TemporalX, and includes protocol buffer definitions, generated code, and documentation. If you are looking for the protocol buffer definitions, check the `pb` folder.
 
@@ -40,6 +43,10 @@ Before generating the code, you'll need to download quite a few generators. Befo
 Once you have all of this installed, you can then install the needed generators which will allow you to generate the gRPC client stubs. To do this run `make install`. This has to download quite a few packages so it might take some time to complete. The only thing this doesn't install is a java generator, to do that visit https://search.maven.org/search?q=g:io.grpc%20a:protoc-gen-grpc-java and download the one for your platform.
 
 After you've downloaded all generator tooling, you can generate the client stubs, and documentation with a single `make`.
+
+# FAQ
+
+In an effort to reduce the frequency of responding to commonly asked questions, we have provided an [FAQ](FAQ.md)
 
 # License
 
