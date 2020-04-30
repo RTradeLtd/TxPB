@@ -62,6 +62,7 @@ temporalx:
     # the address to expose the net/http/pprof endpoint on 
     endpoint: 127.0.0.1:9091
   # ipfs http gateway configuration
+  # this is currently disabled, and is not parsed
   gateway:
     # enables the http gateway
     enabled: true
@@ -101,13 +102,8 @@ node:
       # is more performant, at the cost of increased memory consumption
       fileLoadingMode: 2
       # enable/disable reference counted blockstore
-      countedStore: true
-      counterMaxWorkers: 8
-      # the key namespace used for the ref counter queue
-      counterQueueNamespace: cqueuenamespace
-      # the key namespace used for ref counter entries
-      counterStoreNamespace: cstorenamespace
-        # the path to store ref counter entries in
+      noQueueStore: true
+      # the path to store ref counter entries in
       counterStorePath: /temporalx/counterstore
   # configures the libp2p peerstore
   peerstore:
@@ -564,8 +560,7 @@ node:
     opts:
       fileLoadingMode: 2
       countedStore: true
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
   peerstore:
     type: memory
@@ -615,9 +610,7 @@ node:
     path: /temporalx/storage
     opts:
       fileLoadingMode: 2
-      countedStore: true
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
   peerstore:
     type: memory
