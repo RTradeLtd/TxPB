@@ -210,13 +210,24 @@ The current datastore types are supported:
   * consumes the most memory out of everything since it resides entirely in-memory
   * all data is lost on crash, or restart of service and should only be used for testing
 
-The current `opts` for all `datastore` sections are as follows. Note that whenever an `opt`ion is left out, the default is implied:
+Please note that all options below apply to all `datastore` configuration sections.
+
+## Badger Options
+
+| Name            | Values                 | Details                          | Default |
+|-----------------|------------------------|----------------------------------|----|
+| fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Controls how data is loaded. FileIO is suitable for memory constrained devices at the cost of performance | 0 |
+| passphrase | 32 character string | Enables on the fly AES256 encryption of data | empty string (disabled) |
+| logMode | disabled| Disable internal badger logging |  Empty string (logging enabled) | 
+| async | false, true | Enable asynchronous writes to disk for better performance with the increased risk of data loss | false |
 
 
-| Name            | Values                 | Details                          |
-|-----------------|------------------------|----------------------------------|
-| fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
-| withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
+## Pebble Options
+
+| Name            | Values                 | Details                          | Default |
+|-----------------|------------------------|----------------------------------|----|
+| withSync | false, true | Enable synchronous writes to disk | false |
+
 
 # TemporalX
 
@@ -374,11 +385,8 @@ A breakdown of the reference counter configurations is as follows
 
 name                  | example            | explanation                                     |
 ----------------------|--------------------|-------------------------------------------------|
-countedStore          | true               | enables reference counted storage               |
-counterQueueNamespace | counterqueuespace  | the key namespace for the counter queue         |
-counterStoreNamespace | counterstorespace  | the key namespace for the counter store         |
+noQueueStore          | true               | enables the queueless reference count               |
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
-counterMaxWorkers     | 10                 | the maximum number of concurrent reference counter operations (default 1) |
 
 If you are using the referene counter, you will want to make sure you don't enable blockstore caching, otherwise you will not get totally accurate reference count information, as the cached blockstore will intercept the blockstore call before our reference counter intercepts the call. By "not totally accurate" we mean that you will lmost likely get a maximum reference count of 1. For more deatils on this please consult the reference counter information page.
 
