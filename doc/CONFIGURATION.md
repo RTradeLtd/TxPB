@@ -5,7 +5,7 @@ TemporalX configuration is done through a yaml file, while the command line tool
 ## Table Of Contents
 
 <p align="left">
-  <a href="#warnings"><strong>Warnings</strong></a>
+  · <a href="#warnings"><strong>Warnings</strong></a>
   <br>
   · <a href="#configuration-file-reference"><strong>Configuration File Reference</strong></a>
   <br>
@@ -14,6 +14,8 @@ TemporalX configuration is done through a yaml file, while the command line tool
   · <a href="#datastore-configuration"><strong>Datastore Configuration</strong></a>
   <br>
   · <a href="#node-configuration"><strong>Node Configuration</strong></a> 
+  <br>
+  · <a href="#logging"><strong>Logging</strong></a> 
   <br>
   · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
 </p>
@@ -541,6 +543,19 @@ Configuration Options:
 * `ipnsps`is used to enable IPNS PubSub transport/router (this reuqires enabling pubsub + namesys)
 * `discovery` is used to enable service discovery
 * `discoveryBackoff` is used to enable an advanced service discovery mechanism at the cost of increased resource consumption
+
+# Logging
+
+TemporalX uses `uber-go/zap` for our logging systems, whose logging output can be fine-tuned with the following environment variales
+
+* `DEV_LOGGING` when set to `true` enables logging of development related conditions, primarily only useful when developing services against TemporalX
+* `DEBUG_LOGGING` when set to `true` will display all logs including debug logs, note that this can cause very verbose output
+* `FILE_LOGGING` when set to `true` will not show logs on stdout, and instead will only dump logs to the log file
+
+Additionally because we use some upstream libraries that leverage `ipfs/go-log` the following environment variables can be used to control `ipfs/go-log` behavior:
+
+* `IPFS_LOGGING` sets the level of verbosity of the logging and must be one of: debug, info, warn, error, dpanic, panic, fatal.
+* `IPFS_LOGGING_FMT` sets formatting of the log output and must be one of: color, nocolor
 
 
 # Config File Templates
