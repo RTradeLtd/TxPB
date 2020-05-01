@@ -4,7 +4,7 @@ The following is a small list of issues first time users often run into, and the
 
 >  `error encountered: mkdir peerstore: permission denied`
 
-The default configuration when generated via `tex-cli config gen` uses relative paths for specifying the location of thigns on disk such as the peerstore datastore. Typically this issue is encountered when you test out TemporalX via the CLI, and then use the same configuration file via a service manager like systemd.
+The default configuration when generated via `tex-cli config gen` uses relative paths for specifying the location of things on disk such as the peerstore datastore. Typically this issue is encountered when you test out TemporalX via the CLI, and then use the same configuration file via a service manager like systemd.
 
 If using a service manager such as systemd it is best to specify the path to things with absolute paths, and ensure that the service is running under the correct user account. If you are running TemporalX directly from the CLI, it is usually sufficient to use relative paths.
 

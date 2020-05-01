@@ -64,7 +64,7 @@ temporalx:
     # the address to expose the net/http/pprof endpoint on 
     endpoint: 127.0.0.1:9091
   # ipfs http gateway configuration
-  # this is currently disabled, and is not parsed
+  # this is currently ignored, and is not parsed
   gateway:
     # enables the http gateway
     enabled: true
