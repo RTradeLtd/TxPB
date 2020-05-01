@@ -15,6 +15,7 @@ This folder contains all of our documentation including protocol buffer docs, co
 # Miscellaneous
 
 * [Benchmarks](BENCHMARKS.md)
+* [Common First Time User Issues](COMMON_FIRST_ISSUES.md)
 * [Licensing System Overview](LICENSE_OVERVIEW.md)
 
 

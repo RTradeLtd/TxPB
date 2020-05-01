@@ -5,7 +5,7 @@ TemporalX configuration is done through a yaml file, while the command line tool
 ## Table Of Contents
 
 <p align="left">
-  <a href="#warnings"><strong>Warnings</strong></a>
+  · <a href="#warnings"><strong>Warnings</strong></a>
   <br>
   · <a href="#configuration-file-reference"><strong>Configuration File Reference</strong></a>
   <br>
@@ -14,6 +14,8 @@ TemporalX configuration is done through a yaml file, while the command line tool
   · <a href="#datastore-configuration"><strong>Datastore Configuration</strong></a>
   <br>
   · <a href="#node-configuration"><strong>Node Configuration</strong></a> 
+  <br>
+  · <a href="#logging"><strong>Logging</strong></a> 
   <br>
   · <a href="#config-file-templates"><strong>Config File Templates</strong></a> 
 </p>
@@ -62,6 +64,7 @@ temporalx:
     # the address to expose the net/http/pprof endpoint on 
     endpoint: 127.0.0.1:9091
   # ipfs http gateway configuration
+  # this is currently ignored, and is not parsed
   gateway:
     # enables the http gateway
     enabled: true
@@ -101,13 +104,8 @@ node:
       # is more performant, at the cost of increased memory consumption
       fileLoadingMode: 2
       # enable/disable reference counted blockstore
-      countedStore: true
-      counterMaxWorkers: 8
-      # the key namespace used for the ref counter queue
-      counterQueueNamespace: cqueuenamespace
-      # the key namespace used for ref counter entries
-      counterStoreNamespace: cstorenamespace
-        # the path to store ref counter entries in
+      noQueueStore: true
+      # the path to store ref counter entries in
       counterStorePath: /temporalx/counterstore
   # configures the libp2p peerstore
   peerstore:
@@ -214,13 +212,24 @@ The current datastore types are supported:
   * consumes the most memory out of everything since it resides entirely in-memory
   * all data is lost on crash, or restart of service and should only be used for testing
 
-The current `opts` for all `datastore` sections are as follows. Note that whenever an `opt`ion is left out, the default is implied:
+Please note that all options below apply to all `datastore` configuration sections.
+
+## Badger Options
+
+| Name            | Values                 | Details                          | Default |
+|-----------------|------------------------|----------------------------------|----|
+| fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Controls how data is loaded. FileIO is suitable for memory constrained devices at the cost of performance | 0 |
+| passphrase | 32 character string | Enables on the fly AES256 encryption of data | empty string (disabled) |
+| logMode | disabled| Disable internal badger logging |  Empty string (logging enabled) | 
+| async | false, true | Enable asynchronous writes to disk for better performance with the increased risk of data loss | false |
 
 
-| Name            | Values                 | Details                          |
-|-----------------|------------------------|----------------------------------|
-| fileLoadingMode | 0 (FileIO), 2 (MemoryMap)| Specifies how objects are loaded when using the **badger** datastore type. FileIO is for memory constrained devices. Default is 0 (FileIO) |
-| withSync | false, true | Specifies whether to synchronize writes to disk when using the **pebble** datastore type. Default is false.
+## Pebble Options
+
+| Name            | Values                 | Details                          | Default |
+|-----------------|------------------------|----------------------------------|----|
+| withSync | false, true | Enable synchronous writes to disk | false |
+
 
 # TemporalX
 
@@ -378,11 +387,8 @@ A breakdown of the reference counter configurations is as follows
 
 name                  | example            | explanation                                     |
 ----------------------|--------------------|-------------------------------------------------|
-countedStore          | true               | enables reference counted storage               |
-counterQueueNamespace | counterqueuespace  | the key namespace for the counter queue         |
-counterStoreNamespace | counterstorespace  | the key namespace for the counter store         |
+noQueueStore          | true               | enables the queueless reference count               |
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
-counterMaxWorkers     | 10                 | the maximum number of concurrent reference counter operations (default 1) |
 
 If you are using the referene counter, you will want to make sure you don't enable blockstore caching, otherwise you will not get totally accurate reference count information, as the cached blockstore will intercept the blockstore call before our reference counter intercepts the call. By "not totally accurate" we mean that you will lmost likely get a maximum reference count of 1. For more deatils on this please consult the reference counter information page.
 
@@ -538,6 +544,19 @@ Configuration Options:
 * `discovery` is used to enable service discovery
 * `discoveryBackoff` is used to enable an advanced service discovery mechanism at the cost of increased resource consumption
 
+# Logging
+
+TemporalX uses `uber-go/zap` for our logging systems, whose logging output can be fine-tuned with the following environment variales
+
+* `DEV_LOGGING` when set to `true` enables logging of development related conditions, primarily only useful when developing services against TemporalX
+* `DEBUG_LOGGING` when set to `true` will display all logs including debug logs, note that this can cause very verbose output
+* `FILE_LOGGING` when set to `true` will not show logs on stdout, and instead will only dump logs to the log file
+
+Additionally because we use some upstream libraries that leverage `ipfs/go-log` the following environment variables can be used to control `ipfs/go-log` behavior:
+
+* `IPFS_LOGGING` sets the level of verbosity of the logging and must be one of: debug, info, warn, error, dpanic, panic, fatal.
+* `IPFS_LOGGING_FMT` sets formatting of the log output and must be one of: color, nocolor
+
 
 # Config File Templates
 
@@ -564,8 +583,7 @@ node:
     opts:
       fileLoadingMode: 2
       countedStore: true
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
   peerstore:
     type: memory
@@ -615,9 +633,7 @@ node:
     path: /temporalx/storage
     opts:
       fileLoadingMode: 2
-      countedStore: true
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
   peerstore:
     type: memory
