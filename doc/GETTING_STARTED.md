@@ -36,15 +36,17 @@ If you use systemd we have a systemd service file that you can use to handle sta
 
 ```
 [Unit]
-Description=Starts the TemporalX service
+Description=temporalx enterprise ipfs client
 After=network.target
 
 [Service]
-User=temporal
-Group=temporal
+User=rtrade
+Group=rtrade
 Type=simple
+LimitNOFILE=65535
 PIDFile=/var/run/temporalx.pid
 ExecStart=/boot_scripts/temporalx_management.sh server
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
