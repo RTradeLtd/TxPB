@@ -40,8 +40,8 @@ Description=temporalx enterprise ipfs client
 After=network.target
 
 [Service]
-User=rtrade
-Group=rtrade
+User=temporalx
+Group=temporalx
 Type=simple
 LimitNOFILE=65535
 PIDFile=/var/run/temporalx.pid
