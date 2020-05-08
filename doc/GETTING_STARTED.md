@@ -36,15 +36,17 @@ If you use systemd we have a systemd service file that you can use to handle sta
 
 ```
 [Unit]
-Description=Starts the TemporalX service
+Description=temporalx enterprise ipfs client
 After=network.target
 
 [Service]
-User=temporal
-Group=temporal
+User=temporalx
+Group=temporalx
 Type=simple
+LimitNOFILE=65535
 PIDFile=/var/run/temporalx.pid
 ExecStart=/boot_scripts/temporalx_management.sh server
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
@@ -70,7 +72,7 @@ esac
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
-**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.1.1-3-gc8217ca`**
+**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.4.1-rc4`**
 
 ```
 NAME:
@@ -80,33 +82,28 @@ USAGE:
    tex-cli [global options] command [command options] [arguments...]
 
 VERSION:
-   <VERSION>
+   v3.4.1-rc4
 
 AUTHORS:
    Alex Trottier <postables@rtradetechnologies.com>
    George Xie <georgex@rtradetechnologies.com>
 
 COMMANDS:
-   admin    admin commands
-   client   gRPC client subcommands
-   config   configuration management tools
-   server   run the gRPC api server
-   license  license management
-   help, h  Shows a list of commands or help for one command
+   admin             admin commands
+   client            gRPC client subcommands
+   config            configuration management tools
+   replication, rep  Create, update, and monitor replications
+   server            run the gRPC api server
+   license           license management
+   help, h           Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --bootstrap, --bp          bootstrap against public ipfs (default: false)
    --config PATH, --cfg PATH  load the configuration file at PATH (default: "./config.yml")
+   --config.env, --cfg.e      load configuration file from environment variables (default: false)
    --help, -h                 show help (default: false)
    --version, -v              print the version (default: false)
-
 ```
-
-Global Options:
-* `--config`, `--cfg`: The path to the yaml configuration file, needed for basically every command
-* `--bootstrap`, `--bp`: initiate a bootstrap process when starting the server
-
-Take a look through the various commands to see what you can do.
 
 ## Configuration Initialization
 
