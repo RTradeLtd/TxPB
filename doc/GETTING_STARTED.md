@@ -182,6 +182,15 @@ Within the config file set `prometheus.enabled: true` and provide an ip+port you
 
 Additionally you can enable system profiling in the same way, however the path for that information is `/debug/pprof`.
 
+### Metric Seeding
+
+The following usage of `--seed.metrics` will enable seeding of prometheus metrics:
+
+```shell
+$> tex-cli server --seed.metrics (long form)
+$> tex-cli server --sm           (short form)
+```
+
 ## Admin API
 
 Expose via `localhost:9999` we have an admin gRPC API that allows low-level management of TemporalX, in particular it allows managed the garbage collection of the reference counted blockstore.

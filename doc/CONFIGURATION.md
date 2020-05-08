@@ -288,6 +288,8 @@ Configuration Options:
 * `enabled` enables/disables the prometheus endpoint
 * `endpoint` the ip+port to expose the `/metrics` handler on.
 
+Note that some metrics we measure may require certain actions to be taken to reach a representation of the current state. At the moment this only applies to the blockstore metric which measures how many blocks we have stored. Whenever `Blockstore::AllKeysChan` is called, we count the number of CIDs sent through the blockstore channel, and set the number of stored blocks to that value. To seed the metrics you can use the `--seed.metrics` server command flag, see the getting started documentation for more information.
+
 ## Profiling
 
 The `profiling` section is used to configure profiling of TemporalX via pprof, and exposes `net/http/pprof` handlers.
