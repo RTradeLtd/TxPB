@@ -22,6 +22,8 @@ The current list is as follows, but note that over time we will continue to fork
 * `go-libp2p-connmgr`
 * `go-libp2p-tls`
 * `go-ws-transport`
+* `go-libp2p-peerstore`
+* `go-blockservice`
 
 ## Is TemporalX Compatible With The Rest Of The IPFS Network
 
