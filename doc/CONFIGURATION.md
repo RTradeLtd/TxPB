@@ -103,10 +103,30 @@ node:
       # Here we are overriding the default to 2 (MemoryMap) which
       # is more performant, at the cost of increased memory consumption
       fileLoadingMode: 2
-      # enable/disable reference counted blockstore
-      noQueueStore: true
-      # the path to store ref counter entries in
+      #### REFERENCE COUNTER CONFIGURATION ####
+      ####           START                 ####
+      # enables the reference counter
+      noQueueStore: true 
+      # sets the path to store reference count metadata in
       counterStorePath: /temporalx/counterstore
+      # preallocates the worker pool (default & recomended)
+      antsPreAlloc: true 
+      # defines the maximum number of active count operations (default = number of CPUs)
+      # the higher the value, the less chance of blocking counting operations
+      # if 8192 leads to blocking double the number until it doesnt (higher value == higher cpu consumption)
+      antsMaxWorkers: 8192
+      # if set to true no reference count operations will block but if the max workers is reached operation will be discard
+      # DEFUALT IS FALSE, RECOMMENDED TO NOT TOUCH THE CONFIGURATION AT ALL
+      # if setting to true, a very, very high max worker count is desirable
+      antsNonBlocking: true
+      # indicates the number of tasks that can block (default = 0 [no limit])
+      antsMaxBlockingTasks: 0
+      # indicates how long tasks can be running for before being expired (default is empty, thus no limit)
+      # acceptables values are time.Duration types (20s, 10min, etc...)
+      antsExpiryDuration: 20s
+      ####           END                   ####
+      #### REFERENCE COUNTER CONFIGURATION ####
+
   # configures the libp2p peerstore
   peerstore:
     # the type of peerstore to use
@@ -376,19 +396,27 @@ LevelDB (reference counted)
     type: leveldb
     path: /temporalx/storage
     opts:
-      countedStore: true
-      counterMaxWorkers: 8
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
+      antsPreAlloc: true 
+      antsMaxWorkers: 8192
+      antsNonBlocking: true
+      antsMaxBlockingTasks: 0
+      antsExpiryDuration: 20s
 ```
 
 A breakdown of the reference counter configurations is as follows
 
 name                  | example            | explanation                                     |
 ----------------------|--------------------|-------------------------------------------------|
-noQueueStore          | true               | enables the queueless reference count               |
+noQueueStore          | true               | enables the queueless reference count           |
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
+antsPreAlloc          | true               | preallocate worker pool for maximum memory efficiency |
+antsMaxWorkers        | 8192               | maximum number of active count operations at a single moment |
+antsNonBlocking       | true               | prevents count operation submission from blocking at the risk of inaccurate counts |
+antsMaxBlockingTasks  | 8192               | indicates the max number of tasks that can block on submission |
+antsExpiryDuration    | 10s                | enables setting a life time on tasks before they get removed |
+
 
 If you are using the referene counter, you will want to make sure you don't enable blockstore caching, otherwise you will not get totally accurate reference count information, as the cached blockstore will intercept the blockstore call before our reference counter intercepts the call. By "not totally accurate" we mean that you will lmost likely get a maximum reference count of 1. For more deatils on this please consult the reference counter information page.
 

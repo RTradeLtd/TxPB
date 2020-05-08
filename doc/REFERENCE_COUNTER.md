@@ -2,11 +2,13 @@
 
 > If you are looking to migrate from the queue based reference counter, see the [migration doc](REFERENCE_COUNTER_MIGRATION.md)
 
-The source of a major performance drain for go-ipfs and js-ipfs is the pinning system, which is used to ensure that Content Identifiers (CIDs) aren't accidentally deleted. To alleviate this performance drain, TemporalX uses a novel reference counted blockstore. It intercepts all `Put`, `PutMany` and `Delete` calls launching a goroutine to count the reference. After this goroutine is launched, the calls are then sent to the underlying blockstore. The exception to this is `Delete` calls, which don't forward the request to the underlying blockstore.
+The source of a major performance drain for go-ipfs and js-ipfs is the pinning system, which is used to ensure that Content Identifiers (CIDs) aren't accidentally deleted. To alleviate this performance drain, TemporalX uses a novel reference counted blockstore. It intercepts all `Put`, `PutMany` and `Delete` calls launching a goroutine to perform a reference count operation on the blocks, which is started after the underlying blockstore call has completed.
 
-The reference counter is non-blocking, and has no garbage collection process. Instead whenever a reference count drops to 0, the block is automatically removed. The blocking operations of the reference counter are limited to the counting operations, which have no impact on putting data into the underlying blockstore. Any active counting operations prevent shutting down the blockstore, and subsequently prevent shutting down TemporalX until the counting operations are finished.  
+A worker pool is used to manage the counting operations goroutine for memory efficiency and to decouple counting operations from blocking general blockstore calls. The worker pool has a configurable limit which defines the maximum number of active count operations. If a submission to the worker pool happens while the maximum number is reached, the submitter is blocked until the limit is decreased, and thus blocking the calling blockstore call. In practice this doesn't happen that often, and can be mitigated by increasing the limit of the worker pool.
 
-A really interesting side effect of our reference counter is that the overhead imposed by counting operations, and the blockstore locking is a constant 2% -> 5% regardless of how much data you have stored. This is a stark difference when compared to the go-ipfs and js-ipfs pinning system whose performance gets exponentially worse the more data you have stored.
+The internals of the reference counter are optimized to enable minimal disk IO via the usage of transactions. Calling `Blockstore::CollectGarbage` will force a flush of this transaction to disk outside of the normal method of operation which is to flush whenever 4MB of data is buffered into the transaction and `Txn::Commit` is called. This will block counting operations, but is pretty quick as a single 4MB buffer needs to be flushed. The reference counter is technically GC-less, as data is deleted whenever the reference count operation hits 0.
+
+With the refactor of this blockstore to use the worker pool, the only overhead imposed to regular blockstore interactions is submitting the task to the worker pool, which in practice shouldn't have an overhead of more than 2%. This is a constant overhead that doesn't change regardless of how many active workers there are *except* when the submission would go above the limit. In these cases the calling blockstore is blocked until a worker finishes. Due to our use of transactions, this is a pretty quick process; If this proves to be too much blocking for your needs, simply double the maximum worker number 2x of the value it is when the blocking occurs. At the moment this requires a restart of TemporalX after making the configuration change, but the ability to tune the worker limit via the gRPC API will be enabled soon.
 
 # Why You Shouldn't Use A Cached Blockstore
 
@@ -16,10 +18,12 @@ Realistically a cached blockstore won't really reduce a lot of overhead, because
 
 # How Much Blocking Is There
 
-Unless shutting down the blockstore, there is no blocking mutex locks to general blockstore operation. All runtime blocking is isolated to the reference counting operations. This is summarized in the following table
+There are very few situations in which the blockstore will block calling functions
 
 | Action | Mutex Lock Type | What Gets Blocked |
 |--------|-----------------|-------------------|
 | Put, Get, GetSize, PutMany, DeleteBlock | Blockstore read lock | Nothing |
-| Reference count operations | Counter write lock | Other reference count operations |
-| Blockstore close | Blockstore write lock + Counter write lock | Everything |
+| Reference count operation submission | Pool write lock | Worker submits (unless pool is full, this block is minimal and not measurable) |
+| Reference count operation | Counter read lock & CID Lock | Will only block the same CID from being counted simultaneously |
+| CollectGarbage | Blockstore and counter lock | Count operations and blockstore calls |
+| Blockstore close | Blockstore write lock + Counter write lock | Count operations and blockstore calls |
