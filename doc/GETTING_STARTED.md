@@ -148,18 +148,28 @@ To stop the node after running the server, you can use any of the following os c
 
 Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
 
+## Client Overview
+
+All non-replication commands that use the gRPC API are grouped under the `client` command. Previously you used to be able to configure the client via the yaml configuration file, however this proved to be a bit difficult to use via the CLI and involved shipping copies of the config file to whatever machine you were using the CLI on. This has been refactored to use the following two flags under the `client` command:
+
+* `--endpoint.address, --ea` - the address of the TemporalX gRPC server
+  * examples:
+    * `--endpoint.address xapi.temporal.cloud:9090`
+    * `--ea xapi.temporal.cloud:9090`
+* `--insecure` - indicates whether the endpoint requires TLS encryption or if it is insecure
+
 ## Your First Upload
 
 To upload a file located at `/tmp/foo.txt` as a unixfs object to your local node, and make it publicly available to the IPFS network run the command:
 
 ```
-$ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt
+$ tex-cli client --ea localhost:9090 file upload --file.name /tmp/foo.txt
 ```
 
 Which will return output like:
 
 ```
-$ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt
+$ tex-cli client --ea localhost:9090  file upload --file.name /tmp/foo.txt
 
 hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4
 ```
@@ -167,7 +177,7 @@ hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4
 To download the file and save it at `/tmp/foo2.txt` run the command
 
 ```
-$ tex-cli --config /path/to/config.yml --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4 --save.path /tmp/foo2.txt
+$ tex-cli client --ea localhost:9090  file download --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4 --save.path /tmp/foo2.txt
 ```
 
 When you run the `client file upload` command, you end up storing the given file as a unixfs object, and you announce to the network that you are providing the returned hash. When you run the `client file download` command, we first check if node has the data for the given cid locally, and if not we ask the rest of the network for that data.
