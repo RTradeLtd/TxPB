@@ -213,7 +213,7 @@ log_file: ./logger.log
 
 The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other.
 
-The `datastore` configurations also apply to the `storage` section of `node`, where DAG data blocks are stored. The `storage` section also includes an additional storage type of `countedStore`, which is a reference-counted DAG block store. `countedStore` is only supported by `storage`.
+The `datastore` configurations also apply to the `storage` section of `node`, where DAG data blocks are stored. The `storage` section also includes an additional storage type of `noQueueStore`, which is a reference-counted DAG block store. `noQueueStore` is only supported by `storage`.
 
 The current datastore types are supported:
 
@@ -249,6 +249,12 @@ Please note that all options below apply to all `datastore` configuration sectio
 | Name            | Values                 | Details                          | Default |
 |-----------------|------------------------|----------------------------------|----|
 | withSync | false, true | Enable synchronous writes to disk | false |
+
+## LevelDB Options
+
+| Name | Values | Details | Default |
+|------|--------|---------|---------|
+| noSync | true, false | disable sync writes to disk | false |
 
 
 # TemporalX
