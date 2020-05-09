@@ -4,7 +4,7 @@
 
 ## Overview
 
-The source of a major performance drain for go-ipfs and js-ipfs is the pinning system, which is used to ensure that Content Identifiers (CIDs) aren't accidentally deleted. To alleviate this performance drain, TemporalX uses a novel reference counted blockstore. It intercepts all `Put`, `PutMany` and `Delete` calls launching a goroutine to perform a reference count operation on the blocks, which is started after the underlying blockstore call has completed.
+The source of a major performance drain for go-ipfs and js-ipfs is the pinning system, which is used to ensure that Content Identifiers (CIDs) aren't accidentally deleted. To alleviate this performance drain, TemporalX uses a novel reference counted blockstore. It intercepts all `Put`, `PutMany` and `Delete` calls launching a goroutine to perform a reference count operation on the blocks, which is started after the underlying blockstore call has completed. Due to changes in how memory is released back to the OS in recent golang versions, for maximal memory efficiency we recommend running TemporalX with `GODEBUG=madvdontneed=1` when using the reference counter.
 
 ## Internals
 
