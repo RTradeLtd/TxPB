@@ -36,15 +36,17 @@ If you use systemd we have a systemd service file that you can use to handle sta
 
 ```
 [Unit]
-Description=Starts the TemporalX service
+Description=temporalx enterprise ipfs client
 After=network.target
 
 [Service]
-User=temporal
-Group=temporal
+User=temporalx
+Group=temporalx
 Type=simple
+LimitNOFILE=65535
 PIDFile=/var/run/temporalx.pid
 ExecStart=/boot_scripts/temporalx_management.sh server
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
@@ -70,7 +72,7 @@ esac
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
-**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.1.1-3-gc8217ca`**
+**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.4.1-rc4`**
 
 ```
 NAME:
@@ -80,33 +82,28 @@ USAGE:
    tex-cli [global options] command [command options] [arguments...]
 
 VERSION:
-   <VERSION>
+   v3.4.1-rc4
 
 AUTHORS:
    Alex Trottier <postables@rtradetechnologies.com>
    George Xie <georgex@rtradetechnologies.com>
 
 COMMANDS:
-   admin    admin commands
-   client   gRPC client subcommands
-   config   configuration management tools
-   server   run the gRPC api server
-   license  license management
-   help, h  Shows a list of commands or help for one command
+   admin             admin commands
+   client            gRPC client subcommands
+   config            configuration management tools
+   replication, rep  Create, update, and monitor replications
+   server            run the gRPC api server
+   license           license management
+   help, h           Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --bootstrap, --bp          bootstrap against public ipfs (default: false)
    --config PATH, --cfg PATH  load the configuration file at PATH (default: "./config.yml")
+   --config.env, --cfg.e      load configuration file from environment variables (default: false)
    --help, -h                 show help (default: false)
    --version, -v              print the version (default: false)
-
 ```
-
-Global Options:
-* `--config`, `--cfg`: The path to the yaml configuration file, needed for basically every command
-* `--bootstrap`, `--bp`: initiate a bootstrap process when starting the server
-
-Take a look through the various commands to see what you can do.
 
 ## Configuration Initialization
 
@@ -148,18 +145,28 @@ To stop the node after running the server, you can use any of the following os c
 
 Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
 
+## Client Overview
+
+All non-replication commands that use the gRPC API are grouped under the `client` command. Previously you used to be able to configure the client via the yaml configuration file, however this proved to be a bit difficult to use via the CLI and involved shipping copies of the config file to whatever machine you were using the CLI on. This has been refactored to use the following two flags under the `client` command:
+
+* `--endpoint.address, --ea` - the address of the TemporalX gRPC server
+  * examples:
+    * `--endpoint.address xapi.temporal.cloud:9090`
+    * `--ea xapi.temporal.cloud:9090`
+* `--insecure` - indicates whether the endpoint requires TLS encryption or if it is insecure
+
 ## Your First Upload
 
 To upload a file located at `/tmp/foo.txt` as a unixfs object to your local node, and make it publicly available to the IPFS network run the command:
 
 ```
-$ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt
+$ tex-cli client --ea localhost:9090 file upload --file.name /tmp/foo.txt
 ```
 
 Which will return output like:
 
 ```
-$ tex-cli --config /path/to/config.yml client file upload --file.name /tmp/foo.txt
+$ tex-cli client --ea localhost:9090  file upload --file.name /tmp/foo.txt
 
 hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4
 ```
@@ -167,7 +174,7 @@ hash of file bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4
 To download the file and save it at `/tmp/foo2.txt` run the command
 
 ```
-$ tex-cli --config /path/to/config.yml --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4 --save.path /tmp/foo2.txt
+$ tex-cli client --ea localhost:9090  file download --cid bafybeifxokjh6pny5eq7fdh3bhik4sfzrpmevp5c24guonwtu44iusa5h4 --save.path /tmp/foo2.txt
 ```
 
 When you run the `client file upload` command, you end up storing the given file as a unixfs object, and you announce to the network that you are providing the returned hash. When you run the `client file download` command, we first check if node has the data for the given cid locally, and if not we ask the rest of the network for that data.
@@ -181,6 +188,15 @@ Using the configuration file you can enable metric collection that gets exposed 
 Within the config file set `prometheus.enabled: true` and provide an ip+port you want to expose the metrics on. The metrics will be available on the path `/metrics`. For example if you provided the ip+port `127.0.0.1:9093` you can go to `127.0.0.1:9093/metrics` and start collecting your data.
 
 Additionally you can enable system profiling in the same way, however the path for that information is `/debug/pprof`.
+
+### Metric Seeding
+
+The following usage of `--seed.metrics` will enable seeding of prometheus metrics:
+
+```shell
+$> tex-cli server --seed.metrics (long form)
+$> tex-cli server --sm           (short form)
+```
 
 ## Admin API
 

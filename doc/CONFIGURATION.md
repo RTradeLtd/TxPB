@@ -103,10 +103,30 @@ node:
       # Here we are overriding the default to 2 (MemoryMap) which
       # is more performant, at the cost of increased memory consumption
       fileLoadingMode: 2
-      # enable/disable reference counted blockstore
-      noQueueStore: true
-      # the path to store ref counter entries in
+      #### REFERENCE COUNTER CONFIGURATION ####
+      ####           START                 ####
+      # enables the reference counter
+      noQueueStore: true 
+      # sets the path to store reference count metadata in
       counterStorePath: /temporalx/counterstore
+      # preallocates the worker pool (default & recomended)
+      antsPreAlloc: true 
+      # defines the maximum number of active count operations (default = number of CPUs)
+      # the higher the value, the less chance of blocking counting operations
+      # if 8192 leads to blocking double the number until it doesnt (higher value == higher cpu consumption)
+      antsMaxWorkers: 8192
+      # if set to true no reference count operations will block but if the max workers is reached operation will be discard
+      # DEFUALT IS FALSE, RECOMMENDED TO NOT TOUCH THE CONFIGURATION AT ALL
+      # if setting to true, a very, very high max worker count is desirable
+      antsNonBlocking: true
+      # indicates the number of tasks that can block (default = 0 [no limit])
+      antsMaxBlockingTasks: 0
+      # indicates how long tasks can be running for before being expired (default is empty, thus no limit)
+      # acceptables values are time.Duration types (20s, 10min, etc...)
+      antsExpiryDuration: 20s
+      ####           END                   ####
+      #### REFERENCE COUNTER CONFIGURATION ####
+
   # configures the libp2p peerstore
   peerstore:
     # the type of peerstore to use
@@ -193,7 +213,7 @@ log_file: ./logger.log
 
 The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other.
 
-The `datastore` configurations also apply to the `storage` section of `node`, where DAG data blocks are stored. The `storage` section also includes an additional storage type of `countedStore`, which is a reference-counted DAG block store. `countedStore` is only supported by `storage`.
+The `datastore` configurations also apply to the `storage` section of `node`, where DAG data blocks are stored. The `storage` section also includes an additional storage type of `noQueueStore`, which is a reference-counted DAG block store. `noQueueStore` is only supported by `storage`.
 
 The current datastore types are supported:
 
@@ -229,6 +249,12 @@ Please note that all options below apply to all `datastore` configuration sectio
 | Name            | Values                 | Details                          | Default |
 |-----------------|------------------------|----------------------------------|----|
 | withSync | false, true | Enable synchronous writes to disk | false |
+
+## LevelDB Options
+
+| Name | Values | Details | Default |
+|------|--------|---------|---------|
+| noSync | true, false | disable sync writes to disk | false |
 
 
 # TemporalX
@@ -267,6 +293,8 @@ Configuration Options:
 
 * `enabled` enables/disables the prometheus endpoint
 * `endpoint` the ip+port to expose the `/metrics` handler on.
+
+Note that some metrics we measure may require certain actions to be taken to reach a representation of the current state. At the moment this only applies to the blockstore metric which measures how many blocks we have stored. Whenever `Blockstore::AllKeysChan` is called, we count the number of CIDs sent through the blockstore channel, and set the number of stored blocks to that value. To seed the metrics you can use the `--seed.metrics` server command flag, see the getting started documentation for more information.
 
 ## Profiling
 
@@ -376,19 +404,27 @@ LevelDB (reference counted)
     type: leveldb
     path: /temporalx/storage
     opts:
-      countedStore: true
-      counterMaxWorkers: 8
-      counterQueueNamespace: cqueuenamespace
-      counterStoreNamespace: cstorenamespace
+      noQueueStore: true
       counterStorePath: /temporalx/counterstore
+      antsPreAlloc: true 
+      antsMaxWorkers: 8192
+      antsNonBlocking: true
+      antsMaxBlockingTasks: 0
+      antsExpiryDuration: 20s
 ```
 
 A breakdown of the reference counter configurations is as follows
 
 name                  | example            | explanation                                     |
 ----------------------|--------------------|-------------------------------------------------|
-noQueueStore          | true               | enables the queueless reference count               |
+noQueueStore          | true               | enables the queueless reference count           |
 counterStorePath      | counterstorage     | the path for storing reference counter metadata |
+antsPreAlloc          | true               | preallocate worker pool for maximum memory efficiency |
+antsMaxWorkers        | 8192               | maximum number of active count operations at a single moment |
+antsNonBlocking       | true               | prevents count operation submission from blocking at the risk of inaccurate counts |
+antsMaxBlockingTasks  | 8192               | indicates the max number of tasks that can block on submission |
+antsExpiryDuration    | 10s                | enables setting a life time on tasks before they get removed |
+
 
 If you are using the referene counter, you will want to make sure you don't enable blockstore caching, otherwise you will not get totally accurate reference count information, as the cached blockstore will intercept the blockstore call before our reference counter intercepts the call. By "not totally accurate" we mean that you will lmost likely get a maximum reference count of 1. For more deatils on this please consult the reference counter information page.
 
