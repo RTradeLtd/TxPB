@@ -72,6 +72,9 @@ func NewSimpleConnectionProvider(pk libcryto.PrivKey, addPeer AddPeer, logger *z
 	if err != nil {
 		return nil, err
 	}
+	if logger == nil {
+		logger = zap.NewNop()
+	}
 	return &SimpleGRPCConnectionProvider{
 		peerID:    id,
 		tlsConfig: tc,
