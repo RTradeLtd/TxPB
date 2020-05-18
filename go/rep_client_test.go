@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"net"
 	"testing"
+	"time"
 
 	libp2ptls "github.com/RTradeLtd/go-libp2p-tls"
 	manet "github.com/multiformats/go-multiaddr-net"
@@ -57,5 +58,18 @@ func TestSimpleConnectionProvider(t *testing.T) {
 	_, err = rc.GetSubscriptionUpdate(context.Background(), &Subscription{})
 	if status.Code(err) != codes.Unimplemented {
 		t.Fatal("unimplemented error expected for err:", err)
+	}
+}
+
+func TestSimpleGRPCConnectionProvider_SetInitConnectionTimeout(t *testing.T) {
+	s, err := NewSimpleConnectionProvider(getMockHostKey(0).priv, nil, nil)
+	fatalOnError(t, err)
+	if s.timeout != time.Second {
+		t.Fatal("default timeout should be 1 second, got ", s.timeout)
+	}
+	newTimeout := 2 * time.Second
+	s.SetInitConnectionTimeout(newTimeout)
+	if s.timeout != newTimeout {
+		t.Fatalf(" timeout should be updated to %v, got %v", newTimeout, s.timeout)
 	}
 }

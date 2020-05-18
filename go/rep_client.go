@@ -20,7 +20,12 @@ import (
 //Close is a function that closes a resource
 type Close func() error
 
-//NewReplicatorClientConstructor is a convenient way to make a NewReplicatorClient
+//NewReplicatorClientConstructor is a convenient way to make a NewReplicatorClient.
+//
+//The underlying implementation of the returned ReplicatorClient may change in miner releases.
+//To take better control of the ReplicatorClient, such as changing connection options,
+//please construct it manually by copying the source code of this function, or implement the
+//ReplicatorClient interface.
 func NewReplicatorClientConstructor(myPrivateKey libcryto.PrivKey, server *AddrInfo, addPeer func(id peer.ID, ma multiaddr.Multiaddr), logger *zap.Logger) (ReplicatorClient, Close, error) {
 	p, err := NewSimpleConnectionProvider(myPrivateKey, addPeer, logger)
 	if err != nil {
