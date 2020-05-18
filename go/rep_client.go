@@ -20,7 +20,12 @@ import (
 //Close is a function that closes a resource
 type Close func() error
 
-//NewReplicatorClientConstructor is a convenient way to make a NewReplicatorClient
+//NewReplicatorClientConstructor is a convenient way to make a NewReplicatorClient.
+//
+//The underlying implementation of the returned ReplicatorClient may change in miner releases.
+//To take better control of the ReplicatorClient, such as changing connection options,
+//please construct it manually by copying the source code of this function, or implement the
+//ReplicatorClient interface.
 func NewReplicatorClientConstructor(myPrivateKey libcryto.PrivKey, server *AddrInfo, addPeer func(id peer.ID, ma multiaddr.Multiaddr), logger *zap.Logger) (ReplicatorClient, Close, error) {
 	p, err := NewSimpleConnectionProvider(myPrivateKey, addPeer, logger)
 	if err != nil {
@@ -54,6 +59,7 @@ type SimpleGRPCConnectionProvider struct {
 	tlsConfig *libp2ptls.Identity
 	opts      []grpc.DialOption
 	addPeer   func(id peer.ID, ma multiaddr.Multiaddr)
+	timeout   time.Duration
 	l         *zap.Logger
 }
 
@@ -83,12 +89,21 @@ func NewSimpleConnectionProvider(pk libcryto.PrivKey, addPeer AddPeer, logger *z
 			grpc.WithDisableRetry(),
 		},
 		addPeer: addPeer,
+		timeout: time.Second, //default initial connection timeout
 		l:       logger,
 	}, nil
 }
 
 //ErrConnectToSelf is returned by a connection provider if it attempts to connect to itself
 var ErrConnectToSelf = errors.New("connection to self not allowed")
+
+// SetInitConnectionTimeout sets the initial connection timeout when connecting to a server.
+// A low time out allows skipping bad servers and addresses quickly.
+// A long timeout prevents errors during high load situations.
+// The default timeout is 1 second.
+func (s *SimpleGRPCConnectionProvider) SetInitConnectionTimeout(d time.Duration) {
+	s.timeout = d
+}
 
 //ConnectionToServer returns grpc client connection from AddrInfo
 func (s *SimpleGRPCConnectionProvider) ConnectionToServer(a *AddrInfo) (*grpc.ClientConn, error) {
@@ -124,8 +139,8 @@ func (s *SimpleGRPCConnectionProvider) ConnectionToServer(a *AddrInfo) (*grpc.Cl
 		tlsConfig := s.tlsConfig.ReusableConfigForPeer(id)
 		opts := append(s.opts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
 
-		//TODO: a better way to try multiple addresses
-		dialCtx, cancel := context.WithTimeout(context.Background(), time.Second)
+		// if we have multiple addresses, try them one by one with timeout.
+		dialCtx, cancel := context.WithTimeout(context.Background(), s.timeout)
 		defer cancel()
 
 		cc, err := grpc.DialContext(dialCtx, address, opts...)
