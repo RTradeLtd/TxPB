@@ -29,8 +29,7 @@ The only warning when it comes to TemporalX configuration is not using the pebbl
 The following example configuration file is a fully populated config file, with reference counting enabled. A much more basic config file can be produced with the command `tex-cli config gen`.
 
 ```yaml
-# configures the TemporalX gRPC Server
-temporalx: 
+temporalx:
   # configures the api 
   api: 
     # enables/disables jaeger tracing
@@ -51,44 +50,50 @@ temporalx:
       realm: realm 
       # the actual jwt key
       key: key
+    # maximum message size in bytes
+    max_message_size: 4194304 # this is the default value
+    # maximum size of sent messages in bytes
+    max_send_msg_size: 2147483647 # this is the default value
+    # amount of data to before writing on the gRPC wire
+    # 0 means no buffering at all
+    write_buffer_size: 32768 # this is the default value
+    # amount of data to buffer before issuing a read syscall
+    # 0 means no bufering at all
+    read_buffer_size: 32768 # this is the default value
+    # timeout for connection establishment including HTTP/2 handshaking
+    connection_timeout: 2m0s # default value
+    # whether to enable compressiong and decompression of messages
+    # note that if you enable this, it is very important that you enable compressiong
+    # on the gRPC client you are using or you may get weird results
+    compression: # default is no compression
+      enabled: true
+      # type of compression, only gzip is supported
+      type: gzip
+      # amount of compression, 1 lowest and fastest, 9 being best and slowest
+      level: 7
   # configures a prometheus endpoint to expose metrics
+  # default is disabled
   prometheus: 
     # enable/disable prometheus endpoint
-    enabled: false 
+    enabled: enabled 
     # the address to export prometheus metrics on
     endpoint: 127.0.0.1:9093 
   # configures pprof profiling
+  # default is disabled
   profiling: 
     # enable/disable profiling
-    enabled: false
+    enabled: enabled
     # the address to expose the net/http/pprof endpoint on 
     endpoint: 127.0.0.1:9091
-  # ipfs http gateway configuration
-  # this is currently ignored, and is not parsed
-  gateway:
-    # enables the http gateway
-    enabled: true
-    # the address to listen on
-    address: 0.0.0.0:8080
-    # the http methods to accept
-    allowed_methods: ["POST", "GET"]
-    # the origins to accept requests from
-    allowed_origins: ["*"]
-    # the headers to accept
-    allowed_headers: ["*"]
-# configures the custom IPFS node TemporalX uses 
 node:
   # the various address to expose the libp2p swarm connection on
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
+  # the public key peerID of the private_key we use for libp2p connections
+  # this is also known as "our hosts peerID"
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
   # a hex encoded ed25519 private key
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
-  replication:
-    enabled: true
-    database_location: storage/replication/db.sqlite
-    grpc_port: 9094
-    white_list_location: storage/replication/publishers
-    replication_delay: 10m
   # configures the main datastore used for things like the dht, blockstore, etc...
   storage:
     # the type of datastore to use
@@ -127,7 +132,7 @@ node:
       ####           END                   ####
       #### REFERENCE COUNTER CONFIGURATION ####
 
-  # configures the libp2p peerstore
+  # configures the peerstore used for storing peer information
   peerstore:
     # the type of peerstore to use
     # accepted values: datastore, memory
@@ -140,11 +145,90 @@ node:
   keystore:
     # the type of keystore to use
     # accepted values: krab, memory, filesystem
-    type: filesystem
+    type: krab
+    # if using krab, the password to encrypt keys for
+    # storing them on disk in an encrypted format
+    passphrase: Swoovretag
+    # the underlying datastore to use, any valid datastore
+    # type we support is acceptabled
     datastore:
-      path: /temporalx/keystore
+      type: leveldb
+      path: keystore
+  # TODO(bonedaddy): fill out
+  replication:
+    enabled: true
+    database_location: storage/replication/db.sqlite
+    grpc_port: 9094
+    grpc_port_dial_Timeout: 1s
+    white_list_location: storage/replication/publishers
+    replication_delay: 10m
   # provides configuration of libp2p itself
   libp2p:
+    # enables private libp2p swarm mode with a 32 byte hex encoded key
+    # the value here will be used as the private network shared secret key
+    # default is empty string ("") which means use the public network
+    swarm_key: thisinotarealswarmtestkey
+    # allows configuring the DHt subsystem
+    dht:
+      # default is a "null" value for everything, which means
+      # the DHT library will use default settings, which we've
+      # listed below
+      options:
+        # the latency tolerance for peers we will consider "ok"
+        # any peers with latency outside of this window are ignored
+        # acceptable values are any time.Duration type
+        routing_table_latency_tolerance: 1m0s
+        # the maximum age of records we will consider valid for
+        # before attempting to talk to the DHT again
+        # lower values mean more busy DHT, higher values means
+        # less busy DHt at the risk of possibly inaccurate information
+        # acceptables values are any time.Duration type
+        max_record_age: 24h0m0s
+        # whether to operate as a DHT client only, or enable server capabilities
+        # if resource usage or network activity is a concern, you can enable this
+        # which means your peer will only reach out to the DHT to get data
+        # and will never provide data to the DHT
+        client_mode: false
+        # configures the bucket size of the routing table
+        bucket_size: 20
+        # the type of DHT protocols we will talk on
+        # supported values are: /ipfs/kad/1.0.0 or /ipfs/kad/2.0.0
+        protocols:
+        - /ipfs/kad/1.0.0
+        # disables storing and retrieving provider records
+        disable_providers: false
+        # disables storing and retrieving value records including public keys
+        disable_values: false
+      # indicates if we want to use a datastore for DHT information, which allows
+      # persisting DHt records through restarts, by storing them on disk
+      # the default is disabled, and an in-memory datastore will be used
+      persistent:
+        # enable persistent storage of dht information
+        enabled: true
+        # if namespaced is set, than we will use the main node storage datastore
+        # and use a namespaced key around, if store is set, and namespaced is enabled
+        # namespace takes precedece over the store
+        namespaced: true
+        # if set, allows using a dedicated datastore for storing DHT information
+        # any acceptable "datastore" configuration is usable here
+        store:
+          type: badger
+          path: dhtstore
+          opts:
+            fileLoadingMode: "0"
+    # enables control of the libp2p bootstrap process
+    bootstrap:
+      # if set, then we will ignore all default bootstrap peers and only
+      # use the contents of extra_peers. Note that this is mainly useful for private networks
+      # to prevent spending time connecting to default bootstrap peers which will not
+      # be reachable on private networks
+      skip_defaults: true
+      # enables supplying an extra set of peers to use in the boostrap, and periodic bootstrap process
+      # if you have multiple TemporalX nodes that aren't in the same replication cluster it's a good idea to list their multiaddresses here to enable connectivity between them all
+      # this isn'y needed with TemporalX nodes in a replication cluster, as the replication algorithm
+      # ensures connection between all the hosts
+      extra_peers:
+      - /ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5
     # provides configuration of the host connection manager
     connection_manager:
       # enable/disable the configuration manager
@@ -155,6 +239,22 @@ node:
       high_water_mark: 9000
       # the time we wait before considering a new connection eligible for removal;
       grace_period: 20s
+    # allows controlling the libp2p transport subsystem
+    # default is "null" which means the default TCP, WS and SECIO + TLS security transports
+    transports:
+      # the extra transports to use, only supported ones are noise and quic
+      enabled:
+        noise: true
+        quic: true
+    # generalized libp2p host configurations
+    # only supported field is options
+    host:
+      # only supported oprtions are natPortMap and enableP2PStreams
+      options:
+        # enabels libp2p NAT hole punching
+        natPortMap: "true"
+        # enables p2p stream capabilities, equivalent to ipfs p2p
+        enableP2PStreams: "true"
     # provides configuration of the circuit relay system
     # WARNING: do not use unless you know what you are doing
     circuit:
@@ -166,36 +266,32 @@ node:
       discovery: false
       # enable being a relay hop (this means we will relay connections)
       relay_hop: false
-    # enables modifying the available transports
-    enabled_transports:
-      # enables and prefers tls security/transport over secio
-      # default is true
-      tls: true
-      # enables the quic transport
-      # default is false
-      quic: false
-      # enables the noise security transport
-      # default is false
-      noise: false
-    # enables modifying dht settings
-    dht_options:
-      # persistently store DHT information between reboots
-      # it does this using a namespaced wrapper around the "storage" datastore specified earlier in the yaml config file
-      persistentDHT: "true"
-    # enables modifying libp2p host options
-    host_options:
-      # enable nat port mapping
-      # useful if blocked by a residential connection
-      natPortMap: "true"
-      # enables p2p stream capabilities, equivalent to ipfs p2p
-      enableP2PStreams: "true"
-    # enables private libp2p swarm mode with a 32 byte hex encoded key
-    # the value here will be used as the private network shared secret key
-    # default is empty string ("") which means use the public network
-    swarm_key: thisinotarealswarmtestkey
-    # allows specifying additional peers to use when bootstrapping
-    bootstrap_peers: [ "/ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5", "/ip4/207.6.222.55/tcp/4003/ipfs/QmXow5Vu8YXqvabkptQ7HddvNPpbLhXzmmU53yPCM54EQa"]
-  # general node configuration
+  namesys:
+    enabled: true
+    pubsub: true
+    cache_size: 128
+  pubsub:
+    enabled: true
+    options:
+      outbound_queue_size: 100
+      flood_publish: true
+      peer_exchange: true
+    value_store:
+      enabled: true
+      namespaces:
+      - ipns
+    direct_peers:
+    - /ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 3m0s
+    reprovider_interval: 12h0m0s
+  discovery:
+    enabled: true
+    type: ExponentialBackoff
+    backoff_enabled: true
+    min_backoff: 1m0s
+    max_backoff: 1h0m0s
   opts:
     # enables a bloom+arc cache on top of the blockstore
     # can improve query performance and reduce disk IO
@@ -203,11 +299,8 @@ node:
     # whether or not we are running on a low power device
     # useful if running TemporalX on low-memory devices like RPi
     lowPower: false
-    # enable/disable pubsub
-    pubsub: true
-    # enable/disable ipns and other name resolution systems
-    namesys: true
 # the file we will dump logs into
+log_file: ./logger.log
 log_file: ./logger.log
 ```
 
