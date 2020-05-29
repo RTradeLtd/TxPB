@@ -154,9 +154,13 @@ node:
     datastore:
       type: leveldb
       path: keystore
-  # TODO(bonedaddy): fill out
+  # controls the built-in replication subsystem
+  # allowing replication of CIDs between TemporalX nodes
+  # default is enabled
   replication:
+    # enable the replication subsystem
     enabled: true
+    # where to store replication metadata
     database_location: storage/replication/db.sqlite
     grpc_port: 9094
     grpc_port_dial_Timeout: 1s
