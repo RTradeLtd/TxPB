@@ -266,32 +266,74 @@ node:
       discovery: false
       # enable being a relay hop (this means we will relay connections)
       relay_hop: false
+  # controls the namesys subsystem, commonly known as IPNS
+  # default is disabled
   namesys:
+    # enable namesys allowing usage of IPNS
     enabled: true
+    # enables using the pubsub value store as a way of retrieving IPNS records
+    # which increases IPNS name resolution speeds
     pubsub: true
+    # the size of the LRU cache for namesys records we publish and resolve
+    # if namesys is enabled and cache_size is unspecified, 128 is used
     cache_size: 128
+  # controls the libp2p pubsub system
+  # default is enabled with no option and value store disabled
   pubsub:
+    # enable libp2pb pubsub
     enabled: true
+    # enables advanced control over libp2p pubsub options
+    # default is "null" which means all options are disabled and defaults used
     options:
+      # the maximum number of queued outbound messages to any given pubsub peer
       outbound_queue_size: 100
+      # enables flood based publishing alongside gossip sub
       flood_publish: true
+      # enables exchanging peers with other peers whenever the gossip PRUNE operation occurs
       peer_exchange: true
+    # enables using pubsub as a value store for content routing mainly useful for IPNS
+    # default is disabled, and when enabled pubsub content routing is used first before the DHT
     value_store:
+      # enable pubsub as a content routing layer to be tried first before interacting with the DHT
       enabled: true
+      # the namespaces to use with the pubsub content routing layer
+      # if enabled the default is ipns
       namespaces:
       - ipns
+      # WARNING: 
+      #   this is experimental, and enables using pubsub as a way of retrieving and publishing
+      #   using pubsub first before using the dht
+      - ipfs
     direct_peers:
     - /ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5
+  # enables control of the cid provider subsystem
+  # responsible for announcing content we host
+  # deafult is enabled, and the values below are the defaults
   cid_provider:
+    # enables the cid provider system
     provider_enabled: true
+    # how long to spend announcing to the network that we provide content
+    # whenever the content is added to our node
     provider_timeout: 3m0s
+    # the interval at which we iterate over all root CIDs for all content we store
+    # and reannounce it to the network
     reprovider_interval: 12h0m0s
+  # enables a service discovery subsystem
+  # it is mostly useful with pubsub to enable discovering pubsub hosts
+  # default is disable
   discovery:
+    # enables a basic discovery system using the DHT
     enabled: true
-    type: ExponentialBackoff
+    # enables an advanced discovery system using exponential backoffs if queries fal
+    # requires discovery be enabled as well
     backoff_enabled: true
+    # the type of backoff discovery, only supported one is ExponentialBackoff
+    type: ExponentialBackoff
+    # the minimum backoff time
     min_backoff: 1m0s
+    # the maximum backoff time
     max_backoff: 1h0m0s
+  # generalized node configuration options
   opts:
     # enables a bloom+arc cache on top of the blockstore
     # can improve query performance and reduce disk IO
@@ -300,7 +342,6 @@ node:
     # useful if running TemporalX on low-memory devices like RPi
     lowPower: false
 # the file we will dump logs into
-log_file: ./logger.log
 log_file: ./logger.log
 ```
 
