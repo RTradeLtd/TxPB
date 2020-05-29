@@ -72,7 +72,7 @@ esac
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
-**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.4.1-rc4`**
+**Note: where it says `<VERSION>` will be the git release tag when the binary was built, this is from `v3.4.2`**
 
 ```
 NAME:
@@ -82,7 +82,7 @@ USAGE:
    tex-cli [global options] command [command options] [arguments...]
 
 VERSION:
-   v3.4.1-rc4
+   <VERSION>
 
 AUTHORS:
    Alex Trottier <postables@rtradetechnologies.com>
@@ -90,19 +90,23 @@ AUTHORS:
 
 COMMANDS:
    admin             admin commands
+   util              generalized utility functions
    client            gRPC client subcommands
    config            configuration management tools
    replication, rep  Create, update, and monitor replications
    server            run the gRPC api server
+   node              runs a standalone node without the API
    license           license management
    help, h           Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --bootstrap, --bp          bootstrap against public ipfs (default: false)
-   --config PATH, --cfg PATH  load the configuration file at PATH (default: "./config.yml")
-   --config.env, --cfg.e      load configuration file from environment variables (default: false)
-   --help, -h                 show help (default: false)
-   --version, -v              print the version (default: false)
+   --bootstrap, --bp                                  bootstrap against public ipfs (default: false)
+   --bootstrap.periodic, --bpp                        enables periodic reboostrapping (default: false)
+   --bootstrap.periodic.interval value, --bppi value  how often to run periodic rebootstrapping (default: 2m0s)
+   --config PATH, --cfg PATH                          load the configuration file at PATH (default: "./config.yml")
+   --config.env, --cfg.e                              load configuration file from environment variables (default: false)
+   --help, -h                                         show help (default: false)
+   --version, -v                                      print the version (default: false)
 ```
 
 ## Configuration Initialization
@@ -144,6 +148,27 @@ This bootstrap process is done in the background, and does not block the startup
 To stop the node after running the server, you can use any of the following os calls and system calls against the tex-cli server process, such as `kill -9` or `CTRL+C` in the terminal window you are running the server from. This will trigger a graceful shutdown of the node which can take up to 30 seconds. 
 
 Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
+
+## Node Bootstrapping
+
+TemporalX includes additional bootstrap capabilities to ensure that you can always maintain a healthy set of connected peers. Along with the basic `--bootstrap,--bp` flags which does a one time connection to a preset list of peers, and starts the DHT bootstrap function which is responsible for maintaining the routing table, there is an optional "periodic bootstrap" functionality. 
+
+This periodic bootstrap functionality will run at a user-configurable interval (default of 2 minutes), and every iteration will connect to the default bootstrap peer list containing approximately 30 peers, as well as 10 randomly selected peers from our peerstore. This provides a very lightweight method of staying connected to a number of different peers, and in practice TemporalX nodes using periodic bootstrap will be much better connected than go-ipfs. 
+
+
+As noted by the following output with the TemporalX node not being online for more than minutes, and go-ipfs having approximately 1 week uptime, the TemporalX node is much better connected than go-ipfs.
+
+```
+rtrade@capecod:~/stress$ tex-cli client --ea 192.168.1.201:9090 --insecure=true node peer count
+connected peer count: 746
+rtrade@capecod:~/stress$ ipfs swarm peers | wc -l
+133
+```
+
+To enable periodic bootstrap you can use `--bootstrap.periodic, --bpp` and should you want to configure the interval to something other than the default 2 minutes `--bootstrap.periodic.interval value, --bppi value` where `value` is a time.Duration value such as `2m0s, 1hr` etc...
+
+Note that to use periodic bootstrap, you must also use the regular bootstrapping method enabled with `--boostrap, --bp`.
+
 
 ## Client Overview
 

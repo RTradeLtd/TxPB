@@ -193,6 +193,8 @@ node:
     # the value here will be used as the private network shared secret key
     # default is empty string ("") which means use the public network
     swarm_key: thisinotarealswarmtestkey
+    # allows specifying additional peers to use when bootstrapping
+    bootstrap_peers: [ "/ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5", "/ip4/207.6.222.55/tcp/4003/ipfs/QmXow5Vu8YXqvabkptQ7HddvNPpbLhXzmmU53yPCM54EQa"]
   # general node configuration
   opts:
     # enables a bloom+arc cache on top of the blockstore
