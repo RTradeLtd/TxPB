@@ -736,154 +736,304 @@ Additionally because we use some upstream libraries that leverage `ipfs/go-log` 
 
 # Config File Templates
 
-Server (high CPU, high memory):
+The following sections contain template config files for a variety of platforms and environments, and can be used as a baseline for your own configuration
 
-* Blockstore caching
-* Reference counted
-* PubSub enabled
-* NameSys enabled
-* TLS encryption preferred
+## Server (High Memory)
+
+The following config should be suitable for server machines with 8GB+ memory and provides the best performance
 
 ```yaml
-temporalx: 
+temporalx:
   api: 
+    tracing: false
     listen_address: 0.0.0.0:9090 
     listen_proto: tcp
+    tls:
+      cert_file: certfile.txt 
+      key_file: keyfile.txt 
+    jwt: 
+      realm: realm 
+      key: key
+    max_message_size: 4194304
+    max_send_msg_size: 2147483647
+    write_buffer_size: 32768
+    read_buffer_size: 32768
+    connection_timeout: 2m0s
+    # if clients wil be connecting over high speed low-latency networks this likely isn't needed
+    compression:
+      enabled: true
+      type: gzip
+      level: 3
 node:
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
   storage:
     type: badger
-    path: /temporalx/storage
+    path: storage
     opts:
       fileLoadingMode: 2
-      countedStore: true
       noQueueStore: true
-      counterStorePath: /temporalx/counterstore
+      counterStorePath: counterstore
+      antsPreAlloc: true
+      antsMaxWorkers: 8192
   peerstore:
     type: memory
   keystore:
     type: krab
-    passphrase: password123
+    passphrase: Swoovretag
     datastore:
-      type: badger
-      path: /temporalx/keystore
-      opts:
-         fileLoadingMode: 2
+      type: leveldb
+      path: keystore
+  replication:
+    enabled: true
+    database_location: storage/replication/db.sqlite
+    grpc_port: 9094
+    grpc_port_dial_Timeout: 1s
+    white_list_location: storage/replication/publishers
+    replication_delay: 10m
   libp2p:
     connection_manager:
       enabled: true
       low_water_mark: 6000
       high_water_mark: 9000
       grace_period: 20s
-    enabled_transports:
-      tls: true
+    transports:
+      enabled:
+        noise: true
+        quic: true
+  namesys:
+    enabled: true
+    pubsub: true
+    cache_size: 1024
+  pubsub:
+    enabled: true
+    value_store:
+      enabled: true
+      namespaces:
+      - ipns
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 3m0s
+    reprovider_interval: 12h0m0s
+  discovery:
+    enabled: true
+    backoff_enabled: true
+    type: ExponentialBackoff
+    min_backoff: 1m0s
+    max_backoff: 1h0m0s
   opts:
     blockstoreCaching: true
-    lowPower: false
-    pubsub: true
-    namesys: true
 log_file: ./logger.log
 ```
 
-Server (low CPU, low memory):
+## Server (Low Memory)
 
-* No blockstore caching
-* Reference counted
-* PubSub enabled
-* NameSys enabled
-* TLS encryption preferred
+The following configuration is suitable for servers with 6GB+ memory, and provide a combination of good performance, and low memory consumption, while also using reference counting
 
 ```yaml
-temporalx: 
+temporalx:
   api: 
+    tracing: false
     listen_address: 0.0.0.0:9090 
     listen_proto: tcp
+    max_message_size: 4194304
+    max_send_msg_size: 2147483647
+    write_buffer_size: 32768
+    read_buffer_size: 32768
+    connection_timeout: 2m0s
 node:
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: badger
+    path: storage
+    opts:
+      fileLoadingMode: 0
+      noQueueStore: true 
+      counterStorePath: counterstore
+      antsMaxWorkers: 8192
+  peerstore:
+    type: memory
+  keystore:
+    type: krab
+    passphrase: Swoovretag
+    datastore:
+      type: leveldb
+      path: keystore
+  replication:
+    enabled: true
+    database_location: storage/replication/db.sqlite
+    grpc_port: 9094
+    grpc_port_dial_Timeout: 1s
+    white_list_location: storage/replication/publishers
+    replication_delay: 10m
+  libp2p:
+    connection_manager:
+      enabled: true
+      low_water_mark: 6000
+      high_water_mark: 9000
+      grace_period: 20s
+    transports:
+      enabled:
+        quic: true
+  namesys:
+    enabled: true
+    pubsub: true
+    cache_size: 1024
+  pubsub:
+    enabled: true
+    value_store:
+      enabled: true
+      namespaces:
+      - ipns
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 3m0s
+    reprovider_interval: 12h0m0s
+  discovery:
+    enabled: true
+    backoff_enabled: true
+    type: ExponentialBackoff
+    min_backoff: 1m0s
+    max_backoff: 1h0m0s
+  opts:
+    blockstoreCaching: true
+log_file: ./logger.log
+```
+
+## Mid-Range
+
+On a machine with more than 4GB of memory, the following config template will provide good performance, data replication, namesys, and pubsub discovery.
+
+```yaml
+temporalx:
+  api: 
+    max_message_size: 4194304
+    max_send_msg_size: 2147483647
+    write_buffer_size: 32768
+    read_buffer_size: 32768
+    connection_timeout: 2m0s
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
   storage:
     type: badger
     path: /temporalx/storage
     opts:
-      fileLoadingMode: 2
-      noQueueStore: true
-      counterStorePath: /temporalx/counterstore
-  peerstore:
-    type: memory
-  keystore:
-    type: krab
-    passphrase: password123
-    datastore:
-      type: leveldb
-      path: /temporalx/keystore
-  libp2p:
-    connection_manager:
-      enabled: true
-      low_water_mark: 2000
-      high_water_mark: 4000
-      grace_period: 20s
-    enabled_transports:
-      tls: true
-  opts:
-    pubsub: true
-    namesys: true
-log_file: ./logger.log
-```
-
-Low Power (high memory):
-
-* Not reference counted
-* PubSub disabled
-* NameSys disabled
-
-```yaml
-temporalx: 
-  api: 
-    listen_address: 0.0.0.0:9090 
-    listen_proto: tcp
-node:
-  listen_addresses:
-  - /ip4/0.0.0.0/tcp/4005
-  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
-  storage:
-    type: badger
-    path: /temporalx/storage
+      fileLoadingMode: 0
   peerstore:
     type: memory
   keystore:
     type: filesystem
     datastore:
-      path: /temporalx/keystore
+      path: keystore
+  replication:
+    enabled: true
+    database_location: storage/replication/db.sqlite
+    grpc_port: 9094
+    grpc_port_dial_Timeout: 1s
+    white_list_location: storage/replication/publishers
+    replication_delay: 10m
   libp2p:
     connection_manager:
       enabled: true
-      low_water_mark: 600
+      low_water_mark: 1200
+      high_water_mark: 1800
+      grace_period: 20s
+  namesys:
+    enabled: true
+    cache_size: 1024
+  pubsub:
+    enabled: true
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 3m0s
+    reprovider_interval: 12h0m0s
+  discovery:
+    enabled: true
+log_file: ./logger.log
+```
+
+## Low Power / High Memory 
+
+Similar to the low power lowest memory configuration, this template will provide slightly better performance, but will be higher in memory consumption. This should be fine for use with devices like the Raspberry Pi 4 4GB model, and similar spec'd devices.
+
+```yaml
+temporalx:
+  api: 
+    listen_address: 0.0.0.0:9090 
+    listen_proto: tcp
+    max_message_size: 4194304
+    max_send_msg_size: 2147483647
+    write_buffer_size: 32768
+    read_buffer_size: 32768
+    connection_timeout: 2m0s
+node:
+  listen_addresses:
+  - /ip4/0.0.0.0/tcp/4005
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
+  private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
+  storage:
+    type: badger
+    path: /temporalx/storage
+    opts:
+      fileLoadingMode: 0
+  peerstore:
+    type: memory
+  keystore:
+    type: filesystem
+    datastore:
+      path: keystore
+  pubsub:
+    enabled: true
+  namesys:
+    enabled: true
+  libp2p:
+    dht:
+      options:
+        client_mode: true
+      persistent:
+        enabled: true
+        namespaced: true
+    connection_manager:
+      enabled: true
+      low_water_mark: 300
       high_water_mark: 900
       grace_period: 20s
-    dht_options:
-      persistentDHT: "true"
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 2m0s
+    reprovider_interval: 12h0m0s
   opts:
     lowPower: true
 log_file: ./logger.log
 ```
 
-Low Power (low memory):
+## Low Power / Lowest Memory
 
-* Not reference counted
-* PubSub disabled
-* NameSys disabled
+
+This config template is suitable for use with the most memory restricted environments, such as embedded systems using Raspberry Pis, IoT devices, etc...
 
 ```yaml
-temporalx: 
+temporalx:
   api: 
     listen_address: 0.0.0.0:9090 
     listen_proto: tcp
+    max_message_size: 4194304
+    max_send_msg_size: 2147483647
+    write_buffer_size: 32768
+    read_buffer_size: 32768
+    connection_timeout: 2m0s
 node:
   listen_addresses:
   - /ip4/0.0.0.0/tcp/4005
+  peer_id: 12D3KooWGFFSDieD5xTK1L8ZAqCEGRJ6xAKEeaGnkXaNsrhCAgw1
   private_key: 080112403bd9126aeee7f2186e0e0f96aba8f402a9628caf986a003bb62f081144f74a4bc62c107665752d48ffa876d1d8c7c48cf65ce6f91cd185de33fc34afdeb7ec61
   storage:
     type: leveldb
@@ -896,15 +1046,23 @@ node:
   keystore:
     type: filesystem
     datastore:
-      path: /temporalx/keystore
+      path: keystore
   libp2p:
+    dht:
+      options:
+        client_mode: true
+      persistent:
+        enabled: true
+        namespaced: true
     connection_manager:
       enabled: true
-      low_water_mark: 600
+      low_water_mark: 300
       high_water_mark: 900
       grace_period: 20s
-    dht_options:
-      persistentDHT: "true"
+  cid_provider:
+    provider_enabled: true
+    provider_timeout: 1m0s
+    reprovider_interval: 24h0m0s
   opts:
     lowPower: true
 log_file: ./logger.log
