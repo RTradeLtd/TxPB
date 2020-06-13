@@ -2,6 +2,8 @@
 
 TemporalX configuration is done through a yaml file, while the command line tool `tex-cli` has a commad `tex-cli config` that can be used to generate default configuration files. There is no required location of the config file. By default `tex-cli` looks for a file named `config.yml` in the current directory, but this can be changed by specifying the `--config` or `--cfg` CLI flag.
 
+If you are looking for instructions on how to migrate from an old configuration file format to a new one, please see the [migration documentation](CONFIG_MIGRATION.md)
+
 ## Table Of Contents
 
 <p align="left">
