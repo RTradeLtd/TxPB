@@ -14,6 +14,7 @@ We have pre-generated gRPC bindings for the following languages:
 * [python](https://github.com/RTradeLtd/TxPB/tree/master/py)
 * [rust](https://github.com/RTradeLtd/TxPB/tree/master/rs/src)
 
+
 If you want bindings in other languages, feel free to open a github issue. Alternatively you can generate language bindings independently as long as the languages you are using support the appropriate protocol buffer and gRPC versions.
 
 # Client Libraries
@@ -21,6 +22,8 @@ If you want bindings in other languages, feel free to open a github issue. Alter
 The following packages are client libraries that can be used to interact with TemporalX without needing to write any code, or writing less code than using gRPC directly:
 
 * [go-temporalx-sdk](https://github.com/RTradeLtd/go-temporalx-sdk)
+* [kronosx-rs rust sdk (WIP)](https://github.com/AIDXNZ/kronosx-rs)
+  * Will eventually replace the rust bindings included in this repo once `kronosx-rs` is finished.
 
 # Documentation
 
