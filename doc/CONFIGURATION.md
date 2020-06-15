@@ -13,8 +13,6 @@ If you are looking for instructions on how to migrate from an old configuration 
   <br>
   · <a href="#temporalx"><strong>TemporalX Configuration</strong></a>
   <br>
-  · <a href="#datastore-configuration"><strong>Datastore Configuration</strong></a>
-  <br>
   · <a href="#node-configuration"><strong>Node Configuration</strong></a> 
   <br>
   · <a href="#logging"><strong>Logging</strong></a> 
@@ -64,8 +62,8 @@ temporalx:
     read_buffer_size: 32768 # this is the default value
     # timeout for connection establishment including HTTP/2 handshaking
     connection_timeout: 2m0s # default value
-    # whether to enable compressiong and decompression of messages
-    # note that if you enable this, it is very important that you enable compressiong
+    # whether to enable compression and decompression of messages
+    # note that if you enable this, it is very important that you enable compression
     # on the gRPC client you are using or you may get weird results
     compression: # default is no compression
       enabled: true
@@ -351,7 +349,122 @@ node:
 log_file: ./logger.log
 ```
 
-# Datastore Configuration
+# TemporalX
+
+The `temporalx` section is used to configure the TemporalX gRPC server that facilitates interaction with our custom node. Additionally it enables things like tracing, and monitoring.
+
+<p align="left">
+  · <a href="#api"><strong>API</strong></a>
+  <br>
+  · <a href="#prometheus"><strong>Prometheus</strong></a>
+  <br>
+  · <a href="#profiling"><strong>Profiling</strong></a>
+  <br>
+  · <a href="#gateway"><strong>Gateway</strong></a>
+</p>
+
+## API
+
+The `api` section is used to configure the gRPC API server, enabling controlling JWT authentication, tls configuration,  jaeger tracing, as well as a variety of other gRPC configurations. For a brief overview on jaeger tracing, see [our short tracing doc](TRACING.md).
+
+The following table lists all available configuration options. When a field is denoted as `foo.bar` it would translate to the following in the YAML configuration file:
+
+```yaml
+foo:
+   bar: somevaluebaz
+```
+
+| Field | Value | Default | Note |
+|-------|-------|---------|-------|
+| `tracing` | bool | false | |
+| `listen_address` | string | 0.0.0.0:9090 | specifes the addres to listen on for gRPC connections |
+| `listen_proto` | string | tcp | only tcp is supported at the moment, but udp may work |
+| `tls.cert_file` | string | "" | path to tls cert in PEM format |
+| `tls.key_file` | string | "" | |
+| `jwt.realm` | string | "" | |
+| `jwt.key` | string | "" | |
+| `max_message_size` | int | 4194304 | |
+| `max_send_msg_size` | int | 2147483647 | |
+| `write_buffer_size` | int | 32768 | |
+| `read_buffer_size` | int | 32768 | |
+| `connection_timeout` | time.Duration | 2m0s | for more information on time.Duration see the [time package](https://pkg.go.dev/time?tab=doc) |
+| `compression.enabled` | bool | false | |
+| `compression.type` | string | "" | |
+| `compression.level` | int | 0  | usually on a scale of 1-9, ultimtaely depends on the compression algorithm |
+
+## Prometheus
+
+The `prometheus` section is used to configure a prometheus endpoint that can be used for metric collection. The default setting is disabled. Metric collection via prometheus can sometimes be impactful on resources
+
+Configuration Options:
+
+* `enabled` enables/disables the prometheus endpoint
+* `endpoint` the ip+port to expose the `/metrics` handler on.
+
+Note that some metrics we measure may require certain actions to be taken to reach a representation of the current state, and as such you may not receive totally accurate metrics from prometheus for some time. This can be circumvented by seeding the metrics when TemporalX first starts up. To seed the metrics you can use the `--seed.metrics` server command flag, covered in the getting started documentation.
+
+## Profiling
+
+The `profiling` section is used to configure profiling of TemporalX via pprof, and exposes `net/http/pprof` handlers.
+
+Configuration Options:
+
+* `enabled` enables/disables profiling collection with a default of disabled.
+* `endpoint` is the ip+port to expose `net/http/pprof` handlers on.
+
+## Gateway
+
+> **Note: gateway is currently disabled pending a rewrite and configuration declartions are no longer processed**
+
+The `gateway` section is used to configure the IPFS HTTP Gateway that TemporalX exposes. It has feature parity with `go-ipfs` to a certain extent, ignoring some of the `X-Ipfs-*` headers, while also supporting `/ipld` lookups. When encountering UnixFS directories, a slightly different "directory index" is displayed than what is shown when using `go-ipfs`.
+
+The gateway http server by default enables gzip "level 3" compression, and has a max processing limit of 1000 requests/second, and a 2 minute timeout for inactive connections. Eventually these will be configurable, but for now they are some sensible defaults. Additionally the gateway will error out when processing a request body 1GB or larger in size.
+
+The gateway offers no write capabilities, and is strictly focused on read-only purposes. Planned features include an in-memory cache. 
+
+Configuration Options:
+
+* `enabled` enables/disables http gateway (default false)
+* `address` specifies the address and port we will listen on (default is empty string)
+* `allowed_methods` specifies the http methods we allow (default is all)
+* `allowed_origins` specifies the origins we will accept requests from (default is all)
+* `allowed_headers` specifies the http headers we will process (default is all)
+
+# Node Configuration
+
+The `node` section is used to configure the underlying libp2p, and ipfs subsystems used by TemporalX.
+
+<p align="left">
+  · <a href="#top-level-identity-configurations"><strong>Top Level (Identity)</strong></a>
+  <br>
+  · <a href="#datastore"><strong>Datastore</strong></a>
+  <br>
+  · <a href="#replication"><strong>Replication</strong></a>
+  <br>
+  · <a href="#storage"><strong>Storage</strong></a>
+  <br>
+  · <a href="#peerstore"><strong>Peerstore</strong></a>
+  <br>
+  · <a href="#keystore"><strong>Keystore</strong></a>
+  <br>
+  · <a href="#libp2p"><strong>LibP2P</strong></a> 
+  <br>
+  · <a href="#opts"><strong>Opts</strong></a> 
+</p>
+
+## Top Level (Identity) Configurations
+
+The following fields are individual fields within the `node` YAML section, and used for specifying configurations used to establish your libp2p peer identity. All following fields *except* `peer_id` are needed, and will be automatically generated each time you create a new config file.
+
+* `listen_addresses`
+  * Specifies all the multiaddrs that the node will accept libp2p connections on
+* `peer_id`
+  * A hashed public key corresponding to the key declared in `private_key`
+* `private_key`
+  * A hex encoded private key, although any valid LibP2P private/public key algorithm can be used, TemporalX will only generated ED25519 keys, although you can provide any valid hex-encoded LibP2P private key
+
+
+## Datastore
 
 The `datastore` section(s) of the yaml config file is used to config key-value datastores. These key-value datastores are used throughout the entire libp2p, and ipfs stack. Every `datastore` section shares the same configuration options with each other.
 
@@ -399,87 +512,6 @@ Please note that all options below apply to all `datastore` configuration sectio
 | noSync | true, false | disable sync writes to disk | false |
 
 
-# TemporalX
-
-The `temporalx` section is used to configure the TemporalX gRPC server that facilitates interaction with our custom node. Additionally it enables things like tracing, and monitoring.
-
-<p align="left">
-  · <a href="#api"><strong>API</strong></a>
-  <br>
-  · <a href="#prometheus"><strong>Prometheus</strong></a>
-  <br>
-  · <a href="#profiling"><strong>Profiling</strong></a>
-  <br>
-  · <a href="#gateway"><strong>Gateway</strong></a>
-</p>
-
-## API
-
-The `api` section is used to configure the gRPC API server. For a brief overview on jaeger tracing, see [our short tracing doc](TRACING.md).
-
-Configuration Options:
-
-* `tracing` enables/disables jaeger tracing
-* `listen_address` is the address to listen on for gRPC connections
-* `listen_proto` is the protocol the gRPC endpoint is using. Only supported protocol is TCP, although UDP may work. 
-* `tls.cert_file` is the path to the server's TLS certificate saved as a PEM file
-* `tls.key_file` is the path  to the server's private key
-* `jwt.realm` is the realm of the jwt
-* `jwt.key` is they used for signing jwt's
-
-## Prometheus
-
-The `prometheus` section is used to configure a prometheus endpoint that can be used for metric collection. The default setting is disabled. Metric collection via prometheus can sometimes be impactful on resources
-
-Configuration Options:
-
-* `enabled` enables/disables the prometheus endpoint
-* `endpoint` the ip+port to expose the `/metrics` handler on.
-
-Note that some metrics we measure may require certain actions to be taken to reach a representation of the current state. At the moment this only applies to the blockstore metric which measures how many blocks we have stored. Whenever `Blockstore::AllKeysChan` is called, we count the number of CIDs sent through the blockstore channel, and set the number of stored blocks to that value. To seed the metrics you can use the `--seed.metrics` server command flag, see the getting started documentation for more information.
-
-## Profiling
-
-The `profiling` section is used to configure profiling of TemporalX via pprof, and exposes `net/http/pprof` handlers.
-
-Configuration Options:
-
-* `enabled` enables/disables profiling collection with a default of disabled.
-* `endpoint` is the ip+port to expose `net/http/pprof` handlers on.
-
-## Gateway
-
-The `gateway` section is used to configure the IPFS HTTP Gateway that TemporalX exposes. It has feature parity with `go-ipfs` to a certain extent, ignoring some of the `X-Ipfs-*` headers, while also supporting `/ipld` lookups. When encountering UnixFS directories, a slightly different "directory index" is displayed than what is shown when using `go-ipfs`.
-
-The gateway http server by default enables gzip "level 3" compression, and has a max processing limit of 1000 requests/second, and a 2 minute timeout for inactive connections. Eventually these will be configurable, but for now they are some sensible defaults. Additionally the gateway will error out when processing a request body 1GB or larger in size.
-
-The gateway offers no write capabilities, and is strictly focused on read-only purposes. Planned features include an in-memory cache. 
-
-Configuration Options:
-
-* `enabled` enables/disables http gateway (default false)
-* `address` specifies the address and port we will listen on (default is empty string)
-* `allowed_methods` specifies the http methods we allow (default is all)
-* `allowed_origins` specifies the origins we will accept requests from (default is all)
-* `allowed_headers` specifies the http headers we will process (default is all)
-
-# Node Configuration
-
-The `node` section is used to configure the underlying libp2p, and ipfs subsystems used by TemporalX.
-
-<p align="left">
-  · <a href="#replication"><strong>Replication</strong></a>
-  <br>
-  · <a href="#storage"><strong>Storage</strong></a>
-  <br>
-  · <a href="#peerstore"><strong>Peerstore</strong></a>
-  <br>
-  · <a href="#keystore"><strong>Keystore</strong></a>
-  <br>
-  · <a href="#libp2p"><strong>LibP2P</strong></a> 
-  <br>
-  · <a href="#opts"><strong>Opts</strong></a> 
-</p>
 
 ## Replication
 
@@ -645,6 +677,8 @@ Filesystem
 The `libp2p` section is used to configure the libp2p host that we start up, and is a core component of TemporalX. All these configurations are from libp2p itself, so for those who have used existing IPFS solutions these may seem familiar.
 
 <p align="left">
+  · <a href="#dht"><strong>DHT</strong></a>
+  <br>
   · <a href="#connection-manager"><strong>Connection Manager</strong></a>
   <br>
   · <a href="#circuit"><strong>Circuit</strong></a>
@@ -658,6 +692,24 @@ The `libp2p` section is used to configure the libp2p host that we start up, and 
   · <a href="#swarm-key-private-networks"><strong>Swarm Key (Private Networks)</strong></a> 
 </p>
 
+
+### DHT
+
+The `dht` section allows controlling the libp2p dht, as well as enabling a persistent DHT that allows storing DHT records on disk, and can be namespaced around the main storage datastore, or use a dedicated datastore.
+
+#### Options
+
+The `dht.options` section can be used to fine tune the DHT, and the routing table. Generally it's recommended to leave this empty unless you are very familiar with the mechanics of libp2p and its DHT. 
+
+| Field | Type |
+|-------|------|
+| `dht.options.routing_table_latency_tolerance` | time.Duration |
+| `dht.options.max_record_age` | time.Duration |
+| `dht.options.client_mode` | bool |
+| `dht.options.bucket_size` | int |
+| `dht.options.protocols` | array of strings |
+
+The default setting is to leave the `options`
 
 ### Connection Manager
 
