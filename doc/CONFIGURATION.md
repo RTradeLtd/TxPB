@@ -480,6 +480,9 @@ The `datastore` configurations also apply to the `storage` section of `node`, wh
 
 The current datastore types are supported:
 
+* postgresql
+  * enables using a postgresql database to back the datastore
+  * suitable for storing very large amounts of data
 * pebble
   * currently experimental, but is generally the fastest datastore next to pure in-memory stores
   * it is generally okay, however it can cause unexpected errors, and should be used at your own risk.
@@ -496,6 +499,23 @@ The current datastore types are supported:
   * all data is lost on crash, or restart of service and should only be used for testing
 
 Please note that all options below apply to all `datastore` configuration sections.
+
+## PostgreSQL Options
+
+
+| Name   | Details | Required |
+|--------|---------|----------|
+| host   | an ip address or hostname used to connect to the database host | yes |
+| port   | port the host is using to accept connections on | yes |
+| user   | the username to use when connecting to the database | yes |
+| password | the password to use when connecting to the database | yes |
+| database | the name of the database to use | yes |
+| table    | the name of the table to use in the database | yes |
+| sslMode  | if set to `disable` will not use ssl when connecting to the host | optional |
+| acceptRecreateWarning | if set to `recreate tables` and used in combination with `recreateTables` it will drop all existing data in all tables, delete the tables, and create them | no |
+| recreateTables | when used in combination with `acceptRecreateWarning` will nuke the database and recreate it |
+| runMigrations | if set to `true` we will create the database tables, useful when first using a database | no
+| createIndex | when used in combination with `runMigations` or `recreateTables` it will enable creation of an index that optimizes search queries | no
 
 ## Badger Options
 
