@@ -540,6 +540,7 @@ A breakdown of replication configuration is as follows
 
 name                  | example            | explanation                                     |
 ----------------------|--------------------|-------------------------------------------------|
+grpc_port_dial_timeout | 2s                | timeout grpc connections if dial takes longer than given timeout|
 enabled               | true               | whether or not replication is enabled           |
 database_location     | vstorage/replication/db.sqlite | Location of the SQL database to keep track of replications. |
 grpc_port             | 9094                          | A dedicated TCP port for replication protocol. |
