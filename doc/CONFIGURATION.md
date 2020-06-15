@@ -449,6 +449,14 @@ The `node` section is used to configure the underlying libp2p, and ipfs subsyste
   <br>
   · <a href="#libp2p"><strong>LibP2P</strong></a> 
   <br>
+  · <a href="#namesys"><strong>NameSys</strong></a> 
+  <br>
+  · <a href="#pubsub"><strong>PubSub</strong></a> 
+  <br>
+  · <a href="#cid-provider"><strong>CID Provider</strong></a> 
+  <br>
+  · <a href="#discovery"><strong>Discovery</strong></a> 
+  <br>
   · <a href="#opts"><strong>Opts</strong></a> 
 </p>
 
@@ -707,14 +715,30 @@ The `dht.options` section can be used to fine tune the DHT, and the routing tabl
 | `dht.options.max_record_age` | time.Duration |
 | `dht.options.client_mode` | bool |
 | `dht.options.bucket_size` | int |
-| `dht.options.protocols` | array of strings |
+| `dht.options.protocols` | array of string |
 
-The default setting is to leave the `options`
+#### Persistent
+
+The `dht.persistent` section can be used to control how we persist DHT information on disk out of memory. This allows retaining DHT information whenever a node restarts, whereas the default setting is in-memory storage, thus losing all DHT data. Enabling this can be advantageous to reduce memory usage on very busy nodes, share DHT data amongst nodes via postgres, etc...
+
+| Field | Type | Note |
+|-------|------|-------|
+| `dht.persistent.enabled` | bool | |
+| `dht.persistent.namespaced` | bool | if using namespaced, dont use the `store` settings |
+| `dht.persistent.store` | `datastore` | allows specifying a valid `datastore`  configuration to use instead of using a namespace wrapper around the main storage datastore |  
+
+### Bootstrap
+
+The `bootstrap` section can be used to skip the default list of peers to bootstrap from, or to provide an extra set of peers to use when bootstrapping.
+
+| Field | Type | Note |
+|-------|------|-------|
+| `skip_defaults` | bool | allows skipping the default bootstrap peers, primarily useful on private networks |
+| `extra_peers` | array of multiaddresses | when used with `skip_defaults: true` this will be the only set of peers used when bootstrapping
 
 ### Connection Manager
 
 The `connection_manager` section is used to configure our libp2p connection management subsystem. It is not technically a "required" configuration, however it is strongly recommended you use it to keep resource consumption underwatch.
-
 
 Configuration Options:
 
@@ -722,6 +746,22 @@ Configuration Options:
 * `low_water_mark` is the minimum number of connections we attempt to maintain
 * `high_water_mark` is the number of connections that, when exceeded, will trigger a connection GC operation which will trim connections until the `low_water_mark` is reached.
 * `grace_period` is a time duration that new connections are immune from being closed by the connection manager. It uses Golang `time.Duration` syntax so values like `1h` (1 hour), `10m` (10 minutes) are acceptable
+
+### Transports
+
+The `transports` section is used to configure the available transports. At the moment the only recognized configuration is `transports.enabled`, and a list of protocols to use as methods of communicating with other peers. The following tranports are optional:
+
+* `noise`
+* `quic`
+
+### Host
+
+The `host` section is used to configure the libp2p host. At the moment the only recognized configuration is `host.options` and a list of optional funcionality for the libp2p host. The following options are accepted:
+
+| Field | Type | Default | Note |
+|-------|------|---------|-------|
+| `natPortMap` | bool | false | enables NAT hole punching |
+| `enableP2PStreams` | bool | false | enables management of p2p streams to enable tunneling TCP/UDP traffic over libp2p |
 
 ### Circuit
 
@@ -758,6 +798,53 @@ The `host_options` section is used to provide optional control of libp2p host co
 ### Swarm Key (Private Networks)
 
 The `swarm_key` is a configuration directive enables the usage of encrypted/private libp2p swarm connections via a pre-shared key. The default is an empty string, which will have the libp2p host operate on the "public network". If a non-empty string, the value will be used as the pre-shared key. It takes a 32-byte hex encoded string, which can be generated with `tex-cli config new-swarm-key` or `tex-cli config nsk`. If you want to force private libp2p communication, that is disable communication with libp2p hosts not using the same swarm key (or not using a swarm at all) set the environment variable `LIBP2P_FORCE_PNET` to `1` before launching TemporalX.
+
+
+## Namesys
+
+The `namesys` section is used to configure our name system, which is a generalized name system, supporting the IPNS protocol. 
+
+| Field | Type | Default | Note |
+|-------|------|---------|------|
+| `namesys.enabled` | bool | false | |
+| `namesys.pubsub` | bool | false | if true, requires using the `pubsub.value_store` configuration option mentioned in the next section |
+| `cache_size` | bool | 128 | if `namesys.enabled` is set to true, this will allow caching up to N records in an LRU cache
+
+## PubSub
+
+The `pubsub` section is used to configure libp2p pubsub, which currently is using the gossipsub protocol.
+
+| Field | Type | Default | Note |
+|-------|------|---------|------|
+| `pubsub.enabled` | bool | false | enables a pubsub router using the gossipsub protocol |
+| `pubsub.direct_peers`| array of multiaddrs | specifies a set of peers to unconditionally forward messages to |
+| `pubsub.options.outbound_queue_size` | int | `1 << 20` | maximum number of queued outbound messages to a single peer |
+| `pubsub.options.flood_publish` | bool | false | enables publishing every message to all known peers, enabling a hybrid gossipsub + floodsub |
+| `pubsub.options.peer_exchange` bool | false | whenevert the gossipsub `PRUNE` operation occurs, exchange peers
+| `pubsub.value_store.enabled` | bool | false | enables using pubsub as a content routing subsystem, primarily useful for IPNS-over-PubSub, but can also be used to retrieve IPFS keys over pubsub |
+| `pubsub.value_store.namespaces` | array of string | `ipns` | enables specifying keyspaces that will attempt to use pubsub to retrieve records. if the value store system is enabled, you'll need to set `namesys.pubsub: true`
+
+## Cid Provider
+
+The `cid_provider` section enables control of the subsystem responsible for providing to the network that we are storing some content.
+
+| Field | Type | Default |
+|-------|------|---------|
+| `cid_provider.enabled` | bool | true |
+| `cid_provider.provider_timeout` | time.Duration | 3m0s |
+| `cid_provider.reprovider_timeout` | time.Duration | 12h0m0s |
+
+## Discovery
+
+The `discovery` section enables a service discover system, primarily used by pubsub to enable discovery of pubsub peers that are useful to us (ie, listening on the same topic).
+
+| Field | Type | Default | Note |
+|-------|------|---------|------|
+| `discovery.enabled` | bool | true | enables basic service discovery using the dht |
+| `discovery.backoff_enabled` | bool | false | enables slightly more advanced discovery ontop of basic DHT discovery, using backoff queries |
+| `discovery.type` | string | "" | Current supported type is `ExponentialBackoff`
+| `discovery.min_backoff` | time.Duration | "" | minimum backoff time
+| `discovery.max_backoff` | time.Duration | "" | maximum backoff time
 
 ## Opts
 
