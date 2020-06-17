@@ -208,6 +208,11 @@ message BlockstoreRequest {
     // the hash function to use when constructing blocks, default is sha2-256
     // sent by: BS_PUT, BS_PUT_MANY
     string hashFunc = 7;
+    // reference ID to mark the blocks of this operation with
+    // when sent by BS_PUT, BS_PUT_MANY: only put if the id is not marked on block, otherwise noop
+    // when sent by BS_GET, BS_GET_MANY: only get if the id is marked on block
+    // when sent by BS_DELETE: only delete if the id is marked on block
+    string refId = 1;
 }
 
 // BlockstoreResponse is a response to a BlockstoreqRequest
@@ -251,6 +256,8 @@ enum DAGREQTYPE {
     DAG_GET_LINKS = 4;
     // DAG_STAT is used to retrieve ipld.NodeStats information
     DAG_STAT = 5;
+    // DAG_REMOVE is the inverse of DAG_PUT
+    DAG_REMOVE = 6;
 }
 
 // Used to submit a request to Dag or DagStream RPCs
@@ -274,11 +281,14 @@ message DagRequest {
     // sent by: DAG_PUT, DAG_NEW_NODE
     int64 cidVersion = 6;
     // the hash of the object we are processing
-    // sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS
+    // sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS, DAG_REMOVE
     string hash = 7;
     // indicates links and their names. key = name, value = link hash
     // sent by: DAG_NEW_NODE, DAG_ADD_LINKS
     map<string, string> links = 8;
+    // optional reference ID to mark the cid/hash with
+    // sent by: DAG_PUT, DAG_REMOVE
+    string refId = 2;
 }
 
 // Used in response to a Dag or DagStream RPC
@@ -377,6 +387,8 @@ message KeystoreResponse {
 message PersistRequest {
     // cids to persist locally
     repeated string cids = 1;
+    // optional reference ID to mark the cids with
+    string refId = 2;
 }
 
 message PersistResponse {

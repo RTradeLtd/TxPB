@@ -4,10 +4,12 @@ import "util.proto";
 
 // FileAPI provides a gRPC api to upload/download files as UnixFS objects
 service FileAPI {
-    // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
+    // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs pin add)
     rpc UploadFile(stream UploadRequest) returns  (PutResponse) { };
     // DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)
     rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) { };
+    // RemoveFile allows removing a UnixFS object or decrease it's reference counter (equivalent to ipfs pin rm)
+    rpc RemoveFile(RemoveRequest) returns (RemoveResponse) { };
 }
 
 
@@ -17,6 +19,8 @@ message UploadRequest {
     Blob blob = 1;
     // options allows setting the optoins for this upload
     UploadOptions options = 2;
+    // optional reference ID to mark the file with, only valid in the first message of a stream
+    string refId = 3;
 }
 
 // UploadOptions allows controlling the parameters of a file upload
@@ -64,4 +68,17 @@ message Blob {
     // Currently, DownloadResponse support blob range.
     uint64 rangeStart = 2;
     uint64 rangeEnd = 3;
+}
+
+// UploadRequest is used to decrease the reference count on UnixFS objects
+message RemoveRequest{
+    // refIds is a map of reference IDs to hash/cid of objects to remove those refernece counts
+    map<string, string> refIds = 1;
+}
+
+// RemoveResponse contains the response to a remove request
+message RemoveResponse{
+    // The number of acturall removal operations performed.
+    // A missing count is because the refId to hash pair was already removed or was never added 
+    uint64 count = 1;
 }
