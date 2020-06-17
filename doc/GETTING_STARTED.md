@@ -130,7 +130,7 @@ $ tex-cli --config config2.yml config generate
 
 ### Full Example
 
-While the basic configuration file is suitable for running TemporalX, it purposely leaves a lot of configurations that aren't specified, so that sensible defaults may be used. That being said, TemporalX has very tunable configuration parameters, that if you are familiar with IPFS, and TemporalX can be used to optimize your performance, and get a configuration profile suitable for your environment. To better showcase how a full configuration file can be used, we provide an optional parameter suppleid when generating the configuration file that will showcase all the options and how they can be used. It is inadvisable to use this configuration file as is, but it certainly can be done.
+While the basic configuration file is suitable for running TemporalX, it purposely leaves a lot of configurations that aren't specified, so that sensible defaults may be used. That being said, TemporalX has very tunable configuration parameters, that if you are familiar with IPFS, and TemporalX can be used to optimize your performance, and get a configuration profile suitable for your environment. To better showcase how a full configuration file can be used, we provide an optional parameter supplied when generating the configuration file that will showcase all the options and how they can be used. It is inadvisable to use this configuration file as is, but it certainly can be done.
 
 ```
 $ tex-cli config generate --example.config

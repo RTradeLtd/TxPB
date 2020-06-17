@@ -312,7 +312,7 @@ node:
     - /ip4/207.6.222.55/tcp/4002/ipfs/QmPvnFXWAz1eSghXD6JKpHxaGjbVo4VhBXY2wdBxKPbne5
   # enables control of the cid provider subsystem
   # responsible for announcing content we host
-  # deafult is enabled, and the values below are the defaults
+  # default is enabled, and the values below are the defaults
   cid_provider:
     # enables the cid provider system
     provider_enabled: true
@@ -328,7 +328,7 @@ node:
   discovery:
     # enables a basic discovery system using the DHT
     enabled: true
-    # enables an advanced discovery system using exponential backoffs if queries fal
+    # enables an advanced discovery system using exponential backoffs if queries fail
     # requires discovery be enabled as well
     backoff_enabled: true
     # the type of backoff discovery, only supported one is ExponentialBackoff
@@ -376,21 +376,21 @@ foo:
 
 | Field | Value | Default | Note |
 |-------|-------|---------|-------|
-| `tracing` | bool | false | |
+| `tracing` | bool | false | enables jaeger tracing |
 | `listen_address` | string | 0.0.0.0:9090 | specifes the addres to listen on for gRPC connections |
 | `listen_proto` | string | tcp | only tcp is supported at the moment, but udp may work |
 | `tls.cert_file` | string | "" | path to tls cert in PEM format |
-| `tls.key_file` | string | "" | |
-| `jwt.realm` | string | "" | |
-| `jwt.key` | string | "" | |
-| `max_message_size` | int | 4194304 | |
-| `max_send_msg_size` | int | 2147483647 | |
-| `write_buffer_size` | int | 32768 | |
-| `read_buffer_size` | int | 32768 | |
+| `tls.key_file` | string | "" | path to tls key file corresponding to the cert |
+| `jwt.realm` | string | "" | realm used for jwt authentication |
+| `jwt.key` | string | "" | the key used to sign jwt messages |
+| `max_message_size` | int | 4194304 | max size in bytes for messages we receive |
+| `max_send_msg_size` | int | 2147483647 | max size in bytes for messages we send |
+| `write_buffer_size` | int | 32768 | amount of data to buffer before writing on the wire |
+| `read_buffer_size` | int | 32768 | amount of data to buffer before reading from the wire |
 | `connection_timeout` | time.Duration | 2m0s | for more information on time.Duration see the [time package](https://pkg.go.dev/time?tab=doc) |
-| `compression.enabled` | bool | false | |
-| `compression.type` | string | "" | |
-| `compression.level` | int | 0  | usually on a scale of 1-9, ultimtaely depends on the compression algorithm |
+| `compression.enabled` | bool | false | whether or not to enable gRPC compression, if enabled must enable on the client too |
+| `compression.type` | string | "" | type of compression to use, only gzip supported at the moment |
+| `compression.level` | int | 1  | usually on a scale of 1-9, ultimtaely depends on the compression algorithm |
 
 ## Prometheus
 
