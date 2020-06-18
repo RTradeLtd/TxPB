@@ -78,7 +78,7 @@ message RemoveRequest{
 
 // RemoveResponse contains the response to a remove request
 message RemoveResponse{
-    // The number of acturall removal operations performed.
+    // The number of removal operations performed.
     // A missing count is because the refId to hash pair was already removed or was never added 
     uint64 count = 1;
 }

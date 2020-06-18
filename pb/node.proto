@@ -308,6 +308,9 @@ message DagResponse {
     // maps ipld cids to a ipld.NodeStat object equivalent
     // sent by: DAG_STAT
     map<string, IPLDStat> nodeStats = 5;
+    // The number of removal operations performed.
+    // sent by: DAG_REMOVE
+    uint64 count = 6;
 }
 
 // IPLDStat is statistics about an individual dag node
