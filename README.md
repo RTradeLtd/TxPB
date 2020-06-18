@@ -53,6 +53,4 @@ In an effort to reduce the frequency of responding to commonly asked questions, 
 
 # License
 
-All code in this repository is licensed under `AGPL-3.0`, and all documentation is licensed under `MIT`. Documentation is anything that is a readme, or html file. Code is pretty much anything other than documentation such as javascript, java, golang, python, and `.proto` files.
-
-This is different than the license key that is used to authorize your purchase and ownership of TemporalX.
+As of release `v3.4.3` everything in the repository is licensed under [`GNU AFFERO GENERAL PUBLIC LICENSE Version 3`](./LICENSE). 
