@@ -8,15 +8,14 @@ require (
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/ipfs/go-block-format v0.0.2
 	github.com/ipfs/go-cid v0.0.6
-	github.com/ipfs/go-datastore v0.4.4 // indirect
 	github.com/ipfs/go-ipld-format v0.2.0
 	github.com/ipfs/go-merkledag v0.3.2
 	github.com/libp2p/go-libp2p-core v0.6.0
+	github.com/libp2p/go-libp2p-peerstore v0.2.6 // indirect
+	github.com/libp2p/go-libp2p-swarm v0.2.7 // indirect
 	github.com/multiformats/go-multiaddr v0.2.2
 	github.com/multiformats/go-multiaddr-dns v0.2.0 // indirect
-	github.com/multiformats/go-multiaddr-fmt v0.1.0 // indirect
 	github.com/multiformats/go-multiaddr-net v0.1.5
-	github.com/multiformats/go-multistream v0.1.1 // indirect
 	github.com/pkg/errors v0.9.1
 	go.uber.org/zap v1.15.0
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
