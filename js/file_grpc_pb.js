@@ -38,6 +38,28 @@ function deserialize_pb_PutResponse(buffer_arg) {
   return util_pb.PutResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_RemoveRequest(arg) {
+  if (!(arg instanceof file_pb.RemoveRequest)) {
+    throw new Error('Expected argument of type pb.RemoveRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_RemoveRequest(buffer_arg) {
+  return file_pb.RemoveRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_RemoveResponse(arg) {
+  if (!(arg instanceof file_pb.RemoveResponse)) {
+    throw new Error('Expected argument of type pb.RemoveResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_RemoveResponse(buffer_arg) {
+  return file_pb.RemoveResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_UploadRequest(arg) {
   if (!(arg instanceof file_pb.UploadRequest)) {
     throw new Error('Expected argument of type pb.UploadRequest');
@@ -52,7 +74,7 @@ function deserialize_pb_UploadRequest(buffer_arg) {
 
 // FileAPI provides a gRPC api to upload/download files as UnixFS objects
 var FileAPIService = exports.FileAPIService = {
-  // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
+  // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs pin add)
 uploadFile: {
     path: '/pb.FileAPI/UploadFile',
     requestStream: true,
@@ -75,6 +97,18 @@ downloadFile: {
     requestDeserialize: deserialize_pb_DownloadRequest,
     responseSerialize: serialize_pb_DownloadResponse,
     responseDeserialize: deserialize_pb_DownloadResponse,
+  },
+  // RemoveFile allows removing a UnixFS object or decrease it's reference counter (equivalent to ipfs pin rm)
+removeFile: {
+    path: '/pb.FileAPI/RemoveFile',
+    requestStream: false,
+    responseStream: false,
+    requestType: file_pb.RemoveRequest,
+    responseType: file_pb.RemoveResponse,
+    requestSerialize: serialize_pb_RemoveRequest,
+    requestDeserialize: deserialize_pb_RemoveRequest,
+    responseSerialize: serialize_pb_RemoveResponse,
+    responseDeserialize: deserialize_pb_RemoveResponse,
   },
 };
 

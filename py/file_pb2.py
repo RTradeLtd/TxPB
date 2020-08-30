@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nfile.proto\x12\x02pb\x1a\nutil.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"C\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\"X\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\x12\x12\n\nrangeStart\x18\x03 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x04 \x01(\x04\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"=\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x12\n\nrangeStart\x18\x02 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x03 \x01(\x04\x32~\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\nfile.proto\x12\x02pb\x1a\nutil.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"g\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\x12\r\n\x05refID\x18\x04 \x01(\t\x12\x13\n\x0bprogressive\x18\x05 \x01(\x08\"X\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\x12\x12\n\nrangeStart\x18\x03 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x04 \x01(\x04\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"=\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x12\n\nrangeStart\x18\x02 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x03 \x01(\x04\"m\n\rRemoveRequest\x12-\n\x06refIDs\x18\x01 \x03(\x0b\x32\x1d.pb.RemoveRequest.RefIDsEntry\x1a-\n\x0bRefIDsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1f\n\x0eRemoveResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x04\x32\xb5\x01\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x12\x35\n\nRemoveFile\x12\x11.pb.RemoveRequest\x1a\x12.pb.RemoveResponse\"\x00\x62\x06proto3'
   ,
   dependencies=[util__pb2.DESCRIPTOR,])
 
@@ -92,6 +92,20 @@ _UPLOADOPTIONS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='refID', full_name='pb.UploadOptions.refID', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='progressive', full_name='pb.UploadOptions.progressive', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -105,7 +119,7 @@ _UPLOADOPTIONS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=107,
-  serialized_end=174,
+  serialized_end=210,
 )
 
 
@@ -156,8 +170,8 @@ _DOWNLOADREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=176,
-  serialized_end=264,
+  serialized_start=212,
+  serialized_end=300,
 )
 
 
@@ -187,8 +201,8 @@ _DOWNLOADRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=266,
-  serialized_end=308,
+  serialized_start=302,
+  serialized_end=344,
 )
 
 
@@ -232,18 +246,121 @@ _BLOB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=310,
-  serialized_end=371,
+  serialized_start=346,
+  serialized_end=407,
+)
+
+
+_REMOVEREQUEST_REFIDSENTRY = _descriptor.Descriptor(
+  name='RefIDsEntry',
+  full_name='pb.RemoveRequest.RefIDsEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='pb.RemoveRequest.RefIDsEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='pb.RemoveRequest.RefIDsEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=473,
+  serialized_end=518,
+)
+
+_REMOVEREQUEST = _descriptor.Descriptor(
+  name='RemoveRequest',
+  full_name='pb.RemoveRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='refIDs', full_name='pb.RemoveRequest.refIDs', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_REMOVEREQUEST_REFIDSENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=409,
+  serialized_end=518,
+)
+
+
+_REMOVERESPONSE = _descriptor.Descriptor(
+  name='RemoveResponse',
+  full_name='pb.RemoveResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='count', full_name='pb.RemoveResponse.count', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=520,
+  serialized_end=551,
 )
 
 _UPLOADREQUEST.fields_by_name['blob'].message_type = _BLOB
 _UPLOADREQUEST.fields_by_name['options'].message_type = _UPLOADOPTIONS
 _DOWNLOADRESPONSE.fields_by_name['blob'].message_type = _BLOB
+_REMOVEREQUEST_REFIDSENTRY.containing_type = _REMOVEREQUEST
+_REMOVEREQUEST.fields_by_name['refIDs'].message_type = _REMOVEREQUEST_REFIDSENTRY
 DESCRIPTOR.message_types_by_name['UploadRequest'] = _UPLOADREQUEST
 DESCRIPTOR.message_types_by_name['UploadOptions'] = _UPLOADOPTIONS
 DESCRIPTOR.message_types_by_name['DownloadRequest'] = _DOWNLOADREQUEST
 DESCRIPTOR.message_types_by_name['DownloadResponse'] = _DOWNLOADRESPONSE
 DESCRIPTOR.message_types_by_name['Blob'] = _BLOB
+DESCRIPTOR.message_types_by_name['RemoveRequest'] = _REMOVEREQUEST
+DESCRIPTOR.message_types_by_name['RemoveResponse'] = _REMOVERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UploadRequest = _reflection.GeneratedProtocolMessageType('UploadRequest', (_message.Message,), {
@@ -281,7 +398,30 @@ Blob = _reflection.GeneratedProtocolMessageType('Blob', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Blob)
 
+RemoveRequest = _reflection.GeneratedProtocolMessageType('RemoveRequest', (_message.Message,), {
 
+  'RefIDsEntry' : _reflection.GeneratedProtocolMessageType('RefIDsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _REMOVEREQUEST_REFIDSENTRY,
+    '__module__' : 'file_pb2'
+    # @@protoc_insertion_point(class_scope:pb.RemoveRequest.RefIDsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _REMOVEREQUEST,
+  '__module__' : 'file_pb2'
+  # @@protoc_insertion_point(class_scope:pb.RemoveRequest)
+  })
+_sym_db.RegisterMessage(RemoveRequest)
+_sym_db.RegisterMessage(RemoveRequest.RefIDsEntry)
+
+RemoveResponse = _reflection.GeneratedProtocolMessageType('RemoveResponse', (_message.Message,), {
+  'DESCRIPTOR' : _REMOVERESPONSE,
+  '__module__' : 'file_pb2'
+  # @@protoc_insertion_point(class_scope:pb.RemoveResponse)
+  })
+_sym_db.RegisterMessage(RemoveResponse)
+
+
+_REMOVEREQUEST_REFIDSENTRY._options = None
 
 _FILEAPI = _descriptor.ServiceDescriptor(
   name='FileAPI',
@@ -289,8 +429,8 @@ _FILEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=373,
-  serialized_end=499,
+  serialized_start=554,
+  serialized_end=735,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadFile',
@@ -308,6 +448,15 @@ _FILEAPI = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_DOWNLOADREQUEST,
     output_type=_DOWNLOADRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveFile',
+    full_name='pb.FileAPI.RemoveFile',
+    index=2,
+    containing_service=None,
+    input_type=_REMOVEREQUEST,
+    output_type=_REMOVERESPONSE,
     serialized_options=None,
   ),
 ])

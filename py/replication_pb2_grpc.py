@@ -5,94 +5,164 @@ import replication_pb2 as replication__pb2
 
 
 class replicatorStub(object):
-  """The replicator provides replication services.
-  """
-
-  def __init__(self, channel):
-    """Constructor.
-
-    Args:
-      channel: A grpc.Channel.
+    """The replicator provides replication services.
     """
-    self.Add = channel.unary_stream(
-        '/pb.replicator/Add',
-        request_serializer=replication__pb2.Subscription.SerializeToString,
-        response_deserializer=replication__pb2.ReplicationStatus.FromString,
-        )
-    self.Status = channel.unary_stream(
-        '/pb.replicator/Status',
-        request_serializer=replication__pb2.Subscription.SerializeToString,
-        response_deserializer=replication__pb2.ReplicationStatus.FromString,
-        )
-    self.GetSubscriptionUpdate = channel.unary_unary(
-        '/pb.replicator/GetSubscriptionUpdate',
-        request_serializer=replication__pb2.Subscription.SerializeToString,
-        response_deserializer=replication__pb2.SubscriptionUpdate.FromString,
-        )
-    self.SubmitReplication = channel.unary_stream(
-        '/pb.replicator/SubmitReplication',
-        request_serializer=replication__pb2.SignedSubscription.SerializeToString,
-        response_deserializer=replication__pb2.ReplicationStatus.FromString,
-        )
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Add = channel.unary_stream(
+                '/pb.replicator/Add',
+                request_serializer=replication__pb2.Subscription.SerializeToString,
+                response_deserializer=replication__pb2.ReplicationStatus.FromString,
+                )
+        self.Status = channel.unary_stream(
+                '/pb.replicator/Status',
+                request_serializer=replication__pb2.Subscription.SerializeToString,
+                response_deserializer=replication__pb2.ReplicationStatus.FromString,
+                )
+        self.GetSubscriptionUpdate = channel.unary_unary(
+                '/pb.replicator/GetSubscriptionUpdate',
+                request_serializer=replication__pb2.Subscription.SerializeToString,
+                response_deserializer=replication__pb2.SubscriptionUpdate.FromString,
+                )
+        self.SubmitReplication = channel.unary_stream(
+                '/pb.replicator/SubmitReplication',
+                request_serializer=replication__pb2.SignedSubscription.SerializeToString,
+                response_deserializer=replication__pb2.ReplicationStatus.FromString,
+                )
 
 
 class replicatorServicer(object):
-  """The replicator provides replication services.
-  """
-
-  def Add(self, request, context):
-    """Add is used to add a replication to this server, changing it's status from reserved to active.
+    """The replicator provides replication services.
     """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
 
-  def Status(self, request, context):
-    """Status returns an updating stream of the replication status on the server.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def Add(self, request, context):
+        """Add is used to add a replication to this server, changing it's status from reserved to active.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-  def GetSubscriptionUpdate(self, request, context):
-    """GetSubscriptionUpdate returns the latest version of subscribed replication
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def Status(self, request, context):
+        """Status returns an updating stream of the replication status on the server.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-  def SubmitReplication(self, request, context):
-    """SubmitReplication is used by client agents to start replications, after they 
-    have uploaded the files and retrieved the cid, and collected servers to replicate too.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def GetSubscriptionUpdate(self, request, context):
+        """GetSubscriptionUpdate returns the latest version of subscribed replication
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SubmitReplication(self, request, context):
+        """SubmitReplication is used by client agents to start replications, after they 
+        have uploaded the files and retrieved the cid, and collected servers to replicate too.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_replicatorServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'Add': grpc.unary_stream_rpc_method_handler(
-          servicer.Add,
-          request_deserializer=replication__pb2.Subscription.FromString,
-          response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
-      ),
-      'Status': grpc.unary_stream_rpc_method_handler(
-          servicer.Status,
-          request_deserializer=replication__pb2.Subscription.FromString,
-          response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
-      ),
-      'GetSubscriptionUpdate': grpc.unary_unary_rpc_method_handler(
-          servicer.GetSubscriptionUpdate,
-          request_deserializer=replication__pb2.Subscription.FromString,
-          response_serializer=replication__pb2.SubscriptionUpdate.SerializeToString,
-      ),
-      'SubmitReplication': grpc.unary_stream_rpc_method_handler(
-          servicer.SubmitReplication,
-          request_deserializer=replication__pb2.SignedSubscription.FromString,
-          response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'pb.replicator', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'Add': grpc.unary_stream_rpc_method_handler(
+                    servicer.Add,
+                    request_deserializer=replication__pb2.Subscription.FromString,
+                    response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
+            ),
+            'Status': grpc.unary_stream_rpc_method_handler(
+                    servicer.Status,
+                    request_deserializer=replication__pb2.Subscription.FromString,
+                    response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
+            ),
+            'GetSubscriptionUpdate': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSubscriptionUpdate,
+                    request_deserializer=replication__pb2.Subscription.FromString,
+                    response_serializer=replication__pb2.SubscriptionUpdate.SerializeToString,
+            ),
+            'SubmitReplication': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubmitReplication,
+                    request_deserializer=replication__pb2.SignedSubscription.FromString,
+                    response_serializer=replication__pb2.ReplicationStatus.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'pb.replicator', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class replicator(object):
+    """The replicator provides replication services.
+    """
+
+    @staticmethod
+    def Add(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/pb.replicator/Add',
+            replication__pb2.Subscription.SerializeToString,
+            replication__pb2.ReplicationStatus.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Status(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/pb.replicator/Status',
+            replication__pb2.Subscription.SerializeToString,
+            replication__pb2.ReplicationStatus.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSubscriptionUpdate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pb.replicator/GetSubscriptionUpdate',
+            replication__pb2.Subscription.SerializeToString,
+            replication__pb2.SubscriptionUpdate.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SubmitReplication(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/pb.replicator/SubmitReplication',
+            replication__pb2.SignedSubscription.SerializeToString,
+            replication__pb2.ReplicationStatus.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -23,10 +23,20 @@ type FileAPIDownloadFile = {
   readonly responseType: typeof file_pb.DownloadResponse;
 };
 
+type FileAPIRemoveFile = {
+  readonly methodName: string;
+  readonly service: typeof FileAPI;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof file_pb.RemoveRequest;
+  readonly responseType: typeof file_pb.RemoveResponse;
+};
+
 export class FileAPI {
   static readonly serviceName: string;
   static readonly UploadFile: FileAPIUploadFile;
   static readonly DownloadFile: FileAPIDownloadFile;
+  static readonly RemoveFile: FileAPIRemoveFile;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -63,5 +73,14 @@ export class FileAPIClient {
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   uploadFile(metadata?: grpc.Metadata): RequestStream<file_pb.UploadRequest>;
   downloadFile(requestMessage: file_pb.DownloadRequest, metadata?: grpc.Metadata): ResponseStream<file_pb.DownloadResponse>;
+  removeFile(
+    requestMessage: file_pb.RemoveRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: file_pb.RemoveResponse|null) => void
+  ): UnaryResponse;
+  removeFile(
+    requestMessage: file_pb.RemoveRequest,
+    callback: (error: ServiceError|null, responseMessage: file_pb.RemoveResponse|null) => void
+  ): UnaryResponse;
 }
 

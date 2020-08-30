@@ -8,4 +8,4 @@ message PutResponse {
 }
 
 // Empty is an empty message
-message Empty { }
+message Empty {}

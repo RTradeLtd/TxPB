@@ -1935,7 +1935,9 @@ proto.pb.BlockstoreRequest.toObject = function(includeInstance, msg) {
     cidsList: jspb.Message.getRepeatedField(msg, 3),
     dataList: msg.getDataList_asB64(),
     cidversion: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    hashfunc: jspb.Message.getFieldWithDefault(msg, 7, "")
+    hashfunc: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    refid: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    progressive: jspb.Message.getFieldWithDefault(msg, 9, false)
   };
 
   if (includeInstance) {
@@ -1995,6 +1997,14 @@ proto.pb.BlockstoreRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setHashfunc(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRefid(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setProgressive(value);
       break;
     default:
       reader.skipField();
@@ -2064,6 +2074,20 @@ proto.pb.BlockstoreRequest.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getRefid();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getProgressive();
+  if (f) {
+    writer.writeBool(
+      9,
       f
     );
   }
@@ -2223,6 +2247,38 @@ proto.pb.BlockstoreRequest.prototype.getHashfunc = function() {
 /** @param {string} value */
 proto.pb.BlockstoreRequest.prototype.setHashfunc = function(value) {
   jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string refID = 8;
+ * @return {string}
+ */
+proto.pb.BlockstoreRequest.prototype.getRefid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.pb.BlockstoreRequest.prototype.setRefid = function(value) {
+  jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional bool progressive = 9;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.BlockstoreRequest.prototype.getProgressive = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 9, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.BlockstoreRequest.prototype.setProgressive = function(value) {
+  jspb.Message.setProto3BooleanField(this, 9, value);
 };
 
 
@@ -2695,7 +2751,9 @@ proto.pb.DagRequest.toObject = function(includeInstance, msg) {
     hashfunc: jspb.Message.getFieldWithDefault(msg, 5, ""),
     cidversion: jspb.Message.getFieldWithDefault(msg, 6, 0),
     hash: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    linksMap: (f = msg.getLinksMap()) ? f.toObject(includeInstance, undefined) : []
+    linksMap: (f = msg.getLinksMap()) ? f.toObject(includeInstance, undefined) : [],
+    refid: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    progressive: jspb.Message.getFieldWithDefault(msg, 10, false)
   };
 
   if (includeInstance) {
@@ -2765,6 +2823,14 @@ proto.pb.DagRequest.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "");
          });
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRefid(value);
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setProgressive(value);
       break;
     default:
       reader.skipField();
@@ -2847,6 +2913,20 @@ proto.pb.DagRequest.serializeBinaryToWriter = function(message, writer) {
   f = message.getLinksMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
+  }
+  f = message.getRefid();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
+  f = message.getProgressive();
+  if (f) {
+    writer.writeBool(
+      10,
+      f
+    );
   }
 };
 
@@ -2998,6 +3078,38 @@ proto.pb.DagRequest.prototype.clearLinksMap = function() {
 };
 
 
+/**
+ * optional string refID = 9;
+ * @return {string}
+ */
+proto.pb.DagRequest.prototype.getRefid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/** @param {string} value */
+proto.pb.DagRequest.prototype.setRefid = function(value) {
+  jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional bool progressive = 10;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.DagRequest.prototype.getProgressive = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 10, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.DagRequest.prototype.setProgressive = function(value) {
+  jspb.Message.setProto3BooleanField(this, 10, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -3057,7 +3169,8 @@ proto.pb.DagResponse.toObject = function(includeInstance, msg) {
     rawdata: msg.getRawdata_asB64(),
     linksList: jspb.Message.toObjectList(msg.getLinksList(),
     proto.pb.IPLDLink.toObject, includeInstance),
-    nodestatsMap: (f = msg.getNodestatsMap()) ? f.toObject(includeInstance, proto.pb.IPLDStat.toObject) : []
+    nodestatsMap: (f = msg.getNodestatsMap()) ? f.toObject(includeInstance, proto.pb.IPLDStat.toObject) : [],
+    count: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -3116,6 +3229,10 @@ proto.pb.DagResponse.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.pb.IPLDStat.deserializeBinaryFromReader, "");
          });
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCount(value);
       break;
     default:
       reader.skipField();
@@ -3178,6 +3295,13 @@ proto.pb.DagResponse.serializeBinaryToWriter = function(message, writer) {
   f = message.getNodestatsMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(5, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.pb.IPLDStat.serializeBinaryToWriter);
+  }
+  f = message.getCount();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
+      f
+    );
   }
 };
 
@@ -3311,6 +3435,21 @@ proto.pb.DagResponse.prototype.getNodestatsMap = function(opt_noLazyCreate) {
 
 proto.pb.DagResponse.prototype.clearNodestatsMap = function() {
   this.getNodestatsMap().clear();
+};
+
+
+/**
+ * optional uint64 count = 6;
+ * @return {number}
+ */
+proto.pb.DagResponse.prototype.getCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.pb.DagResponse.prototype.setCount = function(value) {
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -4547,7 +4686,9 @@ proto.pb.PersistRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.pb.PersistRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    cidsList: jspb.Message.getRepeatedField(msg, 1)
+    cidsList: jspb.Message.getRepeatedField(msg, 1),
+    refid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    progressive: jspb.Message.getFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -4588,6 +4729,14 @@ proto.pb.PersistRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.addCids(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRefid(value);
+      break;
+    case 5:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setProgressive(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4624,6 +4773,20 @@ proto.pb.PersistRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getRefid();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getProgressive();
+  if (f) {
+    writer.writeBool(
+      5,
+      f
+    );
+  }
 };
 
 
@@ -4653,6 +4816,38 @@ proto.pb.PersistRequest.prototype.addCids = function(value, opt_index) {
 
 proto.pb.PersistRequest.prototype.clearCidsList = function() {
   this.setCidsList([]);
+};
+
+
+/**
+ * optional string refID = 2;
+ * @return {string}
+ */
+proto.pb.PersistRequest.prototype.getRefid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.pb.PersistRequest.prototype.setRefid = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional bool progressive = 5;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.PersistRequest.prototype.getProgressive = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 5, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.PersistRequest.prototype.setProgressive = function(value) {
+  jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
@@ -4900,7 +5095,8 @@ proto.pb.DAGREQTYPE = {
   DAG_NEW_NODE: 2,
   DAG_ADD_LINKS: 3,
   DAG_GET_LINKS: 4,
-  DAG_STAT: 5
+  DAG_STAT: 5,
+  DAG_REMOVE: 6
 };
 
 /**

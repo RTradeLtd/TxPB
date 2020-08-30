@@ -29,6 +29,15 @@ FileAPI.DownloadFile = {
   responseType: file_pb.DownloadResponse
 };
 
+FileAPI.RemoveFile = {
+  methodName: "RemoveFile",
+  service: FileAPI,
+  requestStream: false,
+  responseStream: false,
+  requestType: file_pb.RemoveRequest,
+  responseType: file_pb.RemoveResponse
+};
+
 exports.FileAPI = FileAPI;
 
 function FileAPIClient(serviceHost, options) {
@@ -111,6 +120,37 @@ FileAPIClient.prototype.downloadFile = function downloadFile(requestMessage, met
     },
     cancel: function () {
       listeners = null;
+      client.close();
+    }
+  };
+};
+
+FileAPIClient.prototype.removeFile = function removeFile(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(FileAPI.RemoveFile, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
       client.close();
     }
   };

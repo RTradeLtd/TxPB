@@ -212,10 +212,12 @@ message BlockstoreRequest {
     // when sent by BS_PUT, BS_PUT_MANY: only put if the id is not marked on block, otherwise noop
     // when sent by BS_GET, BS_GET_MANY: only get if the id is marked on block
     // when sent by BS_DELETE: only delete if the id is marked on block
-    string refId = 8;
+    string refID = 8;
+    // if refID is set, allows progressive upload
+    bool progressive = 9;
 }
 
-// BlockstoreResponse is a response to a BlockstoreqRequest
+// BlockstoreResponse is a response to a BlockstoreRequest
 message BlockstoreResponse {
     // indicates the particular request type being made
     BSREQTYPE requestType = 1;
@@ -237,7 +239,7 @@ message Block {
     // data is the actual contents of the block
     bytes data = 2;
     // size of the block, only filled out by BS_GET_STATS
-    // since if we just want stats, we dont want to 
+    // since if we just want stats, we don't want to 
     // retrieve all the data.
     int64 size = 3;
 }
@@ -288,7 +290,9 @@ message DagRequest {
     map<string, string> links = 8;
     // optional reference ID to mark the cid/hash with
     // sent by: DAG_PUT, DAG_REMOVE
-    string refId = 9;
+    string refID = 9;
+    // if refID is set, allows progressive upload
+    bool progressive = 10;
 }
 
 // Used in response to a Dag or DagStream RPC
@@ -391,7 +395,9 @@ message PersistRequest {
     // cids to persist locally
     repeated string cids = 1;
     // optional reference ID to mark the cids with
-    string refId = 2;
+    string refID = 2;
+    // if refID is set, allows progressive upload
+    bool progressive = 5;
 }
 
 message PersistResponse {

@@ -97,7 +97,7 @@ impl ReplicatorClient {
     pub fn submit_replication(&self, req: &super::replication::SignedSubscription) -> ::grpcio::Result<::grpcio::ClientSStreamReceiver<super::replication::ReplicationStatus>> {
         self.submit_replication_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }

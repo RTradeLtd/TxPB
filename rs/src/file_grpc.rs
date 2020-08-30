@@ -32,6 +32,13 @@ const METHOD_FILE_API_DOWNLOAD_FILE: ::grpcio::Method<super::file::DownloadReque
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
+const METHOD_FILE_API_REMOVE_FILE: ::grpcio::Method<super::file::RemoveRequest, super::file::RemoveResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Unary,
+    name: "/pb.FileAPI/RemoveFile",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
 #[derive(Clone)]
 pub struct FileApiClient {
     client: ::grpcio::Client,
@@ -59,7 +66,23 @@ impl FileApiClient {
     pub fn download_file(&self, req: &super::file::DownloadRequest) -> ::grpcio::Result<::grpcio::ClientSStreamReceiver<super::file::DownloadResponse>> {
         self.download_file_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+
+    pub fn remove_file_opt(&self, req: &super::file::RemoveRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::file::RemoveResponse> {
+        self.client.unary_call(&METHOD_FILE_API_REMOVE_FILE, req, opt)
+    }
+
+    pub fn remove_file(&self, req: &super::file::RemoveRequest) -> ::grpcio::Result<super::file::RemoveResponse> {
+        self.remove_file_opt(req, ::grpcio::CallOption::default())
+    }
+
+    pub fn remove_file_async_opt(&self, req: &super::file::RemoveRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::file::RemoveResponse>> {
+        self.client.unary_call_async(&METHOD_FILE_API_REMOVE_FILE, req, opt)
+    }
+
+    pub fn remove_file_async(&self, req: &super::file::RemoveRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::file::RemoveResponse>> {
+        self.remove_file_async_opt(req, ::grpcio::CallOption::default())
+    }
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
@@ -67,6 +90,7 @@ impl FileApiClient {
 pub trait FileApi {
     fn upload_file(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::file::UploadRequest>, sink: ::grpcio::ClientStreamingSink<super::util::PutResponse>);
     fn download_file(&mut self, ctx: ::grpcio::RpcContext, req: super::file::DownloadRequest, sink: ::grpcio::ServerStreamingSink<super::file::DownloadResponse>);
+    fn remove_file(&mut self, ctx: ::grpcio::RpcContext, req: super::file::RemoveRequest, sink: ::grpcio::UnarySink<super::file::RemoveResponse>);
 }
 
 pub fn create_file_api<S: FileApi + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
@@ -75,9 +99,13 @@ pub fn create_file_api<S: FileApi + Send + Clone + 'static>(s: S) -> ::grpcio::S
     builder = builder.add_client_streaming_handler(&METHOD_FILE_API_UPLOAD_FILE, move |ctx, req, resp| {
         instance.upload_file(ctx, req, resp)
     });
-    let mut instance = s;
+    let mut instance = s.clone();
     builder = builder.add_server_streaming_handler(&METHOD_FILE_API_DOWNLOAD_FILE, move |ctx, req, resp| {
         instance.download_file(ctx, req, resp)
+    });
+    let mut instance = s;
+    builder = builder.add_unary_handler(&METHOD_FILE_API_REMOVE_FILE, move |ctx, req, resp| {
+        instance.remove_file(ctx, req, resp)
     });
     builder.build()
 }
