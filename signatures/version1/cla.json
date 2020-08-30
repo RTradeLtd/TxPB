@@ -1,3 +1,12 @@
 {
-  "signedContributors": []
+  "signedContributors": [
+    {
+      "name": "RT-nilPointer",
+      "id": 69625202,
+      "comment_id": 683380172,
+      "created_at": "2020-08-30T05:55:46Z",
+      "repoId": 196796457,
+      "pullRequestNo": 100
+    }
+  ]
 }
