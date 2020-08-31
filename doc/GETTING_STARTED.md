@@ -11,9 +11,13 @@ This documentation covers everything you need to know to quickly get your Tempor
   <br>
   · <a href="#configuration-initialization"><strong>Configuration Initialization</strong></a> 
   <br>
+  · <a href="#client-overview"><strong>Client Overview</strong></a>
+  <br>
   · <a href="#starting-the-node"><strong>Starting The Node</strong></a>
   <br> 
   · <a href="#stopping-the-node"><strong>Stopping The Node</strong></a>
+  <br>
+  · <a href="#node-bootstrapping"><strong>Node Bootstrapping</strong></a>
   <br>
    · <a href="#your-first-upload"><strong>Your First Upload</strong></a>
   <br>
@@ -62,13 +66,14 @@ CONFIG_FILE="/boot_scripts/temporalx.yml"
 case "$1" in
 
     server)
-        tex-cli --config "$CONFIG_FILE" --bp server
+        # start TemporalX with bootstrapping and periodic bootstrapping
+        tex-cli --config "$CONFIG_FILE" --bp --bpp --bppi 2m20s server
         ;;
 
 esac
 ```
 
-## Comand Overview
+## Command Overview
 
 The command line client is called `tex-cli`, and invoking the command without any arguments, or with the `--help`/`-h` flag will display the following information:
 
@@ -136,6 +141,21 @@ While the basic configuration file is suitable for running TemporalX, it purpose
 $ tex-cli config generate --example.config
 ```
 
+## Client Overview
+
+All non-replication commands that use the gRPC API are grouped under the `client` command. Previously you used to be able to configure the client via the yaml configuration file, however this proved to be a bit difficult to use via the CLI and involved shipping copies of the config file to whatever machine you were using the CLI on. This has been refactored to use the following two flags under the `client` command:
+
+* `--endpoint.address, --ea` - the address of the TemporalX gRPC server
+  * examples:
+    * `--endpoint.address xapi.temporal.cloud:9090`
+    * `--ea xapi.temporal.cloud:9090`
+* `--insecure` - indicates whether the endpoint requires TLS encryption or if it is insecure
+  * examples:
+    * `--insecure=false` - connecting to an SSL/TLS enabled endpoint
+    * `--insecure=true` (default) - connecting to an endpoint with no SSL/TLS
+
+For detailed information about the client commands [view the go-temporalx-sdk documentation](https://github.com/RTradeLtd/go-temporalx-sdk#usage).
+
 ## Starting The Node
 
 To start the node with the config file located at `/tmp/config.yml` run:
@@ -154,18 +174,19 @@ This bootstrap process is done in the background, and does not block the startup
 
 ## Stopping The Node
 
-To stop the node after running the server, you can use any of the following os calls and system calls against the tex-cli server process, such as `kill -9` or `CTRL+C` in the terminal window you are running the server from. This will trigger a graceful shutdown of the node which can take up to 30 seconds. 
+To stop the node after running the server, you can use any of the following os calls and system calls against the tex-cli server process, such as `kill -9` or `CTRL+C` in the terminal window you are running the server from. This will immediately cancel all active gRPC calls, and start tthe shutdown process.
 
-Do not abort the process unless you want to face possible data corruption. If you do need ot abort the shutdown process, waiting about 10-15 seconds after the shutdown process is started generally is enough to wait for all internal process to finish, but it is recommmended to wait the full 30 seconds it is required which typically only happens with pending gRPC calls.
+It is important to not forcefully abort the shutdown process, and let the process complete once it is triggerd. Force shutting down the node will have an increased risk of data corruption, and if using reference counting, will lose any pending reference count operations.
 
 ## Node Bootstrapping
 
-TemporalX includes additional bootstrap capabilities to ensure that you can always maintain a healthy set of connected peers. Along with the basic `--bootstrap,--bp` flags which does a one time connection to a preset list of peers, and starts the DHT bootstrap function which is responsible for maintaining the routing table, there is an optional "periodic bootstrap" functionality. 
+TemporalX includes two types of bootstrapping capabilities that allow us to ensure we always maintain a high number of connected peers. 
 
-This periodic bootstrap functionality will run at a user-configurable interval (default of 2 minutes), and every iteration will connect to the default bootstrap peer list containing approximately 30 peers, as well as 10 randomly selected peers from our peerstore. This provides a very lightweight method of staying connected to a number of different peers, and in practice TemporalX nodes using periodic bootstrap will be much better connected than go-ipfs. 
+The first being a traditional boostrap functionality as is done with go-ipfs; This is invoked with the `--bootstrap, --bp` flags, which triggers a one time connection to a preset list of peers, and starts the DHT bootstrap function which maintains the routing table.
 
+The second type is a periodic bootstrap, which runs at a usesr-configurable interval (default of 2 minutes), and connects to the preset peer list (approximately 30 peers), along with an additional 10 randomly selected peers from our known peer list. This periodic bootstrapping functionality is lightweight, and consumes very little resources, but in practice allows us to both reach our target peer count faster, and easier to maitnain.
 
-As noted by the following output with the TemporalX node not being online for more than minutes, and go-ipfs having approximately 1 week uptime, the TemporalX node is much better connected than go-ipfs.
+As noted by the following output with the TemporalX not being online for more than 5 minutes, and go-ipfs having approximately 7 day uptime, the TemporalX node is much better connected than go-ipfs.
 
 ```
 rtrade@capecod:~/stress$ tex-cli client --ea 192.168.1.201:9090 --insecure=true node peer count
@@ -177,17 +198,6 @@ rtrade@capecod:~/stress$ ipfs swarm peers | wc -l
 To enable periodic bootstrap you can use `--bootstrap.periodic, --bpp` and should you want to configure the interval to something other than the default 2 minutes `--bootstrap.periodic.interval value, --bppi value` where `value` is a time.Duration value such as `2m0s, 1hr` etc...
 
 Note that to use periodic bootstrap, you must also use the regular bootstrapping method enabled with `--boostrap, --bp`.
-
-
-## Client Overview
-
-All non-replication commands that use the gRPC API are grouped under the `client` command. Previously you used to be able to configure the client via the yaml configuration file, however this proved to be a bit difficult to use via the CLI and involved shipping copies of the config file to whatever machine you were using the CLI on. This has been refactored to use the following two flags under the `client` command:
-
-* `--endpoint.address, --ea` - the address of the TemporalX gRPC server
-  * examples:
-    * `--endpoint.address xapi.temporal.cloud:9090`
-    * `--ea xapi.temporal.cloud:9090`
-* `--insecure` - indicates whether the endpoint requires TLS encryption or if it is insecure
 
 ## Your First Upload
 
