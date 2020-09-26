@@ -30,7 +30,7 @@ require (
 	github.com/ipfs/go-merkledag v0.3.2
 	github.com/kr/text v0.2.0 // indirect
 	github.com/libp2p/go-libp2p v0.11.0 // indirect
-	github.com/libp2p/go-libp2p-core v0.7.0
+	github.com/libp2p/go-libp2p-core v0.6.1
 	github.com/libp2p/go-libp2p-record v0.1.3 // indirect
 	github.com/libp2p/go-sockaddr v0.1.0 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect
