@@ -5,45 +5,68 @@ import pubsub_pb2 as pubsub__pb2
 
 
 class PubSubAPIStub(object):
-  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
-  `ipfs pubsub` subset of commands.
-  """
-
-  def __init__(self, channel):
-    """Constructor.
-
-    Args:
-      channel: A grpc.Channel.
+    """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+    `ipfs pubsub` subset of commands.
     """
-    self.PubSub = channel.stream_stream(
-        '/pb.PubSubAPI/PubSub',
-        request_serializer=pubsub__pb2.PubSubRequest.SerializeToString,
-        response_deserializer=pubsub__pb2.PubSubResponse.FromString,
-        )
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.PubSub = channel.stream_stream(
+                '/pb.PubSubAPI/PubSub',
+                request_serializer=pubsub__pb2.PubSubRequest.SerializeToString,
+                response_deserializer=pubsub__pb2.PubSubResponse.FromString,
+                )
 
 
 class PubSubAPIServicer(object):
-  """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
-  `ipfs pubsub` subset of commands.
-  """
-
-  def PubSub(self, request_iterator, context):
-    """PubSub allows controlling libp2p pubsub topics and subscriptions using
-    a bidirectional streaming API
+    """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+    `ipfs pubsub` subset of commands.
     """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+
+    def PubSub(self, request_iterator, context):
+        """PubSub allows controlling libp2p pubsub topics and subscriptions using
+        a bidirectional streaming API
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_PubSubAPIServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'PubSub': grpc.stream_stream_rpc_method_handler(
-          servicer.PubSub,
-          request_deserializer=pubsub__pb2.PubSubRequest.FromString,
-          response_serializer=pubsub__pb2.PubSubResponse.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'pb.PubSubAPI', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'PubSub': grpc.stream_stream_rpc_method_handler(
+                    servicer.PubSub,
+                    request_deserializer=pubsub__pb2.PubSubRequest.FromString,
+                    response_serializer=pubsub__pb2.PubSubResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'pb.PubSubAPI', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class PubSubAPI(object):
+    """PubSubAPI provides a libp2p pubsub API and is equivalent to go-ipfs
+    `ipfs pubsub` subset of commands.
+    """
+
+    @staticmethod
+    def PubSub(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/pb.PubSubAPI/PubSub',
+            pubsub__pb2.PubSubRequest.SerializeToString,
+            pubsub__pb2.PubSubResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

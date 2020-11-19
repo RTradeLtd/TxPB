@@ -13,7 +13,7 @@ mkdir -p build
 PLUGIN_EXE=protoc-gen-grpc-java-$VERSION-$PLATFORM.exe
 OUT=build/protoc-gen-grpc-java
 echo Downloading $PLUGIN_EXE to $OUT...
-curl https://search.maven.org/remotecontent?filepath=io/grpc/protoc-gen-grpc-java/$VERSION/$PLUGIN_EXE \
+curl -C - https://search.maven.org/remotecontent?filepath=io/grpc/protoc-gen-grpc-java/$VERSION/$PLUGIN_EXE \
   -o $OUT
 
 echo Setting plugin as executable...

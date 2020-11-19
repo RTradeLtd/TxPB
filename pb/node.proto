@@ -208,9 +208,18 @@ message BlockstoreRequest {
     // the hash function to use when constructing blocks, default is sha2-256
     // sent by: BS_PUT, BS_PUT_MANY
     string hashFunc = 7;
+    // reference ID to mark the blocks of this operation with
+    // when sent by BS_PUT, BS_PUT_MANY: only put if the id is not marked on block, otherwise noop
+    // when sent by BS_GET, BS_GET_MANY: only get if the id is marked on block
+    // when sent by BS_DELETE: only delete if the id is marked on block
+    string refID = 8;
+    // if refID is set, allows progressive upload
+    bool progressive = 9;
+    // if refID is set, remove the any existing blocks with same refID
+    bool replace = 10;
 }
 
-// BlockstoreResponse is a response to a BlockstoreqRequest
+// BlockstoreResponse is a response to a BlockstoreRequest
 message BlockstoreResponse {
     // indicates the particular request type being made
     BSREQTYPE requestType = 1;
@@ -232,7 +241,7 @@ message Block {
     // data is the actual contents of the block
     bytes data = 2;
     // size of the block, only filled out by BS_GET_STATS
-    // since if we just want stats, we dont want to 
+    // since if we just want stats, we don't want to 
     // retrieve all the data.
     int64 size = 3;
 }
@@ -251,6 +260,8 @@ enum DAGREQTYPE {
     DAG_GET_LINKS = 4;
     // DAG_STAT is used to retrieve ipld.NodeStats information
     DAG_STAT = 5;
+    // DAG_REMOVE is the inverse of DAG_PUT
+    DAG_REMOVE = 6;
 }
 
 // Used to submit a request to Dag or DagStream RPCs
@@ -274,11 +285,18 @@ message DagRequest {
     // sent by: DAG_PUT, DAG_NEW_NODE
     int64 cidVersion = 6;
     // the hash of the object we are processing
-    // sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS
+    // sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS, DAG_REMOVE
     string hash = 7;
     // indicates links and their names. key = name, value = link hash
     // sent by: DAG_NEW_NODE, DAG_ADD_LINKS
     map<string, string> links = 8;
+    // optional reference ID to mark the cid/hash with
+    // sent by: DAG_PUT, DAG_REMOVE
+    string refID = 9;
+    // if refID is set, allows progressive upload
+    bool progressive = 10;
+    // if refID is set, remove the any existing DAGs with same refID
+    bool replace = 11;
 }
 
 // Used in response to a Dag or DagStream RPC
@@ -298,6 +316,9 @@ message DagResponse {
     // maps ipld cids to a ipld.NodeStat object equivalent
     // sent by: DAG_STAT
     map<string, IPLDStat> nodeStats = 5;
+    // The number of removal operations performed.
+    // sent by: DAG_REMOVE
+    uint64 count = 6;
 }
 
 // IPLDStat is statistics about an individual dag node
@@ -377,6 +398,10 @@ message KeystoreResponse {
 message PersistRequest {
     // cids to persist locally
     repeated string cids = 1;
+    // optional reference ID to mark the cids with
+    string refID = 2;
+    // if refID is set, allows progressive upload
+    bool progressive = 5;
 }
 
 message PersistResponse {

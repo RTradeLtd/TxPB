@@ -42,6 +42,15 @@ export class UploadOptions extends jspb.Message {
   getChunker(): string;
   setChunker(value: string): void;
 
+  getRefid(): string;
+  setRefid(value: string): void;
+
+  getProgressive(): boolean;
+  setProgressive(value: boolean): void;
+
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UploadOptions.AsObject;
   static toObject(includeInstance: boolean, msg: UploadOptions): UploadOptions.AsObject;
@@ -57,6 +66,9 @@ export namespace UploadOptions {
     multihash: string,
     layout: string,
     chunker: string,
+    refid: string,
+    progressive: boolean,
+    replace: boolean,
   }
 }
 
@@ -141,6 +153,45 @@ export namespace Blob {
     content: Uint8Array | string,
     rangestart: number,
     rangeend: number,
+  }
+}
+
+export class RemoveRequest extends jspb.Message {
+  getRefidsMap(): jspb.Map<string, string>;
+  clearRefidsMap(): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RemoveRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: RemoveRequest): RemoveRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: RemoveRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RemoveRequest;
+  static deserializeBinaryFromReader(message: RemoveRequest, reader: jspb.BinaryReader): RemoveRequest;
+}
+
+export namespace RemoveRequest {
+  export type AsObject = {
+    refidsMap: Array<[string, string]>,
+  }
+}
+
+export class RemoveResponse extends jspb.Message {
+  getCount(): number;
+  setCount(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): RemoveResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: RemoveResponse): RemoveResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: RemoveResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): RemoveResponse;
+  static deserializeBinaryFromReader(message: RemoveResponse, reader: jspb.BinaryReader): RemoveResponse;
+}
+
+export namespace RemoveResponse {
+  export type AsObject = {
+    count: number,
   }
 }
 

@@ -43,16 +43,16 @@ fmt:
 # install supplementary tooling
 .PHONY: install
 install:
-	go get -u github.com/gogo/protobuf/protoc-gen-gogoslick
-	go get -u github.com/gogo/protobuf/protoc-gen-gogofaster
-	go get -u github.com/gogo/protobuf/protoc-gen-gogofast
-	go get -u github.com/gogo/protobuf/protoc-gen-gogo
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-	go get -u github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
-	go get -u github.com/gogo/protobuf/proto
-	go get -u github.com/gogo/protobuf/gogoproto
-	go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	go get github.com/gogo/protobuf/protoc-gen-gogoslick
+	go get github.com/gogo/protobuf/protoc-gen-gogofaster
+	go get github.com/gogo/protobuf/protoc-gen-gogofast
+	go get github.com/gogo/protobuf/protoc-gen-gogo
+	go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+	go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+	go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
+	go get github.com/gogo/protobuf/proto
+	go get github.com/gogo/protobuf/gogoproto
+	go get github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 	npm install -g ts-protoc-gen
 	npm install -g grpc
 	npm install -g @grpc/proto-loader

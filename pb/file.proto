@@ -4,10 +4,12 @@ import "util.proto";
 
 // FileAPI provides a gRPC api to upload/download files as UnixFS objects
 service FileAPI {
-    // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add)
-    rpc UploadFile(stream UploadRequest) returns  (PutResponse) { };
+    // UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs pin add)
+    rpc UploadFile(stream UploadRequest) returns  (PutResponse) {};
     // DownloadFile allows downloading a UnixFS object (equivalent to ipfs get)
-    rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) { };
+    rpc DownloadFile(DownloadRequest) returns (stream DownloadResponse) {};
+    // RemoveFile allows removing a UnixFS object or decrease it's reference counter (equivalent to ipfs pin rm)
+    rpc RemoveFile(RemoveRequest) returns (RemoveResponse) {};
 }
 
 
@@ -15,18 +17,24 @@ service FileAPI {
 message UploadRequest {
     // blob is a single chunk of data
     Blob blob = 1;
-    // options allows setting the optoins for this upload
+    // options allows setting the options for this upload, only valid in the first message of a stream
     UploadOptions options = 2;
 }
 
 // UploadOptions allows controlling the parameters of a file upload
 message UploadOptions {
-    // specifes the multihash function to use
+    // specifies the multihash function to use
     string multiHash = 1;
     // specifies the dag layout (balanced, tricklet)
     string layout = 2;
     // specifies the chunker type (rabin, default, etc...)
     string chunker = 3;
+    // optional reference ID to tag the file with. If set, the same reference ID must be used for deletion
+    string refID = 4;
+    // if refID is set, allows progressive upload
+    bool progressive = 5;
+    // if refID is set, remove the any existing uploads with same refID
+    bool replace = 6;
 }
 
 // DownloadRequest is used to download a UnixFS object
@@ -41,7 +49,7 @@ message DownloadRequest {
     int32 chunkSize = 2;
     // Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range.
     // If both is none zero, only data within range is requested.
-    // The unit of range is alway in bytes.
+    // The unit of range is always in bytes.
     // If used, please check the returned range values in blobs to make sure this feature is supported.
     uint64 rangeStart = 3;
     uint64 rangeEnd = 4;
@@ -60,8 +68,21 @@ message Blob {
     bytes content = 1;
     // Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range.
     // If both is zero, the blobs streams contents of the file from start to finish.
-    // The unit of range is alway in bytes.
+    // The unit of range is always in bytes.
     // Currently, DownloadResponse support blob range.
     uint64 rangeStart = 2;
     uint64 rangeEnd = 3;
+}
+
+// UploadRequest is used to decrease the reference count on UnixFS objects
+message RemoveRequest{
+    // refIDs is a map of reference IDs to hash/cid of objects to remove those reference counts
+    map<string, string> refIDs = 1;
+}
+
+// RemoveResponse contains the response to a remove request
+message RemoveResponse{
+    // The number of removal operations performed.
+    // A missing count is because the refID to hash pair was already removed or was never added 
+    uint64 count = 1;
 }

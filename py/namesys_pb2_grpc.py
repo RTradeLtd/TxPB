@@ -6,77 +6,131 @@ import util_pb2 as util__pb2
 
 
 class NameSysAPIStub(object):
-  """NameSysAPI provides a generic name resolution API
-  """
-
-  def __init__(self, channel):
-    """Constructor.
-
-    Args:
-      channel: A grpc.Channel.
+    """NameSysAPI provides a generic name resolution API
     """
-    self.NameSysResolve = channel.unary_unary(
-        '/pb.NameSysAPI/NameSysResolve',
-        request_serializer=namesys__pb2.NameSysResolveRequest.SerializeToString,
-        response_deserializer=namesys__pb2.NameSysResolveResult.FromString,
-        )
-    self.NameSysResolveAsync = channel.unary_stream(
-        '/pb.NameSysAPI/NameSysResolveAsync',
-        request_serializer=namesys__pb2.NameSysResolveRequest.SerializeToString,
-        response_deserializer=namesys__pb2.NameSysResolveResult.FromString,
-        )
-    self.NameSysPublish = channel.unary_unary(
-        '/pb.NameSysAPI/NameSysPublish',
-        request_serializer=namesys__pb2.NameSysPublishRequest.SerializeToString,
-        response_deserializer=util__pb2.Empty.FromString,
-        )
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.NameSysResolve = channel.unary_unary(
+                '/pb.NameSysAPI/NameSysResolve',
+                request_serializer=namesys__pb2.NameSysResolveRequest.SerializeToString,
+                response_deserializer=namesys__pb2.NameSysResolveResult.FromString,
+                )
+        self.NameSysResolveAsync = channel.unary_stream(
+                '/pb.NameSysAPI/NameSysResolveAsync',
+                request_serializer=namesys__pb2.NameSysResolveRequest.SerializeToString,
+                response_deserializer=namesys__pb2.NameSysResolveResult.FromString,
+                )
+        self.NameSysPublish = channel.unary_unary(
+                '/pb.NameSysAPI/NameSysPublish',
+                request_serializer=namesys__pb2.NameSysPublishRequest.SerializeToString,
+                response_deserializer=util__pb2.Empty.FromString,
+                )
 
 
 class NameSysAPIServicer(object):
-  """NameSysAPI provides a generic name resolution API
-  """
-
-  def NameSysResolve(self, request, context):
-    """NameSysResolve is used to resolve a name, waiting for the request to complete
+    """NameSysAPI provides a generic name resolution API
     """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
 
-  def NameSysResolveAsync(self, request, context):
-    """NameSysResolveAsync is like Resolve, except instead of waiting for the request
-    to complete, we send back a stream which we will send the result on
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def NameSysResolve(self, request, context):
+        """NameSysResolve is used to resolve a name, waiting for the request to complete
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-  def NameSysPublish(self, request, context):
-    """NameSysPublish is used to publish an IPNS record, with/with-out an EOL
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def NameSysResolveAsync(self, request, context):
+        """NameSysResolveAsync is like Resolve, except instead of waiting for the request
+        to complete, we send back a stream which we will send the result on
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def NameSysPublish(self, request, context):
+        """NameSysPublish is used to publish an IPNS record, with/with-out an EOL
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_NameSysAPIServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'NameSysResolve': grpc.unary_unary_rpc_method_handler(
-          servicer.NameSysResolve,
-          request_deserializer=namesys__pb2.NameSysResolveRequest.FromString,
-          response_serializer=namesys__pb2.NameSysResolveResult.SerializeToString,
-      ),
-      'NameSysResolveAsync': grpc.unary_stream_rpc_method_handler(
-          servicer.NameSysResolveAsync,
-          request_deserializer=namesys__pb2.NameSysResolveRequest.FromString,
-          response_serializer=namesys__pb2.NameSysResolveResult.SerializeToString,
-      ),
-      'NameSysPublish': grpc.unary_unary_rpc_method_handler(
-          servicer.NameSysPublish,
-          request_deserializer=namesys__pb2.NameSysPublishRequest.FromString,
-          response_serializer=util__pb2.Empty.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'pb.NameSysAPI', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'NameSysResolve': grpc.unary_unary_rpc_method_handler(
+                    servicer.NameSysResolve,
+                    request_deserializer=namesys__pb2.NameSysResolveRequest.FromString,
+                    response_serializer=namesys__pb2.NameSysResolveResult.SerializeToString,
+            ),
+            'NameSysResolveAsync': grpc.unary_stream_rpc_method_handler(
+                    servicer.NameSysResolveAsync,
+                    request_deserializer=namesys__pb2.NameSysResolveRequest.FromString,
+                    response_serializer=namesys__pb2.NameSysResolveResult.SerializeToString,
+            ),
+            'NameSysPublish': grpc.unary_unary_rpc_method_handler(
+                    servicer.NameSysPublish,
+                    request_deserializer=namesys__pb2.NameSysPublishRequest.FromString,
+                    response_serializer=util__pb2.Empty.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'pb.NameSysAPI', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class NameSysAPI(object):
+    """NameSysAPI provides a generic name resolution API
+    """
+
+    @staticmethod
+    def NameSysResolve(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pb.NameSysAPI/NameSysResolve',
+            namesys__pb2.NameSysResolveRequest.SerializeToString,
+            namesys__pb2.NameSysResolveResult.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def NameSysResolveAsync(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/pb.NameSysAPI/NameSysResolveAsync',
+            namesys__pb2.NameSysResolveRequest.SerializeToString,
+            namesys__pb2.NameSysResolveResult.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def NameSysPublish(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pb.NameSysAPI/NameSysPublish',
+            namesys__pb2.NameSysPublishRequest.SerializeToString,
+            util__pb2.Empty.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

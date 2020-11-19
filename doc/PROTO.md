@@ -14,32 +14,27 @@
     - [REFREQOPTS](#pb.REFREQOPTS)
     - [REFREQTYPE](#pb.REFREQTYPE)
   
-  
     - [AdminAPI](#pb.AdminAPI)
   
-
 - [file.proto](#file.proto)
     - [Blob](#pb.Blob)
     - [DownloadRequest](#pb.DownloadRequest)
     - [DownloadResponse](#pb.DownloadResponse)
+    - [RemoveRequest](#pb.RemoveRequest)
+    - [RemoveRequest.RefIDsEntry](#pb.RemoveRequest.RefIDsEntry)
+    - [RemoveResponse](#pb.RemoveResponse)
     - [UploadOptions](#pb.UploadOptions)
     - [UploadRequest](#pb.UploadRequest)
   
-  
-  
     - [FileAPI](#pb.FileAPI)
   
-
 - [namesys.proto](#namesys.proto)
     - [NameSysPublishRequest](#pb.NameSysPublishRequest)
     - [NameSysResolveRequest](#pb.NameSysResolveRequest)
     - [NameSysResolveResult](#pb.NameSysResolveResult)
   
-  
-  
     - [NameSysAPI](#pb.NameSysAPI)
   
-
 - [node.proto](#node.proto)
     - [Block](#pb.Block)
     - [BlockstoreRequest](#pb.BlockstoreRequest)
@@ -77,10 +72,8 @@
     - [KSREQTYPE](#pb.KSREQTYPE)
     - [P2PREQTYPE](#pb.P2PREQTYPE)
   
-  
     - [NodeAPI](#pb.NodeAPI)
   
-
 - [pubsub.proto](#pubsub.proto)
     - [PubSubMessage](#pb.PubSubMessage)
     - [PubSubPeer](#pb.PubSubPeer)
@@ -89,10 +82,8 @@
   
     - [PSREQTYPE](#pb.PSREQTYPE)
   
-  
     - [PubSubAPI](#pb.PubSubAPI)
   
-
 - [replication.proto](#replication.proto)
     - [AddrInfo](#pb.AddrInfo)
     - [Replication](#pb.Replication)
@@ -102,29 +93,20 @@
     - [Subscription](#pb.Subscription)
     - [SubscriptionUpdate](#pb.SubscriptionUpdate)
   
-  
-  
     - [replicator](#pb.replicator)
   
-
 - [status.proto](#status.proto)
     - [StatusResponse](#pb.StatusResponse)
     - [VersionResponse](#pb.VersionResponse)
   
     - [APISTATUS](#pb.APISTATUS)
   
-  
     - [StatusAPI](#pb.StatusAPI)
   
-
 - [util.proto](#util.proto)
     - [Empty](#pb.Empty)
     - [PutResponse](#pb.PutResponse)
   
-  
-  
-  
-
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -287,7 +269,7 @@ Blob is a chunk of binary data
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | content | [bytes](#bytes) |  | content is the actual binary data contained in this message |
-| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range. If both is zero, the blobs streams contents of the file from start to finish. The unit of range is alway in bytes. Currently, DownloadResponse support blob range. |
+| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range. If both is zero, the blobs streams contents of the file from start to finish. The unit of range is always in bytes. Currently, DownloadResponse support blob range. |
 | rangeEnd | [uint64](#uint64) |  |  |
 
 
@@ -307,7 +289,7 @@ there may be some undefined behavior
 | ----- | ---- | ----- | ----------- |
 | hash | [string](#string) |  | hash is the ipfs hash/cid (content identifier) of the data to download |
 | chunkSize | [int32](#int32) |  | chunkSize specifies the size of chunks to be sent to the client it allows us to efficiently control incoming data amounts which is useful on machines with low-memory |
-| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range. If both is none zero, only data within range is requested. The unit of range is alway in bytes. If used, please check the returned range values in blobs to make sure this feature is supported. |
+| rangeStart | [uint64](#uint64) |  | Range start and end mirrors developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range. If both is none zero, only data within range is requested. The unit of range is always in bytes. If used, please check the returned range values in blobs to make sure this feature is supported. |
 | rangeEnd | [uint64](#uint64) |  |  |
 
 
@@ -331,6 +313,52 @@ which allows the gRPC server to stream blobs to the client
 
 
 
+<a name="pb.RemoveRequest"></a>
+
+### RemoveRequest
+UploadRequest is used to decrease the reference count on UnixFS objects
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| refIDs | [RemoveRequest.RefIDsEntry](#pb.RemoveRequest.RefIDsEntry) | repeated | refIDs is a map of reference IDs to hash/cid of objects to remove those reference counts |
+
+
+
+
+
+
+<a name="pb.RemoveRequest.RefIDsEntry"></a>
+
+### RemoveRequest.RefIDsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="pb.RemoveResponse"></a>
+
+### RemoveResponse
+RemoveResponse contains the response to a remove request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| count | [uint64](#uint64) |  | The number of removal operations performed. A missing count is because the refID to hash pair was already removed or was never added |
+
+
+
+
+
+
 <a name="pb.UploadOptions"></a>
 
 ### UploadOptions
@@ -339,9 +367,12 @@ UploadOptions allows controlling the parameters of a file upload
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| multiHash | [string](#string) |  | specifes the multihash function to use |
+| multiHash | [string](#string) |  | specifies the multihash function to use |
 | layout | [string](#string) |  | specifies the dag layout (balanced, tricklet) |
 | chunker | [string](#string) |  | specifies the chunker type (rabin, default, etc...) |
+| refID | [string](#string) |  | optional reference ID to tag the file with. If set, the same reference ID must be used for deletion |
+| progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing uploads with same refID |
 
 
 
@@ -357,7 +388,7 @@ UploadRequest is used to upload data as a UnixFS object
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | blob | [Blob](#pb.Blob) |  | blob is a single chunk of data |
-| options | [UploadOptions](#pb.UploadOptions) |  | options allows setting the optoins for this upload |
+| options | [UploadOptions](#pb.UploadOptions) |  | options allows setting the options for this upload, only valid in the first message of a stream |
 
 
 
@@ -377,8 +408,9 @@ FileAPI provides a gRPC api to upload/download files as UnixFS objects
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| UploadFile | [UploadRequest](#pb.UploadRequest) stream | [PutResponse](#pb.PutResponse) | UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs add) |
+| UploadFile | [UploadRequest](#pb.UploadRequest) stream | [PutResponse](#pb.PutResponse) | UploadFile allows uploading a file as a UnixFS object (equivalent to ipfs pin add) |
 | DownloadFile | [DownloadRequest](#pb.DownloadRequest) | [DownloadResponse](#pb.DownloadResponse) stream | DownloadFile allows downloading a UnixFS object (equivalent to ipfs get) |
+| RemoveFile | [RemoveRequest](#pb.RemoveRequest) | [RemoveResponse](#pb.RemoveResponse) | RemoveFile allows removing a UnixFS object or decrease it&#39;s reference counter (equivalent to ipfs pin rm) |
 
  
 
@@ -481,7 +513,7 @@ NameSysAPI provides a generic name resolution API
 | ----- | ---- | ----- | ----------- |
 | cid | [string](#string) |  | cid is the identifier of the block |
 | data | [bytes](#bytes) |  | data is the actual contents of the block |
-| size | [int64](#int64) |  | size of the block, only filled out by BS_GET_STATS since if we just want stats, we dont want to retrieve all the data. |
+| size | [int64](#int64) |  | size of the block, only filled out by BS_GET_STATS since if we just want stats, we don&#39;t want to retrieve all the data. |
 
 
 
@@ -502,6 +534,9 @@ BlockstoreRequest is a message used to control blockstores
 | data | [bytes](#bytes) | repeated | the data we are putting sent by: BS_PUT, BS_PUT_MANY |
 | cidVersion | [string](#string) |  | the cid version to use when constructing blocks, default is v1 sent by: BS_PUT, BS_PUT_MANY |
 | hashFunc | [string](#string) |  | the hash function to use when constructing blocks, default is sha2-256 sent by: BS_PUT, BS_PUT_MANY |
+| refID | [string](#string) |  | reference ID to mark the blocks of this operation with when sent by BS_PUT, BS_PUT_MANY: only put if the id is not marked on block, otherwise noop when sent by BS_GET, BS_GET_MANY: only get if the id is marked on block when sent by BS_DELETE: only delete if the id is marked on block |
+| progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing blocks with same refID |
 
 
 
@@ -511,7 +546,7 @@ BlockstoreRequest is a message used to control blockstores
 <a name="pb.BlockstoreResponse"></a>
 
 ### BlockstoreResponse
-BlockstoreResponse is a response to a BlockstoreqRequest
+BlockstoreResponse is a response to a BlockstoreRequest
 
 
 | Field | Type | Label | Description |
@@ -625,8 +660,11 @@ Used to submit a request to Dag or DagStream RPCs
 | serializationFormat | [string](#string) |  | the serialization format (raw, cbor, protobuf, etc...) sent by: DAG_PUT |
 | hashFunc | [string](#string) |  | the hash function to to use (sha2-256, sha3-512, etc...) sent by: DAG_PUT, DAG_NEW_NODE, DAG_ADD_LINKS |
 | cidVersion | [int64](#int64) |  | the cid version to use (0, 1) sent by: DAG_PUT, DAG_NEW_NODE |
-| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS |
+| hash | [string](#string) |  | the hash of the object we are processing sent by: DAG_GET, DAG_NEW_NODe, DAG_ADD_LINKS, DAG_GET_LINKS, DAG_REMOVE |
 | links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
+| refID | [string](#string) |  | optional reference ID to mark the cid/hash with sent by: DAG_PUT, DAG_REMOVE |
+| progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing DAGs with same refID |
 
 
 
@@ -662,6 +700,7 @@ Used in response to a Dag or DagStream RPC
 | rawData | [bytes](#bytes) |  | the actual data contained by the IPLD object sent by: DAG_GET |
 | links | [IPLDLink](#pb.IPLDLink) | repeated | the links contained within an IPLD node object sent by: DAG_GET_LINKS |
 | nodeStats | [DagResponse.NodeStatsEntry](#pb.DagResponse.NodeStatsEntry) | repeated | maps ipld cids to a ipld.NodeStat object equivalent sent by: DAG_STAT |
+| count | [uint64](#uint64) |  | The number of removal operations performed. sent by: DAG_REMOVE |
 
 
 
@@ -871,6 +910,8 @@ P2PResponse is a response message sent in response to a P2PRequest message
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | cids | [string](#string) | repeated | cids to persist locally |
+| refID | [string](#string) |  | optional reference ID to mark the cids with |
+| progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
 
 
 
@@ -986,6 +1027,7 @@ DAGREQTYPE indicates the particular DagAPI request being performed
 | DAG_ADD_LINKS | 3 | DAG_ADD_LINKS is used to add links to an IPLD node object |
 | DAG_GET_LINKS | 4 | DAG_GET_LINKS is used to retrieve all links contained in an IPLD node object |
 | DAG_STAT | 5 | DAG_STAT is used to retrieve ipld.NodeStats information |
+| DAG_REMOVE | 6 | DAG_REMOVE is the inverse of DAG_PUT |
 
 
 
@@ -1158,7 +1200,7 @@ PSREQTYPE indicates the particular PubSubAPI request being performed
 | PS_GET_TOPICS | 0 | PS_GET_TOPICS is used to return a list of subscribed pubsub topics |
 | PS_LIST_PEERS | 1 | PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to |
 | PS_SUBSCRIBE | 2 | PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic |
-| PS_PUBLISH | 3 | PS_PUBLISH is used to publisbh a message to a pubsub topic |
+| PS_PUBLISH | 3 | PS_PUBLISH is used to publish a message to a pubsub topic |
 
 
  

@@ -285,6 +285,15 @@ export class BlockstoreRequest extends jspb.Message {
   getHashfunc(): string;
   setHashfunc(value: string): void;
 
+  getRefid(): string;
+  setRefid(value: string): void;
+
+  getProgressive(): boolean;
+  setProgressive(value: boolean): void;
+
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockstoreRequest.AsObject;
   static toObject(includeInstance: boolean, msg: BlockstoreRequest): BlockstoreRequest.AsObject;
@@ -303,6 +312,9 @@ export namespace BlockstoreRequest {
     dataList: Array<Uint8Array | string>,
     cidversion: string,
     hashfunc: string,
+    refid: string,
+    progressive: boolean,
+    replace: boolean,
   }
 }
 
@@ -388,6 +400,15 @@ export class DagRequest extends jspb.Message {
 
   getLinksMap(): jspb.Map<string, string>;
   clearLinksMap(): void;
+  getRefid(): string;
+  setRefid(value: string): void;
+
+  getProgressive(): boolean;
+  setProgressive(value: boolean): void;
+
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DagRequest.AsObject;
   static toObject(includeInstance: boolean, msg: DagRequest): DagRequest.AsObject;
@@ -408,6 +429,9 @@ export namespace DagRequest {
     cidversion: number,
     hash: string,
     linksMap: Array<[string, string]>,
+    refid: string,
+    progressive: boolean,
+    replace: boolean,
   }
 }
 
@@ -432,6 +456,9 @@ export class DagResponse extends jspb.Message {
 
   getNodestatsMap(): jspb.Map<string, IPLDStat>;
   clearNodestatsMap(): void;
+  getCount(): number;
+  setCount(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DagResponse.AsObject;
   static toObject(includeInstance: boolean, msg: DagResponse): DagResponse.AsObject;
@@ -449,6 +476,7 @@ export namespace DagResponse {
     rawdata: Uint8Array | string,
     linksList: Array<IPLDLink.AsObject>,
     nodestatsMap: Array<[string, IPLDStat.AsObject]>,
+    count: number,
   }
 }
 
@@ -618,6 +646,12 @@ export class PersistRequest extends jspb.Message {
   setCidsList(value: Array<string>): void;
   addCids(value: string, index?: number): string;
 
+  getRefid(): string;
+  setRefid(value: string): void;
+
+  getProgressive(): boolean;
+  setProgressive(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PersistRequest.AsObject;
   static toObject(includeInstance: boolean, msg: PersistRequest): PersistRequest.AsObject;
@@ -631,6 +665,8 @@ export class PersistRequest extends jspb.Message {
 export namespace PersistRequest {
   export type AsObject = {
     cidsList: Array<string>,
+    refid: string,
+    progressive: boolean,
   }
 }
 
@@ -719,6 +755,7 @@ export interface DAGREQTYPEMap {
   DAG_ADD_LINKS: 3;
   DAG_GET_LINKS: 4;
   DAG_STAT: 5;
+  DAG_REMOVE: 6;
 }
 
 export const DAGREQTYPE: DAGREQTYPEMap;

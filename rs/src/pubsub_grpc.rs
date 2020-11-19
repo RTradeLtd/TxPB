@@ -44,7 +44,7 @@ impl PubSubApiClient {
     pub fn pub_sub(&self) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::pubsub::PubSubRequest>, ::grpcio::ClientDuplexReceiver<super::pubsub::PubSubResponse>)> {
         self.pub_sub_opt(::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }

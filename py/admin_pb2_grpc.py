@@ -5,59 +5,97 @@ import admin_pb2 as admin__pb2
 
 
 class AdminAPIStub(object):
-  """AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
-  """
-
-  def __init__(self, channel):
-    """Constructor.
-
-    Args:
-      channel: A grpc.Channel.
+    """AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
     """
-    self.ManageGC = channel.unary_unary(
-        '/pb.AdminAPI/ManageGC',
-        request_serializer=admin__pb2.ManageGCRequest.SerializeToString,
-        response_deserializer=admin__pb2.ManageGCResponse.FromString,
-        )
-    self.RefCount = channel.unary_unary(
-        '/pb.AdminAPI/RefCount',
-        request_serializer=admin__pb2.RefCountRequest.SerializeToString,
-        response_deserializer=admin__pb2.RefCountResponse.FromString,
-        )
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.ManageGC = channel.unary_unary(
+                '/pb.AdminAPI/ManageGC',
+                request_serializer=admin__pb2.ManageGCRequest.SerializeToString,
+                response_deserializer=admin__pb2.ManageGCResponse.FromString,
+                )
+        self.RefCount = channel.unary_unary(
+                '/pb.AdminAPI/RefCount',
+                request_serializer=admin__pb2.RefCountRequest.SerializeToString,
+                response_deserializer=admin__pb2.RefCountResponse.FromString,
+                )
 
 
 class AdminAPIServicer(object):
-  """AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
-  """
-
-  def ManageGC(self, request, context):
-    """ManageGC is used to manage TemporalX's garbage collection process
+    """AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
     """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
 
-  def RefCount(self, request, context):
-    """RefCount is used to analyze the counter store and pull reference count information
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def ManageGC(self, request, context):
+        """ManageGC is used to manage TemporalX's garbage collection process
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RefCount(self, request, context):
+        """RefCount is used to analyze the counter store and pull reference count information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_AdminAPIServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'ManageGC': grpc.unary_unary_rpc_method_handler(
-          servicer.ManageGC,
-          request_deserializer=admin__pb2.ManageGCRequest.FromString,
-          response_serializer=admin__pb2.ManageGCResponse.SerializeToString,
-      ),
-      'RefCount': grpc.unary_unary_rpc_method_handler(
-          servicer.RefCount,
-          request_deserializer=admin__pb2.RefCountRequest.FromString,
-          response_serializer=admin__pb2.RefCountResponse.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'pb.AdminAPI', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'ManageGC': grpc.unary_unary_rpc_method_handler(
+                    servicer.ManageGC,
+                    request_deserializer=admin__pb2.ManageGCRequest.FromString,
+                    response_serializer=admin__pb2.ManageGCResponse.SerializeToString,
+            ),
+            'RefCount': grpc.unary_unary_rpc_method_handler(
+                    servicer.RefCount,
+                    request_deserializer=admin__pb2.RefCountRequest.FromString,
+                    response_serializer=admin__pb2.RefCountResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'pb.AdminAPI', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class AdminAPI(object):
+    """AdminAPI facilitates administrative management of TemporalX via a localhost gRPC API
+    """
+
+    @staticmethod
+    def ManageGC(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pb.AdminAPI/ManageGC',
+            admin__pb2.ManageGCRequest.SerializeToString,
+            admin__pb2.ManageGCResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RefCount(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/pb.AdminAPI/RefCount',
+            admin__pb2.RefCountRequest.SerializeToString,
+            admin__pb2.RefCountResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

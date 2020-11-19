@@ -13,7 +13,7 @@ mkdir -p build
 OUT=build/protoc-gen-grpc-web
 PLUGIN_EXE=protoc-gen-grpc-web-$VERSION-$PLATFORM
 echo Downloading $PLUGIN_EXE to $OUT...
-curl -L https://github.com/grpc/grpc-web/releases/download/$VERSION/$PLUGIN_EXE \
+curl -C - -L https://github.com/grpc/grpc-web/releases/download/$VERSION/$PLUGIN_EXE \
   -o $OUT
 
 echo Setting plugin as executable...
