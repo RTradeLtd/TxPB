@@ -48,6 +48,9 @@ export class UploadOptions extends jspb.Message {
   getProgressive(): boolean;
   setProgressive(value: boolean): void;
 
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UploadOptions.AsObject;
   static toObject(includeInstance: boolean, msg: UploadOptions): UploadOptions.AsObject;
@@ -65,6 +68,7 @@ export namespace UploadOptions {
     chunker: string,
     refid: string,
     progressive: boolean,
+    replace: boolean,
   }
 }
 

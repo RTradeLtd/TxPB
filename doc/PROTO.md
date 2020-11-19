@@ -372,6 +372,7 @@ UploadOptions allows controlling the parameters of a file upload
 | chunker | [string](#string) |  | specifies the chunker type (rabin, default, etc...) |
 | refID | [string](#string) |  | optional reference ID to tag the file with. If set, the same reference ID must be used for deletion |
 | progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing uploads with same refID |
 
 
 
@@ -535,6 +536,7 @@ BlockstoreRequest is a message used to control blockstores
 | hashFunc | [string](#string) |  | the hash function to use when constructing blocks, default is sha2-256 sent by: BS_PUT, BS_PUT_MANY |
 | refID | [string](#string) |  | reference ID to mark the blocks of this operation with when sent by BS_PUT, BS_PUT_MANY: only put if the id is not marked on block, otherwise noop when sent by BS_GET, BS_GET_MANY: only get if the id is marked on block when sent by BS_DELETE: only delete if the id is marked on block |
 | progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing blocks with same refID |
 
 
 
@@ -662,6 +664,7 @@ Used to submit a request to Dag or DagStream RPCs
 | links | [DagRequest.LinksEntry](#pb.DagRequest.LinksEntry) | repeated | indicates links and their names. key = name, value = link hash sent by: DAG_NEW_NODE, DAG_ADD_LINKS |
 | refID | [string](#string) |  | optional reference ID to mark the cid/hash with sent by: DAG_PUT, DAG_REMOVE |
 | progressive | [bool](#bool) |  | if refID is set, allows progressive upload |
+| replace | [bool](#bool) |  | if refID is set, remove the any existing DAGs with same refID |
 
 
 
@@ -1197,7 +1200,7 @@ PSREQTYPE indicates the particular PubSubAPI request being performed
 | PS_GET_TOPICS | 0 | PS_GET_TOPICS is used to return a list of subscribed pubsub topics |
 | PS_LIST_PEERS | 1 | PS_LIST_PEERS is used to return a list of peers subscribed to topics we are subscribed to |
 | PS_SUBSCRIBE | 2 | PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic |
-| PS_PUBLISH | 3 | PS_PUBLISH is used to publisbh a message to a pubsub topic |
+| PS_PUBLISH | 3 | PS_PUBLISH is used to publish a message to a pubsub topic |
 
 
  

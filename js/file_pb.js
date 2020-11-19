@@ -273,7 +273,8 @@ proto.pb.UploadOptions.toObject = function(includeInstance, msg) {
     layout: jspb.Message.getFieldWithDefault(msg, 2, ""),
     chunker: jspb.Message.getFieldWithDefault(msg, 3, ""),
     refid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    progressive: jspb.Message.getFieldWithDefault(msg, 5, false)
+    progressive: jspb.Message.getFieldWithDefault(msg, 5, false),
+    replace: jspb.Message.getFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -329,6 +330,10 @@ proto.pb.UploadOptions.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setProgressive(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReplace(value);
       break;
     default:
       reader.skipField();
@@ -391,6 +396,13 @@ proto.pb.UploadOptions.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       5,
+      f
+    );
+  }
+  f = message.getReplace();
+  if (f) {
+    writer.writeBool(
+      6,
       f
     );
   }
@@ -471,6 +483,23 @@ proto.pb.UploadOptions.prototype.getProgressive = function() {
 /** @param {boolean} value */
 proto.pb.UploadOptions.prototype.setProgressive = function(value) {
   jspb.Message.setProto3BooleanField(this, 5, value);
+};
+
+
+/**
+ * optional bool replace = 6;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.UploadOptions.prototype.getReplace = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 6, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.UploadOptions.prototype.setReplace = function(value) {
+  jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 

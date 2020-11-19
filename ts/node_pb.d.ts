@@ -291,6 +291,9 @@ export class BlockstoreRequest extends jspb.Message {
   getProgressive(): boolean;
   setProgressive(value: boolean): void;
 
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): BlockstoreRequest.AsObject;
   static toObject(includeInstance: boolean, msg: BlockstoreRequest): BlockstoreRequest.AsObject;
@@ -311,6 +314,7 @@ export namespace BlockstoreRequest {
     hashfunc: string,
     refid: string,
     progressive: boolean,
+    replace: boolean,
   }
 }
 
@@ -402,6 +406,9 @@ export class DagRequest extends jspb.Message {
   getProgressive(): boolean;
   setProgressive(value: boolean): void;
 
+  getReplace(): boolean;
+  setReplace(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DagRequest.AsObject;
   static toObject(includeInstance: boolean, msg: DagRequest): DagRequest.AsObject;
@@ -424,6 +431,7 @@ export namespace DagRequest {
     linksMap: Array<[string, string]>,
     refid: string,
     progressive: boolean,
+    replace: boolean,
   }
 }
 

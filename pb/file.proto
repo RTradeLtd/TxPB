@@ -33,6 +33,8 @@ message UploadOptions {
     string refID = 4;
     // if refID is set, allows progressive upload
     bool progressive = 5;
+    // if refID is set, remove the any existing uploads with same refID
+    bool replace = 6;
 }
 
 // DownloadRequest is used to download a UnixFS object

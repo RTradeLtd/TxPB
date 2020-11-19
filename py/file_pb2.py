@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nfile.proto\x12\x02pb\x1a\nutil.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"g\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\x12\r\n\x05refID\x18\x04 \x01(\t\x12\x13\n\x0bprogressive\x18\x05 \x01(\x08\"X\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\x12\x12\n\nrangeStart\x18\x03 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x04 \x01(\x04\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"=\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x12\n\nrangeStart\x18\x02 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x03 \x01(\x04\"m\n\rRemoveRequest\x12-\n\x06refIDs\x18\x01 \x03(\x0b\x32\x1d.pb.RemoveRequest.RefIDsEntry\x1a-\n\x0bRefIDsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1f\n\x0eRemoveResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x04\x32\xb5\x01\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x12\x35\n\nRemoveFile\x12\x11.pb.RemoveRequest\x1a\x12.pb.RemoveResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\nfile.proto\x12\x02pb\x1a\nutil.proto\"K\n\rUploadRequest\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\x12\"\n\x07options\x18\x02 \x01(\x0b\x32\x11.pb.UploadOptions\"x\n\rUploadOptions\x12\x11\n\tmultiHash\x18\x01 \x01(\t\x12\x0e\n\x06layout\x18\x02 \x01(\t\x12\x0f\n\x07\x63hunker\x18\x03 \x01(\t\x12\r\n\x05refID\x18\x04 \x01(\t\x12\x13\n\x0bprogressive\x18\x05 \x01(\x08\x12\x0f\n\x07replace\x18\x06 \x01(\x08\"X\n\x0f\x44ownloadRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\x11\n\tchunkSize\x18\x02 \x01(\x05\x12\x12\n\nrangeStart\x18\x03 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x04 \x01(\x04\"*\n\x10\x44ownloadResponse\x12\x16\n\x04\x62lob\x18\x01 \x01(\x0b\x32\x08.pb.Blob\"=\n\x04\x42lob\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x12\n\nrangeStart\x18\x02 \x01(\x04\x12\x10\n\x08rangeEnd\x18\x03 \x01(\x04\"m\n\rRemoveRequest\x12-\n\x06refIDs\x18\x01 \x03(\x0b\x32\x1d.pb.RemoveRequest.RefIDsEntry\x1a-\n\x0bRefIDsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1f\n\x0eRemoveResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x04\x32\xb5\x01\n\x07\x46ileAPI\x12\x34\n\nUploadFile\x12\x11.pb.UploadRequest\x1a\x0f.pb.PutResponse\"\x00(\x01\x12=\n\x0c\x44ownloadFile\x12\x13.pb.DownloadRequest\x1a\x14.pb.DownloadResponse\"\x00\x30\x01\x12\x35\n\nRemoveFile\x12\x11.pb.RemoveRequest\x1a\x12.pb.RemoveResponse\"\x00\x62\x06proto3'
   ,
   dependencies=[util__pb2.DESCRIPTOR,])
 
@@ -106,6 +106,13 @@ _UPLOADOPTIONS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='replace', full_name='pb.UploadOptions.replace', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -119,7 +126,7 @@ _UPLOADOPTIONS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=107,
-  serialized_end=210,
+  serialized_end=227,
 )
 
 
@@ -170,8 +177,8 @@ _DOWNLOADREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=212,
-  serialized_end=300,
+  serialized_start=229,
+  serialized_end=317,
 )
 
 
@@ -201,8 +208,8 @@ _DOWNLOADRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=344,
+  serialized_start=319,
+  serialized_end=361,
 )
 
 
@@ -246,8 +253,8 @@ _BLOB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=346,
-  serialized_end=407,
+  serialized_start=363,
+  serialized_end=424,
 )
 
 
@@ -284,8 +291,8 @@ _REMOVEREQUEST_REFIDSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=473,
-  serialized_end=518,
+  serialized_start=490,
+  serialized_end=535,
 )
 
 _REMOVEREQUEST = _descriptor.Descriptor(
@@ -314,8 +321,8 @@ _REMOVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=409,
-  serialized_end=518,
+  serialized_start=426,
+  serialized_end=535,
 )
 
 
@@ -345,8 +352,8 @@ _REMOVERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=520,
-  serialized_end=551,
+  serialized_start=537,
+  serialized_end=568,
 )
 
 _UPLOADREQUEST.fields_by_name['blob'].message_type = _BLOB
@@ -429,8 +436,8 @@ _FILEAPI = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=554,
-  serialized_end=735,
+  serialized_start=571,
+  serialized_end=752,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadFile',

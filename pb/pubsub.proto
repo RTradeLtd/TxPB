@@ -17,7 +17,7 @@ enum PSREQTYPE {
     PS_LIST_PEERS = 1;
     // PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic
     PS_SUBSCRIBE = 2;
-    // PS_PUBLISH is used to publisbh a message to a pubsub topic
+    // PS_PUBLISH is used to publish a message to a pubsub topic
     PS_PUBLISH = 3;
 }
 

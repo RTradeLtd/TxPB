@@ -215,6 +215,8 @@ message BlockstoreRequest {
     string refID = 8;
     // if refID is set, allows progressive upload
     bool progressive = 9;
+    // if refID is set, remove the any existing blocks with same refID
+    bool replace = 10;
 }
 
 // BlockstoreResponse is a response to a BlockstoreRequest
@@ -293,6 +295,8 @@ message DagRequest {
     string refID = 9;
     // if refID is set, allows progressive upload
     bool progressive = 10;
+    // if refID is set, remove the any existing DAGs with same refID
+    bool replace = 11;
 }
 
 // Used in response to a Dag or DagStream RPC

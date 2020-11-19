@@ -1937,7 +1937,8 @@ proto.pb.BlockstoreRequest.toObject = function(includeInstance, msg) {
     cidversion: jspb.Message.getFieldWithDefault(msg, 5, ""),
     hashfunc: jspb.Message.getFieldWithDefault(msg, 7, ""),
     refid: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    progressive: jspb.Message.getFieldWithDefault(msg, 9, false)
+    progressive: jspb.Message.getFieldWithDefault(msg, 9, false),
+    replace: jspb.Message.getFieldWithDefault(msg, 10, false)
   };
 
   if (includeInstance) {
@@ -2005,6 +2006,10 @@ proto.pb.BlockstoreRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setProgressive(value);
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReplace(value);
       break;
     default:
       reader.skipField();
@@ -2088,6 +2093,13 @@ proto.pb.BlockstoreRequest.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       9,
+      f
+    );
+  }
+  f = message.getReplace();
+  if (f) {
+    writer.writeBool(
+      10,
       f
     );
   }
@@ -2279,6 +2291,23 @@ proto.pb.BlockstoreRequest.prototype.getProgressive = function() {
 /** @param {boolean} value */
 proto.pb.BlockstoreRequest.prototype.setProgressive = function(value) {
   jspb.Message.setProto3BooleanField(this, 9, value);
+};
+
+
+/**
+ * optional bool replace = 10;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.BlockstoreRequest.prototype.getReplace = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 10, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.BlockstoreRequest.prototype.setReplace = function(value) {
+  jspb.Message.setProto3BooleanField(this, 10, value);
 };
 
 
@@ -2753,7 +2782,8 @@ proto.pb.DagRequest.toObject = function(includeInstance, msg) {
     hash: jspb.Message.getFieldWithDefault(msg, 7, ""),
     linksMap: (f = msg.getLinksMap()) ? f.toObject(includeInstance, undefined) : [],
     refid: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    progressive: jspb.Message.getFieldWithDefault(msg, 10, false)
+    progressive: jspb.Message.getFieldWithDefault(msg, 10, false),
+    replace: jspb.Message.getFieldWithDefault(msg, 11, false)
   };
 
   if (includeInstance) {
@@ -2831,6 +2861,10 @@ proto.pb.DagRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 10:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setProgressive(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReplace(value);
       break;
     default:
       reader.skipField();
@@ -2925,6 +2959,13 @@ proto.pb.DagRequest.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       10,
+      f
+    );
+  }
+  f = message.getReplace();
+  if (f) {
+    writer.writeBool(
+      11,
       f
     );
   }
@@ -3107,6 +3148,23 @@ proto.pb.DagRequest.prototype.getProgressive = function() {
 /** @param {boolean} value */
 proto.pb.DagRequest.prototype.setProgressive = function(value) {
   jspb.Message.setProto3BooleanField(this, 10, value);
+};
+
+
+/**
+ * optional bool replace = 11;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.pb.DagRequest.prototype.getReplace = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 11, false));
+};
+
+
+/** @param {boolean} value */
+proto.pb.DagRequest.prototype.setReplace = function(value) {
+  jspb.Message.setProto3BooleanField(this, 11, value);
 };
 
 

@@ -36,7 +36,7 @@ const (
 	PSREQTYPE_PS_LIST_PEERS PSREQTYPE = 1
 	// PS_SUBSCRIBE is used to establish a persistent subscription to a pubsub topic
 	PSREQTYPE_PS_SUBSCRIBE PSREQTYPE = 2
-	// PS_PUBLISH is used to publisbh a message to a pubsub topic
+	// PS_PUBLISH is used to publish a message to a pubsub topic
 	PSREQTYPE_PS_PUBLISH PSREQTYPE = 3
 )
 
